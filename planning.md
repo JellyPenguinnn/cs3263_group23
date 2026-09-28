@@ -100,6 +100,8 @@ No executable files, empty Python modules, package manifests, sample results, or
 
 ## 5. Parallel start and dependency management
 
+Before implementation, each member completes the onboarding confirmation in `AGENTS.md`: identity, own local clone path, assigned branch/scope, credential configuration method, and first milestone. Agents ask focused questions or offer choices for unresolved decisions and wait before dependent work. Missing provider access permits offline work; it does not change component ownership.
+
 **Day 1–2: 28–29 September.** Agree the version-1 contract below and at least six tiny fixtures: simple SAT, overlap, shared resource, precedence/deadline interaction, proven UNSAT, and repair. Yao Xiang owns the schema PR; Li Hao owns the shared provider-call interface; all review both contracts. Each person can start immediately:
 
 - Li Hao: provider capability checks, canned direct-output parsing, direct prompts, and package setup against the draft contract.

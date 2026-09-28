@@ -34,7 +34,8 @@ cd cs3263_group23
 
 1. Read [planning.md](planning.md) for scope, interfaces, ownership, experiments, and milestones.
 2. Read [AGENTS.md](AGENTS.md) before changing files or using a coding agent.
-3. Fetch and switch to your assigned branch from the table below. Each member should use a separate local clone.
+3. Each member uses a separate local clone. Before an agent clones, switches branches, or implements work, have it confirm your identity, local path, assigned scope/branch, credential setup method, and intended milestone using [the onboarding instructions](AGENTS.md#member-onboarding-and-clarification). Already confirmed details do not need to be repeated.
+4. Fetch and switch to the confirmed member branch from the table below. For unresolved choices, the agent should explain the options and wait for your answer before dependent work. Supply API keys only through local secret configuration, never through chat.
 
 The planned local runtime is CPU-only Python on macOS and Linux, with remote inference through SoCLaaS; portability remains to be verified during implementation. There is no install, test, or experiment command yet. Those commands will be added when their implementations exist; the planned stack is Python, OR-Tools CP-SAT, and NUS SoCLaaS through its OpenAI-compatible API.
 

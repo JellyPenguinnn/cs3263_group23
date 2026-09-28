@@ -8,6 +8,24 @@ Build and evaluate Group 23's dynamic constraint-aware scheduling study: Direct 
 
 At bootstrap only documentation, configuration templates, and empty `.gitkeep` directory placeholders exist. The initial `main` has no implementation code; subsequent implementation belongs on the assigned member branches and enters `main` through reviewed PRs. Do not add dummy modules, unimplemented commands, sample results, or empty workflow/package files merely to fill the scaffold. Do not claim implementation, tests, model capability, benchmark results, or reproducibility before executing the relevant checks. Do not import code or assumptions from a different project/older checkout as if they belong here.
 
+## Member onboarding and clarification
+
+At the start of a member's first implementation session, read the repository instructions and inspect the checkout without changing it. Present a short setup summary and ask that member to confirm any item not already explicitly established in the conversation:
+
+| Item | What to confirm |
+| --- | --- |
+| Member and responsibility | Li Hao, Yao Xiang, or Yong Qing; show the matching assigned scope and first deliverable from `planning.md` |
+| Local workspace | Exact existing clone path, or proposed clone destination; confirm it is that member's own checkout |
+| Branch | The assigned member branch, current branch, and any mismatch; do not assume the Git account or machine username identifies the member |
+| Provider access | Whether an authorized SoCLaaS key is already configured locally, will be configured by the member, or is unavailable so work should begin offline |
+| Immediate work and authorization | The milestone to implement and whether the member authorizes local edits only, commits, or publication; do not infer push/merge authorization from branch ownership |
+
+Use one compact set of questions, with 2–3 clear choices and a recommendation where useful; allow a custom answer. Explain why a missing answer matters. Existing explicit confirmations remain valid: do not ask again unless the path, scope, access, or authorization changes. An unanswered question is not confirmation. Before cloning, switching branches, or making implementation edits, resolve missing member/path/branch/scope decisions; read-only inspection and planning may continue.
+
+Ask the member whenever uncertainty remains after checking the plan, repository, and prior answers. This includes conflicting instructions, unclear requirements, ambiguous ownership, provider settings, or choices that change expected behavior. State what is known, offer concrete alternatives and their consequences, and wait before doing work that depends on the answer. Continue independent authorized work. Routine implementation choices already covered by the agreed scope and repository conventions do not need repeated approval. Shared-contract or ownership changes also require coordination with affected members.
+
+For credentials, ask only about availability and configuration method. Never ask the member to paste an API key into chat, a prompt, an issue, or a tracked file. Explain how to set it in the ignored local `.env` or a process secret source; check only presence/permissions without displaying its value. If unavailable, offer offline fixtures/canned outputs and postpone live calls. A configured key does not authorize an unbounded run; confirm the development cap before quota-consuming pilots.
+
 ## Start every task with the correct checkout
 
 1. Identify the assigned deliverable, current phase, owner, and acceptance criteria.
@@ -30,7 +48,7 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 
 - Implement the smallest coherent change that satisfies the assigned gate.
 - Preserve the core generation/repair comparison. No unrequested UI, RAG, calendars, training, deployment, or new provider integrations.
-- Clarify only when a missing decision would change the scientific contract, expose data, create substantial cost, or destroy work. Continue independent unblocked work.
+- Follow the onboarding and clarification rules above whenever requirements or setup remain uncertain. Do not guess unresolved member decisions; continue independent authorized work while waiting.
 - Record material decisions, schema migrations, changed objectives, scope reductions, and benchmark changes in `planning.md`.
 - Do not silently change splits, prompts, objectives, weights, time units, seeds, solver limits, models, or metrics to improve results.
 - Use subagents only for independent, non-overlapping work that benefits from delegation. Give a narrow scope and verify the result. Do not run overlapping edits in a shared directory.
