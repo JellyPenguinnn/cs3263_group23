@@ -108,6 +108,18 @@ Before implementation, each member completes the onboarding confirmation in `AGE
 - Yao Xiang: formal definitions, tiny solver cases, and extraction prompts; use a canned provider response until the shared adapter is ready.
 - Yong Qing: hand-written gold fixtures, independent schedule checks, and renderer/runner design using canned pipeline outputs.
 
+### First implementation checkpoints by member
+
+| Member | First work increment | Required evidence and handoff | Continue with |
+| --- | --- | --- | --- |
+| Li Hao | Establish the package/test setup and provider interface; implement canned direct-output parsing and bounded provider error handling | Verified offline setup/test commands; provider response contract for Yao Xiang and Yong Qing; parser cases for valid, malformed, and missing-task outputs. A live smoke check is separate and requires configured access and a confirmed cap | Direct generation/repair, shared CLI and integration, then the assigned runs, demo, and writing |
+| Yao Xiang | Implement the canonical schema, tiny generation solver, and explicit repair context/objectives incrementally | Schema examples and rejection cases; hand-checked or exhaustive tiny feasibility/objective checks; contract review request to both members. Publish reference-solver interface/limits for Yong Qing | Full core constraints, extraction and solver-augmented pipeline, then proof audit, failure analysis, and writing |
+| Yong Qing | Define the six shared gold fixtures, independent validator, and a runner consuming canned pipeline outputs | Manually justified expected validity/objectives; deliberate invalid-schedule mutations caught; generation/repair record format and fixture review with both members | Generator/renderings and splits, reference labelling using Yao Xiang's solver, metrics/replay, then main runs and analysis after the evaluation freeze |
+
+These are ordered starting points, not extra scope or independent replacements for the shared gates. Component tests belong to each component owner. Treat Section 6 as the working draft until team review freezes it; questions that alter its semantics require agreement, but fixture design, solver mathematics, provider parsing, and other independent work can proceed. Li Hao establishes the single package manifest and test command early; other members do not create competing manifests. Yao Xiang's canonical schema is integrated before consumers finalize their imports. Yong Qing checks expected answers independently rather than deriving them solely from the reference solver.
+
+When a dependency blocks execution, the agent names the owner, missing interface/version, and smallest requested deliverable, then continues other owned tasks using the agreed contract. The member passes that handoff to the teammate; agents are not assumed to have access to each other's chats or permission to message them. After reviewed shared work reaches `main`, fetch and merge it into the member branch, preserve local work, and verify integration. A newly created local branch without its remote counterpart or an unavailable dependency is reported explicitly, never silently replaced with another branch or implementation.
+
 Mocks/canned outputs unblock interface work but never count as live-model research evidence. Merge the shared contract first, then merge small component increments every 1–2 days. Do not wait until the end of a week to integrate three large branches.
 
 If a contract change is needed, record its motivation, affected consumers, migration, and schema version; coordinate before editing shared files. Never copy divergent schemas into separate components.

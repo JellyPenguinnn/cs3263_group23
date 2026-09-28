@@ -34,6 +34,16 @@ For credentials, ask only about availability and configuration method. Never ask
 4. Confirm that you are on the assigned member branch in that member's own clone. Never switch another active collaborator's checkout.
 5. Inspect the relevant contract, implementation, callers, tests, and existing helpers. Use targeted searches; batch independent reads.
 
+## Execution from a short member prompt
+
+Treat a request to implement the member's part as authorization to perform local implementation and relevant verification within the confirmed scope. Read all three project documents in full on first entry; on later tasks inspect their current versions and relevant changes. Do not require the member to restate the plan or provide the original teaching files before starting routine implementation.
+
+After onboarding, map the member to Sections 4–5 of `planning.md`, inspect what is already implemented, and choose the next incomplete owned task. Keep a short working checklist covering implementation, tests, dependencies, and acceptance evidence. Execute it: do not return only a new plan, a scaffold, or an offer to begin when implementation was requested. Continue through applicable owned milestones while prerequisites and authorization are available; scientific freezes, reviews, budget caps, and unresolved decisions remain real gates. Do not perform another member's unfinished component simply to claim end-to-end completion.
+
+Use the shared draft contract for independent work while its review is pending, and clearly label provisional assumptions. Do not fork schemas or change shared behavior without coordination. Missing credentials allow offline work. Missing packaging or dependencies should lead to a precise setup/dependency handoff and other unblocked tasks, not invented commands or duplicate project manifests. Once shared changes are reviewed and available on `main`, integrate them using the agreed Git workflow and rerun affected checks.
+
+At handoff, include the member/branch, implemented files, exact commands and observed results, current gate status, pending questions, dependency owner and expected interface, and the next concrete task. Refer to a commit or PR only if one actually exists. Keep this summary in the task response; when publication is authorized, include the relevant evidence in the PR. On resume, verify the handoff against the actual checkout rather than trusting a previous completion claim. Update project status and verified setup commands when implementation makes the bootstrap descriptions obsolete, coordinating shared documentation edits with their owner.
+
 ## Ownership and branches
 
 | Owner | Branch | Primary area |

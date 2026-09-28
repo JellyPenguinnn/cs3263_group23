@@ -39,6 +39,20 @@ cd cs3263_group23
 
 The planned local runtime is CPU-only Python on macOS and Linux, with remote inference through SoCLaaS; portability remains to be verified during implementation. There is no install, test, or experiment command yet. Those commands will be added when their implementations exist; the planned stack is Python, OR-Tools CP-SAT, and NUS SoCLaaS through its OpenAI-compatible API.
 
+### Start with a coding agent
+
+After cloning, open this repository folder in your coding agent and use this prompt, replacing the name:
+
+> I am [Li Hao / Yao Xiang / Yong Qing]. Read the full `README.md`, `AGENTS.md`, and `planning.md` in this repository. Confirm any missing onboarding details with me, then implement and test my assigned part of `planning.md` on my member branch. Start with Section 5 and continue through my applicable milestones; do not stop at another plan. Ask focused questions or offer choices when a decision is unresolved, and continue independent work while waiting. Follow the repository's verification and handoff rules.
+
+Use the exact filename casing above, including `AGENTS.md`, on case-sensitive systems. The agent should derive your responsibilities from the plan; you do not need to rewrite the technical specification in the prompt. Git and repository access are needed to clone; pushing also requires write access. The SSH clone command assumes your GitHub SSH access is configured; otherwise use the repository's HTTPS clone URL with your own GitHub authentication. Never put credentials in a clone URL.
+
+The initial onboarding answers establish the local path, branch, work scope, and allowed Git actions. The agent then implements in small verified increments. If a teammate's component is pending, it follows the dependency guidance in Section 5. For a later session, use:
+
+> Continue my assigned work. Read the three project documents, inspect my branch and existing changes, and use the latest handoff and actual verification evidence to resume from the next incomplete task. Ask me only for missing or changed decisions.
+
+The plan contains the technical information needed to start; the original course documents need not be available at another member's local path. New teaching-team feedback must still be reconciled with the plan. Members review the agent's work, coordinate shared decisions, and understand the implementation; agent output alone is not proof that an acceptance gate passed.
+
 ### NUS SoCLaaS configuration
 
 **Development uses SoCLaaS only; no frontier-model access is needed to begin implementation or development pilots.** Final evaluation model selection is a separate milestone by 18 October, before held-out experiments. The course requires a frontier-model comparison unless the teaching team accepts an alternative; SoCLaaS access alone does not establish that acceptance.
