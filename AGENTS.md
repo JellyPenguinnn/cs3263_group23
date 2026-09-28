@@ -101,7 +101,8 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 - Confirm the final evaluation model satisfies the course requirement or has documented teaching-team acceptance before freezing the main comparison. This gate does not block SoCLaaS development. Provider connectivity is not model eligibility; pending approval is not approval.
 - Freeze benchmark, prompts, model settings, metrics, and limits before held-out runs. Keep related variants in one split.
 - Preserve raw failures with safe redaction. No cherry-picking, manual answer repairs, hidden retries, or tuning against test outcomes.
-- Retain base-instance pairing in robustness analysis and uncertainty estimates. Report denominators, exclusions, objective proof status, and realistic-scenario limitations.
+- Follow Section 8's canonical-only primary comparison; report realistic scenarios, extra renderings, and repeats separately. Preserve pairing and common source-problem groups in uncertainty estimates. Report denominators, exclusions, objective proof status, and realistic-scenario limitations.
+- Track parsing/schema success, extracted-spec semantics, solver outcomes, and independent gold validity separately. Never treat a schema-valid or solver-feasible extraction as proof of faithful interpretation.
 - Record code commit, config/prompt/data hashes, provider/model identity, dependencies, seeds, solver workers/limits, hardware context, timestamps, and usage coverage for runs.
 - Keep run artifacts immutable; corrections create a new run ID. Separate offline/mock tests, provider smoke checks, pilot evidence, and main experimental results.
 

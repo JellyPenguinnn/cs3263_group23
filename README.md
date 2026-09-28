@@ -142,4 +142,6 @@ These folders contain only empty `.gitkeep` placeholders. No Python modules, pac
 - [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver).
 - [NUS SoCLaaS documentation](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) — institutional access may be required.
 
+Additional research on formalization failures, constrained planning, verification, minimal-perturbation repair, and statistical evaluation is mapped to concrete design decisions in [planning.md, Section 16](planning.md#16-source-grounding). These references guide implementation and analysis; they do not add course requirements.
+
 Project scope follows the Group 23 proposal and CS3263 project guidelines. A distribution license has not yet been selected.
