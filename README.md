@@ -4,7 +4,7 @@
 
 A research project comparing direct language-model scheduling with language-model-to-constraint-solver scheduling. We study both generating a new schedule and repairing an existing schedule after requirements change, while minimizing unnecessary disruption.
 
-**Status:** initial research plan and repository setup. Scheduling systems, benchmarks, and experiment results are not implemented yet. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**.
+**Status:** initial research plan and repository setup. Scheduling systems, benchmarks, and experiment results are not implemented yet. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. The plan also covers final review and course submission in November.
 
 ## Research questions
 
@@ -23,7 +23,7 @@ A research project comparing direct language-model scheduling with language-mode
 
 Both approaches will be checked by an independent validator against the gold specification. A solver-valid answer to an incorrectly translated problem does not count as a correct answer to the original problem.
 
-The core covers fixed-duration activities, availability, deadlines, fixed commitments, precedence, participant/resource non-overlap, preferences, and minimum-disruption repair. UI, live calendar integrations, and verifier-feedback correction are stretch work.
+The core covers fixed-duration activities, availability, deadlines, fixed commitments, precedence, participant/resource non-overlap, preferences, and minimum-disruption repair. A small demo UI and verifier-feedback correction are stretch work. Live calendar integrations are outside project scope.
 
 ## Getting started
 
@@ -36,7 +36,7 @@ cd cs3263_group23
 2. Read [AGENTS.md](AGENTS.md) before changing files or using a coding agent.
 3. Fetch and switch to your assigned branch from the table below. Each member should use a separate local clone.
 
-There is no install, test, or experiment command yet. Those commands will be added when their implementations exist; the planned stack is Python, OR-Tools CP-SAT, and NUS SoCLaaS through its OpenAI-compatible API.
+The planned local runtime is CPU-only Python on macOS and Linux, with remote inference through SoCLaaS; portability remains to be verified during implementation. There is no install, test, or experiment command yet. Those commands will be added when their implementations exist; the planned stack is Python, OR-Tools CP-SAT, and NUS SoCLaaS through its OpenAI-compatible API.
 
 ### NUS SoCLaaS configuration
 
@@ -62,7 +62,7 @@ curl --fail --silent --show-error \
 
 This lists models and does not run a scheduling experiment. Avoid shell tracing (`set -x`), verbose HTTP logs, and publishing raw provider responses. `SOCLAAS_MODEL=default` is a bootstrap alias; choose and record a verified model ID before the benchmark is frozen. Available models, quotas, and advanced request features must be checked live. Environment files are not loaded automatically by this repository yet.
 
-Connectivity verified on **28 September 2026**: authenticated model listing and one tiny chat completion succeeded; `default` returned `qwen3.6:35b`. This verifies access only, not scheduling performance or suitability for the course's frontier-model comparison.
+Connectivity verified on **28 September 2026**: authenticated model listing and one tiny chat completion succeeded; `default` returned `qwen3.6:35b`. This verifies access only, not scheduling performance or suitability for the course's frontier-model comparison. Model suitability or teaching-team approval must be established before the main experiment is frozen.
 
 ## Team and branches
 
@@ -83,7 +83,7 @@ Development begins with synthetic scenarios. We will examine privacy of routines
 ## Repository contents
 
 - `README.md` — project overview and entry points.
-- `planning.md` — complete working plan and proposed interface contract.
+- `planning.md` — working plan, interface contract, experiment matrix, rubric evidence checklist, portability requirements, and submission schedule.
 - `AGENTS.md` — contributor and coding-agent instructions.
 - `.env.example` — configuration names without credentials.
 - `.gitignore` — local secrets, environments, generated artifacts, and caches.

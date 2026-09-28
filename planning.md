@@ -7,12 +7,13 @@ This is the working implementation and evaluation plan for Group 23's **AI Assis
 - Setup and contract agreement: **28 September–4 October 2026**.
 - Four implementation weeks: **5–30 October 2026**.
 - Completion target: **Friday 30 October 2026**, in Week 11 (26–30 October).
+- Mandatory proposal deadline: **28 September 2026**; confirm the Canvas submission receipt. Its body is limited to one single-spaced, single-column page with 1-inch margins, excluding title/references.
 - Course presentation: week of **9 November 2026**, normally 15 minutes plus 5 minutes of questions; a recording may be requested.
 - Course final report: **13 November 2026**.
 - The Week 11 target includes implementation, evaluated results, a complete report draft, and presentation/demo material. The remaining course window is for review and required submission adjustments, not planned core development.
 - Current repository status: documentation/configuration bootstrap only. All implementation and research gates below remain open until supported by evidence.
 
-The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. Check Canvas for subsequent instructor changes before submission.
+The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must list every member's name, matriculation number, and email on the title page; keep those identifying details in the private submission copy. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
 
 ## 2. Research questions and contribution
 
@@ -41,11 +42,12 @@ The intended contribution is a reproducible, bounded comparison combining genera
 ### Stretch, only after the core gates pass
 
 - One verifier-feedback correction round, reported separately with its exact information and budget.
-- A second verified model, or a second initial-schedule policy sensitivity check.
+- A second research model beyond the required primary comparison, or a second initial-schedule policy sensitivity check.
 - A small visualization/demo interface.
-- Participant assignment, multi-capacity resources, new/cancelled tasks, longer horizons, and repeated disruption sequences.
 
-Live calendars, account integrations, RAG, autonomous calendar edits, mobile applications, model training, and production deployment are outside the four-week core. Do not add them as implicit dependencies.
+Participant assignment, multi-capacity resources, new/cancelled tasks, longer horizons, and repeated disruption sequences are future extensions, outside the four-week delivery.
+
+Live calendars, account integrations, RAG, autonomous calendar edits, mobile applications, model training, and production deployment are outside the four-week delivery. Do not add them as implicit dependencies.
 
 Generation-only is the proposal's fallback. Taking it requires an explicit team decision and a documented scope reduction; it does not satisfy the original generation-and-repair completion claim.
 
@@ -69,8 +71,8 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 
 | Area | Lead | Review/coordination |
 | --- | --- | --- |
-| `src/scheduling/schema.py`, `solver.py`, `objectives.py` | Yao Xiang | Other two approve contract changes |
-| `src/scheduling/providers/`, `pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
+| `src/scheduling/schema.py`, `src/scheduling/solver.py`, `src/scheduling/objectives.py` | Yao Xiang | Other two approve contract changes |
+| `src/scheduling/providers/`, `src/scheduling/pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
 | `src/scheduling/pipelines/solver_augmented.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries |
 | `src/scheduling/validation.py`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
 | Corresponding component tests | Component owner | Rotating reviewer |
@@ -97,16 +99,19 @@ This section is a proposed implementation contract to freeze by 29 September. Fi
 
 ### Gold problem and natural-language view
 
-`ProblemSpec`: `schema_version`, `instance_id`, `task_type` (`generation` or `repair`), `horizon_slots`, `slot_minutes` (30), participant IDs, resource IDs, activities, and constraints. Activity records contain unique stable IDs, positive integer `duration_slots`, participant/resource IDs, and one or more availability windows. Constraints/preferences have stable IDs and typed operands; unknown types and dangling IDs are errors.
+`ProblemSpec`: `schema_version`, `instance_id`, `task_type` (`generation` or `repair`), `horizon_slots`, `slot_minutes` (30), participant records, resource records, activities, and constraints. Each participant/resource has a unique ID and explicit availability windows; capacity is one in v1. Activity records contain unique stable IDs, positive integer `duration_slots`, participant/resource IDs, and an explicit list of zero or more availability windows. Constraints/preferences have stable IDs and typed operands; unknown types and dangling IDs are errors.
 
-- Slot zero is the explicitly stated horizon start. No implicit current date or timezone.
+- Store `horizon_start` and `timezone` explicitly; slot zero is that start, with `0 <= start < end <= horizon_slots`. No implicit current date/timezone. Initial scenarios use a single fixed-offset day.
+- Activity, participant, and resource IDs are visible labels in every language rendering. Extracted constraints use their own IDs; hidden gold constraint IDs are never required for a correct extraction. Match constraints by normalized type, operands, and values.
 - Intervals are half-open `[start,end)`. Adjacent activities are permitted.
-- An activity must fit completely within an allowed window, not span the gap between two windows.
+- An activity must fit completely within one allowed window for the activity and for each required participant/resource, not span gaps. Explicit full-horizon availability means unrestricted; an empty list means unavailable.
+- A blocked interval identifies its target kind (`participant` or `resource`), target ID, and half-open endpoints. Its effect applies to every activity using that entity. No unstated availability defaults.
 - Mandatory activity IDs must occur exactly once in a schedule. Missing, duplicate, and invented activities are invalid.
 - Release times, deadlines, fixed starts, precedence, and blocked intervals have explicit semantics. No inferred travel/rest constraints unless stated.
 - Resources and participants cannot be double-booked. Multiple required participants must all be available for the full interval.
 - A preferred start window uses explicit inclusive lower/exclusive upper start bounds and an integer penalty weight. Generation minimizes the sum of violated-preference weights.
-- Repair additionally carries a gold-valid original schedule, an event description, and a fully updated problem. Both systems receive identical original schedules and updated information.
+- A repair benchmark case retains `original_problem`, `original_schedule`, `event`, and `updated_problem` separately. The original schedule must pass validation against the original problem; it may violate the updated problem. Evaluate all repaired schedules against the updated problem. Both systems receive the same original schedule and the complete updated natural-language description; the evaluator keeps both gold specifications private.
+- Reject malformed types, endpoints, and references as schema errors. Preserve well-formed contradictions (such as a deadline earlier than the release time, or insufficient available time) as scheduling instances whose feasibility must be solved, not filtered away as invalid data.
 
 `NaturalLanguageView` contains the user-visible text, variant ID, base-instance ID, and, for repair, the common original schedule. Evaluated pipelines receive this view and the public output/schema instructions. They do not receive gold constraints, oracle solutions, hidden labels, or expected objective values.
 
@@ -116,19 +121,21 @@ This section is a proposed implementation contract to freeze by 29 September. Fi
 
 `PipelineResult`: `instance_id`, `variant_id`, `approach`, `status`, optional schedule, optional extracted specification, diagnostics, timings, and usage. Pipeline status is one of `SAT`, `UNSAT`, `UNKNOWN`, `INVALID_OUTPUT`, or `ERROR`. A SAT claim requires a complete schedule; an UNSAT claim from a direct LLM is a prediction, not a proof.
 
-Preserve the underlying solver status separately: `OPTIMAL`, `FEASIBLE`, `INFEASIBLE`, `UNKNOWN`, or `MODEL_INVALID`. Also store objective value, best bound where available, time limit, elapsed time, and whether each lexicographic stage was proven optimal. Never report a feasible incumbent as a proven optimum, or a timeout as UNSAT.
+Record the model's declared status separately from parsing/execution status and final gold validation; a parseable SAT claim is not an accepted solution. Preserve the underlying solver status separately: `OPTIMAL`, `FEASIBLE`, `INFEASIBLE`, `UNKNOWN`, or `MODEL_INVALID`. Also store objective value, best bound where available, time limit, elapsed time, and whether each lexicographic stage was proven optimal. Never report a feasible incumbent as a proven optimum, or a timeout as UNSAT.
 
 `ValidationResult`: structural validity, hard-feasible flag, violations with constraint IDs, objective components recomputed from gold, and repair distance. The validator consumes a schedule and gold specification; it must not call CP-SAT or reuse the solver's constraint-building implementation.
 
 ### Proposed Python interfaces
 
 ```python
-solve(spec, limits) -> SolveResult
-validate_schedule(gold_spec, schedule) -> ValidationResult
+solve(spec, limits, repair_context=None) -> SolveResult
+validate_schedule(gold_spec, schedule, repair_context=None) -> ValidationResult
 run_direct(nl_view, model_config) -> PipelineResult
 run_solver_augmented(nl_view, model_config, solver_limits) -> PipelineResult
 evaluate(instance, pipeline_result, gold_reference) -> EvaluationRecord
 ```
+
+`RepairContext` contains the common original schedule, including stable activity IDs and start slots. It is required for a repair task and absent for generation; missing repair context is an explicit error. Both the solver and validator use it to compute moved count and total shift. The evaluator first checks the original schedule against `original_problem`, then checks repairs against `updated_problem` with this context. The solver-augmented path builds the same context from the public original schedule; it must not receive the original or updated gold specification.
 
 Li Hao also provides a minimal typed `complete(messages, model_config) -> ModelResponse` interface with content, returned model, timing, usage, and sanitized error fields. Both pipelines use this adapter. Freeze it alongside the shared schema so Yao Xiang can work with canned responses without waiting for live access.
 
@@ -148,7 +155,9 @@ Repair: satisfy the updated hard constraints and lexicographically minimize:
 
 Use sequential optimization or a proven equivalent bounded encoding. For sequential optimization, only freeze a prior objective value as optimal after that stage has been proven optimal. Otherwise retain the feasible incumbent and explicitly mark optimality as unproven. Hard constraints are never converted into soft penalties.
 
-Document the initial-schedule policy (initially a deterministic feasible schedule from the gold solver) and give both approaches exactly that schedule. Report that this choice may favor some repair patterns. New/cancelled activities are excluded from v1; if later added, define retained-task distance and mandatory-presence semantics first.
+Document the initial-schedule policy (initially a saved feasible schedule produced by the pinned gold solver configuration) and give both approaches exactly that schedule. Report that this choice may favor some repair patterns. New/cancelled activities are excluded from v1; if later added, define retained-task distance and mandatory-presence semantics first.
+
+Compare repair objective tuples lexicographically. Report moved-count excess first; treat total-shift excess as a secondary optimality gap only when moved count equals its proven optimum. Interpret preference gaps only when both earlier objectives match. A schedule moving more activities but shifting fewer slots is not a better lexicographic repair. Raw component values can always be shown.
 
 Changing weights or objective priority changes the question being studied and requires a new experiment configuration. Keep raw moved count and total shift even when reporting the lexicographic optimum.
 
@@ -163,7 +172,25 @@ Changing weights or objective priority changes the question being studied and re
 - Both core approaches use each rendering: 600 model calls per complete single-model, single-attempt pass. Repeats, pilot calls, feedback, and extra models are additional. This arithmetic is a planning estimate, not a budget authorization.
 - Group all variants and related generation/repair scenarios from a common base in the same split. Keep prompt examples and tuning cases out of the held-out test set.
 
-Generate feasible instances with a known witness. Establish UNSAT with the gold solver, including interacting contradictions rather than only obvious single-rule failures. Discard or relabel unresolved reference cases; do not silently assign a binary truth label to UNKNOWN. Record selection/exclusion counts and reasons.
+### Confirmatory experiment matrix
+
+Provisional controlled allocation, to confirm using development-only pilots before test generation:
+
+| Sweep | Generation bases | Repair bases | Levels and allocation per task type | Other factors |
+| --- | --- | --- | --- | --- |
+| Activity count | 30 | 30 | 4/8/12 activities; 10 cases per level | Fix horizon and target slack/contention/density bands |
+| Available slack | 30 | 30 | Low/medium/high; 10 cases per level | Fix 8 activities and target contention/density bands |
+| Constraint interaction density | 30 | 30 | Low/medium/high; 10 cases per level | Fix 8 activities and target slack/contention bands |
+| Resource contention | 30 | 30 | Low/medium/high; 10 cases per level | Fix 8 activities and target slack/density bands |
+| **Total** | **120** | **120** | Each cell of 10: 5 proven SAT, 5 proven UNSAT | Unique bases across sweeps |
+
+Balance the three disruption types within the repair set and record their counts. Target 6 SAT/6 UNSAT for the 12 realistic scenarios. Select the 24 language-variant bases in advance: 12 generation and 12 repair, balanced by SAT/UNSAT and spread across difficulty. Report how this artificial class balance differs from real scheduling demand.
+
+Define unary slack using each activity's number of allowable starts after duration, windows, and deadlines, before interactions. Define interaction density and resource contention separately; record realized counts/bands. These factors are coupled, so report unmatched covariates and selection rates rather than claiming a perfect causal intervention. Freeze exact definitions, seeds, quotas, time limits, and exclusion rules in the benchmark manifest after the pilot.
+
+Primary outcome for SAT cases is valid-schedule rate; UNSAT cases assess false SAT and correct infeasibility claims. Repair also measures lexicographic objective quality. Language variants assess paired changes in these outcomes, not exact schedule identity: multiple different schedules may be equally valid and optimal.
+
+Generate feasible instances with a known witness. Establish UNSAT with the gold solver, including interacting contradictions rather than only obvious single-rule failures. Keep unresolved reference cases in a separately reported set, or exclude them using the frozen rule; do not silently assign a binary truth label to UNKNOWN. Record selection/exclusion counts and reasons.
 
 Use targeted difficulty sweeps: task counts such as 4/8/12, several slack levels, low/high resource contention, and sparse/dense meaningful constraint interactions. Pilot for floor/ceiling effects. Avoid a full Cartesian product; separate controlled sweeps from mixed cases. Define density and slack operationally in the generator documentation and store realized values. More constraints do not automatically imply greater difficulty.
 
@@ -180,13 +207,34 @@ Natural-language renderings must state all information needed to solve the task,
 - Paired changes in validity/objective across renderings, with repeated identical prompts on a small subset if resources permit to estimate model variability.
 - End-to-end latency plus extraction/solver components; token usage; request count; retries; rate-limit events; cost where known. Missing prices/usage are marked unavailable, never zero.
 
+Define overall accepted-answer rate as `(gold-valid SAT schedules + correct UNSAT answers) / all gold-labelled attempts`, with errors/unknowns contributing no successes. Report SAT validity and UNSAT accuracy separately so a high score on one class cannot hide failure on the other. A gold-UNSAT instance with an independently validated schedule signals a reference/validator defect: investigate before publishing any affected scores.
+
 Confidence intervals and paired comparisons should group by base instance; paraphrases are not independent samples. Report the sample sizes and uncertainty. Do not pool results from changed model/backend configurations without identifying the change.
+
+### Priorities and analysis outputs
+
+The two approaches, both task types, gold validation, and failure accounting are mandatory. The 300-rendering plan is a provisional target, not a minimum required to claim completion. If the pilot exceeds time/quota, reduce the predeclared matrix proportionally while retaining every primary comparison; freeze the revised counts before test access. Do not select easy cases from main-run outcomes.
+
+| Question | Controlled comparison | Required report evidence |
+| --- | --- | --- |
+| Difficulty and feasibility | A versus B within SAT/UNSAT strata and each sweep | Validity curves with uncertainty; status/coverage table; explanation of interactions |
+| Formalization failure | Gold solver versus extracted-spec solver, with independent gold validation | Error-category table; one omitted/altered constraint case; semantic review notes |
+| Repair quality | Common old schedule and disruption, A versus B versus gold optimum | Movement/shift results with valid-solution denominators; an annotated repair example |
+| Language robustness | Matched canonical/paraphrased/reordered descriptions | Paired validity transitions and objective changes, grouped by base |
+
+Use the same evidence to discuss privacy, participant inconvenience, and objective trade-offs. Bound responsible-AI case analysis to four synthetic cases, drawn from development/realistic examples where possible: unequal inconvenience, an objective trade-off, ambiguous negotiability, and instruction-like task text. Do not build a separate large adversarial benchmark.
+
+For language-effect claims, repeat all three renderings of a preselected 12-base subset three times per approach if the pilot budget permits: 144 additional calls beyond the 600-call pass. Otherwise report observed one-attempt variation and the inability to separate it fully from model sampling variability. Extra models, feedback, and UI follow only after required analysis is complete.
+
+Explain technical depth through the start-domain search space `product_i |D_i|`, the constraints that couple choices, and the distinction between finding a witness, proving infeasibility, and proving optimality. Do not use constraint count alone as a complexity proof. Discuss when ambiguous/missing information, solver availability, translation cost, or time limits make tool use less helpful. Relate any forecast about improved models to observed failures and label it as a hypothesis.
 
 ### Fair comparison and error attribution
 
-Use the same verified model ID, prompt information, reasoning settings where supported, and predeclared per-call output budget for A and B. Record prompt lengths and token usage because output tasks differ. One model attempt per approach is the core condition; transport retries are bounded, recorded, and distinct from semantic corrections. Neither path gets hidden gold feedback.
+Use the same verified model ID, problem information, reasoning settings where supported, and predeclared per-call output budget for A and B. Pilot that budget on the longest supported outputs of both paths so one format is not artificially truncated. Freeze each approach's task-appropriate prompt and record both; do not give either path private hints or unreported tools; CP-SAT is the declared tool for B. Direct inference has no external solver/code execution or hidden agent tools. Record prompt lengths and token usage because output tasks differ. One model attempt per approach is the core condition; transport retries are bounded, recorded, and distinct from semantic corrections. Neither path gets hidden gold feedback.
 
 Gold-to-Solver isolates the reference/modeling layer. Compare B's extracted specification to gold and validate B's final schedule against gold. A correct output despite an extraction mistake remains an end-to-end success but an extraction failure. If the gold solver or independent validator fails cross-checks, fix the infrastructure before interpreting model results.
+
+Assign deterministic operational categories first: provider/transport error, malformed output, unsupported specification, solver model error, solver limit, or gold-invalid schedule. Track extraction mismatches separately; an associated mismatch does not alone prove the cause of a failure. On a preselected diagnostic sample of up to 20 B failures (or all if fewer), review normalized constraints and, where useful, replace one erroneous extraction component with gold in an explicitly labelled diagnostic rerun. Keep these reruns outside primary scores. A second member reviews ambiguous equivalences and disagreements. If sampling failures, state the sampling rule and denominator rather than extrapolating unsupported causal percentages.
 
 Preserve malformed outputs and failures with appropriate redaction. Never hand-repair a test response or keep only successful retries. An optional feedback experiment must state whether feedback uses gold constraints or only the model's extracted specification; those are different information settings.
 
@@ -199,6 +247,7 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 - Adapter must have explicit connect/read timeouts, bounded retries for transient errors, sanitized errors, and per-attempt accounting. Start with sequential requests; increase concurrency only within verified provider limits.
 - Credentials stay in a local ignored `.env` or process environment. Each member supplies an authorized credential. Do not distribute the project owner's key through Git or team documents. Rotate any key shared through chat/screenshots.
 - Validate authentication with a model listing and one small non-sensitive completion before scheduling experiments. These are connectivity checks, not research results.
+- **Model eligibility gate:** by **4 October**, Yao Xiang documents how the primary model meets the course frontier-model requirement or obtains teaching-team acceptance of the SoCLaaS choice. The course describes SoCLaaS open-weight evaluation as an additional option; an accessible alias is not sufficient evidence of eligibility. If unresolved, continue offline development but do not freeze a supposedly course-compliant main comparison. Resolve with a qualifying model under an authorized access/budget arrangement or a documented teaching-team-approved scope; use the same primary model for both paths.
 - Before bulk execution, run a small pilot and estimate request/token cost and runtime. Set a maximum requests/tokens or currency cap, concurrency cap, and stop conditions. Obtain the project owner's explicit budget authorization; course reimbursement is not an execution budget.
 - The course guidelines allow a group claim up to $100 under their receipt rules. SoCLaaS accounting may differ; confirm institutional quota/cost rather than assuming it is free or reimbursable.
 
@@ -233,20 +282,22 @@ Two brief team checkpoints each week: progress/blockers and integration/review. 
 - Both generation and repair work through A and B with recorded live-provider evidence.
 - Provider errors, invalid JSON, valid-but-wrong extraction, model UNSAT predictions, and solver UNKNOWN remain distinguishable.
 - Dependency versions are locked, relevant tests pass, and installation/demo commands are verified from a fresh environment.
-- Model, prompts, seeds, fixtures, metrics, and execution caps are frozen before the main test set is run.
+- Primary-model eligibility or teaching-team acceptance is documented. Model, prompts, seeds, fixtures, metrics, and execution caps are frozen before the main test set is run.
+- A fresh macOS checkout and a fresh Linux checkout pass the offline reproduction checks in Section 14; unsupported platforms are documented.
 
 ### Gate C — defensible results
 
 - Every planned attempt has a record, or an explicit exclusion/failure reason.
 - Gold labels/objective proof status and all reported denominators are checked.
 - Analysis includes difficulty, repair, language robustness, extraction failures, uncertainty, and limits of realism.
-- A teammate independently reproduces representative results from saved manifests without accessing secrets.
+- A teammate independently replays saved synthetic outputs and recomputes validation, metrics, and figures without an API key. New live inference uses an authorized credential and is reported as a new run, not an exact text reproduction.
 
 ### Gate D — four-week completion
 
 - Complete report draft and presentation/demo with no fabricated or unverified claims.
 - Responsible AI analysis includes concrete cases/measurements and objective trade-offs.
 - Actual member contributions and AI assistance disclosed; every member understands the whole pipeline.
+- Rubric evidence, report page allocation, timed presentation, and November submission responsibilities are checked against Section 17.
 - Repository instructions reflect implemented commands and current limitations; no open critical correctness defects.
 
 ## 12. Responsible AI and limitations
@@ -285,6 +336,26 @@ Commit source code, tests, small synthetic fixtures, benchmark generation config
 
 Maintain immutable run directories and manifest hashes; fixes require a new run ID. Offline/mock success, provider connectivity, and actual benchmark results are separate evidence classes.
 
+### Portable runtime and supported environments
+
+Li Hao owns packaging and CI. Use a standard `pyproject.toml`, a documented Python minor version (initial target **Python 3.12**), and one committed dependency lockfile. Verify OR-Tools and provider-client compatibility before freezing versions. Use CPU execution locally and remote model inference; a GPU, local model server, paid desktop app, or developer-specific environment must not be required.
+
+Supported targets are macOS and Linux, verified from fresh environments by Gate B. Windows users can use WSL2 with the Linux workflow; native Windows support is optional and must not be claimed without a check. Keep POSIX shell examples labelled. Use repository-relative paths or explicit CLI/config paths and `pathlib`; no hardcoded home directories, absolute personal paths, shell-only business logic, or implicit local timezone. Configuration changes must not require source edits.
+
+Provide an installable CLI covering fixture generation, gold solving, single-case A/B execution, validation, batch execution/resume, offline replay, and metric/figure export. Freeze the command syntax with the implementation and document only commands actually tested. Add one tiny offline example and one explicitly selected live smoke example. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
+
+### Bounded execution and restart behavior
+
+Yong Qing owns run bookkeeping. Identify attempts by base/variant/task/approach/model-config/repeat ID and immutable config hashes. Write each completed attempt atomically and save manifest/progress incrementally. Resume only matching configurations and reuse completed records without another API call; configuration changes create a new run. Keep interrupted/uncertain requests visible because the provider may already have charged them. Any retry is explicit, bounded, recorded, and counted toward the approved cap.
+
+Begin with one worker and a small pilot. Scale with bounded concurrency and disjoint instance shards under verified rate limits; each attempt has one owner. Stream records and aggregate incrementally so memory does not grow with raw response volume. A database/service is unnecessary at this scale; per-attempt files plus a manifest are sufficient. Include stop conditions for budget exhaustion, persistent authentication/rate-limit failures, or invalid reference results.
+
+### Reproduction package
+
+By Gate C, preserve a versioned package containing synthetic benchmark inputs/gold references, frozen prompts/configs, sanitized attempt records, status/usage accounting, and scripts that regenerate all reported tables/figures. Include checksums and a short manifest-to-figure index. Keep small configurations and aggregate outputs in Git; share larger reviewed synthetic records in a team-accessible archive with a recorded checksum and location. Ignoring `runs/` must not make the reported results unrecoverable. Retain failed attempts and disclose any redaction affecting reproducibility.
+
+Offline replay must reproduce metrics from saved outputs without credentials or live model access. Exact live text and exact tied solver schedules are not guaranteed; retain their original records and separate reruns. Keep a replay-based demo available for presentation failures and label it clearly as recorded evidence.
+
 ## 15. Decision log and next actions
 
 | Date | Decision | Status / follow-up |
@@ -293,6 +364,7 @@ Maintain immutable run directories and manifest hashes; fixes require a new run 
 | 2026-09-28 | Use NUS SoCLaaS and local secret configuration | Connectivity verified; evaluation model, quota, and execution budget pending |
 | 2026-09-28 | Li Hao: direct baseline and provider; Yao Xiang: formal model and solver pipeline; Yong Qing: evaluation | Responsibilities and interfaces defined in Sections 4–6 |
 | 2026-09-28 | Single-day fixed-duration v1 and lexicographic repair | Proposed contract; freeze with team by Sep 29 |
+| 2026-09-28 | Primary-model eligibility, portable replay, and rubric evidence are acceptance gates | Eligibility review by Oct 4; other evidence due at Gates B–D |
 
 Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified model and pilot budget; implement Gate A and the provider adapter in parallel. Record subsequent material decisions here without overwriting prior experiment configurations.
 
@@ -306,3 +378,43 @@ Next actions: each member reads these documents; confirm available hours; freeze
 - [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/): formal-tool-assisted planning and verification.
 - [CP-SAT](https://developers.google.com/optimization/cp/cp_solver): integer modeling and distinct solver statuses.
 - [SoCLaaS](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) and NUS SoCLaaS connection instructions: API configuration. Institutional documentation access and actual provider capability are separate checks.
+
+## 17. Rubric evidence and course delivery
+
+The teaching handout provides qualitative criteria, not numerical weights or a guaranteed top-grade checklist. Use this mapping to gather substantive evidence; implementation claims and research conclusions still require validation.
+
+| Teaching criterion | Project evidence | Lead and review |
+| --- | --- | --- |
+| Motivation, problem definition, relevance | Concrete personal/shared scheduling use case; explicit variables, domains, constraints, objectives, and assumptions | Li Hao + Yao Xiang; all review |
+| Innovativeness and literature | Comparison of related work's task, method, metrics, and limitations; precise account of what this study adds without unsupported novelty claims | Li Hao; Yao Xiang reviews |
+| Knowledge, technical depth, achievement | CSP/COP formulation, search-space/interaction analysis, solver and repair method, independent correctness checks | Yao Xiang; Yong Qing reviews |
+| Methodology and implementation | Frozen paired design, clean split, fair model access, reference proofs/bounds, tested pipelines, portable reproduction package | All component owners |
+| Analysis and insights | Section 8's four evidence outputs, failures, uncertainty, assumptions, tool limitations, and recommendations supported by results | Yong Qing integrates; all interpret |
+| Responsible AI | Four bounded case analyses; privacy boundaries, unequal inconvenience, objective choice, transparency, and user control | All; Li Hao edits |
+| Effort, initiative, teamwork | Actual contribution log linked to PRs, experiment/review work, and report sections; AI-assistance disclosure | Each member records; leader reconciles |
+| Report quality | Technical accuracy, coherent argument, readable figures, clear writing, citations, strict page/format audit | Li Hao assembles; rotating review |
+| Presentation and Q&A | Timed coherent explanation, legible results/demo, rehearsed questions, each member able to explain the whole study | All three |
+
+### Report structure and evidence budget
+
+Indicative body allocation totals **10 pages**, including figures and tables. Adjust within the fixed total and preserve space for analysis: motivation/problem (0.75), related work (0.75), formulation/repair (1.5), systems (1), benchmark/protocol (1.5), results/error analysis (2.5), responsible AI/limitations (1), conclusion/contributions/AI disclosure (1). Title and references are separate. Appendices may contain supporting outputs where allowed, but must not carry essential arguments that belong within the body limit.
+
+Required evidence is the Section 8 status/coverage table, difficulty curves, error taxonomy, repair comparison, and paired robustness results, plus two annotated examples: a valid low-disruption repair and a translation failure or infeasible case. Reuse compact figures across related questions; do not fill the report with screenshots. Maintain a claim-to-run/figure mapping and distinguish measured findings from interpretation.
+
+Start the report outline and related-work comparison in Week 1, method sections in Week 2, and result figures in Week 3. Week 4 synthesizes and edits existing material rather than starting the report from scratch.
+
+### Presentation and submission schedule
+
+Target a 15-minute presentation: problem/questions (2 min), formulation and systems (3), benchmark/fair comparison (2), results and failure cases (5), responsible AI/limitations (2), conclusion (1). Split speaking time approximately equally. Rehearse 5 minutes of Q&A on gold correctness, infeasibility versus timeout, extraction error, repair objectives, sampling, fairness, and when tools do not help. Prepare a recorded replay if live access fails.
+
+| Date | Deliverable and verification | Owner |
+| --- | --- | --- |
+| Sep 28 | Confirm mandatory proposal uploaded through Canvas and retain receipt; possession of a PDF is not proof of submission | Yao Xiang; another member verifies |
+| By Oct 4 | Read proposal feedback/announcements, confirm model eligibility and teaching-team clarifications, record any required plan changes | Yao Xiang, with all members |
+| Oct 30 | Core freeze, audited experiment records, complete report draft, presentation/demo, contribution records | All three |
+| Nov 2–6 | Cross-review report, verify claims/citations and format, conduct full timed rehearsal; confirm presentation/video arrangements and exact Canvas times | Li Hao assembles; all review; Yao Xiang checks Canvas |
+| Week of Nov 9 | Present or submit the required recording/materials according to Canvas instructions; verify successful delivery | All present; Yao Xiang coordinates |
+| By Nov 12 | Final report audit: <=10-page body, font/margins, references, private title-page identifiers, member contributions, AI disclosure; target early upload | Li Hao assembles; Yong Qing checks evidence; Yao Xiang uploads |
+| Nov 13 | Confirm final report submission before the published Canvas cutoff and preserve receipt; resolve upload issues before the cutoff | Yao Xiang; another member verifies |
+
+These are planned actions, not completed submissions or claimed instructor approval. Keep exact submission times and any changed requirements from Canvas in the decision log; do not infer them from the dates alone.

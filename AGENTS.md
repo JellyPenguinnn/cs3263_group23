@@ -43,8 +43,8 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 - Keep model extraction, solver compilation, validation, and evaluation separate. The independent validator must not call CP-SAT or reuse the solver's constraint-building logic.
 - Hard constraints cannot be silently dropped or converted into preferences. Missing required activities invalidate a schedule.
 - Use integer slots and half-open activity intervals. Respect full-window containment and all participants/resources.
-- Preserve original and updated problem versions for repair. Both approaches receive the same original schedule.
-- Apply the frozen lexicographic repair objective; only claim optimality when proven. Preserve solver bounds/status and stage completion.
+- Preserve original and updated problem versions for repair. Validate the old schedule against the original problem and repaired outputs against the updated problem. Both approaches receive the same original schedule and updated information.
+- Apply the frozen lexicographic repair objective; only claim optimality when proven. Preserve solver bounds/status and stage completion. Interpret secondary objective gaps only when preceding objective values match the reference optimum.
 - No broad exception swallowing, silent fallbacks, misleading success results, placeholder production paths, or dependencies without clear value.
 - Comments explain non-obvious constraints and reasoning, not the obvious code behavior.
 
@@ -66,6 +66,7 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 - Keep gold-SAT, gold-UNSAT, unresolved references, solver timeouts, invalid output, and provider errors distinct.
 - Direct-model UNSAT is a prediction. CP-SAT `INFEASIBLE` is proof for the compiled model only; it says nothing about omitted source constraints or erroneous extraction.
 - `FEASIBLE` is not `OPTIMAL`; `UNKNOWN` is not `INFEASIBLE`. Do not present an unproven incumbent as a gold optimum.
+- Confirm the primary model satisfies the course requirement or has documented teaching-team acceptance before freezing the main comparison. Provider connectivity is not model eligibility.
 - Freeze benchmark, prompts, model settings, metrics, and limits before held-out runs. Keep related variants in one split.
 - Preserve raw failures with safe redaction. No cherry-picking, manual answer repairs, hidden retries, or tuning against test outcomes.
 - Retain base-instance pairing in robustness analysis and uncertainty estimates. Report denominators, exclusions, objective proof status, and realistic-scenario limitations.
@@ -82,6 +83,14 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 - Do not repeatedly rerun passing checks without a relevant change. Do not write tests merely mirroring implementation details.
 - Before finishing, review the final diff, call sites, edge cases, staged paths, secrets, and unintended dependency/generated changes. Report commands actually executed and their results.
 - At bootstrap there are no canonical build/test commands. Add and document verified commands with the package implementation; never invent a successful check.
+
+## Portability and experiment operations
+
+- Follow Section 14 of `planning.md`: locked Python dependencies, CPU-only local execution, and verified macOS/Linux workflows. Do not claim platform support before checking it.
+- Use portable paths and explicit configuration/timezones. No developer-specific home directories, implicit environment dependencies, or secret-bearing logs.
+- Keep attempt IDs and configuration hashes stable. Resume completed attempts without another API call; account for interrupted requests and bounded retries explicitly.
+- Share a sanitized reproduction package with checksums. Offline replay must recompute reported metrics without credentials; live reruns are separate evidence.
+- Check rubric evidence and course deliverables in Section 17. Maintain contribution records and claim-to-result links as work proceeds, not only at report time.
 
 ## Git and collaboration
 
