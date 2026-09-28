@@ -55,35 +55,38 @@ Working assumption: **8–10 hours per member per week**, approximately 32–40 
 
 | Member | Branch | Primary deliverables | Approximate total effort |
 | --- | --- | --- | --- |
-| Tea Li Hao | `lihao-formal-core` | Shared schema implementation; CSP/COP formulation; CP-SAT compiler; generation/repair solver; reference labels; tiny-case exhaustive cross-checks | 24h technical + 6h review/analysis + 6h writing/demo |
-| Tham Yao Xiang, leader | `yaoxiang-llm-pipelines` | SoCLaaS adapter; direct scheduling; NL-to-specification extraction; prompts; provider/pipeline tests; integration support | 20h technical + 4h coordination + 6h review/analysis + 6h writing/demo |
+| Tea Li Hao | `lihao-llm-baseline` | SoCLaaS adapter; direct-LLM generation/repair baseline; direct prompts and parsing; provider tests; package/CLI/CI setup; demo integration | 22h implementation/tooling + 6h review/analysis + 8h writing/demo |
+| Tham Yao Xiang, leader | `yaoxiang-formal-core` | Shared schema; CSP/COP formulation; CP-SAT compiler; generation/repair objectives; reference labels; NL-to-specification extraction and solver-augmented pipeline | 24h technical + 4h coordination + 4h review/analysis + 4h writing |
 | Woo Yong Qing | `yongqing-evaluation` | Synthetic generator/rendering; independent validator; runner; metrics; result tables/figures | 24h technical + 6h review/analysis + 6h writing/demo |
 
-The independent validator moves from Li Hao's proposed sole implementation responsibility to Yong Qing, with Li Hao reviewing the mathematical rules. This balances the implementation load and reduces shared solver/validator bugs. All members approve the rules and own the overall result.
+The user requested the easier technical stream for Li Hao and the harder stream for Yao Xiang, while Yong Qing retains evaluation. Direct API integration and baseline output handling have fewer algorithmic dependencies than formal modeling, CP-SAT compilation, lexicographic repair, and extraction semantics. Li Hao therefore takes additional setup, integration, demo, and writing work to keep estimated total effort comparable. If Yao Xiang becomes the bottleneck, shift supporting tooling/documentation to Li Hao before reducing scientific scope; do not silently transfer the harder core back to Li Hao.
 
-Review rotation: Li Hao reviews LLM extraction semantics; Yao Xiang reviews runner/provider boundaries and benchmark wording; Yong Qing reviews solver behavior against independently enumerated cases. Any member may flag a correctness problem outside their ownership.
+The independent validator is implemented by Yong Qing, with Yao Xiang reviewing mathematical rules. Separate implementations and cross-checks reduce shared solver/validator bugs. This allocation explicitly supersedes the proposal's original member split; all members approve the rules and own the overall result.
 
-Report ownership: Li Hao drafts formulation and solver methodology; Yao Xiang drafts motivation, related work, pipeline method, and AI-assistance disclosure; Yong Qing drafts benchmark and results. All jointly write discussion, limitations, responsible AI, and conclusion, and rehearse questions about the entire system.
+Review rotation: Li Hao reviews benchmark wording, provider/runner integration, and user-facing diagnostics; Yao Xiang reviews direct-baseline assumptions and formal validity rules; Yong Qing reviews solver and extracted-constraint behavior against independently enumerated cases. Any member may flag a correctness problem outside their ownership.
+
+Report ownership: Li Hao drafts motivation, related work, the direct baseline/provider method, and AI-assistance disclosure, and assembles the demo; Yao Xiang drafts formulation, solver/repair method, and the extraction pipeline; Yong Qing drafts benchmark and results. All jointly write discussion, limitations, responsible AI, and conclusion, and rehearse questions about the entire system.
 
 ### File ownership once implementation starts
 
 | Area | Lead | Review/coordination |
 | --- | --- | --- |
-| `src/scheduling/schema.py`, `solver.py`, `objectives.py` | Li Hao | Other two approve contract changes |
-| `src/scheduling/providers/`, `pipelines/`, `prompts/` | Yao Xiang | Li Hao checks extracted semantics |
-| `src/scheduling/validation.py`, `benchmarks/`, `evaluation/` | Yong Qing | Li Hao cross-checks validity rules |
+| `src/scheduling/schema.py`, `solver.py`, `objectives.py` | Yao Xiang | Other two approve contract changes |
+| `src/scheduling/providers/`, `pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
+| `src/scheduling/pipelines/solver_augmented.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries |
+| `src/scheduling/validation.py`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
 | Corresponding component tests | Component owner | Rotating reviewer |
-| `pyproject.toml`, lockfile, CI, shared CLI, README | Yao Xiang integrates | Owners request changes; avoid competing edits |
+| `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao integrates | Owners request changes; avoid competing edits |
 | `planning.md`, `AGENTS.md` | Team agrees; one editor at a time | Record material decisions below |
 
 No implementation directories are promised to exist at bootstrap. Keep a small Python package; avoid unnecessary service/framework layers.
 
 ## 5. Parallel start and dependency management
 
-**Day 1–2: 28–29 September.** Agree the version-1 contract below and at least six tiny fixtures: simple SAT, overlap, shared resource, precedence/deadline interaction, proven UNSAT, and repair. Li Hao owns the schema PR; all review it. Each person can start immediately:
+**Day 1–2: 28–29 September.** Agree the version-1 contract below and at least six tiny fixtures: simple SAT, overlap, shared resource, precedence/deadline interaction, proven UNSAT, and repair. Yao Xiang owns the schema PR; Li Hao owns the shared provider-call interface; all review both contracts. Each person can start immediately:
 
-- Li Hao: formal definitions and tiny enumerated solver cases.
-- Yao Xiang: provider capability checks, canned response parsing, and prompts against the draft JSON contract.
+- Li Hao: provider capability checks, canned direct-output parsing, direct prompts, and package setup against the draft contract.
+- Yao Xiang: formal definitions, tiny solver cases, and extraction prompts; use a canned provider response until the shared adapter is ready.
 - Yong Qing: hand-written gold fixtures, independent schedule checks, and renderer/runner design using canned pipeline outputs.
 
 Mocks/canned outputs unblock interface work but never count as live-model research evidence. Merge the shared contract first, then merge small component increments every 1–2 days. Do not wait until the end of a week to integrate three large branches.
@@ -128,6 +131,8 @@ run_direct(nl_view, model_config) -> PipelineResult
 run_solver_augmented(nl_view, model_config, solver_limits) -> PipelineResult
 evaluate(instance, pipeline_result, gold_reference) -> EvaluationRecord
 ```
+
+Li Hao also provides a minimal typed `complete(messages, model_config) -> ModelResponse` interface with content, returned model, timing, usage, and sanitized error fields. Both pipelines use this adapter. Freeze it alongside the shared schema so Yao Xiang can work with canned responses without waiting for live access.
 
 Use explicit typed models and deterministic serialization. Validate generated JSON before compilation. Do not execute model-generated code. Schema-valid JSON is not proof of semantic correctness.
 
@@ -209,10 +214,10 @@ An authenticated model listing and one non-sensitive chat completion returned HT
 
 | Week | Li Hao | Yao Xiang | Yong Qing | Shared gate |
 | --- | --- | --- | --- | --- |
-| **1: Oct 5–11** | Schema, formal rules, basic SAT/UNSAT solver, exhaustive tiny cases | SoCLaaS smoke check, adapter and canned parsing tests, first A/B prompts | Gold fixtures, independent validator, renderer, runner using canned outputs | Contract frozen during setup (target Sep 29); one generation and one repair example through both live paths by Oct 11, or an explicit provider blocker |
-| **2: Oct 12–18** | Complete supported constraints, preferences, lexicographic repair, solver diagnostics | Robust structured parsing, both pipelines, extraction diagnostics, bounded error handling | Generator/splits, reference labelling, metrics, pilot automation | Core feature complete; development suite passes; pilot completed; benchmark/prompts/model/budget frozen |
-| **3: Oct 19–25** | Reference audit, optimality/bounds checks, solver failure analysis | Execute assigned model runs, audit extraction failures, record provider drift | Execute remaining runs, aggregate records, paired analysis and figures | Planned runs complete or explicitly accounted for; provenance and denominators audited |
-| **4: Oct 26–30** | Formulation/method draft, independent rerun of selected cases | Related work/pipeline draft, integration/demo, coordination | Benchmark/results draft, reproducibility rerun and figures | Complete report draft within limit; presentation and demo; all members can explain findings; core frozen Oct 30 |
+| **1: Oct 5–11** | SoCLaaS adapter, direct prompts/parsing, provider tests, package/CLI setup | Schema, basic solver/tiny-case checks, extraction prompts and first B path | Gold fixtures, independent validator, renderer, runner using canned outputs | Contract frozen during setup (target Sep 29); one generation and one repair example through both live paths by Oct 11, or an explicit provider blocker |
+| **2: Oct 12–18** | Direct generation/repair baseline, bounded provider errors, offline tests, CI and integration support | Complete constraints/preferences/repair, extraction diagnostics, solver-augmented integration | Generator/splits, reference labelling, metrics, pilot automation | Core feature complete; development suite passes; pilot completed; benchmark/prompts/model/budget frozen |
+| **3: Oct 19–25** | Execute assigned model runs, audit direct-output failures, provider drift and run support | Reference/optimality audit, solver and extraction failure analysis | Execute remaining runs, aggregate records, paired analysis and figures | Planned runs complete or explicitly accounted for; provenance and denominators audited |
+| **4: Oct 26–30** | Related work/direct-method draft, integration/demo, selected independent reruns | Formulation/solver/extraction draft, technical discussion, coordination | Benchmark/results draft, reproducibility rerun and figures | Complete report draft within limit; presentation and demo; all members can explain findings; core frozen Oct 30 |
 
 Two brief team checkpoints each week: progress/blockers and integration/review. Leadership is coordination, not sole responsibility for integration. Rebalance workload based on remaining tasks, not only the original titles. Use a shared decision log for scope/API changes; record actual contributions as work occurs.
 
@@ -288,14 +293,14 @@ Maintain immutable run directories and manifest hashes; fixes require a new run 
 | --- | --- | --- |
 | 2026-09-28 | Complete core by Week 11, Oct 26–30; target Oct 30 | User clarified timeline; setup Sep 28–Oct 4 and four implementation weeks Oct 5–30; course deadlines remain unchanged |
 | 2026-09-28 | Use NUS SoCLaaS and local secret configuration | User selected provider; model/budget suitability to be verified |
-| 2026-09-28 | Three owned workstreams with an independently implemented validator | Working allocation; confirm availability at kickoff |
+| 2026-09-28 | Li Hao owns easier direct-baseline/provider work; Yao Xiang owns harder formal/solver/extraction work; Yong Qing retains evaluation | User-requested allocation; support/writing effort balances technical difficulty |
 | 2026-09-28 | Single-day fixed-duration v1 and lexicographic repair | Proposed contract; freeze with team by Sep 29 |
 
 Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified model and pilot budget; implement Gate A and the provider adapter in parallel. Record subsequent material decisions here without overwriting prior experiment configurations.
 
 ## 16. Source grounding
 
-- Group 23 proposal, supplied 28 September 2026: problem, two approaches, repair, metrics, team, and original milestones. This plan accelerates completion and redistributes validator implementation explicitly.
+- Group 23 proposal, supplied 28 September 2026: problem, two approaches, repair, metrics, team, and original milestones. This plan accelerates completion and explicitly updates member ownership at the user's request, including independent validator implementation.
 - CS3263 Project.pdf and CS3263-Project-Guidelines 2627.docx: course comparison requirement, deliverables, evaluation, responsible AI, team contributions, and AI-assistance disclosure.
 - ResponsibleAI.pptx: privacy, fairness/trade-offs, transparency, adversarial behavior, unintended effects, and human control.
 - [SCHEDBench](https://arxiv.org/abs/2608.00991): scheduling under equivalent language forms.

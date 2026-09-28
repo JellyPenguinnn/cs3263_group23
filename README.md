@@ -68,11 +68,11 @@ Connectivity verified on **28 September 2026**: authenticated model listing and 
 
 | Member | Primary responsibility | Branch |
 | --- | --- | --- |
-| Tea Li Hao | Formal model, CP-SAT solver, repair objectives, reference verification | `lihao-formal-core` |
-| Tham Yao Xiang · team leader | SoCLaaS adapter, direct LLM and extraction pipelines, coordination | `yaoxiang-llm-pipelines` |
+| Tea Li Hao | Direct LLM baseline, SoCLaaS adapter, setup/integration tooling, demo | `lihao-llm-baseline` |
+| Tham Yao Xiang · team leader | Formal model, CP-SAT and repair, LLM-to-solver pipeline, coordination | `yaoxiang-formal-core` |
 | Woo Yong Qing | Benchmark, independent validator, experiment runner, metrics | `yongqing-evaluation` |
 
-All three members share experiment analysis, report writing, presentation, and cross-review. Detailed effort allocation and review rotation are in [planning.md](planning.md).
+Li Hao owns the more straightforward API/baseline work; Yao Xiang owns the harder formal reasoning and solver integration. Li Hao takes more setup, demo, and report support to keep overall effort comparable. All three members share experiment analysis, report writing, presentation, and cross-review. Detailed effort allocation and review rotation are in [planning.md](planning.md).
 
 ## Evaluation and responsible AI
 
