@@ -47,6 +47,8 @@ After cloning, open this repository folder in your coding agent and use this pro
 
 Use the exact filename casing above, including `AGENTS.md`, on case-sensitive systems. The agent should derive your responsibilities from the plan; you do not need to rewrite the technical specification in the prompt. Git and repository access are needed to clone; pushing also requires write access. The SSH clone command assumes your GitHub SSH access is configured; otherwise use the repository's HTTPS clone URL with your own GitHub authentication. Never put credentials in a clone URL.
 
+The [decision guide](planning.md#decision-guide-for-members-and-agents) separates course requirements, shared project decisions, provisional experiments, and routine engineering choices; the following implementation defaults give agents a practical starting direction.
+
 The initial onboarding answers establish the local path, branch, work scope, and allowed Git actions. The agent then implements in small verified increments. If a teammate's component is pending, it follows the dependency guidance in Section 5. For a later session, use:
 
 > Continue my assigned work. Read the three project documents, inspect my branch and existing changes, and use the latest handoff and actual verification evidence to resume from the next incomplete task. Ask me only for missing or changed decisions.

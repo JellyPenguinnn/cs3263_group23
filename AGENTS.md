@@ -36,6 +36,8 @@ For credentials, ask only about availability and configuration method. Never ask
 
 ## Execution from a short member prompt
 
+Apply the decision guide and recommended defaults in Section 1 of `planning.md`. Classify uncertain choices before asking: preserve course obligations and agreed scientific semantics, iterate provisional settings on development data within authorization, and make routine engineering choices yourself. Do not treat a recommendation as an immutable rule or an experiment freeze as a ban on normal code maintenance. A behavior-changing fix after freeze needs a recorded version and an assessment of affected results.
+
 Treat a request to implement the member's part as authorization to perform local implementation and relevant verification within the confirmed scope. Read all three project documents in full on first entry; on later tasks inspect their current versions and relevant changes. Do not require the member to restate the plan or provide the original teaching files before starting routine implementation.
 
 After onboarding, map the member to Sections 4–5 of `planning.md`, inspect what is already implemented, and choose the next incomplete owned task. Keep a short working checklist covering implementation, tests, dependencies, and acceptance evidence. Execute it: do not return only a new plan, a scaffold, or an offer to begin when implementation was requested. Continue through applicable owned milestones while prerequisites and authorization are available; scientific freezes, reviews, budget caps, and unresolved decisions remain real gates. Do not perform another member's unfinished component simply to claim end-to-end completion.
@@ -72,7 +74,7 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 - Hard constraints cannot be silently dropped or converted into preferences. Missing required activities invalidate a schedule.
 - Use integer slots and half-open activity intervals. Respect full-window containment and all participants/resources.
 - Preserve original and updated problem versions for repair. Validate the old schedule against the original problem and repaired outputs against the updated problem. Both approaches receive the same original schedule and updated information.
-- Apply the frozen lexicographic repair objective; only claim optimality when proven. Preserve solver bounds/status and stage completion. Interpret secondary objective gaps only when preceding objective values match the reference optimum.
+- Apply the frozen lexicographic repair objective; only claim optimality when proven. Preserve solver bounds/status and stage completion. Interpret secondary objective gaps only when preceding objective values match the reference optimum. Follow Section 7's exact-gap settings and shared stage time budget; `OPTIMAL` under a loose stopping tolerance is not automatically an exact reference optimum.
 - No broad exception swallowing, silent fallbacks, misleading success results, placeholder production paths, or dependencies without clear value.
 - Comments explain non-obvious constraints and reasoning, not the obvious code behavior.
 

@@ -21,6 +21,36 @@ The course requires a course-related formal subproblem, a frontier-model direct-
 
 The 30-minute single-day representation, lexicographic objective, provisional sample counts, Python/package layout, and portability checks are team design choices, not additional teaching-team requirements. Keep agreed scientific semantics consistent and freeze the comparison before held-out evaluation. Component owners can choose and test routine engineering details without team-wide approval; coordinate shared semantic changes and record material decisions. Prefer a small working research system and deep analysis to extra infrastructure or features.
 
+### Decision guide for members and agents
+
+| Decision level | Examples in this project | How to act |
+| --- | --- | --- |
+| Course requirements | Formal AI subproblem; frontier-model direct-versus-tool comparison; responsible AI; evidence, contributions and disclosure; report/presentation limits and deadlines | Satisfy them and keep evidence. If a proposed deviation affects compliance, obtain teaching-team clarification through the team; do not reinterpret the requirement away. |
+| Agreed project direction | Generation and repair, CP-SAT, two comparable paths, gold specifications, independent validation, SoCLaaS development, member responsibilities | Implement as planned. Ask the relevant member/team before changing these commitments. The final-model decision remains open until Section 9's gate. |
+| Shared scientific contract | Slot/window semantics, constraint meaning, repair objective order, status meanings, gold separation, fair input access | Use Section 6's working draft and Section 7 consistently; resolve semantic ambiguity with affected owners before dependent work. After contract review, changes need a versioned migration and affected tests. |
+| Provisional experiment choices | Sample counts, difficulty bands, prompt wording, seeds, request/solver limits and repeat counts | Owners develop and pilot these on development cases within the approved budget. Record choices for team review at the evaluation freeze; do not ask for every development-only adjustment. After freeze, preserve the prior run/config and explicitly version any revision. |
+| Routine engineering | Helper functions, internal classes, test layout, local environments, serialization mechanics, CLI organization, internal refactoring | The owner chooses the simplest suitable implementation, tests it, and proceeds. New shared dependencies go through the packaging owner; no all-team approval is needed unless they change scope or the shared contract. |
+
+A local choice stops being routine when it changes a consumer's public interface, the meaning of an input/output, experimental comparability, spending authorization, or another member's work. Explain that impact when asking; do not send the member a vague request to choose an architecture.
+
+### Recommended implementation defaults
+
+These recommendations guide implementation; they are not extra assessment criteria. Keep an existing tested solution when it already meets the contract. An owner may use an equally simple alternative and explain a material trade-off in the handoff.
+
+| Area | Recommended starting approach | Reason / verification |
+| --- | --- | --- |
+| Overall system | One Python package with explicit functions and a small CLI; pass typed data between components | Keep the scheduling study understandable. A web service, generic agent framework, database, or plugin system is unnecessary for the core. |
+| Shared data | One canonical set of typed schema models with validation at file/model boundaries; stable IDs and deterministic serialization | Avoid separate definitions for each pipeline. Round-trip fixtures and reject malformed structure while retaining well-formed infeasible problems. |
+| Direct pipeline | Natural-language view → one model call → parse and normalize → independent gold validation during evaluation | Never silently repair a bad answer with the solver or hidden gold hints. Preserve the original response and each status. |
+| Solver pipeline | Natural-language view → one extraction call → schema validation → fixed CP-SAT compiler → independent gold validation | No execution of model-written code. Measure translation errors separately from compiled-model feasibility. |
+| Repair optimization | Sequential lexicographic solving as the initial approach; retain objective values, bounds and proof status for each stage | Easier to audit than inventing large combined weights. A tested equivalent bounded encoding remains allowed. |
+| Provider layer | One small shared adapter; inject canned responses in offline tests; configure model and limits outside source | Both paths share transport/accounting behavior. Check malformed output, transient failure, timeout and missing usage without live calls in routine tests. |
+| Development order | First connect one tiny generation case and one tiny repair case, then expand constraint coverage and benchmark scale | Integration errors surface early. Passing two cases is an integration checkpoint, not scientific validation. |
+| Runs and results | Per-attempt records with immutable configuration hashes; serial pilot first; one analysis path for live records and offline replay | Resume without duplicate calls and recompute metrics from saved evidence. Increase concurrency only if pilot evidence justifies it. |
+| Demonstration | A reproducible CLI or recorded before/after schedule example with visible constraints, changes and validation | Show what repair achieves and where extraction can fail. Build a visual UI only if core evidence and time allow. |
+
+Examples: proceed with a helper refactor that preserves its public behavior, additional offline edge-case tests, or development prompt iteration within an agreed cap. Ask before changing 30-minute slots to 15 minutes, reordering repair objectives, relaxing a hard constraint, selecting a different provider/model, adding live calendar integration, or inspecting held-out results to tune a prompt. A time limit never proves UNSAT: preserve a feasible incumbent when available and mark unfinished optimization as unproven; otherwise report UNKNOWN.
+
 ## 2. Research questions and contribution
 
 1. How do problem size, slack, constraint interactions, and shared resources affect direct versus solver-assisted scheduling?
@@ -192,6 +222,11 @@ Repair: satisfy the updated hard constraints and lexicographically minimize:
 
 Use sequential optimization or a proven equivalent bounded encoding. For sequential optimization, only freeze a prior objective value as optimal after that stage has been proven optimal. Otherwise retain the feasible incumbent and explicitly mark optimality as unproven. Hard constraints are never converted into soft penalties.
 
+For exact gold and lexicographic-stage optima, explicitly set `absolute_gap_limit=0` and `relative_gap_limit=0`, retain the objective/bound pair, and verify proof handling against the locked OR-Tools release. `OPTIMAL` alone can reflect a configured nonzero gap stopping rule; see the [official parameter definitions](https://github.com/google/or-tools/blob/stable/ortools/sat/sat_parameters.proto). Use integer objective coefficients and cross-check tiny optima independently. Give a repair solve one recorded total time budget across all optimization stages, passing only remaining time to each stage; record reference-solver and evaluated-pipeline budgets separately. A later stage timing out must not discard a valid earlier incumbent or claim full lexicographic optimality.
+
+A practical compiler starting point is one interval per activity, a no-overlap constraint for each participant/resource, precedence inequalities, and legal start domains that enforce whole-window containment. This adapts the [official job-shop example](https://developers.google.com/optimization/scheduling/job_shop); do not copy its makespan objective, since our objectives are preferences and repair disruption. The independent validator checks the mathematics directly without calling that compiler.
+
+
 Document the initial-schedule policy (initially a saved feasible schedule produced by the pinned gold solver configuration) and give both approaches exactly that schedule. Report that this choice may favor some repair patterns. New/cancelled activities are excluded from v1; if later added, define retained-task distance and mandatory-presence semantics first.
 
 Compare repair objective tuples lexicographically. Report moved-count excess first; treat total-shift excess as a secondary optimality gap only when moved count equals its proven optimum. Interpret preference gaps only when both earlier objectives match. A schedule moving more activities but shifting fewer slots is not a better lexicographic repair. Raw component values can always be shown.
@@ -262,6 +297,9 @@ The two approaches, both task types, gold validation, and failure accounting are
 Use the same evidence to discuss privacy, participant inconvenience, and objective trade-offs. Bound responsible-AI case analysis to four synthetic cases, drawn from development/realistic examples where possible: unequal inconvenience, an objective trade-off, ambiguous negotiability, and instruction-like task text. Do not build a separate large adversarial benchmark.
 
 For language-effect claims, repeat all three renderings of a preselected 12-base subset three times per approach if the pilot budget permits: 144 additional calls beyond the 600-call pass. Otherwise report observed one-attempt variation and the inability to separate it fully from model sampling variability. Extra models, feedback, and UI follow only after required analysis is complete.
+
+Track benchmark-generation seed, rendering seed, and model-call repeat separately. SCHEDBench Section 4.3 varies rendering seeds; our identical-prompt repeats estimate inference variability and are not a replication of that test. One paraphrase and one reordering per base support claims about the selected renderings, not all possible wording. Keep canonical success alongside paired transitions: consistently invalid schedules are not evidence of useful robustness. Review all additional renderings (48 under the provisional matrix) for preserved semantics before main inference; correct renderer defects without consulting model performance, version the fixtures, and keep prompt tuning separate from that audit.
+
 
 Explain technical depth through the start-domain search space `product_i |D_i|`, the constraints that couple choices, and the distinction between finding a witness, proving infeasibility, and proving optimality. Do not use constraint count alone as a complexity proof. Discuss when ambiguous/missing information, solver availability, translation cost, or time limits make tool use less helpful. Relate any forecast about improved models to observed failures and label it as a hypothesis.
 
@@ -426,6 +464,20 @@ Next actions: each member reads these documents; confirm available hours; freeze
 - [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/): formal-tool-assisted planning and verification.
 - [CP-SAT](https://developers.google.com/optimization/cp/cp_solver): integer modeling and distinct solver statuses.
 - [SoCLaaS](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) and NUS SoCLaaS connection instructions: API configuration. Institutional documentation access and actual provider capability are separate checks.
+
+### Research basis for the recommendations — checked 28 September 2026
+
+These sources inform design, not course rules or predicted scores. The implications below are project decisions; distinguish them from the authors' reported findings in the report. Cite the original research, and verify API details against the package version actually locked during implementation.
+
+| Primary source | Relevant evidence | Implication and boundary for this project |
+| --- | --- | --- |
+| [NATURAL PLAN](https://arxiv.org/abs/2406.04520) and [authors' evaluation repository](https://github.com/google-deepmind/natural-plan) | Studies natural-language planning with supplied task information, complexity variation, and executable response evaluation | Supply sufficient information to both paths and evaluate saved outputs. This motivates the design; their older model scores are not predictions for our models or scheduling tasks. |
+| [SCHEDBench, Sections 4.2–4.4 and Appendix A.6–A.7](https://arxiv.org/html/2608.00991v1) | Paired scheduling renderings, semantic audits, rendering-seed sensitivity, and feasible-only objective reporting | Preserve pairing and audit wording. Separate model-repeat noise from rendering variation. Do not equate a benchmark best-known solution with a proven optimum or adopt its scale as a course requirement. |
+| [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/) | Reports a formal-solver planning framework and handling of infeasible requests | Supports studying tool-assisted planning, but does not establish that our extraction is correct or guarantee its reported success rate here. Our fixed JSON-to-CP-SAT pipeline is a bounded design choice. |
+| [Barták, Müller and Rudová, Minimal Perturbation Problem — A Formal View](https://www.unitime.org/papers/ercimprelimin03.pdf) | Formalizes changing a constraint problem while limiting deviation from its previous solution; also discusses broader partial-solution variants | Grounds the repair task in existing constraint research. Our complete schedules, fixed activity set and specific three-stage objective are a narrower chosen formulation; minimum-disruption repair itself is not a novelty claim. |
+| [OR-Tools scheduling example](https://developers.google.com/optimization/scheduling/job_shop), [solver statuses](https://developers.google.com/optimization/cp/cp_solver), and [gap parameters](https://github.com/google/or-tools/blob/stable/ortools/sat/sat_parameters.proto) | Documents interval/non-overlap modeling, solver outcomes, and tolerance-based stopping | Use supported primitives and preserve proof/bound distinctions. Exact reference optimality needs appropriate settings; an infeasibility result applies only to the compiled specification. |
+
+The intended distinction from prior work is this study's combined analysis of direct versus extracted-spec solving, minimum-disruption repair, and wording sensitivity in a small personal/shared scheduling domain. Describe it as a scoped empirical contribution; any stronger novelty claim needs a broader literature review. A CLI, fixed compiler, sequential repair optimization, and simple file-based runner are engineering recommendations for auditability and the four-week budget, not methods proven universally best by these papers.
 
 ## 17. Rubric evidence and course delivery
 
