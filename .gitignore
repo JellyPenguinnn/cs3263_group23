@@ -1,0 +1,54 @@
+# Credentials and local environment configuration
+.env
+.env.*
+!.env.example
+.envrc
+secrets/
+credentials/
+*.pem
+*.key
+*.p12
+*.pfx
+
+# Python environments, builds, and caches
+.venv/
+venv/
+env/
+__pycache__/
+*.py[cod]
+*.egg-info/
+build/
+dist/
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+.coverage
+.coverage.*
+htmlcov/
+coverage.xml
+.tox/
+.nox/
+.ipynb_checkpoints/
+
+# Local/private data and generated experiment outputs
+data/private/
+data/generated/
+artifacts/
+runs/
+results/raw/
+logs/
+*.log
+tmp/
+.cache/
+
+# Operating system and editor state
+.DS_Store
+._*
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# Keep source fixtures, benchmark manifests, dependency lockfiles,
+# reviewed result summaries, and final report sources trackable.
