@@ -40,7 +40,7 @@ There is no install, test, or experiment command yet. Those commands will be add
 
 ### NUS SoCLaaS configuration
 
-Connection details are based on the SoCLaaS key-creation instructions supplied to the team:
+Configure access to the NUS SoCLaaS API:
 
 ```bash
 cp .env.example .env
@@ -72,7 +72,7 @@ Connectivity verified on **28 September 2026**: authenticated model listing and 
 | Tham Yao Xiang · team leader | Formal model, CP-SAT and repair, LLM-to-solver pipeline, coordination | `yaoxiang-formal-core` |
 | Woo Yong Qing | Benchmark, independent validator, experiment runner, metrics | `yongqing-evaluation` |
 
-Li Hao owns the more straightforward API/baseline work; Yao Xiang owns the harder formal reasoning and solver integration. Li Hao takes more setup, demo, and report support to keep overall effort comparable. All three members share experiment analysis, report writing, presentation, and cross-review. Detailed effort allocation and review rotation are in [planning.md](planning.md).
+All three members share experiment analysis, report writing, presentation, and cross-review. Detailed effort allocation and review rotation are in [planning.md](planning.md).
 
 ## Evaluation and responsible AI
 
@@ -96,4 +96,4 @@ Development begins with synthetic scenarios. We will examine privacy of routines
 - [OR-Tools CP-SAT documentation](https://developers.google.com/optimization/cp/cp_solver).
 - [NUS SoCLaaS documentation](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) — institutional access may be required.
 
-This repository follows the Group 23 proposal and CS3263 project materials supplied to the team. Course documents and identifying student details are not copied into the repository. A distribution license has not yet been selected.
+Project scope follows the Group 23 proposal and CS3263 project guidelines. A distribution license has not yet been selected.

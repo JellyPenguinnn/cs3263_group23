@@ -2,11 +2,11 @@
 
 ## 1. Authority, status, and completion target
 
-This is the working implementation and evaluation plan for Group 23's **AI Assistant for Dynamic Constraint-Aware Scheduling: Direct LLM Reasoning vs Constraint-Solver-Augmented Reasoning**. It elaborates the supplied proposal; proposed design decisions below are not experimental findings.
+This is the working implementation and evaluation plan for Group 23's **AI Assistant for Dynamic Constraint-Aware Scheduling: Direct LLM Reasoning vs Constraint-Solver-Augmented Reasoning**. It defines scope, interfaces, responsibilities, milestones, and evaluation criteria. Design decisions remain provisional until the corresponding review gate is complete.
 
 - Setup and contract agreement: **28 September–4 October 2026**.
 - Four implementation weeks: **5–30 October 2026**.
-- Completion target: **Friday 30 October 2026**, in the user-specified Week 11 window of 26–30 October.
+- Completion target: **Friday 30 October 2026**, in Week 11 (26–30 October).
 - Course presentation: week of **9 November 2026**, normally 15 minutes plus 5 minutes of questions; a recording may be requested.
 - Course final report: **13 November 2026**.
 - The Week 11 target includes implementation, evaluated results, a complete report draft, and presentation/demo material. The remaining course window is for review and required submission adjustments, not planned core development.
@@ -49,7 +49,7 @@ Live calendars, account integrations, RAG, autonomous calendar edits, mobile app
 
 Generation-only is the proposal's fallback. Taking it requires an explicit team decision and a documented scope reduction; it does not satisfy the original generation-and-repair completion claim.
 
-## 4. Team ownership and balanced effort
+## 4. Team responsibilities and workload
 
 Working assumption: **8–10 hours per member per week**, approximately 32–40 hours each for implementation, with lightweight setup beforehand. Confirm availability at kickoff and rebalance at each weekly review. These are planning estimates, not records of work performed.
 
@@ -59,9 +59,7 @@ Working assumption: **8–10 hours per member per week**, approximately 32–40 
 | Tham Yao Xiang, leader | `yaoxiang-formal-core` | Shared schema; CSP/COP formulation; CP-SAT compiler; generation/repair objectives; reference labels; NL-to-specification extraction and solver-augmented pipeline | 24h technical + 4h coordination + 4h review/analysis + 4h writing |
 | Woo Yong Qing | `yongqing-evaluation` | Synthetic generator/rendering; independent validator; runner; metrics; result tables/figures | 24h technical + 6h review/analysis + 6h writing/demo |
 
-The user requested the easier technical stream for Li Hao and the harder stream for Yao Xiang, while Yong Qing retains evaluation. Direct API integration and baseline output handling have fewer algorithmic dependencies than formal modeling, CP-SAT compilation, lexicographic repair, and extraction semantics. Li Hao therefore takes additional setup, integration, demo, and writing work to keep estimated total effort comparable. If Yao Xiang becomes the bottleneck, shift supporting tooling/documentation to Li Hao before reducing scientific scope; do not silently transfer the harder core back to Li Hao.
-
-The independent validator is implemented by Yong Qing, with Yao Xiang reviewing mathematical rules. Separate implementations and cross-checks reduce shared solver/validator bugs. This allocation explicitly supersedes the proposal's original member split; all members approve the rules and own the overall result.
+The independent validator is implemented by Yong Qing, with Yao Xiang reviewing mathematical rules. Separate implementations and cross-checks reduce shared solver/validator bugs. Changes to validation rules require team review. All members are responsible for the overall result.
 
 Review rotation: Li Hao reviews benchmark wording, provider/runner integration, and user-facing diagnostics; Yao Xiang reviews direct-baseline assumptions and formal validity rules; Yong Qing reviews solver and extracted-constraint behavior against independently enumerated cases. Any member may flag a correctness problem outside their ownership.
 
@@ -79,7 +77,7 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao integrates | Owners request changes; avoid competing edits |
 | `planning.md`, `AGENTS.md` | Team agrees; one editor at a time | Record material decisions below |
 
-No implementation directories are promised to exist at bootstrap. Keep a small Python package; avoid unnecessary service/framework layers.
+The paths above define the planned package layout; implementation directories will be added with their components. Keep a small Python package with explicit interfaces.
 
 ## 5. Parallel start and dependency management
 
@@ -196,19 +194,19 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 
 - Base URL: `https://soclaas-api.comp.nus.edu.sg/v1`.
 - Environment names: `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY`, `SOCLAAS_MODEL`.
-- `default` is the supplied bootstrap model alias. Query `/models`, inspect available model IDs, and choose a verified ID before pilot/freeze. If only an alias is available, record it, the returned model identity, run time, and the resulting reproducibility limitation.
-- The supplied setup describes an OpenAI-compatible client. Verify completion endpoint, model access, output parsing, supported structured-output/reasoning parameters, quota, and rate limits; do not assume feature parity with another provider.
+- `default` is the initial model alias. Query `/models`, inspect available model IDs, and choose a verified ID before pilot/freeze. If only an alias is available, record it, the returned model identity, run time, and the resulting reproducibility limitation.
+- SoCLaaS provides an OpenAI-compatible API. Verify completion endpoint, model access, output parsing, supported structured-output/reasoning parameters, quota, and rate limits; do not assume feature parity with another provider.
 - Adapter must have explicit connect/read timeouts, bounded retries for transient errors, sanitized errors, and per-attempt accounting. Start with sequential requests; increase concurrency only within verified provider limits.
 - Credentials stay in a local ignored `.env` or process environment. Each member supplies an authorized credential. Do not distribute the project owner's key through Git or team documents. Rotate any key shared through chat/screenshots.
 - Validate authentication with a model listing and one small non-sensitive completion before scheduling experiments. These are connectivity checks, not research results.
 - Before bulk execution, run a small pilot and estimate request/token cost and runtime. Set a maximum requests/tokens or currency cap, concurrency cap, and stop conditions. Obtain the project owner's explicit budget authorization; course reimbursement is not an execution budget.
-- The supplied course guidance allows a group claim up to $100 under its receipt rules. SoCLaaS accounting may differ; confirm institutional quota/cost rather than assuming it is free or reimbursable.
+- The course guidelines allow a group claim up to $100 under their receipt rules. SoCLaaS accounting may differ; confirm institutional quota/cost rather than assuming it is free or reimbursable.
 
 Store model ID, returned backend identity if available, prompt/config hashes, benchmark version/hash, code commit, dependency versions, solver parameters/seed/workers, host/CPU context, timestamps, and usage coverage in each run manifest. Keep raw responses local/private by default; publish reviewed synthetic fixtures, manifests without secrets, and aggregate results needed for reproducibility.
 
 ### Bootstrap connectivity evidence — 28 September 2026
 
-An authenticated model listing and one non-sensitive chat completion returned HTTP 200. The `default` alias returned model ID `qwen3.6:35b`; the response was exactly the requested short acknowledgement, with 17 prompt and 2 completion tokens reported. This is connectivity evidence only. Structured-output support, rate limits, quota/cost, model suitability for the course requirement, and scheduling performance remain unverified. The local credential is ignored by Git and restricted to its owner; no secret is stored in this document.
+An authenticated model listing and one non-sensitive chat completion returned HTTP 200. The `default` alias returned model ID `qwen3.6:35b`; the response was exactly the requested short acknowledgement, with 17 prompt and 2 completion tokens reported. This is connectivity evidence only. Structured-output support, rate limits, quota/cost, model suitability for the course requirement, and scheduling performance remain unverified. Credentials must remain in an ignored local environment file with owner-only permissions.
 
 ## 10. Four-week delivery schedule
 
@@ -291,20 +289,20 @@ Maintain immutable run directories and manifest hashes; fixes require a new run 
 
 | Date | Decision | Status / follow-up |
 | --- | --- | --- |
-| 2026-09-28 | Complete core by Week 11, Oct 26–30; target Oct 30 | User clarified timeline; setup Sep 28–Oct 4 and four implementation weeks Oct 5–30; course deadlines remain unchanged |
-| 2026-09-28 | Use NUS SoCLaaS and local secret configuration | User selected provider; model/budget suitability to be verified |
-| 2026-09-28 | Li Hao owns easier direct-baseline/provider work; Yao Xiang owns harder formal/solver/extraction work; Yong Qing retains evaluation | User-requested allocation; support/writing effort balances technical difficulty |
+| 2026-09-28 | Complete core by Week 11, Oct 26–30; target Oct 30 | Setup Sep 28–Oct 4; implementation Oct 5–30; presentation and submission follow the course schedule |
+| 2026-09-28 | Use NUS SoCLaaS and local secret configuration | Connectivity verified; evaluation model, quota, and execution budget pending |
+| 2026-09-28 | Li Hao: direct baseline and provider; Yao Xiang: formal model and solver pipeline; Yong Qing: evaluation | Responsibilities and interfaces defined in Sections 4–6 |
 | 2026-09-28 | Single-day fixed-duration v1 and lexicographic repair | Proposed contract; freeze with team by Sep 29 |
 
 Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified model and pilot budget; implement Gate A and the provider adapter in parallel. Record subsequent material decisions here without overwriting prior experiment configurations.
 
 ## 16. Source grounding
 
-- Group 23 proposal, supplied 28 September 2026: problem, two approaches, repair, metrics, team, and original milestones. This plan accelerates completion and explicitly updates member ownership at the user's request, including independent validator implementation.
+- Group 23 project proposal: problem definition, two approaches, schedule repair, evaluation metrics, and research scope. The current implementation schedule and responsibilities are defined in this plan.
 - CS3263 Project.pdf and CS3263-Project-Guidelines 2627.docx: course comparison requirement, deliverables, evaluation, responsible AI, team contributions, and AI-assistance disclosure.
 - ResponsibleAI.pptx: privacy, fairness/trade-offs, transparency, adversarial behavior, unintended effects, and human control.
 - [SCHEDBench](https://arxiv.org/abs/2608.00991): scheduling under equivalent language forms.
 - [NATURAL PLAN](https://arxiv.org/abs/2406.04520): natural-language planning and complexity.
 - [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/): formal-tool-assisted planning and verification.
 - [CP-SAT](https://developers.google.com/optimization/cp/cp_solver): integer modeling and distinct solver statuses.
-- [SoCLaaS](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) and the user-supplied setup screen: connection configuration. Institutional documentation access and actual provider capability are separate checks.
+- [SoCLaaS](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) and NUS SoCLaaS connection instructions: API configuration. Institutional documentation access and actual provider capability are separate checks.

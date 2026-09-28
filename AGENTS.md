@@ -20,11 +20,11 @@ At bootstrap only documentation/configuration exists. Do not claim implementatio
 
 | Owner | Branch | Primary area |
 | --- | --- | --- |
-| Tea Li Hao | `lihao-llm-baseline` | Direct LLM baseline, provider adapter, setup/CLI/CI, demo; easier technical stream |
-| Tham Yao Xiang | `yaoxiang-formal-core` | Shared schema, CP-SAT, repair objectives, extraction and solver-augmented pipeline; harder technical stream |
+| Tea Li Hao | `lihao-llm-baseline` | Direct LLM baseline, provider adapter, setup/CLI/CI, demo |
+| Tham Yao Xiang | `yaoxiang-formal-core` | Shared schema, CP-SAT, repair objectives, extraction and solver-augmented pipeline |
 | Woo Yong Qing | `yongqing-evaluation` | Benchmark, independent validator, runner, metrics |
 
-The user explicitly assigned the easier technical work to Li Hao and the harder formal/solver work to Yao Xiang; Yong Qing retains evaluation. Do not silently swap these assignments. Follow the detailed file ownership in `planning.md`. Coordinate shared schemas, package configuration, CLI, and documentation before editing. Do not create duplicated interfaces to avoid integration. Work can begin against reviewed fixtures/canned outputs while another component is pending; clearly label that evidence as offline.
+Follow the file ownership in `planning.md`. Coordinate responsibility changes with the affected members before starting work. Coordinate shared schemas, package configuration, CLI, and documentation before editing. Do not create duplicated interfaces to avoid integration. Work can begin against reviewed fixtures/canned outputs while another component is pending; clearly label that evidence as offline.
 
 ## Scope and decision boundaries
 
