@@ -11,9 +11,9 @@ This is the working implementation and evaluation plan for Group 23's **AI Assis
 - Course presentation: week of **9 November 2026**, normally 15 minutes plus 5 minutes of questions; a recording may be requested.
 - Course final report: **13 November 2026**.
 - The Week 11 target includes implementation, evaluated results, a complete report draft, and presentation/demo material. The remaining course window is for review and required submission adjustments, not planned core development.
-- Current repository status: documentation/configuration bootstrap only. All implementation and research gates below remain open until supported by evidence.
+- Current repository status: documentation, configuration templates, and empty directory scaffold only; no implementation code. All implementation and research gates below remain open until supported by evidence.
 
-The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must list every member's name, matriculation number, and email on the title page; keep those identifying details in the private submission copy. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
+The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must clearly list every member's name, matriculation number, and email; place those identifying details on the private submission title page. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
 
 ## 2. Research questions and contribution
 
@@ -79,7 +79,24 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao integrates | Owners request changes; avoid competing edits |
 | `planning.md`, `AGENTS.md` | Team agrees; one editor at a time | Record material decisions below |
 
-The paths above define the planned package layout; implementation directories will be added with their components. Keep a small Python package with explicit interfaces.
+The directory scaffold exists, but the module files above are planned interfaces, not implemented components. Empty `.gitkeep` files preserve directories in Git; replace them with substantive files as each component is implemented. Keep a small Python package with explicit interfaces. The initial `main` contains no implementation code; later reviewed component PRs integrate into `main`.
+
+### Directory backbone and artifact placement
+
+| Directory | Intended contents | Owner |
+| --- | --- | --- |
+| `src/scheduling/`, `src/scheduling/providers/`, `src/scheduling/pipelines/` | Shared schema, solver/objectives, validator, provider adapter, and two pipelines; exact module ownership above | Component owners |
+| `prompts/direct/`, `prompts/extraction/` | Versioned prompt templates; no hidden gold answers | Li Hao / Yao Xiang |
+| `configs/development/` | SoCLaaS development model/settings, solver limits, small pilot caps; no credentials | Li Hao, reviewed by all |
+| `configs/experiments/` | Frozen model, prompt, solver, sampling, and budget references for main runs | Yong Qing, approved by all |
+| `benchmarks/fixtures/`, `benchmarks/manifests/` | Small synthetic development cases and versioned split/seed/hash manifests; declare split explicitly and keep gold evaluator-only | Yong Qing |
+| `evaluation/` | Experiment orchestration, metrics, offline replay, and figure export using the canonical package interfaces | Yong Qing |
+| `tests/unit/`, `tests/integration/` | Offline component tests and shared-contract/end-to-end checks | Component owners; Li Hao integrates |
+| `.github/workflows/` | Future offline CI; no live API calls or credentials required | Li Hao |
+| `results/summary/` | Reviewed aggregate tables and claim-to-run references | Yong Qing |
+| `report/`, `report/figures/`, `presentation/` | Report/presentation sources, selected figures, and demo materials; no private submission identifiers in Git | Section owners; Li Hao assembles |
+
+No executable files, empty Python modules, package manifests, sample results, or pretend CI jobs belong in the initial scaffold. Generated large/raw outputs go to ignored local `runs/`, `artifacts/`, or `results/raw/`; private inputs go to ignored `data/private/`. These runtime directories need not exist until used. Preserve reproducibility through the reviewed archive and checksums described in Section 14, rather than committing raw outputs.
 
 ## 5. Parallel start and dependency management
 
@@ -242,12 +259,15 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 
 - Base URL: `https://soclaas-api.comp.nus.edu.sg/v1`.
 - Environment names: `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY`, `SOCLAAS_MODEL`.
-- `default` is the initial model alias. Query `/models`, inspect available model IDs, and choose a verified ID before pilot/freeze. If only an alias is available, record it, the returned model identity, run time, and the resulting reproducibility limitation.
+- **Development and integration: use SoCLaaS only, without frontier-model calls.** Development fixtures, integration checks, and bounded pilots can proceed before final evaluation model eligibility is resolved.
+- `default` is the initial model alias. Query `/models`, inspect available model IDs, and choose a verified development ID before scheduling pilots. If only an alias is available, record it, the returned model identity, run time, and the resulting reproducibility limitation.
 - SoCLaaS provides an OpenAI-compatible API. Verify completion endpoint, model access, output parsing, supported structured-output/reasoning parameters, quota, and rate limits; do not assume feature parity with another provider.
 - Adapter must have explicit connect/read timeouts, bounded retries for transient errors, sanitized errors, and per-attempt accounting. Start with sequential requests; increase concurrency only within verified provider limits.
 - Credentials stay in a local ignored `.env` or process environment. Each member supplies an authorized credential. Do not distribute the project owner's key through Git or team documents. Rotate any key shared through chat/screenshots.
 - Validate authentication with a model listing and one small non-sensitive completion before scheduling experiments. These are connectivity checks, not research results.
-- **Model eligibility gate:** by **4 October**, Yao Xiang documents how the primary model meets the course frontier-model requirement or obtains teaching-team acceptance of the SoCLaaS choice. The course describes SoCLaaS open-weight evaluation as an additional option; an accessible alias is not sufficient evidence of eligibility. If unresolved, continue offline development but do not freeze a supposedly course-compliant main comparison. Resolve with a qualifying model under an authorized access/budget arrangement or a documented teaching-team-approved scope; use the same primary model for both paths.
+- **Development readiness by 4 October:** Li Hao records the SoCLaaS model/backend identity, supported request options, output parsing, and authorized development cap. Final evaluation eligibility is not a prerequisite for live SoCLaaS development.
+- **Final evaluation decision by 18 October, before held-out runs:** Yao Xiang documents how the selected primary model meets the course frontier-model requirement or obtains teaching-team acceptance of a SoCLaaS-only comparison. The course describes SoCLaaS open-weight evaluation as an additional option; an accessible model is not automatically eligible. A frontier model, if required, is introduced only for this later evaluation phase under separately authorized access and budget. If eligibility/access remains unresolved, continue development but hold the main comparison and record the schedule impact; do not claim course compliance.
+- Keep `configs/development/` and `configs/experiments/` separate. Select models through configuration and the shared provider interface. Any necessary provider extension is an explicit, reviewed scope decision. Before freezing evaluation, qualify the selected model on development cases, rerun parsing/capability checks, and pilot its cost/runtime. Use the same primary model and equivalent information for both paths. SoCLaaS development outputs cannot substitute for missing final-model attempts or be pooled into its results.
 - Before bulk execution, run a small pilot and estimate request/token cost and runtime. Set a maximum requests/tokens or currency cap, concurrency cap, and stop conditions. Obtain the project owner's explicit budget authorization; course reimbursement is not an execution budget.
 - The course guidelines allow a group claim up to $100 under their receipt rules. SoCLaaS accounting may differ; confirm institutional quota/cost rather than assuming it is free or reimbursable.
 
@@ -261,8 +281,8 @@ An authenticated model listing and one non-sensitive chat completion returned HT
 
 | Week | Li Hao | Yao Xiang | Yong Qing | Shared gate |
 | --- | --- | --- | --- | --- |
-| **1: Oct 5–11** | SoCLaaS adapter, direct prompts/parsing, provider tests, package/CLI setup | Schema, basic solver/tiny-case checks, extraction prompts and first B path | Gold fixtures, independent validator, renderer, runner using canned outputs | Contract frozen during setup (target Sep 29); one generation and one repair example through both live paths by Oct 11, or an explicit provider blocker |
-| **2: Oct 12–18** | Direct generation/repair baseline, bounded provider errors, offline tests, CI and integration support | Complete constraints/preferences/repair, extraction diagnostics, solver-augmented integration | Generator/splits, reference labelling, metrics, pilot automation | Core feature complete; development suite passes; pilot completed; benchmark/prompts/model/budget frozen |
+| **1: Oct 5–11** | SoCLaaS adapter, direct prompts/parsing, provider tests, package/CLI setup | Schema, basic solver/tiny-case checks, extraction prompts and first B path | Gold fixtures, independent validator, renderer, runner using canned outputs | Contract frozen during setup (target Sep 29); one generation and one repair example through both live SoCLaaS paths by Oct 11, or an explicit provider blocker |
+| **2: Oct 12–18** | Direct generation/repair baseline, bounded provider errors, offline tests, CI and integration support | Complete constraints/preferences/repair, extraction diagnostics, solver-augmented integration | Generator/splits, reference labelling, metrics, pilot automation | Core feature complete on SoCLaaS; development suite passes; final evaluation model eligibility/access resolved, qualification pilot complete, and benchmark/prompts/model/budget frozen by Oct 18 |
 | **3: Oct 19–25** | Execute assigned model runs, audit direct-output failures, provider drift and run support | Reference/optimality audit, solver and extraction failure analysis | Execute remaining runs, aggregate records, paired analysis and figures | Planned runs complete or explicitly accounted for; provenance and denominators audited |
 | **4: Oct 26–30** | Related work/direct-method draft, integration/demo, selected independent reruns | Formulation/solver/extraction draft, technical discussion, coordination | Benchmark/results draft, reproducibility rerun and figures | Complete report draft within limit; presentation and demo; all members can explain findings; core frozen Oct 30 |
 
@@ -279,11 +299,19 @@ Two brief team checkpoints each week: progress/blockers and integration/review. 
 
 ### Gate B — integrated core
 
-- Both generation and repair work through A and B with recorded live-provider evidence.
+- Both generation and repair work through A and B with recorded live SoCLaaS development evidence. Frontier-model access is not needed to complete this development integration check.
 - Provider errors, invalid JSON, valid-but-wrong extraction, model UNSAT predictions, and solver UNKNOWN remain distinguishable.
 - Dependency versions are locked, relevant tests pass, and installation/demo commands are verified from a fresh environment.
-- Primary-model eligibility or teaching-team acceptance is documented. Model, prompts, seeds, fixtures, metrics, and execution caps are frozen before the main test set is run.
 - A fresh macOS checkout and a fresh Linux checkout pass the offline reproduction checks in Section 14; unsupported platforms are documented.
+
+### Evaluation freeze — by 18 October, after Gate B and before main runs
+
+Target Gate B by 15 October, leaving 16–18 October for separately authorized final-model qualification and protocol review. Prepare access/eligibility decisions in parallel with development; do not defer them to the last day. If Gate B slips, revise the experiment schedule explicitly rather than skipping qualification or using held-out cases for debugging.
+
+- Final primary-model eligibility or teaching-team acceptance, access, and execution budget are documented.
+- The selected evaluation model passes capability/parsing checks and a bounded qualification pilot on development cases, even if it differs from the SoCLaaS development model.
+- Model, prompts, seeds, test manifests, metrics, and execution caps are frozen. No held-out results inform these choices.
+- Development and main evaluation have distinct configurations/run IDs. An unresolved eligibility or access decision blocks main runs, not development.
 
 ### Gate C — defensible results
 
@@ -317,7 +345,7 @@ The system proposes schedules. It does not send messages or modify calendars. Fu
 | Risk | Response |
 | --- | --- |
 | Schema integration blocks parallel work | Freeze minimal v1 by day 2; use six shared fixtures; merge small PRs frequently |
-| SoCLaaS access/model is unsuitable for course frontier-model requirement | Record model identity, discuss suitability with the instructor; do not label an unverified model frontier or silently switch providers |
+| Final evaluation model eligibility/access is unresolved | Resolve by Oct 18 with a qualifying authorized model or documented teaching-team acceptance; keep SoCLaaS development progressing, hold main runs, and record any schedule impact |
 | Unreliable formalization | Measure it explicitly; simplify supported language/schema before freeze; retain failures |
 | Quota, cost, latency, or rate limits | Pilot first; bounded concurrency and retries; reduce predeclared sample size/repeats before dropping core comparisons |
 | Reference optimality cannot be proven | Reduce pilot difficulty or report bounds/unknown gaps; never invent gold optima |
@@ -361,12 +389,12 @@ Offline replay must reproduce metrics from saved outputs without credentials or 
 | Date | Decision | Status / follow-up |
 | --- | --- | --- |
 | 2026-09-28 | Complete core by Week 11, Oct 26–30; target Oct 30 | Setup Sep 28–Oct 4; implementation Oct 5–30; presentation and submission follow the course schedule |
-| 2026-09-28 | Use NUS SoCLaaS and local secret configuration | Connectivity verified; evaluation model, quota, and execution budget pending |
+| 2026-09-28 | Use SoCLaaS only during development; local secret configuration | Connectivity verified; development model/cap due Oct 4; final evaluation model/access/budget decision due Oct 18 |
 | 2026-09-28 | Li Hao: direct baseline and provider; Yao Xiang: formal model and solver pipeline; Yong Qing: evaluation | Responsibilities and interfaces defined in Sections 4–6 |
 | 2026-09-28 | Single-day fixed-duration v1 and lexicographic repair | Proposed contract; freeze with team by Sep 29 |
-| 2026-09-28 | Primary-model eligibility, portable replay, and rubric evidence are acceptance gates | Eligibility review by Oct 4; other evidence due at Gates B–D |
+| 2026-09-28 | Primary-model eligibility, portable replay, and rubric evidence are acceptance gates | Final eligibility due at evaluation freeze by Oct 18; portable replay and rubric evidence due at Gates B–D |
 
-Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified model and pilot budget; implement Gate A and the provider adapter in parallel. Record subsequent material decisions here without overwriting prior experiment configurations.
+Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified SoCLaaS development model and bounded pilot budget; implement Gate A and the provider adapter in parallel. Resolve final evaluation model eligibility/access by Oct 18 before any main held-out run. Record subsequent material decisions here without overwriting prior experiment configurations.
 
 ## 16. Source grounding
 
@@ -410,7 +438,8 @@ Target a 15-minute presentation: problem/questions (2 min), formulation and syst
 | Date | Deliverable and verification | Owner |
 | --- | --- | --- |
 | Sep 28 | Confirm mandatory proposal uploaded through Canvas and retain receipt; possession of a PDF is not proof of submission | Yao Xiang; another member verifies |
-| By Oct 4 | Read proposal feedback/announcements, confirm model eligibility and teaching-team clarifications, record any required plan changes | Yao Xiang, with all members |
+| By Oct 4 | Read proposal feedback/announcements and teaching-team clarifications; confirm SoCLaaS development readiness and cap; record required plan changes | Li Hao checks provider; Yao Xiang checks feedback; all review |
+| By Oct 18 | Confirm final evaluation model eligibility/access, qualification pilot, execution budget, and frozen protocol before held-out runs | Yao Xiang coordinates; Li Hao checks provider; Yong Qing freezes manifests |
 | Oct 30 | Core freeze, audited experiment records, complete report draft, presentation/demo, contribution records | All three |
 | Nov 2–6 | Cross-review report, verify claims/citations and format, conduct full timed rehearsal; confirm presentation/video arrangements and exact Canvas times | Li Hao assembles; all review; Yao Xiang checks Canvas |
 | Week of Nov 9 | Present or submit the required recording/materials according to Canvas instructions; verify successful delivery | All present; Yao Xiang coordinates |

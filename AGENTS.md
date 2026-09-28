@@ -6,7 +6,7 @@ These instructions apply to the entire repository. Read this file and `planning.
 
 Build and evaluate Group 23's dynamic constraint-aware scheduling study: Direct LLM versus LLM-to-CP-SAT for generation and minimum-disruption repair. Complete the core by Friday 30 October 2026 (Week 11), with setup from 28 September and four implementation weeks from 5 October. Read `README.md` for the overview and `planning.md` for the complete contract, ownership, gates, and scope.
 
-At bootstrap only documentation/configuration exists. Do not claim implementation, tests, model capability, benchmark results, or reproducibility before executing the relevant checks. Do not import code or assumptions from a different project/older checkout as if they belong here.
+At bootstrap only documentation, configuration templates, and empty `.gitkeep` directory placeholders exist. The initial `main` has no implementation code; subsequent implementation belongs on the assigned member branches and enters `main` through reviewed PRs. Do not add dummy modules, unimplemented commands, sample results, or empty workflow/package files merely to fill the scaffold. Do not claim implementation, tests, model capability, benchmark results, or reproducibility before executing the relevant checks. Do not import code or assumptions from a different project/older checkout as if they belong here.
 
 ## Start every task with the correct checkout
 
@@ -50,6 +50,8 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 
 ## SoCLaaS and credential handling
 
+- Use SoCLaaS only during development; frontier-model calls are outside the development phase. Live SoCLaaS integration and bounded development pilots do not depend on final evaluation eligibility.
+- Keep development and evaluation model settings in their separate configuration directories. Final model selection/access/budget is due by 18 October before held-out runs; switching models requires development-set qualification and a separate run identity. Never pool different models into one comparison.
 - Use `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY`, and `SOCLAAS_MODEL`; configuration defaults and placeholders are in `.env.example`.
 - Keys belong only in a local ignored `.env` or a suitable process secret source. Restrict local credential-file permissions. Each member uses an authorized credential; never copy the owner's secret to other branches/documents.
 - Never print environment values, tokens, authorization headers, credential files, or unredacted request dumps. Disable shell tracing and verbose HTTP output around credentials. Sanitize errors before recording them.
@@ -66,7 +68,7 @@ Follow the file ownership in `planning.md`. Coordinate responsibility changes wi
 - Keep gold-SAT, gold-UNSAT, unresolved references, solver timeouts, invalid output, and provider errors distinct.
 - Direct-model UNSAT is a prediction. CP-SAT `INFEASIBLE` is proof for the compiled model only; it says nothing about omitted source constraints or erroneous extraction.
 - `FEASIBLE` is not `OPTIMAL`; `UNKNOWN` is not `INFEASIBLE`. Do not present an unproven incumbent as a gold optimum.
-- Confirm the primary model satisfies the course requirement or has documented teaching-team acceptance before freezing the main comparison. Provider connectivity is not model eligibility.
+- Confirm the final evaluation model satisfies the course requirement or has documented teaching-team acceptance before freezing the main comparison. This gate does not block SoCLaaS development. Provider connectivity is not model eligibility; pending approval is not approval.
 - Freeze benchmark, prompts, model settings, metrics, and limits before held-out runs. Keep related variants in one split.
 - Preserve raw failures with safe redaction. No cherry-picking, manual answer repairs, hidden retries, or tuning against test outcomes.
 - Retain base-instance pairing in robustness analysis and uncertainty estimates. Report denominators, exclusions, objective proof status, and realistic-scenario limitations.
