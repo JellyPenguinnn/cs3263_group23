@@ -15,6 +15,12 @@ This is the working implementation and evaluation plan for Group 23's **AI Assis
 
 The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must clearly list every member's name, matriculation number, and email; place those identifying details on the private submission title page. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
 
+### Requirements and implementation discretion
+
+The course requires a course-related formal subproblem, a frontier-model direct-versus-tool comparison, evidence-based analysis, responsible AI, honest contributions/AI disclosure, and the specified submissions. The proposal commits to scheduling generation and repair, CP-SAT, gold specifications/validation, difficulty and language-robustness evaluation, with feedback and UI as optional extensions. The revised roles and earlier internal milestones in this plan change delivery arrangements, not that scientific direction; the course permits actual work allocation to differ from the proposal when reported honestly.
+
+The 30-minute single-day representation, lexicographic objective, provisional sample counts, Python/package layout, and portability checks are team design choices, not additional teaching-team requirements. Keep agreed scientific semantics consistent and freeze the comparison before held-out evaluation. Component owners can choose and test routine engineering details without team-wide approval; coordinate shared semantic changes and record material decisions. Prefer a small working research system and deep analysis to extra infrastructure or features.
+
 ## 2. Research questions and contribution
 
 1. How do problem size, slack, constraint interactions, and shared resources affect direct versus solver-assisted scheduling?
@@ -76,8 +82,8 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `src/scheduling/pipelines/solver_augmented.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries |
 | `src/scheduling/validation.py`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
 | Corresponding component tests | Component owner | Rotating reviewer |
-| `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao integrates | Owners request changes; avoid competing edits |
-| `planning.md`, `AGENTS.md` | Team agrees; one editor at a time | Record material decisions below |
+| `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
+| `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
 The directory scaffold exists, but the module files above are planned interfaces, not implemented components. Empty `.gitkeep` files preserve directories in Git; replace them with substantive files as each component is implemented. Keep a small Python package with explicit interfaces. The initial `main` contains no implementation code; later reviewed component PRs integrate into `main`.
 
@@ -273,7 +279,7 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 
 - Base URL: `https://soclaas-api.comp.nus.edu.sg/v1`.
 - Environment names: `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY`, `SOCLAAS_MODEL`.
-- **Development and integration: use SoCLaaS only, without frontier-model calls.** Development fixtures, integration checks, and bounded pilots can proceed before final evaluation model eligibility is resolved.
+- **Development and integration: use SoCLaaS only for scheduling-model inference, without frontier scheduling-model calls.** The coding assistant used to develop the software is a separate choice. Development fixtures, integration checks, and bounded pilots can proceed before final evaluation model eligibility is resolved.
 - `default` is the initial model alias. Query `/models`, inspect available model IDs, and choose a verified development ID before scheduling pilots. If only an alias is available, record it, the returned model identity, run time, and the resulting reproducibility limitation.
 - SoCLaaS provides an OpenAI-compatible API. Verify completion endpoint, model access, output parsing, supported structured-output/reasoning parameters, quota, and rate limits; do not assume feature parity with another provider.
 - Adapter must have explicit connect/read timeouts, bounded retries for transient errors, sanitized errors, and per-attempt accounting. Start with sequential requests; increase concurrency only within verified provider limits.
@@ -282,7 +288,7 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 - **Development readiness by 4 October:** Li Hao records the SoCLaaS model/backend identity, supported request options, output parsing, and authorized development cap. Final evaluation eligibility is not a prerequisite for live SoCLaaS development.
 - **Final evaluation decision by 18 October, before held-out runs:** Yao Xiang documents how the selected primary model meets the course frontier-model requirement or obtains teaching-team acceptance of a SoCLaaS-only comparison. The course describes SoCLaaS open-weight evaluation as an additional option; an accessible model is not automatically eligible. A frontier model, if required, is introduced only for this later evaluation phase under separately authorized access and budget. If eligibility/access remains unresolved, continue development but hold the main comparison and record the schedule impact; do not claim course compliance.
 - Keep `configs/development/` and `configs/experiments/` separate. Select models through configuration and the shared provider interface. Any necessary provider extension is an explicit, reviewed scope decision. Before freezing evaluation, qualify the selected model on development cases, rerun parsing/capability checks, and pilot its cost/runtime. Use the same primary model and equivalent information for both paths. SoCLaaS development outputs cannot substitute for missing final-model attempts or be pooled into its results.
-- Before bulk execution, run a small pilot and estimate request/token cost and runtime. Set a maximum requests/tokens or currency cap, concurrency cap, and stop conditions. Obtain the project owner's explicit budget authorization; course reimbursement is not an execution budget.
+- Before bulk execution, run a small pilot and estimate request/token cost and runtime. Set a maximum requests/tokens or currency cap, concurrency cap, and stop conditions. Agree the cap and stop conditions with the credential/budget owner before that run or session; requests within the agreed scope and cap do not need repeated confirmation. Course reimbursement is not an execution budget.
 - The course guidelines allow a group claim up to $100 under their receipt rules. SoCLaaS accounting may differ; confirm institutional quota/cost rather than assuming it is free or reimbursable.
 
 Store model ID, returned backend identity if available, prompt/config hashes, benchmark version/hash, code commit, dependency versions, solver parameters/seed/workers, host/CPU context, timestamps, and usage coverage in each run manifest. Keep raw responses local/private by default; publish reviewed synthetic fixtures, manifests without secrets, and aggregate results needed for reproducibility.
@@ -346,7 +352,7 @@ Target Gate B by 15 October, leaving 16–18 October for separately authorized f
 
 Use synthetic schedules initially. Real routines can reveal identity and sensitive activities even after names are removed; any later real-data collection needs consent and a defined retention/access policy. Never commit raw private calendars or personal student identifiers.
 
-Measure per-participant inconvenience when reporting repair results. Fixed participant assignments permit analysis of unequal disruption, not a claim of fair workload allocation. A fairness-aware alternative objective is optional and must disclose its trade-off with total disruption.
+Measure per-participant inconvenience for valid repairs: count moved activities involving each participant and sum their absolute start shifts; show the distribution and maximum burden. A shared activity contributes to every involved participant, so these totals need not equal the schedule-level objective. Fixed participant assignments permit analysis of unequal disruption, not a claim of fair workload allocation. Explain this simplification of the proposal's fairness ambition in the report. A fairness-aware alternative objective is optional and must disclose its trade-off with total disruption.
 
 Explanations must refer to actual interpreted constraints and validation results. Do not present an LLM narrative as a solver proof or a purported minimum conflict set without verification. Keep ambiguous requests separate from clean benchmark cases; do not silently guess negotiability.
 
@@ -384,7 +390,7 @@ Li Hao owns packaging and CI. Use a standard `pyproject.toml`, a documented Pyth
 
 Supported targets are macOS and Linux, verified from fresh environments by Gate B. Windows users can use WSL2 with the Linux workflow; native Windows support is optional and must not be claimed without a check. Keep POSIX shell examples labelled. Use repository-relative paths or explicit CLI/config paths and `pathlib`; no hardcoded home directories, absolute personal paths, shell-only business logic, or implicit local timezone. Configuration changes must not require source edits.
 
-Provide an installable CLI covering fixture generation, gold solving, single-case A/B execution, validation, batch execution/resume, offline replay, and metric/figure export. Freeze the command syntax with the implementation and document only commands actually tested. Add one tiny offline example and one explicitly selected live smoke example. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
+Provide one small installable CLI covering fixture generation, gold solving, single-case A/B execution, validation, batch execution/resume, offline replay, and metric/figure export. Add these capabilities incrementally as their components become available; subcommands or configuration-selected operations are sufficient, without a plugin framework or service layer. Freeze the command syntax with the implementation and document only commands actually tested. Add one tiny offline example and one explicitly selected live smoke example. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
 
 ### Bounded execution and restart behavior
 
@@ -423,7 +429,7 @@ Next actions: each member reads these documents; confirm available hours; freeze
 
 ## 17. Rubric evidence and course delivery
 
-The teaching handout provides qualitative criteria, not numerical weights or a guaranteed top-grade checklist. Use this mapping to gather substantive evidence; implementation claims and research conclusions still require validation.
+The teaching handout provides qualitative criteria, not numerical weights or a guaranteed top-grade checklist. Use this mapping to gather substantive evidence; implementation claims and research conclusions still require validation. Prioritize a few well-explained findings: where solver assistance helps or fails, why translation errors matter, and what repair changes for users. A finding that direct reasoning is competitive or that solver assistance does not help can be valuable when the experiment and analysis are sound. The proposed small difficulty cells support exploratory patterns with uncertainty, not precise thresholds or broad causal claims.
 
 | Teaching criterion | Project evidence | Lead and review |
 | --- | --- | --- |

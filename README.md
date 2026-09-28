@@ -55,7 +55,7 @@ The plan contains the technical information needed to start; the original course
 
 ### NUS SoCLaaS configuration
 
-**Development uses SoCLaaS only; no frontier-model access is needed to begin implementation or development pilots.** Final evaluation model selection is a separate milestone by 18 October, before held-out experiments. The course requires a frontier-model comparison unless the teaching team accepts an alternative; SoCLaaS access alone does not establish that acceptance.
+**Scheduling-model inference during development uses SoCLaaS only; no frontier-model access is needed to begin implementation or development pilots.** This does not restrict the coding assistant used to develop the software. Final evaluation model selection is a separate milestone by 18 October, before held-out experiments. The course requires a frontier-model comparison unless the teaching team accepts an alternative; SoCLaaS access alone does not establish that acceptance.
 
 Configure access to the NUS SoCLaaS API:
 
