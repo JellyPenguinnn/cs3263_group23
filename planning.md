@@ -55,9 +55,9 @@ Working assumption: **8–10 hours per member per week**, approximately 32–40 
 
 | Member | Branch | Primary deliverables | Approximate total effort |
 | --- | --- | --- | --- |
-| Tea Li Hao | `codex/lihao-formal-core` | Shared schema implementation; CSP/COP formulation; CP-SAT compiler; generation/repair solver; reference labels; tiny-case exhaustive cross-checks | 24h technical + 6h review/analysis + 6h writing/demo |
-| Tham Yao Xiang, leader | `codex/yaoxiang-llm-pipelines` | SoCLaaS adapter; direct scheduling; NL-to-specification extraction; prompts; provider/pipeline tests; integration support | 20h technical + 4h coordination + 6h review/analysis + 6h writing/demo |
-| Woo Yong Qing | `codex/yongqing-evaluation` | Synthetic generator/rendering; independent validator; runner; metrics; result tables/figures | 24h technical + 6h review/analysis + 6h writing/demo |
+| Tea Li Hao | `lihao-formal-core` | Shared schema implementation; CSP/COP formulation; CP-SAT compiler; generation/repair solver; reference labels; tiny-case exhaustive cross-checks | 24h technical + 6h review/analysis + 6h writing/demo |
+| Tham Yao Xiang, leader | `yaoxiang-llm-pipelines` | SoCLaaS adapter; direct scheduling; NL-to-specification extraction; prompts; provider/pipeline tests; integration support | 20h technical + 4h coordination + 6h review/analysis + 6h writing/demo |
+| Woo Yong Qing | `yongqing-evaluation` | Synthetic generator/rendering; independent validator; runner; metrics; result tables/figures | 24h technical + 6h review/analysis + 6h writing/demo |
 
 The independent validator moves from Li Hao's proposed sole implementation responsibility to Yong Qing, with Li Hao reviewing the mathematical rules. This balances the implementation load and reduces shared solver/validator bugs. All members approve the rules and own the overall result.
 

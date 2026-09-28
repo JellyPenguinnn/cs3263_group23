@@ -20,9 +20,9 @@ At bootstrap only documentation/configuration exists. Do not claim implementatio
 
 | Owner | Branch | Primary area |
 | --- | --- | --- |
-| Tea Li Hao | `codex/lihao-formal-core` | Schema, formulation, CP-SAT, objectives, reference cross-checks |
-| Tham Yao Xiang | `codex/yaoxiang-llm-pipelines` | Provider adapter, prompts, direct/extraction pipelines, coordination |
-| Woo Yong Qing | `codex/yongqing-evaluation` | Benchmark, independent validator, runner, metrics |
+| Tea Li Hao | `lihao-formal-core` | Schema, formulation, CP-SAT, objectives, reference cross-checks |
+| Tham Yao Xiang | `yaoxiang-llm-pipelines` | Provider adapter, prompts, direct/extraction pipelines, coordination |
+| Woo Yong Qing | `yongqing-evaluation` | Benchmark, independent validator, runner, metrics |
 
 Follow the detailed file ownership in `planning.md`. Coordinate shared schemas, package configuration, CLI, and documentation before editing. Do not create duplicated interfaces to avoid integration. Work can begin against reviewed fixtures/canned outputs while another component is pending; clearly label that evidence as offline.
 
