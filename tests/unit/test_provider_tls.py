@@ -116,13 +116,16 @@ def test_packaged_issuers_chain_to_existing_roots_but_are_not_roots(tmp_path):
     bundle = tmp_path / "issuers.pem"
     bundle.write_text(chain)
     verified = subprocess.run(
-        ["openssl", "verify", "-CAfile", certifi.where(), "-untrusted", str(bundle), str(bundle)],
+        ["openssl", "verify", "-trusted", certifi.where(), "-untrusted", str(bundle), str(bundle)],
         capture_output=True,
     )
-    assert verified.returncode == 0
-    # Explicitly disable default roots: the supplied chain alone must not be trusted.
+    assert verified.returncode == 0, verified.stderr.decode()
+    # -trusted disables all default CA sources, including OpenSSL 3's CAstore.
+    # Overriding only CAfile/CApath still lets Ubuntu load its system roots.
     isolated = subprocess.run(
-        ["openssl", "verify", "-CAfile", str(bundle), "-CApath", str(tmp_path), str(bundle)],
+        ["openssl", "verify", "-trusted", str(bundle), str(bundle)],
         capture_output=True,
     )
-    assert isolated.returncode != 0
+    diagnostic = isolated.stdout + isolated.stderr
+    assert isolated.returncode == 2, diagnostic.decode()
+    assert b"unable to get issuer certificate" in diagnostic
