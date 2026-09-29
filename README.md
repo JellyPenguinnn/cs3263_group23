@@ -4,7 +4,7 @@
 
 A research project comparing direct language-model scheduling with language-model-to-constraint-solver scheduling. We study both generating a new schedule and repairing an existing schedule after requirements change, while minimizing unnecessary disruption.
 
-**Status on `lihao-llm-baseline`:** provider transport/accounting, strict direct-output parsing, generation/repair prompts, incremental CLI, locked Python setup, offline tests and demo examples are implemented locally. Two tiny live direct-component checks succeeded; canonical schema integration, the solver path, independent validation, benchmark/evaluation runner and research results remain pending. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. The plan also covers final review and course submission in November.
+**Status on `yaoxiang-formal-core`:** the canonical schema draft, CP-SAT compiler, lexicographic repair, extraction pipeline and offline solver commands are implemented locally on Li Hao's published provider/direct dependency (`b063fb9`). Both bounded live B checks exposed reversed-precedence extraction failures; solver optimality did not establish correct interpretation. Independent validation, canonical direct integration, benchmarks and research results remain pending. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. See [Yao Xiang's method and handoff draft](report/yaoxiang-method-notes.md).
 
 ## Research questions
 
@@ -37,7 +37,7 @@ cd cs3263_group23
 3. Each member uses a separate local clone. Before an agent clones, switches branches, or implements work, have it confirm your identity, local path, assigned scope/branch, credential setup method, and intended milestone using [the onboarding instructions](AGENTS.md#member-onboarding-and-clarification). Already confirmed details do not need to be repeated.
 4. Fetch and switch to the confirmed member branch from the table below. For unresolved choices, the agent should explain the options and wait for your answer before dependent work. Supply API keys only through local secret configuration, never through chat.
 
-The runtime targets CPU-only Python 3.12 with remote SoCLaaS inference. A fresh macOS ARM64 source snapshot and installed package have been checked. Linux remains unverified: the local Docker daemon is unavailable, and the prepared macOS/Linux CI workflow has not run remotely. No full scheduling/evaluation system or Gate B portability claim is made.
+The runtime targets CPU-only Python 3.12 with remote SoCLaaS inference. A fresh macOS ARM64 source snapshot and installed package have been checked. Linux remains unverified: the local Docker daemon is unavailable, and remote CI results for this local Yao Xiang implementation are unavailable. No full scheduling/evaluation system or Gate B portability claim is made.
 
 ### Install and verify (POSIX shell, Python 3.12)
 
@@ -50,7 +50,7 @@ python3.12 -m venv .venv
 .venv/bin/scheduling --help
 ```
 
-`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The initial pins are HTTPX 0.28.1, pytest 8.4.2 and OR-Tools 9.14.6206. OR-Tools imports and a tiny native optimization have been checked; the project scheduling compiler remains Yao Xiang's work. The lockfile is generated with pip-tools 7.5.1:
+`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The initial pins are HTTPX 0.28.1, pytest 8.4.2 and OR-Tools 9.14.6206. The scheduling compiler and exhaustive tiny objective checks now use this locked OR-Tools version. The lockfile is generated with pip-tools 7.5.1:
 
 ```sh
 pip-compile --allow-unsafe --extra dev --extra solver --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
@@ -65,9 +65,16 @@ Run lock regeneration only when intentionally updating dependencies; normal inst
 - `scheduling provider-smoke --allow-live --model default`: explicitly live, one model listing plus at most one completion, `max_tokens=32`, no retries. Requires prior cap authorization and environment credentials.
 - `scheduling direct-live --allow-live --model MODEL --max-tokens N --text-file PUBLIC_TEXT --task-type generation --activity-id A --output runs/NEW_FILE.json`: explicitly live, one completion with no retries. Repair additionally requires `--original-schedule FILE`. The output parent must exist, and the output file must not already exist. This is a component check, not batch evaluation or resume.
 
+- `scheduling solve --spec tests/examples/formal-generation.json`: solve an explicit specification offline. Repair also requires `--original-schedule tests/examples/formal-original.json` with the repair spec.
+- `scheduling solver-offline --view tests/examples/generation-view.json --response-file tests/examples/formal-generation.json`: one canned extraction through real CP-SAT. Both commands accept `--time-limit`, `--seed`, `--workers`, and an optional new `--output` path.
+
+Fresh noneditable macOS verification passed **203 offline tests**, `pip check`, both solver demos and both canned pipelines. Linux remains unverified.
+
+The solver API, strict wire format, repair proof handling, limitations and teammate handoff are in [the formal-core notes](report/yaoxiang-method-notes.md). The schema is a shared draft, not a completed team freeze. Install the hashed lock above to include the solver dependency.
+
 Provider and direct component interfaces are in `src/scheduling/providers/` and `src/scheduling/pipelines/direct.py`. `complete(messages, model_config) -> ModelResponse` is available as a convenience function or a provider method. It preserves individual attempts and missing usage. Share an explicit `RequestBudget` across serial calls to enforce request and requested output-token caps. This does not cap input tokens or currency. Default retries are disabled; retry configuration never overrides a budget.
 
-`request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang must supply the reviewed `NaturalLanguageView`, `Schedule`, and `PipelineResult` before Li Hao finalizes `run_direct(nl_view, model_config)`. Yong Qing supplies independent gold validation and the batch/metrics/replay runner. No placeholder commands for those components are exposed.
+`request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang has supplied draft `NaturalLanguageView`, `Schedule`, and `PipelineResult` types; teammate review remains required before Li Hao finalizes `run_direct(nl_view, model_config)`. Yong Qing supplies independent gold validation and the batch/metrics/replay runner. No placeholder commands for those components are exposed.
 
 A live single-case output is created with mode 600 before requesting, so interruption remains visible; completion replaces it atomically. Reusing an output filename refuses another call. Completed outputs remain private/ignored under `runs/`; the full experiment runner will handle immutable manifests and resume. Treat arbitrary saved model outputs as untrusted data.
 
@@ -127,6 +134,8 @@ Li Hao then authorized two separate synthetic direct-component calls using expli
 
 Private records, exact source snapshots and checksums are in `runs/lihao-components-20260929-01/`. The small [development settings record](configs/development/lihao-component-check.json) contains no credentials. [Li Hao's method draft](report/lihao-method-notes.md) records implementation boundaries, related-work starting notes and AI assistance. Gates A–D and the evaluation freeze remain open.
 
+Yao Xiang separately authorized two B development calls with `qwen3.6:35b`, at most 2,048 output tokens each, no retries, and a 5-second solver budget per case. Both extracted valid JSON but reversed A-before-B, returning A1/B0 (generation) and A3/B2 (repair). Both violate the stated precedence despite solver OPTIMAL results. Usage was 1,864 input + 618 output = 2,482 tokens. Raw records and the original source snapshot remain in `runs/yaoxiang-components-20260929-01/`; the cap is consumed. A later prompt clarification is **not live-retested**. The [formal-core notes](report/yaoxiang-method-notes.md) preserve the failure analysis and distinguish structural differences from semantic errors.
+
 ## Team and branches
 
 | Member | Primary responsibility | Branch |
@@ -154,7 +163,7 @@ Development begins with synthetic scenarios. We will examine privacy of routines
 The repository layout and component ownership are:
 
 ```text
-.github/workflows/        # offline CI definition (not yet run remotely)
+.github/workflows/        # offline macOS/Linux CI definition
 src/scheduling/
   providers/              # model access and response accounting
   pipelines/              # direct and solver-augmented paths
@@ -176,7 +185,7 @@ report/figures/           # report sources and selected figures
 presentation/             # slides and demo materials
 ```
 
-On this member branch, the provider/direct components, CLI, packaging/lock, tests, CI definition, direct prompts and tiny demonstration files now contain substantive implementation. Solver/schema, benchmark, validation and evaluation areas remain unimplemented. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
+On this member branch, the provider/direct components, CLI, packaging/lock, tests, CI definition, direct prompts and tiny demonstration files now contain substantive implementation. The canonical schema draft, solver, repair objectives and extraction pipeline are also implemented. Benchmark, independent validation and evaluation remain pending their owner. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
 
 ## References
 

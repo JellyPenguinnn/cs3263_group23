@@ -1,0 +1,22 @@
+{
+  "evidence": "live_development_components_only",
+  "independent_gold_validation": false,
+  "max_attempts": 1,
+  "max_requested_output_tokens": 4096,
+  "max_requests": 2,
+  "max_tokens_per_request": 2048,
+  "model": "qwen3.6:35b",
+  "outcome": "Both schema-valid extractions reversed precedence; both schedules violate the public requirement",
+  "reported_usage": {
+    "completion_tokens": 618,
+    "prompt_tokens": 1864,
+    "total_tokens": 2482
+  },
+  "run_id": "yaoxiang-components-20260929-01",
+  "solver": {
+    "num_workers": 1,
+    "random_seed": 0,
+    "time_limit_seconds": 5
+  },
+  "source": "Exact pre-clarification source and prompts retained in ignored run snapshot; current prompt differs"
+}

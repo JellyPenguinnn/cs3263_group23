@@ -1,0 +1,59 @@
+{
+  "activities": [
+    {
+      "availability": [
+        {
+          "end": 4,
+          "start": 0
+        }
+      ],
+      "duration_slots": 1,
+      "id": "A",
+      "participant_ids": [
+        "P"
+      ],
+      "resource_ids": []
+    },
+    {
+      "availability": [
+        {
+          "end": 4,
+          "start": 0
+        }
+      ],
+      "duration_slots": 1,
+      "id": "B",
+      "participant_ids": [
+        "P"
+      ],
+      "resource_ids": []
+    }
+  ],
+  "constraints": [
+    {
+      "after": "B",
+      "before": "A",
+      "id": "before",
+      "type": "precedence"
+    }
+  ],
+  "horizon_slots": 4,
+  "horizon_start": "2026-10-05T09:00:00+08:00",
+  "instance_id": "tiny",
+  "participants": [
+    {
+      "availability": [
+        {
+          "end": 4,
+          "start": 0
+        }
+      ],
+      "id": "P"
+    }
+  ],
+  "resources": [],
+  "schema_version": "1.0",
+  "slot_minutes": 30,
+  "task_type": "generation",
+  "timezone": "+08:00"
+}

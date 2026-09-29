@@ -20,6 +20,7 @@ scheduling = "scheduling.cli:main"
 where = ["src"]
 
 [tool.setuptools.data-files]
+"share/cs3263-scheduling/prompts/extraction" = ["prompts/extraction/specification.txt"]
 "share/cs3263-scheduling/prompts/direct" = ["prompts/direct/generation.txt", "prompts/direct/repair.txt"]
 
 [tool.pytest.ini_options]
