@@ -8,7 +8,10 @@ from dataclasses import asdict, dataclass, fields, is_dataclass
 from datetime import datetime, timedelta, timezone
 import json
 import re
-from typing import ClassVar, Literal
+from typing import TYPE_CHECKING, ClassVar, Literal
+
+if TYPE_CHECKING:
+    from scheduling.domain_analysis import DomainAnalysis
 from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 from scheduling.providers.types import ModelResponse, Usage
@@ -18,18 +21,45 @@ PipelineStatus = Literal["SAT", "UNSAT", "UNKNOWN", "INVALID_OUTPUT", "ERROR"]
 SolverStatus = Literal["OPTIMAL", "FEASIBLE", "INFEASIBLE", "UNKNOWN", "MODEL_INVALID"]
 
 
+@dataclass(frozen=True)
+class SchemaDiagnostic:
+    code: str
+    path: str
+    message: str
+    missing_fields: tuple[str, ...] = ()
+    unsupported_fields: tuple[str, ...] = ()
+    format_version: str = "1.0"
+
+
 class SchemaError(ValueError):
-    """Malformed structure, distinct from a well-formed infeasible problem."""
+    """Malformed structure with safe location detail; never echo field values."""
+
+    def __init__(self, message, *, code="invalid_schema", path="$",
+                 missing_fields=(), unsupported_fields=()):
+        super().__init__(message)
+        self.detail = SchemaDiagnostic(code, path, message, missing_fields, unsupported_fields)
+
+
+def _located(path, operation):
+    try:
+        return operation()
+    except SchemaError as error:
+        detail = error.detail
+        raise SchemaError(detail.message, code=detail.code,
+                          path=path + detail.path[1:], missing_fields=detail.missing_fields,
+                          unsupported_fields=detail.unsupported_fields) from None
+
 
 
 def _integer(value: object, name: str, minimum: int = 0) -> None:
     if type(value) is not int or value < minimum:
-        raise SchemaError(f"{name} must be an integer >= {minimum}")
+        raise SchemaError(f"{name} must be an integer >= {minimum}", code="invalid_integer",
+                          path="$." + name.split()[-1])
 
 
 def _identifier(value: object) -> None:
     if not isinstance(value, str) or not value.strip():
-        raise SchemaError("IDs must be nonempty strings")
+        raise SchemaError("IDs must be nonempty strings", code="invalid_id", path="$.id")
 
 
 def _tuple_of(value: object, cls: type) -> None:
@@ -45,15 +75,26 @@ def _unique(values: tuple[str, ...]) -> None:
         raise SchemaError("Duplicate IDs")
 
 
-def _record(data: object, keys: set[str]) -> dict:
-    if not isinstance(data, dict) or set(data) != keys:
-        raise SchemaError("Missing or unsupported object fields")
+def _safe_field(value):
+    return value if isinstance(value, str) and re.fullmatch(r"[A-Za-z_][A-Za-z_0-9]{0,63}", value) else "<invalid_field_name>"
+
+
+def _record(data: object, keys: set[str], path="$") -> dict:
+    if not isinstance(data, dict):
+        raise SchemaError("Expected a JSON object", code="expected_object", path=path)
+    missing = tuple(sorted(keys - data.keys()))
+    unsupported = tuple(sorted({_safe_field(k) for k in data.keys() - keys}))
+    if missing or unsupported:
+        extra = unsupported[0] if unsupported else missing[0]
+        raise SchemaError("Missing or unsupported object fields", code="object_fields",
+                          path=path + "." + extra, missing_fields=missing,
+                          unsupported_fields=unsupported)
     return data
 
 
-def _array(data: object) -> list:
+def _array(data: object, path="$") -> list:
     if not isinstance(data, list):
-        raise SchemaError("Expected an explicit JSON array")
+        raise SchemaError("Expected an explicit JSON array", code="expected_array", path=path)
     return data
 
 
@@ -61,20 +102,22 @@ def _json_object(pairs: list[tuple[str, object]]) -> dict:
     result = {}
     for key, value in pairs:
         if key in result:
-            raise SchemaError("Duplicate JSON key")
+            raise SchemaError("Duplicate JSON key", code="duplicate_key")
         result[key] = value
     return result
 
 
 def _nonfinite(_: str) -> None:
-    raise SchemaError("Nonfinite JSON number")
+    raise SchemaError("Nonfinite JSON number", code="nonfinite_number")
 
 
 def load_json(content: str) -> object:
     try:
         return json.loads(content, object_pairs_hook=_json_object, parse_constant=_nonfinite)
+    except SchemaError:
+        raise
     except (ValueError, TypeError, RecursionError):
-        raise SchemaError("Invalid or ambiguous JSON") from None
+        raise SchemaError("Invalid or ambiguous JSON", code="invalid_json") from None
 
 
 @dataclass(frozen=True)
@@ -86,7 +129,7 @@ class Window:
         _integer(self.start, "window start")
         _integer(self.end, "window end")
         if self.start >= self.end:
-            raise SchemaError("Window must have positive length")
+            raise SchemaError("Window must have positive length", code="invalid_window", path="$.end")
 
 
 @dataclass(frozen=True)
@@ -163,7 +206,7 @@ class BlockedInterval:
         _identifier(self.id)
         _identifier(self.target_id)
         if self.target_kind not in ("participant", "resource"):
-            raise SchemaError("Unsupported blocked target kind")
+            raise SchemaError("Unsupported blocked target kind", code="unsupported_target", path="$.target_kind")
         Window(self.start, self.end)
 
 
@@ -218,58 +261,66 @@ class ProblemSpec:
 
     def __post_init__(self) -> None:
         if self.schema_version != "1.0":
-            raise SchemaError("Unsupported schema_version")
+            raise SchemaError("Unsupported schema_version", path="$.schema_version")
         _identifier(self.instance_id)
         if self.task_type not in ("generation", "repair"):
-            raise SchemaError("Unsupported task_type")
+            raise SchemaError("Unsupported task_type", path="$.task_type")
         _integer(self.horizon_slots, "horizon_slots", 1)
-        if self.horizon_slots > 48 or type(self.slot_minutes) is not int or self.slot_minutes != 30:
-            raise SchemaError("v1 requires a single day of 30-minute slots")
+        if self.horizon_slots > 48:
+            raise SchemaError("v1 requires a single day of 30-minute slots", path="$.horizon_slots")
+        if type(self.slot_minutes) is not int or self.slot_minutes != 30:
+            raise SchemaError("v1 requires a single day of 30-minute slots", path="$.slot_minutes")
         try:
             start = datetime.fromisoformat(self.horizon_start)
         except (TypeError, ValueError):
-            raise SchemaError("horizon_start must be an offset-aware ISO datetime") from None
+            raise SchemaError("horizon_start must be an offset-aware ISO datetime", path="$.horizon_start") from None
         if start.utcoffset() is None:
-            raise SchemaError("horizon_start requires an explicit UTC offset")
-        zone = _zone(self.timezone)
+            raise SchemaError("horizon_start requires an explicit UTC offset", path="$.horizon_start")
+        zone = _located("$.timezone", lambda: _zone(self.timezone))
         try:
             end = start + timedelta(minutes=self.slot_minutes * self.horizon_slots)
             if start.utcoffset() != start.astimezone(zone).utcoffset() or end.utcoffset() != end.astimezone(zone).utcoffset():
-                raise SchemaError("Timezone must agree with a fixed-offset horizon")
+                raise SchemaError("Timezone must agree with a fixed-offset horizon", path="$.timezone")
             midnight = (start + timedelta(days=1)).replace(hour=0, minute=0, second=0, microsecond=0)
         except OverflowError:
-            raise SchemaError("Horizon exceeds supported calendar range") from None
+            raise SchemaError("Horizon exceeds supported calendar range", path="$.horizon_start") from None
         if end > midnight:
-            raise SchemaError("Horizon extends beyond the stated day")
-        for rows, cls in ((self.participants, Entity), (self.resources, Entity), (self.activities, Activity)):
+            raise SchemaError("Horizon extends beyond the stated day", path="$.horizon_start")
+        for name, rows, cls in (("participants", self.participants, Entity), ("resources", self.resources, Entity), ("activities", self.activities, Activity)):
             _tuple_of(rows, cls)
-            _unique(tuple(row.id for row in rows))
-            for row in rows:
-                if any(w.end > self.horizon_slots for w in row.availability):
-                    raise SchemaError("Availability endpoint outside horizon")
+            _located("$." + name, lambda: _unique(tuple(row.id for row in rows)))
+            for index, row in enumerate(rows):
+                for wi, window in enumerate(row.availability):
+                    if window.end > self.horizon_slots:
+                        raise SchemaError("Availability endpoint outside horizon", code="horizon_endpoint",
+                                          path=f"$.{name}[{index}].availability[{wi}].end")
         _tuple_of(self.constraints, object)
         if any(type(c) not in CONSTRAINT_TYPES.values() for c in self.constraints):
             raise SchemaError("Unsupported constraint type")
-        _unique(tuple(c.id for c in self.constraints))
+        _located("$.constraints", lambda: _unique(tuple(c.id for c in self.constraints)))
         participants = {p.id for p in self.participants}
         resources = {r.id for r in self.resources}
         activities = {a.id for a in self.activities}
-        for activity in self.activities:
-            if set(activity.participant_ids) - participants or set(activity.resource_ids) - resources:
-                raise SchemaError("Dangling participant/resource reference")
-        for constraint in self.constraints:
+        for index, activity in enumerate(self.activities):
+            for name, ids in (("participant_ids", participants), ("resource_ids", resources)):
+                for j, label in enumerate(getattr(activity, name)):
+                    if label not in ids:
+                        raise SchemaError("Dangling participant/resource reference", code="dangling_reference",
+                                          path=f"$.activities[{index}].{name}[{j}]")
+        for index, constraint in enumerate(self.constraints):
             if isinstance(constraint, (ReleaseTime, PreferredStart)) and constraint.activity_id not in activities:
-                raise SchemaError("Dangling activity reference")
+                raise SchemaError("Dangling activity reference", code="dangling_reference", path=f"$.constraints[{index}].activity_id")
             if isinstance(constraint, ReleaseTime) and constraint.slot > self.horizon_slots:
-                raise SchemaError("Constraint slot outside horizon")
+                raise SchemaError("Constraint slot outside horizon", code="horizon_endpoint", path=f"$.constraints[{index}].slot")
             if isinstance(constraint, Precedence) and {constraint.before, constraint.after} - activities:
-                raise SchemaError("Dangling precedence reference")
+                raise SchemaError("Dangling precedence reference", code="dangling_reference",
+                                  path=f"$.constraints[{index}]." + ("before" if constraint.before not in activities else "after"))
             if isinstance(constraint, (BlockedInterval, PreferredStart)) and constraint.end > self.horizon_slots:
-                raise SchemaError("Constraint window outside horizon")
+                raise SchemaError("Constraint window outside horizon", code="horizon_endpoint", path=f"$.constraints[{index}].end")
             if isinstance(constraint, BlockedInterval):
                 targets = participants if constraint.target_kind == "participant" else resources
                 if constraint.target_id not in targets:
-                    raise SchemaError("Dangling blocked target reference")
+                    raise SchemaError("Dangling blocked target reference", code="dangling_reference", path=f"$.constraints[{index}].target_id")
 
     def to_dict(self) -> dict:
         data = asdict(self)
@@ -282,27 +333,47 @@ class ProblemSpec:
     @classmethod
     def from_dict(cls, data: object) -> "ProblemSpec":
         data = dict(_record(data, {field.name for field in fields(cls)}))
-        def windows(raw):
-            return tuple(Window(**_record(w, {"start", "end"})) for w in _array(raw))
+        def windows(raw, path):
+            result = []
+            for index, item in enumerate(_array(raw, path)):
+                item_path = f"{path}[{index}]"
+                row = _record(item, {"start", "end"}, item_path)
+                result.append(_located(item_path, lambda: Window(**row)))
+            return tuple(result)
         for key in ("participants", "resources"):
             rows = []
-            for item in _array(data[key]):
-                row = _record(item, {"id", "availability"})
-                rows.append(Entity(row["id"], windows(row["availability"])))
+            for index, item in enumerate(_array(data[key], "$." + key)):
+                path = f"$.{key}[{index}]"
+                row = _record(item, {"id", "availability"}, path)
+                allowed = windows(row["availability"], path + ".availability")
+                rows.append(_located(path, lambda: Entity(row["id"], allowed)))
             data[key] = tuple(rows)
         activities = []
-        for item in _array(data["activities"]):
-            row = _record(item, {field.name for field in fields(Activity)})
-            activities.append(Activity(row["id"], row["duration_slots"], tuple(_array(row["participant_ids"])),
-                                       tuple(_array(row["resource_ids"])), windows(row["availability"])))
+        for index, item in enumerate(_array(data["activities"], "$.activities")):
+            path = f"$.activities[{index}]"
+            row = _record(item, {field.name for field in fields(Activity)}, path)
+            people = tuple(_array(row["participant_ids"], path + ".participant_ids"))
+            resources = tuple(_array(row["resource_ids"], path + ".resource_ids"))
+            _located(path + ".participant_ids", lambda: _unique(people))
+            _located(path + ".resource_ids", lambda: _unique(resources))
+            allowed = windows(row["availability"], path + ".availability")
+            activities.append(_located(path, lambda: Activity(row["id"], row["duration_slots"], people, resources, allowed)))
         data["activities"] = tuple(activities)
         constraints = []
-        for item in _array(data["constraints"]):
+        for index, item in enumerate(_array(data["constraints"], "$.constraints")):
+            path = f"$.constraints[{index}]"
             if not isinstance(item, dict) or not isinstance(item.get("type"), str) or item["type"] not in CONSTRAINT_TYPES:
-                raise SchemaError("Unsupported constraint type")
+                raise SchemaError("Unsupported constraint type", code="unsupported_constraint", path=path + ".type")
             constraint_cls = CONSTRAINT_TYPES[item["type"]]
-            row = _record(item, {"type"} | {field.name for field in fields(constraint_cls)})
-            constraints.append(constraint_cls(**{key: value for key, value in row.items() if key != "type"}))
+            row = _record(item, {"type"} | {field.name for field in fields(constraint_cls)}, path)
+            for name in ("id", "activity_id", "before", "after", "target_id"):
+                if name in row:
+                    # Locate ID failures at their actual operand, without echoing the value.
+                    try:
+                        _identifier(row[name])
+                    except SchemaError:
+                        raise SchemaError("IDs must be nonempty strings", code="invalid_id", path=path + "." + name) from None
+            constraints.append(_located(path, lambda: constraint_cls(**{key: value for key, value in row.items() if key != "type"})))
         data["constraints"] = tuple(constraints)
         return cls(**data)
 
@@ -372,6 +443,17 @@ class RepairCase:
         new_ids = tuple(a.id for a in self.updated_problem.activities)
         self.original_schedule.require_ids(old_ids)
         self.original_schedule.require_ids(new_ids)
+        for name in ("horizon_start", "timezone", "slot_minutes", "horizon_slots"):
+            if getattr(self.original_problem, name) != getattr(self.updated_problem, name):
+                raise SchemaError(f"Repair must preserve {name}")
+        original = {a.id: a for a in self.original_problem.activities}
+        for activity in self.updated_problem.activities:
+            before = original[activity.id]
+            if activity.duration_slots != before.duration_slots:
+                raise SchemaError("Repair must preserve activity duration_slots")
+            for name in ("participant_ids", "resource_ids"):
+                if set(getattr(activity, name)) != set(getattr(before, name)):
+                    raise SchemaError(f"Repair must preserve activity {name}")
         # Original feasibility remains the evaluator's independent validation duty.
 
 
@@ -439,6 +521,7 @@ class SolveResult:
     elapsed_seconds: float
     optimality_proven: bool
     diagnostics: tuple[str, ...] = ()
+    domain_analysis: "DomainAnalysis | None" = None
 
 
 @dataclass(frozen=True)
@@ -472,6 +555,7 @@ class PipelineResult:
     solve_result: SolveResult | None = None
     prompt_sha256: str | None = None
     config_sha256: str | None = None
+    schema_diagnostics: tuple[SchemaDiagnostic, ...] = ()
 
     def __post_init__(self) -> None:
         if self.status not in ("SAT", "UNSAT", "UNKNOWN", "INVALID_OUTPUT", "ERROR"):

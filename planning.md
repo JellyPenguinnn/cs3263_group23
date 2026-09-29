@@ -129,7 +129,7 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `pyproject.toml`, lockfile, CI, shared CLI, `src/scheduling/dashboard/`, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
 | `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
-The baseline modules are implemented and integrated on `main`; R4 is implemented on Li Hao's branch, pending teammate review and main integration. Sections 5 and 7 specify the pending improvements to existing components. Preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
+The baseline modules are implemented and integrated on `main`; R4 reached main through PR #4 (`61d9fbb`); Yao Xiang's R1–R3 and compatible R4 extension remain on the member branch pending review/integration. Sections 5 and 7 specify the pending improvements to existing components. Preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
 
 ### Directory backbone and artifact placement
 
@@ -170,6 +170,8 @@ The first component checkpoints are implemented. Do not restart packaging, schem
 Work can continue in parallel: Li Hao on direct/provider diagnostics and verification, Yao Xiang on formal/semantic review, and Yong Qing on generator and evaluator improvements. The source is a working shared contract pending human review, not permission to create competing schemas. The packaging owner maintains the existing manifest and lock; consumers use the existing canonical types. Agree behavior changes with affected owners and version scientific changes before dependent runs.
 
 Li Hao follow-up (29 September, local branch): Work package 3's A/provider error table and three offline semantic-failure regressions are complete; R4 is implemented against existing records. CLI explanations, CI frontend checks, demo instructions and four responsible-AI discussion cases are prepared. Prompt policy and the original 60-call evidence are unchanged. Review/qualification status is in [the follow-up handoff](report/lihao-development-followup.md); this is not Gate B sign-off or publication.
+
+Yao Xiang follow-up (29 September, member branch; publication authorized after assignment audit): R1 repair invariants, R2 extraction/schema/typed-difference diagnostics and R3 bounded domain reasons are implemented. The compatible R4 consumer update builds on Li Hao’s checkpoint, now included in main through PR #4; Yao Xiang’s branch incorporates that latest main (`61d9fbb`). A fresh installed macOS build passed 365 Python and 3 frontend tests; all 30 references checked and the original 60-record aggregate stayed unchanged. An independently validated four-call development pilot accepted both B answers and one A answer on two previously failed B cases; this selected pilot is not a general accuracy estimate. See [the formal-core handoff](report/yaoxiang-formal-followup.md). Human reviews, current Linux qualification and final-evaluation gates remain pending.
 
 ### Implementation work packages
 
@@ -343,7 +345,7 @@ Implement R1/R2 before optional search tuning. Li Hao can develop R4 against the
 
 ### R1 — repair invariants and mathematical qualification
 
-`RepairCase.__post_init__` currently checks types and activity-ID coverage but permits changes to time origin, horizon length, duration and assignments. The evaluator already checks the time frame, but that does not protect every shared caller. This is an existing v1 contract gap, not a proposal to change the research task. The reviewed development cases keep the intended time frame, durations and assignments; this finding does not invalidate their recorded acceptance counts.
+The integrated baseline audit found that `RepairCase.__post_init__` checked types and activity-ID coverage but permitted changes to time origin, horizon length, duration and assignments. R1 now rejects those changes on Yao Xiang’s local branch; human review and main integration remain pending. The evaluator already checks the time frame, but that does not protect every shared caller. This is an existing v1 contract gap, not a proposal to change the research task. The reviewed development cases keep the intended time frame, durations and assignments; this finding does not invalidate their recorded acceptance counts.
 
 Compare original/updated `horizon_start`, timezone, slot length and horizon length, and compare each retained activity's duration, participant IDs and resource IDs by stable ID. Order alone is irrelevant. Keep activity presence fixed. Accept the supported availability/deadline/fixed-commitment disruptions; reject changing an activity's meaning under the same ID. A future task-duration, assignment, new/cancelled-activity or time-resolution feature requires a new explicit repair contract. Original-schedule feasibility remains independently checked against the original specification.
 
@@ -391,7 +393,7 @@ Do not obtain misleading explanations by blindly attaching assumptions to every 
 
 ### R4 — explanations tied to actual evidence
 
-Local implementation on `lihao-llm-baseline` (29 September): shared `explanations.py` and the read-only `scheduling explain` CLI consume current and saved results. No schema, prompt or solver changes; human semantic/evaluation review and main integration remain pending. See [Li Hao follow-up](report/lihao-development-followup.md) for tests, measured failures and the participant-burden example. The behavior requirements below remain the review criteria.
+Implemented by Li Hao and merged through PR #4 (`61d9fbb`, 29 September): shared `explanations.py` and the read-only `scheduling explain` CLI consume current and saved results. The original formatter made no schema, prompt or solver changes. Formal semantic/evaluation sign-off remains pending; the local Yao Xiang extension adds compatible recorded R3 reasons. See [Li Hao follow-up](report/lihao-development-followup.md) for tests, measured failures and the participant-burden example. The behavior requirements below remain the review criteria.
 
 Add a small shared formatter over existing `ProblemSpec`, `SolveResult`, `OptimizationStage`, repair context and validation records, consumed by the CLI and optionally the existing read-only case view. A formatter does not solve, call a model, change the schedule or invent a proof. Keep gold/extraction comparisons evaluator-only and visibly separate from what B itself knows.
 
@@ -603,8 +605,8 @@ Two brief team checkpoints each week: progress/blockers and integration/review. 
 
 | Gate | Evidence available | Still needed |
 | --- | --- | --- |
-| A: trustworthy contract/reference | Schema/compiler, independent validator, tiny exhaustive checks and 30 development references pass; planning audit verified worked repair/window examples | Human mathematical/fixture/contract review; Section 7 R1 repair invariants and richer mathematical regressions; record sign-off |
-| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current local macOS suite 311 plus 3 frontend tests; R4 formatter/CLI implemented locally | Implement R2/R3 extraction guidance, diagnostics and bounded domain reasons; review R4 proof/gold semantics. Review integration and requalify the final changed package across platforms before sign-off; a test count alone is not approval |
+| A: trustworthy contract/reference | R1 repair invariants and richer independent enumeration/validator/solver checks implemented locally; 30 references pass | Human mathematical/fixture/contract review, integration and recorded sign-off |
+| B: integrated core | R2/R3 and compatible R4 diagnostics implemented locally; installed macOS suite 365 plus 3 frontend tests; old 60-record replay unchanged; separately capped 4-call development pilot completed | Independent reasoning/consumer/gold review and main integration; current Linux qualification before sign-off. Passing tests and a selected pilot are not approval or final-study evidence |
 | Evaluation freeze | Development-only caps, configuration and provenance exist | Refined/fresh benchmark, language review, eligible model/access, qualification, final cap, reviewed evaluation mode and frozen protocol |
 | C: defensible results | Reproducible descriptive development results | Frozen main study, full analysis/robustness and independent teammate replay; share/review the local sanitized archive in the Li Hao follow-up |
 | D: course delivery | Method notes and read-only demo tooling | Complete report/presentation, responsible-AI analysis, actual contribution/AI disclosure records and submission receipts |

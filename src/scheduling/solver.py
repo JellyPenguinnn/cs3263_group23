@@ -7,6 +7,7 @@ import time
 from ortools.sat.python import cp_model
 
 from scheduling.objectives import check_repair_context, measure_objectives
+from scheduling.domain_analysis import analyze_domains
 from scheduling.schema import (
     BlockedInterval, Deadline, FixedStart, OptimizationStage, Precedence, PreferredStart,
     ProblemSpec, ReleaseTime, RepairContext, Schedule, ScheduledActivity, SolveResult,
@@ -30,40 +31,15 @@ class SolverLimits:
 
 def legal_starts(spec: ProblemSpec, activity_id: str) -> tuple[int, ...]:
     """Compiler-only domains. Never reuse this in the independent validator."""
-    activity = next(a for a in spec.activities if a.id == activity_id)
-    people = {p.id: p for p in spec.participants}
-    resources = {r.id: r for r in spec.resources}
-    windows = [activity.availability]
-    windows.extend(people[p].availability for p in activity.participant_ids)
-    windows.extend(resources[r].availability for r in activity.resource_ids)
-    starts = []
-    for start in range(spec.horizon_slots - activity.duration_slots + 1):
-        end = start + activity.duration_slots
-        if not all(any(w.start <= start and end <= w.end for w in group) for group in windows):
-            continue
-        valid = True
-        for constraint in spec.constraints:
-            if isinstance(constraint, ReleaseTime) and constraint.activity_id == activity.id:
-                if type(constraint) is ReleaseTime and start < constraint.slot:
-                    valid = False
-                elif type(constraint) is Deadline and end > constraint.slot:
-                    valid = False
-                elif type(constraint) is FixedStart and start != constraint.slot:
-                    valid = False
-            if isinstance(constraint, BlockedInterval):
-                ids = activity.participant_ids if constraint.target_kind == "participant" else activity.resource_ids
-                if constraint.target_id in ids and start < constraint.end and constraint.start < end:
-                    valid = False
-        if valid:
-            starts.append(start)
-    return tuple(starts)
+    return next(row.legal_starts for row in analyze_domains(spec).domains if row.activity_id == activity_id)
 
 
-def _compile(spec: ProblemSpec, context: RepairContext | None):
+def _compile(spec: ProblemSpec, context: RepairContext | None, analysis=None):
     model = cp_model.CpModel()
-    domains = {a.id: legal_starts(spec, a.id) for a in spec.activities}
-    if any(not values for values in domains.values()):
-        # Explicit false constraint lets CP-SAT prove unary infeasibility without
+    analysis = analysis if analysis is not None else analyze_domains(spec)
+    domains = {row.activity_id: row.legal_starts for row in analysis.domains}
+    if analysis.contradictions:
+        # Explicit false constraint lets CP-SAT prove supported contradictions without
         # creating an invalid empty-domain interval (or overflowing a huge duration).
         model.add(False)
         return model, {}, [("preference_penalty" if context is None else "moved_count", 0)]
@@ -116,11 +92,12 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
     if sum(c.weight for c in spec.constraints if isinstance(c, PreferredStart)) > 2**53 - 1:
         return SolveResult("MODEL_INVALID", "MODEL_INVALID", None, None, (),
                            time.monotonic() - start_time, False, ("objective_exceeds_exact_bound_range",))
+    analysis = analyze_domains(spec)
     try:
-        model, starts, objectives = _compile(spec, repair_context)
+        model, starts, objectives = _compile(spec, repair_context, analysis)
     except (OverflowError, ValueError):
         return SolveResult("MODEL_INVALID", "MODEL_INVALID", None, None, (),
-                           time.monotonic() - start_time, False, ("compiler_numeric_range_error",))
+                           time.monotonic() - start_time, False, ("compiler_numeric_range_error",), analysis)
     for name, objective in objectives:
         remaining = max(0.0, limits.time_limit_seconds - (time.monotonic() - start_time))
         if remaining == 0:
@@ -173,5 +150,9 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
     fully_proven = len(stages) == len(objectives) and all(stage.proven_optimal for stage in stages)
     if incumbent is not None and status == "OPTIMAL" and not fully_proven:
         status = "FEASIBLE"
+    if analysis.contradictions:
+        diagnostics += tuple(
+            f"Supplied specification: {reason.code}; activities={','.join(reason.activity_ids)}; rules={','.join(reason.rule_paths)}; sufficient, not minimum conflict"
+            for reason in analysis.contradictions)
     return SolveResult(status, last_status, incumbent, values, tuple(stages),
-                       time.monotonic() - start_time, fully_proven, diagnostics)
+                       time.monotonic() - start_time, fully_proven, diagnostics, analysis)

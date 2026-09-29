@@ -1,5 +1,7 @@
 # Yao Xiang: formal core and extraction method draft
 
+Current extension and qualification: [formal-core follow-up](yaoxiang-formal-followup.md). The historical snapshot below is preserved.
+
 Date: 29 September 2026. Branch: `yaoxiang-formal-core`. This is implementation
 and synthetic development evidence, not a benchmark report or a frozen contract.
 The provisional dependency is Li Hao's published commit `b063fb9`; Yao Xiang's

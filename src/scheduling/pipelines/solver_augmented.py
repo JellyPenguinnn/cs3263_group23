@@ -52,7 +52,7 @@ def run_solver_augmented(nl_view: NaturalLanguageView, model_config: ModelConfig
         if {a.id for a in extracted.activities} != set(nl_view.activity_ids):
             raise SchemaError("Extracted activity set differs from public labels")
     except SchemaError as error:
-        return PipelineResult(**base, status="INVALID_OUTPUT", diagnostics=(str(error),),
+        return PipelineResult(**base, status="INVALID_OUTPUT", diagnostics=(f"{error.detail.path}: {error}",), schema_diagnostics=(error.detail,),
                               timings=(("total_seconds", time.monotonic() - started),))
     extracted_at = time.monotonic()
     context = RepairContext(nl_view.original_schedule) if nl_view.task_type == "repair" else None
@@ -60,7 +60,7 @@ def run_solver_augmented(nl_view: NaturalLanguageView, model_config: ModelConfig
         result = solve(extracted, solver_limits, context)
     except SchemaError as error:
         return PipelineResult(**base, status="INVALID_OUTPUT", extracted_spec=extracted,
-                              diagnostics=(str(error),), timings=(("total_seconds", time.monotonic() - started),))
+                              diagnostics=(f"{error.detail.path}: {error}",), schema_diagnostics=(error.detail,), timings=(("total_seconds", time.monotonic() - started),))
     status = {"OPTIMAL": "SAT", "FEASIBLE": "SAT", "INFEASIBLE": "UNSAT",
               "UNKNOWN": "UNKNOWN", "MODEL_INVALID": "ERROR"}[result.status]
     return PipelineResult(**base, status=status, schedule=result.schedule, extracted_spec=extracted,
