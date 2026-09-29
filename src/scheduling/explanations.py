@@ -140,6 +140,33 @@ def _check_saved_solver(data):
             raise ValueError("Saved solver stage has invalid or missing fields")
 
 
+def _recorded_domain_analysis(data):
+    """Read optional v1 evidence without recomputing or upgrading solver status."""
+    analysis = data.get("domain_analysis")
+    if analysis is None:
+        return None
+    if (
+        not isinstance(analysis, Mapping)
+        or analysis.get("format_version") != "1.0"
+        or analysis.get("scope") != "supplied_specification_only"
+        or not isinstance(analysis.get("contradictions"), (list, tuple))
+    ):
+        raise ValueError("Invalid saved domain analysis")
+    for reason in analysis["contradictions"]:
+        if (
+            not isinstance(reason, Mapping)
+            or reason.get("code")
+            not in ("empty_unary_domain", "positive_duration_precedence_cycle")
+            or any(
+                not isinstance(reason.get(key), (list, tuple))
+                or any(not isinstance(item, str) for item in reason[key])
+                for key in ("activity_ids", "rule_paths", "constraint_ids")
+            )
+        ):
+            raise ValueError("Invalid saved domain contradiction")
+    return analysis
+
+
 def explain_solver(
     spec: ProblemSpec,
     result: SolveResult | Mapping,
@@ -152,6 +179,7 @@ def explain_solver(
         raise ValueError("Explicit solver evidence scope required")
     data = to_data(result) if isinstance(result, SolveResult) else dict(result)
     _check_saved_solver(data)
+    analysis = _recorded_domain_analysis(data)
     status = data["status"]
     details = (
         schedule_details(spec, data["schedule"], context)
@@ -190,7 +218,11 @@ def explain_solver(
         and status == "OPTIMAL"
     )
     if status == "INFEASIBLE":
-        summary = "Solver reports infeasibility for this specification. No detailed conflict was derived."
+        summary = "Solver reports infeasibility for this specification."
+        if analysis and analysis["contradictions"]:
+            summary += " Recorded sufficient contradictions are available; they are not minimum conflicts."
+        else:
+            summary += " No detailed conflict was derived."
     elif status == "UNKNOWN":
         summary = "Solver did not determine feasibility; UNKNOWN is not an infeasibility proof."
     elif status == "MODEL_INVALID":
@@ -216,6 +248,7 @@ def explain_solver(
         "stages": stages,
         "schedule": details,
         "diagnostics": list(data.get("diagnostics", ())),
+        "domain_analysis": analysis,
     }
 
 
@@ -340,6 +373,15 @@ def render_text(explanation: Mapping) -> str:
             for name in block["unproven_objectives"]:
                 lines.append(f"Not established: {_OBJECTIVES[name]}.")
             lines.extend(f"Diagnostic: {item}" for item in block["diagnostics"])
+            analysis = block.get("domain_analysis")
+            if analysis:
+                for reason in analysis["contradictions"]:
+                    lines.append(
+                        f"Recorded sufficient contradiction: {reason['code']}; "
+                        f"activities={', '.join(reason['activity_ids'])}; "
+                        f"rules={', '.join(reason['rule_paths'])}. "
+                        "Applies only to this specification; not a minimum conflict."
+                    )
             if block["scope"] == "extracted_specification":
                 lines.append(
                     "This solver proof does not establish faithful extraction or correctness against the original request."

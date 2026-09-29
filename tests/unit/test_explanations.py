@@ -233,3 +233,34 @@ def test_malformed_saved_evidence_rejected(mutation):
         data["stages"][0]["best_bound"] = True
     with pytest.raises(ValueError, match="Saved solver"):
         explain_solver(tiny(task_type="repair"), data, context())
+
+
+@pytest.mark.parametrize("budget, status", [(5, "INFEASIBLE"), (0, "UNKNOWN")])
+def test_recorded_contradictions_preserve_native_status(budget, status, monkeypatch):
+    spec = tiny(constraints=(Deadline("impossible", "A", 0),))
+    result = solve(spec, SolverLimits(time_limit_seconds=budget))
+    monkeypatch.setattr(
+        "scheduling.domain_analysis.analyze_domains",
+        lambda *_: pytest.fail("No recomputation"),
+    )
+    explained = explain_solver(spec, result, scope="extracted_specification")
+    assert explained["status"] == status
+    assert not explained["optimality_proven"]
+    text = render_text({"solver": explained})
+    assert "Recorded sufficient contradiction: empty_unary_domain" in text
+    assert "not a minimum conflict" in text
+    assert "does not establish faithful extraction" in text
+    assert "No detailed conflict" not in explained["summary"]
+    if status == "UNKNOWN":
+        assert "UNKNOWN is not an infeasibility proof" in explained["summary"]
+    old = to_data(result)
+    old.pop("domain_analysis")
+    assert explain_solver(spec, old)["domain_analysis"] is None
+
+
+def test_malformed_optional_domain_diagnostics_rejected():
+    spec = tiny()
+    data = to_data(solve(spec, SolverLimits()))
+    data["domain_analysis"]["contradictions"] = [{"code": "invented_proof"}]
+    with pytest.raises(ValueError, match="domain contradiction"):
+        explain_solver(spec, data)

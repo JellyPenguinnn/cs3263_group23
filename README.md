@@ -111,6 +111,8 @@ Live commands/configuration select an explicit model; the saved development conf
 
 Certificate and hostname verification remain enabled. The Linux client includes ordinary issuer certificates to complete the service's previously incomplete chain; macOS uses native trust. If verification fails, investigate the chain/OS trust service rather than disabling TLS. [Issuer provenance](configs/development/tls-issuer-provenance.json) and the baseline report document the implementation.
 
+The [Yao Xiang follow-up](report/yaoxiang-formal-followup.md) records the local R1–R3 extension and its installed-build/live-pilot evidence. Solver JSON now includes optional versioned `domain_analysis`; extraction failures include `schema_diagnostics`. `scheduling explain` reads supported recorded conflicts while keeping solver proof and gold acceptance separate. Historical run files remain readable and unchanged.
+
 ### Run the integrated development baseline
 
 First generate and validate the 30 development references without credentials:
