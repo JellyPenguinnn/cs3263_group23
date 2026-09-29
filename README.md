@@ -23,7 +23,7 @@ A research project comparing direct language-model scheduling with language-mode
 
 Both approaches are checked by an independent validator against the gold specification. A solver-valid answer to an incorrectly translated problem does not count as a correct answer to the original problem.
 
-The core covers fixed-duration activities, availability, deadlines, fixed commitments, precedence, participant/resource non-overlap, preferences, and minimum-disruption repair. A small demo UI and verifier-feedback correction are stretch work. Live calendar integrations are outside project scope.
+The core covers fixed-duration activities, availability, deadlines, fixed commitments, precedence, participant/resource non-overlap, preferences, and minimum-disruption repair. The local dashboard provides read-only live run monitoring, results and case inspection. Verifier-feedback correction remains stretch work. Live calendar integrations are outside project scope.
 
 ## Getting started
 
@@ -114,6 +114,23 @@ Architecture: evaluator-only cases → common public rendering → A: direct mod
 The actual run `runs/main-baseline-20260929-01/` and its frozen source/input archive remain private/ignored. [The tracked aggregate receipt](configs/development/main-baseline-verification.json) and [validation report](report/main-baseline-validation.md) record provenance and observed failures. A 28-SAT/2-UNSAT development set is not the balanced held-out matrix. Human-written realistic cases, wording review, final-model eligibility, the evaluation freeze and final experiments remain open.
 
 `evaluation/offline_demo.py` remains available for testing/rehearsal and is explicitly labelled canned. It is not substituted for the live evidence above. Single-spec solving, validation and direct component commands remain available through `scheduling --help`.
+
+### Scheduling dashboard
+
+```sh
+.venv/bin/scheduling dashboard --runs-dir runs \
+  --run-dir runs/main-baseline-20260929-01 --port 8876
+```
+
+Open `http://127.0.0.1:8876`. The dashboard is **read-only**: start live batches from a separate terminal using `evaluate-batch` as documented above. No credentials are needed by the dashboard. Keep it open during a run to see saved results update every three seconds. New run directories appear automatically in the selector; choose the run to follow. Omit `--run-dir` for a new checkout; private raw runs are not included in Git.
+
+- **Run monitor:** completed, pending/uncertain and not-started attempts; latest per-case activity; reported token usage with coverage; model, caps and provenance. A run lock indicates possible activity, not proof that its terminal process is still alive. Interrupted reservations still require the runner's manual reconciliation.
+- **Results:** independent replay/scoring with separate generation and repair rates, denominators, paired intervals and failure counts. Case kinds, variants and repeats stay separate. Pending reservations under an active lock are excluded from completed-result metrics.
+- **Case explorer:** explains the aggregate results. Search/filter individual cases and compare both schedules, original versus repaired starts, objective values, constraint violations, extraction diagnostics and saved responses. The gold reference is displayed separately from model answers.
+
+The server binds only to `127.0.0.1`, restricts Host/Origin, rejects mutation requests, serves only packaged assets, and verifies records before displaying metrics. It cannot start, stop or alter a run. It adds no runtime dependencies or frontend build requirement. Case tables are paginated and the server caches up to four verified run snapshots. This is a local development dashboard, not a public multi-user service.
+
+Validation covers record checksums, independent score recomputation, missing usage, changing/pending records, filtering and read-only HTTP boundaries. The actual 60-call development run supplies the displayed live evidence; dashboard checks do not consume model calls. Run `.venv/bin/python -m pytest -q`, `node --check src/scheduling/dashboard/static/app.js` and `node --test tests/frontend/dashboard.test.cjs` when editing the dashboard. The Node tests cover refresh recovery and overlapping case requests without a browser or network.
 
 ### Start with a coding agent
 

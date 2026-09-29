@@ -30,3 +30,5 @@ addopts = "-ra"
 
 [tool.setuptools.package-data]
 "scheduling.providers" = ["issuer-chain.crt"]
+
+"scheduling.dashboard" = ["static/*.html", "static/*.css", "static/*.js"]

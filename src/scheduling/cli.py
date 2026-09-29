@@ -42,12 +42,17 @@ def _parser() -> argparse.ArgumentParser:
     add_commands(commands)
     from scheduling.evaluation.cli import add_commands as add_evaluation_commands
     add_evaluation_commands(commands)
+    from scheduling.dashboard.server import add_command
+    add_command(commands)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "dashboard":
+            from scheduling.dashboard.server import serve
+            return serve(args)
         from scheduling.evaluation.cli import COMMANDS, run_command as run_evaluation
         if args.command in COMMANDS:
             return run_evaluation(args)
