@@ -1,0 +1,8 @@
+Synthetic component example, not a benchmark or live model result.
+UPDATED problem: date 2026-10-05, timezone +08:00, start 09:00, four
+30-minute slots. A and B each last one slot and share participant P.
+A, B and P are available in [0,4). P now has a blocked interval [0,1).
+A must finish before B starts. No resources or preferences. Both activities
+are mandatory. Minimize moved activity count, then total absolute slot shift,
+then preference penalty. The supplied original schedule was valid before
+the new blocked interval. This example has not passed the independent validator.

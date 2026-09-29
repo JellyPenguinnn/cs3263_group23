@@ -1,0 +1,42 @@
+{
+  "authorization_consumed": true,
+  "authorized_completion_tokens_reserved": 2048,
+  "authorized_requests": 2,
+  "date": "2026-09-29",
+  "final_evaluation_model_eligibility": "unresolved",
+  "independent_gold_validation": "pending Yong Qing component",
+  "max_attempts_per_case": 1,
+  "max_tokens_per_call": 1024,
+  "model": "qwen3.6:35b",
+  "observed": {
+    "generation": {
+      "config_sha256": "f0b72d8c40d3f9ff87aefe74b60bd3cf0b93daa0df4b5fb83b6bd5662d742c13",
+      "prompt_sha256": "26ad75595bc55b8ef6deedf8316af213a11e784b97c4f5de3c9819b3855f2b2a",
+      "returned_model": "qwen3.6:35b",
+      "status": "SAT",
+      "usage": {
+        "completion_tokens": 67,
+        "prompt_tokens": 359,
+        "total_tokens": 426
+      }
+    },
+    "repair": {
+      "config_sha256": "f0b72d8c40d3f9ff87aefe74b60bd3cf0b93daa0df4b5fb83b6bd5662d742c13",
+      "prompt_sha256": "89c9be1a7b94c43b344bb56a5657540949a07666597fec3602411f3d16f13beb",
+      "returned_model": "qwen3.6:35b",
+      "status": "SAT",
+      "usage": {
+        "completion_tokens": 29,
+        "prompt_tokens": 485,
+        "total_tokens": 514
+      }
+    }
+  },
+  "phase": "development_component_only",
+  "private_record_directory": "runs/lihao-components-20260929-01",
+  "prompt_files": [
+    "prompts/direct/generation.txt",
+    "prompts/direct/repair.txt"
+  ],
+  "schema": "development_check_record_v1"
+}
