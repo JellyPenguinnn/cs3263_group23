@@ -1,0 +1,1476 @@
+{
+  "analysis": {
+    "canonical_paired_strata": [
+      {
+        "B_minus_A_percentage_points": 66.66666666666667,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 1,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 2
+        },
+        "gold_label": "SAT",
+        "group_count": 3,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "kind": "controlled",
+        "pair_count": 3,
+        "resamples": 10000,
+        "seed": 3263,
+        "task_type": "generation",
+        "unresolved_pairs": 0
+      },
+      {
+        "B_minus_A_percentage_points": 66.66666666666667,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 1,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 2
+        },
+        "gold_label": "UNSAT",
+        "group_count": 3,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "kind": "controlled",
+        "pair_count": 3,
+        "resamples": 10000,
+        "seed": 3263,
+        "task_type": "generation",
+        "unresolved_pairs": 0
+      },
+      {
+        "B_minus_A_percentage_points": 66.66666666666667,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 1,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 2
+        },
+        "gold_label": "SAT",
+        "group_count": 3,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "kind": "controlled",
+        "pair_count": 3,
+        "resamples": 10000,
+        "seed": 3263,
+        "task_type": "repair",
+        "unresolved_pairs": 0
+      },
+      {
+        "B_minus_A_percentage_points": 100.0,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 0,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 3
+        },
+        "gold_label": "UNSAT",
+        "group_count": 3,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "kind": "controlled",
+        "pair_count": 3,
+        "resamples": 10000,
+        "seed": 3263,
+        "task_type": "repair",
+        "unresolved_pairs": 0
+      }
+    ],
+    "difficulty_uncertainty": [
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "0",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "0",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "1",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "1",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "2",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "interaction_density",
+        "task_type": "generation"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "2",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "interaction_density",
+        "task_type": "generation"
+      },
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "0",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "0",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "1",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "1",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "approach": "direct",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "2",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "interaction_density",
+        "task_type": "repair"
+      },
+      {
+        "approach": "solver_augmented",
+        "cluster_bootstrap_95": null,
+        "denominator": 1,
+        "group_count": 1,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "level": "2",
+        "resamples": 10000,
+        "seed": 3263,
+        "sweep": "interaction_density",
+        "task_type": "repair"
+      }
+    ],
+    "evidence": "supplementary_recomputed_analysis",
+    "format_version": "2.0",
+    "funnels": [
+      {
+        "accepted_answers": 2,
+        "changed_field_instance_counts": {},
+        "gold_valid_schedules": 1,
+        "missing_usage_instances": 0,
+        "parsed_outputs": 6,
+        "reserved_attempts": 6,
+        "schedule_claims": 4,
+        "schema_valid_extractions": null,
+        "solver_status_counts": {},
+        "status_counts": {
+          "SAT": 4,
+          "UNSAT": 2
+        },
+        "structurally_matching_extractions": null,
+        "subset": {
+          "approach": "direct",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "generation",
+          "variant_id": "canonical"
+        },
+        "typed_constraint_difference_counts": {},
+        "unsat_claims": 2,
+        "violation_instance_counts": {
+          "blocked": 1,
+          "deadline": 1,
+          "resource_overlap": 1
+        }
+      },
+      {
+        "accepted_answers": 6,
+        "changed_field_instance_counts": {},
+        "gold_valid_schedules": 3,
+        "missing_usage_instances": 0,
+        "parsed_outputs": 6,
+        "reserved_attempts": 6,
+        "schedule_claims": 3,
+        "schema_valid_extractions": 6,
+        "solver_status_counts": {
+          "INFEASIBLE": 3,
+          "OPTIMAL": 3
+        },
+        "status_counts": {
+          "SAT": 3,
+          "UNSAT": 3
+        },
+        "structurally_matching_extractions": 5,
+        "subset": {
+          "approach": "solver_augmented",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "generation",
+          "variant_id": "canonical"
+        },
+        "typed_constraint_difference_counts": {
+          "invented": 16
+        },
+        "unsat_claims": 3,
+        "violation_instance_counts": {}
+      },
+      {
+        "accepted_answers": 1,
+        "changed_field_instance_counts": {},
+        "gold_valid_schedules": 1,
+        "missing_usage_instances": 0,
+        "parsed_outputs": 5,
+        "reserved_attempts": 6,
+        "schedule_claims": 5,
+        "schema_valid_extractions": null,
+        "solver_status_counts": {},
+        "status_counts": {
+          "INVALID_OUTPUT": 1,
+          "SAT": 5
+        },
+        "structurally_matching_extractions": null,
+        "subset": {
+          "approach": "direct",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "repair",
+          "variant_id": "canonical"
+        },
+        "typed_constraint_difference_counts": {},
+        "unsat_claims": 0,
+        "violation_instance_counts": {
+          "blocked": 2,
+          "deadline": 2
+        }
+      },
+      {
+        "accepted_answers": 6,
+        "changed_field_instance_counts": {},
+        "gold_valid_schedules": 3,
+        "missing_usage_instances": 0,
+        "parsed_outputs": 6,
+        "reserved_attempts": 6,
+        "schedule_claims": 3,
+        "schema_valid_extractions": 6,
+        "solver_status_counts": {
+          "INFEASIBLE": 3,
+          "OPTIMAL": 3
+        },
+        "status_counts": {
+          "SAT": 3,
+          "UNSAT": 3
+        },
+        "structurally_matching_extractions": 6,
+        "subset": {
+          "approach": "solver_augmented",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "repair",
+          "variant_id": "canonical"
+        },
+        "typed_constraint_difference_counts": {},
+        "unsat_claims": 3,
+        "violation_instance_counts": {}
+      }
+    ],
+    "language_transitions": [],
+    "notes": [
+      "Funnel columns are counts, not strictly nested subsets: a valid UNSAT answer has no schedule.",
+      "Structural matching is not proof of faithful natural-language interpretation.",
+      "Missing usage includes canned outputs and interrupted requests; it is not zero tokens.",
+      "Objective changes compare valid outputs; they are not reference optimality gaps."
+    ]
+  },
+  "base_main_commit": "bc165bc",
+  "branch": "yongqing-evaluation",
+  "development_registry": {
+    "path": "runs/yongqing-followup-20260929-01/development-fingerprints.json",
+    "scope": "Legacy 30 plus v2 144; add any further developed structures before final allocation",
+    "sha256": "de807ad2ec9090ca670a4837d1ee209770fbcaa6bb50cc71acd90210977838d8",
+    "source_cases": 174,
+    "structures": 174
+  },
+  "evidence": "live_development_and_separate_offline_qualification",
+  "format_version": "2.0",
+  "input_file_sha256": {
+    "benchmark.manifest.json": "015a96ed8fda629f0d26463675ce48df4afb7a3d022a8cbd1682d7b5ee58ef1f",
+    "cases.json": "7325ccab9c012a42605ed839595d54debdab8903cd91002b8ce5731a0fae1926",
+    "preflight.json": "6e8f938a1bfded9bbc136c5731fd4074d09fa9e89a99766d2b811d4a07d7d147"
+  },
+  "limitations": [
+    "Six preselected related families, only three per task/label stratum; no general accuracy or significance claim.",
+    "All v2 UNSAT cases use the same interacting-pair recipe; SAT repairs need one move/one-slot shift.",
+    "Longest output observed only within selected cases; no claim to qualify every future longest prompt.",
+    "Realistic human prose, language/gold review, fresh test allocation, final model eligibility and budget remain pending."
+  ],
+  "member": "Yong Qing",
+  "model_accounting": {
+    "currency_cost": null,
+    "finish_reasons": {
+      "stop": 24
+    },
+    "largest_completion_tokens": 2652,
+    "provider_attempts": 24,
+    "requested_output_token_cap": 196608,
+    "returned_models": {
+      "qwen3.6:35b": 24
+    },
+    "usage": {
+      "completion_tokens": 21123,
+      "prompt_tokens": 36236,
+      "total_tokens": 57359
+    },
+    "usage_coverage": "24/24"
+  },
+  "progress": {
+    "completed": 24,
+    "evidence": "live_development",
+    "not_started": 0,
+    "pending_attempt_ids": [],
+    "planned": 24,
+    "reserved": 24
+  },
+  "publication": "member_branch_commit_and_push_authorized_2026-09-30",
+  "qualification": {
+    "frontend_tests_passed": 3,
+    "human_reviews": "pending",
+    "installed_wheel": true,
+    "legacy_60_call_summary_unchanged": true,
+    "legacy_reference_cases": 30,
+    "linux_current_snapshot": "not_executed",
+    "platform": "macOS ARM64",
+    "python_tests_passed": 398,
+    "v2_canned_accepted": 864,
+    "v2_canned_attempts": 864,
+    "v2_reference_cases": 144,
+    "v2_resume_additional_calls": 0
+  },
+  "replay_archive": {
+    "bytes": 763713,
+    "checksummed_files": 193,
+    "independent_teammate_review": "pending",
+    "path": "artifacts/yongqing-replay-20260929-01.tar.gz",
+    "sha256": "50a1ef99dde5c53ad845b9b3cd0b3b0cc12a70ba8e35ced38fb9ec932314cfe2",
+    "team_shared_location": "not_yet_provided",
+    "unpacked_replay_matches": true
+  },
+  "run_file_sha256": {
+    "attempts/04daa40b21fedd8716919869c80bbf54e49541df3071f7198e2ef36868f312f8.json": "42eec3e2c7470cbf29caf8357eca33d4480e6ddfe31e8fdc9a626b1631fc50c0",
+    "attempts/07c3fa5cd23ff01856946c3a961177cc972617839c7559aef1e1d6ce0803a931.json": "9999ffde26992cf9a6846ab45f98b87a88bbd4fd88c638787ce25a0061b47270",
+    "attempts/0f1ed0edc25daeebab49e1c04aa55b5ec1436a1b16a5d5a7f21e2a297fbe5b17.json": "47bd6d1191c71a157648e74ec1e759dd6dfc4172f324db248a54d4315fcab4b1",
+    "attempts/27e813bc2f87b0f4416e7fb49e67e7a975c4dada909e7dadfd6c41a1e0fd5a70.json": "be778b95e0e8ac0a86f499a558b6119081fcf5d4f68a73e067ce956a8f0fbbf2",
+    "attempts/39f14232135d052425714c0ef0864a344dbba73d0b8d06aef7a8e7a90f7b82c5.json": "01b40963aacab18ab42087bd9d838bffc3d9488b43ae3e405a9e362506cb0777",
+    "attempts/3f07a59091476c5f17cda7f093c2686a377a4834b1a0bc921d8f2e561493ac7e.json": "a262f776818e9372684e5b1481f8bac9b7a23310df2929be0b8d28b91bfa5cd0",
+    "attempts/47324aebd7ec1e35d3cac3444940855ee81c726198e2e0a4dc8a18eed06bf3bb.json": "0ecbed96a5dd5f12488bbf31ec1fe57f6a88b2dad7782d10435ef729d6b28e53",
+    "attempts/5150704100c65bf1366c31c79602bd215ce4161554a924c0503a31251fa0b7de.json": "e1b025309feed11c3fed66755097dc290ae33a6b20f4c743949d494adad1b304",
+    "attempts/5b8f038318785a941b2a84856d1182dd5879ae8e8ccb5b125e55628488fa29ac.json": "e9199d11c2e2ab6539225fdfa4ea75557867770c90d230ab1debbde5a221ce68",
+    "attempts/69b78994541c6b7cf25a53345314562dac4b6f54ed8fa931965d2e2488374acd.json": "71d6cf81de3187b65ff966cae07fb200cf12c33fedfb4499c1f409949aa7734c",
+    "attempts/6dfe7f502f8af56723dcc15f40d01d859e63469a56e5c6ae2af917cccee8c031.json": "76922348bbdc038d46e91d537bac820807378073b7e33dbd231f28833c86dd62",
+    "attempts/74357f087ea168ca1ca875dfa265816c5c06e1bb271b4f67a64d4615d0054b72.json": "7505a55def29c87d04e6e3a90cb4c895c7f8648cc393e29720ee202fb3370472",
+    "attempts/8026a0087c77c1aada24e00bbb1a6f487844481b4271ceaff08192a50ae9d4e5.json": "2c7c75399ec06243957e2a5636b64590fe6170a83e8646f68d066b9a541e0ca4",
+    "attempts/8cbdd10641905385a3a62ca83d628d599c9d3a5dfc7c03f2e6d13baaf9d1966b.json": "670259d8b49c8321dd52671249a2b790e258ac5fd8ea7b86795e81a085f9e56c",
+    "attempts/9392aa11eebef8721ac5f127cb5d83503fe58ec66d17b87bb405fe181a1f8bbd.json": "55209ddf943fcb5cf8ba5a4c3a9408f1c183ec4bd18de6044836450a9ea518ac",
+    "attempts/a5dfb848ddd1bdc7e0a7d0ca0d8fe474b2a7c2133f3205c5c23ccff5eb34820e.json": "ff4e7b0db1c7c711c89f25be85bb8c2a3d7a31a71c336399cec2790bb9362372",
+    "attempts/bb63259c909e2541bac24c257e623771ae41b27719a092311a438b6764344291.json": "152a9d4ad67b1ac9c6209b4d0ab9b820b7d4b921b030444fd89f78fd1431adbe",
+    "attempts/c146b2428349c0bb5050a690d24dbd8c2a5c44ab32575945d4a1f72f32ef232f.json": "81d44a0154e66275a5d479149c42ec0d007b9a71a7ee90680ed2be1999366ca4",
+    "attempts/c2613308aea88c645260f406d823b35394e31abd5b80e7d8a8c0daba87fee61a.json": "3ebe6d80d1b0bf87278bba35f5b81630f47aca1dff751a232cc112022fcb2255",
+    "attempts/d6cb4c733ad4805b0cbd6fb4d812cdfb9215f2629e021e4d963fd5d77292a159.json": "9b6859a79f5e6c1d0994136e440f32c630edb58dfe2cbc12b739ba4202022a17",
+    "attempts/dac4996fdbdc5f6f4f521a37bbfb32f748b6631eca0f38c8faf3312253459ea2.json": "b3033bb9dc789d23f21dad856e514ea051ea4ace865ab008d08f416f2af81a36",
+    "attempts/eb29bd183ed04f757a7cd23a34e45f34b65565e956ea8f894060e141561e0f63.json": "ec943833b957f57b727d012205927afc06860dc375157f055f49b5ff2f2d289a",
+    "attempts/f169ddb4e4e0a8e9bb54c89b69bc7f0ec032398f15b154b0746c491d41d6bc06.json": "e80f154ad9b547ea7b8750c0b659ed1bbf22afdc9bd62277df2581733ed4ef7d",
+    "attempts/f47a1ee281a9404fb4f34b630a87bad1ba29a8472663504a657c1926ea8d4c88.json": "c34e0fb8276199957a0f3918b1a559cf448b254eddd8d2d8341c990ae335aefe",
+    "cases.json": "7325ccab9c012a42605ed839595d54debdab8903cd91002b8ce5731a0fae1926",
+    "manifest.json": "bbcd4e51ee2096e8f4cdf360a03d44dca2339c7a82be04282850877733ddd138",
+    "references/0913efe3326ed6cc03a9c6d119522220c0d54c8aade46afc18fe269c78f2e1e2.json": "913e45e4d1f0ab226d2c868dc5f09f1790df4e29499a815155f9ff83538cd5e3",
+    "references/1692b59e80a9a93cafbb03bc8f30161c6ab2604b96d6035f8bcd86f9ed0edffc.json": "c5a803c2160a828a0d93fc24d8489c0b346751bf37f4e808ca0063ebd554e02a",
+    "references/316f438d569ae1b0384e08fb83643c20cba5ecd02b2ec230abb717a58c9f7e29.json": "302c3b0cbcce405268160c157979c41c9e77508e82beea88b3fbd31db237a502",
+    "references/5230a0dc798bf7fed2c20cb5d9c4bcd71473c57ab6f3e2fc35439d9f9fcc9d0b.json": "5a5be6faeb48bee3ee56dfda32428a3a15324f0cd0d35d671f245d37cd523bb5",
+    "references/5d09db0438e0b0cf2bc65033395021e43e542a380da658efd8a857444779946a.json": "a1ef3ed980448ca4d67db4ab9da6304f4194fd96278bc51391e079f7fe326baa",
+    "references/82368ff1a86140df04433018889416ad5c45bd0d4d00fa572599a2095e4ebece.json": "914f8dd9b19a3974f691c0b107c50dc9b995f7bcad3b3e82affda9197ca64a6c",
+    "references/92c7883520903c7d6bd8afd5df1caf8caffba29aea44b572bd6c661896f34467.json": "ee727147f42acc596c75baa42b7347c2594f54123cf0a03772d6ffaf1d6da09a",
+    "references/a86ebfb2754f8fcad946568ec2365bcfdd94c814dc5e913693952f0739638b38.json": "ebcdf983ca57ec1925ef8b966af48193569e029f5a62aed4f5af56351247e92c",
+    "references/be29853823e8d1068b02231e49b82a1122b09af80ffae66cebbc94ed92eddb6f.json": "2910d8bef3ba312cf5111a3e83c551717d16bb9cc45816a060841aa027228141",
+    "references/d34d40a3261964cf82216484f4755deecc6ab01d1bdd6b95941f36cfbfa59986.json": "3253306860c2dd4509a6023113761bed3a362c7994aecad3f8b153e587c4083f",
+    "references/d3e910ca453fd4f1e143d4d4e13f7912ae0bb96c4bba41cd18b1e0d62ba5b9da.json": "abc65bb4e5079cf3c3d447b55b4d5316998b736a28068be7257b8b1a91f507b6",
+    "references/e4ee6e398501775981d054d59b391e2ce09a1bb6ac507ace8b2807f8929875fc.json": "efbd0a747ab838fbd06807d1d3e0879789e4fd880be75ba1eebdb23382193ed9"
+  },
+  "run_id": "yongqing-v2-pilot-20260929-01",
+  "semantic_review": [
+    {
+      "case_id": "dev-v2-3264-interaction_density-2-deadline-sat-0-generation",
+      "diagnostic": "Every added release/deadline is entailed by the unchanged activity availability windows; no gold constraint is missing. A representation mismatch, not a demonstrated feasible-set change. Historical structural score retained.",
+      "human_semantic_review": "pending",
+      "invented_constraints": 16,
+      "structural_match": false
+    }
+  ],
+  "summary": {
+    "difficulty": [
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "0",
+        "realized_mean_interaction_density": 0.3333333333333333,
+        "realized_mean_resource_contention": 0.16666666666666666,
+        "realized_mean_unary_slack": 6.25,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "0",
+        "realized_mean_interaction_density": 0.3333333333333333,
+        "realized_mean_resource_contention": 0.16666666666666666,
+        "realized_mean_unary_slack": 6.25,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "direct",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.0,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.0,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "2",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.75,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "sweep": "interaction_density",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "2",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.75,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "interaction_density",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "0",
+        "realized_mean_interaction_density": 0.17857142857142858,
+        "realized_mean_resource_contention": 0.03571428571428571,
+        "realized_mean_unary_slack": 6.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "resource_contention",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "0",
+        "realized_mean_interaction_density": 0.17857142857142858,
+        "realized_mean_resource_contention": 0.03571428571428571,
+        "realized_mean_unary_slack": 6.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "resource_contention",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.125,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.125,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "direct",
+        "level": "2",
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 10.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "2",
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 10.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "generation"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "0",
+        "realized_mean_interaction_density": 0.3333333333333333,
+        "realized_mean_resource_contention": 0.16666666666666666,
+        "realized_mean_unary_slack": 5.75,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "0",
+        "realized_mean_interaction_density": 0.3333333333333333,
+        "realized_mean_resource_contention": 0.16666666666666666,
+        "realized_mean_unary_slack": 5.75,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "direct",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.0,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.0,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "activity_count",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "2",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.375,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "sweep": "interaction_density",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "2",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.375,
+        "sat_validity": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "sweep": "interaction_density",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "0",
+        "realized_mean_interaction_density": 0.17857142857142858,
+        "realized_mean_resource_contention": 0.03571428571428571,
+        "realized_mean_unary_slack": 6.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "resource_contention",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "0",
+        "realized_mean_interaction_density": 0.17857142857142858,
+        "realized_mean_resource_contention": 0.03571428571428571,
+        "realized_mean_unary_slack": 6.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "resource_contention",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.125,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "1",
+        "realized_mean_interaction_density": 0.2857142857142857,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 7.125,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "approach": "direct",
+        "level": "2",
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 10.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "repair"
+      },
+      {
+        "accepted_answer": {
+          "denominator": 1,
+          "numerator": 1,
+          "rate": 1.0
+        },
+        "approach": "solver_augmented",
+        "level": "2",
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.14285714285714285,
+        "realized_mean_unary_slack": 10.875,
+        "sat_validity": {
+          "denominator": 0,
+          "numerator": 0,
+          "rate": null
+        },
+        "sweep": "slack",
+        "task_type": "repair"
+      }
+    ],
+    "evidence": "recomputed_from_saved_attempts",
+    "paired": [
+      {
+        "B_minus_A_percentage_points": 66.66666666666667,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 2,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 4
+        },
+        "group_count": 6,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "pair_count": 6,
+        "resamples": 10000,
+        "seed": 3263,
+        "subset": [
+          "controlled",
+          "generation",
+          "canonical",
+          0
+        ],
+        "unresolved_pairs": 0
+      },
+      {
+        "B_minus_A_percentage_points": 83.33333333333333,
+        "cluster_bootstrap_95": null,
+        "counts": {
+          "both": 1,
+          "neither": 0,
+          "only_A": 0,
+          "only_B": 5
+        },
+        "group_count": 6,
+        "incomplete_pairs": 0,
+        "interval_note": "descriptive_only_fewer_than_10_groups",
+        "pair_count": 6,
+        "resamples": 10000,
+        "seed": 3263,
+        "subset": [
+          "controlled",
+          "repair",
+          "canonical",
+          0
+        ],
+        "unresolved_pairs": 0
+      }
+    ],
+    "robustness": [],
+    "subsets": [
+      {
+        "accepted_answer": {
+          "denominator": 6,
+          "numerator": 2,
+          "rate": 0.3333333333333333
+        },
+        "accepted_wilson_95": null,
+        "attempt_count": 6,
+        "category_counts": {
+          "accepted": 2,
+          "false_unsat": 1,
+          "gold_invalid_schedule": 3
+        },
+        "confusion": {
+          "SAT->SAT": 2,
+          "SAT->UNSAT": 1,
+          "UNSAT->SAT": 2,
+          "UNSAT->UNSAT": 1
+        },
+        "cost": null,
+        "extraction_mismatches": 0,
+        "group_count": 6,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 6,
+            "mean": 5.643816229266425
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 0,
+            "mean": null
+          },
+          {
+            "component": "solver_seconds",
+            "count": 0,
+            "mean": null
+          }
+        ],
+        "objective_gaps": [
+          {
+            "count": 1,
+            "mean": 4.0
+          }
+        ],
+        "primary_controlled": true,
+        "requests": 6,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "sat_validity": {
+          "denominator": 3,
+          "numerator": 1,
+          "rate": 0.3333333333333333
+        },
+        "status_counts": {
+          "SAT": 4,
+          "UNSAT": 2
+        },
+        "subset": {
+          "approach": "direct",
+          "config_sha256": "4ff55586bbfa34df42e7816d618f4db55e86f6f6bf6d105189e4c61ab98d6d66",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "generation",
+          "variant_id": "canonical"
+        },
+        "tokens": {
+          "completion_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 793
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 5959
+          },
+          "total_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 6752
+          }
+        },
+        "uncertain_reservations": 0,
+        "unresolved_reference_count": 0,
+        "unsat_accuracy": {
+          "denominator": 3,
+          "numerator": 1,
+          "rate": 0.3333333333333333
+        },
+        "violation_counts": {
+          "blocked": 1,
+          "deadline": 1,
+          "resource_overlap": 1
+        }
+      },
+      {
+        "accepted_answer": {
+          "denominator": 6,
+          "numerator": 6,
+          "rate": 1.0
+        },
+        "accepted_wilson_95": null,
+        "attempt_count": 6,
+        "category_counts": {
+          "accepted": 6
+        },
+        "confusion": {
+          "SAT->SAT": 3,
+          "UNSAT->UNSAT": 3
+        },
+        "cost": null,
+        "extraction_mismatches": 1,
+        "group_count": 6,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 6,
+            "mean": 10.550380152339736
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 6,
+            "mean": 10.546300388872623
+          },
+          {
+            "component": "solver_seconds",
+            "count": 6,
+            "mean": 0.004061263985931873
+          }
+        ],
+        "objective_gaps": [
+          {
+            "count": 3,
+            "mean": 0.0
+          }
+        ],
+        "primary_controlled": true,
+        "requests": 6,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "sat_validity": {
+          "denominator": 3,
+          "numerator": 3,
+          "rate": 1.0
+        },
+        "status_counts": {
+          "SAT": 3,
+          "UNSAT": 3
+        },
+        "subset": {
+          "approach": "solver_augmented",
+          "config_sha256": "143ba1ed116508a0ef9dd4604034e5dab5d033948d541e69e148429f12e4ad23",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "generation",
+          "variant_id": "canonical"
+        },
+        "tokens": {
+          "completion_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 9740
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 11146
+          },
+          "total_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 20886
+          }
+        },
+        "uncertain_reservations": 0,
+        "unresolved_reference_count": 0,
+        "unsat_accuracy": {
+          "denominator": 3,
+          "numerator": 3,
+          "rate": 1.0
+        },
+        "violation_counts": {}
+      },
+      {
+        "accepted_answer": {
+          "denominator": 6,
+          "numerator": 1,
+          "rate": 0.16666666666666666
+        },
+        "accepted_wilson_95": null,
+        "attempt_count": 6,
+        "category_counts": {
+          "accepted": 1,
+          "gold_invalid_schedule": 4,
+          "invalid_output": 1
+        },
+        "confusion": {
+          "SAT->SAT": 3,
+          "UNSAT->INVALID_OUTPUT": 1,
+          "UNSAT->SAT": 2
+        },
+        "cost": null,
+        "extraction_mismatches": 0,
+        "group_count": 6,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 6,
+            "mean": 3.2423005206510425
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 0,
+            "mean": null
+          },
+          {
+            "component": "solver_seconds",
+            "count": 0,
+            "mean": null
+          }
+        ],
+        "objective_gaps": [
+          {
+            "count": 1,
+            "mean": 0.0
+          },
+          {
+            "count": 1,
+            "mean": 0.0
+          },
+          {
+            "count": 1,
+            "mean": 0.0
+          }
+        ],
+        "primary_controlled": true,
+        "requests": 6,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "sat_validity": {
+          "denominator": 3,
+          "numerator": 1,
+          "rate": 0.3333333333333333
+        },
+        "status_counts": {
+          "INVALID_OUTPUT": 1,
+          "SAT": 5
+        },
+        "subset": {
+          "approach": "direct",
+          "config_sha256": "4ff55586bbfa34df42e7816d618f4db55e86f6f6bf6d105189e4c61ab98d6d66",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "repair",
+          "variant_id": "canonical"
+        },
+        "tokens": {
+          "completion_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 1753
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 7104
+          },
+          "total_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 8857
+          }
+        },
+        "uncertain_reservations": 0,
+        "unresolved_reference_count": 0,
+        "unsat_accuracy": {
+          "denominator": 3,
+          "numerator": 0,
+          "rate": 0.0
+        },
+        "violation_counts": {
+          "blocked": 2,
+          "deadline": 2
+        }
+      },
+      {
+        "accepted_answer": {
+          "denominator": 6,
+          "numerator": 6,
+          "rate": 1.0
+        },
+        "accepted_wilson_95": null,
+        "attempt_count": 6,
+        "category_counts": {
+          "accepted": 6
+        },
+        "confusion": {
+          "SAT->SAT": 3,
+          "UNSAT->UNSAT": 3
+        },
+        "cost": null,
+        "extraction_mismatches": 0,
+        "group_count": 6,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 6,
+            "mean": 15.274327812561145
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 6,
+            "mean": 15.269247173486898
+          },
+          {
+            "component": "solver_seconds",
+            "count": 6,
+            "mean": 0.005027215151737134
+          }
+        ],
+        "objective_gaps": [
+          {
+            "count": 3,
+            "mean": 0.0
+          },
+          {
+            "count": 3,
+            "mean": 0.0
+          },
+          {
+            "count": 3,
+            "mean": 0.0
+          }
+        ],
+        "primary_controlled": true,
+        "requests": 6,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "sat_validity": {
+          "denominator": 3,
+          "numerator": 3,
+          "rate": 1.0
+        },
+        "status_counts": {
+          "SAT": 3,
+          "UNSAT": 3
+        },
+        "subset": {
+          "approach": "solver_augmented",
+          "config_sha256": "143ba1ed116508a0ef9dd4604034e5dab5d033948d541e69e148429f12e4ad23",
+          "kind": "controlled",
+          "repeat": 0,
+          "task_type": "repair",
+          "variant_id": "canonical"
+        },
+        "tokens": {
+          "completion_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 8837
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 12027
+          },
+          "total_tokens": {
+            "all_provider_attempts": 6,
+            "reported_attempts": 6,
+            "reported_sum": 20864
+          }
+        },
+        "uncertain_reservations": 0,
+        "unresolved_reference_count": 0,
+        "unsat_accuracy": {
+          "denominator": 3,
+          "numerator": 3,
+          "rate": 1.0
+        },
+        "violation_counts": {}
+      }
+    ]
+  },
+  "tested_source_sha256": {
+    "configs/development/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "configs/development/lihao-component-check.json": "ab0f2fd6f98bec833a7274c4990c193a7d5537e163b2d2e4723d22bf797286cd",
+    "configs/development/lihao-followup-verification.json": "1993af2df1b06185181cf6bcd223442818e043e9a75618747390ac04ea8d7893",
+    "configs/development/main-baseline-verification.json": "14b3d6abb78ca5bc03b5a575971423a34c574af731450974151a175aebbe3346",
+    "configs/development/main-baseline.json": "d655c9095cbc248db4f144262742769c76180486f1dd686f931545f593e9244f",
+    "configs/development/tls-issuer-provenance.json": "1e105368157d9a52aea23d76dbeafcc527b80db7fa4c8e501fa9ef1926fa79f6",
+    "configs/development/tls-verification-20260929.json": "a02480e8ee1b20014265f2a801cbfd942b745dcecc7196fd6cb239695e829982",
+    "configs/development/yaoxiang-component-check.json": "8f47a23d0665ff71b39f3135635154554116cc201af5166d6d0ccf84af9df31e",
+    "configs/development/yaoxiang-extraction-v2-pilot.json": "c9611953f1a66da3fb9467cd222021c1bcee05fb9188b9fec33e8d92d112923a",
+    "configs/development/yongqing-live-check.json": "1bc0224c1587711e09802be217c48e3687cddf167d6bee535d5634810f720fb2",
+    "configs/development/yongqing-v2-pilot.json": "6bae2351ae29f8873312dcba35eb232b54747c91e696045998ec4f8832fb0052",
+    "configs/development/yongqing-verification.json": "102fb4de2e510b29819a9b80e8d02db59658b52792d8780140013fc78ba9a261",
+    "evaluation/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/offline_demo.py": "9e4320f37e22af41124b2340131f437e7cbef779efe46f118455c14866fa8237",
+    "evaluation/v2_qualification.py": "196ca7c7d5a1a443cf901f0e8cb52fdd6fb0df12ed688f1e37ebca3ecef6448b",
+    "prompts/direct/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/direct/generation.txt": "aa1e9bad2a55c31080715e40de0f021aa524a412ab380ae403f162def4950c25",
+    "prompts/direct/repair.txt": "d85ed72e8f26df83e1a5fd3f86433bd5c60f14df452eaf13be031542772cc6f8",
+    "prompts/extraction/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/extraction/specification.txt": "e702acc1d05e8c7072231cb1f0e4a39ac5d72709116b7a8697d6fb2f0efeacea",
+    "pyproject.toml": "ed1cb06334a2c2c312215e343b9e30255725b62aab9801f7698f16b2f5113c5c",
+    "requirements.lock": "329d2777351a1ec79c5ab0fd260d24aff01f980f398b084ae688a59d9fd97a7d",
+    "src/scheduling/__init__.py": "f536cf75c54ec3ff11f69bd7a26827155c1820b5eacd04ca8b6fcc623b588057",
+    "src/scheduling/cli.py": "ee516fd64855692317d1714fb20234897abe7692c904e5f06c5677bcc4c26a91",
+    "src/scheduling/dashboard/__init__.py": "6b0f95873da6ba567b2dba9675c1a61573e2eef17105106ea67758057f3e5b57",
+    "src/scheduling/dashboard/server.py": "2c015e60701acceaff693ed69ccb5f129e2e5839cbedbb901af8b5d94f1c2441",
+    "src/scheduling/dashboard/service.py": "b1147fd841f2694b845c433e5c5d5d016d0aacf71d261dfc1ba48f52dbecc5d2",
+    "src/scheduling/dashboard/static/app.js": "7ea9db3d312ff59d8273237696b9586ab59ed4f7fc4ea77c1b52d6f876b688af",
+    "src/scheduling/dashboard/static/index.html": "138418aa5f06d194c8d7905f1529d1ecf65d4116e170a8102e48949be7e992ed",
+    "src/scheduling/dashboard/static/style.css": "ed1ea3dc4e4e8ab1817004eb3df8d0ed8b4f960833cab3e134f1941033e71d3d",
+    "src/scheduling/domain_analysis.py": "5afc4bdb0d30e93b8d6b863e8166edad64fd3d84adad8f72f6d5f685a8bbb62b",
+    "src/scheduling/evaluation/__init__.py": "eedbdba39b10d084015fd9ade706803c86c69a4ddb8ec9a75e17462a506202a5",
+    "src/scheduling/evaluation/benchmark.py": "7f5bd3b43420f97051fe828574ce0a729eaa523b28b5e023c52ca2c80d455fd7",
+    "src/scheduling/evaluation/cases.py": "4e300ef74a27fd72f25ee444f44af23f8ee5101102303c1b668ce2d9bd54902f",
+    "src/scheduling/evaluation/cli.py": "ca67e1bc69f5c5183f1f9b03dfc5c8a13273ca3e198e539db2c1bc3988eb1004",
+    "src/scheduling/evaluation/figures.py": "ed76ce0245010990159078dfbc80544abdcf3f76f24eaf17fc7a73fbf62bbe13",
+    "src/scheduling/evaluation/frozen.py": "c4f39edefce2d6107656bc2055f9279131e21505a08c3475698992a251b129e0",
+    "src/scheduling/evaluation/manifests.py": "2904edb857de7acf27ef42763e7f66bec9c8cc32e560a1c0fbda12e59146fe8c",
+    "src/scheduling/evaluation/metrics.py": "30a88deae966d49ac1966c37af540e1b89bdd51e46cc7a4c696361206cfebce2",
+    "src/scheduling/evaluation/runner.py": "1d71f5d7a205ba68f06ce7a7dc9462eeb648bb44225ef5b74fd698d7fd69ee7d",
+    "src/scheduling/evaluation/scoring.py": "099de47be4d0db6f0ee09f15a4c42beb91ed40269cbf3d587c97b9f125c55d11",
+    "src/scheduling/explanation_cli.py": "853a201d55f60f92c3b93322e36151cbe3f920daa175edd82f0d127189c8afbc",
+    "src/scheduling/explanations.py": "f603f8ce3dd4fa3d595dc9d8b8303e4c45081c0bea5b3998a985bdd1b2136b25",
+    "src/scheduling/extraction_diagnostics.py": "aae1b557fa89ef812470a8f47a4c210ddb9b08de7992689ce82a7d6c912df869",
+    "src/scheduling/formal_cli.py": "acff3c1e1fc49dba98ea32bb4bf9f17a9c1e13e4a6559339ce33d2e3d80b74c9",
+    "src/scheduling/objectives.py": "735b86ba1fba016e1f0948e39253d8298c21d1edec7bc32e0859d4d99fc6da7e",
+    "src/scheduling/pipelines/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/pipelines/__init__.py": "c58fa330b61fd27ee6026d340a111469ec70747c0a31beeafa839b94b7e28e29",
+    "src/scheduling/pipelines/direct.py": "36c610512278b6c35c7bfe72140f53fa210d969854938e40877313cb3ffb8dbb",
+    "src/scheduling/pipelines/solver_augmented.py": "063fbb4b67ad84d772665c99fb160188c9d06677e49e819e99ccf2b865cd6f10",
+    "src/scheduling/providers/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/providers/__init__.py": "1a0681d7a28129defe1326e63003face90d0bbada0eef82363d64c8d547e6468",
+    "src/scheduling/providers/issuer-chain.crt": "539848d4940ce0f670abf650456d3f68606728da65b20ec8fc2cad247461ce2e",
+    "src/scheduling/providers/soclaas.py": "f76b8a64e6f5efbb0932fc4ebebb18717f4252eb5c1dca69ccbe3f20199d3bae",
+    "src/scheduling/providers/tls.py": "5dafd099fb19114f9503a6a8f670cf137032915db72f4b42f23ea301341a50ea",
+    "src/scheduling/providers/types.py": "07ca58a3d116045c6b66b11d4e22256cb6b7e0f109f1c257f40e6b693b4cd554",
+    "src/scheduling/schema.py": "5aedb26597a07b9dad6ef4e20765798f6d71d91ee60ba7245eaecab0fa3e8fcc",
+    "src/scheduling/solver.py": "353f85795d3d502ebb51b7acdd73d4619cad123244abdf5bfab9ee566c460424",
+    "src/scheduling/validation.py": "43d88d415b1f9c4a95a2fcce098e6432bc78d4c24ead726c893d2ad73ff49557",
+    "tests/__init__.py": "8f8d7a6d53c65516b3752ab1d0714a4a56691a0993a9d86c7ac31cb34a19a70b",
+    "tests/conftest.py": "d3f31f532e4ff9f51fd740e30be0f85f45174726fa4dd52951265e726a279b60",
+    "tests/examples/formal-generation.json": "9e44b00f459f13f6a82eca8d8a8525937fa4d25cab13bf8da8b65d437403a1fd",
+    "tests/examples/formal-original.json": "943324d78463ab2eb0bfb29e8c1668907e73799efd17b7ecd2e8c139b99977f2",
+    "tests/examples/formal-repair.json": "cbb2b100f646ca204e7abd52a1a915967dfea75cfa976c90ebb5f466c0d7ca04",
+    "tests/examples/generation-view.json": "0249d37e6f42d68ec6c71b10c87f3c7dc1a1c515cd2f9bb1626c7a2d133d9c43",
+    "tests/examples/repair-view.json": "d36d405b81b45778bb3f81c84df0fdd2e952192893fe113050809246b5b79b99",
+    "tests/formal_support.py": "fcfecae87cb625738c863bc612586780c2e9892a8454b822554795d8cd421f8b",
+    "tests/frontend/dashboard.test.cjs": "8ed13d9219766e9c51d6011342a87ec540ec1f2d2ff0195d445481cbf0eadf45",
+    "tests/integration/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/integration/test_baseline_operations.py": "c2856f3785a4b1107dbd6ab6ca6df76c3dab3351c6f9a22cac1f27eb8e68b094",
+    "tests/integration/test_dashboard.py": "e3dddc24871778947442bce4e07e4d8acd8d7748bc27b42d4358f8be22fab0e1",
+    "tests/integration/test_direct_failure_patterns.py": "fbf7886b695094bfc413f016731c69d34eabfff9ae378b54699e63afed005871",
+    "tests/integration/test_direct_transport.py": "7229cae42a332eb064db828240657fd20bc2450e51d6629f815f677a0140f6f2",
+    "tests/integration/test_evaluation.py": "81cf67949e813b78bcce38741b6e61abff31f06ddd98127cd7ea52791fce5f8c",
+    "tests/integration/test_explanation_cli.py": "fe4a8dbf2279e1eaefe7df0e882e36b6fc09ccfca283a8aa7f42595b55063ed5",
+    "tests/integration/test_frozen_evaluation.py": "3562df730fc8f332ba69ff88611d10111094a3e9eb6df657d6437036018cbf30",
+    "tests/integration/test_solver_augmented.py": "93f56bd944e82987d670a038ec96437da12cd40c9c84d54532114861da929928",
+    "tests/unit/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/unit/test_analysis_details.py": "9ff06b134bd788d3b78cc43be47a57fd973aeb0e2d22086561e33e1bbe863fa0",
+    "tests/unit/test_benchmark_v2.py": "cfd6cb53056edd451f8537e7be4d3b7231386945fec778a6cce4005a7e28a711",
+    "tests/unit/test_direct.py": "479d2175a87670e72fec3dde453da7a41b5845b63055cdff01e70b2b72cdb455",
+    "tests/unit/test_domain_analysis.py": "2bff9ba1a2a927e5994a3e88f1e615ff171dbecf72116987b4b9c7a1cf9ce417",
+    "tests/unit/test_explanations.py": "97564d34c685a92013f6383c6f7557b98954e68d1d506e9fd8c1589b58cf3c3e",
+    "tests/unit/test_extraction_contract.py": "55230910bf4b2e78c23ad4fa3a187779fef278831a57e213f8bc40f4f4b9fff7",
+    "tests/unit/test_formal_qualification.py": "a629ba0767e3e7178d2f2f9580607532ce2e72483b42f8101eed4e37daacd9d7",
+    "tests/unit/test_provider.py": "a9423622a4bad854bf3c1f1eb14628abe4847afcfe7169d3812a732b9f79a75c",
+    "tests/unit/test_provider_tls.py": "610207384e6836b39e8bbf2a8a3ae714ef62cfb6e8912b50a1d98e07fe072188",
+    "tests/unit/test_repair_invariants.py": "6a7c5a51d9cf7317c948d59b305a07a38b13acdf610c9bc11ad3e6e5e84a8ce6",
+    "tests/unit/test_schema.py": "e253ed9ce83bf5683d566bf429f0f06d528bbec3f0403acd04dafe0c91e0a0cd",
+    "tests/unit/test_solver.py": "4ea473b11a894812a4a1c4ad9ffb8af4b73b75e110db00e642d75385b1771887",
+    "tests/unit/test_validation.py": "18ebc207448f38be335937f64934d9ac33431a149ff2e8d3ef90a0cd9d66d3c7"
+  }
+}

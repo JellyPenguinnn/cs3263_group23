@@ -23,6 +23,11 @@ from scheduling.pipelines.solver_augmented import (
 from scheduling.providers import ModelConfig, ModelResponse
 from scheduling.schema import load_json, to_data
 from scheduling.solver import SolverLimits
+from scheduling.evaluation.frozen import (
+    FROZEN_MODES,
+    check_frozen,
+    check_frozen_reference,
+)
 
 
 @dataclass(frozen=True)
@@ -36,6 +41,7 @@ class RunConfig:
     variants: tuple[str, ...] = ("canonical",)
     repeats: int = 1
     rendering_seed: int = 3263
+    freeze: dict | None = None
 
     def __post_init__(self):
         if not isinstance(self.model, ModelConfig) or not all(
@@ -45,8 +51,13 @@ class RunConfig:
             raise ValueError(
                 "Run configuration requires typed model and solver settings"
             )
-        if self.evidence not in ("offline_canned", "live_development"):
-            raise ValueError("Only unfrozen development runs are supported")
+        if self.evidence not in ("offline_canned", "live_development", *FROZEN_MODES):
+            raise ValueError("Unsupported run evidence mode")
+        if self.evidence in FROZEN_MODES:
+            if not isinstance(self.freeze, dict):
+                raise ValueError("Frozen mode needs an explicit protocol")
+        elif self.freeze is not None:
+            raise ValueError("Development mode cannot carry frozen protocol")
         if self.model.max_attempts != 1:
             raise ValueError(
                 "Serial runner permits one request per attempt, no hidden retries"
@@ -154,7 +165,7 @@ def _contract(cases, config):
         revision = None
     return {
         "code_commit": revision,
-        "format_version": "1.0",
+        "format_version": "2.0" if config.evidence in FROZEN_MODES else "1.0",
         "case_bundle_sha256": digest(case_bundle(cases)),
         "config": to_data(config),
         "source_sha256": source,
@@ -176,13 +187,13 @@ def _contract(cases, config):
 def plan_run(cases, config):
     """Check gold references and size the exact public requests without a provider."""
     cases = check_case_set(tuple(cases))
-    if not cases or any(c.split != "development" for c in cases):
-        raise ValueError(
-            "Only explicit nonempty development cases may run before freeze"
-        )
+    contract = _contract(cases, config)
+    check_frozen(cases, config, contract)
     labels = Counter()
     for case in cases:
         ref = reference(case, config.reference_solver)
+        if config.evidence in FROZEN_MODES:
+            check_frozen_reference(case, ref)
         labels[check_reference(case, ref)[0]] += 1
     sizes = []
     for _, identity, _, view in requests(cases, config):
@@ -216,11 +227,11 @@ def plan_run(cases, config):
             "total": sum(sizes),
         },
         "input_token_estimate": None,
-        "contract": _contract(cases, config),
+        "contract": contract,
     }
 
 
-def _stop_reason(response):
+def _stop_reason(response, expected_model=None):
     response = to_data(response) if response else {}
     for attempt in response.get("attempts", []):
         status = attempt.get("http_status")
@@ -236,6 +247,8 @@ def _stop_reason(response):
         return error
     if isinstance(error, str) and error.startswith("http_"):
         return error
+    if expected_model is not None and response.get("returned_model") != expected_model:
+        return "returned_model_mismatch"
     return None
 
 
@@ -249,19 +262,16 @@ def run_batch(
     progress=None,
 ):
     cases = check_case_set(tuple(cases))
-    if not cases or any(c.split != "development" for c in cases):
-        raise ValueError(
-            "Only explicit nonempty development cases may run before freeze"
-        )
-    if config.evidence == "offline_canned" and (
+    contract = _contract(cases, config)
+    check_frozen(cases, config, contract)
+    if config.evidence in ("offline_canned", "offline_frozen") and (
         canned is None or provider_complete is not None
     ):
         raise ValueError("Offline runs require saved canned responses only")
-    if config.evidence == "live_development" and (
+    if config.evidence in ("live_development", "live_frozen") and (
         provider_complete is None or canned is not None
     ):
         raise ValueError("Live runs require an explicitly configured provider")
-    contract = _contract(cases, config)
     if canned is not None:
         contract["canned_sha256"] = digest(canned)
     directory.mkdir(parents=True, exist_ok=True, mode=0o700)
@@ -303,6 +313,8 @@ def run_batch(
             if digest(saved["reference"]) != saved["sha256"]:
                 raise ValueError("Reference record changed")
             check_reference(case, saved["reference"])
+            if config.evidence in FROZEN_MODES:
+                check_frozen_reference(case, saved["reference"])
             gold[case.case_id] = saved["reference"]
         existing = list(records.glob("*.json"))
         reserved = len(existing)
@@ -322,7 +334,10 @@ def run_batch(
             if saved["sha256"] != digest(saved["payload"]):
                 raise ValueError("Completed record changed")
             response = saved["payload"]["pipeline_result"].get("model_response") or {}
-            reason = _stop_reason(response)
+            reason = _stop_reason(
+                response,
+                config.model.model if config.evidence == "live_frozen" else None,
+            )
             if reason:
                 return {
                     "state": "stopped_provider",
@@ -400,7 +415,10 @@ def run_batch(
                         "gold_valid": scored["gold_valid"],
                     }
                 )
-            reason = _stop_reason(result.model_response)
+            reason = _stop_reason(
+                result.model_response,
+                config.model.model if config.evidence == "live_frozen" else None,
+            )
             if reason:
                 return {
                     "state": "stopped_provider",
