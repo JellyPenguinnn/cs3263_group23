@@ -40,12 +40,17 @@ def _parser() -> argparse.ArgumentParser:
     smoke.add_argument("--allow-live", action="store_true", required=True)
     from scheduling.formal_cli import add_commands
     add_commands(commands)
+    from scheduling.evaluation.cli import add_commands as add_evaluation_commands
+    add_evaluation_commands(commands)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        from scheduling.evaluation.cli import COMMANDS, run_command as run_evaluation
+        if args.command in COMMANDS:
+            return run_evaluation(args)
         if args.command in ("solve", "solver-offline"):
             from scheduling.formal_cli import run_command
             return run_command(args)

@@ -1,8 +1,8 @@
 """Direct prompt/response boundary, without gold data or a duplicate shared schema.
 
 DirectParse and DirectAttempt are component records, NOT the canonical Schedule,
-NaturalLanguageView or PipelineResult. run_direct is integrated when the schema
-owner supplies those types. Structural SAT here is an unvalidated model claim.
+NaturalLanguageView or PipelineResult. run_direct adapts them to the canonical
+schema supplied by its owner. Structural SAT here is an unvalidated model claim.
 """
 
 from collections.abc import Callable, Sequence
@@ -134,3 +134,25 @@ def request_direct(text: str, model_config: ModelConfig, *, task_type: str,
         return DirectAttempt(None, response, prompt_hash, config_hash, status)
     parsed = parse_direct_output(response.content, required_activity_ids)
     return DirectAttempt(parsed, response, prompt_hash, config_hash, parsed.status)
+
+
+def run_direct(nl_view, model_config: ModelConfig, *, provider_complete=None):
+    """Canonical adapter; one existing direct call with public inputs only."""
+    import time
+    from scheduling.providers import complete
+    from scheduling.schema import NaturalLanguageView, PipelineResult, Schedule
+    if not isinstance(nl_view, NaturalLanguageView):
+        raise TypeError("Direct pipeline requires the canonical public view")
+    started = time.monotonic()
+    attempt = request_direct(nl_view.text, model_config, task_type=nl_view.task_type,
+                             required_activity_ids=nl_view.activity_ids,
+                             original_schedule=nl_view.original_schedule.to_list() if nl_view.original_schedule else None,
+                             provider_complete=provider_complete if provider_complete is not None else complete)
+    parsed = attempt.parsed
+    return PipelineResult(nl_view.instance_id, nl_view.variant_id, "direct", attempt.status,
+                          schedule=Schedule.from_list(parsed.schedule) if parsed and parsed.schedule is not None else None,
+                          declared_status=parsed.declared_status if parsed else None,
+                          diagnostics=parsed.diagnostics if parsed else (attempt.response.error,),
+                          timings=(("total_seconds", time.monotonic()-started),),
+                          usage=tuple(a.usage for a in attempt.response.attempts), model_response=attempt.response,
+                          prompt_sha256=attempt.prompt_sha256, config_sha256=attempt.config_sha256)

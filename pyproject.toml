@@ -7,11 +7,12 @@ name = "cs3263-scheduling"
 version = "0.1.0"
 description = "Group 23 scheduling comparison: provider and direct baseline components"
 requires-python = ">=3.12,<3.13"
-dependencies = ["httpx==0.28.1"]
+dependencies = ["httpx==0.28.1", "truststore==0.10.4"]
 
 [project.optional-dependencies]
 dev = ["pytest==8.4.2", "setuptools==80.9.0", "wheel==0.45.1"]
 solver = ["ortools==9.14.6206"]
+plots = ["matplotlib==3.10.8"]
 
 [project.scripts]
 scheduling = "scheduling.cli:main"

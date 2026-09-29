@@ -1,0 +1,81 @@
+{
+  "case_count": 6,
+  "cases": [
+    {
+      "case_id": "simple-sat",
+      "group_id": "simple-sat",
+      "kind": "controlled",
+      "level": "simple-sat",
+      "sha256": "11f9b7efd524bbaa6ecb23f0d5abeeba8dbb69b80d3d82d85195a982e6f483a4",
+      "split": "development",
+      "sweep": "fixture"
+    },
+    {
+      "case_id": "overlap",
+      "group_id": "overlap",
+      "kind": "controlled",
+      "level": "overlap",
+      "sha256": "1fc74fa2600817249b541b064dd69e6b99f47cbb41c63786e60cc8369c9914de",
+      "split": "development",
+      "sweep": "fixture"
+    },
+    {
+      "case_id": "shared-resource",
+      "group_id": "shared-resource",
+      "kind": "controlled",
+      "level": "shared-resource",
+      "sha256": "d0e7ab012b1510973264f0865621ddbafb8263020d946dcb7678d325b84b9459",
+      "split": "development",
+      "sweep": "fixture"
+    },
+    {
+      "case_id": "precedence-deadline",
+      "group_id": "precedence-deadline",
+      "kind": "controlled",
+      "level": "precedence-deadline",
+      "sha256": "f29cbbc5cec832aea9d3c067097939925f82852512ddf3ac0aac16b4f93b3a97",
+      "split": "development",
+      "sweep": "fixture"
+    },
+    {
+      "case_id": "proven-unsat",
+      "group_id": "proven-unsat",
+      "kind": "controlled",
+      "level": "proven-unsat",
+      "sha256": "e7efbe81983a377df3a2a003a6230a3ef965694b13d1be45ff9924783b2f2084",
+      "split": "development",
+      "sweep": "fixture"
+    },
+    {
+      "case_id": "repair",
+      "group_id": "repair",
+      "kind": "controlled",
+      "level": "repair",
+      "sha256": "8020c3a5df2405cdae82cdc41b8b6a9026e273e75350cfe26e5308cefaf0df92",
+      "split": "development",
+      "sweep": "fixture"
+    }
+  ],
+  "definitions": {
+    "interaction_density": "Distinct unordered activity pairs coupled by shared participants/resources or precedence, divided by all distinct activity pairs.",
+    "resource_contention": "Activity pairs sharing at least one resource divided by all distinct activity pairs; separate from participant contention.",
+    "unary_slack": "Number of legal individual starts after duration, activity/entity windows, releases, deadlines, fixed starts and blocked intervals; excludes precedence and pairwise capacity."
+  },
+  "format_version": "1.0",
+  "generation_seed": null,
+  "group_count": 6,
+  "human_fixture_review": "pending",
+  "human_language_review": "pending",
+  "limitations": [
+    "Generated development sweep levels are coupled, not causal interventions.",
+    "Generation cases carry constructed SAT witnesses; this is not the balanced held-out matrix.",
+    "No human-written realistic scenarios are claimed."
+  ],
+  "rendering_seed": 3263,
+  "selection": {
+    "constructed": 6,
+    "excluded": 0,
+    "policy": "No selection using model performance; unresolved solver references remain explicitly unresolved in run records"
+  },
+  "status": "development_draft_not_frozen"
+}
