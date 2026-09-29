@@ -42,6 +42,8 @@ def _parser() -> argparse.ArgumentParser:
     add_commands(commands)
     from scheduling.evaluation.cli import add_commands as add_evaluation_commands
     add_evaluation_commands(commands)
+    from scheduling.explanation_cli import add_command as add_explanation_command
+    add_explanation_command(commands)
     from scheduling.dashboard.server import add_command
     add_command(commands)
     return parser
@@ -50,6 +52,9 @@ def _parser() -> argparse.ArgumentParser:
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command == "explain":
+            from scheduling.explanation_cli import run_command
+            return run_command(args)
         if args.command == "dashboard":
             from scheduling.dashboard.server import serve
             return serve(args)

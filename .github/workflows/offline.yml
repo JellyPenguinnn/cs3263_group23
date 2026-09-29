@@ -15,6 +15,13 @@ jobs:
       - run: python -m pip install --no-deps --no-build-isolation .
       - run: python -m pytest -q
       - run: python -m pip check
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+      - name: Dashboard frontend checks
+        run: |
+          node --check src/scheduling/dashboard/static/app.js
+          node --test tests/frontend/dashboard.test.cjs
       - name: Generate and independently check the full development reference set
         run: |
           scheduling benchmark-generate --output artifacts/development.json
