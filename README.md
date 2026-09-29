@@ -197,9 +197,17 @@ Local credentials, environments, raw runs and generated artifacts are ignored. S
 
 Read [AGENTS.md](AGENTS.md) and the [current work plan](planning.md#current-priorities-after-the-first-baseline). Use your own clone and assigned branch; merge the latest `origin/main` before extending an older member branch. Preserve existing work and use small reviewed PRs. Shared scientific changes need coordination; routine owned engineering choices do not require team-wide approval.
 
-To start with a coding agent:
+To start with a coding agent, replace `[name]` with Li Hao, Yao Xiang, or Yong Qing:
 
-> I am [Li Hao / Yao Xiang / Yong Qing]. Read README.md, AGENTS.md and planning.md. Confirm missing onboarding details, then implement and test my next incomplete work in Section 5 on my member branch, building on the integrated baseline. Ask focused questions for consequential unresolved decisions, continue independent work, and follow the verification and handoff rules.
+> I am [name]. Read README.md, AGENTS.md and planning.md in full. Inspect the current implementation and Git status, and ensure my working branch incorporates the latest GitHub main while preserving existing work.
+>
+> Identify my remaining responsibilities in Sections 4–5 of planning.md. Implement and verify the next incomplete work package, then continue through my other unblocked assigned improvements while prerequisites and authorization are available. Build on the integrated baseline and avoid rebuilding completed components.
+>
+> Follow the architecture and formal reasoning guidance in Sections 6–7, the relevant evaluation and provider requirements in Sections 8–9, and the acceptance gates in Section 11. Distinguish required deliverables from optional optimizations.
+>
+> Ask focused questions only for consequential unresolved decisions or missing setup details; reuse previous confirmations and make routine engineering choices independently. Ask about credential availability without requesting secret values. Continue independent work when another task is blocked.
+>
+> Carry the work through implementation and relevant verification. Report completed changes, checks and observed results, remaining dependencies, and the next concrete task. Follow AGENTS.md for Git publication, live-call authorization, scientific integrity and handoff.
 
 Members must review and understand the work, record actual contributions and disclose AI assistance. The next priorities are benchmark refinement, contract review, development failure analysis and frozen-evaluation support; see [implementation work packages](planning.md#implementation-work-packages).
 
