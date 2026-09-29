@@ -6,7 +6,15 @@ These instructions apply to the entire repository. Read this file and `planning.
 
 Build and evaluate Group 23's dynamic constraint-aware scheduling study: Direct LLM versus LLM-to-CP-SAT for generation and minimum-disruption repair. Complete the core by Friday 30 October 2026 (Week 11), with setup from 28 September and four implementation weeks from 5 October. Read `README.md` for the overview and `planning.md` for the complete contract, ownership, gates, and scope.
 
-At bootstrap only documentation, configuration templates, and empty `.gitkeep` directory placeholders exist. The initial `main` has no implementation code; subsequent implementation belongs on the assigned member branches and enters `main` through reviewed PRs. Do not add dummy modules, unimplemented commands, sample results, or empty workflow/package files merely to fill the scaffold. Do not claim implementation, tests, model capability, benchmark results, or reproducibility before executing the relevant checks. Do not import code or assumptions from a different project/older checkout as if they belong here.
+The integrated baseline on `main` implements both pipelines, CP-SAT repair, independent validation, a development runner/replay package and a read-only dashboard. Read current priorities in Section 5 and gate status in Section 11 of `planning.md`; do not restart delivered components from historical handoffs. Member branches may lag `main`: fetch and normally merge the integrated code before extending them, preserving local work. New work normally enters `main` through reviewed PRs. Do not add dummy modules, pretend commands, fabricated results or competing package/schema definitions. Do not claim implementation, tests, model capability, benchmark results, or reproducibility before executing the relevant checks. Do not import code or assumptions from a different project/older checkout as if they belong here.
+
+## Document roles and decision authority
+
+- `README.md`: what the repository does, prerequisites, installation, runnable commands and current limitations.
+- `planning.md`: scope, design, implementation work packages, owners, experiment protocol, acceptance gates and course evidence. Section 5 is the current task queue; Sections 6–7 define the architecture and semantics.
+- `AGENTS.md`: how to work, ask for missing decisions, preserve evidence and verify changes. It does not grant a live-call budget or publication permission.
+
+Read the current files, not just an earlier handoff. Historical receipts/method notes describe their recorded versions; use current code and the latest gate table for present capabilities. Course requirements come from the supplied teaching materials and subsequent confirmed feedback; research papers inform design but do not create grading rules. If a conflict affects correctness or compliance, explain the exact conflict and resolve it before dependent work. Do not invent teaching-team approval, submission receipts or human review.
 
 ## Member onboarding and clarification
 
@@ -42,7 +50,7 @@ Treat a request to implement the member's part as authorization to perform local
 
 After onboarding, map the member to Sections 4–5 of `planning.md`, inspect what is already implemented, and choose the next incomplete owned task. Keep a short working checklist covering implementation, tests, dependencies, and acceptance evidence. Execute it: do not return only a new plan, a scaffold, or an offer to begin when implementation was requested. Continue through applicable owned milestones while prerequisites and authorization are available; scientific freezes, reviews, budget caps, and unresolved decisions remain real gates. Do not perform another member's unfinished component simply to claim end-to-end completion.
 
-Use the shared draft contract for independent work while its review is pending, and clearly label provisional assumptions. Do not fork schemas or change shared behavior without coordination. Missing credentials allow offline work. Create a local virtual environment and install the agreed dependencies as needed for owned checks. Missing shared packaging artifacts or unresolved shared dependency choices require a precise handoff and other unblocked work; do not invent successful commands or create competing manifests. The packaging owner may choose justified minimal dependencies and establish the initial lockfile within the agreed architecture, then document and test them. Once shared changes are reviewed and available on `main`, integrate them using the agreed Git workflow and rerun affected checks.
+Use the existing canonical implementation while human contract review is pending, and label unresolved semantic assumptions. Do not fork schemas or change shared behavior without coordination. Missing credentials allow offline work. Create a local Python 3.12 environment and use the existing `pyproject.toml` and hashed `requirements.lock` as documented in README. Reinstall after source changes or deliberately use an editable installation; verify which package is being tested. Missing dependencies require a precise handoff and other unblocked work, not competing manifests. The packaging owner maintains the lock for justified dependency changes. Integrate reviewed shared changes from `main` using the agreed workflow and rerun affected checks.
 
 At handoff, include the member/branch, implemented files, exact commands and observed results, current gate status, pending questions, dependency owner and expected interface, and the next concrete task. Refer to a commit or PR only if one actually exists. Keep this summary in the task response; when publication is authorized, include the relevant evidence in the PR. On resume, verify the handoff against the actual checkout rather than trusting a previous completion claim. Update project status and verified setup commands when implementation makes the bootstrap descriptions obsolete, coordinating shared documentation edits with their owner.
 
@@ -59,7 +67,7 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 ## Scope and decision boundaries
 
 - Implement the smallest coherent change that satisfies the assigned gate.
-- Preserve the core generation/repair comparison. No unrequested UI, RAG, calendars, training, deployment, or new provider integrations.
+- Preserve the core generation/repair comparison. The existing read-only dashboard is authorized supporting tooling; maintain it without adding run controls or unrelated features. No unrequested UI expansion, RAG, calendars, training, deployment or provider integrations. Prioritize the current research gaps over further UI polish.
 - Follow the onboarding and clarification rules above whenever requirements or setup remain uncertain. Do not guess unresolved member decisions; continue independent authorized work while waiting.
 - Record material decisions, schema migrations, changed objectives, scope reductions, and benchmark changes in `planning.md`.
 - Do not silently change splits, prompts, objectives, weights, time units, seeds, solver limits, models, or metrics to improve results.
@@ -77,6 +85,21 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 - Apply the frozen lexicographic repair objective; only claim optimality when proven. Preserve solver bounds/status and stage completion. Interpret secondary objective gaps only when preceding objective values match the reference optimum. Follow Section 7's exact-gap settings and shared stage time budget; `OPTIMAL` under a loose stopping tolerance is not automatically an exact reference optimum.
 - No broad exception swallowing, silent fallbacks, misleading success results, placeholder production paths, or dependencies without clear value.
 - Comments explain non-obvious constraints and reasoning, not the obvious code behavior.
+
+## Architecture and change checks
+
+Keep the boundaries in planning.md Section 6. Provider transport/accounting belongs in `providers/`; model-facing transformations in `pipelines/` and `prompts/`; canonical semantics in `schema.py` and solver/objectives; independent gold checks in `validation.py`; experiment logic in `src/scheduling/evaluation/`. The root `evaluation/` directory is a demo entry point. The dashboard consumes saved evidence and stays read-only. Extend these components rather than creating a second runner, schema, provider or set of metrics.
+
+| Change | Required evidence before handoff |
+| --- | --- |
+| Schema, solver or repair semantics | Tiny independently justified SAT/UNSAT/optimality cases, rejection/boundary cases and affected consumer tests; source, prompt and plan agree |
+| Benchmark/rendering | Determinism, witness/reference checks, split/family and structural-duplicate checks, realized difficulty/event counts; human wording review remains explicitly pending until performed |
+| Prompt/parser/provider | Malformed and semantic-error handling, no hidden corrections or retries, preserved raw failures/accounting; changed pilot settings use a separate configuration and cap |
+| Runner, metrics or frozen mode | No calls before preflight, correct reservation/resume and stop behavior, immutable records, complete denominators and offline replay; old saved evidence remains interpretable |
+| Dashboard or packaging | Relevant Python/frontend checks, packaged assets, dependency consistency and installed-runtime checks for affected platforms; no new data mutation or inference path |
+| Documentation only | Match current commands/paths/owners and evidence versions, check links and diff; do not rerun expensive or live experiments without a relevant reason |
+
+Implement the next incomplete work package for the confirmed owner. Improve the benchmark/protocol before pursuing score gains or more UI. Never silently apply a discovered fix to archived results: preserve the original, record scientific impact, and produce a new version/run when needed. A passing test suite does not substitute for the course's analysis, human understanding or final evaluation.
 
 ## SoCLaaS and credential handling
 
@@ -99,7 +122,8 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 - Direct-model UNSAT is a prediction. CP-SAT `INFEASIBLE` is proof for the compiled model only; it says nothing about omitted source constraints or erroneous extraction.
 - `FEASIBLE` is not `OPTIMAL`; `UNKNOWN` is not `INFEASIBLE`. Do not present an unproven incumbent as a gold optimum.
 - Confirm the final evaluation model satisfies the course requirement or has documented teaching-team acceptance before freezing the main comparison. This gate does not block SoCLaaS development. Provider connectivity is not model eligibility; pending approval is not approval.
-- Freeze benchmark, prompts, model settings, metrics, and limits before held-out runs. Keep related variants in one split.
+- Freeze benchmark, prompts, model settings, metrics, and limits before held-out runs. Keep related variants in one split. The current runner is development-only: a reviewed frozen-evaluation mode is required; never retag test cases as development to bypass its guard.
+- Follow Section 8's benchmark audit before expanding the study. New seeds currently vary only preference weights; changed IDs are not new structural coverage. Check normalized duplicates/source families, nonredundant difficulty variation and repair-event balancing before interpreting trends or allocating held-out cases.
 - Preserve raw failures with safe redaction. No cherry-picking, manual answer repairs, hidden retries, or tuning against test outcomes.
 - Follow Section 8's canonical-only primary comparison; report realistic scenarios, extra renderings, and repeats separately. Preserve pairing and common source-problem groups in uncertainty estimates. Report denominators, exclusions, objective proof status, and realistic-scenario limitations.
 - Track parsing/schema success, extracted-spec semantics, solver outcomes, and independent gold validity separately. Never treat a schema-valid or solver-feasible extraction as proof of faithful interpretation.
@@ -115,14 +139,14 @@ Follow the file ownership in `planning.md`. The designated owner may implement a
 - Inspect actual failures, determine whether they are implementation/environment/pre-existing, fix the root cause, and rerun affected checks.
 - Do not repeatedly rerun passing checks without a relevant change. Do not write tests merely mirroring implementation details.
 - Before finishing, review the final diff, call sites, edge cases, staged paths, secrets, and unintended dependency/generated changes. Report commands actually executed and their results.
-- At bootstrap there are no canonical build/test commands. Add and document verified commands with the package implementation; never invent a successful check.
+- Use README's implemented install/test/preflight/replay commands. For dashboard edits also run JavaScript syntax and `node --test tests/frontend/dashboard.test.cjs`; Node is a development check, not a Python runtime dependency. Distinguish current-source checks from older installed/cross-platform receipts. If native TLS verification fails under sandbox restrictions, identify the environment error rather than weakening certificate verification.
 
 ## Portability and experiment operations
 
 - Follow Section 14 of `planning.md`: locked Python dependencies, CPU-only local execution, and verified macOS/Linux workflows. Do not claim platform support before checking it.
 - Use portable paths and explicit configuration/timezones. No developer-specific home directories, implicit environment dependencies, or secret-bearing logs.
 - Keep attempt IDs and configuration hashes stable. Resume completed attempts without another API call; account for interrupted requests and bounded retries explicitly.
-- Share a sanitized reproduction package with checksums. Offline replay must recompute reported metrics without credentials; live reruns are separate evidence.
+- Share a sanitized reproduction package with checksums. Raw runs are ignored and absent from a fresh clone: use the canned demo for offline integration, or obtain the reviewed synthetic run archive to replay the actual baseline. Do not claim a fresh clone alone reproduces unavailable live records. Offline replay needs no credentials; live reruns are separate evidence.
 - Check rubric evidence and course deliverables in Section 17. Maintain contribution records and claim-to-result links as work proceeds, not only at report time.
 
 ## Git and collaboration
@@ -145,6 +169,6 @@ All members must understand the complete system and be able to explain it. Keep 
 
 ## Handoff and completion
 
-Provide a concise handoff: what changed, files/components affected, executed validation/results, interface or scientific consequences, and remaining blockers. Distinguish completed work from proposed next steps.
+Provide a concise handoff: what changed, files/components affected, executed validation/results, interface or scientific consequences, and remaining blockers. Distinguish completed work from proposed next steps. Identify the work package and acceptance evidence achieved, whether checks used current source or an installed snapshot, any affected prior results, and the next owned task. Update current status in planning.md and user-facing commands in README when behavior changes; do not rewrite historical receipts or treat an unperformed human review as done.
 
 For a blocker, state the exact evidence, completed work, and smallest input/action needed. Never call a milestone complete just because code compiles, a mock passes, or an API returns a response. Use the gates in `planning.md`.

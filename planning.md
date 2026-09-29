@@ -11,9 +11,19 @@ This is the working implementation and evaluation plan for Group 23's **AI Assis
 - Course presentation: week of **9 November 2026**, normally 15 minutes plus 5 minutes of questions; a recording may be requested.
 - Course final report: **13 November 2026**.
 - The Week 11 target includes implementation, evaluated results, a complete report draft, and presentation/demo material. The remaining course window is for review and required submission adjustments, not planned core development.
-- Current integration status (29 September, `main`): the three member branches are merged at `eea2e09`. User-authorized integration adds credential-free preflight, run progress, safe provider stops, installed runtime packaging and Linux TLS issuer completion. Fresh installed macOS ARM64/Linux ARM64 verification passes 278 tests; a 60-call live development batch completed, with independent validation and cross-platform replay. See report/main-baseline-validation.md. Human scientific review, eligible-model qualification, balanced/realistic held-out data and the evaluation freeze remain open; merging code is not evidence that those gates passed.
+- Current integration status (audit of `c2eeffc`, 29 September): the three contributions, end-to-end development CLI, and read-only dashboard are integrated on `main`. Current macOS source verification passes 284 Python tests, 3 frontend tests, JavaScript syntax, dependency consistency, and all 30 development references. Offline replay exactly reproduces the tracked 60-call summary. The earlier installed macOS ARM64/Linux ARM64 baseline passed 278 tests; current Linux/dashboard requalification is not inferred from that receipt. See [the baseline report](report/main-baseline-validation.md).
+- Immediate coordination check: the proposal deadline has passed, but its Canvas receipt is not recorded here. Yao Xiang should confirm submission/receipt status now and follow up with the teaching team if needed. Missing documentation is not evidence that submission was missed.
+- Development implementation is operational; scientific contract review, benchmark refinement, realistic/wording review, final-model eligibility and the evaluation freeze remain open. Use Section 5 for current work and Section 11 for gate status.
 
 The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must clearly list every member's name, matriculation number, and email; place those identifying details on the private submission title page. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
+
+### Baseline assessment and next goal
+
+**The current version is a valid, usable development baseline.** It is suitable for end-to-end debugging, small authorized SoCLaaS pilots, failure diagnosis, offline replay and demonstration. Both approaches, both task types and independent gold checking are connected; the audit reproduced the saved results. It is not yet the final scientific baseline for the course comparison because the benchmark and protocol have not passed the evaluation freeze.
+
+The next goal is an evaluation-ready version of this same system: reviewed mathematical contracts, structurally varied and independently checked data, a qualified eligible model, and an explicit frozen-run mode. Success is reliable measurement and explainable evidence, not reaching a predetermined accuracy or forcing B to outperform A. Preserve the first run as the initial development reference. No architecture rewrite is justified by the current audit.
+
+Read this plan in order of purpose: Section 5 for current work and implementation tasks; Sections 6–7 for system design and semantics; Sections 8–9 for data, metrics and model execution; Sections 10–11 for milestones and gates; Sections 12–17 for responsible AI, operations, decisions, sources and course delivery. The README is the installation/use guide; AGENTS.md defines how contributors and coding agents carry out this plan.
 
 ### Requirements and implementation discretion
 
@@ -75,11 +85,14 @@ The intended contribution is a reproducible, bounded comparison combining genera
 - Direct LLM, LLM-to-CP-SAT, a gold reference solver, and an independent validator.
 - Controlled synthetic instances, a small human-written realistic set, and selected paired language variants.
 
-### Stretch, only after the core gates pass
+### Supporting tooling and remaining stretch
+
+The authorized read-only dashboard is implemented as development/demo tooling: it monitors saved runs and inspects results, with no run control or calendar actions. It supports presentation and diagnosis but is not additional scientific evidence. Prioritize the open research gates over further UI expansion.
+
+Remaining stretch, after the core gates pass:
 
 - One verifier-feedback correction round, reported separately with its exact information and budget.
 - A second research model beyond the required primary comparison, or a second initial-schedule policy sensitivity check.
-- A small visualization/demo interface.
 
 Participant assignment, multi-capacity resources, new/cancelled tasks, longer horizons, and repeated disruption sequences are future extensions, outside the four-week delivery.
 
@@ -103,19 +116,19 @@ Review rotation: Li Hao reviews benchmark wording, provider/runner integration, 
 
 Report ownership: Li Hao drafts motivation, related work, the direct baseline/provider method, and AI-assistance disclosure, and assembles the demo; Yao Xiang drafts formulation, solver/repair method, and the extraction pipeline; Yong Qing drafts benchmark and results. All jointly write discussion, limitations, responsible AI, and conclusion, and rehearse questions about the entire system.
 
-### File ownership once implementation starts
+### Current file ownership
 
 | Area | Lead | Review/coordination |
 | --- | --- | --- |
 | `src/scheduling/schema.py`, `src/scheduling/solver.py`, `src/scheduling/objectives.py` | Yao Xiang | Other two approve contract changes |
 | `src/scheduling/providers/`, `src/scheduling/pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
 | `src/scheduling/pipelines/solver_augmented.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries |
-| `src/scheduling/validation.py`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
+| `src/scheduling/validation.py`, `src/scheduling/evaluation/`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
 | Corresponding component tests | Component owner | Rotating reviewer |
-| `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
+| `pyproject.toml`, lockfile, CI, shared CLI, `src/scheduling/dashboard/`, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
 | `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
-The merged main branch includes Li Hao's provider/direct components, Yao Xiang's canonical schema/solver/extraction, and Yong Qing's independent validation and development evaluation. See report/yaoxiang-method-notes.md for concrete interfaces and review requests. Empty `.gitkeep` files preserve directories in Git; replace them with substantive files as each component is implemented. Keep a small Python package with explicit interfaces. The initial `main` contains no implementation code; later reviewed component PRs integrate into `main`.
+The listed modules are now implemented and integrated on `main`; preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
 
 ### Directory backbone and artifact placement
 
@@ -126,43 +139,101 @@ The merged main branch includes Li Hao's provider/direct components, Yao Xiang's
 | `configs/development/` | SoCLaaS development model/settings, solver limits, small pilot caps; no credentials | Li Hao, reviewed by all |
 | `configs/experiments/` | Frozen model, prompt, solver, sampling, and budget references for main runs | Yong Qing, approved by all |
 | `benchmarks/fixtures/`, `benchmarks/manifests/` | Small synthetic development cases and versioned split/seed/hash manifests; declare split explicitly and keep gold evaluator-only | Yong Qing |
-| `evaluation/` | Experiment orchestration, metrics, offline replay, and figure export using the canonical package interfaces | Yong Qing |
+| `src/scheduling/evaluation/`, `evaluation/` | Implemented benchmark/rendering, orchestration, scoring, metrics/replay and figures in the package; root `evaluation/` contains the canned demo | Yong Qing |
+| `src/scheduling/dashboard/`, `tests/frontend/` | Read-only local run monitor/case explorer and frontend regression tests | Li Hao |
 | `tests/unit/`, `tests/integration/` | Offline component tests and shared-contract/end-to-end checks | Component owners; Li Hao integrates |
-| `.github/workflows/` | Installed package tests and full reference preflight; no live API calls or credentials required | Li Hao |
+| `.github/workflows/` | Installed-package offline macOS/Linux CI and reference preflight; hosted run status must be checked separately | Li Hao |
 | `results/summary/` | Reviewed aggregate tables and claim-to-run references | Yong Qing |
 | `report/`, `report/figures/`, `presentation/` | Report/presentation sources, selected figures, and demo materials; no private submission identifiers in Git | Section owners; Li Hao assembles |
 
-No executable files, empty Python modules, package manifests, sample results, or pretend CI jobs belong in the initial scaffold. Generated large/raw outputs go to ignored local `runs/`, `artifacts/`, or `results/raw/`; private inputs go to ignored `data/private/`. These runtime directories need not exist until used. Preserve reproducibility through the reviewed archive and checksums described in Section 14, rather than committing raw outputs.
+Keep real implementation, verified commands and evidence; do not add placeholder modules, pretend CI jobs or fabricated sample results. Generated large/raw outputs go to ignored local `runs/`, `artifacts/`, or `results/raw/`; private inputs go to ignored `data/private/`. These runtime directories need not exist until used. Preserve reproducibility through the reviewed archive and checksums described in Section 14, rather than committing raw outputs.
 
 ## 5. Parallel start and dependency management
 
 Before implementation, each member completes the onboarding confirmation in `AGENTS.md`: identity, own local clone path, assigned branch/scope, credential configuration method, and first milestone. Agents ask focused questions or offer choices for unresolved decisions and wait before dependent work. Missing provider access permits offline work; it does not change component ownership.
 
-**Day 1–2: 28–29 September.** Agree the version-1 contract below and at least six tiny fixtures: simple SAT, overlap, shared resource, precedence/deadline interaction, proven UNSAT, and repair. Yao Xiang owns the schema PR; Li Hao owns the shared provider-call interface; all review both contracts. Each person can start immediately:
+### Current priorities after the first baseline
 
-- Li Hao: provider capability checks, canned direct-output parsing, direct prompts, and package setup against the draft contract.
-- Yao Xiang: formal definitions, tiny solver cases, and extraction prompts; use a canned provider response until the shared adapter is ready.
-- Yong Qing: hand-written gold fixtures, independent schedule checks, and renderer/runner design using canned pipeline outputs.
+The first component checkpoints are implemented. Do not restart packaging, schemas or pipelines from the bootstrap plan. Preserve the original development records and historical method notes; their pending-dependency statements describe earlier checkpoints, not current missing components. The following table is the current handoff. Dates are team targets within the existing delivery window, not new course deadlines.
 
-### First implementation checkpoints by member
-
-| Member | First work increment | Required evidence and handoff | Continue with |
+| Priority / target | Owner and reviewer | Existing evidence | Next deliverable and acceptance evidence |
 | --- | --- | --- | --- |
-| Li Hao | Establish the package/test setup and provider interface; implement canned direct-output parsing and bounded provider error handling | Verified offline setup/test commands; provider response contract for Yao Xiang and Yong Qing; parser cases for valid, malformed, and missing-task outputs. A live smoke check is separate and requires configured access and a confirmed cap | Direct generation/repair, shared CLI and integration, then the assigned runs, demo, and writing |
-| Yao Xiang | Implement the canonical schema, tiny generation solver, and explicit repair context/objectives incrementally | Schema examples and rejection cases; hand-checked or exhaustive tiny feasibility/objective checks; contract review request to both members. Publish reference-solver interface/limits for Yong Qing | Full core constraints, extraction and solver-augmented pipeline, then proof audit, failure analysis, and writing |
-| Yong Qing | Define the six shared gold fixtures, independent validator, and a runner consuming canned pipeline outputs | Manually justified expected validity/objectives; deliberate invalid-schedule mutations caught; generation/repair record format and fixture review with both members | Generator/renderings and splits, reference labelling using Yao Xiang's solver, metrics/replay, then main runs and analysis after the evaluation freeze |
+| Immediate: proposal receipt and feedback | Yao Xiang; another member verifies | Proposal and course deadlines documented; receipt unconfirmed in repository | Confirm Canvas status, retain private receipt, and record any teaching-team feedback or changed requirement |
+| By Oct 4: contract and mathematical review | Yao Xiang; Yong Qing reviews, Li Hao checks consumers | Implemented schema, solver/repair, validator, tiny tests and 30 reference checks | Human review of supported semantics, fixtures and objective proofs; record contract version/sign-off. Bring the common time-origin/horizon check into the shared `RepairCase` boundary and test it; the evaluator already guards it. Preserve current recorded outputs |
+| By Oct 11: benchmark redesign and language review | Yong Qing; Yao Xiang reviews constraints, Li Hao wording | 30-case development generator and grouped manifests | Resolve Section 8's redundancy/event/seed limitations; structural duplicate audit and family grouping; balanced fresh SAT/UNSAT candidates, realistic prose, reviewed equivalent renderings. Pilot only development cases before final test allocation |
+| By Oct 11: diagnose model failures and qualify the current runtime | Li Hao for direct/provider, Yao Xiang for extraction; Yong Qing checks scoring | A: ten invalid schedules/two false UNSAT; B: five extra-field schema failures; current-source replay agrees | Analyze raw development failures, test any prompt/parser revision under a new configuration and authorized cap, preserve original denominators. Requalify changed installed code on macOS/Linux; include frontend checks in verification/CI when maintaining the dashboard |
+| By Oct 15, freeze by Oct 18: final-evaluation support | Yong Qing for runner, Li Hao for provider, Yao Xiang for eligibility; team reviews | Runner supports only `offline_canned` and `live_development` and rejects test splits | Add an explicit frozen-evaluation mode with separate evidence/run identity and recorded freeze/model/budget decisions, tested offline. Keep development rejection safeguards; do not relabel test data as development to bypass them. Resolve eligible model/access and qualify it on development data before final runs |
+| Weeks 3–4: analysis, reproduction and course deliverables | All; existing report-section owners | Replayed development summary, component method drafts and dashboard | Execute the frozen study, audit uncertainty/failures, complete four responsible-AI cases, share sanitized replay evidence, write/rehearse and record actual human/AI contributions |
 
-These are ordered starting points, not extra scope or independent replacements for the shared gates. Component tests belong to each component owner. Treat Section 6 as the working draft until team review freezes it; questions that alter its semantics require agreement, but fixture design, solver mathematics, provider parsing, and other independent work can proceed. Li Hao establishes the single package manifest and test command early; other members do not create competing manifests. Yao Xiang's canonical schema is integrated before consumers finalize their imports. Yong Qing checks expected answers independently rather than deriving them solely from the reference solver.
+Work can continue in parallel: Li Hao on direct/provider diagnostics and verification, Yao Xiang on formal/semantic review, and Yong Qing on generator and evaluator improvements. The source is a working shared contract pending human review, not permission to create competing schemas. The packaging owner maintains the existing manifest and lock; consumers use the existing canonical types. Agree behavior changes with affected owners and version scientific changes before dependent runs.
+
+### Implementation work packages
+
+These packages refine the agreed study. They are implementation recommendations and acceptance evidence, not extra teaching-team requirements. Owners may choose equally simple designs that preserve the scientific contract. Keep changes small enough for another member to review and reproduce.
+
+**1. Shared repair and reference contract — Yao Xiang, reviewed by Yong Qing.** Add the common `horizon_start`, timezone and horizon-length checks to `RepairCase`, retaining the evaluator's independent defense. Test a valid no-op repair and rejected frame changes; unchanged slot indices must never conceal changed clock times. Keep the fixed activity set, durations and assignments consistent when applying v1 events. Review tiny SAT, interacting UNSAT and lexicographic-optimum fixtures with a teammate, including solver timeouts and retained incumbents. Acceptance: shared and evaluation boundaries agree, affected tests pass, and human review identifies the contract/version being accepted.
+
+**2. Benchmark generation and grouping — Yong Qing, reviewed by Yao Xiang and Li Hao.** Extend `evaluation/benchmark.py` and manifests rather than adding another benchmark engine. Use seeded structural choices for activity durations, windows, participant/resource assignments and nonredundant precedence graphs within the supported schema. Construct a SAT witness, derive repair cases from a saved valid original schedule, and create UNSAT candidates with checked contradictions. Record rejected/unresolved candidates and reasons under a predeclared selection policy. Balance event types within repair difficulty levels or hold events constant for a controlled comparison. Store realized slack/contention/density, event type and source-family identity. Normalize away incidental IDs when auditing hard structure, and separately compare full objective-bearing instances: deliberate related cases share a family/split; duplicates must not inflate independent sample counts. Acceptance: deterministic generation, witness/UNSAT checks, structural variation across seeds, duplicate/family tests, reviewed language and quotas for the selected matrix. Prove the intended constraint effect on tiny examples; more listed edges alone is insufficient.
+
+**3. Development failure analysis — Li Hao for A/provider, Yao Xiang for B, Yong Qing for scoring.** Use saved responses to separate schedule mistakes, false infeasibility, malformed JSON, extra fields and semantic extraction errors. For the five B `capacity`-field failures, first inspect whether the published schema/prompt is unambiguous; do not silently discard fields or retrospectively accept old responses. A deliberate parser-policy change needs a documented contract, tests and a new comparison configuration. Improve prompts only on development cases, record both paths' settings, and use the same verified model and comparable task information. Acceptance: a concise error table and representative examples, offline regression tests, and any separately authorized live pilot labelled with its actual configuration. Improvements that do not increase measured accuracy may still explain a failure mode; retain them as findings rather than hiding unsuccessful attempts.
+
+**4. Frozen evaluation mode — Yong Qing, coordinated with Li Hao and Yao Xiang.** Extend the existing `RunConfig`, CLI preflight and runner after the team fixes the final protocol. Introduce an explicit evidence mode separate from `live_development`, linked to a versioned experiment configuration in `configs/experiments/` and a reviewed benchmark manifest. Record the study/protocol identity, intended model/backend, input/prompt/configuration hashes, eligibility decision reference and authorized cap. Preflight checks split membership, reference labels/proofs, planned attempts and budget before any model request; it cannot itself certify human approval or eligibility. Preserve development-mode rejection of test cases. Tests must reject missing/mismatched manifests, changed frozen inputs and incompatible resumes; a completed matching resume must make zero new calls. Reuse the existing reservation, accounting, stop and replay paths. Version new record/config formats explicitly and keep the original development archives readable; do not mutate saved records to fit a new schema. Acceptance: offline fixture/canned validation of both modes, reviewed freeze receipt, then a separately authorized run.
+
+**5. Reproducibility and final analysis — Yong Qing for metrics, Li Hao for packaging, all interpret.** Requalify the final package from fresh macOS/Linux environments and run the dashboard frontend checks where relevant. Produce a sanitized, checksum-addressed archive containing sufficient synthetic records for a teammate to recompute results without a key. Verify canonical-only primary aggregation, SAT/UNSAT/error denominators, source-family pairing, conditional repair gaps and missing usage. Report language transitions/repeats separately and state when uncertainty is too weak for a conclusion. Acceptance: independent teammate replay, claim-to-run/figure mapping, Section 8's analysis outputs, and documented environment limits. Preserve failed attempts and original figures when a later correction creates a new result version.
+
+The delivery work in Sections 12 and 17 proceeds alongside these packages: maintain method drafts and actual contribution records now, then complete responsible-AI cases, results discussion and presentation rehearsal. Do not wait for a large final benchmark before drafting the formulation or explaining the baseline's limitations.
 
 When a dependency blocks execution, the agent names the owner, missing interface/version, and smallest requested deliverable, then continues other owned tasks using the agreed contract. The member passes that handoff to the teammate; agents are not assumed to have access to each other's chats or permission to message them. After reviewed shared work reaches `main`, fetch and merge it into the member branch, preserve local work, and verify integration. A newly created local branch without its remote counterpart or an unavailable dependency is reported explicitly, never silently replaced with another branch or implementation.
 
-Mocks/canned outputs unblock interface work but never count as live-model research evidence. Merge the shared contract first, then merge small component increments every 1–2 days. Do not wait until the end of a week to integrate three large branches.
+Mocks/canned outputs unblock new interface work but never count as live-model research evidence. The shared implementation is already merged; sync from current `origin/main` before new work and integrate small reviewed increments every 1–2 days. Do not reset member branches to make all heads identical.
 
 If a contract change is needed, record its motivation, affected consumers, migration, and schema version; coordinate before editing shared files. Never copy divergent schemas into separate components.
 
 ## 6. Version-1 shared contract
 
-This section is a proposed implementation contract to freeze by 29 September. Field names can change during that review, but all consumers must change together.
+This section describes the implemented version-1 draft contract. Human team review/sign-off is still pending; the original Sep 29 review target is not a claimed completion. Source types in `schema.py` and the shipped prompts concretize the wire fields. Reconcile this description, callers, tests and prompts together if review changes the contract.
+
+### System architecture and data flow
+
+Keep one installable Python package, one CLI and one shared provider adapter. Local computation is CPU-only; only the provider sends model requests. The dashboard reads saved records and adds no alternate execution path. Gold access is an explicit evaluation boundary, not a distinction inferred from file names.
+
+```mermaid
+flowchart LR
+    C[Evaluator-only case bundle] --> R[Public renderer]
+    R --> V[Same public view and original schedule]
+    V --> A[Direct model call and schedule parser]
+    V --> B[Extraction model call and schema check]
+    B --> S[Fixed CP-SAT compiler]
+    C --> G[Gold reference solver]
+    C --> I[Independent gold validator]
+    A --> I
+    S --> I
+    G --> E[Evaluator and objective comparison]
+    I --> E
+    E --> D[Durable attempt records]
+    D --> P[Replay, metrics and figures]
+    P --> U[Read-only dashboard and report]
+```
+
+| Boundary | Existing implementation | Design rule / next extension |
+| --- | --- | --- |
+| Formal data | `schema.py`, `objectives.py` | One typed schema and deterministic wire serialization; shared semantics are reviewed/versioned, not copied into each pipeline |
+| Provider | `providers/types.py`, `soclaas.py`, `tls.py` | Credentials stay local; explicit timeouts/caps and per-attempt usage/errors; both paths inject the same adapter |
+| Direct path | `pipelines/direct.py`, `prompts/direct/` | One call, strict public schedule parsing, no solver or gold repair of A's answer |
+| Solver path | `pipelines/solver_augmented.py`, `solver.py`, `prompts/extraction/` | One extraction, validated schema, fixed compiler and bounded lexicographic solving; preserve extracted input and native solver outcomes |
+| Independent correctness | `validation.py`, `extraction_diagnostics.py`, `evaluation/scoring.py` | Recompute gold feasibility/objectives independently; compare extraction separately and retain conditional objective denominators |
+| Data and experiment control | `evaluation/benchmark.py`, `cases.py`, `manifests.py`, `runner.py` | Render equal public information, protect source-family splits, preflight references, reserve calls durably; extend the same runner for frozen evaluation |
+| Analysis and presentation | `evaluation/metrics.py`, `figures.py`, `dashboard/` | Consume saved evidence; no model calls from dashboard/replay and no second metric definition in the UI |
+
+Paths in this table are relative to `src/scheduling/` except `prompts/`. The gold validator can check final outputs regardless of whether B's extracted specification is faithful; these are separate measurements. Gold reference solver success is infrastructure evidence, not a third natural-language competitor. For UNSAT, compare the prediction with the independently established gold label; a timeout remains unresolved.
+
+### Run lifecycle and stored evidence
+
+The implemented development path is: load/validate cases and config → check references and estimate requests → establish immutable run contract → reserve each attempt → call A or B → save output → independently score → persist completion → export/replay. Reservation precedes the external request so a crash cannot silently erase possible spending. A saved failure is a completed observation; a pending/uncertain reservation needs explicit reconciliation, not automatic reissue. Authentication, TLS, rate-limit and transport stops retain completed work. An exclusive lock prevents overlapping writes; a stale lock alone does not prove an active process.
+
+A run stores `manifest.json`, `cases.json`, `references/` and `attempts/` under an ignored run directory. The manifest identifies cases, prompts, model/solver configuration, source and runtime; reference and attempt records carry their checksums and statuses. Offline replay verifies stored records and recomputes validation/metrics from saved pipeline outputs and references without calling the provider or rerunning CP-SAT. It demonstrates reproducibility of recorded evidence, not identical future live answers. Raw records must remain preserved locally and be supplied through a reviewed team archive when omitted from Git; sharing that archive is still a Gate C deliverable.
+
+The frozen-evaluation extension in Section 5 adds protocol and eligibility/cap decision references to this lifecycle; it does not require a database, web service, generic agent framework or new scheduler. Keep the current serial execution until measured runtime/rate-limit evidence justifies bounded parallelism.
 
 ### Gold problem and natural-language view
 
@@ -192,19 +263,21 @@ Record the model's declared status separately from parsing/execution status and 
 
 `ValidationResult`: structural validity, hard-feasible flag, violations with constraint IDs, objective components recomputed from gold, and repair distance. The validator consumes a schedule and gold specification; it must not call CP-SAT or reuse the solver's constraint-building implementation.
 
-### Proposed Python interfaces
+### Implemented Python interfaces
 
 ```python
 solve(spec, limits, repair_context=None) -> SolveResult
 validate_schedule(gold_spec, schedule, repair_context=None) -> ValidationResult
-run_direct(nl_view, model_config) -> PipelineResult
-run_solver_augmented(nl_view, model_config, solver_limits) -> PipelineResult
-evaluate(instance, pipeline_result, gold_reference) -> EvaluationRecord
+run_direct(nl_view, model_config, *, provider_complete=None) -> PipelineResult
+run_solver_augmented(nl_view, model_config, solver_limits, *, provider_complete=complete) -> PipelineResult
+evaluate(case, pipeline_result, gold_reference, *, repeat=0) -> dict
 ```
+
+These entry points live in `solver.py`, `validation.py`, `pipelines/` and `evaluation/scoring.py` under `src/scheduling/`. The evaluator currently returns a JSON-serializable mapping; there is no separate `EvaluationRecord` class. Inject the shared provider or canned callable through the pipeline keyword argument.
 
 `RepairContext` contains the common original schedule, including stable activity IDs and start slots. It is required for a repair task and absent for generation; missing repair context is an explicit error. Both the solver and validator use it to compute moved count and total shift. The evaluator first checks the original schedule against `original_problem`, then checks repairs against `updated_problem` with this context. The solver-augmented path builds the same context from the public original schedule; it must not receive the original or updated gold specification.
 
-Li Hao also provides a minimal typed `complete(messages, model_config) -> ModelResponse` interface with content, returned model, timing, usage, and sanitized error fields. Both pipelines use this adapter. Freeze it alongside the shared schema so Yao Xiang can work with canned responses without waiting for live access.
+Li Hao provides the implemented typed `complete(messages, model_config) -> ModelResponse` interface with content, returned model, timing, usage, and sanitized error fields. Both pipelines use this adapter. Review it alongside the shared schema; injected canned responses support offline development without live access.
 
 Use explicit typed models and deterministic serialization. Validate generated JSON before compilation. Do not execute model-generated code. Schema-valid JSON is not proof of semantic correctness.
 
@@ -243,6 +316,18 @@ Changing weights or objective priority changes the question being studied and re
 - Select 24 base instances for two additional equivalent language variants each: paraphrase and constraint reordering. This yields a provisional total of 300 input renderings (240 + 12 + 48).
 - Both core approaches use each rendering: 600 model calls per complete single-model, single-attempt pass. Repeats, pilot calls, feedback, and extra models are additional. This arithmetic is a planning estimate, not a budget authorization.
 - Group all variants and related generation/repair scenarios from a common base in the same split. Keep prompt examples and tuning cases out of the held-out test set.
+
+### Development benchmark audit — 29 September 2026
+
+The saved first run covers 30 development cases (17 generation, 13 repair; 28 SAT, 2 UNSAT), one canonical rendering and one attempt per approach. Current-source replay reproduces accepted A 18/30 and B 25/30. This establishes functioning integration and identifies model failures; it does not establish held-out superiority, a balanced infeasibility study, language robustness, or realistic deployment performance.
+
+Code review and offline structural checks identified three limits in `src/scheduling/evaluation/benchmark.py`:
+
+- The interaction-density sweep uses 0, 7 and 13 precedence edges. Its highest level adds six edges already implied by the adjacent-task chain. It changes stated constraint load without adding those scheduling restrictions; label this as redundant-description load unless the generator is revised to change nonredundant interactions.
+- Generated repair events are tied to level: level 0 uses blocked intervals, level 1 deadlines, and level 2 fixed appointments. Balance event types within levels or hold them constant before interpreting a repair difficulty trend.
+- The seed changes preference weights, not durations, availability, assignments or hard-constraint structure. Three generation cases across sweeps share a hard problem but have different group IDs. A new seed or ID is not evidence of a fresh held-out instance. Add structural variation, normalized duplicate checks and common source-family grouping for related cases before allocation.
+
+These limits qualify difficulty plots and uncertainty interpretations, not the independently checked acceptance counts. Preserve the original run/configuration and disclose its design. Revised benchmarks get new versions and runs; do not rewrite the existing development receipt. The current runner intentionally rejects held-out/test cases and has no frozen-evaluation evidence mode. Implement and test that mode as Section 5 describes before the evaluation freeze; changing a case's split label is not an acceptable workaround.
 
 ### Confirmatory experiment matrix
 
@@ -343,6 +428,8 @@ An authenticated model listing and one non-sensitive chat completion returned HT
 
 ## 10. Four-week delivery schedule
 
+These are delivery checkpoints, not instructions to rebuild completed components. The baseline arrived ahead of the original implementation window; use Section 5's current priorities to spend that time on review, benchmark quality and analysis while preserving the October completion target.
+
 | Week | Li Hao | Yao Xiang | Yong Qing | Shared gate |
 | --- | --- | --- | --- | --- |
 | **1: Oct 5–11** | SoCLaaS adapter, direct prompts/parsing, provider tests, package/CLI setup | Schema, basic solver/tiny-case checks, extraction prompts and first B path | Gold fixtures, independent validator, renderer, runner using canned outputs | Contract frozen during setup (target Sep 29); one generation and one repair example through both live SoCLaaS paths by Oct 11, or an explicit provider blocker |
@@ -353,6 +440,18 @@ An authenticated model listing and one non-sensitive chat completion returned HT
 Two brief team checkpoints each week: progress/blockers and integration/review. Leadership is coordination, not sole responsibility for integration. Rebalance workload based on remaining tasks, not only the original titles. Use a shared decision log for scope/API changes; record actual contributions as work occurs.
 
 ## 11. Verification and acceptance gates
+
+### Current gate status — 29 September 2026
+
+| Gate | Evidence available | Still needed |
+| --- | --- | --- |
+| A: trustworthy contract/reference | Schema/compiler, independent validator, tiny exhaustive checks and 30 development references pass | Human mathematical/fixture/contract review; shared repair-boundary hardening; record sign-off |
+| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current macOS suite 284 plus 3 frontend tests | Review integration and requalify the final changed package across platforms before the gate is signed off; a test count alone is not approval |
+| Evaluation freeze | Development-only caps, configuration and provenance exist | Refined/fresh benchmark, language review, eligible model/access, qualification, final cap, reviewed evaluation mode and frozen protocol |
+| C: defensible results | Reproducible descriptive development results | Frozen main study, full analysis/robustness and independent teammate replay; a team-accessible sanitized reproduction archive |
+| D: course delivery | Method notes and read-only demo tooling | Complete report/presentation, responsible-AI analysis, actual contribution/AI disclosure records and submission receipts |
+
+The audit reran source tests with `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src .venv/bin/python -m pytest -q -p no:cacheprovider`, plus `pip check`, JavaScript syntax and the frontend tests. A native TLS test initially failed under sandbox restrictions (`OSStatus -26276`); the isolated test and then all 284 tests passed with OS certificate-service access. No live requests were made. `benchmark-generate` and `evaluate-plan` regenerated/checked all 30 references, and `evaluate-replay` matched the tracked summary exactly. Current Linux execution and hosted CI status were not rechecked in this audit; their historical receipts remain labelled by snapshot.
 
 ### Gate A — contract and trustworthy reference
 
@@ -374,7 +473,8 @@ Target Gate B by 15 October, leaving 16–18 October for separately authorized f
 
 - Final primary-model eligibility or teaching-team acceptance, access, and execution budget are documented.
 - The selected evaluation model passes capability/parsing checks and a bounded qualification pilot on development cases, even if it differs from the SoCLaaS development model.
-- Model, prompts, seeds, test manifests, metrics, and execution caps are frozen. No held-out results inform these choices.
+- Model, prompts, seeds, test manifests, metrics, and execution caps are frozen. No held-out results inform these choices. Structural duplicate/family checks, nonredundant difficulty definitions and repair-event balancing have been reviewed; revised sample counts remain provisional until this gate.
+- A reviewed frozen-evaluation runner mode enforces the final manifest/configuration and produces a distinct evidence identity; the development-only guard is not bypassed.
 - Development and main evaluation have distinct configurations/run IDs. An unresolved eligibility or access decision blocks main runs, not development.
 
 ### Gate C — defensible results
@@ -420,7 +520,7 @@ The system proposes schedules. It does not send messages or modify calendars. Fu
 
 ## 14. Git workflow and reproducibility
 
-`main` is the reviewed integration branch. The initial setup commit is shared by the three member branches listed above. Each member uses their own clone; agents must verify their branch and worktree before editing. Never switch branches in another member's active checkout.
+`main` contains the integrated baseline. Member branch tips may still point to earlier contributions; inspect ancestry and merge current `origin/main` normally before extending them. Matching branch heads are no longer a project invariant. Each member uses their own clone; agents must verify their branch and worktree before editing. Never switch branches in another member's active checkout.
 
 After bootstrap, use small PRs from the assigned branch to `main`, with one other member reviewing and relevant checks passing. Include behavior, validation, and scientific impact. Sync from `origin/main` regularly by a normal merge on shared branches; do not rewrite published history or force push. When scope overlaps, agree a single editor. No branch protection is assumed until configured and verified.
 
@@ -430,11 +530,19 @@ Maintain immutable run directories and manifest hashes; fixes require a new run 
 
 ### Portable runtime and supported environments
 
-Li Hao owns packaging and CI. Use a standard `pyproject.toml`, a documented Python minor version (initial target **Python 3.12**), and one committed dependency lockfile. Verify OR-Tools and provider-client compatibility before freezing versions. Use CPU execution locally and remote model inference; a GPU, local model server, paid desktop app, or developer-specific environment must not be required.
+Li Hao owns packaging and CI. The current `pyproject.toml` requires **Python 3.12** and `requirements.lock` pins and hashes the installed dependency set. Verify OR-Tools and provider-client compatibility before freezing versions. Use CPU execution locally and remote model inference; a GPU, local model server, paid desktop app, or developer-specific environment must not be required.
 
 Supported targets are macOS and Linux, verified from fresh environments by Gate B. Windows users can use WSL2 with the Linux workflow; native Windows support is optional and must not be claimed without a check. Keep POSIX shell examples labelled. Use repository-relative paths or explicit CLI/config paths and `pathlib`; no hardcoded home directories, absolute personal paths, shell-only business logic, or implicit local timezone. Configuration changes must not require source edits.
 
-Provide one small installable CLI covering fixture generation, gold solving, single-case A/B execution, validation, batch execution/resume, offline replay, and metric/figure export. Add these capabilities incrementally as their components become available; subcommands or configuration-selected operations are sufficient, without a plugin framework or service layer. Freeze the command syntax with the implementation and document only commands actually tested. Add one tiny offline example and one explicitly selected live smoke example. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
+Maintain the implemented installable CLI for fixture generation, gold solving, single-case A/B execution, validation, development batch/resume, offline replay and metric/figure export. Extend it for reviewed frozen evaluation without a parallel runner, generic plugin framework or service layer. Freeze the command syntax with the implementation and document only commands actually tested. Add one tiny offline example and one explicitly selected live smoke example. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
+
+When intentionally updating dependencies, regenerate the existing lock with pip-tools 7.5.1 and inspect the resulting pins/hashes; normal installation uses the committed lock:
+
+```sh
+pip-compile --allow-unsafe --extra dev --extra solver --extra plots --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
+```
+
+Pip-tools is a lock-maintenance tool, not a runtime prerequisite. Preserve the single lock and validate installation plus affected tests after a justified change. Current pins include HTTPX 0.28.1, truststore 0.10.4, certifi 2026.7.22, OR-Tools 9.14.6206 and Matplotlib 3.10.8; the `solver` compatibility extra is empty because CP-SAT is already a runtime dependency.
 
 ### Bounded execution and restart behavior
 
@@ -449,6 +557,8 @@ By Gate C, preserve a versioned package containing synthetic benchmark inputs/go
 Offline replay must reproduce metrics from saved outputs without credentials or live model access. Exact live text and exact tied solver schedules are not guaranteed; retain their original records and separate reruns. Keep a replay-based demo available for presentation failures and label it clearly as recorded evidence.
 
 ## 15. Decision log and next actions
+
+Entries below retain historical checkpoints and authorization scope; later entries and Sections 5/11 define current technical status. Earlier pending dependencies or smaller test counts must not be read as current blockers.
 
 | Date | Decision | Status / follow-up |
 | --- | --- | --- |
@@ -479,17 +589,17 @@ Offline replay must reproduce metrics from saved outputs without credentials or 
 | 2026-09-29 | User approved 4 qwen3.6:35b calls, max 2,048 output tokens each, no retries, 5s CP-SAT per B case | All 4 produced transport errors with no HTTP status or usage. Cap consumed. Credential-free TLS with provider CA bundle failed code 20: unable to get local issuer certificate. No TLS bypass or automatic new run |
 | 2026-09-29 | User requested a TLS fix after the exhausted live check; provider now uses pinned truststore 0.10.4 native verification | Server supplied only the YE2-issued leaf. Patched macOS client passed credential-free HEAD HTTP 200; 255 offline tests and pip check passed, including untrusted-certificate/hostname rejection. No model calls, key changes or TLS bypass; Linux and authenticated rerun remain unverified |
 | 2026-09-29 | User approved committing and pushing Yong Qing's tested development baseline to yongqing-evaluation | Includes evaluation implementation and the verified native TLS fix; supersedes local-only publication status. Live rerun, teammate review, Linux verification and experiment freeze remain pending |
-
 | 2026-09-29 | User reported all member branches merged and authorized integration work on main; fetched eea2e09 | Routine cross-component fixes authorized; no additional main commit/push authorization inferred |
 | 2026-09-29 | User approved 60 qwen3.6:35b development calls, 8,192 output tokens each, no retries, serial execution, 10s per B solve | Completed all 60 with HTTP 200/stop, 117,976 reported tokens, no transport errors. Accepted A 18/30 and B 25/30. All failures retained; this cap is consumed |
 | 2026-09-29 | Installed macOS/Linux baseline tests and full 30-case reference checks pass; Linux certificate-chain gap fixed without new trust anchors | 278 tests; no credential required for preflight/replay; Linux recomputes the actual live summaries. Frozen run source is distinct from subsequent Linux TLS packaging changes |
 | 2026-09-29 | User explicitly authorized committing and pushing the validated integration baseline directly to main | Supersedes the earlier local-only integration publication status; no new live calls authorized |
 | 2026-09-29 | User requested a clean dashboard, then chose an interactive scheduling workspace with monitoring for future live runs | UI stretch scope is now explicitly authorized for local implementation on the integrated checkout; no new model-call cap or publication authorization inferred |
 | 2026-09-29 | User refined the UI to remove the workspace and keep terminal-based execution; implemented read-only run monitoring, results and a case explorer | Removed editing, preview and launch/stop endpoints. Reuses independent replay/scoring and immutable records; no credential access, runtime dependency or model calls. AI-assisted local implementation requires normal team review |
-
 | 2026-09-29 | User explicitly authorized committing and pushing the complete dashboard implementation and UI polish directly to main | Final checks: 284 Python tests, 3 frontend regression tests, JavaScript syntax, dependency consistency and wheel build passed. Dashboard remains read-only; no new model calls or private run artifacts published |
+| 2026-09-29 | Audited integrated source at `c2eeffc` against supplied course materials and proposal | 284 Python/3 frontend tests pass; 30 references pass; offline replay matches all 60 records. Development benchmark limits and the shared repair API boundary gap remain follow-up work in Sections 5/8; no new model calls or held-out claims |
+| 2026-09-29 | Documentation defines the usable development baseline, system boundaries and five implementation work packages | Continue from the integrated code; improve data/protocol/evidence before main evaluation; October delivery and course obligations remain unchanged |
 
-Next actions: review the integrated baseline and development failures; Li Hao reviews provider/CLI/TLS, Yao Xiang reviews independent validation and fixture mathematics, and Yong Qing reviews replay/metrics. Five B outputs added an unsupported capacity field; A produced ten invalid schedules and two false UNSAT claims. Do not edit outputs or relax gold/schema checks to improve scores. Complete human language/realistic-scenario review and the balanced matrix, resolve final-model eligibility/access, qualify it under a new cap, and freeze protocol before held-out inference. Proposal receipt remains a coordination item. The baseline is operationally validated; course-level Gates C/D are not claimed.
+Next actions: confirm the proposal receipt immediately, then follow Section 5's current owner/reviewer table. Preserve the 60-call baseline as development evidence. Scientific and human-review gates remain open; new experiments need their own configuration, evidence identity and authorized cap.
 
 
 ## 16. Source grounding
