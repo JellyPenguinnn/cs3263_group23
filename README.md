@@ -4,7 +4,7 @@
 
 A research project comparing direct language-model scheduling with language-model-to-constraint-solver scheduling. We study both generating a new schedule and repairing an existing schedule after requirements change, while minimizing unnecessary disruption.
 
-**Status:** research plan, configuration templates, and empty directory scaffold only. Scheduling systems, benchmarks, and experiment results are not implemented yet. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. The plan also covers final review and course submission in November.
+**Status on `lihao-llm-baseline`:** provider transport/accounting, strict direct-output parsing, generation/repair prompts, incremental CLI, locked Python setup, offline tests and demo examples are implemented locally. Two tiny live direct-component checks succeeded; canonical schema integration, the solver path, independent validation, benchmark/evaluation runner and research results remain pending. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. The plan also covers final review and course submission in November.
 
 ## Research questions
 
@@ -37,7 +37,42 @@ cd cs3263_group23
 3. Each member uses a separate local clone. Before an agent clones, switches branches, or implements work, have it confirm your identity, local path, assigned scope/branch, credential setup method, and intended milestone using [the onboarding instructions](AGENTS.md#member-onboarding-and-clarification). Already confirmed details do not need to be repeated.
 4. Fetch and switch to the confirmed member branch from the table below. For unresolved choices, the agent should explain the options and wait for your answer before dependent work. Supply API keys only through local secret configuration, never through chat.
 
-The planned local runtime is CPU-only Python on macOS and Linux, with remote inference through SoCLaaS; portability remains to be verified during implementation. There is no install, test, or experiment command yet. Those commands will be added when their implementations exist; the planned stack is Python, OR-Tools CP-SAT, and NUS SoCLaaS through its OpenAI-compatible API.
+The runtime targets CPU-only Python 3.12 with remote SoCLaaS inference. A fresh macOS ARM64 source snapshot and installed package have been checked. Linux remains unverified: the local Docker daemon is unavailable, and the prepared macOS/Linux CI workflow has not run remotely. No full scheduling/evaluation system or Gate B portability claim is made.
+
+### Install and verify (POSIX shell, Python 3.12)
+
+```sh
+python3.12 -m venv .venv
+.venv/bin/python -m pip install --require-hashes -r requirements.lock
+.venv/bin/python -m pip install --no-deps --no-build-isolation -e .
+.venv/bin/python -m pytest -q
+.venv/bin/python -m pip check
+.venv/bin/scheduling --help
+```
+
+`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The initial pins are HTTPX 0.28.1, pytest 8.4.2 and OR-Tools 9.14.6206. OR-Tools imports and a tiny native optimization have been checked; the project scheduling compiler remains Yao Xiang's work. The lockfile is generated with pip-tools 7.5.1:
+
+```sh
+pip-compile --allow-unsafe --extra dev --extra solver --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
+```
+
+Run lock regeneration only when intentionally updating dependencies; normal installation uses the existing lock. Tests use synthetic data and injected HTTP transports; an automatic fixture blocks network connections.
+
+### Implemented commands and integration boundary
+
+- `scheduling parse-direct RESPONSE --activity-id A --activity-id B`: check strict JSON and public activity coverage. SAT is an unvalidated claim, not proof of feasibility.
+- `scheduling direct-offline`: exercise the generation/repair prompt and parser using a saved canned response. See [the two runnable demos](presentation/README.md).
+- `scheduling provider-smoke --allow-live --model default`: explicitly live, one model listing plus at most one completion, `max_tokens=32`, no retries. Requires prior cap authorization and environment credentials.
+- `scheduling direct-live --allow-live --model MODEL --max-tokens N --text-file PUBLIC_TEXT --task-type generation --activity-id A --output runs/NEW_FILE.json`: explicitly live, one completion with no retries. Repair additionally requires `--original-schedule FILE`. The output parent must exist, and the output file must not already exist. This is a component check, not batch evaluation or resume.
+
+Provider and direct component interfaces are in `src/scheduling/providers/` and `src/scheduling/pipelines/direct.py`. `complete(messages, model_config) -> ModelResponse` is available as a convenience function or a provider method. It preserves individual attempts and missing usage. Share an explicit `RequestBudget` across serial calls to enforce request and requested output-token caps. This does not cap input tokens or currency. Default retries are disabled; retry configuration never overrides a budget.
+
+`request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang must supply the reviewed `NaturalLanguageView`, `Schedule`, and `PipelineResult` before Li Hao finalizes `run_direct(nl_view, model_config)`. Yong Qing supplies independent gold validation and the batch/metrics/replay runner. No placeholder commands for those components are exposed.
+
+A live single-case output is created with mode 600 before requesting, so interruption remains visible; completion replaces it atomically. Reusing an output filename refuses another call. Completed outputs remain private/ignored under `runs/`; the full experiment runner will handle immutable manifests and resume. Treat arbitrary saved model outputs as untrusted data.
+
+The current direct JSON output contract is provisional for team review: exactly `status` and `schedule`; SAT carries a list of `{activity_id, start_slot}` objects, while UNSAT/UNKNOWN carry `null`. Starts must be nonnegative integers. Markdown fences, duplicate JSON keys, extra fields, and missing/duplicate/invented activities are rejected. Normalization only sorts entries by ID. Full schedule semantics require independent validation.
+
 
 ### Start with a coding agent
 
@@ -62,7 +97,8 @@ The plan contains the technical information needed to start; the original course
 Configure access to the NUS SoCLaaS API:
 
 ```bash
-cp .env.example .env
+# Only create .env if it does not already exist.
+[ -e .env ] || cp .env.example .env
 chmod 600 .env
 ```
 
@@ -79,9 +115,17 @@ curl --fail --silent --show-error \
   "${SOCLAAS_BASE_URL}/models"
 ```
 
-This lists models and does not run a scheduling experiment. Avoid shell tracing (`set -x`), verbose HTTP logs, and publishing raw provider responses. `SOCLAAS_MODEL=default` is a bootstrap alias; choose and record a verified development model ID before scheduling pilots. Keep development and final evaluation configurations and results separate. Available models, quotas, and advanced request features must be checked live. Environment files are not loaded automatically by this repository yet.
+This lists models and does not run a scheduling experiment. Avoid shell tracing (`set -x`), verbose HTTP logs, and publishing raw provider responses. `SOCLAAS_MODEL=default` is a bootstrap alias; choose and record a verified development model ID before scheduling pilots. Keep development and final evaluation configurations and results separate. Available models, quotas, and advanced request features must be checked live. The CLI reads process environment variables; it does not automatically load `.env`. Load it explicitly with the POSIX steps above, without shell tracing.
 
 Connectivity verified on **28 September 2026**: authenticated model listing and one tiny chat completion succeeded; `default` returned `qwen3.6:35b`. This verifies access only, not scheduling performance or suitability for the course's frontier-model comparison. Final evaluation suitability or teaching-team approval must be established before the main experiment is frozen; this does not block SoCLaaS development.
+
+### Development evidence — 29 September 2026
+
+The approved check made one model-list request and one tiny completion using `default`. The backend was `qwen3.6:35b`, HTTP 200, with 16 input/3 output tokens. The reply did **not** exactly match the requested `OK`; access succeeded, exact acknowledgement did not. No retry was made.
+
+Li Hao then authorized two separate synthetic direct-component calls using explicit `qwen3.6:35b`, 1,024 output tokens each and no retries. Both returned complete parseable SAT schedules; reported usage was 844 input + 96 output = 940 tokens. The tiny schedules also agree with the hand calculation in [the demo notes](presentation/README.md), but have not passed the pending independent validator. The cap is consumed; further live requests require a new authorized cap. These checks do not establish benchmark accuracy or final-model course eligibility.
+
+Private records, exact source snapshots and checksums are in `runs/lihao-components-20260929-01/`. The small [development settings record](configs/development/lihao-component-check.json) contains no credentials. [Li Hao's method draft](report/lihao-method-notes.md) records implementation boundaries, related-work starting notes and AI assistance. Gates A–D and the evaluation freeze remain open.
 
 ## Team and branches
 
@@ -107,10 +151,10 @@ Development begins with synthetic scenarios. We will examine privacy of routines
 - `.env.example` — configuration names without credentials.
 - `.gitignore` — local secrets, environments, generated artifacts, and caches.
 
-The directory backbone is ready for work on the assigned branches:
+The repository layout and component ownership are:
 
 ```text
-.github/workflows/        # future offline CI
+.github/workflows/        # offline CI definition (not yet run remotely)
 src/scheduling/
   providers/              # model access and response accounting
   pipelines/              # direct and solver-augmented paths
@@ -132,7 +176,7 @@ report/figures/           # report sources and selected figures
 presentation/             # slides and demo materials
 ```
 
-These folders contain only empty `.gitkeep` placeholders. No Python modules, package manifest, CI workflow, tests, prompts, or experiment configurations are implemented yet. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
+On this member branch, the provider/direct components, CLI, packaging/lock, tests, CI definition, direct prompts and tiny demonstration files now contain substantive implementation. Solver/schema, benchmark, validation and evaluation areas remain unimplemented. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
 
 ## References
 

@@ -11,7 +11,7 @@ This is the working implementation and evaluation plan for Group 23's **AI Assis
 - Course presentation: week of **9 November 2026**, normally 15 minutes plus 5 minutes of questions; a recording may be requested.
 - Course final report: **13 November 2026**.
 - The Week 11 target includes implementation, evaluated results, a complete report draft, and presentation/demo material. The remaining course window is for review and required submission adjustments, not planned core development.
-- Current repository status: documentation, configuration templates, and empty directory scaffold only; no implementation code. All implementation and research gates below remain open until supported by evidence.
+- Current member-branch status (29 September, `lihao-llm-baseline`): provider/direct components, package/lock, tests, CLI and tiny demo are implemented locally. Two live direct component checks and offline macOS checks are recorded in README. Canonical schema/solver, validator/benchmark/runner and integrated A/B evidence remain pending. All shared implementation/research gates below remain open; no changes have been published or reviewed into `main`.
 
 The course project carries 25% of the course grade. The mandatory proposal is ungraded. The final report is at most 10 single-spaced, single-column pages, excluding title/references, with 1-inch margins and at least 11-point font. Figures, tables, and substantive discussion count toward the limit. Contributions, responsible AI, source attribution, and disclosure of AI assistance are required. The submitted proposal and report must clearly list every member's name, matriculation number, and email; place those identifying details on the private submission title page. Write for classmates with general AI knowledge. Check Canvas announcements and proposal feedback for subsequent changes before the experimental freeze and final submission.
 
@@ -115,7 +115,7 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `pyproject.toml`, lockfile, CI, shared CLI, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
 | `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
-The directory scaffold exists, but the module files above are planned interfaces, not implemented components. Empty `.gitkeep` files preserve directories in Git; replace them with substantive files as each component is implemented. Keep a small Python package with explicit interfaces. The initial `main` contains no implementation code; later reviewed component PRs integrate into `main`.
+Li Hao's current branch implements the provider/direct components listed above; canonical schema, solver and evaluation modules remain planned interfaces until their owners supply them. Empty `.gitkeep` files preserve directories in Git; replace them with substantive files as each component is implemented. Keep a small Python package with explicit interfaces. The initial `main` contains no implementation code; later reviewed component PRs integrate into `main`.
 
 ### Directory backbone and artifact placement
 
@@ -458,6 +458,9 @@ Offline replay must reproduce metrics from saved outputs without credentials or 
 | 2026-09-28 | Single-day fixed-duration v1 and lexicographic repair | Proposed contract; freeze with team by Sep 29 |
 | 2026-09-28 | Primary-model eligibility, portable replay, and rubric evidence are acceptance gates | Final eligibility due at evaluation freeze by Oct 18; portable replay and rubric evidence due at Gates B–D |
 | 2026-09-28 | Broader literature review informs formalization diagnostics, canonical primary comparisons, and paired uncertainty | Sections 8 and 16; estimator and sample settings freeze after development pilots; core scope unchanged |
+| 2026-09-29 | Li Hao confirmed own checkout/member branch, local implementation only, and approximately 8–10h/week; supplied authorized local SoCLaaS configuration | No commit/push/PR authorization; credentials remain ignored and private |
+| 2026-09-29 | Li Hao selected explicit `qwen3.6:35b` for two tiny direct-component development checks, capped at 1,024 requested output tokens each, no retries | Both calls completed and parsed as SAT; cap consumed. README records usage and limitations. This is not a shared contract freeze, benchmark result or final-model eligibility decision |
+| 2026-09-29 | Initial Python 3.12 package/hashed lock uses HTTPX 0.28.1 and OR-Tools 9.14.6206; component wire format is provisional | Offline and native-runtime macOS checks passed; Linux CI and canonical schema/validator integration pending owner review |
 
 Next actions: each member reads these documents; confirm available hours; freeze schema/fixtures and objective priorities; choose a verified SoCLaaS development model and bounded pilot budget; implement Gate A and the provider adapter in parallel. Resolve final evaluation model eligibility/access by Oct 18 before any main held-out run. Record subsequent material decisions here without overwriting prior experiment configurations.
 
