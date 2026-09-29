@@ -129,7 +129,7 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `pyproject.toml`, lockfile, CI, shared CLI, `src/scheduling/dashboard/`, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
 | `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
-The listed modules are now implemented and integrated on `main`; preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
+The baseline modules are implemented and integrated on `main`; the proposed R4 result-explanation formatter remains next-stage work. Sections 5 and 7 specify the pending improvements to existing components. Preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
 
 ### Directory backbone and artifact placement
 
@@ -578,7 +578,7 @@ Store model ID, returned backend identity if available, prompt/config hashes, be
 
 ### Bootstrap connectivity evidence — 28 September 2026
 
-An authenticated model listing and one non-sensitive chat completion returned HTTP 200. The `default` alias returned model ID `qwen3.6:35b`; the response was exactly the requested short acknowledgement, with 17 prompt and 2 completion tokens reported. This is connectivity evidence only. Structured-output support, rate limits, quota/cost, model suitability for the course requirement, and scheduling performance remain unverified. Credentials must remain in an ignored local environment file with owner-only permissions.
+An authenticated model listing and one non-sensitive chat completion returned HTTP 200. The `default` alias returned model ID `qwen3.6:35b`; the response was exactly the requested short acknowledgement, with 17 prompt and 2 completion tokens reported. This bootstrap check established connectivity only. The subsequent 60-call development benchmark provides measured scheduling results, documented in Section 8 and the [baseline validation report](report/main-baseline-validation.md). Structured-output support, rate limits and quota/cost still require verification before relying on them; final-model eligibility remains unresolved. Credentials must remain in an ignored local environment file with owner-only permissions.
 
 ## 10. Four-week delivery schedule
 
@@ -600,7 +600,7 @@ Two brief team checkpoints each week: progress/blockers and integration/review. 
 | Gate | Evidence available | Still needed |
 | --- | --- | --- |
 | A: trustworthy contract/reference | Schema/compiler, independent validator, tiny exhaustive checks and 30 development references pass; planning audit verified worked repair/window examples | Human mathematical/fixture/contract review; Section 7 R1 repair invariants and richer mathematical regressions; record sign-off |
-| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current macOS suite 284 plus 3 frontend tests | Review integration and requalify the final changed package across platforms before the gate is signed off; a test count alone is not approval |
+| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current macOS suite 284 plus 3 frontend tests | Implement and review Section 7 R2–R4: extraction guidance and diagnostics, bounded domain reasons, and deterministic result explanations. Review integration and requalify the final changed package across platforms before sign-off; a test count alone is not approval |
 | Evaluation freeze | Development-only caps, configuration and provenance exist | Refined/fresh benchmark, language review, eligible model/access, qualification, final cap, reviewed evaluation mode and frozen protocol |
 | C: defensible results | Reproducible descriptive development results | Frozen main study, full analysis/robustness and independent teammate replay; a team-accessible sanitized reproduction archive |
 | D: course delivery | Method notes and read-only demo tooling | Complete report/presentation, responsible-AI analysis, actual contribution/AI disclosure records and submission receipts |
