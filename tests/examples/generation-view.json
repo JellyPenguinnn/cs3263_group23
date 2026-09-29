@@ -1,0 +1,11 @@
+{
+  "activity_ids": [
+    "A",
+    "B"
+  ],
+  "instance_id": "tiny",
+  "original_schedule": null,
+  "task_type": "generation",
+  "text": "Synthetic component example, not a benchmark or live model result.\nDate 2026-10-05, timezone +08:00. Horizon starts at 09:00 and lasts four\n30-minute slots. A and B each last one slot and share participant P.\nA, B and P are available throughout [0,4). No resources are needed.\nA must finish before B starts. All activities are mandatory. No preferences.\n",
+  "variant_id": "canonical"
+}

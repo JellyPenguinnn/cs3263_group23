@@ -1,0 +1,20 @@
+{
+  "activity_ids": [
+    "A",
+    "B"
+  ],
+  "instance_id": "tiny",
+  "original_schedule": [
+    {
+      "activity_id": "A",
+      "start_slot": 0
+    },
+    {
+      "activity_id": "B",
+      "start_slot": 2
+    }
+  ],
+  "task_type": "repair",
+  "text": "Synthetic component example, not a benchmark or live model result.\nUPDATED problem: date 2026-10-05, timezone +08:00, start 09:00, four\n30-minute slots. A and B each last one slot and share participant P.\nA, B and P are available in [0,4). P now has a blocked interval [0,1).\nA must finish before B starts. No resources or preferences. Both activities\nare mandatory. Minimize moved activity count, then total absolute slot shift,\nthen preference penalty. The supplied original schedule was valid before\nthe new blocked interval. This example has not passed the independent validator.\n",
+  "variant_id": "canonical"
+}

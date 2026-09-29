@@ -38,12 +38,17 @@ def _parser() -> argparse.ArgumentParser:
     smoke = commands.add_parser("provider-smoke", help="LIVE: one listing and at most one 32-token completion")
     smoke.add_argument("--model", required=True)
     smoke.add_argument("--allow-live", action="store_true", required=True)
+    from scheduling.formal_cli import add_commands
+    add_commands(commands)
     return parser
 
 
 def main(argv: list[str] | None = None) -> int:
     args = _parser().parse_args(argv)
     try:
+        if args.command in ("solve", "solver-offline"):
+            from scheduling.formal_cli import run_command
+            return run_command(args)
         if args.command == "parse-direct":
             parsed = parse_direct_output(args.response.read_text(encoding="utf-8"), args.activity_id)
             print(json.dumps({"evidence": "offline_structure_only", **asdict(parsed)}, sort_keys=True))
