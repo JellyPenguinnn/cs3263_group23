@@ -124,12 +124,12 @@ Report ownership: Li Hao drafts motivation, related work, the direct baseline/pr
 | `src/scheduling/providers/`, `src/scheduling/pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
 | `src/scheduling/pipelines/solver_augmented.py`, `src/scheduling/extraction_diagnostics.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries and owns scoring consumers |
 | `src/scheduling/validation.py`, `src/scheduling/evaluation/`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
-| Proposed deterministic result-explanation formatter (Section 7 R4) | Li Hao | Yao Xiang reviews proof/objective semantics; Yong Qing reviews gold/evaluation labels; keep one shared formatter |
+| Deterministic result-explanation formatter (Section 7 R4) | Li Hao | Yao Xiang reviews proof/objective semantics; Yong Qing reviews gold/evaluation labels; keep one shared formatter |
 | Corresponding component tests | Component owner | Rotating reviewer |
 | `pyproject.toml`, lockfile, CI, shared CLI, `src/scheduling/dashboard/`, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
 | `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
 
-The baseline modules are implemented and integrated on `main`; the proposed R4 result-explanation formatter remains next-stage work. Sections 5 and 7 specify the pending improvements to existing components. Preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
+The baseline modules are implemented and integrated on `main`; R4 is implemented on Li Hao's branch, pending teammate review and main integration. Sections 5 and 7 specify the pending improvements to existing components. Preserve the single canonical schema and component boundaries. Remaining empty `.gitkeep` markers can be removed when touching their populated directories, but cleanup is not a development prerequisite. New work belongs on member branches and normally enters `main` through reviewed PRs.
 
 ### Directory backbone and artifact placement
 
@@ -168,6 +168,8 @@ The first component checkpoints are implemented. Do not restart packaging, schem
 | Weeks 3–4: analysis, reproduction and course deliverables | All; existing report-section owners | Replayed development summary, component method drafts and dashboard | Execute the frozen study, audit uncertainty/failures, complete four responsible-AI cases, share sanitized replay evidence, write/rehearse and record actual human/AI contributions |
 
 Work can continue in parallel: Li Hao on direct/provider diagnostics and verification, Yao Xiang on formal/semantic review, and Yong Qing on generator and evaluator improvements. The source is a working shared contract pending human review, not permission to create competing schemas. The packaging owner maintains the existing manifest and lock; consumers use the existing canonical types. Agree behavior changes with affected owners and version scientific changes before dependent runs.
+
+Li Hao follow-up (29 September, local branch): Work package 3's A/provider error table and three offline semantic-failure regressions are complete; R4 is implemented against existing records. CLI explanations, CI frontend checks, demo instructions and four responsible-AI discussion cases are prepared. Prompt policy and the original 60-call evidence are unchanged. Review/qualification status is in [the follow-up handoff](report/lihao-development-followup.md); this is not Gate B sign-off or publication.
 
 ### Implementation work packages
 
@@ -389,6 +391,8 @@ Do not obtain misleading explanations by blindly attaching assumptions to every 
 
 ### R4 — explanations tied to actual evidence
 
+Local implementation on `lihao-llm-baseline` (29 September): shared `explanations.py` and the read-only `scheduling explain` CLI consume current and saved results. No schema, prompt or solver changes; human semantic/evaluation review and main integration remain pending. See [Li Hao follow-up](report/lihao-development-followup.md) for tests, measured failures and the participant-burden example. The behavior requirements below remain the review criteria.
+
 Add a small shared formatter over existing `ProblemSpec`, `SolveResult`, `OptimizationStage`, repair context and validation records, consumed by the CLI and optionally the existing read-only case view. A formatter does not solve, call a model, change the schedule or invent a proof. Keep gold/extraction comparisons evaluator-only and visibly separate from what B itself knows.
 
 For a feasible repair, show before/after clock times, moved activity IDs, `(M,T,P)`, and the proof status/bound of each attempted stage. For a timeout after proving movement only, say that minimum moved count is established but minimum shift is not. Explain preference penalties using the actual windows/weights. For infeasibility, distinguish a proven contradiction in the **extracted specification** from a correct infeasibility judgment about the original request; show a supported reason if available and otherwise state that a detailed conflict was not derived. Parsing failure, solver UNKNOWN and gold-invalid output each retain their own explanation.
@@ -600,9 +604,9 @@ Two brief team checkpoints each week: progress/blockers and integration/review. 
 | Gate | Evidence available | Still needed |
 | --- | --- | --- |
 | A: trustworthy contract/reference | Schema/compiler, independent validator, tiny exhaustive checks and 30 development references pass; planning audit verified worked repair/window examples | Human mathematical/fixture/contract review; Section 7 R1 repair invariants and richer mathematical regressions; record sign-off |
-| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current macOS suite 284 plus 3 frontend tests | Implement and review Section 7 R2–R4: extraction guidance and diagnostics, bounded domain reasons, and deterministic result explanations. Review integration and requalify the final changed package across platforms before sign-off; a test count alone is not approval |
+| B: integrated core | Both task types and paths ran live; all 60 records replay; earlier installed macOS/Linux baseline verified; current local macOS suite 311 plus 3 frontend tests; R4 formatter/CLI implemented locally | Implement R2/R3 extraction guidance, diagnostics and bounded domain reasons; review R4 proof/gold semantics. Review integration and requalify the final changed package across platforms before sign-off; a test count alone is not approval |
 | Evaluation freeze | Development-only caps, configuration and provenance exist | Refined/fresh benchmark, language review, eligible model/access, qualification, final cap, reviewed evaluation mode and frozen protocol |
-| C: defensible results | Reproducible descriptive development results | Frozen main study, full analysis/robustness and independent teammate replay; a team-accessible sanitized reproduction archive |
+| C: defensible results | Reproducible descriptive development results | Frozen main study, full analysis/robustness and independent teammate replay; share/review the local sanitized archive in the Li Hao follow-up |
 | D: course delivery | Method notes and read-only demo tooling | Complete report/presentation, responsible-AI analysis, actual contribution/AI disclosure records and submission receipts |
 
 The audit reran source tests with `PYTHONDONTWRITEBYTECODE=1 PYTHONPATH=src .venv/bin/python -m pytest -q -p no:cacheprovider`, plus `pip check`, JavaScript syntax and the frontend tests. A native TLS test initially failed under sandbox restrictions (`OSStatus -26276`); the isolated test and then all 284 tests passed with OS certificate-service access. No live requests were made. `benchmark-generate` and `evaluate-plan` regenerated/checked all 30 references, and `evaluate-replay` matched the tracked summary exactly. Current Linux execution and hosted CI status were not rechecked in this audit; their historical receipts remain labelled by snapshot.
@@ -757,6 +761,8 @@ Entries below retain historical checkpoints and authorization scope; later entri
 | 2026-09-29 | Documentation defines the usable development baseline, system boundaries and five implementation work packages | Continue from the integrated code; improve data/protocol/evidence before main evaluation; October delivery and course obligations remain unchanged |
 | 2026-09-29 | Rechecked course/proposal data requirements, traced all 30 development cases and inspected primary public benchmark releases/evaluation | Current data is wholly project-authored synthetic; added provenance/review workflow and a bounded optional NATURAL PLAN subset strategy. No new dataset, model run, human sign-off or budget approval is claimed; weekly tasks now target remaining work |
 | 2026-09-29 | Audited the formal core at `895e523` against course/proposal and primary solver/formalization research; expanded Section 7 and aligned owner tasks/gates | Confirmed implemented CSP/COP/lexicographic machinery, repair-boundary gaps and millisecond conditional solver times. Offline probes checked coupled repair, window semantics, 1,372 precedence-filter cases and pinned NoOverlap enforcement limits. R1–R4 are planned improvements, not implemented features or claimed speedups |
+
+Publication checkpoint, 29 September: the user authorized committing and pushing Li Hao's follow-up to `lihao-llm-baseline`. The [assignment audit](report/lihao-development-followup.md#assignment-audit-against-planningmd) distinguishes implemented development work from outstanding Linux qualification, human reviews, final-model qualification/runs and course delivery. No main merge, new model cap or completed human review is implied.
 
 Next actions: confirm the proposal receipt immediately, then follow Section 5's current owner/reviewer table. Preserve the 60-call baseline as development evidence. Scientific and human-review gates remain open; new experiments need their own configuration, evidence identity and authorized cap.
 

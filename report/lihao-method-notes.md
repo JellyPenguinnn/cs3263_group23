@@ -1,6 +1,11 @@
 # Li Hao method and report draft
 
-Status: draft for member review, 29 September 2026. These paragraphs describe the
+Status: historical component draft for member review, 29 September 2026.
+The canonical adapter and independent validation described as pending below are
+now integrated. See [current follow-up](lihao-development-followup.md) and
+[baseline evidence](main-baseline-validation.md) for current status.
+
+Original checkpoint: These paragraphs describe the
 implemented provider/direct components and the intended comparison; they are not
 a completed study or a final report. No held-out experiments have run.
 

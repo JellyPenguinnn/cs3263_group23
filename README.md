@@ -140,6 +140,23 @@ Recompute saved results without model calls:
 
 A fresh clone contains aggregate evidence, not the private raw live run. To replay `main-baseline-20260929-01`, obtain the reviewed synthetic archive and checksum from the team; use the canned demo when that archive is unavailable. Do not substitute canned results for live evidence.
 
+### Explain saved evidence
+
+```sh
+.venv/bin/scheduling explain --run-dir runs/NEW-live \
+  --case-id repair --approach solver_augmented
+```
+
+Use the actual saved case ID; add `--format json` for structured output. The command
+checks record integrity and recomputes evaluation without inference or solving.
+It separates extracted-specification proofs from gold acceptance, shows stage
+bounds, before/after times and participant inconvenience. For a standalone saved
+solve, use `--spec problem.json --result result.json` and, for repair,
+`--original-schedule original.json`; that mode does not claim gold evaluation.
+See the [integrated demo](presentation/README.md) and
+[Li Hao follow-up](report/lihao-development-followup.md) for failure examples,
+current verification and review boundaries.
+
 ### Scheduling dashboard
 
 ```sh
