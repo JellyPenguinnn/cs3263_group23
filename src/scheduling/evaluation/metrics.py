@@ -363,3 +363,163 @@ def difficulty_rates(rows):
         }
         for key, rs in sorted(groups.items(), key=lambda kv: str(kv[0]))
     ]
+
+
+def analysis_details(rows):
+    """Versioned supplementary analysis; retain the historical summary contract."""
+    rows = list(rows)
+    # Existing checks reject mixed backends/configurations and duplicate units.
+    summarize(rows)
+    buckets = defaultdict(list)
+    for row in rows:
+        buckets[
+            (
+                row["kind"],
+                row["task_type"],
+                row["variant_id"],
+                row["repeat"],
+                row["approach"],
+            )
+        ].append(row)
+    funnels = []
+    for key, items in sorted(buckets.items()):
+        fields = Counter()
+        violations = Counter()
+        constraint_changes = Counter()
+        for row in items:
+            violations.update(
+                {
+                    v["category"]
+                    for v in (row.get("validation") or {}).get("violations", [])
+                }
+            )
+            comparison = row.get("extraction_comparison")
+            if comparison:
+                fields.update(
+                    {change["path"] for change in comparison.get("differences", [])}
+                )
+                for change in comparison.get("constraint_differences", []):
+                    constraint_changes[change["kind"]] += change["count"]
+        funnels.append(
+            {
+                "subset": dict(
+                    zip(("kind", "task_type", "variant_id", "repeat", "approach"), key)
+                ),
+                "reserved_attempts": len(items),
+                "parsed_outputs": sum(
+                    r["pipeline_status"] not in ("INVALID_OUTPUT", "ERROR")
+                    or r["extraction_comparison"] is not None
+                    for r in items
+                ),
+                "schema_valid_extractions": (
+                    sum(r["extraction_comparison"] is not None for r in items)
+                    if key[-1] == "solver_augmented"
+                    else None
+                ),
+                "structurally_matching_extractions": (
+                    sum(
+                        bool(r["extraction_comparison"])
+                        and r["extraction_comparison"]["structurally_equivalent"]
+                        for r in items
+                    )
+                    if key[-1] == "solver_augmented"
+                    else None
+                ),
+                "schedule_claims": sum(r["pipeline_status"] == "SAT" for r in items),
+                "gold_valid_schedules": sum(r["gold_valid"] for r in items),
+                "unsat_claims": sum(r["pipeline_status"] == "UNSAT" for r in items),
+                "accepted_answers": sum(r["accepted"] is True for r in items),
+                "violation_instance_counts": dict(violations),
+                "changed_field_instance_counts": dict(fields),
+                "typed_constraint_difference_counts": dict(constraint_changes),
+                "status_counts": dict(Counter(r["pipeline_status"] for r in items)),
+                "solver_status_counts": dict(
+                    Counter(r["solver_status"] for r in items if r["solver_status"])
+                ),
+                "missing_usage_instances": sum(
+                    not r["usage"]
+                    or any(u.get("total_tokens") is None for u in r["usage"])
+                    for r in items
+                ),
+            }
+        )
+    strata = defaultdict(list)
+    for row in rows:
+        if row["variant_id"] == "canonical" and row["repeat"] == 0:
+            strata[(row["kind"], row["task_type"], row["gold_label"])].append(row)
+    paired_strata = [
+        {"kind": key[0], "task_type": key[1], "gold_label": key[2], **paired(items)}
+        for key, items in sorted(strata.items())
+    ]
+    transitions = []
+    for item in robustness(rows):
+        a, b = item["canonical_objectives"], item["variant_objectives"]
+        transitions.append(
+            {
+                **item,
+                "objective_change_variant_minus_canonical": (
+                    [y - x for x, y in zip(a, b)]
+                    if a is not None and b is not None
+                    else None
+                ),
+            }
+        )
+    return {
+        "format_version": "2.0",
+        "evidence": "supplementary_recomputed_analysis",
+        "notes": [
+            "Funnel columns are counts, not strictly nested subsets: a valid UNSAT answer has no schedule.",
+            "Structural matching is not proof of faithful natural-language interpretation.",
+            "Missing usage includes canned outputs and interrupted requests; it is not zero tokens.",
+            "Objective changes compare valid outputs; they are not reference optimality gaps.",
+        ],
+        "funnels": funnels,
+        "canonical_paired_strata": paired_strata,
+        "language_transitions": transitions,
+        "difficulty_uncertainty": difficulty_intervals(rows),
+    }
+
+
+def difficulty_intervals(rows, *, seed=3263, resamples=10000):
+    """Gold-SAT validity intervals resample source families, not repeated views."""
+    buckets = defaultdict(lambda: defaultdict(list))
+    for r in rows:
+        if (
+            r["kind"] == "controlled"
+            and r["variant_id"] == "canonical"
+            and r["repeat"] == 0
+            and r["gold_label"] == "SAT"
+        ):
+            key = (r["task_type"], r["sweep"], r["level"], r["approach"])
+            buckets[key][r["group_id"]].append(int(r["gold_valid"]))
+    result = []
+    for key, groups in sorted(buckets.items(), key=lambda kv: str(kv[0])):
+        interval = None
+        if len(groups) >= 10:
+            rng = random.Random(seed)
+            keys = sorted(groups)
+            samples = []
+            for _ in range(resamples):
+                values = [v for g in rng.choices(keys, k=len(keys)) for v in groups[g]]
+                samples.append(sum(values) / len(values))
+            samples.sort()
+            interval = [samples[int(p * (resamples - 1))] for p in (0.025, 0.975)]
+        result.append(
+            {
+                "task_type": key[0],
+                "sweep": key[1],
+                "level": key[2],
+                "approach": key[3],
+                "group_count": len(groups),
+                "denominator": sum(map(len, groups.values())),
+                "cluster_bootstrap_95": interval,
+                "seed": seed,
+                "resamples": resamples,
+                "interval_note": (
+                    "descriptive_only_fewer_than_10_groups"
+                    if interval is None
+                    else "source_family_resampling"
+                ),
+            }
+        )
+    return result

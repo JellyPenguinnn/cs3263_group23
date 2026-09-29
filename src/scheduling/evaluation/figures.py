@@ -9,15 +9,37 @@ def export_figures(rows, directory: Path, *, evidence):
 
     matplotlib.use("Agg")
     import matplotlib.pyplot as plt
-    from scheduling.evaluation.metrics import difficulty_rates, robustness
+    from scheduling.evaluation.metrics import (
+        difficulty_rates,
+        difficulty_intervals,
+        robustness,
+    )
 
     figures = []
+    phase = (
+        "Frozen evaluation"
+        if evidence == "live_frozen"
+        else (
+            "Offline qualification"
+            if evidence in ("offline_canned", "offline_frozen")
+            else "Development"
+        )
+    )
+    qualifier = (
+        "Recorded results; scientific interpretation requires review"
+        if evidence == "live_frozen"
+        else "Descriptive evidence; not a frozen benchmark comparison"
+    )
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), layout="constrained")
     fig.suptitle(
-        f"Scheduling development diagnostics — {evidence}\nDescriptive evidence; not a frozen benchmark comparison",
+        f"{phase} scheduling diagnostics — {evidence}\n{qualifier}",
         fontsize=13,
     )
     difficulty = difficulty_rates(rows)
+    uncertainty = {
+        (r["task_type"], r["sweep"], r["level"], r["approach"]): r
+        for r in difficulty_intervals(rows)
+    }
     ax = axes[0, 0]
     canonical = defaultdict(list)
     for row in rows:
@@ -58,12 +80,12 @@ def export_figures(rows, directory: Path, *, evidence):
             and row["variant_id"] == "canonical"
             and row["repeat"] == 0
         ):
-            repairs[row["approach"]].append(row["objective_values"])
+            repairs[(row["kind"], row["approach"])].append(row["objective_values"])
     labels = []
     moved = []
     shift = []
-    for approach, values in sorted(repairs.items()):
-        labels.append(f"{approach}\nvalid n={len(values)}")
+    for (kind, approach), values in sorted(repairs.items()):
+        labels.append(f"{kind} / {approach}\nvalid n={len(values)}")
         moved.append(sum(v[0] for v in values) / len(values))
         shift.append(sum(v[1] for v in values) / len(values))
     xs = list(range(len(labels)))
@@ -107,7 +129,7 @@ def export_figures(rows, directory: Path, *, evidence):
             2, 4, figsize=(13, 6), layout="constrained", sharey=True
         )
         fig.suptitle(
-            f"Provisional development difficulty sweeps — {evidence}\nPoints show gold-SAT denominators; tiny cells are descriptive only",
+            f"{phase} difficulty sweeps — {evidence}\n95% family bootstrap when ≥10 groups; smaller cells descriptive (n shown)",
             fontsize=12,
         )
         for row_index, task in enumerate(("generation", "repair")):
@@ -137,6 +159,16 @@ def export_figures(rows, directory: Path, *, evidence):
                         alpha=0.8,
                     )
                     for x, y, r in zip(xs, ys, values):
+                        interval = uncertainty[(task, sweep, r["level"], approach)][
+                            "cluster_bootstrap_95"
+                        ]
+                        if interval is not None:
+                            ax.vlines(
+                                x,
+                                *interval,
+                                color="C0" if approach == "direct" else "C1",
+                                alpha=0.7,
+                            )
                         ax.annotate(
                             f"n={r['sat_validity']['denominator']}",
                             (x, y),

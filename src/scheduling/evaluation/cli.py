@@ -8,6 +8,7 @@ from scheduling.schema import load_json, to_data
 
 COMMANDS = (
     "benchmark-generate",
+    "freeze-draft",
     "validate",
     "evaluate-plan",
     "evaluate-batch",
@@ -18,11 +19,25 @@ COMMANDS = (
 def add_commands(commands):
     generate = commands.add_parser(
         "benchmark-generate",
-        help="Write six fixtures plus 24 synthetic development cases",
+        help="Write legacy v1 or balanced structural v2 development cases",
     )
     generate.add_argument("--output", type=Path, required=True)
     generate.add_argument("--seed", type=int, default=3263)
     generate.add_argument("--fixtures-only", action="store_true")
+    generate.add_argument("--version", choices=("1", "2"), default="1")
+    generate.add_argument("--repetitions", type=int, default=1)
+    draft = commands.add_parser(
+        "freeze-draft",
+        help="Write a non-runnable protocol draft for team review; no calls",
+    )
+    draft.add_argument("--cases", type=Path, required=True)
+    draft.add_argument("--config", type=Path, required=True)
+    draft.add_argument("--manifest", type=Path, required=True)
+    draft.add_argument("--development-registry", type=Path, required=True)
+    draft.add_argument(
+        "--mode", choices=("offline_frozen", "live_frozen"), default="offline_frozen"
+    )
+    draft.add_argument("--output", type=Path, required=True)
     validate = commands.add_parser(
         "validate", help="Independently validate a schedule against explicit gold"
     )
@@ -92,30 +107,79 @@ def run_command(args):
         from scheduling.evaluation.benchmark import tiny_fixtures, generate_development
         from scheduling.evaluation.cases import case_bundle
 
-        cases = (
-            tiny_fixtures()
-            if args.fixtures_only
-            else tiny_fixtures() + generate_development(args.seed)
+        from scheduling.evaluation.manifests import (
+            benchmark_manifest,
+            benchmark_manifest_v2,
         )
-        from scheduling.evaluation.manifests import benchmark_manifest
 
+        if args.version == "2":
+            if args.fixtures_only:
+                raise ValueError(
+                    "V2 is a separate procedural dataset; fixtures stay v1"
+                )
+            from scheduling.evaluation.benchmark import generate_development_v2
+            import subprocess
+
+            cases, provenance, selection = generate_development_v2(
+                args.seed, repetitions=args.repetitions
+            )
+            revision = subprocess.run(
+                ["git", "rev-parse", "HEAD"], capture_output=True, text=True
+            )
+            manifest = benchmark_manifest_v2(
+                cases,
+                generation_seed=args.seed,
+                rendering_seed=3263,
+                selection=selection,
+                records=provenance,
+                code_revision=(
+                    revision.stdout.strip()
+                    if revision.returncode == 0
+                    else "unavailable"
+                ),
+            )
+        else:
+            if args.repetitions != 1:
+                raise ValueError("Repetitions require generator v2")
+            cases = (
+                tiny_fixtures()
+                if args.fixtures_only
+                else tiny_fixtures() + generate_development(args.seed)
+            )
+            manifest = benchmark_manifest(
+                cases,
+                generation_seed=None if args.fixtures_only else args.seed,
+                rendering_seed=3263,
+            )
         manifest_path = args.output.with_suffix(".manifest.json")
         if args.output.exists() or manifest_path.exists():
             raise FileExistsError("Benchmark outputs already exist")
         args.output.parent.mkdir(parents=True, exist_ok=True)
         write_new(args.output, case_bundle(cases))
-        write_new(
-            manifest_path,
-            benchmark_manifest(
-                cases,
-                generation_seed=None if args.fixtures_only else args.seed,
-                rendering_seed=3263,
-            ),
-        )
+        write_new(manifest_path, manifest)
         result = {
+            "quota_complete": manifest.get("selection", {}).get("quota_complete", True),
             "case_count": len(cases),
             "split": "development",
             "human_review": "pending",
+        }
+    elif args.command == "freeze-draft":
+        from scheduling.evaluation.cases import load_cases
+        from scheduling.evaluation.frozen import draft_frozen_config
+
+        draft = draft_frozen_config(
+            load_cases(args.cases),
+            load_config(args.config),
+            load_json(args.manifest.read_text()),
+            load_json(args.development_registry.read_text()),
+            mode=args.mode,
+        )
+        args.output.parent.mkdir(parents=True, exist_ok=True)
+        write_new(args.output, draft)
+        result = {
+            "state": "draft_requires_team_review",
+            "model_calls": 0,
+            "output": str(args.output),
         }
     elif args.command == "validate":
         from scheduling.schema import ProblemSpec, RepairContext, Schedule
@@ -152,7 +216,7 @@ def run_command(args):
         def progress(event):
             print(json.dumps(event, sort_keys=True), file=sys.stderr, flush=True)
 
-        if config.evidence == "live_development":
+        if config.evidence in ("live_development", "live_frozen"):
             if not args.allow_live or args.canned:
                 raise ValueError(
                     "Live run needs explicit selection and no canned responses"
@@ -182,13 +246,18 @@ def run_command(args):
                 progress=progress,
             )
     else:
-        from scheduling.evaluation.metrics import summarize, export_tables
+        from scheduling.evaluation.metrics import (
+            summarize,
+            export_tables,
+            analysis_details,
+        )
 
         rows, progress = replay(args.run_dir)
         result = {"progress": progress, "summary": summarize(rows)}
         if args.export_dir:
             export_tables(rows, args.export_dir)
             write_new(args.export_dir / "summary.json", result)
+            write_new(args.export_dir / "analysis.json", analysis_details(rows))
             if args.figures:
                 from scheduling.evaluation.figures import export_figures
 
@@ -196,6 +265,8 @@ def run_command(args):
         elif args.figures:
             raise ValueError("Figures require an export directory")
     print(json.dumps(result, sort_keys=True))
+    if args.command == "benchmark-generate" and not result["quota_complete"]:
+        return 2
     return (
         2 if args.command == "evaluate-batch" and result["state"] != "completed" else 0
     )

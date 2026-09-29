@@ -48,7 +48,7 @@ All 60 requests completed; reported usage was 117,976 tokens. Currency cost is u
 
 These are **development results**, not evidence of general superiority. The set has 28 SAT and two UNSAT cases, no live language-robustness evaluation, and known generator limitations: redundant precedence edges, repair events tied to difficulty levels, and seeds that vary weights rather than hard scheduling structures. [The benchmark audit](planning.md#development-benchmark-audit--29-september-2026) defines the required improvements.
 
-The runner currently supports development cases only. Final experiments require a reviewed frozen-evaluation mode, fresh benchmark data, human review, and an eligible primary model or teaching-team acceptance of an alternative. Development scheduling inference remains SoCLaaS-only.
+The runner supports development runs and separately guarded `offline_frozen` / `live_frozen` modes. Frozen controls are technically qualified with synthetic tests; no real study has been frozen or run. Final experiments still require fresh data, human review, protocol/cap decisions and an eligible primary model or teaching-team acceptance. Development scheduling inference remains SoCLaaS-only.
 
 ## Getting started
 
@@ -111,7 +111,7 @@ Live commands/configuration select an explicit model; the saved development conf
 
 Certificate and hostname verification remain enabled. The Linux client includes ordinary issuer certificates to complete the service's previously incomplete chain; macOS uses native trust. If verification fails, investigate the chain/OS trust service rather than disabling TLS. [Issuer provenance](configs/development/tls-issuer-provenance.json) and the baseline report document the implementation.
 
-The [Yao Xiang follow-up](report/yaoxiang-formal-followup.md) records the local R1–R3 extension and its installed-build/live-pilot evidence. Solver JSON now includes optional versioned `domain_analysis`; extraction failures include `schema_diagnostics`. `scheduling explain` reads supported recorded conflicts while keeping solver proof and gold acceptance separate. Historical run files remain readable and unchanged.
+The [Yao Xiang follow-up](report/yaoxiang-formal-followup.md) records the R1–R3 extension now incorporated from main and its installed-build/live-pilot evidence. Solver JSON now includes optional versioned `domain_analysis`; extraction failures include `schema_diagnostics`. `scheduling explain` reads supported recorded conflicts while keeping solver proof and gold acceptance separate. Historical run files remain readable and unchanged.
 
 ### Run the integrated development baseline
 
@@ -142,6 +142,23 @@ Recompute saved results without model calls:
 
 A fresh clone contains aggregate evidence, not the private raw live run. To replay `main-baseline-20260929-01`, obtain the reviewed synthetic archive and checksum from the team; use the canned demo when that archive is unavailable. Do not substitute canned results for live evidence.
 
+### Revised benchmark and analysis
+
+The [Yong Qing follow-up](report/yongqing-evaluation-followup.md) records the v2 benchmark, frozen-run controls, qualification and separately capped live pilot. V1 generation remains the default so the old inputs stay reproducible. V2 generates 144 **development** cases per repetition: balanced generation/repair and SAT/UNSAT, three repair events at every sweep level, structural seeds, checked witnesses and an exclusion ledger. Human language/fixture review is pending.
+
+```sh
+.venv/bin/scheduling benchmark-generate --version 2 --seed 3264 \
+  --output runs/NEW-v2-input/cases.json
+# Full canned integration: 144 cases × 3 renderings × 2 paths, zero model calls.
+.venv/bin/python evaluation/v2_qualification.py runs/NEW-v2-qualification
+```
+
+The 24-call pilot config is for the **12 preselected cases only**; it does not authorize running the 144-case matrix live. Its recorded 24-call allowance is consumed. The completed pilot accepted A 2/6 generation and 1/6 repair answers, and B 6/6 for each, using 57,359 reported tokens. These six preselected families support descriptive development findings only. New live work requires a new cap and run identity.
+
+Replay exports the historical `summary.json` and a separate `analysis.json`: operational funnels, affected-instance violation counts, typed extraction differences, SAT/UNSAT paired strata, language objective changes and source-family difficulty intervals. Old summary meanings and raw archives are unchanged. Fewer than ten source families produces descriptive counts without a bootstrap interval.
+
+`freeze-draft` writes a deliberately non-runnable configuration with blank decision references; `scheduling freeze-draft --help` lists its inputs. A final protocol needs an exactly reviewed test-case manifest/renderings, the complete registry of previously developed hard structures (including legacy data), final model eligibility/access and explicit approval/budget references. Preflight checks source/prompt/input/config hashes, family grouping, leakage, caps and proven reference objectives before inference. Live frozen runs stop on backend-identity drift. Recorded references are audit fields, not automatic certification of human approval. Never retag development cases to populate a final study.
+
 ### Explain saved evidence
 
 ```sh
@@ -168,6 +185,8 @@ current verification and review boundaries.
 Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved progress, shows metrics with denominators, and lets you inspect schedules, violations and extraction diagnostics. It is read-only, binds to localhost and needs no credentials. Live batches run separately through the CLI. A run lock indicates possible activity, not proof that the process is still running.
 
 ## Verification
+
+The current Yong Qing follow-up passed **398 Python tests and three frontend tests from a fresh installed wheel on macOS**, dependency checks, 30 legacy references, 144 v2 references and 864 canned integration attempts. The original 60-call replay summary remains identical. This snapshot has not been executed on Linux; historical Linux results below apply to their recorded versions. See the follow-up report for commands and live-pilot evidence.
 
 The audit of code at `c2eeffc` on 29 September passed **284 Python tests, three frontend tests, JavaScript syntax checking, dependency checks, all 30 development references, and exact replay of all 60 saved records**. Source tests used `PYTHONPATH=src`. Native macOS TLS tests need access to the OS certificate service; a sandbox restriction was isolated and the complete suite passed with that access.
 

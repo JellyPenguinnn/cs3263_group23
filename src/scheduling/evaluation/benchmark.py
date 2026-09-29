@@ -374,3 +374,262 @@ def difficulty(spec):
         "interaction_density": len(edges) / len(pairs) if pairs else 0,
         "resource_contention": contention / len(pairs) if pairs else 0,
     }
+
+
+V2_SWEEPS = ("activity_count", "slack", "interaction_density", "resource_contention")
+V2_EVENTS = ("blocked", "deadline", "fixed_start")
+
+
+def _v2_candidate(seed, sweep, level, event, label, serial):
+    """Witness-first construction; every precedence edge has a reversible pair."""
+    import hashlib
+
+    rng = random.Random(
+        int.from_bytes(
+            hashlib.sha256(
+                f"{seed}/{sweep}/{level}/{event}/{label}/{serial}".encode()
+            ).digest(),
+            "big",
+        )
+    )
+    n = (4, 8, 12)[level] if sweep == "activity_count" else 8
+    radius = (1, 3, 6)[level] if sweep == "slack" else 3
+    edge_level = level if sweep == "interaction_density" else 1
+    sharing = (0.0, 0.5, 1.0)[level] if sweep == "resource_contention" else 0.5
+    ident = f"dev-v2-{seed}-{sweep}-{level}-{event}-{label.lower()}-{serial}"
+    full = (Window(0, 48),)
+    d = rng.choice((1, 2))
+    base = rng.randint(1, 3)
+    # A1 is fixed; A0 can precede or follow it individually. UNSAT updates leave
+    # only overlapping positions, so unary domains alone do not reveal the conflict.
+    starts = {"A0": base + d + 1, "A1": base}
+    durations = [d, d] + [rng.choice((1, 2)) for _ in range(n - 2)]
+    cursor = base + 2 * d + 4
+    for i in range(2, n):
+        starts[f"A{i}"] = cursor
+        cursor += durations[i] + (1 if n == 12 else rng.randint(1, 2))
+    assert cursor <= 48
+    assignments = [() for _ in range(n)]
+    assignments[0] = assignments[1] = ("Rpair",)
+    shuffled = list(range(2, n))
+    rng.shuffle(shuffled)
+    for i in shuffled[: round(sharing * (n - 2))]:
+        assignments[i] = ("Rshared",)
+    # Private participants identify events; an extra shared participant varies
+    # participant contention without removing any activity's immutable assignment.
+    shared_people = set(rng.sample(list(range(2, n)), min(3, n - 2)))
+    activity_windows = [(Window(base, base + 2 * d + 3),)] * 2
+    pair_edges = []
+    for i in range(2, n, 2):
+        j = i + 1
+        lo = max(base + 2 * d + 3, starts[f"A{i}"] - radius)
+        hi = min(48, starts[f"A{j}"] + durations[j] + radius)
+        activity_windows.extend([(Window(lo, hi),), (Window(lo, hi),)])
+        pair_edges.append((f"A{i}", f"A{j}"))
+    edge_count = (0, max(1, len(pair_edges) // 2), len(pair_edges))[edge_level]
+    rng.shuffle(pair_edges)
+    rules = [FixedStart("anchor", "A1", base)]
+    if event == "fixed_start":
+        rules.append(FixedStart("old-event", "A0", starts["A0"]))
+    rules += [
+        Precedence(f"edge{i}", a, b) for i, (a, b) in enumerate(pair_edges[:edge_count])
+    ]
+    rules += [
+        PreferredStart(
+            f"pref{i}", f"A{i}", starts[f"A{i}"], starts[f"A{i}"] + 1, rng.randint(1, 4)
+        )
+        for i in range(n)
+    ]
+    spec = ProblemSpec(
+        "1.0",
+        ident + "-original",
+        "generation",
+        48,
+        30,
+        "2026-10-05T00:00:00+08:00",
+        "+08:00",
+        tuple(Entity(f"P{i}", full) for i in range(n)) + (Entity("Pshared", full),),
+        (Entity("Rpair", full), Entity("Rshared", full)),
+        tuple(
+            Activity(
+                f"A{i}",
+                durations[i],
+                (f"P{i}",) + (("Pshared",) if i in shared_people else ()),
+                assignments[i],
+                activity_windows[i],
+            )
+            for i in range(n)
+        ),
+        tuple(rules),
+    )
+    if label == "SAT":
+        rule = {
+            "blocked": BlockedInterval(
+                "event", "participant", "P0", starts["A0"] + d - 1, starts["A0"] + d
+            ),
+            "deadline": Deadline("event", "A0", starts["A0"] + d - 1),
+            "fixed_start": FixedStart("event", "A0", starts["A0"] - 1),
+        }[event]
+    else:
+        rule = {
+            "blocked": BlockedInterval(
+                "event", "participant", "P0", base + d, base + 2 * d + 3
+            ),
+            "deadline": Deadline("event", "A0", base + d),
+            "fixed_start": FixedStart("event", "A0", base),
+        }[event]
+    updated = replace(
+        spec,
+        constraints=tuple(c for c in spec.constraints if c.id != "old-event") + (rule,),
+    )
+    generation = replace(
+        spec if label == "SAT" else updated, instance_id=ident + "-generation"
+    )
+    repair = replace(updated, instance_id=ident + "-repair", task_type="repair")
+    return ident, spec, generation, repair, _schedule(starts)
+
+
+def generate_development_v2(seed=3264, *, repetitions=1, reference_limits=None):
+    """Balanced 144-case development matrix per repetition, with bounded selection.
+
+    Three event types occur in every sweep/level/label cell. Never use model
+    outcomes for selection. All exclusions and incomplete cells stay visible.
+    """
+    from collections import Counter
+    from scheduling.solver import SolverLimits, solve
+    from scheduling.validation import validate_schedule
+    from scheduling.schema import RepairContext
+    from scheduling.evaluation.manifests import structural_fingerprint
+
+    if (
+        type(seed) is not int
+        or seed < 0
+        or type(repetitions) is not int
+        or not 1 <= repetitions <= 10
+    ):
+        raise ValueError("V2 requires a nonnegative seed and 1–10 repetitions")
+    limits = reference_limits or SolverLimits(5, 0, 1)
+    cases, records, exclusions, seen = [], {}, [], set()
+    requested = 4 * 3 * 3 * 2 * 2 * repetitions
+    constructed = 0
+    for sweep in V2_SWEEPS:
+        for level in range(3):
+            for event in V2_EVENTS:
+                for label in ("SAT", "UNSAT"):
+                    for repeat in range(repetitions):
+                        for retry in range(10):
+                            serial = repeat * 10 + retry
+                            group, original, gen, repair, witness = _v2_candidate(
+                                seed, sweep, level, event, label, serial
+                            )
+                            constructed += 1
+                            if not validate_schedule(original, witness).hard_feasible:
+                                raise ValueError("Constructed original witness invalid")
+                            old = solve(original, limits)
+                            if not old.optimality_proven or old.schedule is None:
+                                exclusions.append(
+                                    {
+                                        "candidate": group,
+                                        "reason": "original_reference_unresolved",
+                                        "status": old.status,
+                                    }
+                                )
+                                continue
+                            assert old.objectives.preference_penalty == 0
+                            keys = {
+                                structural_fingerprint(s)
+                                for s in (original, gen, repair)
+                            }
+                            if keys & seen:
+                                exclusions.append(
+                                    {
+                                        "candidate": group,
+                                        "reason": "related_hard_structure_already_selected",
+                                    }
+                                )
+                                continue
+                            solved = [
+                                solve(gen, limits),
+                                solve(repair, limits, RepairContext(old.schedule)),
+                            ]
+                            if any(
+                                r.status not in ("OPTIMAL", "INFEASIBLE")
+                                for r in solved
+                            ):
+                                exclusions.append(
+                                    {
+                                        "candidate": group,
+                                        "reason": "updated_reference_unresolved",
+                                        "statuses": [r.status for r in solved],
+                                    }
+                                )
+                                continue
+                            if any(
+                                (r.status == "OPTIMAL") != (label == "SAT")
+                                for r in solved
+                            ):
+                                raise ValueError(
+                                    "Constructed label disagrees with solver"
+                                )
+                            for spec, result in zip((gen, repair), solved):
+                                is_repair = spec.task_type == "repair"
+                                case = BenchmarkCase(
+                                    spec.instance_id,
+                                    group,
+                                    "development",
+                                    "controlled",
+                                    sweep,
+                                    str(level),
+                                    spec,
+                                    original if is_repair else None,
+                                    old.schedule if is_repair else None,
+                                    event if is_repair else None,
+                                    result.schedule,
+                                    label,
+                                    (
+                                        result.objectives.as_tuple()
+                                        if result.schedule
+                                        else None
+                                    ),
+                                    "SAT: independently checked witness and exact reference objective. UNSAT: A0 and fixed A1 require overlapping Rpair slots despite nonempty unary domains. Human review pending.",
+                                )
+                                cases.append(case)
+                                records[case.case_id] = {
+                                    "creation_method": "procedural",
+                                    "code_authorship": "AI-assisted",
+                                    "generation_seed": seed,
+                                    "candidate_serial": serial,
+                                    "event_type": event if is_repair else None,
+                                    "construction_event": event,
+                                    "gold_status": result.status,
+                                    "gold_optimality_proven": result.optimality_proven,
+                                    "reference_limits": {
+                                        "time_limit_seconds": limits.time_limit_seconds,
+                                        "random_seed": limits.random_seed,
+                                        "num_workers": limits.num_workers,
+                                    },
+                                    "fixture_review": "pending",
+                                    "language_review": "pending",
+                                    "selection_reason": "predeclared_balanced_cell_without_model_outputs",
+                                }
+                            seen.update(keys)
+                            break
+                        else:
+                            exclusions.append(
+                                {
+                                    "cell": [sweep, level, event, label, repeat],
+                                    "reason": "quota_unfilled_after_10_candidates",
+                                }
+                            )
+    selection = {
+        "policy_version": "2.0",
+        "policy": "Ten candidates per requested family; exclude unresolved references or prior hard fingerprints; never inspect model outcomes.",
+        "requested_cases": requested,
+        "selected_cases": len(cases),
+        "constructed_families": constructed,
+        "excluded_candidates": sum("candidate" in r for r in exclusions),
+        "exclusions": exclusions,
+        "quota_complete": len(cases) == requested,
+        "repair_event_counts": dict(Counter(c.event for c in cases if c.context)),
+    }
+    return tuple(cases), records, selection
