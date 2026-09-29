@@ -36,6 +36,8 @@ Both approaches receive the same task information and, for repair, the same orig
 
 The saved 29 September development run used `qwen3.6:35b`, 30 cases and one call per approach per case. Accepted answers include valid schedules and correct UNSAT predictions; failures remain in the denominator.
 
+The inputs are **6 project-authored fixed fixtures + 24 procedurally generated synthetic cases**; no public benchmark instances or real calendars were imported. The live responses came from SoCLaaS. SCHEDBench and NATURAL PLAN currently serve as research references. See [dataset provenance and the next evaluation design](planning.md#dataset-provenance--verified-29-september-2026).
+
 | Task | Direct A | Solver-assisted B |
 | --- | ---: | ---: |
 | Generation | 12/17 | 13/17 |
