@@ -4,7 +4,7 @@
 
 A research project comparing direct language-model scheduling with language-model-to-constraint-solver scheduling. We study both generating a new schedule and repairing an existing schedule after requirements change, while minimizing unnecessary disruption.
 
-**Status on `yongqing-evaluation`:** Yao Xiang's formal core is published as `69157d5`; this branch adds independent validation, six documented fixtures, a 24-case development generator, complete public renderings, canonical direct integration, capped serial runs/resume, offline replay, metrics and figure export. The schema and fixture review gates remain open. Development checks are distinct from frozen benchmark results. See [Yong Qing's implementation and handoff](report/yongqing-method-notes.md). The core delivery target remains **30 October 2026**.
+**Integrated baseline on `main` (29 September 2026):** all three member contributions are merged. The CLI connects direct generation/repair, extraction plus CP-SAT, independent gold validation, bounded live batches, durable records, replay, metrics and figures. Fresh installed macOS ARM64 and Linux ARM64 checks pass **278 tests**. A real **60-call `qwen3.6:35b` development run** completed with HTTP 200 for every request; the validator accepted 18/30 direct answers and 25/30 solver-augmented answers. Failures are retained. This validates the operational baseline, not perfect model accuracy or the frozen course experiment. See [the baseline validation report](report/main-baseline-validation.md).
 
 ## Research questions
 
@@ -21,7 +21,7 @@ A research project comparing direct language-model scheduling with language-mode
 | LLM-to-Solver | Same problem → structured specification → OR-Tools CP-SAT → schedule/status | Evaluated approach B |
 | Gold-to-Solver | Human-checked specification → CP-SAT → reference status/objective | Evaluation reference; not a natural-language competitor |
 
-Both approaches will be checked by an independent validator against the gold specification. A solver-valid answer to an incorrectly translated problem does not count as a correct answer to the original problem.
+Both approaches are checked by an independent validator against the gold specification. A solver-valid answer to an incorrectly translated problem does not count as a correct answer to the original problem.
 
 The core covers fixed-duration activities, availability, deadlines, fixed commitments, precedence, participant/resource non-overlap, preferences, and minimum-disruption repair. A small demo UI and verifier-feedback correction are stretch work. Live calendar integrations are outside project scope.
 
@@ -37,20 +37,20 @@ cd cs3263_group23
 3. Each member uses a separate local clone. Before an agent clones, switches branches, or implements work, have it confirm your identity, local path, assigned scope/branch, credential setup method, and intended milestone using [the onboarding instructions](AGENTS.md#member-onboarding-and-clarification). Already confirmed details do not need to be repeated.
 4. Fetch and switch to the confirmed member branch from the table below. For unresolved choices, the agent should explain the options and wait for your answer before dependent work. Supply API keys only through local secret configuration, never through chat.
 
-The runtime targets CPU-only Python 3.12 with remote SoCLaaS inference. A fresh macOS ARM64 source snapshot and installed package have been checked. Linux remains unverified: the local Docker daemon is unavailable, and remote CI results for this local Yao Xiang implementation are unavailable. No full scheduling/evaluation system or Gate B portability claim is made.
+The runtime uses CPU-only Python 3.12 and remote SoCLaaS inference. The installed package has been verified in fresh macOS ARM64 and Linux ARM64 environments, including all development references and credential-free HTTPS. Linux replay reproduces the saved live metrics without credentials. Hosted CI repeats installation/tests/preflight on Ubuntu and macOS; its remote result is not claimed here. Model access and final-model course eligibility remain separate checks.
 
 ### Install and verify (POSIX shell, Python 3.12)
 
 ```sh
 python3.12 -m venv .venv
 .venv/bin/python -m pip install --require-hashes -r requirements.lock
-.venv/bin/python -m pip install --no-deps --no-build-isolation -e .
+.venv/bin/python -m pip install --no-deps --no-build-isolation .
 .venv/bin/python -m pytest -q
 .venv/bin/python -m pip check
 .venv/bin/scheduling --help
 ```
 
-`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The core pins are HTTPX 0.28.1, truststore 0.10.4, pytest 8.4.2 and OR-Tools 9.14.6206; optional figure export adds Matplotlib 3.10.8. The scheduling compiler and exhaustive tiny objective checks now use this locked OR-Tools version. The lockfile is generated with pip-tools 7.5.1:
+`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The core pins are HTTPX 0.28.1, certifi 2026.7.22, truststore 0.10.4 and OR-Tools 9.14.6206; tests use pytest 8.4.2; optional figure export adds Matplotlib 3.10.8. The scheduling compiler and exhaustive tiny objective checks now use this locked OR-Tools version. The lockfile is generated with pip-tools 7.5.1:
 
 ```sh
 pip-compile --allow-unsafe --extra dev --extra solver --extra plots --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
@@ -68,7 +68,7 @@ Run lock regeneration only when intentionally updating dependencies; normal inst
 - `scheduling solve --spec tests/examples/formal-generation.json`: solve an explicit specification offline. Repair also requires `--original-schedule tests/examples/formal-original.json` with the repair spec.
 - `scheduling solver-offline --view tests/examples/generation-view.json --response-file tests/examples/formal-generation.json`: one canned extraction through real CP-SAT. Both commands accept `--time-limit`, `--seed`, `--workers`, and an optional new `--output` path.
 
-The earlier formal-core verification passed 203 tests. The earlier fresh noneditable macOS verification passed **251 offline tests**, `pip check`, and the complete evaluation demo/resume/replay/figure workflow. After the TLS fix, this checkout passes **255 offline tests** and `pip check`. TLS tests use the local `openssl` executable to generate temporary certificates and socket pairs without network access. Linux remains unverified.
+The merged baseline passes **278 tests** in this checkout and in installed macOS/Linux packages, plus `pip check` and the 30-case reference preflight. TLS tests use the local `openssl` executable and socket pairs, without a live network. CP-SAT is a required runtime dependency; the older `solver` extra remains accepted for compatibility. Use `-e .` instead of `.` only when intentionally developing an editable installation.
 
 The solver API, strict wire format, repair proof handling, limitations and teammate handoff are in [the formal-core notes](report/yaoxiang-method-notes.md). The schema is a shared draft, not a completed team freeze. Install the hashed lock above to include the solver dependency.
 
@@ -76,23 +76,44 @@ Provider and direct component interfaces are in `src/scheduling/providers/` and 
 
 `request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang supplied draft canonical types, and the explicitly authorized `run_direct(nl_view, model_config)` adapter now wraps this component. Yong Qing implemented independent gold validation and batch/metrics/replay; teammate contract review remains required. No placeholder commands for those components are exposed.
 
-A live single-case output is created with mode 600 before requesting, so interruption remains visible; completion replaces it atomically. Reusing an output filename refuses another call. Completed outputs remain private/ignored under `runs/`; the full experiment runner will handle immutable manifests and resume. Treat arbitrary saved model outputs as untrusted data.
+A live single-case output is created with mode 600 before requesting, so interruption remains visible; completion replaces it atomically. Reusing an output filename refuses another call. Completed outputs remain private/ignored under `runs/`; the batch runner preserves immutable manifests and resumes completed records without new calls. Treat arbitrary saved model outputs as untrusted data.
 
 The current direct JSON output contract is provisional for team review: exactly `status` and `schedule`; SAT carries a list of `{activity_id, start_slot}` objects, while UNSAT/UNKNOWN carry `null`. Starts must be nonnegative integers. Markdown fences, duplicate JSON keys, extra fields, and missing/duplicate/invented activities are rejected. Normalization only sorts entries by ID. Full schedule semantics require independent validation.
 
 
-### Evaluation development workflow
+### Run the integrated development baseline
 
-The approved four-call `qwen3.6:35b` development check produced four preserved transport errors, with no HTTP response or reported usage. A credential-free check with the provider CA bundle found TLS verification error 20 (`unable to get local issuer certificate`). The cap is consumed and those records remain unchanged: see [the original verification receipt](configs/development/yongqing-verification.json). The TLS fix below now passes a credential-free HTTP 200 check on macOS; a fresh cap and new run ID are required before retrying model calls.
+The tracked [development configuration](configs/development/main-baseline.json) selects `qwen3.6:35b`, 60 serial requests, one canonical rendering per case, one attempt per approach, 8,192 maximum output tokens per call, a 180-second read timeout, 10 seconds per B solve and 30 seconds per gold reference. These limits are configuration, not ongoing spending authorization. Obtain a fresh cap before a new live run. Input tokens are additional; currency cost is unavailable.
+
+Run from the repository after installation. Choose unused output/run names:
 
 ```sh
-.venv/bin/scheduling benchmark-generate --output runs/NEW-development.json
-.venv/bin/python evaluation/offline_demo.py runs/NEW-offline-demo
-.venv/bin/scheduling evaluate-replay --run-dir runs/NEW-offline-demo --export-dir artifacts/NEW-export --figures
-.venv/bin/scheduling validate --spec tests/examples/formal-generation.json --schedule tests/examples/formal-original.json
+# Generate all 30 cases and check their gold references without credentials.
+.venv/bin/scheduling benchmark-generate --output runs/NEW-input/cases.json
+.venv/bin/scheduling evaluate-plan --cases runs/NEW-input/cases.json \
+  --config configs/development/main-baseline.json --output runs/NEW-input/preflight.json
+
+# After the run's cap is authorized, load the ignored local credential.
+set +x
+set -a
+. ./.env
+set +a
+.venv/bin/scheduling evaluate-batch --allow-live \
+  --cases runs/NEW-input/cases.json --config configs/development/main-baseline.json \
+  --run-dir runs/NEW-live
+
+# Recompute validation, tables and figures from saved live responses; no model calls.
+.venv/bin/scheduling evaluate-replay --run-dir runs/NEW-live \
+  --export-dir artifacts/NEW-live --figures
 ```
 
-Create the parent output directory first when using a new checkout. Outputs refuse existing filenames. The demo performs 180 **canned** attempts across 30 development cases and three renderings, including deliberate failures; it makes zero model calls. The manifest records seeds, source/config/prompt hashes, references, caps and evidence class. Run/resume requires matching inputs/configuration/source. An interrupted request reservation needs explicit reconciliation, never an automatic retry. `evaluate-batch --help` describes offline/live selection; live calls require a separately approved cap. These commands do not imply a passed shared gate or human-reviewed benchmark.
+Progress events go to stderr; the final machine-readable outcome goes to stdout. A completed run returns exit code 0, including legitimately rejected model answers. Budget exhaustion, provider stops and invalid inputs return 2. Authentication, rate-limit, TLS, timeout and HTTP failures stop the batch; there are no hidden retries or canned substitutes. A completed rerun with identical source/configuration/input reuses its records. A changed source, prompt or setting requires a new run ID. Interrupted reservations require explicit reconciliation.
+
+Architecture: evaluator-only cases → common public rendering → A: direct model → strict schedule parser; B: extraction model → strict schema → fixed CP-SAT compiler. Both results then enter the independent gold validator → immutable attempt records → replay/metrics/figures. Gold references never enter either model prompt. An incorrect extraction can yield a solver-valid schedule; independent gold checking remains mandatory.
+
+The actual run `runs/main-baseline-20260929-01/` and its frozen source/input archive remain private/ignored. [The tracked aggregate receipt](configs/development/main-baseline-verification.json) and [validation report](report/main-baseline-validation.md) record provenance and observed failures. A 28-SAT/2-UNSAT development set is not the balanced held-out matrix. Human-written realistic cases, wording review, final-model eligibility, the evaluation freeze and final experiments remain open.
+
+`evaluation/offline_demo.py` remains available for testing/rehearsal and is explicitly labelled canned. It is not substituted for the live evidence above. Single-spec solving, validation and direct component commands remain available through `scheduling --help`.
 
 ### Start with a coding agent
 
@@ -114,9 +135,9 @@ The plan contains the technical information needed to start; the original course
 
 **Scheduling-model inference during development uses SoCLaaS only; no frontier-model access is needed to begin implementation or development pilots.** This does not restrict the coding assistant used to develop the software. Final evaluation model selection is a separate milestone by 18 October, before held-out experiments. The course requires a frontier-model comparison unless the teaching team accepts an alternative; SoCLaaS access alone does not establish that acceptance.
 
-The provider now uses an explicit `truststore.SSLContext` with native system trust, required certificate verification and hostname checking. It does not globally patch SSL, follow redirects or enable environment proxies. No credential or `.env` change is needed; install the updated hashed lock and package with the setup commands above.
+The provider requires certificate and hostname verification, disables environment proxies and redirects, and never globally patches SSL. macOS uses native truststore verification. Linux uses certifi roots plus two packaged ordinary issuer certificates because the current server omits its intermediate chain. Partial-chain trust is explicitly disabled: those issuers cannot become new trust anchors. The certificates came from [Let's Encrypt's official chain publication](https://letsencrypt.org/certificates/); [source URLs, fingerprints and validity](configs/development/tls-issuer-provenance.json) are recorded. See [OpenSSL's trust-anchor rules](https://docs.openssl.org/3.0/man1/openssl-verification-options/). Credential-free HTTP 200 checks passed on both operating systems.
 
-On 29 September, the endpoint sent only its leaf certificate, issued by Let's Encrypt YE2. The certifi-only client could not build the issuer chain. Native macOS verification resolves the missing intermediates, and the patched client returned **HTTP 200** to a credential-free HEAD request. See [the TLS receipt](configs/development/tls-verification-20260929.json), [truststore documentation](https://truststore.readthedocs.io/en/stable/) and [the published CA chains](https://letsencrypt.org/certificates/). This is a verified local client fix; the service should still send its complete intermediate chain for other clients. Linux uses OpenSSL and is not covered by this macOS check. Do not disable TLS verification if another host fails.
+The service should still send its complete chain. Recheck the supplement if its issuer changes or before YE2 expires on 2 September 2028; never disable verification. The prior four-call TLS failures and earlier native-macOS receipt remain historical evidence. No `.env` changes are needed for this fix.
 
 Configure access to the NUS SoCLaaS API:
 

@@ -1,6 +1,6 @@
 """Evaluator-only case metadata around the canonical problem types."""
 
-from dataclasses import dataclass
+from dataclasses import dataclass, fields
 from pathlib import Path
 
 from scheduling.schema import (
@@ -104,6 +104,13 @@ class BenchmarkCase:
 
     @classmethod
     def from_dict(cls, data):
+        required = {"case_id", "group_id", "split", "kind", "sweep", "level", "problem"}
+        if (
+            not isinstance(data, dict)
+            or not required <= set(data)
+            or set(data) - {f.name for f in fields(cls)}
+        ):
+            raise ValueError("Missing or unsupported benchmark case fields")
         row = dict(data)
         row["problem"] = ProblemSpec.from_dict(row["problem"])
         if row.get("original_problem") is not None:
@@ -112,6 +119,8 @@ class BenchmarkCase:
             if row.get(key) is not None:
                 row[key] = Schedule.from_list(row[key])
         if row.get("expected_objective") is not None:
+            if not isinstance(row["expected_objective"], list):
+                raise ValueError("Expected objective must be an array")
             row["expected_objective"] = tuple(row["expected_objective"])
         return cls(**row)
 
@@ -134,6 +143,7 @@ def load_cases(path: Path):
         not isinstance(data, dict)
         or set(data) != {"format_version", "cases"}
         or data["format_version"] != "1.0"
+        or not isinstance(data["cases"], list)
     ):
         raise ValueError("Unsupported benchmark bundle")
     return check_case_set(tuple(BenchmarkCase.from_dict(row) for row in data["cases"]))

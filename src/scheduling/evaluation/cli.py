@@ -1,10 +1,18 @@
 """Evaluation CLI; live execution is explicit and capped, replay is offline."""
 
 import json
+import sys
+from dataclasses import fields
 from pathlib import Path
 from scheduling.schema import load_json, to_data
 
-COMMANDS = ("benchmark-generate", "validate", "evaluate-batch", "evaluate-replay")
+COMMANDS = (
+    "benchmark-generate",
+    "validate",
+    "evaluate-plan",
+    "evaluate-batch",
+    "evaluate-replay",
+)
 
 
 def add_commands(commands):
@@ -21,6 +29,13 @@ def add_commands(commands):
     validate.add_argument("--spec", type=Path, required=True)
     validate.add_argument("--schedule", type=Path, required=True)
     validate.add_argument("--original-schedule", type=Path)
+    plan = commands.add_parser(
+        "evaluate-plan",
+        help="Validate references and size a run without credentials or model calls",
+    )
+    plan.add_argument("--cases", type=Path, required=True)
+    plan.add_argument("--config", type=Path, required=True)
+    plan.add_argument("--output", type=Path)
     batch = commands.add_parser(
         "evaluate-batch",
         help="Run/resume a capped development batch with immutable records",
@@ -45,12 +60,29 @@ def load_config(path):
     from scheduling.solver import SolverLimits
 
     data = load_json(path.read_text(encoding="utf-8"))
-    data["model"] = ModelConfig(**data["model"])
-    data["solver"] = SolverLimits(**data["solver"])
-    data["reference_solver"] = SolverLimits(**data["reference_solver"])
+    if not isinstance(data, dict) or set(data) - {f.name for f in fields(RunConfig)}:
+        raise ValueError("Unsupported run configuration fields")
+    for name, cls in (
+        ("model", ModelConfig),
+        ("solver", SolverLimits),
+        ("reference_solver", SolverLimits),
+    ):
+        if not isinstance(data.get(name), dict):
+            raise ValueError("Missing model or solver configuration")
+        try:
+            data[name] = cls(**data[name])
+        except TypeError:
+            raise ValueError(
+                "Unsupported model or solver configuration fields"
+            ) from None
     if "variants" in data:
+        if not isinstance(data["variants"], list):
+            raise ValueError("Variants must be an explicit array")
         data["variants"] = tuple(data["variants"])
-    return RunConfig(**data)
+    try:
+        return RunConfig(**data)
+    except TypeError:
+        raise ValueError("Missing or invalid run configuration fields") from None
 
 
 def run_command(args):
@@ -70,6 +102,7 @@ def run_command(args):
         manifest_path = args.output.with_suffix(".manifest.json")
         if args.output.exists() or manifest_path.exists():
             raise FileExistsError("Benchmark outputs already exist")
+        args.output.parent.mkdir(parents=True, exist_ok=True)
         write_new(args.output, case_bundle(cases))
         write_new(
             manifest_path,
@@ -100,11 +133,25 @@ def run_command(args):
         result = to_data(validate_schedule(spec, schedule, context))
         print(json.dumps(result, sort_keys=True))
         return 0 if result["hard_feasible"] else 2
+    elif args.command == "evaluate-plan":
+        from scheduling.evaluation.cases import load_cases
+        from scheduling.evaluation.runner import plan_run
+
+        result = plan_run(load_cases(args.cases), load_config(args.config))
+        if args.output:
+            args.output.parent.mkdir(parents=True, exist_ok=True)
+            write_new(args.output, result)
+        print(json.dumps(result, sort_keys=True))
+        return 0 if result["state"] == "ready" and result["within_cap"] else 2
     elif args.command == "evaluate-batch":
         from scheduling.evaluation.cases import load_cases
 
         config = load_config(args.config)
         cases = load_cases(args.cases)
+
+        def progress(event):
+            print(json.dumps(event, sort_keys=True), file=sys.stderr, flush=True)
+
         if config.evidence == "live_development":
             if not args.allow_live or args.canned:
                 raise ValueError(
@@ -118,13 +165,21 @@ def run_command(args):
                 )
             ) as provider:
                 result = run_batch(
-                    cases, args.run_dir, config, provider_complete=provider.complete
+                    cases,
+                    args.run_dir,
+                    config,
+                    provider_complete=provider.complete,
+                    progress=progress,
                 )
         else:
             if args.allow_live or not args.canned:
                 raise ValueError("Offline batch requires canned responses")
             result = run_batch(
-                cases, args.run_dir, config, canned=load_json(args.canned.read_text())
+                cases,
+                args.run_dir,
+                config,
+                canned=load_json(args.canned.read_text()),
+                progress=progress,
             )
     else:
         from scheduling.evaluation.metrics import summarize, export_tables
@@ -141,4 +196,6 @@ def run_command(args):
         elif args.figures:
             raise ValueError("Figures require an export directory")
     print(json.dumps(result, sort_keys=True))
-    return 0
+    return (
+        2 if args.command == "evaluate-batch" and result["state"] != "completed" else 0
+    )

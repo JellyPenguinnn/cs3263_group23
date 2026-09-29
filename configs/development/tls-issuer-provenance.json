@@ -1,0 +1,28 @@
+{
+  "retrieved": "2026-09-29",
+  "purpose": "Missing server intermediates for strict OpenSSL verification; not additional trust anchors",
+  "certificates": [
+    {
+      "url": "https://letsencrypt.org/certs/gen-y/int-ye2.pem",
+      "sha256": "a1809226d01db1ae8df803a73a31a97330a924e3059c42b4be599449c43c5119",
+      "certificate": [
+        "subject=C=US, O=Let's Encrypt, CN=YE2",
+        "issuer=C=US, O=ISRG, CN=Root YE",
+        "notBefore=Sep  3 00:00:00 2025 GMT",
+        "notAfter=Sep  2 23:59:59 2028 GMT",
+        "sha256 Fingerprint=97:65:8D:E8:C6:8D:FA:98:AC:E1:E5:02:8A:63:D5:4A:1A:AE:91:1B:3E:21:47:10:76:C6:85:0C:D0:8C:BA:B4"
+      ]
+    },
+    {
+      "url": "https://letsencrypt.org/certs/gen-y/root-ye-by-x2.pem",
+      "sha256": "2681e97e939cab7cde4fad1dc733fc7c99e39a203190e8f298e1c02ab431b1e9",
+      "certificate": [
+        "subject=C=US, O=ISRG, CN=Root YE",
+        "issuer=C=US, O=Internet Security Research Group, CN=ISRG Root X2",
+        "notBefore=May 13 00:00:00 2026 GMT",
+        "notAfter=Sep  2 23:59:59 2032 GMT",
+        "sha256 Fingerprint=0F:C0:90:1C:CA:2B:AE:9E:9F:DB:B0:2D:50:D0:2F:10:94:F7:B3:66:72:08:69:91:B9:E8:97:62:6D:C4:85:F0"
+      ]
+    }
+  ]
+}

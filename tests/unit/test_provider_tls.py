@@ -2,6 +2,7 @@
 
 from concurrent.futures import ThreadPoolExecutor
 import socket
+import platform
 import ssl
 import subprocess
 
@@ -10,6 +11,7 @@ import pytest
 import truststore
 
 from scheduling.providers import RequestBudget, SoCLaaSProvider
+from scheduling.providers.tls import create_tls_context
 
 
 def test_provider_uses_verified_native_context_without_environment_routing(monkeypatch):
@@ -26,7 +28,11 @@ def test_provider_uses_verified_native_context_without_environment_routing(monke
     monkeypatch.setenv("SSL_CERT_FILE", "/does-not-exist")
     with SoCLaaSProvider(api_key="test-only", budget=RequestBudget(1, 32)):
         context = captured["verify"]
-        assert isinstance(context, truststore.SSLContext)
+        assert isinstance(context, ssl.SSLContext)
+        if platform.system() != "Linux":
+            assert isinstance(context, truststore.SSLContext)
+        else:
+            assert not context.verify_flags & ssl.VERIFY_X509_PARTIAL_CHAIN
         assert context.verify_mode == ssl.CERT_REQUIRED
         assert context.check_hostname is True
         assert captured["trust_env"] is False
@@ -60,11 +66,16 @@ def local_certificate(tmp_path_factory):
     (False, "localhost", False),
     (True, "wrong.example", False),
 ])
-def test_native_handshake_fails_closed(local_certificate, trusted, hostname, accepted):
+@pytest.mark.parametrize("backend", ["native", "linux"])
+def test_native_handshake_fails_closed(local_certificate, trusted, hostname, accepted, backend, monkeypatch):
     cert, key = local_certificate
     server_context = ssl.SSLContext(ssl.PROTOCOL_TLS_SERVER)
     server_context.load_cert_chain(cert, key)
-    client_context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
+    if backend == "linux":
+        monkeypatch.setattr(platform, "system", lambda: "Linux")
+        client_context = create_tls_context()
+    else:
+        client_context = truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT)
     if trusted:
         client_context.load_verify_locations(cafile=str(cert))
     # socketpair stays entirely within the process: no connect(), port or network.
@@ -94,3 +105,24 @@ def test_native_handshake_fails_closed(local_certificate, trusted, hostname, acc
     finally:
         client_socket.close()
         server_socket.close()
+
+
+def test_packaged_issuers_chain_to_existing_roots_but_are_not_roots(tmp_path):
+    import certifi
+    from importlib.resources import files
+    chain = files("scheduling.providers").joinpath("issuer-chain.crt").read_text()
+    assert chain.count("-----BEGIN CERTIFICATE-----") == 2
+    assert "TRUSTED CERTIFICATE" not in chain
+    bundle = tmp_path / "issuers.pem"
+    bundle.write_text(chain)
+    verified = subprocess.run(
+        ["openssl", "verify", "-CAfile", certifi.where(), "-untrusted", str(bundle), str(bundle)],
+        capture_output=True,
+    )
+    assert verified.returncode == 0
+    # Explicitly disable default roots: the supplied chain alone must not be trusted.
+    isolated = subprocess.run(
+        ["openssl", "verify", "-CAfile", str(bundle), "-CApath", str(tmp_path), str(bundle)],
+        capture_output=True,
+    )
+    assert isolated.returncode != 0

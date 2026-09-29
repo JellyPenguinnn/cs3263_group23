@@ -1,0 +1,171 @@
+{
+  "evidence": "live_development_not_frozen_benchmark",
+  "recorded_utc": "2026-09-29T06:56:51.355303+00:00",
+  "merged_base_commit": "eea2e098007d43cfc38f314dac37f0243e8a0892",
+  "verification": {
+    "tests_each": 278,
+    "environments": [
+      "macOS ARM64 Python 3.12.2, fresh noneditable installation",
+      "Linux ARM64 Python 3.12.14, isolated container noneditable installation"
+    ],
+    "pip_check": "passed",
+    "credential_free_https": {
+      "macos": 200,
+      "linux": 200
+    },
+    "replay": "Frozen-run, final macOS and final Linux summaries exactly equal",
+    "resume": "Completed frozen-source run resumed without any provider calls",
+    "archive": "runs/main-baseline-verification-20260929",
+    "final_source_sha256_file": "14e74a527f7553727072baca2367defdffca28902e2a8ce40e862f36a794a831",
+    "linux_base_image": "python@sha256:f77ac9e44ae96ef2c90b8053ea08c31f8be030f824196b0ae4db6d462c84e51f"
+  },
+  "live_run": {
+    "run_id": "main-baseline-20260929-01",
+    "config": "configs/development/main-baseline.json",
+    "cases": 30,
+    "case_sizes": [
+      2,
+      4,
+      8,
+      12
+    ],
+    "task_counts": {
+      "generation": 17,
+      "repair": 13
+    },
+    "reference_labels": {
+      "SAT": 28,
+      "UNSAT": 2
+    },
+    "model": "qwen3.6:35b",
+    "calls": 60,
+    "http_200": 60,
+    "finish_stop": 60,
+    "retries": 0,
+    "requested_output_tokens_reserved": 491520,
+    "reported_usage": {
+      "prompt_tokens": 76876,
+      "completion_tokens": 41100,
+      "total_tokens": 117976
+    },
+    "results": [
+      {
+        "task_type": "generation",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 12,
+          "denominator": 17,
+          "rate": 0.7058823529411765
+        },
+        "sat_validity": {
+          "numerator": 11,
+          "denominator": 16,
+          "rate": 0.6875
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "category_counts": {
+          "accepted": 12,
+          "gold_invalid_schedule": 5
+        },
+        "extraction_mismatches": 0
+      },
+      {
+        "task_type": "generation",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 13,
+          "denominator": 17,
+          "rate": 0.7647058823529411
+        },
+        "sat_validity": {
+          "numerator": 13,
+          "denominator": 16,
+          "rate": 0.8125
+        },
+        "unsat_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "category_counts": {
+          "invalid_output": 4,
+          "accepted": 13
+        },
+        "extraction_mismatches": 0
+      },
+      {
+        "task_type": "repair",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 6,
+          "denominator": 13,
+          "rate": 0.46153846153846156
+        },
+        "sat_validity": {
+          "numerator": 5,
+          "denominator": 12,
+          "rate": 0.4166666666666667
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "category_counts": {
+          "false_unsat": 2,
+          "accepted": 6,
+          "gold_invalid_schedule": 5
+        },
+        "extraction_mismatches": 0
+      },
+      {
+        "task_type": "repair",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 12,
+          "denominator": 13,
+          "rate": 0.9230769230769231
+        },
+        "sat_validity": {
+          "numerator": 11,
+          "denominator": 12,
+          "rate": 0.9166666666666666
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "category_counts": {
+          "accepted": 12,
+          "invalid_output": 1
+        },
+        "extraction_mismatches": 0
+      }
+    ],
+    "progress": {
+      "pending_attempt_ids": [],
+      "completed": 60,
+      "reserved": 60,
+      "planned": 60,
+      "not_started": 0,
+      "evidence": "live_development"
+    },
+    "manifest_sha256": "260db3ff587ff37d3b6909bccddb477ac3e8020ae28a969bfbcb86c3f65c68f6",
+    "exports": "artifacts/main-baseline-20260929-01",
+    "artifact_checksums": "runs/main-baseline-verification-20260929/live-artifact-sha256.json"
+  },
+  "boundaries": [
+    "Live source is frozen in runs/main-baseline-20260929-01-source; subsequent Linux TLS packaging and issuer provenance changes did not alter prompts, schedules, constraints or scoring. Final replay equality was verified.",
+    "Final verification source snapshot precedes documentation-only updates.",
+    "A failures: ten invalid schedules and two false UNSAT claims. B failures: five schema-invalid responses containing an extra resource capacity field. Raw outputs unchanged.",
+    "All 60 approved calls consumed; another live run needs a new cap.",
+    "No held-out evaluation, independent human review or model-eligibility approval claimed.",
+    "No remote CI status claimed; local macOS/Linux checks executed."
+  ],
+  "working_tree_dirty_at_verification": true
+}

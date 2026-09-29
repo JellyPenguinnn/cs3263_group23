@@ -1,0 +1,1604 @@
+{
+  "evidence": "live_development_not_frozen_benchmark",
+  "run_id": "main-baseline-20260929-01",
+  "summary": {
+    "evidence": "recomputed_from_saved_attempts",
+    "subsets": [
+      {
+        "subset": {
+          "kind": "controlled",
+          "task_type": "generation",
+          "variant_id": "canonical",
+          "repeat": 0,
+          "approach": "direct",
+          "config_sha256": "4ff55586bbfa34df42e7816d618f4db55e86f6f6bf6d105189e4c61ab98d6d66"
+        },
+        "primary_controlled": true,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "attempt_count": 17,
+        "group_count": 17,
+        "accepted_answer": {
+          "numerator": 12,
+          "denominator": 17,
+          "rate": 0.7058823529411765
+        },
+        "sat_validity": {
+          "numerator": 11,
+          "denominator": 16,
+          "rate": 0.6875
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "unresolved_reference_count": 0,
+        "status_counts": {
+          "SAT": 16,
+          "UNSAT": 1
+        },
+        "confusion": {
+          "SAT->SAT": 16,
+          "UNSAT->UNSAT": 1
+        },
+        "category_counts": {
+          "accepted": 12,
+          "gold_invalid_schedule": 5
+        },
+        "violation_counts": {
+          "activity_availability": 21
+        },
+        "accepted_wilson_95": [
+          0.4686688993346016,
+          0.8672001038970478
+        ],
+        "objective_gaps": [
+          {
+            "count": 11,
+            "mean": 5.545454545454546
+          }
+        ],
+        "tokens": {
+          "prompt_tokens": {
+            "reported_sum": 14575,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          },
+          "completion_tokens": {
+            "reported_sum": 2475,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          },
+          "total_tokens": {
+            "reported_sum": 17050,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          }
+        },
+        "requests": 17,
+        "uncertain_reservations": 0,
+        "extraction_mismatches": 0,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 17,
+            "mean": 1.516089176539989
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 0,
+            "mean": null
+          },
+          {
+            "component": "solver_seconds",
+            "count": 0,
+            "mean": null
+          }
+        ],
+        "cost": null
+      },
+      {
+        "subset": {
+          "kind": "controlled",
+          "task_type": "generation",
+          "variant_id": "canonical",
+          "repeat": 0,
+          "approach": "solver_augmented",
+          "config_sha256": "143ba1ed116508a0ef9dd4604034e5dab5d033948d541e69e148429f12e4ad23"
+        },
+        "primary_controlled": true,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "attempt_count": 17,
+        "group_count": 17,
+        "accepted_answer": {
+          "numerator": 13,
+          "denominator": 17,
+          "rate": 0.7647058823529411
+        },
+        "sat_validity": {
+          "numerator": 13,
+          "denominator": 16,
+          "rate": 0.8125
+        },
+        "unsat_accuracy": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "unresolved_reference_count": 0,
+        "status_counts": {
+          "INVALID_OUTPUT": 4,
+          "SAT": 13
+        },
+        "confusion": {
+          "SAT->INVALID_OUTPUT": 3,
+          "SAT->SAT": 13,
+          "UNSAT->INVALID_OUTPUT": 1
+        },
+        "category_counts": {
+          "invalid_output": 4,
+          "accepted": 13
+        },
+        "violation_counts": {},
+        "accepted_wilson_95": [
+          0.5273820188043501,
+          0.9044495567791988
+        ],
+        "objective_gaps": [
+          {
+            "count": 13,
+            "mean": 0.0
+          }
+        ],
+        "tokens": {
+          "prompt_tokens": {
+            "reported_sum": 24456,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          },
+          "completion_tokens": {
+            "reported_sum": 19310,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          },
+          "total_tokens": {
+            "reported_sum": 43766,
+            "reported_attempts": 17,
+            "all_provider_attempts": 17
+          }
+        },
+        "requests": 17,
+        "uncertain_reservations": 0,
+        "extraction_mismatches": 0,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 17,
+            "mean": 8.769957725396928
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 13,
+            "mean": 9.369187734089792
+          },
+          {
+            "component": "solver_seconds",
+            "count": 13,
+            "mean": 0.005108378326090483
+          }
+        ],
+        "cost": null
+      },
+      {
+        "subset": {
+          "kind": "controlled",
+          "task_type": "repair",
+          "variant_id": "canonical",
+          "repeat": 0,
+          "approach": "direct",
+          "config_sha256": "4ff55586bbfa34df42e7816d618f4db55e86f6f6bf6d105189e4c61ab98d6d66"
+        },
+        "primary_controlled": true,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "attempt_count": 13,
+        "group_count": 13,
+        "accepted_answer": {
+          "numerator": 6,
+          "denominator": 13,
+          "rate": 0.46153846153846156
+        },
+        "sat_validity": {
+          "numerator": 5,
+          "denominator": 12,
+          "rate": 0.4166666666666667
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "unresolved_reference_count": 0,
+        "status_counts": {
+          "UNSAT": 3,
+          "SAT": 10
+        },
+        "confusion": {
+          "SAT->UNSAT": 2,
+          "SAT->SAT": 10,
+          "UNSAT->UNSAT": 1
+        },
+        "category_counts": {
+          "false_unsat": 2,
+          "accepted": 6,
+          "gold_invalid_schedule": 5
+        },
+        "violation_counts": {
+          "deadline": 2,
+          "activity_availability": 14
+        },
+        "accepted_wilson_95": [
+          0.23206067809538303,
+          0.7085620428549398
+        ],
+        "objective_gaps": [
+          {
+            "count": 5,
+            "mean": 0.8
+          },
+          {
+            "count": 3,
+            "mean": 0.0
+          },
+          {
+            "count": 3,
+            "mean": 0.0
+          }
+        ],
+        "tokens": {
+          "prompt_tokens": {
+            "reported_sum": 15420,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          },
+          "completion_tokens": {
+            "reported_sum": 1722,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          },
+          "total_tokens": {
+            "reported_sum": 17142,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          }
+        },
+        "requests": 13,
+        "uncertain_reservations": 0,
+        "extraction_mismatches": 0,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 13,
+            "mean": 1.4282530833465548
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 0,
+            "mean": null
+          },
+          {
+            "component": "solver_seconds",
+            "count": 0,
+            "mean": null
+          }
+        ],
+        "cost": null
+      },
+      {
+        "subset": {
+          "kind": "controlled",
+          "task_type": "repair",
+          "variant_id": "canonical",
+          "repeat": 0,
+          "approach": "solver_augmented",
+          "config_sha256": "143ba1ed116508a0ef9dd4604034e5dab5d033948d541e69e148429f12e4ad23"
+        },
+        "primary_controlled": true,
+        "returned_models": [
+          "qwen3.6:35b"
+        ],
+        "attempt_count": 13,
+        "group_count": 13,
+        "accepted_answer": {
+          "numerator": 12,
+          "denominator": 13,
+          "rate": 0.9230769230769231
+        },
+        "sat_validity": {
+          "numerator": 11,
+          "denominator": 12,
+          "rate": 0.9166666666666666
+        },
+        "unsat_accuracy": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "unresolved_reference_count": 0,
+        "status_counts": {
+          "SAT": 11,
+          "INVALID_OUTPUT": 1,
+          "UNSAT": 1
+        },
+        "confusion": {
+          "SAT->SAT": 11,
+          "SAT->INVALID_OUTPUT": 1,
+          "UNSAT->UNSAT": 1
+        },
+        "category_counts": {
+          "accepted": 12,
+          "invalid_output": 1
+        },
+        "violation_counts": {},
+        "accepted_wilson_95": [
+          0.6668604907890041,
+          0.9862895787574435
+        ],
+        "objective_gaps": [
+          {
+            "count": 11,
+            "mean": 0.0
+          },
+          {
+            "count": 11,
+            "mean": 0.0
+          },
+          {
+            "count": 11,
+            "mean": 0.0
+          }
+        ],
+        "tokens": {
+          "prompt_tokens": {
+            "reported_sum": 22425,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          },
+          "completion_tokens": {
+            "reported_sum": 17593,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          },
+          "total_tokens": {
+            "reported_sum": 40018,
+            "reported_attempts": 13,
+            "all_provider_attempts": 13
+          }
+        },
+        "requests": 13,
+        "uncertain_reservations": 0,
+        "extraction_mismatches": 0,
+        "latency_seconds": [
+          {
+            "component": "total_seconds",
+            "count": 13,
+            "mean": 6.791466019331263
+          },
+          {
+            "component": "extraction_seconds",
+            "count": 12,
+            "mean": 6.774331958498806
+          },
+          {
+            "component": "solver_seconds",
+            "count": 12,
+            "mean": 0.006402204899738233
+          }
+        ],
+        "cost": null
+      }
+    ],
+    "paired": [
+      {
+        "subset": [
+          "controlled",
+          "generation",
+          "canonical",
+          0
+        ],
+        "counts": {
+          "both": 9,
+          "only_A": 3,
+          "only_B": 4,
+          "neither": 1
+        },
+        "pair_count": 17,
+        "group_count": 17,
+        "incomplete_pairs": 0,
+        "unresolved_pairs": 0,
+        "B_minus_A_percentage_points": 5.882352941176471,
+        "cluster_bootstrap_95": [
+          -23.529411764705884,
+          35.294117647058826
+        ],
+        "seed": 3263,
+        "resamples": 10000,
+        "interval_note": "paired_group_resampling"
+      },
+      {
+        "subset": [
+          "controlled",
+          "repair",
+          "canonical",
+          0
+        ],
+        "counts": {
+          "both": 6,
+          "only_A": 0,
+          "only_B": 6,
+          "neither": 1
+        },
+        "pair_count": 13,
+        "group_count": 13,
+        "incomplete_pairs": 0,
+        "unresolved_pairs": 0,
+        "B_minus_A_percentage_points": 46.15384615384615,
+        "cluster_bootstrap_95": [
+          23.076923076923077,
+          69.23076923076923
+        ],
+        "seed": 3263,
+        "resamples": 10000,
+        "interval_note": "paired_group_resampling"
+      }
+    ],
+    "robustness": [],
+    "difficulty": [
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.5,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.16666666666666666
+      },
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.5,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.16666666666666666
+      },
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.5,
+        "realized_mean_interaction_density": 0.3181818181818182,
+        "realized_mean_resource_contention": 0.22727272727272727
+      },
+      {
+        "task_type": "generation",
+        "sweep": "activity_count",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.5,
+        "realized_mean_interaction_density": 0.3181818181818182,
+        "realized_mean_resource_contention": 0.22727272727272727
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "overlap",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 2.5,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "overlap",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 2.5,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "precedence-deadline",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "precedence-deadline",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "proven-unsat",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "realized_mean_unary_slack": 2.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "proven-unsat",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "realized_mean_unary_slack": 2.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "shared-resource",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "shared-resource",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "simple-sat",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 4.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "fixture",
+        "level": "simple-sat",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 4.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "interaction_density",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.25,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.25,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "resource_contention",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.25,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 1.0,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 1.0,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 4.75,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 4.75,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 14.5,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "generation",
+        "sweep": "slack",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 14.5,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.25,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.16666666666666666
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.25,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.16666666666666666
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.166666666666666,
+        "realized_mean_interaction_density": 0.3181818181818182,
+        "realized_mean_resource_contention": 0.22727272727272727
+      },
+      {
+        "task_type": "repair",
+        "sweep": "activity_count",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.166666666666666,
+        "realized_mean_interaction_density": 0.3181818181818182,
+        "realized_mean_resource_contention": 0.22727272727272727
+      },
+      {
+        "task_type": "repair",
+        "sweep": "fixture",
+        "level": "repair",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "fixture",
+        "level": "repair",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 3.0,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.125,
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.125,
+        "realized_mean_interaction_density": 0.21428571428571427,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.75,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "interaction_density",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.75,
+        "realized_mean_interaction_density": 0.5,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 8.125,
+        "realized_mean_interaction_density": 0.25,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 8.125,
+        "realized_mean_interaction_density": 0.25,
+        "realized_mean_resource_contention": 0.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.625,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.75,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "resource_contention",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 7.75,
+        "realized_mean_interaction_density": 1.0,
+        "realized_mean_resource_contention": 1.0
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "0",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "realized_mean_unary_slack": 0.875,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "0",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 0,
+          "rate": null
+        },
+        "realized_mean_unary_slack": 0.875,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "1",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "sat_validity": {
+          "numerator": 0,
+          "denominator": 1,
+          "rate": 0.0
+        },
+        "realized_mean_unary_slack": 4.375,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "1",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 4.375,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "2",
+        "approach": "direct",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 13.5,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      },
+      {
+        "task_type": "repair",
+        "sweep": "slack",
+        "level": "2",
+        "approach": "solver_augmented",
+        "accepted_answer": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "sat_validity": {
+          "numerator": 1,
+          "denominator": 1,
+          "rate": 1.0
+        },
+        "realized_mean_unary_slack": 13.5,
+        "realized_mean_interaction_density": 0.35714285714285715,
+        "realized_mean_resource_contention": 0.21428571428571427
+      }
+    ]
+  }
+}

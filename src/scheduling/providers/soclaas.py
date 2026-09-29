@@ -7,12 +7,23 @@ import time
 from collections.abc import Callable, Sequence
 
 import httpx
-import truststore
 
+from .tls import create_tls_context
 from .types import Attempt, Message, ModelConfig, ModelResponse, RequestBudget, Usage
 
 BASE_URL = "https://soclaas-api.comp.nus.edu.sg/v1"
 TRANSIENT_STATUS = {408, 429, 500, 502, 503, 504}
+
+
+def _tls_failure(error: BaseException) -> bool:
+    """HTTPX/httpcore wrap the verification exception; never expose its text."""
+    seen = set()
+    while error is not None and id(error) not in seen:
+        seen.add(id(error))
+        if isinstance(error, ssl.SSLCertVerificationError):
+            return True
+        error = error.__cause__ or error.__context__
+    return False
 
 
 def _usage(data: object) -> Usage:
@@ -40,9 +51,7 @@ class SoCLaaSProvider:
         self._sleep = sleep
         self._client = httpx.Client(
             base_url=BASE_URL + "/", headers={"Authorization": "Bearer " + api_key},
-            # Native verification can retrieve omitted intermediates on macOS.
-            # Keep this context local; never patch global SSL or bypass verification.
-            verify=truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT),
+            verify=create_tls_context(),
             transport=transport, follow_redirects=False, trust_env=False,
         )
 
@@ -73,8 +82,9 @@ class SoCLaaSProvider:
             if any(not isinstance(value, str) or not value for value in ids):
                 raise ValueError("invalid_model_listing")
             return tuple(ids)
-        except httpx.RequestError:
-            raise ValueError("model_listing_transport_error") from None
+        except httpx.RequestError as exc:
+            category = "tls_verification_error" if _tls_failure(exc) else "transport_error"
+            raise ValueError("model_listing_" + category) from None
         except (KeyError, TypeError):
             raise ValueError("invalid_model_listing") from None
 
@@ -129,10 +139,11 @@ class SoCLaaSProvider:
                     if error is None and finish != "stop":
                         error = "incomplete_completion"
             except httpx.RequestError as exc:
-                error = "timeout" if isinstance(exc, httpx.TimeoutException) else "transport_error"
+                error = ("tls_verification_error" if _tls_failure(exc) else
+                         "timeout" if isinstance(exc, httpx.TimeoutException) else "transport_error")
                 uncertain = not isinstance(exc, (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout))
                 # A read/write failure may already have consumed quota. Never retry it silently.
-                retry = not uncertain
+                retry = not uncertain and error != "tls_verification_error"
             attempts.append(Attempt(number, time.monotonic() - tick, status, usage,
                                     error, uncertain, model, finish))
             if not retry or number == config.max_attempts:

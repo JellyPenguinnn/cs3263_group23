@@ -1,5 +1,6 @@
 """Serial development runs with durable reservations and immutable replay inputs."""
 
+from collections import Counter
 from dataclasses import dataclass
 from datetime import datetime, timezone
 from importlib.metadata import version
@@ -37,6 +38,13 @@ class RunConfig:
     rendering_seed: int = 3263
 
     def __post_init__(self):
+        if not isinstance(self.model, ModelConfig) or not all(
+            isinstance(value, SolverLimits)
+            for value in (self.solver, self.reference_solver)
+        ):
+            raise ValueError(
+                "Run configuration requires typed model and solver settings"
+            )
         if self.evidence not in ("offline_canned", "live_development"):
             raise ValueError("Only unfrozen development runs are supported")
         if self.model.max_attempts != 1:
@@ -55,7 +63,9 @@ class RunConfig:
         if type(self.repeats) is not int or self.repeats < 1:
             raise ValueError("Repeat count must be positive")
         if (
-            not self.variants
+            not isinstance(self.variants, tuple)
+            or not self.variants
+            or any(not isinstance(v, str) for v in self.variants)
             or len(set(self.variants)) != len(self.variants)
             or set(self.variants) - {"canonical", "paraphrase", "reordered"}
         ):
@@ -116,7 +126,8 @@ def _contract(cases, config):
     package = Path(__file__).resolve().parents[1]
     source = {
         str(p.relative_to(package)): digest(p.read_text(encoding="utf-8"))
-        for p in sorted(package.rglob("*.py"))
+        for p in sorted(package.rglob("*"))
+        if p.is_file() and p.suffix in (".py", ".crt")
     }
     prompts = {}
     for key, identity, case, view in requests(cases, config):
@@ -133,11 +144,16 @@ def _contract(cases, config):
             )
         )
         prompts[key] = digest(messages)
-    commit = subprocess.run(
-        ["git", "rev-parse", "HEAD"], cwd=package, text=True, capture_output=True
-    )
+    try:
+        commit = subprocess.run(
+            ["git", "rev-parse", "HEAD"], cwd=package, text=True, capture_output=True
+        )
+        revision = commit.stdout.strip() if commit.returncode == 0 else None
+    except FileNotFoundError:
+        # Installed runtime images need not contain Git; source hashes remain mandatory.
+        revision = None
     return {
-        "code_commit": commit.stdout.strip() if commit.returncode == 0 else None,
+        "code_commit": revision,
         "format_version": "1.0",
         "case_bundle_sha256": digest(case_bundle(cases)),
         "config": to_data(config),
@@ -148,12 +164,89 @@ def _contract(cases, config):
             "platform": platform.platform(),
             "httpx": version("httpx"),
             "ortools": version("ortools"),
+            "truststore": version("truststore"),
+            "httpcore": version("httpcore"),
+            "certifi": version("certifi"),
+            "protobuf": version("protobuf"),
+            "numpy": version("numpy"),
         },
     }
 
 
+def plan_run(cases, config):
+    """Check gold references and size the exact public requests without a provider."""
+    cases = check_case_set(tuple(cases))
+    if not cases or any(c.split != "development" for c in cases):
+        raise ValueError(
+            "Only explicit nonempty development cases may run before freeze"
+        )
+    labels = Counter()
+    for case in cases:
+        ref = reference(case, config.reference_solver)
+        labels[check_reference(case, ref)[0]] += 1
+    sizes = []
+    for _, identity, _, view in requests(cases, config):
+        messages = (
+            build_extraction_messages(view)
+            if identity["approach"] == "solver_augmented"
+            else build_messages(
+                view.text,
+                task_type=view.task_type,
+                required_activity_ids=view.activity_ids,
+                original_schedule=(
+                    view.original_schedule.to_list() if view.original_schedule else None
+                ),
+            )
+        )
+        sizes.append(sum(len(m.content) for m in messages))
+    requested = len(sizes) * config.model.max_tokens
+    return {
+        "state": "ready" if labels["UNRESOLVED"] == 0 else "unresolved_references",
+        "evidence": "preflight_no_model_calls",
+        "case_count": len(cases),
+        "task_counts": dict(Counter(c.problem.task_type for c in cases)),
+        "reference_labels": dict(labels),
+        "planned_requests": len(sizes),
+        "requested_output_tokens": requested,
+        "within_cap": len(sizes) <= config.max_requests
+        and requested <= config.max_requested_output_tokens,
+        "prompt_characters": {
+            "min": min(sizes),
+            "max": max(sizes),
+            "total": sum(sizes),
+        },
+        "input_token_estimate": None,
+        "contract": _contract(cases, config),
+    }
+
+
+def _stop_reason(response):
+    response = to_data(response) if response else {}
+    for attempt in response.get("attempts", []):
+        status = attempt.get("http_status")
+        if status in (401, 403, 429):
+            return f"http_{status}"
+    error = response.get("error")
+    if error in (
+        "tls_verification_error",
+        "transport_error",
+        "timeout",
+        "request_budget_exhausted",
+    ):
+        return error
+    if isinstance(error, str) and error.startswith("http_"):
+        return error
+    return None
+
+
 def run_batch(
-    cases, directory: Path, config: RunConfig, *, canned=None, provider_complete=None
+    cases,
+    directory: Path,
+    config: RunConfig,
+    *,
+    canned=None,
+    provider_complete=None,
+    progress=None,
 ):
     cases = check_case_set(tuple(cases))
     if not cases or any(c.split != "development" for c in cases):
@@ -229,11 +322,14 @@ def run_batch(
             if saved["sha256"] != digest(saved["payload"]):
                 raise ValueError("Completed record changed")
             response = saved["payload"]["pipeline_result"].get("model_response") or {}
-            if any(
-                a.get("http_status") in (401, 403, 429)
-                for a in response.get("attempts", [])
-            ):
-                return {"state": "stopped_provider", "reserved_requests": reserved}
+            reason = _stop_reason(response)
+            if reason:
+                return {
+                    "state": "stopped_provider",
+                    "stop_reason": reason,
+                    "completed": reserved,
+                    "reserved_requests": reserved,
+                }
         completed = 0
         for key, identity, case, view in requests(cases, config):
             path = records / (key + ".json")
@@ -292,11 +388,23 @@ def run_batch(
                 },
             )
             completed += 1
-            if result.model_response and any(
-                a.http_status in (401, 403, 429) for a in result.model_response.attempts
-            ):
+            if progress is not None:
+                progress(
+                    {
+                        "event": "attempt_completed",
+                        **identity,
+                        "completed": completed,
+                        "planned": len(contract["request_prompt_sha256"]),
+                        "pipeline_status": result.status,
+                        "category": scored["category"],
+                        "gold_valid": scored["gold_valid"],
+                    }
+                )
+            reason = _stop_reason(result.model_response)
+            if reason:
                 return {
                     "state": "stopped_provider",
+                    "stop_reason": reason,
                     "completed": completed,
                     "reserved_requests": reserved,
                 }

@@ -1,4 +1,4 @@
-name: Offline component checks
+name: Installed baseline checks
 on: [push, pull_request]
 jobs:
   test:
@@ -15,3 +15,7 @@ jobs:
       - run: python -m pip install --no-deps --no-build-isolation .
       - run: python -m pytest -q
       - run: python -m pip check
+      - name: Generate and independently check the full development reference set
+        run: |
+          scheduling benchmark-generate --output artifacts/development.json
+          scheduling evaluate-plan --cases artifacts/development.json --config configs/development/main-baseline.json --output artifacts/preflight.json > artifacts/preflight.stdout.json

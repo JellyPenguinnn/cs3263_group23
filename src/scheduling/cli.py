@@ -1,4 +1,4 @@
-"""Incremental CLI: offline parsing/direct replay and explicitly selected live smoke."""
+"""Scheduling pipelines, independent validation and explicitly bounded evaluation."""
 
 import argparse
 from dataclasses import asdict
@@ -16,7 +16,7 @@ from scheduling.providers import Message, ModelConfig, ModelResponse, RequestBud
 
 
 def _parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser(description="Group 23 direct component checks (not gold validation)")
+    parser = argparse.ArgumentParser(description="Group 23 scheduling: direct LLM, CP-SAT, independent validation and evaluation")
     commands = parser.add_subparsers(dest="command", required=True)
     parse = commands.add_parser("parse-direct", help="Check a saved response's structure and public activity coverage")
     parse.add_argument("response", type=Path)
