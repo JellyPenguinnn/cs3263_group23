@@ -1,0 +1,144 @@
+"""Evaluator-only case metadata around the canonical problem types."""
+
+from dataclasses import dataclass
+from pathlib import Path
+
+from scheduling.schema import (
+    ProblemSpec,
+    RepairCase,
+    RepairContext,
+    Schedule,
+    load_json,
+    to_data,
+)
+from scheduling.validation import validate_schedule
+
+
+@dataclass(frozen=True)
+class BenchmarkCase:
+    case_id: str
+    group_id: str
+    split: str
+    kind: str
+    sweep: str
+    level: str
+    problem: ProblemSpec
+    original_problem: ProblemSpec | None = None
+    original_schedule: Schedule | None = None
+    event: str | None = None
+    witness: Schedule | None = None
+    expected_label: str | None = None
+    expected_objective: tuple[int, ...] | None = None
+    justification: str = "Pending independent human review"
+
+    def __post_init__(self):
+        if not all(
+            isinstance(x, str) and x.strip()
+            for x in (
+                self.case_id,
+                self.group_id,
+                self.sweep,
+                self.level,
+                self.justification,
+            )
+        ):
+            raise ValueError("Case metadata must be explicit")
+        if self.split not in ("development", "test") or self.kind not in (
+            "controlled",
+            "realistic",
+            "diagnostic",
+        ):
+            raise ValueError("Unsupported case subset")
+        if self.problem.instance_id != self.case_id:
+            raise ValueError("Case and problem IDs must agree")
+        if self.problem.task_type == "repair":
+            RepairCase(
+                self.original_problem, self.original_schedule, self.event, self.problem
+            )
+            if not validate_schedule(
+                self.original_problem, self.original_schedule
+            ).hard_feasible:
+                raise ValueError(
+                    "Original schedule fails independent original-problem validation"
+                )
+            if (
+                self.problem.horizon_start,
+                self.problem.timezone,
+                self.problem.horizon_slots,
+            ) != (
+                self.original_problem.horizon_start,
+                self.original_problem.timezone,
+                self.original_problem.horizon_slots,
+            ):
+                raise ValueError("Repair must keep a common slot origin and horizon")
+        elif any(
+            x is not None
+            for x in (self.original_problem, self.original_schedule, self.event)
+        ):
+            raise ValueError("Generation case cannot have repair context")
+        if self.expected_label not in (None, "SAT", "UNSAT"):
+            raise ValueError("Expected label must be SAT, UNSAT or unresolved")
+        if (
+            self.witness
+            and not validate_schedule(
+                self.problem, self.witness, self.context
+            ).hard_feasible
+        ):
+            raise ValueError("Witness fails independent validation")
+        if self.expected_label == "UNSAT" and self.witness is not None:
+            raise ValueError("UNSAT cannot have a witness")
+        if self.expected_objective is not None:
+            size = 3 if self.context else 1
+            if len(self.expected_objective) != size or any(
+                type(v) is not int or v < 0 for v in self.expected_objective
+            ):
+                raise ValueError("Invalid expected objective")
+
+    @property
+    def context(self):
+        return (
+            RepairContext(self.original_schedule)
+            if self.original_schedule is not None
+            else None
+        )
+
+    @classmethod
+    def from_dict(cls, data):
+        row = dict(data)
+        row["problem"] = ProblemSpec.from_dict(row["problem"])
+        if row.get("original_problem") is not None:
+            row["original_problem"] = ProblemSpec.from_dict(row["original_problem"])
+        for key in ("original_schedule", "witness"):
+            if row.get(key) is not None:
+                row[key] = Schedule.from_list(row[key])
+        if row.get("expected_objective") is not None:
+            row["expected_objective"] = tuple(row["expected_objective"])
+        return cls(**row)
+
+
+def check_case_set(cases):
+    ids, groups = set(), {}
+    for case in cases:
+        if case.case_id in ids:
+            raise ValueError("Duplicate case ID")
+        ids.add(case.case_id)
+        if case.group_id in groups and groups[case.group_id] != case.split:
+            raise ValueError("Related cases cannot cross splits")
+        groups[case.group_id] = case.split
+    return tuple(cases)
+
+
+def load_cases(path: Path):
+    data = load_json(path.read_text(encoding="utf-8"))
+    if (
+        not isinstance(data, dict)
+        or set(data) != {"format_version", "cases"}
+        or data["format_version"] != "1.0"
+    ):
+        raise ValueError("Unsupported benchmark bundle")
+    return check_case_set(tuple(BenchmarkCase.from_dict(row) for row in data["cases"]))
+
+
+def case_bundle(cases):
+    check_case_set(cases)
+    return {"format_version": "1.0", "cases": [to_data(case) for case in cases]}

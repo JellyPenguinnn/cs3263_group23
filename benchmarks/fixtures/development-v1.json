@@ -1,0 +1,566 @@
+{
+  "cases": [
+    {
+      "case_id": "simple-sat",
+      "event": null,
+      "expected_label": "SAT",
+      "expected_objective": [
+        0
+      ],
+      "group_id": "simple-sat",
+      "justification": "Adjacent one-slot tasks fit [0,4); nonnegative preference lower bound zero is attained.",
+      "kind": "controlled",
+      "level": "simple-sat",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "B",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "simple-sat",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "P"
+          }
+        ],
+        "resources": [],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": [
+        {
+          "activity_id": "A",
+          "start_slot": 0
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 1
+        }
+      ]
+    },
+    {
+      "case_id": "overlap",
+      "event": null,
+      "expected_label": "SAT",
+      "expected_objective": [
+        0
+      ],
+      "group_id": "overlap",
+      "justification": "A is fixed at 0; B at 1 is adjacent and valid. Mutating B to 0 overlaps P.",
+      "kind": "controlled",
+      "level": "overlap",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "B",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "A",
+            "id": "a",
+            "slot": 0,
+            "type": "fixed_start"
+          }
+        ],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "overlap",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "P"
+          }
+        ],
+        "resources": [],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": [
+        {
+          "activity_id": "A",
+          "start_slot": 0
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 1
+        }
+      ]
+    },
+    {
+      "case_id": "shared-resource",
+      "event": null,
+      "expected_label": "SAT",
+      "expected_objective": [
+        0
+      ],
+      "group_id": "shared-resource",
+      "justification": "Two duration-two tasks exactly fill four slots of R; simultaneous starts violate R capacity.",
+      "kind": "controlled",
+      "level": "shared-resource",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A",
+            "participant_ids": [],
+            "resource_ids": [
+              "R"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B",
+            "participant_ids": [],
+            "resource_ids": [
+              "R"
+            ]
+          }
+        ],
+        "constraints": [],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "shared-resource",
+        "participants": [],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "R"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": [
+        {
+          "activity_id": "A",
+          "start_slot": 0
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 2
+        }
+      ]
+    },
+    {
+      "case_id": "precedence-deadline",
+      "event": null,
+      "expected_label": "SAT",
+      "expected_objective": [
+        0
+      ],
+      "group_id": "precedence-deadline",
+      "justification": "A then B with B ending by 2 forces A0/B1; preference optimum zero.",
+      "kind": "controlled",
+      "level": "precedence-deadline",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "B",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "after": "B",
+            "before": "A",
+            "id": "p",
+            "type": "precedence"
+          },
+          {
+            "activity_id": "B",
+            "id": "d",
+            "slot": 2,
+            "type": "deadline"
+          }
+        ],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "precedence-deadline",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "P"
+          }
+        ],
+        "resources": [],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": [
+        {
+          "activity_id": "A",
+          "start_slot": 0
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 1
+        }
+      ]
+    },
+    {
+      "case_id": "proven-unsat",
+      "event": null,
+      "expected_label": "UNSAT",
+      "expected_objective": null,
+      "group_id": "proven-unsat",
+      "justification": "Each task fits alone, but R needs four occupied slots in a three-slot horizon; impossible without overlap.",
+      "kind": "controlled",
+      "level": "proven-unsat",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 3,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A",
+            "participant_ids": [],
+            "resource_ids": [
+              "R"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 3,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B",
+            "participant_ids": [],
+            "resource_ids": [
+              "R"
+            ]
+          }
+        ],
+        "constraints": [],
+        "horizon_slots": 3,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "proven-unsat",
+        "participants": [],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 3,
+                "start": 0
+              }
+            ],
+            "id": "R"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": null
+    },
+    {
+      "case_id": "repair",
+      "event": "new blocked interval",
+      "expected_label": "SAT",
+      "expected_objective": [
+        1,
+        1,
+        0
+      ],
+      "group_id": "repair",
+      "justification": "Original A0/B2 is valid. Blocking slot 0 forces at least one move and one shifted slot; A1/B2 attains both bounds with zero penalty.",
+      "kind": "controlled",
+      "level": "repair",
+      "original_problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "B",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "after": "B",
+            "before": "A",
+            "id": "p",
+            "type": "precedence"
+          }
+        ],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "repair",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "P"
+          }
+        ],
+        "resources": [],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "original_schedule": [
+        {
+          "activity_id": "A",
+          "start_slot": 0
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 2
+        }
+      ],
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "B",
+            "participant_ids": [
+              "P"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "after": "B",
+            "before": "A",
+            "id": "p",
+            "type": "precedence"
+          },
+          {
+            "end": 1,
+            "id": "b",
+            "start": 0,
+            "target_id": "P",
+            "target_kind": "participant",
+            "type": "blocked"
+          }
+        ],
+        "horizon_slots": 4,
+        "horizon_start": "2026-10-05T09:00:00+08:00",
+        "instance_id": "repair",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "id": "P"
+          }
+        ],
+        "resources": [],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "repair",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "fixture",
+      "witness": [
+        {
+          "activity_id": "A",
+          "start_slot": 1
+        },
+        {
+          "activity_id": "B",
+          "start_slot": 2
+        }
+      ]
+    }
+  ],
+  "format_version": "1.0"
+}

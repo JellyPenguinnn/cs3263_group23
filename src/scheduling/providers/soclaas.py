@@ -2,10 +2,12 @@
 
 from dataclasses import asdict
 import os
+import ssl
 import time
 from collections.abc import Callable, Sequence
 
 import httpx
+import truststore
 
 from .types import Attempt, Message, ModelConfig, ModelResponse, RequestBudget, Usage
 
@@ -38,6 +40,9 @@ class SoCLaaSProvider:
         self._sleep = sleep
         self._client = httpx.Client(
             base_url=BASE_URL + "/", headers={"Authorization": "Bearer " + api_key},
+            # Native verification can retrieve omitted intermediates on macOS.
+            # Keep this context local; never patch global SSL or bypass verification.
+            verify=truststore.SSLContext(ssl.PROTOCOL_TLS_CLIENT),
             transport=transport, follow_redirects=False, trust_env=False,
         )
 

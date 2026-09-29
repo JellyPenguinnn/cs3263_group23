@@ -4,7 +4,7 @@
 
 A research project comparing direct language-model scheduling with language-model-to-constraint-solver scheduling. We study both generating a new schedule and repairing an existing schedule after requirements change, while minimizing unnecessary disruption.
 
-**Status on `yaoxiang-formal-core`:** the canonical schema draft, CP-SAT compiler, lexicographic repair, extraction pipeline and offline solver commands are implemented locally on Li Hao's published provider/direct dependency (`b063fb9`). Both bounded live B checks exposed reversed-precedence extraction failures; solver optimality did not establish correct interpretation. Independent validation, canonical direct integration, benchmarks and research results remain pending. The four-week delivery window is **5–30 October 2026 (Week 11 completion; setup from 28 September)**. See [Yao Xiang's method and handoff draft](report/yaoxiang-method-notes.md).
+**Status on `yongqing-evaluation`:** Yao Xiang's formal core is published as `69157d5`; this branch adds independent validation, six documented fixtures, a 24-case development generator, complete public renderings, canonical direct integration, capped serial runs/resume, offline replay, metrics and figure export. The schema and fixture review gates remain open. Development checks are distinct from frozen benchmark results. See [Yong Qing's implementation and handoff](report/yongqing-method-notes.md). The core delivery target remains **30 October 2026**.
 
 ## Research questions
 
@@ -50,10 +50,10 @@ python3.12 -m venv .venv
 .venv/bin/scheduling --help
 ```
 
-`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The initial pins are HTTPX 0.28.1, pytest 8.4.2 and OR-Tools 9.14.6206. The scheduling compiler and exhaustive tiny objective checks now use this locked OR-Tools version. The lockfile is generated with pip-tools 7.5.1:
+`requirements.lock` pins and hashes the runtime, test/build tools and agreed OR-Tools dependency. The core pins are HTTPX 0.28.1, truststore 0.10.4, pytest 8.4.2 and OR-Tools 9.14.6206; optional figure export adds Matplotlib 3.10.8. The scheduling compiler and exhaustive tiny objective checks now use this locked OR-Tools version. The lockfile is generated with pip-tools 7.5.1:
 
 ```sh
-pip-compile --allow-unsafe --extra dev --extra solver --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
+pip-compile --allow-unsafe --extra dev --extra solver --extra plots --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
 ```
 
 Run lock regeneration only when intentionally updating dependencies; normal installation uses the existing lock. Tests use synthetic data and injected HTTP transports; an automatic fixture blocks network connections.
@@ -68,18 +68,31 @@ Run lock regeneration only when intentionally updating dependencies; normal inst
 - `scheduling solve --spec tests/examples/formal-generation.json`: solve an explicit specification offline. Repair also requires `--original-schedule tests/examples/formal-original.json` with the repair spec.
 - `scheduling solver-offline --view tests/examples/generation-view.json --response-file tests/examples/formal-generation.json`: one canned extraction through real CP-SAT. Both commands accept `--time-limit`, `--seed`, `--workers`, and an optional new `--output` path.
 
-Fresh noneditable macOS verification passed **203 offline tests**, `pip check`, both solver demos and both canned pipelines. Linux remains unverified.
+The earlier formal-core verification passed 203 tests. The earlier fresh noneditable macOS verification passed **251 offline tests**, `pip check`, and the complete evaluation demo/resume/replay/figure workflow. After the TLS fix, this checkout passes **255 offline tests** and `pip check`. TLS tests use the local `openssl` executable to generate temporary certificates and socket pairs without network access. Linux remains unverified.
 
 The solver API, strict wire format, repair proof handling, limitations and teammate handoff are in [the formal-core notes](report/yaoxiang-method-notes.md). The schema is a shared draft, not a completed team freeze. Install the hashed lock above to include the solver dependency.
 
 Provider and direct component interfaces are in `src/scheduling/providers/` and `src/scheduling/pipelines/direct.py`. `complete(messages, model_config) -> ModelResponse` is available as a convenience function or a provider method. It preserves individual attempts and missing usage. Share an explicit `RequestBudget` across serial calls to enforce request and requested output-token caps. This does not cap input tokens or currency. Default retries are disabled; retry configuration never overrides a budget.
 
-`request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang has supplied draft `NaturalLanguageView`, `Schedule`, and `PipelineResult` types; teammate review remains required before Li Hao finalizes `run_direct(nl_view, model_config)`. Yong Qing supplies independent gold validation and the batch/metrics/replay runner. No placeholder commands for those components are exposed.
+`request_direct(...) -> DirectAttempt` takes public text, public activity IDs and optional original schedule, plus an injected `complete` callable. Its result retains raw completion text, declared/parsing status, attempt accounting, and prompt/config hashes. `DirectAttempt` and `DirectParse` are component records, not duplicate canonical scheduling types. Yao Xiang supplied draft canonical types, and the explicitly authorized `run_direct(nl_view, model_config)` adapter now wraps this component. Yong Qing implemented independent gold validation and batch/metrics/replay; teammate contract review remains required. No placeholder commands for those components are exposed.
 
 A live single-case output is created with mode 600 before requesting, so interruption remains visible; completion replaces it atomically. Reusing an output filename refuses another call. Completed outputs remain private/ignored under `runs/`; the full experiment runner will handle immutable manifests and resume. Treat arbitrary saved model outputs as untrusted data.
 
 The current direct JSON output contract is provisional for team review: exactly `status` and `schedule`; SAT carries a list of `{activity_id, start_slot}` objects, while UNSAT/UNKNOWN carry `null`. Starts must be nonnegative integers. Markdown fences, duplicate JSON keys, extra fields, and missing/duplicate/invented activities are rejected. Normalization only sorts entries by ID. Full schedule semantics require independent validation.
 
+
+### Evaluation development workflow
+
+The approved four-call `qwen3.6:35b` development check produced four preserved transport errors, with no HTTP response or reported usage. A credential-free check with the provider CA bundle found TLS verification error 20 (`unable to get local issuer certificate`). The cap is consumed and those records remain unchanged: see [the original verification receipt](configs/development/yongqing-verification.json). The TLS fix below now passes a credential-free HTTP 200 check on macOS; a fresh cap and new run ID are required before retrying model calls.
+
+```sh
+.venv/bin/scheduling benchmark-generate --output runs/NEW-development.json
+.venv/bin/python evaluation/offline_demo.py runs/NEW-offline-demo
+.venv/bin/scheduling evaluate-replay --run-dir runs/NEW-offline-demo --export-dir artifacts/NEW-export --figures
+.venv/bin/scheduling validate --spec tests/examples/formal-generation.json --schedule tests/examples/formal-original.json
+```
+
+Create the parent output directory first when using a new checkout. Outputs refuse existing filenames. The demo performs 180 **canned** attempts across 30 development cases and three renderings, including deliberate failures; it makes zero model calls. The manifest records seeds, source/config/prompt hashes, references, caps and evidence class. Run/resume requires matching inputs/configuration/source. An interrupted request reservation needs explicit reconciliation, never an automatic retry. `evaluate-batch --help` describes offline/live selection; live calls require a separately approved cap. These commands do not imply a passed shared gate or human-reviewed benchmark.
 
 ### Start with a coding agent
 
@@ -100,6 +113,10 @@ The plan contains the technical information needed to start; the original course
 ### NUS SoCLaaS configuration
 
 **Scheduling-model inference during development uses SoCLaaS only; no frontier-model access is needed to begin implementation or development pilots.** This does not restrict the coding assistant used to develop the software. Final evaluation model selection is a separate milestone by 18 October, before held-out experiments. The course requires a frontier-model comparison unless the teaching team accepts an alternative; SoCLaaS access alone does not establish that acceptance.
+
+The provider now uses an explicit `truststore.SSLContext` with native system trust, required certificate verification and hostname checking. It does not globally patch SSL, follow redirects or enable environment proxies. No credential or `.env` change is needed; install the updated hashed lock and package with the setup commands above.
+
+On 29 September, the endpoint sent only its leaf certificate, issued by Let's Encrypt YE2. The certifi-only client could not build the issuer chain. Native macOS verification resolves the missing intermediates, and the patched client returned **HTTP 200** to a credential-free HEAD request. See [the TLS receipt](configs/development/tls-verification-20260929.json), [truststore documentation](https://truststore.readthedocs.io/en/stable/) and [the published CA chains](https://letsencrypt.org/certificates/). This is a verified local client fix; the service should still send its complete intermediate chain for other clients. Linux uses OpenSSL and is not covered by this macOS check. Do not disable TLS verification if another host fails.
 
 Configure access to the NUS SoCLaaS API:
 
@@ -185,7 +202,7 @@ report/figures/           # report sources and selected figures
 presentation/             # slides and demo materials
 ```
 
-On this member branch, the provider/direct components, CLI, packaging/lock, tests, CI definition, direct prompts and tiny demonstration files now contain substantive implementation. The canonical schema draft, solver, repair objectives and extraction pipeline are also implemented. Benchmark, independent validation and evaluation remain pending their owner. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
+On this member branch, the provider/direct components, CLI, packaging/lock, tests, CI definition, direct prompts and tiny demonstration files now contain substantive implementation. The canonical schema draft, solver, repair objectives and extraction pipeline are also implemented. Independent validation, development fixtures/generation/rendering, evaluation bookkeeping, metrics/replay and diagnostic figure export are implemented on this branch. Held-out data, human-written scenarios and frozen research results remain pending review and authorization. Planned module paths and ownership are in [planning.md](planning.md#4-team-responsibilities-and-workload). Ignored runtime folders such as `runs/`, `artifacts/`, and `data/private/` are created locally when needed; they are not part of the tracked scaffold.
 
 ## References
 

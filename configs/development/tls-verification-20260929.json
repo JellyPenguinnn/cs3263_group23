@@ -1,0 +1,21 @@
+{
+  "evidence_class": "credential_free_tls_diagnostic",
+  "timestamp_utc": "2026-09-29T06:24:15.841758+00:00",
+  "platform": "macOS-26.5.2-arm64-arm-64bit",
+  "python": "3.12.2",
+  "method": "HEAD",
+  "url": "https://soclaas-api.comp.nus.edu.sg/",
+  "http_status": 200,
+  "authorization_header_sent": false,
+  "model_requests": 0,
+  "trust_backend": "truststore native system certificate verification",
+  "dependencies": {
+    "httpx": "0.28.1",
+    "truststore": "0.10.4"
+  },
+  "sha256": {
+    "src/scheduling/providers/soclaas.py": "40b56e3a21702a04362c454f1a7b919317a80c9fae5c34f788ac3ca20ef2e1da",
+    "requirements.lock": "284472ffcbb8652676d8b54525f8df9f0ed8ab661cf6d837ddc8899e1a393858"
+  },
+  "limitation": "TLS only; no model access or completion verified. Previous four-call cap remains consumed. Linux unverified."
+}
