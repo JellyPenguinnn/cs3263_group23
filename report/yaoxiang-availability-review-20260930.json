@@ -1,0 +1,362 @@
+{
+  "date": "2026-09-30",
+  "evidence": "offline_saved_response_semantic_audit",
+  "format_version": "1.0",
+  "limitations": [
+    "The control has expanded unary domains but both complete feasible sets are empty; its accepted UNSAT does not establish faithful extraction.",
+    "These cases informed the prompt revision and are not held-out evidence.",
+    "AI-assisted audit; independent human semantic review remains pending."
+  ],
+  "live_calls": 0,
+  "method": "Full Cartesian product of each activity own-window starts, independent arithmetic for all remaining constraints and objectives; no CP-SAT compilation reused. Single-field restoration is diagnostic only.",
+  "reviews": [
+    {
+      "case_id": "dev-v3-d9a5c7aa60e26500e2852c5f-repair",
+      "changes": [
+        {
+          "activity_id": "A0",
+          "extracted_own_window_starts": [
+            42,
+            43,
+            44,
+            45
+          ],
+          "extracted_windows": [
+            [
+              42,
+              48
+            ]
+          ],
+          "feasible_assignments_after_only_this_field_restored": 1,
+          "gold_own_window_starts": [
+            42,
+            45
+          ],
+          "gold_windows": [
+            [
+              42,
+              45
+            ],
+            [
+              45,
+              48
+            ]
+          ]
+        },
+        {
+          "activity_id": "A1",
+          "extracted_own_window_starts": [
+            39,
+            40,
+            41,
+            42,
+            43,
+            44,
+            45
+          ],
+          "extracted_windows": [
+            [
+              39,
+              48
+            ]
+          ],
+          "feasible_assignments_after_only_this_field_restored": 0,
+          "gold_own_window_starts": [
+            39,
+            42
+          ],
+          "gold_windows": [
+            [
+              39,
+              42
+            ],
+            [
+              42,
+              45
+            ]
+          ]
+        }
+      ],
+      "extracted_feasible_assignments": 1,
+      "extracted_optimum": [
+        2,
+        6,
+        9
+      ],
+      "extracted_witness": {
+        "A0": 42,
+        "A1": 45,
+        "A2": 39
+      },
+      "gold_feasible_assignments": 0,
+      "raw_response_sha256": "73e760d67d3afe5d4c3bdecf7622dd6be69cdfb406d02e132a694813a3e7e871",
+      "record_sha256": "e669466d999845583d2936a389f65a34e4336c15eba66c4ef53cee29c2b18bb3",
+      "recorded_status": "SAT"
+    },
+    {
+      "case_id": "dev-v3-246eabff6bb1ff745a7bfbfc-repair",
+      "changes": [
+        {
+          "activity_id": "A4",
+          "extracted_own_window_starts": [
+            5,
+            6
+          ],
+          "extracted_windows": [
+            [
+              5,
+              6
+            ],
+            [
+              6,
+              7
+            ]
+          ],
+          "feasible_assignments_after_only_this_field_restored": 0,
+          "gold_own_window_starts": [
+            5
+          ],
+          "gold_windows": [
+            [
+              5,
+              6
+            ]
+          ]
+        }
+      ],
+      "extracted_feasible_assignments": 1,
+      "extracted_optimum": [
+        5,
+        5,
+        18
+      ],
+      "extracted_witness": {
+        "A0": 2,
+        "A1": 3,
+        "A2": 4,
+        "A3": 5,
+        "A4": 6
+      },
+      "gold_feasible_assignments": 0,
+      "raw_response_sha256": "a9637adb0a31c564f1db9439801c8d4c80a45d2f84fa58dd14df77f87fea3a3e",
+      "record_sha256": "f491a59de8b82dc4cd7b59c7c35dbc3c89a346160c6886f78fa07c56edfac1e9",
+      "recorded_status": "SAT"
+    },
+    {
+      "case_id": "dev-v3-66dd6c3548fb70d23bad6865-repair",
+      "changes": [
+        {
+          "activity_id": "A1",
+          "extracted_own_window_starts": [
+            6,
+            7,
+            8
+          ],
+          "extracted_windows": [
+            [
+              6,
+              10
+            ]
+          ],
+          "feasible_assignments_after_only_this_field_restored": 0,
+          "gold_own_window_starts": [
+            6,
+            8
+          ],
+          "gold_windows": [
+            [
+              6,
+              8
+            ],
+            [
+              8,
+              10
+            ]
+          ]
+        },
+        {
+          "activity_id": "A2",
+          "extracted_own_window_starts": [
+            8,
+            9,
+            10
+          ],
+          "extracted_windows": [
+            [
+              8,
+              12
+            ]
+          ],
+          "feasible_assignments_after_only_this_field_restored": 0,
+          "gold_own_window_starts": [
+            8,
+            10
+          ],
+          "gold_windows": [
+            [
+              8,
+              10
+            ],
+            [
+              10,
+              12
+            ]
+          ]
+        }
+      ],
+      "extracted_feasible_assignments": 0,
+      "extracted_optimum": null,
+      "extracted_witness": null,
+      "gold_feasible_assignments": 0,
+      "raw_response_sha256": "193881f6c7f7b153baa32026e0acb274e38c217a990c8a6603230f9d7ae5991a",
+      "record_sha256": "eacf048b9d89317efe9209e16c1664d9caa4d82b9509940e087210115ce5eed9",
+      "recorded_status": "UNSAT"
+    }
+  ],
+  "revision_3_pilot_review": {
+    "primary_records_unchanged": true,
+    "reviews": [
+      {
+        "case_id": "dev-v3-8c76290cef6036f833b5a4ba-repair",
+        "comparison": {
+          "constraint_differences": [],
+          "differences": [
+            {
+              "actual": [
+                [
+                  2,
+                  48
+                ]
+              ],
+              "expected": [
+                [
+                  0,
+                  48
+                ]
+              ],
+              "kind": "altered",
+              "path": "$.participants[id=\"P0\"].availability"
+            }
+          ],
+          "format_version": "2.0",
+          "invented_constraints": 0,
+          "mismatches": [
+            "participants"
+          ],
+          "omitted_constraints": 0,
+          "structurally_equivalent": false
+        },
+        "extracted_feasible_assignments": 1,
+        "gold_constraints": [
+          {
+            "activity_id": "A0",
+            "end": 1,
+            "id": "old-pref-0",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 4
+          },
+          {
+            "activity_id": "A0",
+            "end": 3,
+            "id": "alt-pref-0",
+            "start": 2,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "A1",
+            "end": 3,
+            "id": "old-pref-1",
+            "start": 2,
+            "type": "preferred_start",
+            "weight": 5
+          },
+          {
+            "activity_id": "A1",
+            "end": 5,
+            "id": "alt-pref-1",
+            "start": 4,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "A2",
+            "end": 5,
+            "id": "old-pref-2",
+            "start": 4,
+            "type": "preferred_start",
+            "weight": 2
+          },
+          {
+            "activity_id": "A2",
+            "end": 7,
+            "id": "alt-pref-2",
+            "start": 6,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "A3",
+            "end": 7,
+            "id": "old-pref-3",
+            "start": 6,
+            "type": "preferred_start",
+            "weight": 4
+          },
+          {
+            "activity_id": "A3",
+            "end": 9,
+            "id": "alt-pref-3",
+            "start": 8,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "A4",
+            "end": 9,
+            "id": "old-pref-4",
+            "start": 8,
+            "type": "preferred_start",
+            "weight": 4
+          },
+          {
+            "activity_id": "A4",
+            "end": 1,
+            "id": "alt-pref-4",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "end": 2,
+            "id": "event",
+            "start": 0,
+            "target_id": "P0",
+            "target_kind": "participant",
+            "type": "blocked"
+          }
+        ],
+        "gold_feasible_assignments": 1,
+        "objective_labelled_feasible_sets_equal": true,
+        "optimum": [
+          5,
+          16,
+          19
+        ],
+        "raw_response_sha256": "e91de27ab11a03084f8eb326e0a66c16de08b9a11235dc5e2fa8175be4f16091",
+        "record_sha256": "8c8b9e6750a676dabfb482025987c38f7cc43d5ef7fb18f49c7eaad1b7421ada"
+      }
+    ],
+    "run_id": "yaoxiang-availability-pilot-20260930-01",
+    "selection": "All remaining structural B mismatches in the 24-call qualification"
+  },
+  "selection": "All three structural extraction mismatches: two rejected false SAT repairs and one accepted UNSAT control. No failure omitted.",
+  "source_run": "lihao-boundary-pilot-20260930-01",
+  "v3_unary_domain_and_exclusion_audit": {
+    "activities": 432,
+    "cases": 108,
+    "human_review": false,
+    "result": "passed"
+  }
+}

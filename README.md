@@ -215,18 +215,25 @@ Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved pro
 
 ## Verification
 
-The [v3 checkpoint](report/yongqing-v3-development.md#executed-qualification)
-passes **434 Python tests on both fresh installed macOS/Linux ARM64 builds**,
-648 v3 and 864 v2 canned attempts per platform, dependency/resource checks and
-exact replay of both saved live summaries. No new model calls were made. The
-[receipt](configs/development/yongqing-v3-verification-20260930.json) records
-versions and source hashes; the B-only historical label-ID confound remains
-explicit and the broader request-boundary fix awaits coordination.
+The [current Yao Xiang follow-up](report/yaoxiang-availability-followup.md)
+incorporates main `ca710cf`, including the v3 benchmark and neutral B request
+boundary. Fresh installed macOS/Linux ARM64 wheels each pass **448 Python tests**,
+**three frontend tests**, dependency/asset checks, 180 legacy, 864 v2 and 648 v3
+canned attempts, figure export and exact replay of three saved live summaries.
+See the [versions and source hashes](configs/development/yaoxiang-availability-verification-20260930.json).
 
+Extraction prompt revision 3 preserves stated availability windows. A separately
+authorized 24-call qwen3.6:35b qualification on twelve previously observed v3
+cases accepted A 4/12 and B 12/12, with 11/12 structurally equivalent B extractions.
+The one remaining mismatch is semantically redundant for its recorded pair.
+These are development observations, not held-out accuracy or a general improvement
+claim. The cap is consumed; raw failures and all earlier summaries are retained.
 
-The 30 September follow-up on `lihao-llm-baseline`, incorporating main `f12e521`, passed **416 Python tests and three frontend tests in fresh noneditable macOS ARM64 and Linux ARM64 installs**. Both passed dependency/asset checks, all 30 legacy references, 864 canned v2 attempts, exact summary replay of the saved 60-call and 24-call development runs, figure export and three saved-case demo explanations. These checks made **zero new model calls**. See [the qualification and assignment audit](report/lihao-integration-followup.md) and [machine-readable receipt](configs/development/lihao-integration-verification-20260930.json).
-
-The Linux check used a Debian container under Colima with Python 3.12.14, OpenSSL 3.0.22 and Node 18.20.4; macOS used Python 3.12.2, OpenSSL 3.6.3 and Node 20.15.0. This is current local platform evidence, not independent teammate review or a hosted-CI result. CI specifies Python 3.12 and Node 20 on Ubuntu/macOS; remote status could not be verified with the available GitHub authentication. Native macOS TLS tests require access to the OS certificate service.
+macOS used Python 3.12.2 / OpenSSL 3.6.3 / Node 20.15.0; the local Linux ARM64
+container used Python 3.12.14 / OpenSSL 3.0.22 / Node 18.20.4. Hosted CI specifies
+Python 3.12 and Node 20 and was not verified here. Human review, final-model
+eligibility, frozen evaluation and independent teammate replay remain open.
+Native macOS TLS tests require access to the OS certificate service.
 
 `check_installed.py` rejects editable imports and verifies that all three prompts, issuer certificates and dashboard assets match the source. Use a noneditable install for this qualification; ordinary editable development remains supported. CI also runs `python evaluation/v2_qualification.py artifacts/v2-qualification` to check the full v2 offline integration.
 
