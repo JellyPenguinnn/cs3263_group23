@@ -1,16 +1,20 @@
-"""Offline v2 qualification using the existing generator, runner and evaluator.
+"""Offline v2/v3 qualification using the existing generator, runner and evaluator.
 
-Usage: python evaluation/v2_qualification.py runs/NEW_QUALIFICATION
+Usage: python evaluation/v2_qualification.py runs/NEW_QUALIFICATION [--version 2|3]
 Canned gold-derived model responses verify integration, NOT model performance.
 """
 
 import json
 from pathlib import Path
-import sys
-from scheduling.evaluation.benchmark import generate_development_v2
+import argparse
+from scheduling.evaluation.benchmark import (
+    generate_development_v2,
+    generate_development_v3,
+)
 from scheduling.evaluation.cases import case_bundle
 from scheduling.evaluation.manifests import (
     benchmark_manifest_v2,
+    benchmark_manifest_v3,
     structural_fingerprint,
 )
 from scheduling.evaluation.runner import (
@@ -25,18 +29,24 @@ from scheduling.providers import ModelConfig
 from scheduling.solver import SolverLimits
 
 
-def main(directory):
+def main(directory, version="2"):
     directory.mkdir(parents=True, exist_ok=False)
-    cases, records, selection = generate_development_v2(3264)
+    generate, make_manifest, seed = (
+        (generate_development_v2, benchmark_manifest_v2, 3264)
+        if version == "2"
+        else (generate_development_v3, benchmark_manifest_v3, 3265)
+    )
+    cases, records, selection = generate(seed)
+    expected = len(cases) * 3 * 2
     if not selection["quota_complete"]:
         write_new(directory / "incomplete-selection.json", selection)
         raise ValueError("Qualification matrix quota incomplete; exclusions retained")
     write_new(directory / "cases.json", case_bundle(cases))
     write_new(
         directory / "benchmark.manifest.json",
-        benchmark_manifest_v2(
+        make_manifest(
             cases,
-            generation_seed=3264,
+            generation_seed=seed,
             rendering_seed=3263,
             selection=selection,
             records=records,
@@ -44,11 +54,11 @@ def main(directory):
         ),
     )
     cfg = RunConfig(
-        ModelConfig("offline-canned-v2", 8192),
+        ModelConfig(f"offline-canned-v{version}", 8192),
         SolverLimits(10),
         SolverLimits(30),
-        864,
-        864 * 8192,
+        expected,
+        expected * 8192,
         variants=("canonical", "paraphrase", "reordered"),
     )
     responses = {}
@@ -64,13 +74,13 @@ def main(directory):
             )
         )
     result = run_batch(cases, directory / "run", cfg, canned=responses)
-    assert result["completed"] == 864
+    assert result["completed"] == expected
     assert (
         run_batch(cases, directory / "run", cfg, canned=responses)["reserved_requests"]
-        == 864
+        == expected
     )
     rows, progress = replay(directory / "run")
-    assert len(rows) == 864 and all(r["accepted"] for r in rows)
+    assert len(rows) == expected and all(r["accepted"] for r in rows)
     write_new(
         directory / "summary.json",
         {
@@ -104,4 +114,8 @@ def main(directory):
 
 
 if __name__ == "__main__":
-    main(Path(sys.argv[1]))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("directory", type=Path)
+    parser.add_argument("--version", choices=("2", "3"), default="2")
+    args = parser.parse_args()
+    main(args.directory, args.version)

@@ -295,3 +295,20 @@ def benchmark_manifest_v2(
             "Fingerprint collisions are conservatively related; arbitrary semantic equivalence requires review.",
         ],
     }
+
+
+
+def benchmark_manifest_v3(cases, **kwargs):
+    """Keep the version-2 provenance wire format for a distinct v3 dataset."""
+    manifest = benchmark_manifest_v2(cases, **kwargs)
+    manifest.update(
+        dataset_version="challenge-v3-development", generator_version="3.0",
+        limitations=[
+            "Procedural binary-domain development challenges, not human-written realistic prose or a final test matrix.",
+            "Three declared mechanisms; unary contradictions are simple controls, not evidence of difficult interaction reasoning.",
+            "Sizes, durations and mechanisms have coupled covariates, not causal difficulty guarantees.",
+            "Event/task/label variants share source families; repeated or translated structures are not independent samples.",
+            "Fingerprint grouping does not prove or exhaust semantic equivalence; human review remains pending.",
+        ],
+    )
+    return manifest

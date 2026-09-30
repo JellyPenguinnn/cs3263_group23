@@ -46,6 +46,8 @@ The inputs are **6 project-authored fixed fixtures + 24 procedurally generated s
 
 All 60 requests completed; reported usage was 117,976 tokens. Currency cost is unavailable. Current-source offline replay reproduces the [tracked summary](results/summary/main-development-20260929.json) exactly. The [validation report](report/main-baseline-validation.md) records the configuration, failures and provenance.
 
+The 30 September request audit also found label-bearing IDs in two original B requests and all twelve B requests in the later v2 pilot. A did not receive those IDs. Saved scores remain unchanged, but this confounds a fair A/B interpretation; see [the metadata audit](report/yongqing-v3-development.md#request-metadata-finding-and-historical-evidence).
+
 These are **development results**, not evidence of general superiority. The set has 28 SAT and two UNSAT cases, no live language-robustness evaluation, and known generator limitations: redundant precedence edges, repair events tied to difficulty levels, and seeds that vary weights rather than hard scheduling structures. [The benchmark audit](planning.md#development-benchmark-audit--29-september-2026) defines the required improvements.
 
 The runner supports development runs and separately guarded `offline_frozen` / `live_frozen` modes. Frozen controls are technically qualified with synthetic tests; no real study has been frozen or run. Final experiments still require fresh data, human review, protocol/cap decisions and an eligible primary model or teaching-team acceptance. Development scheduling inference remains SoCLaaS-only.
@@ -162,6 +164,26 @@ Replay exports the historical `summary.json` and a separate `analysis.json`: ope
 
 `freeze-draft` writes a deliberately non-runnable configuration with blank decision references; `scheduling freeze-draft --help` lists its inputs. A final protocol needs an exactly reviewed test-case manifest/renderings, the complete registry of previously developed hard structures (including legacy data), final model eligibility/access and explicit approval/budget references. Preflight checks source/prompt/input/config hashes, family grouping, leakage, caps and proven reference objectives before inference. Live frozen runs stop on backend-identity drift. Recorded references are audit fields, not automatic certification of human approval. Never retag development cases to populate a final study.
 
+### Development challenge cases (v3)
+
+V3 supplements v2 with resource and precedence repair chains, unary contradiction
+controls and competing preferences. Seed 3265 produces 108 cases in **nine source
+families**, with all three events, balanced task/label strata and feasible repairs
+moving 1, 3, 4 or 5 activities. Opaque case IDs keep reference labels out of public
+metadata. These are procedural development cases, not realistic or held-out data.
+See [the construction, checks and remaining limits](report/yongqing-v3-development.md).
+
+```sh
+.venv/bin/scheduling benchmark-generate --version 3 --seed 3265 \
+  --output runs/NEW-v3-input/cases.json
+# The existing qualification script supports both versions; default remains v2.
+.venv/bin/python evaluation/v2_qualification.py runs/NEW-v3-qualification --version 3
+```
+
+The qualification exercises 648 canned attempts (108 cases × three renderings ×
+two approaches), exact replay and completed resume. It is wiring evidence with
+zero model calls. A new live pilot requires an explicit cap and new run identity.
+
 ### Explain saved evidence
 
 ```sh
@@ -188,6 +210,15 @@ current verification and review boundaries.
 Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved progress, shows metrics with denominators, and lets you inspect schedules, violations and extraction diagnostics. It is read-only, binds to localhost and needs no credentials. Live batches run separately through the CLI. A run lock indicates possible activity, not proof that the process is still running.
 
 ## Verification
+
+The [v3 checkpoint](report/yongqing-v3-development.md#executed-qualification)
+passes **434 Python tests on both fresh installed macOS/Linux ARM64 builds**,
+648 v3 and 864 v2 canned attempts per platform, dependency/resource checks and
+exact replay of both saved live summaries. No new model calls were made. The
+[receipt](configs/development/yongqing-v3-verification-20260930.json) records
+versions and source hashes; the B-only historical label-ID confound remains
+explicit and the broader request-boundary fix awaits coordination.
+
 
 The 30 September follow-up on `lihao-llm-baseline`, incorporating main `f12e521`, passed **416 Python tests and three frontend tests in fresh noneditable macOS ARM64 and Linux ARM64 installs**. Both passed dependency/asset checks, all 30 legacy references, 864 canned v2 attempts, exact summary replay of the saved 60-call and 24-call development runs, figure export and three saved-case demo explanations. These checks made **zero new model calls**. See [the qualification and assignment audit](report/lihao-integration-followup.md) and [machine-readable receipt](configs/development/lihao-integration-verification-20260930.json).
 
