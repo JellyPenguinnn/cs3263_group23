@@ -1,5 +1,6 @@
 """Dashboard accounting, live monitoring and HTTP boundaries without network calls."""
 
+from datetime import datetime, timedelta
 from io import BytesIO
 import json
 from types import SimpleNamespace
@@ -179,12 +180,16 @@ def test_cached_monitor_refreshes_external_progress_without_solver_or_provider(
     record_path = next((path / "attempts").glob("*.json"))
     original = record_path.read_bytes()
     record = json.loads(original)
+    latest = max(
+        datetime.fromisoformat(read(p)["started_utc"])
+        for p in (path / "attempts").glob("*.json")
+    )
     record_path.write_text(
         json.dumps(
             {
                 "state": "pending_or_interrupted",
                 "identity": record["identity"],
-                "started_utc": "2026-09-29T23:59:59+00:00",
+                "started_utc": (latest + timedelta(seconds=1)).isoformat(),
             }
         )
     )

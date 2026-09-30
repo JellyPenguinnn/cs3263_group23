@@ -243,6 +243,7 @@ def _stop_reason(response, expected_model=None):
         "transport_error",
         "timeout",
         "request_budget_exhausted",
+        "invalid_provider_response",
     ):
         return error
     if isinstance(error, str) and error.startswith("http_"):

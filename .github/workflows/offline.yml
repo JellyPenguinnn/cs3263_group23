@@ -13,6 +13,8 @@ jobs:
           python-version: '3.12'
       - run: python -m pip install --require-hashes -r requirements.lock
       - run: python -m pip install --no-deps --no-build-isolation .
+      - name: Verify installed prompts and runtime assets
+        run: python scripts/check_installed.py
       - run: python -m pytest -q
       - run: python -m pip check
       - uses: actions/setup-node@v4
@@ -26,3 +28,5 @@ jobs:
         run: |
           scheduling benchmark-generate --output artifacts/development.json
           scheduling evaluate-plan --cases artifacts/development.json --config configs/development/main-baseline.json --output artifacts/preflight.json > artifacts/preflight.stdout.json
+      - name: Qualify v2 generation, both pipelines, resume and replay offline
+        run: python evaluation/v2_qualification.py artifacts/v2-qualification
