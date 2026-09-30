@@ -14,6 +14,9 @@ async function dashboard() {
         textContent: "",
         value: "",
         hidden: false,
+        open: false,
+        showModal() { this.open = true; },
+        close() { this.open = false; },
         replaceChildren() {
           this.innerHTML = "";
         },
@@ -47,6 +50,7 @@ async function dashboard() {
   };
   const reply = (body) => ({ ok: true, json: async () => body });
   const pending = [];
+  const details = [];
   let failRun = false;
   const context = vm.createContext({
     document: { querySelector: element, querySelectorAll: () => [] },
@@ -64,6 +68,10 @@ async function dashboard() {
         return new Promise((resolve, reject) =>
           pending.push({ resolve: (body) => resolve(reply(body)), reject }),
         );
+      if (url.startsWith("/api/case?"))
+        return new Promise((resolve, reject) =>
+          details.push({ resolve: (body) => resolve(reply(body)), reject }),
+        );
       if (failRun) throw new Error("Temporarily unavailable");
       return reply(data);
     },
@@ -78,6 +86,7 @@ async function dashboard() {
   return {
     element,
     pending,
+    details,
     fail: (value) => {
       failRun = value;
     },
@@ -137,4 +146,61 @@ test("an obsolete filter failure does not report an error for current results", 
   await older;
   assert.equal(ui.element("#notice").textContent, "");
   assert.match(ui.element("#case-rows").innerHTML, /current-case/);
+});
+
+
+test("invalid large slots stay inspectable without calendar conversion errors", async () => {
+  const ui = await dashboard();
+  const c = {problem: {horizon_slots: 4, slot_minutes: 30,
+    horizon_start: "2026-10-05T09:00:00+08:00", timezone: "+08:00",
+    activities: [{id: "A", duration_slots: 1}]}};
+  for (const start of [5, 1e30]) {
+    const html = ui.call(`schedule(${JSON.stringify(c)}, [{activity_id: "A", start_slot: ${start}}], true)`);
+    assert.ok(html.includes(start > Number.MAX_SAFE_INTEGER ? "Outside supported range" : `slot ${start} (outside horizon)`));
+    assert.doesNotMatch(html, /Invalid Date|NaN/);
+    assert.match(html, /invalid/);
+  }
+});
+
+function detail(name) {
+  return {case: {case_id: name}, responses: {}, rows: [], reference: null};
+}
+
+test("older case details cannot overwrite a newer selection", async () => {
+  const ui = await dashboard();
+  const older = ui.call("showDetail(0)");
+  const newer = ui.call("showDetail(1)");
+  ui.details[1].resolve(detail("current-case"));
+  await newer;
+  ui.details[0].resolve(detail("stale-case"));
+  await older;
+  assert.equal(ui.element("#detail-title").textContent, "current-case");
+});
+
+test("obsolete detail errors do not obscure the current case", async () => {
+  const ui = await dashboard();
+  const older = ui.call("showDetail(0)");
+  const newer = ui.call("showDetail(1)");
+  ui.details[1].resolve(detail("current-case"));
+  await newer;
+  ui.details[0].reject(new Error("Obsolete detail error"));
+  await older;
+  assert.equal(ui.element("#notice").textContent, "");
+});
+
+test("dismissed or switched-context requests cannot reopen case details", async () => {
+  for (const action of [
+    "document.querySelector('#close-detail').onclick()",
+    "document.querySelector('#case-dialog').oncancel()",
+    "runId = 'different-run'",
+    "slice = ['controlled', 'paraphrase', 0]",
+  ]) {
+    const ui = await dashboard();
+    const pending = ui.call("showDetail(0)");
+    ui.call(action);
+    ui.details[0].resolve(detail("stale-case"));
+    await pending;
+    assert.equal(ui.element("#case-dialog").open, false, action);
+    assert.equal(ui.element("#detail-title").textContent, "", action);
+  }
 });

@@ -9,6 +9,7 @@ import re
 from scheduling.evaluation.manifests import structural_audit, structural_fingerprint
 from scheduling.evaluation.scoring import digest, check_reference
 from scheduling.schema import to_data
+from scheduling.evaluation.cases import AuthoredBenchmarkCase
 
 FROZEN_MODES = ("offline_frozen", "live_frozen")
 ANALYSIS_SETTINGS = {
@@ -146,6 +147,7 @@ def check_frozen(cases, config, contract):
             "procedural",
             "human_written",
             "external_adaptation",
+            "llm_assisted",
         ):
             raise ValueError("Frozen case provenance missing")
         if (
@@ -153,6 +155,27 @@ def check_frozen(cases, config, contract):
             or row.get("language_review") != "approved"
         ):
             raise ValueError("Frozen case review incomplete")
+        if isinstance(case, AuthoredBenchmarkCase):
+            authored = {r.variant_id: r for r in case.authored_renderings}
+            if (
+                case.gold_review_reference is None
+                or row.get("gold_review_reference") != case.gold_review_reference
+            ):
+                raise ValueError(
+                    "Authored gold needs a matching independent review reference"
+                )
+            if row.get("creation_method") != authored["canonical"].creation_method:
+                raise ValueError("Authored provenance disagrees with frozen manifest")
+            for variant in config.variants:
+                text = authored.get(variant)
+                if text is None or text.review_status != "approved":
+                    raise ValueError("Authored text review incomplete")
+        elif row.get("creation_method") in (
+            "human_written",
+            "llm_assisted",
+            "external_adaptation",
+        ):
+            raise ValueError("Authored provenance requires verbatim authored text")
         renderings = row.get("renderings", {})
         if not isinstance(renderings, Mapping):
             raise ValueError("Invalid frozen rendering records")

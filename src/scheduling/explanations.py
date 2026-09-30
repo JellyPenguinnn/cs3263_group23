@@ -48,6 +48,9 @@ def schedule_details(
     origin = datetime.fromisoformat(spec.horizon_start)
 
     def instant(slot):
+        # Structurally valid model answers can still contain unbounded bad slots.
+        if not 0 <= slot <= spec.horizon_slots:
+            return f"slot {slot} (outside horizon)"
         return (origin + timedelta(minutes=spec.slot_minutes * slot)).isoformat(
             timespec="minutes"
         )

@@ -188,6 +188,27 @@ The qualification exercises 648 canned attempts (108 cases Ã— three renderings Ã
 two approaches), exact replay and completed resume. It is wiring evidence with
 zero model calls. A new live pilot requires an explicit cap and new run identity.
 
+### Authored scenario drafts
+
+The [twelve fictional drafts](report/realistic-drafts-review.md) are AI-assisted
+**development** material requested by Yong Qing. They include six generation/six
+repair cases and six SAT/six UNSAT labels, with gold encodings checked by complete
+finite enumeration. Human prose/gold review remains pending; these do not count
+as independently human-written or held-out scenarios.
+
+Case bundle 2.0 supports opt-in authored renderings with provenance and review
+references. Both approaches receive the selected prose verbatim; evaluator
+metadata stays private. Missing requested variants fail preflight instead of
+falling back to procedural text. Legacy bundle 1.0 and saved replays remain compatible.
+
+```sh
+.venv/bin/python evaluation/v2_qualification.py runs/NEW-authored-qualification \
+  --cases benchmarks/fixtures/realistic-drafts-v1.json
+```
+
+This executes 24 **canned** attempts without credentials. It verifies integration,
+not live language understanding. See [the implementation, checks and remaining gates](report/yongqing-authored-followup.md).
+
 ### Explain saved evidence
 
 ```sh
@@ -215,25 +236,28 @@ Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved pro
 
 ## Verification
 
-The [current Yao Xiang follow-up](report/yaoxiang-availability-followup.md)
-incorporates main `ca710cf`, including the v3 benchmark and neutral B request
-boundary. Fresh installed macOS/Linux ARM64 wheels each pass **448 Python tests**,
-**three frontend tests**, dependency/asset checks, 180 legacy, 864 v2 and 648 v3
-canned attempts, figure export and exact replay of three saved live summaries.
-See the [versions and source hashes](configs/development/yaoxiang-availability-verification-20260930.json).
+The [integrated audit](report/integration-audit-20260930.md) checks all three members'
+work against planning.md. All published member tips are included in GitHub main
+`92a975b`, the base for this integrated checkpoint. It adds authored-text support
+and the dashboard/CLI compatibility fix, with direct publication to `main`
+authorized by the user on 30 September. Both legacy and authored runs now work
+through the same saved-evidence readers. CI includes authored-case qualification.
 
-Extraction prompt revision 3 preserves stated availability windows. A separately
-authorized 24-call qwen3.6:35b qualification on twelve previously observed v3
-cases accepted A 4/12 and B 12/12, with 11/12 structurally equivalent B extractions.
-The one remaining mismatch is semantically redundant for its recorded pair.
-These are development observations, not held-out accuracy or a general improvement
-claim. The cap is consumed; raw failures and all earlier summaries are retained.
+Fresh installed macOS/Linux ARM64 wheels each pass **489 Python tests**, **seven
+frontend tests**, dependency/asset checks, 180 legacy, 864 v2, 648 v3 and 24 authored
+canned attempts, figure export and exact replay of all four saved live summaries.
+The dashboard reads all twelve authored cases, and 24 installed CLI explanations
+pass without mutating records. See [the final stage source hashes and verification receipt](configs/development/stage-verification-20260930.json).
+Invalid out-of-horizon answers remain inspectable, and stale case-detail responses
+cannot replace a current selection or reopen a dismissed dialog. An actual browser
+check passed without console errors. This audit makes **zero model calls** and
+preserves historical scores.
 
-macOS used Python 3.12.2 / OpenSSL 3.6.3 / Node 20.15.0; the local Linux ARM64
-container used Python 3.12.14 / OpenSSL 3.0.22 / Node 18.20.4. Hosted CI specifies
-Python 3.12 and Node 20 and was not verified here. Human review, final-model
-eligibility, frozen evaluation and independent teammate replay remain open.
-Native macOS TLS tests require access to the OS certificate service.
+macOS used Python 3.12.2 / Node 20.15.0; local Linux ARM64 used Python 3.12.14 /
+Node 18.20.4. Hosted CI uses Python 3.12 and Node 20; its status could not be read
+with the available authentication. Human review, final-model eligibility, frozen
+evaluation and independent teammate replay remain open. Native macOS TLS tests
+require access to the OS certificate service.
 
 `check_installed.py` rejects editable imports and verifies that all three prompts, issuer certificates and dashboard assets match the source. Use a noneditable install for this qualification; ordinary editable development remains supported. CI also runs `python evaluation/v2_qualification.py artifacts/v2-qualification` to check the full v2 offline integration.
 

@@ -125,7 +125,119 @@ class BenchmarkCase:
         return cls(**row)
 
 
+@dataclass(frozen=True)
+class AuthoredRendering:
+    """Verbatim public prose; authorship and review metadata stay evaluator-only."""
+
+    variant_id: str
+    text: str
+    creation_method: str
+    author_reference: str
+    rationale: str
+    review_status: str = "pending"
+    review_reference: str | None = None
+
+    def __post_init__(self):
+        if self.variant_id not in ("canonical", "paraphrase", "reordered"):
+            raise ValueError("Unsupported authored rendering variant")
+        if self.creation_method not in (
+            "human_written",
+            "llm_assisted",
+            "external_adaptation",
+        ):
+            raise ValueError("Explicit authored-text provenance required")
+        if not all(
+            isinstance(v, str) and v.strip()
+            for v in (self.text, self.author_reference, self.rationale)
+        ):
+            raise ValueError("Authored prose, author and rationale must be explicit")
+        if self.review_status not in ("pending", "approved"):
+            raise ValueError("Unsupported authored-text review status")
+        if self.review_status == "approved":
+            if (
+                not isinstance(self.review_reference, str)
+                or not self.review_reference.strip()
+            ):
+                raise ValueError("Approved text needs a review reference")
+        elif self.review_reference is not None:
+            raise ValueError("Pending text cannot carry an approval reference")
+
+    @classmethod
+    def from_dict(cls, data):
+        required = {
+            "variant_id",
+            "text",
+            "creation_method",
+            "author_reference",
+            "rationale",
+        }
+        if (
+            not isinstance(data, dict)
+            or not required <= set(data)
+            or set(data) - {f.name for f in fields(cls)}
+        ):
+            raise ValueError("Missing or unsupported authored rendering fields")
+        return cls(**data)
+
+
+@dataclass(frozen=True)
+class AuthoredBenchmarkCase(BenchmarkCase):
+    """Opt-in v2 case bundle extension; legacy case serialization stays exact."""
+
+    authored_renderings: tuple[AuthoredRendering, ...] = ()
+    gold_author_reference: str = ""
+    gold_review_reference: str | None = None
+
+    def __post_init__(self):
+        super().__post_init__()
+        if (
+            not isinstance(self.authored_renderings, tuple)
+            or not self.authored_renderings
+            or not all(
+                isinstance(r, AuthoredRendering) for r in self.authored_renderings
+            )
+        ):
+            raise ValueError("Authored case needs explicit renderings")
+        variants = [r.variant_id for r in self.authored_renderings]
+        if "canonical" not in variants or len(set(variants)) != len(variants):
+            raise ValueError("Authored variants need one canonical and unique IDs")
+        if (
+            not isinstance(self.gold_author_reference, str)
+            or not self.gold_author_reference.strip()
+        ):
+            raise ValueError("Gold authorship must be explicit")
+        if self.gold_review_reference is not None and (
+            not isinstance(self.gold_review_reference, str)
+            or not self.gold_review_reference.strip()
+        ):
+            raise ValueError("Gold review reference must be nonempty when supplied")
+
+    @classmethod
+    def from_dict(cls, data):
+        extra = {
+            "authored_renderings",
+            "gold_author_reference",
+            "gold_review_reference",
+        }
+        if not isinstance(data, dict) or not isinstance(
+            data.get("authored_renderings"), list
+        ):
+            raise ValueError("Authored renderings must be an array")
+        base = BenchmarkCase.from_dict(
+            {k: v for k, v in data.items() if k not in extra}
+        )
+        return cls(
+            **{f.name: getattr(base, f.name) for f in fields(BenchmarkCase)},
+            authored_renderings=tuple(
+                AuthoredRendering.from_dict(r) for r in data["authored_renderings"]
+            ),
+            gold_author_reference=data.get("gold_author_reference", ""),
+            gold_review_reference=data.get("gold_review_reference"),
+        )
+
+
 def check_case_set(cases):
+    cases = tuple(cases)
     ids, groups = set(), {}
     for case in cases:
         if case.case_id in ids:
@@ -142,13 +254,23 @@ def load_cases(path: Path):
     if (
         not isinstance(data, dict)
         or set(data) != {"format_version", "cases"}
-        or data["format_version"] != "1.0"
+        or data["format_version"] not in ("1.0", "2.0")
         or not isinstance(data["cases"], list)
     ):
         raise ValueError("Unsupported benchmark bundle")
-    return check_case_set(tuple(BenchmarkCase.from_dict(row) for row in data["cases"]))
+    cases = []
+    for row in data["cases"]:
+        authored = isinstance(row, dict) and "authored_renderings" in row
+        if authored and data["format_version"] != "2.0":
+            raise ValueError("Authored prose requires case bundle version 2.0")
+        cls = AuthoredBenchmarkCase if authored else BenchmarkCase
+        cases.append(cls.from_dict(row))
+    return check_case_set(tuple(cases))
 
 
 def case_bundle(cases):
-    check_case_set(cases)
-    return {"format_version": "1.0", "cases": [to_data(case) for case in cases]}
+    cases = check_case_set(cases)
+    version = (
+        "2.0" if any(isinstance(c, AuthoredBenchmarkCase) for c in cases) else "1.0"
+    )
+    return {"format_version": version, "cases": [to_data(case) for case in cases]}

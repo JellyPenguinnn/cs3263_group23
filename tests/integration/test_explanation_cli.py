@@ -90,3 +90,32 @@ def test_saved_run_is_revalidated_without_mutation_or_inference(
     content["payload"]["pipeline_result"]["status"] = "UNKNOWN"
     attempt.write_text(json.dumps(content))
     assert main(args) == 2
+
+
+def test_rejected_large_model_slot_survives_replay_and_explanation(tmp_path, capsys):
+    from scheduling.evaluation.benchmark import tiny_fixtures
+    from scheduling.evaluation.runner import requests, run_batch, replay
+    from tests.integration.test_evaluation import config, canned
+
+    cases = tiny_fixtures()[:1]
+    cfg = config()
+    responses = canned(cases, cfg)
+    key = next(k for k, identity, _, _ in requests(cases, cfg)
+               if identity["approach"] == "direct")
+    responses[key] = json.dumps({"status": "SAT", "schedule": [
+        {"activity_id": "A", "start_slot": 10**30},
+        {"activity_id": "B", "start_slot": 2},
+    ]})
+    run_batch(cases, tmp_path, cfg, canned=responses)
+    rows, progress = replay(tmp_path)
+    direct = next(r for r in rows if r["approach"] == "direct")
+    assert progress["completed"] == 2
+    assert direct["accepted"] is False
+    assert direct["category"] == "gold_invalid_schedule"
+    before = {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}
+    assert main(["explain", "--run-dir", str(tmp_path), "--case-id",
+                 cases[0].case_id, "--approach", "direct", "--format", "json"]) == 0
+    text = capsys.readouterr().out
+    assert json.loads(text)["evaluation"]["accepted"] is False
+    assert f"slot {10**30} (outside horizon)" in text
+    assert before == {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}

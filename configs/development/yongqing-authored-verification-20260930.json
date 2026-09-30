@@ -1,0 +1,411 @@
+{
+  "authorizations": [
+    "compatible authored-text interface and narrow consumers explicitly approved",
+    "user requested AI-assisted fictional scenario drafts"
+  ],
+  "branch": "yongqing-evaluation",
+  "date": "2026-09-30",
+  "format_version": "1.0",
+  "github_main_incorporated": "92a975b",
+  "known_development_registry": {
+    "case_count": 294,
+    "cross_split_families": [],
+    "draft_family_mapping": {
+      "realistic-draft-01": "realistic-draft-01",
+      "realistic-draft-02": "realistic-draft-02",
+      "realistic-draft-03": "realistic-draft-03",
+      "realistic-draft-04": "realistic-draft-04",
+      "realistic-draft-05": "realistic-draft-05",
+      "realistic-draft-06": "realistic-draft-06",
+      "realistic-draft-07": "realistic-draft-07",
+      "realistic-draft-08": "realistic-draft-08",
+      "realistic-draft-09": "realistic-draft-09",
+      "realistic-draft-10": "realistic-draft-10",
+      "realistic-draft-11": "realistic-draft-11",
+      "realistic-draft-12": "realistic-draft-12"
+    },
+    "evidence": "known_development_structure_registry_not_freeze",
+    "format_version": "1.0",
+    "limitations": [
+      "Covers the named project matrices and new drafts only; add any other inspected/private/adapted cases before final freeze.",
+      "Conservative graph fingerprints do not establish arbitrary semantic novelty.",
+      "Registry excludes known hard structures; it does not authorize held-out allocation or prove human review."
+    ],
+    "registry": "benchmarks/manifests/development-hard-fingerprints-20260930.json",
+    "registry_sha256": "013cf0a9cd909174ab119ad26a897832428bc6aafd395ad104bc39f3ab61ea9d",
+    "review_status": "pending",
+    "sources": {
+      "ai_authored_drafts_v1": {
+        "bundle_sha256": "d33d3db67c42a3571844039d680cfd28f5da45e960d50c08ad7850151abf896f",
+        "cases": 12
+      },
+      "v1_seed_3263": {
+        "bundle_sha256": "3396dfe3d69454469765e9634e2f6c377e8bb85b52c505dfa318aaf30b7dfa7a",
+        "cases": 30
+      },
+      "v2_seed_3264": {
+        "bundle_sha256": "bc4af652f4e0bb1655968ecd47e453db44fbf51b40941ffe72a7708dce058cd7",
+        "cases": 144
+      },
+      "v3_seed_3265": {
+        "bundle_sha256": "a6f968288d03ff0cf4b079f0b788598954ded00594affe154f1f3dacfbd76f6d",
+        "cases": 108
+      }
+    },
+    "unique_hard_fingerprints": 300
+  },
+  "limits": [
+    "AI-assisted drafts and technical checks are not independent human authorship or teammate review.",
+    "No live qualification of authored prose; no held-out data created or inspected.",
+    "Only canonical authored text exists; missing variants fail instead of falling back to templates.",
+    "Hosted CI unverified; local Linux ARM64 Node 18 versus hosted Node 20.",
+    "Final eligibility/access, fresh allocation, reviewed protocol and cap remain pending."
+  ],
+  "live_model_calls": 0,
+  "local_logs": "runs/yongqing-authored-20260930-01",
+  "local_reproduction_archive": {
+    "bytes": 756102,
+    "content_checksums_verified": 451,
+    "credential_scan": "passed",
+    "external_sharing": "not_performed",
+    "files": 452,
+    "independent_teammate_replay": "pending",
+    "path": "artifacts/yongqing-authored-replay-20260930-01.tar.gz",
+    "sha256": "8ddc19306c6e543975931fccbc409fa0435b101a08496e567c54d12bc36585ec",
+    "verification": "unpacked and checked all hashes; four historical and one authored canned summary replayed exactly with the qualified installed package"
+  },
+  "member": "Yong Qing",
+  "platforms": {
+    "linux": {
+      "assets": "passed",
+      "authored_canned_attempts": 24,
+      "dependencies": "passed",
+      "figure_export": "passed",
+      "frontend_tests_passed": 3,
+      "historical_summaries_replayed_exactly": 4,
+      "installed_from": "fresh_noneditable_wheel",
+      "legacy_canned_attempts": 180,
+      "legacy_deliberate_failures": 6,
+      "live_model_calls": 0,
+      "machine": "aarch64",
+      "node": "v18.20.4",
+      "openssl": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)",
+      "platform": "Linux-6.8.0-117-generic-aarch64-with-glibc2.36",
+      "python": "3.12.14",
+      "python_tests_passed": 478,
+      "v2_canned_attempts": 864,
+      "v3_canned_attempts": 648
+    },
+    "macos": {
+      "assets": "passed",
+      "authored_canned_attempts": 24,
+      "dependencies": "passed",
+      "figure_export": "passed",
+      "frontend_tests_passed": 3,
+      "historical_summaries_replayed_exactly": 4,
+      "installed_from": "fresh_noneditable_wheel",
+      "legacy_canned_attempts": 180,
+      "legacy_deliberate_failures": 6,
+      "live_model_calls": 0,
+      "machine": "arm64",
+      "node": "v20.15.0",
+      "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "python": "3.12.2",
+      "python_tests_passed": 478,
+      "v2_canned_attempts": 864,
+      "v3_canned_attempts": 648
+    }
+  },
+  "publication": "local_uncommitted_not_authorized",
+  "qualified_source_files_rechecked": 96,
+  "qualified_source_sha256": {
+    ".github/workflows/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    ".github/workflows/offline.yml": "1fdfdfa39a574971df308d36e5c683ef58e184f013ee683c5699d605972edb22",
+    "benchmarks/fixtures/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "benchmarks/fixtures/development-v1.json": "b739d919d4601b59c90e2768d0ca1c0688dd7abfe38c8ec9c79382308f11e8bc",
+    "benchmarks/fixtures/realistic-drafts-v1.json": "6c7a6d764ec6ea1780738dbe3261afdd7a335e9d21c2a273ebaaaaf1650ca0a7",
+    "benchmarks/manifests/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "benchmarks/manifests/development-v1.json": "6be5f841ce0fba5b28414029bf77c59f52b5da128a1fde6cb0bf8d0f48957523",
+    "benchmarks/manifests/realistic-drafts-v1.json": "30eb154701222efe1093d29cbf86ffc1bc7de3471ba19621b26ecd56b1064048",
+    "benchmarks/manifests/yongqing-v2-pilot-20260929.json": "6babf417892ebc6e95eacf0ddda6cea8226cdd758b6271406116cc03361f53ca",
+    "evaluation/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "evaluation/offline_demo.py": "ff0c71997d99a4ef23d1d80a6fe3642ac31d0e0f43bcdc76aaf1e7f4821bf6db",
+    "evaluation/v2_qualification.py": "20d5d0cce8988abc51c801eeb48d0b47892b07865a2ff14f46a23fc644021fba",
+    "prompts/direct/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/direct/generation.txt": "aa1e9bad2a55c31080715e40de0f021aa524a412ab380ae403f162def4950c25",
+    "prompts/direct/repair.txt": "d85ed72e8f26df83e1a5fd3f86433bd5c60f14df452eaf13be031542772cc6f8",
+    "prompts/extraction/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/extraction/specification.txt": "075f554a4bd9e7bc54ebc1fd0805ede018ed9193707f90157d064a7ac14bbebd",
+    "pyproject.toml": "ed1cb06334a2c2c312215e343b9e30255725b62aab9801f7698f16b2f5113c5c",
+    "requirements.lock": "329d2777351a1ec79c5ab0fd260d24aff01f980f398b084ae688a59d9fd97a7d",
+    "scripts/check_installed.py": "d25c7471e92e27a4af2a8b925dfb8753052bb3612583633d769b696d7d10add7",
+    "src/scheduling/__init__.py": "f536cf75c54ec3ff11f69bd7a26827155c1820b5eacd04ca8b6fcc623b588057",
+    "src/scheduling/cli.py": "ee516fd64855692317d1714fb20234897abe7692c904e5f06c5677bcc4c26a91",
+    "src/scheduling/dashboard/__init__.py": "6b0f95873da6ba567b2dba9675c1a61573e2eef17105106ea67758057f3e5b57",
+    "src/scheduling/dashboard/server.py": "2c015e60701acceaff693ed69ccb5f129e2e5839cbedbb901af8b5d94f1c2441",
+    "src/scheduling/dashboard/service.py": "b1147fd841f2694b845c433e5c5d5d016d0aacf71d261dfc1ba48f52dbecc5d2",
+    "src/scheduling/dashboard/static/app.js": "7ea9db3d312ff59d8273237696b9586ab59ed4f7fc4ea77c1b52d6f876b688af",
+    "src/scheduling/dashboard/static/index.html": "138418aa5f06d194c8d7905f1529d1ecf65d4116e170a8102e48949be7e992ed",
+    "src/scheduling/dashboard/static/style.css": "ed1ea3dc4e4e8ab1817004eb3df8d0ed8b4f960833cab3e134f1941033e71d3d",
+    "src/scheduling/domain_analysis.py": "5afc4bdb0d30e93b8d6b863e8166edad64fd3d84adad8f72f6d5f685a8bbb62b",
+    "src/scheduling/evaluation/__init__.py": "eedbdba39b10d084015fd9ade706803c86c69a4ddb8ec9a75e17462a506202a5",
+    "src/scheduling/evaluation/benchmark.py": "0a36ebdbabd2f321ad29877a30c498a21d8560ed8b1642902f223a8bbc475989",
+    "src/scheduling/evaluation/cases.py": "486f51eb0030692e9481b702f665a4421618df3dff921421d6595f1f312cdc0b",
+    "src/scheduling/evaluation/cli.py": "06f0e87d12a6db19d21b2c87c31e8ff8f21ff58357a2cb0c1da54e0e9823bcab",
+    "src/scheduling/evaluation/figures.py": "ed76ce0245010990159078dfbc80544abdcf3f76f24eaf17fc7a73fbf62bbe13",
+    "src/scheduling/evaluation/frozen.py": "a206ba165e79b3b0fec85decfadab131801cf12c5cfc2040d54c020396e819fb",
+    "src/scheduling/evaluation/manifests.py": "5e07193faf806ce2580f6540f3f203ce9927eaceb636585586acb8392ed75907",
+    "src/scheduling/evaluation/metrics.py": "30a88deae966d49ac1966c37af540e1b89bdd51e46cc7a4c696361206cfebce2",
+    "src/scheduling/evaluation/runner.py": "1d9b8647975feaa21e41b42badc13b390d3ad4d0f8fef94cc8fd1d2a7ad48329",
+    "src/scheduling/evaluation/scoring.py": "099de47be4d0db6f0ee09f15a4c42beb91ed40269cbf3d587c97b9f125c55d11",
+    "src/scheduling/explanation_cli.py": "853a201d55f60f92c3b93322e36151cbe3f920daa175edd82f0d127189c8afbc",
+    "src/scheduling/explanations.py": "f603f8ce3dd4fa3d595dc9d8b8303e4c45081c0bea5b3998a985bdd1b2136b25",
+    "src/scheduling/extraction_diagnostics.py": "aae1b557fa89ef812470a8f47a4c210ddb9b08de7992689ce82a7d6c912df869",
+    "src/scheduling/formal_cli.py": "acff3c1e1fc49dba98ea32bb4bf9f17a9c1e13e4a6559339ce33d2e3d80b74c9",
+    "src/scheduling/objectives.py": "735b86ba1fba016e1f0948e39253d8298c21d1edec7bc32e0859d4d99fc6da7e",
+    "src/scheduling/pipelines/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/pipelines/__init__.py": "c58fa330b61fd27ee6026d340a111469ec70747c0a31beeafa839b94b7e28e29",
+    "src/scheduling/pipelines/direct.py": "36c610512278b6c35c7bfe72140f53fa210d969854938e40877313cb3ffb8dbb",
+    "src/scheduling/pipelines/solver_augmented.py": "69353b1f5eaca0b8939ac0b4290f025fdbcc3d527f58742c06b3ebbe75dfe089",
+    "src/scheduling/providers/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/providers/__init__.py": "1a0681d7a28129defe1326e63003face90d0bbada0eef82363d64c8d547e6468",
+    "src/scheduling/providers/issuer-chain.crt": "539848d4940ce0f670abf650456d3f68606728da65b20ec8fc2cad247461ce2e",
+    "src/scheduling/providers/soclaas.py": "c28b240b4e0252b7faba2b099ff06aa6ba32293a869d5986193df76927df91b4",
+    "src/scheduling/providers/tls.py": "5dafd099fb19114f9503a6a8f670cf137032915db72f4b42f23ea301341a50ea",
+    "src/scheduling/providers/types.py": "07ca58a3d116045c6b66b11d4e22256cb6b7e0f109f1c257f40e6b693b4cd554",
+    "src/scheduling/schema.py": "5aedb26597a07b9dad6ef4e20765798f6d71d91ee60ba7245eaecab0fa3e8fcc",
+    "src/scheduling/solver.py": "353f85795d3d502ebb51b7acdd73d4619cad123244abdf5bfab9ee566c460424",
+    "src/scheduling/validation.py": "43d88d415b1f9c4a95a2fcce098e6432bc78d4c24ead726c893d2ad73ff49557",
+    "tests/__init__.py": "8f8d7a6d53c65516b3752ab1d0714a4a56691a0993a9d86c7ac31cb34a19a70b",
+    "tests/conftest.py": "d3f31f532e4ff9f51fd740e30be0f85f45174726fa4dd52951265e726a279b60",
+    "tests/examples/formal-generation.json": "9e44b00f459f13f6a82eca8d8a8525937fa4d25cab13bf8da8b65d437403a1fd",
+    "tests/examples/formal-original.json": "943324d78463ab2eb0bfb29e8c1668907e73799efd17b7ecd2e8c139b99977f2",
+    "tests/examples/formal-repair.json": "cbb2b100f646ca204e7abd52a1a915967dfea75cfa976c90ebb5f466c0d7ca04",
+    "tests/examples/generation-view.json": "0249d37e6f42d68ec6c71b10c87f3c7dc1a1c515cd2f9bb1626c7a2d133d9c43",
+    "tests/examples/repair-view.json": "d36d405b81b45778bb3f81c84df0fdd2e952192893fe113050809246b5b79b99",
+    "tests/formal_support.py": "170c6c02615b3919712ce0d125793fa73369d1df508b6132690d0e2f5c48f13b",
+    "tests/frontend/dashboard.test.cjs": "8ed13d9219766e9c51d6011342a87ec540ec1f2d2ff0195d445481cbf0eadf45",
+    "tests/integration/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/integration/test_authored_cases.py": "b11d3e9c6ef76d90f5cb83a88d8412d991e20492d1b7ccac44190a140938a0b7",
+    "tests/integration/test_baseline_operations.py": "c2856f3785a4b1107dbd6ab6ca6df76c3dab3351c6f9a22cac1f27eb8e68b094",
+    "tests/integration/test_dashboard.py": "61fdd1f03bae05c7e4fc57a5b719b9b3101ecf2136e3028f06861c15388139bc",
+    "tests/integration/test_direct_failure_patterns.py": "fbf7886b695094bfc413f016731c69d34eabfff9ae378b54699e63afed005871",
+    "tests/integration/test_direct_transport.py": "7229cae42a332eb064db828240657fd20bc2450e51d6629f815f677a0140f6f2",
+    "tests/integration/test_evaluation.py": "d59c91927c06c0330d11bf1e87d90e52cacb4ec3460990d4a5543ca8e0df6ca1",
+    "tests/integration/test_explanation_cli.py": "fe4a8dbf2279e1eaefe7df0e882e36b6fc09ccfca283a8aa7f42595b55063ed5",
+    "tests/integration/test_extraction_scoring_review.py": "e1b488b9cf471ce4b03d513196eaf12111db725fdb11b5c5516920f8ddf51689",
+    "tests/integration/test_frozen_evaluation.py": "3562df730fc8f332ba69ff88611d10111094a3e9eb6df657d6437036018cbf30",
+    "tests/integration/test_provider_runner.py": "be3ea8824ed335b0cc9d949d7fe1340beca14dafd563f4045751a3b1659935ed",
+    "tests/integration/test_request_boundary.py": "433934cc2bc45e58fad301b065277d8099ea69b8e9bc780ab6ae401f239150fc",
+    "tests/integration/test_solver_augmented.py": "42c44ba0cc98efd34469f3822ce9d6ebdb2376a3de8e37638b201ae8297804b0",
+    "tests/unit/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "tests/unit/test_analysis_details.py": "9ff06b134bd788d3b78cc43be47a57fd973aeb0e2d22086561e33e1bbe863fa0",
+    "tests/unit/test_availability_extraction_review.py": "983f4689a9edeca3a83d5a3c1c9a347db846e5bc5fb6afee01a14d4730185bce",
+    "tests/unit/test_benchmark_v2.py": "cfd6cb53056edd451f8537e7be4d3b7231386945fec778a6cce4005a7e28a711",
+    "tests/unit/test_benchmark_v3.py": "03b949b0a96246c47d3a2a695c436d9103702f298383507ca51a191a0fea5fd6",
+    "tests/unit/test_direct.py": "479d2175a87670e72fec3dde453da7a41b5845b63055cdff01e70b2b72cdb455",
+    "tests/unit/test_domain_analysis.py": "2bff9ba1a2a927e5994a3e88f1e615ff171dbecf72116987b4b9c7a1cf9ce417",
+    "tests/unit/test_explanations.py": "97564d34c685a92013f6383c6f7557b98954e68d1d506e9fd8c1589b58cf3c3e",
+    "tests/unit/test_extraction_contract.py": "55230910bf4b2e78c23ad4fa3a187779fef278831a57e213f8bc40f4f4b9fff7",
+    "tests/unit/test_formal_qualification.py": "a629ba0767e3e7178d2f2f9580607532ce2e72483b42f8101eed4e37daacd9d7",
+    "tests/unit/test_provider.py": "5c9b6bbc26b30e0deb025d26a9c56a9e5ace510871dc84d6ca5e105300e7ec8c",
+    "tests/unit/test_provider_tls.py": "610207384e6836b39e8bbf2a8a3ae714ef62cfb6e8912b50a1d98e07fe072188",
+    "tests/unit/test_repair_invariants.py": "6a7c5a51d9cf7317c948d59b305a07a38b13acdf610c9bc11ad3e6e5e84a8ce6",
+    "tests/unit/test_schema.py": "e253ed9ce83bf5683d566bf429f0f06d528bbec3f0403acd04dafe0c91e0a0cd",
+    "tests/unit/test_solver.py": "4ea473b11a894812a4a1c4ad9ffb8af4b73b75e110db00e642d75385b1771887",
+    "tests/unit/test_v2_formal_review.py": "9836ae81e167fa87080e200ebfbbd483d8a9a25e8b4952305a52a9835a104217",
+    "tests/unit/test_validation.py": "18ebc207448f38be335937f64934d9ac33431a149ff2e8d3ef90a0cd9d66d3c7"
+  },
+  "supplemental_registry_file_sha256": "95f90fd8fe9b1914f92c52049ac574a3f7fa141dd8b8545fb455e6ad79640c41",
+  "technical_review": {
+    "date": "2026-09-30",
+    "drafts": [
+      {
+        "case_id": "realistic-draft-01",
+        "case_sha256": "708d9311ec5c4b09296e60f244039452ce9577f0497111719414ce15e8d26800",
+        "feasible_assignments": 9,
+        "full_assignments_checked": 512,
+        "minimum_objective": [
+          0
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-02",
+        "case_sha256": "7401ec8bea624b97f71e14edcef12b6b20958fb4e8c16449d359041e067478e7",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 64,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      },
+      {
+        "case_id": "realistic-draft-03",
+        "case_sha256": "33a67d48ce2e7555110830e6ca4a912762fc95504b42cbfde2a7db391e08c948",
+        "feasible_assignments": 21,
+        "full_assignments_checked": 512,
+        "minimum_objective": [
+          0
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-04",
+        "case_sha256": "713be42b3be8aaf16723b5ab10353ccadf1d3073001282f4bc0d4a12a6a3d32d",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 16,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      },
+      {
+        "case_id": "realistic-draft-05",
+        "case_sha256": "26da1e845bff883f5219cf5034470d721f877bd22f7ad27354585e8db708baf3",
+        "feasible_assignments": 38,
+        "full_assignments_checked": 4096,
+        "minimum_objective": [
+          3
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-06",
+        "case_sha256": "c7ca701e7e59ead743929a37b98bfca6e3db4140707a20f67112b3cc7a5fd63f",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 512,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      },
+      {
+        "case_id": "realistic-draft-07",
+        "case_sha256": "15f7657ce37916658346ea0efafc881bc0bfd46002a6ef6cd98a5e3b91750f5a",
+        "feasible_assignments": 1,
+        "full_assignments_checked": 64,
+        "minimum_objective": [
+          3,
+          4,
+          0
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-08",
+        "case_sha256": "f351894e45d615051d6b9b414cbea8db7ad662be1cb5d85a645042de1bb675ef",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 36,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      },
+      {
+        "case_id": "realistic-draft-09",
+        "case_sha256": "67bf3161a6d42d0eec578e51e58d2959595c4eb1f864381300b16b31c05ad120",
+        "feasible_assignments": 35,
+        "full_assignments_checked": 512,
+        "minimum_objective": [
+          2,
+          3,
+          0
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-10",
+        "case_sha256": "96e9eacc0a99096d4f8b45d089f4602977e3147a1c6a420390c9b6fc593eae9e",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 16,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      },
+      {
+        "case_id": "realistic-draft-11",
+        "case_sha256": "7ff0f37960edac6c6a70111320a2fe93856b4e725e2ef1a2f56b5f4d3434f6fb",
+        "feasible_assignments": 1,
+        "full_assignments_checked": 216,
+        "minimum_objective": [
+          3,
+          9,
+          0
+        ],
+        "prose_human_review": "pending",
+        "reference_expected": "SAT"
+      },
+      {
+        "case_id": "realistic-draft-12",
+        "case_sha256": "4d2a4104e8dace3a2d03520c8dfabda98dd504be7618b8abeea9d4f74db77516",
+        "feasible_assignments": 0,
+        "full_assignments_checked": 36,
+        "minimum_objective": null,
+        "prose_human_review": "pending",
+        "reference_expected": "UNSAT"
+      }
+    ],
+    "evidence": "AI_assisted_offline_technical_review",
+    "format_version": "1.0",
+    "limitations": [
+      "Same coding assistant performing a technical review is not independent human teammate sign-off.",
+      "All drafts are AI-assisted development data; prose/gold alignment still requires human review.",
+      "Earlier baseline/v2 records retain their label-bearing B metadata confound; do not pool datasets or prompt versions."
+    ],
+    "live_model_calls": 0,
+    "saved_runs": [
+      {
+        "B_structural_mismatches": 0,
+        "accepted": {
+          "direct": 18,
+          "solver_augmented": 25
+        },
+        "failed_denominator_records": 17,
+        "human_replay": false,
+        "records": 60,
+        "run_id": "main-baseline-20260929-01",
+        "source_groups": 18
+      },
+      {
+        "B_structural_mismatches": 1,
+        "accepted": {
+          "direct": 3,
+          "solver_augmented": 12
+        },
+        "failed_denominator_records": 9,
+        "human_replay": false,
+        "records": 24,
+        "run_id": "yongqing-v2-pilot-20260929-01",
+        "source_groups": 6
+      },
+      {
+        "B_structural_mismatches": 3,
+        "accepted": {
+          "direct": 5,
+          "solver_augmented": 10
+        },
+        "failed_denominator_records": 9,
+        "human_replay": false,
+        "records": 24,
+        "run_id": "lihao-boundary-pilot-20260930-01",
+        "source_groups": 6
+      },
+      {
+        "B_structural_mismatches": 1,
+        "accepted": {
+          "direct": 4,
+          "solver_augmented": 12
+        },
+        "failed_denominator_records": 8,
+        "human_replay": false,
+        "records": 24,
+        "run_id": "yaoxiang-availability-pilot-20260930-01",
+        "source_groups": 6
+      }
+    ],
+    "total_complete_assignments_checked": 6592
+  }
+}

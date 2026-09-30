@@ -4,7 +4,7 @@ from dataclasses import replace
 from itertools import combinations
 import random
 
-from scheduling.evaluation.cases import BenchmarkCase
+from scheduling.evaluation.cases import AuthoredBenchmarkCase, BenchmarkCase
 from scheduling.schema import (
     Activity,
     BlockedInterval,
@@ -252,6 +252,14 @@ def render(case, variant="canonical", rendering_seed=0):
     if variant not in ("canonical", "paraphrase", "reordered"):
         raise ValueError("Unsupported rendering variant")
     spec = case.problem
+    if isinstance(case, AuthoredBenchmarkCase):
+        texts = {r.variant_id: r.text for r in case.authored_renderings}
+        if variant not in texts:
+            raise ValueError(f"Missing authored rendering: {variant}")
+        return NaturalLanguageView(
+            case.case_id, variant, spec.task_type, texts[variant],
+            tuple(a.id for a in spec.activities), case.original_schedule,
+        )
 
     def windows(items):
         return ", ".join(f"[{w.start},{w.end})" for w in items) or "none (unavailable)"

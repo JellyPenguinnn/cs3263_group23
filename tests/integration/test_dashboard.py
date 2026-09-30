@@ -2,7 +2,7 @@
 
 from datetime import datetime, timedelta
 from io import BytesIO
-from dataclasses import replace
+from dataclasses import fields, replace
 import json
 from types import SimpleNamespace
 
@@ -10,7 +10,8 @@ import pytest
 
 from scheduling.dashboard.service import Dashboard, snapshot
 from scheduling.dashboard.server import Handler
-from scheduling.evaluation.benchmark import tiny_fixtures
+from scheduling.evaluation.benchmark import render, tiny_fixtures
+from scheduling.evaluation.cases import AuthoredBenchmarkCase, AuthoredRendering, BenchmarkCase
 from scheduling.evaluation.runner import RunConfig, requests, run_batch, read, replay
 from scheduling.evaluation.scoring import digest
 from scheduling.providers import ModelConfig
@@ -18,9 +19,22 @@ from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
 from scheduling.solver import SolverLimits
 
 
-@pytest.fixture
-def saved(tmp_path):
+@pytest.fixture(params=("legacy", "mixed_authored"))
+def saved(tmp_path, request):
     cases = tiny_fixtures()
+    if request.param == "mixed_authored":
+        # Exercise both generation and repair through the versioned consumer path.
+        cases = tuple(
+            AuthoredBenchmarkCase(
+                **{f.name: getattr(case, f.name) for f in fields(BenchmarkCase)},
+                authored_renderings=(AuthoredRendering(
+                    "canonical", render(case).text, "llm_assisted",
+                    "automated-test", "Synthetic consumer regression fixture",
+                ),),
+                gold_author_reference="automated-test",
+            ) if index in (0, len(cases) - 1) else case
+            for index, case in enumerate(cases)
+        )
     cfg = RunConfig(
         ModelConfig("offline", 512), SolverLimits(), SolverLimits(), 12, 6144
     )
@@ -220,3 +234,25 @@ def test_catalog_ignores_component_manifests_and_discovers_new_runs(saved, tmp_p
 
     shutil.copytree(path, tmp_path / "later-run")
     assert len(app.bootstrap()["runs"]) == 2
+
+
+def test_http_reads_versioned_case_bundle_without_changing_records(saved):
+    path, cases, _ = saved
+    before = {p: p.read_bytes() for p in path.rglob("*") if p.is_file()}
+    app = Dashboard(path.parent, run_dir=path)
+    key = app.bootstrap()["selected"]
+    for endpoint in (
+        f"/api/run?run={key}",
+        f"/api/cases?run={key}&task=repair",
+        f"/api/case?run={key}&id={len(cases) - 1}",
+    ):
+        status, _, body = http(app, path=endpoint)
+        assert status == 200, body
+    detail = json.loads(body)
+    assert detail["case"]["case_id"] == cases[-1].case_id
+    assert len(detail["rows"]) == 2
+    assert all(row["accepted"] for row in detail["rows"])
+    if isinstance(cases[-1], AuthoredBenchmarkCase):
+        assert detail["case"]["authored_renderings"][0]["text"] == render(cases[-1]).text
+        assert detail["case"]["gold_review_reference"] is None
+    assert before == {p: p.read_bytes() for p in path.rglob("*") if p.is_file()}

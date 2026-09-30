@@ -37,7 +37,8 @@ let session,
 let slice = ["controlled", "canonical", 0],
   refreshing = false,
   refreshError = false,
-  caseRequest = 0;
+  caseRequest = 0,
+  detailRequest = 0;
 function notice(message, type = "") {
   $("#notice").textContent = message;
   $("#notice").className = `notice ${type}`;
@@ -107,6 +108,10 @@ function schedule(
   const p = c.problem,
     horizon = p.horizon_slots;
   const clock = (slot) => {
+    // JSON numbers outside the safe range cannot preserve the model's exact slot.
+    if (!Number.isFinite(slot) || Math.abs(slot) > Number.MAX_SAFE_INTEGER)
+      return "Outside supported range · see raw response";
+    if (slot < 0 || slot > horizon) return `slot ${slot} (outside horizon)`;
     const d = new Date(
       Date.parse(p.horizon_start) + slot * p.slot_minutes * 60000,
     );
@@ -152,6 +157,7 @@ async function loadSession() {
 }
 $("#run-select").onchange = async (e) => {
   runId = e.target.value;
+  closeDetail();
   run = null;
   offset = 0;
   caseRequest++;
@@ -199,6 +205,7 @@ function sliceControls() {
     el.innerHTML = `<label>Comparison subset<select class="slice-select">${slices.map((s) => `<option value="${esc(JSON.stringify(s))}" ${pretty(s) === pretty(slice) ? "selected" : ""}>${esc(human(s[0]))} · ${esc(s[1])} · repeat ${s[2] + 1}</option>`).join("")}</select></label>`;
     el.querySelector("select").onchange = (e) => {
       slice = JSON.parse(e.target.value);
+      closeDetail();
       offset = 0;
       sliceControls();
       renderResults();
@@ -320,8 +327,12 @@ $("#case-rows").onclick = (e) => {
   if (b) showDetail(Number(b.dataset.detail));
 };
 async function showDetail(id) {
+  const request = ++detailRequest,
+    selection = query({ id }).toString();
+  const current = () => request === detailRequest && selection === query({ id }).toString();
   try {
-    const data = await api("/api/case?" + query({ id }));
+    const data = await api("/api/case?" + selection);
+    if (!current()) return;
     const c = data.case;
     $("#detail-title").textContent = c.case_id;
     $("#detail-content").innerHTML = `<div class="detail-grid">${[
@@ -339,10 +350,15 @@ async function showDetail(id) {
       )}<section class="card full"><h2>Problem & reference</h2>${c.event ? `<p class="comparison-note">Change: ${esc(c.event)}</p>` : ""}${c.original_schedule ? `<details><summary>Original schedule</summary>${schedule(c, c.original_schedule, false, true)}</details>` : ""}<details><summary>Gold reference · ${esc(data.reference?.status || "not yet available")}</summary>${schedule(c, data.reference?.schedule)}${objectives(data.reference?.objectives)}<p class="muted">${data.reference?.optimality_proven ? "Optimum proven" : "Optimality not proven"}</p></details><details><summary>Source problem and constraints</summary><pre class="raw">${esc(pretty(c))}</pre></details></section></div>`;
     if (!$("#case-dialog").open) $("#case-dialog").showModal();
   } catch (e) {
-    notice(e.message, "error");
+    if (current()) notice(e.message, "error");
   }
 }
-$("#close-detail").onclick = () => $("#case-dialog").close();
+function closeDetail() {
+  detailRequest++;
+  $("#case-dialog").close();
+}
+$("#close-detail").onclick = closeDetail;
+$("#case-dialog").oncancel = () => { detailRequest++; };
 async function refresh() {
   if (refreshing) return;
   refreshing = true;

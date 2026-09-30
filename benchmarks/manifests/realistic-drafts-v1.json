@@ -1,0 +1,347 @@
+{
+  "format_version": "2.0",
+  "dataset_version": "realistic-ai-drafts-v1-development",
+  "status": "development_draft_not_frozen",
+  "creation_method": "llm_assisted",
+  "author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+  "human_fixture_review": "pending",
+  "human_language_review": "pending",
+  "case_count": 12,
+  "independently_human_written_count": 0,
+  "selection": "All twelve requested AI-assisted fictional drafts retained; six generation/six repair, six SAT/six UNSAT, six personal/six shared; two repairs per event. No model outputs consulted.",
+  "cases": [
+    {
+      "case_id": "realistic-draft-01",
+      "title": "Shared media studio",
+      "setting": "shared",
+      "task_type": "generation",
+      "expected_label": "SAT",
+      "feasible_assignments": 9,
+      "objective": [
+        0
+      ],
+      "event": null,
+      "sha256": "708d9311ec5c4b09296e60f244039452ce9577f0497111719414ce15e8d26800",
+      "prose_sha256": "c0b9014bdd8035ccca0eca00616b11da430d34c84a3fd62467970a950f03dd3c",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-01",
+      "source_family_id": "realistic-draft-01",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "66ee74500e7655063af5ad58d9b59e2ddd88df4d8f5ace44ca1f751920dd2323"
+      }
+    },
+    {
+      "case_id": "realistic-draft-02",
+      "title": "Shared laboratory instrument",
+      "setting": "shared",
+      "task_type": "generation",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": null,
+      "sha256": "7401ec8bea624b97f71e14edcef12b6b20958fb4e8c16449d359041e067478e7",
+      "prose_sha256": "f65be3b38edce6497af6520b2703a5f6d6caba003574fdd63a612eb7ae595284",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-02",
+      "source_family_id": "realistic-draft-02",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "5e8d66144d3b3a0d37adacdfc26e7762cd54ecf7dc12ee76362ba25bd0c68b82"
+      }
+    },
+    {
+      "case_id": "realistic-draft-03",
+      "title": "Personal study session",
+      "setting": "personal",
+      "task_type": "generation",
+      "expected_label": "SAT",
+      "feasible_assignments": 21,
+      "objective": [
+        0
+      ],
+      "event": null,
+      "sha256": "33a67d48ce2e7555110830e6ca4a912762fc95504b42cbfde2a7db391e08c948",
+      "prose_sha256": "dd2bdd2b01e12b0a119932d264cfb44360049de397b71429aba9545b6e3e8c0c",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-03",
+      "source_family_id": "realistic-draft-03",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "4de6c178d3ddb450ed45c91fba23a6fd0d03f3363751aa8c4c8d3dd72dfeb39e"
+      }
+    },
+    {
+      "case_id": "realistic-draft-04",
+      "title": "Personal rehearsal windows",
+      "setting": "personal",
+      "task_type": "generation",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": null,
+      "sha256": "713be42b3be8aaf16723b5ab10353ccadf1d3073001282f4bc0d4a12a6a3d32d",
+      "prose_sha256": "8e6938176fc55777b41f17876511e476a30b39313698968c67293b469d84c001",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-04",
+      "source_family_id": "realistic-draft-04",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "0ba7b8399aab085710d008714b0788c44a0ef67e60f03248612bc0592e160dfd"
+      }
+    },
+    {
+      "case_id": "realistic-draft-05",
+      "title": "Community science demonstration",
+      "setting": "shared",
+      "task_type": "generation",
+      "expected_label": "SAT",
+      "feasible_assignments": 38,
+      "objective": [
+        3
+      ],
+      "event": null,
+      "sha256": "26da1e845bff883f5219cf5034470d721f877bd22f7ad27354585e8db708baf3",
+      "prose_sha256": "a138c1722c3715fa6d47d4f7ddcf6bf55a5d6e8b6ca525152ee708ebeef22e2b",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-05",
+      "source_family_id": "realistic-draft-05",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "be7094009d391864493f7aeb0e41719b7f8d534e6d02ab04e24c92a094bfcf01"
+      }
+    },
+    {
+      "case_id": "realistic-draft-06",
+      "title": "Personal video production deadline",
+      "setting": "personal",
+      "task_type": "generation",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": null,
+      "sha256": "c7ca701e7e59ead743929a37b98bfca6e3db4140707a20f67112b3cc7a5fd63f",
+      "prose_sha256": "50ec6653b15a3f077f1340ee8424984b174cfd3dcc740a7d596f92a52872ecc5",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-06",
+      "source_family_id": "realistic-draft-06",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "dc4d44af3603ab9de038ff98c49844ba682b9e72e0d40c3fb9eeb7770a83cf59"
+      }
+    },
+    {
+      "case_id": "realistic-draft-07",
+      "title": "Personal craft bookings after an interruption",
+      "setting": "personal",
+      "task_type": "repair",
+      "expected_label": "SAT",
+      "feasible_assignments": 1,
+      "objective": [
+        3,
+        4,
+        0
+      ],
+      "event": "new blocked interval",
+      "sha256": "15f7657ce37916658346ea0efafc881bc0bfd46002a6ef6cd98a5e3b91750f5a",
+      "prose_sha256": "4a3b169e9b222b8191cc49dec6c41e6b418adffa79d141b99b9e615b11e25408",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-07",
+      "source_family_id": "realistic-draft-07",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "82e310dbe05940aa5628e04dc33862454a31788316a57629122fece1034d4b4a"
+      }
+    },
+    {
+      "case_id": "realistic-draft-08",
+      "title": "Personal tutorial deadline change",
+      "setting": "personal",
+      "task_type": "repair",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": "tightened deadline",
+      "sha256": "f351894e45d615051d6b9b414cbea8db7ad662be1cb5d85a645042de1bb675ef",
+      "prose_sha256": "4146f992123cb97439b6b56d7c810614379275a02f1248d85fd8ed9e6a0521e6",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-08",
+      "source_family_id": "realistic-draft-08",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "b9e57da5ad32f30ad23d6c181858e930518010b4e344ab5ece6ba4b8fe5a7a8b"
+      }
+    },
+    {
+      "case_id": "realistic-draft-09",
+      "title": "Shared consultation room rescheduling",
+      "setting": "shared",
+      "task_type": "repair",
+      "expected_label": "SAT",
+      "feasible_assignments": 35,
+      "objective": [
+        2,
+        3,
+        0
+      ],
+      "event": "changed fixed appointment",
+      "sha256": "67bf3161a6d42d0eec578e51e58d2959595c4eb1f864381300b16b31c05ad120",
+      "prose_sha256": "807089d9c379b6340ebcdc0d517f987b57430dcb520cd678f7153107f009e7d2",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-09",
+      "source_family_id": "realistic-draft-09",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "81ef62a13eeb7f3ca00a66ec72496824a4a9b6609734b36e5df360b734046236"
+      }
+    },
+    {
+      "case_id": "realistic-draft-10",
+      "title": "Shared library booth closure",
+      "setting": "shared",
+      "task_type": "repair",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": "new blocked interval",
+      "sha256": "96e9eacc0a99096d4f8b45d089f4602977e3147a1c6a420390c9b6fc593eae9e",
+      "prose_sha256": "fd9cae12c8c3528cd98e9a182c6c733a78e3257ad2d0e9034877bba16248de35",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-10",
+      "source_family_id": "realistic-draft-10",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "c5f9c9240c62ad2457fd560df6e95ca8701af5d07eca8e44cd095d65a7ff9e1c"
+      }
+    },
+    {
+      "case_id": "realistic-draft-11",
+      "title": "Personal audio project earlier deadline",
+      "setting": "personal",
+      "task_type": "repair",
+      "expected_label": "SAT",
+      "feasible_assignments": 1,
+      "objective": [
+        3,
+        9,
+        0
+      ],
+      "event": "tightened deadline",
+      "sha256": "7ff0f37960edac6c6a70111320a2fe93856b4e725e2ef1a2f56b5f4d3434f6fb",
+      "prose_sha256": "99f490a75cad06a4b4342458536f695cde2e9e4e4d65ff82514c890652925b15",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-11",
+      "source_family_id": "realistic-draft-11",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "cdf7cf9320b5a5a9c2f83cb48a04c9de4403a5f494529db3ef67b406c8d4dd65"
+      }
+    },
+    {
+      "case_id": "realistic-draft-12",
+      "title": "Shared loading equipment appointments",
+      "setting": "shared",
+      "task_type": "repair",
+      "expected_label": "UNSAT",
+      "feasible_assignments": 0,
+      "objective": null,
+      "event": "changed fixed appointment",
+      "sha256": "4d2a4104e8dace3a2d03520c8dfabda98dd504be7618b8abeea9d4f74db77516",
+      "prose_sha256": "d751b87e066fb6e8998824f629e7eaae34da2b90dbb53d7bcd98e11b70b97453",
+      "fixture_review": "pending",
+      "language_review": "pending",
+      "group_id": "realistic-draft-12",
+      "source_family_id": "realistic-draft-12",
+      "split": "development",
+      "kind": "realistic",
+      "creation_method": "llm_assisted",
+      "gold_author_reference": "Codex AI-assisted draft requested by Yong Qing, 2026-09-30; not independent human authorship",
+      "gold_review_reference": null,
+      "renderings": {
+        "canonical": "d0ed1cb20bf225a7397235247392aab9377169237294d972e0f1fdd99b113319"
+      }
+    }
+  ],
+  "structural_audit": {
+    "format_version": "1.0",
+    "method": "colored_graph_refinement_conservative_families_not_semantic_equivalence",
+    "hard_duplicate_sets": [],
+    "objective_duplicate_sets": [],
+    "family_for_group": {
+      "realistic-draft-01": "realistic-draft-01",
+      "realistic-draft-02": "realistic-draft-02",
+      "realistic-draft-03": "realistic-draft-03",
+      "realistic-draft-04": "realistic-draft-04",
+      "realistic-draft-05": "realistic-draft-05",
+      "realistic-draft-06": "realistic-draft-06",
+      "realistic-draft-07": "realistic-draft-07",
+      "realistic-draft-08": "realistic-draft-08",
+      "realistic-draft-09": "realistic-draft-09",
+      "realistic-draft-10": "realistic-draft-10",
+      "realistic-draft-11": "realistic-draft-11",
+      "realistic-draft-12": "realistic-draft-12"
+    },
+    "cross_split_families": []
+  },
+  "limitations": [
+    "AI-assisted prose and gold from one authoring process; technical checks do not establish independent human review.",
+    "Development-only; these inspected drafts cannot be relabelled as held-out data.",
+    "Small synthetic examples, including deliberate simple contradictions, are not representative real-world schedules.",
+    "Mathematical motifs may overlap prior development; source grouping and contamination need review before any final allocation."
+  ]
+}

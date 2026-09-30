@@ -3,7 +3,8 @@
 from pathlib import Path
 import threading
 
-from scheduling.evaluation.cases import BenchmarkCase
+from scheduling.evaluation.cases import load_cases
+from scheduling.schema import to_data
 from scheduling.evaluation.metrics import summarize
 from scheduling.evaluation.runner import read, replay
 from scheduling.evaluation.scoring import check_reference, digest
@@ -28,7 +29,7 @@ def snapshot(path):
     before = fingerprint(path)
     rows, progress = replay(path)
     manifest = read(path / "manifest.json")
-    cases = read(path / "cases.json")["cases"]
+    cases = load_cases(path / "cases.json")
     attempts = {}
     activity = []
     evaluated = {
@@ -77,13 +78,13 @@ def snapshot(path):
             attempts[key] = payload
     references = {}
     for case in cases:
-        file = path / "references" / (digest(case["case_id"]) + ".json")
+        file = path / "references" / (digest(case.case_id) + ".json")
         if file.exists():
             record = read(file)
             if digest(record["reference"]) != record["sha256"]:
                 raise ValueError("Reference checksum mismatch")
-            check_reference(BenchmarkCase.from_dict(case), record["reference"])
-            references[case["case_id"]] = record["reference"]["result"]
+            check_reference(case, record["reference"])
+            references[case.case_id] = record["reference"]["result"]
     active = (path / ".lock").exists()
     if before != fingerprint(path):
         raise BusyError("Run changed during refresh; retrying shortly")
@@ -96,7 +97,7 @@ def snapshot(path):
         "summary": summarize(scored),
         "progress": progress,
         "manifest": manifest,
-        "cases": cases,
+        "cases": [to_data(case) for case in cases],
         "attempts": attempts,
         "references": references,
         "active": active,

@@ -32,3 +32,5 @@ jobs:
         run: python evaluation/v2_qualification.py artifacts/v2-qualification
       - name: Qualify v3 challenge cases and request boundary offline
         run: python evaluation/v2_qualification.py artifacts/v3-qualification --version 3
+      - name: Qualify authored development cases through both pipelines offline
+        run: python evaluation/v2_qualification.py artifacts/authored-qualification --cases benchmarks/fixtures/realistic-drafts-v1.json

@@ -264,3 +264,15 @@ def test_malformed_optional_domain_diagnostics_rejected():
     data["domain_analysis"]["contradictions"] = [{"code": "invented_proof"}]
     with pytest.raises(ValueError, match="domain contradiction"):
         explain_solver(spec, data)
+
+
+@pytest.mark.parametrize("start", [5, 10**30])
+def test_out_of_horizon_candidate_remains_explainable(start):
+    details = schedule_details(tiny(), schedule(start, 2))
+    assert details["validation"]["structural_valid"]
+    assert not details["validation"]["hard_feasible"]
+    row = details["activities"][0]
+    assert row["start_slot"] == start
+    assert row["start"] == f"slot {start} (outside horizon)"
+    assert row["end"] == f"slot {start + 1} (outside horizon)"
+    assert details["participant_burden"] is None
