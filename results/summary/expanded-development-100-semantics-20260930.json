@@ -1,0 +1,112 @@
+{
+  "method": "Exhaustive per-activity arithmetic via tests.formal_support; same durations, assignments, time frame, precedence and preferences plus identical legal-start domains imply equal full feasible sets and objective function under fixed v1 semantics. Same authoritative repair starting schedule is used. No solver/validator implementation used in unary enumeration.",
+  "scope": "All10structurally mismatched B extractions in this run only; not general natural-language equivalence or human sign-off.",
+  "findings": [
+    {
+      "case_id": "dev-v2-3264-slack-0-fixed_start-unsat-0-repair",
+      "accepted": false,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": false,
+      "equivalence_certificate": false,
+      "domains_differ": {
+        "A0": {
+          "gold": [
+            1
+          ],
+          "extracted": [
+            1,
+            2,
+            3,
+            4,
+            5
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "dev-v2-3264-interaction_density-2-blocked-unsat-0-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v2-3264-interaction_density-2-fixed_start-sat-0-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v3-be78d316042915cf45591102-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v2-3264-activity_count-2-blocked-unsat-0-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation",
+      "accepted": false,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": false,
+      "equivalence_certificate": false,
+      "domains_differ": {
+        "A1": {
+          "gold": [
+            2
+          ],
+          "extracted": [
+            2,
+            3,
+            4,
+            5,
+            6
+          ]
+        }
+      }
+    },
+    {
+      "case_id": "dev-v3-1cb82271f05a61f8e4b44569-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v3-66dd6c3548fb70d23bad6865-repair",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v2-3264-slack-1-blocked-unsat-0-generation",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    },
+    {
+      "case_id": "dev-v2-3264-resource_contention-1-fixed_start-unsat-0-generation",
+      "accepted": true,
+      "same_assignments_durations_pair_constraints_preferences_timeframe": true,
+      "unary_domains_equal": true,
+      "equivalence_certificate": true,
+      "domains_differ": {}
+    }
+  ]
+}

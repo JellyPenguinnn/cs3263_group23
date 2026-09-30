@@ -11,6 +11,7 @@ from scheduling.domain_analysis import analyze_domains
 from scheduling.schema import (
     BlockedInterval, Deadline, FixedStart, OptimizationStage, Precedence, PreferredStart,
     ProblemSpec, ReleaseTime, RepairContext, Schedule, ScheduledActivity, SolveResult,
+    solver_input_binding,
 )
 
 
@@ -83,6 +84,7 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
         raise TypeError("solve requires a canonical ProblemSpec and SolverLimits")
     check_repair_context(spec, repair_context)
     start_time = time.monotonic()
+    binding = solver_input_binding(spec, repair_context)
     stages = []
     incumbent = values = None
     status = last_status = "UNKNOWN"
@@ -91,13 +93,13 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
     # Reject unsupported magnitudes explicitly rather than losing exactness.
     if sum(c.weight for c in spec.constraints if isinstance(c, PreferredStart)) > 2**53 - 1:
         return SolveResult("MODEL_INVALID", "MODEL_INVALID", None, None, (),
-                           time.monotonic() - start_time, False, ("objective_exceeds_exact_bound_range",))
+                           time.monotonic() - start_time, False, ("objective_exceeds_exact_bound_range",), input_binding=binding)
     analysis = analyze_domains(spec)
     try:
         model, starts, objectives = _compile(spec, repair_context, analysis)
     except (OverflowError, ValueError):
         return SolveResult("MODEL_INVALID", "MODEL_INVALID", None, None, (),
-                           time.monotonic() - start_time, False, ("compiler_numeric_range_error",), analysis)
+                           time.monotonic() - start_time, False, ("compiler_numeric_range_error",), analysis, binding)
     for name, objective in objectives:
         remaining = max(0.0, limits.time_limit_seconds - (time.monotonic() - start_time))
         if remaining == 0:
@@ -155,4 +157,4 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
             f"Supplied specification: {reason.code}; activities={','.join(reason.activity_ids)}; rules={','.join(reason.rule_paths)}; sufficient, not minimum conflict"
             for reason in analysis.contradictions)
     return SolveResult(status, last_status, incumbent, values, tuple(stages),
-                       time.monotonic() - start_time, fully_proven, diagnostics, analysis)
+                       time.monotonic() - start_time, fully_proven, diagnostics, analysis, binding)

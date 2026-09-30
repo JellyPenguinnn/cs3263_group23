@@ -2,73 +2,110 @@
 
 **CS3263 Foundations of Artificial Intelligence · Group 23 · NUS AY2026/27 Semester 1**
 
-A research system for generating schedules and repairing them after requirements change. It compares a language model that produces a schedule directly with the same model translating the request into a specification solved by OR-Tools CP-SAT. An independent validator checks both answers against the original requirements.
+Generate schedules and repair them when requirements change. This research system compares a language model that produces schedules directly with the same model translating requests into a structured problem solved by OR-Tools CP-SAT. An independent validator checks both approaches against the original requirements.
 
-**Status:** usable end-to-end development baseline. Both pipelines, minimum-disruption repair, evaluation/replay, and a read-only dashboard are implemented. The final benchmark, human review and course evaluation are still in progress. Core delivery target: **30 October 2026**.
+**Status: integrated development version 2.** Generation, minimum-disruption repair, extraction diagnostics, constraint explanations, benchmark execution, replay and the read-only dashboard are implemented. The next stage is a focused extraction improvement, model qualification and fresh final-study preparation, followed by reviewed evaluation, analysis and submission. The final-data builder/selector and any required provider extension remain work items; the study has not yet run. Core delivery target: **30 October 2026**.
 
-[Development plan](planning.md) · [Agent/contributor instructions](AGENTS.md) · [Baseline evidence](report/main-baseline-validation.md)
+[Development and final-study plan](planning.md) · [Contributor and agent instructions](AGENTS.md) · [Checkpoint readiness](report/checkpoint-readiness.md) · [Version 2 verification](report/version-2-validation.md)
 
-## Capabilities and scope
+## Capabilities
 
-- Fixed-duration, mandatory activities on a single-day, 30-minute grid.
-- Availability, deadlines, fixed appointments, precedence, and participant/resource non-overlap.
-- Preference optimization for new schedules.
-- Repair after a blocked interval, tightened deadline or changed fixed appointment, minimizing moved activities, then total time shift, then preference penalty.
-- Independent feasibility/objective checks, extraction diagnostics, bounded model calls, durable records, offline replay and result exports.
-- Local dashboard for run monitoring, result inspection and before/after schedule comparison.
+- Mandatory, fixed-duration activities on a single-day, 30-minute grid.
+- Availability, release times, deadlines, fixed appointments, precedence and participant/resource non-overlap.
+- Preference optimization for generation; lexicographic repair minimizing moved activities, then total shift, then preference penalty.
+- Shared repair invariants, strict model-output validation, typed extraction differences and bounded constraint-domain explanations.
+- Deterministic before/after explanations with feasibility, objective and proof-status boundaries.
+- Capped model calls, durable attempt records, safe resume, independent scoring, offline replay and CSV/JSON/PNG/PDF exports.
+- Separate development/frozen modes, versioned exclusion registries and a localhost dashboard for inspecting saved evidence.
 
-The system uses synthetic scheduling problems. It does not connect to real calendars or autonomously change commitments. Multi-day scheduling, participant assignment and model training are outside the current scope.
+The inputs are synthetic. The system does not connect to real calendars or autonomously change commitments. Multi-day scheduling, participant assignment, model training and production deployment are outside the current scope.
 
 ## Architecture
 
-| Component | Input → output | Role |
-| --- | --- | --- |
-| Direct LLM — A | Public natural-language description → schedule or feasibility claim | Evaluated approach |
-| LLM-to-Solver — B | Same public description → structured specification → CP-SAT → schedule/status | Evaluated approach |
-| Gold reference | Evaluator-only specification → CP-SAT reference status/objective | Feasibility and optimality reference |
-| Independent validator | Model answer + gold specification → validity, violations and objective values | Checks the original request, independently of solver compilation |
-| Runner and replay | Frozen run inputs + attempts → verified records, metrics and figures | Accounting and reproducibility |
-| Dashboard | Saved run artifacts → read-only inspection | Development and demonstration |
+| Component | Responsibility |
+| --- | --- |
+| Direct LLM — A | One public natural-language request → one model response → parsed schedule or feasibility prediction |
+| LLM-to-Solver — B | The same public request → one extraction response → canonical specification → fixed CP-SAT compiler |
+| Gold reference | Evaluator-only specification → reference feasibility and proven objective values/bounds |
+| Independent validator | Arithmetic checks of each answer against gold, independent of solver compilation |
+| Runner and analysis | Preflight, request accounting, immutable records, scoring, replay and figures |
+| Explanation and dashboard | Read-only interpretation of solver/evaluation evidence, without new model calls |
 
-Both approaches receive the same task information and, for repair, the same original schedule. Gold labels, constraints and solutions remain evaluator-only. A solver can solve an incorrectly extracted problem correctly, so solver success alone is not end-to-end correctness. [System design and interfaces](planning.md#system-architecture-and-data-flow) describe the boundaries in detail.
+Both approaches receive equivalent task information and, for repair, the same original schedule. Gold specifications, labels and review metadata remain evaluator-only. B receives a neutral request ID; evaluator IDs are restored locally after parsing. A solver can correctly solve an incorrectly extracted problem, so **extraction fidelity, solver proof and end-to-end validity are measured separately**.
 
-## Baseline results and limitations
+The integrated components share one package, schema, completion interface and runner. The current live adapter supports the approved NUS SoCLaaS endpoint; another provider would require explicit integration and qualification. [Planning Sections 6–7](planning.md#system-architecture-and-data-flow) define the interfaces and formal semantics.
 
-The saved 29 September development run used `qwen3.6:35b`, 30 cases and one call per approach per case. Accepted answers include valid schedules and correct UNSAT predictions; failures remain in the denominator.
+## Development results
 
-The inputs are **6 project-authored fixed fixtures + 24 procedurally generated synthetic cases**; no public benchmark instances or real calendars were imported. The live responses came from SoCLaaS. SCHEDBench and NATURAL PLAN currently serve as research references. See [dataset provenance and the next evaluation design](planning.md#dataset-provenance--verified-29-september-2026).
+The expanded SoCLaaS `qwen3.6:35b` comparison completed **200 model calls on 100 preselected cases**, using unchanged prompts and larger explicit execution limits. The packet combines 64 v2 and 36 v3 cases across 41 source families, with balanced generation/repair and SAT/UNSAT strata.
 
-| Task | Direct A | Solver-assisted B |
+| Task | Direct A accepted | Solver-assisted B accepted |
 | --- | ---: | ---: |
-| Generation | 12/17 | 13/17 |
-| Repair | 6/13 | 12/13 |
-| All development cases, descriptive | 18/30 | 25/30 |
+| Generation | 23/50 (46%) | 48/50 (96%) |
+| Repair | 12/50 (24%) | 49/50 (98%) |
+| Total | **35/100** | **97/100** |
 
-All 60 requests completed; reported usage was 117,976 tokens. Currency cost is unavailable. Current-source offline replay reproduces the [tracked summary](results/summary/main-development-20260929.json) exactly. The [validation report](report/main-baseline-validation.md) records the configuration, failures and provenance.
+Accepted answers include gold-valid schedules and correct UNSAT answers; all failures remain in denominators. B produced valid schedules on 49/50 feasible cases and detected 48/50 infeasible cases. All 25 valid B repairs attained the gold lexicographic objective. Its three failures were two omitted fixed appointments and one malformed JSON response. A correct solver result does not guarantee faithful extraction.
 
-The 30 September request audit also found label-bearing IDs in two original B requests and all twelve B requests in the later v2 pilot. A did not receive those IDs. Saved scores remain unchanged, but this confounds a fair A/B interpretation; see [the metadata audit](report/yongqing-v3-development.md#request-metadata-finding-and-historical-evidence).
+| Resource, 100 calls per approach | Direct A | Solver-assisted B |
+| --- | ---: | ---: |
+| Reported prompt tokens | 102,676 | 199,426 |
+| Reported completion tokens | 22,020 | 141,129 |
+| Total tokens | 124,696 | 340,555 |
+| Mean model-response latency | 1.90 s | 10.12 s |
+| p95 model-response latency | 2.07 s | 14.95 s |
 
-The separately authorized [v3 boundary pilot](report/lihao-request-boundary.md#bounded-live-pilot-and-failure-handoff) completed 24 new calls on twelve preselected cases: A accepted 5/12 and B 10/12, with 44,132 reported tokens. It verifies the corrected request path and preserves two B availability-extraction failures; different datasets prevent an accuracy-improvement claim. That allowance is consumed.
+The batch took **20 minutes 5 seconds** and reported **465,251 tokens**, with usage present for all 200 calls. CP-SAT averaged 4.69 ms across 99 executed B solves. All calls completed without provider errors, retries or output truncation. This supports the architecture on the selected development distribution and points to extraction reliability as the next improvement. Detailed strata, paired uncertainty, semantic certificates, maxima/medians and resource accounting are in the [expanded development report](report/expanded-development-100.md), [aggregate](results/summary/expanded-development-100-20260930.json) and [resource statistics](results/summary/expanded-development-100-resources-20260930.json).
 
-These are **development results**, not evidence of general superiority. The set has 28 SAT and two UNSAT cases, no live language-robustness evaluation, and known generator limitations: redundant precedence edges, repair events tied to difficulty levels, and seeds that vary weights rather than hard scheduling structures. [The benchmark audit](planning.md#development-benchmark-audit--29-september-2026) defines the required improvements.
+**Evidence boundary:** all 100 cases come from known synthetic development generators; 14 IDs appeared in earlier live pilots. Related cases remain grouped, and only canonical wording was tested. These are development results, not held-out or production-reliability claims. The larger limits also prevent a causal comparison with older pilot scores. Fresh reviewed cases, final-model eligibility and the final study remain open.
 
-The current Li Hao checkpoint closes this request-boundary leak for future calls: B receives only a neutral `instance_id: "request"`, with no variant ID. It must echo that ID; bookkeeping restores the evaluator ID locally while retaining the raw response. Canned extraction responses must use the same neutral ID. Saved archives remain readable; changed requests require a new run. See [request-boundary qualification](report/lihao-request-boundary.md) for the 444-test installed macOS/Linux checks and current handoff.
+Earlier evidence is preserved separately:
 
-The runner supports development runs and separately guarded `offline_frozen` / `live_frozen` modes. Frozen controls are technically qualified with synthetic tests; no real study has been frozen or run. Final experiments still require fresh data, human review, protocol/cap decisions and an eligible primary model or teaching-team acceptance. Development scheduling inference remains SoCLaaS-only.
+| Recorded checkpoint | Cases / calls | A / B accepted | Interpretation |
+| --- | --- | --- | --- |
+| [Original baseline](report/main-baseline-validation.md) | 30 / 60 | 18/30 · 25/30 | Two B requests contained label-bearing IDs |
+| [Structural v2 pilot](report/yongqing-evaluation-followup.md) | 12 / 24 | 3/12 · 12/12 | All selected B request IDs exposed labels |
+| [Neutral-boundary v3 pilot](report/lihao-request-boundary.md) | 12 / 24 | 5/12 · 10/12 | Corrected metadata boundary; two availability-extraction failures retained |
+| [Extraction revision 3 qualification](report/yaoxiang-availability-followup.md) | 12 / 24 | 4/12 · 12/12 | Cases reused during prompt development; 48,493 reported tokens |
 
-## Getting started
+The separate [four-call formal-core check](report/yaoxiang-formal-followup.md) used two selected earlier failure cases. Do not pool differing prompts, inputs or budgets. Historical records and scores remain unchanged.
 
-### Requirements
+## Next stage: final study and submission
 
-- Python **3.12** and Git; CPU-only execution, no local GPU required.
-- macOS or Linux. The earlier installed baseline was verified on ARM64 for both; current audit/platform details are below. Native Windows support is not verified.
-- An `openssl` executable for offline TLS tests.
-- Node.js for dashboard development tests only; Node 20 was used in the audit. The dashboard itself needs no Node server or frontend build.
-- An authorized SoCLaaS credential and agreed spending/request cap only for live model calls.
+The [current work queue](planning.md#current-priorities-after-the-first-baseline) builds on this checkpoint:
 
-### Install and verify
+| Work | Intended outcome |
+| --- | --- |
+| F1 — extraction fidelity | Regressions for the two omitted fixed appointments and malformed JSON; qualify a prompt amendment only if failure analysis justifies one, after model selection |
+| F2 — model and execution contract | Qualify a candidate against the current model, record effective settings and eligibility, and add a specific backend adapter only if required |
+| F3 — fresh final cases | Versioned construction/selection, complete development exclusions, independent gold/text review and explicit family/label quotas |
+| F4 — freeze and study | Rehearse the frozen workflow, finalize actual review/budget decisions, then execute separate controlled, realistic and wording blocks |
+| F5–F6 — evidence and delivery | Validate cross-block analysis, archive replayable evidence, write the report and rehearse the presentation |
 
-Run these POSIX shell commands from your own checkout:
+The working study target is **600 calls**: 240 controlled canonical cases, 12 realistic cases and 48 additional renderings, each evaluated by A and B. A **312-call compact alternative** is available if family diversity, review capacity or resources do not support that target. Select the design using development evidence before final outcomes; neither count is a course requirement, a power guarantee or spending permission. See [the study design](planning.md#final-experiment-matrix-and-size-decision).
+
+A metadata-only SoCLaaS check on 30 September listed **`qwen3.8:27b`**, `gemma4:26b` and `ornith1.5:35b` alongside the current `qwen3.6:35b`. Qualify Qwen3.8 first as a possible upgrade; its [official model card](https://huggingface.co/Qwen/Qwen3.8-27B) motivates checking it, but no project result establishes it as better. Current configurations still use the existing model. [Planning Section 9](planning.md#9-nus-soclaas-model-choice-and-execution-budget) records availability, the proposed bounded comparison, settings and course-eligibility decision. The course's frontier-model requirement must be resolved before the final freeze; an endpoint listing alone does not settle it.
+
+Internal targets are **18 October for freeze** and **30 October for a complete report draft and reproduction package**. Course delivery is a 15-minute presentation plus five-minute Q&A in the week of 9 November, and a report due 13 November with at most ten single-column, single-spaced body pages, at least 11-point font and 1-inch margins. Verify Canvas cutoffs and feedback. [Planning Section 17](planning.md#17-rubric-evidence-and-course-delivery) maps the qualitative rubric to technical evidence, responsible-AI cases, genuine member contributions and delivery checks.
+
+This checkpoint includes the audited integrity fixes, expanded development results and final-study plan. Historical audit receipts describe their earlier local snapshot based on `63d68d8`; use the current commit and GitHub branch state to verify publication. A clone contains source, tests, manifests and reviewed summaries; raw live records must be supplied separately in a reviewed reproduction archive.
+
+## Data and evaluation scope
+
+| Dataset | Origin and coverage | Current use |
+| --- | --- | --- |
+| Legacy v1 | Six project-authored fixtures plus 24 procedural cases; 17 generation/13 repair, 28 SAT/2 UNSAT | Baseline reproduction and regression checks |
+| Structural v2 | 144 procedural cases per repetition; balanced task/label strata, structural variation and three repair events at each level | Development and offline qualification |
+| Challenge v3 | 108 procedural cases in nine source families; coupled repairs, contradictions and preference trade-offs | Development, pilots and the expanded 100-case comparison |
+| Authored drafts | Twelve AI-assisted fictional scenarios; six generation/six repair and six SAT/six UNSAT | Development integration; human prose/gold review pending |
+
+No public benchmark instances or real calendars have been imported. SCHEDBench, NATURAL PLAN and related work inform the methodology. The authored drafts are not independently human-written or untouched test data. [Planning Section 8](planning.md#8-benchmark-and-evaluation-design) describes provenance, construction limits, human review and the final study.
+
+## Installation
+
+Requirements: Python **3.12**, Git and a CPU-only macOS or Linux environment. Offline TLS tests require `openssl`; dashboard regression tests require Node.js. The dashboard itself uses no Node server or frontend build. Native Windows has not been qualified.
+
+From your own checkout, using a POSIX shell:
 
 ```sh
 git clone git@github.com:JellyPenguinnn/cs3263_group23.git
@@ -82,30 +119,55 @@ python3.12 -m venv .venv
 .venv/bin/scheduling --help
 ```
 
-The SSH URL requires configured GitHub SSH access. HTTPS with your own authentication is also supported; never embed a credential in the URL. Dependencies, including OR-Tools and plotting tools, are pinned in `requirements.lock`. Reinstall after source edits, or deliberately use `-e .` for editable development. Dependency maintenance is described in [planning.md](planning.md#portable-runtime-and-supported-environments).
+SSH requires configured GitHub access; HTTPS with your own authentication is also supported. Never embed credentials in URLs. Reinstall after source changes, or deliberately use an editable installation during development. `check_installed.py` requires a noneditable installation and compares packaged prompts, certificates and dashboard assets with the checkout. Dependency maintenance is in [planning.md](planning.md#portable-runtime-and-supported-environments).
 
-### Try the system offline
+## Run offline
 
-No API key is required. From the repository root, choose unused output paths:
+No API key is required. Use new output directories so existing evidence is preserved:
 
 ```sh
-# Solve a tiny specification with real CP-SAT.
+# Solve a specification with real CP-SAT.
 .venv/bin/scheduling solve --spec tests/examples/formal-generation.json
 
-# Exercise both pipelines, validation, resume, replay and figure export with canned responses.
+# Legacy integration: 180 canned attempts, including six intentional failures.
 .venv/bin/python evaluation/offline_demo.py runs/quickstart-offline
+
+# Full structural v2 integration: 144 cases × 3 renderings × 2 paths.
+.venv/bin/python evaluation/v2_qualification.py runs/quickstart-v2
+
+# Challenge v3: 108 cases × 3 renderings × 2 paths.
+.venv/bin/python evaluation/v2_qualification.py runs/quickstart-v3 --version 3
+
+# Authored drafts: 12 cases × 2 paths, canonical prose only.
+.venv/bin/python evaluation/v2_qualification.py runs/quickstart-authored \
+  --cases benchmarks/fixtures/realistic-drafts-v1.json
 ```
 
-The demo contains 180 canned attempts and deliberately includes failures. It makes **zero model calls** and is not a model benchmark. Results and exports are written beneath the chosen directory; rerunning with an existing directory is refused to preserve evidence. Small direct-component examples are in [presentation/README.md](presentation/README.md); its original handoff notes are historical.
+These workflows exercise generation/repair, both pipelines, reference checks, accounting, completed resume and replay. They use **gold-derived canned responses**, so their success is integration evidence rather than model performance.
 
-### NUS SoCLaaS configuration
+### Dashboard and explanations
+
+```sh
+.venv/bin/scheduling dashboard --runs-dir runs --port 8876
+```
+
+Open [the local dashboard](http://127.0.0.1:8876). Select a saved run to inspect progress, results and before/after schedules. The dashboard is read-only and binds to localhost; live runs start through the CLI. For a nested qualification run, add `--run-dir runs/quickstart-authored/run`.
+
+```sh
+.venv/bin/scheduling explain --run-dir runs/quickstart-authored/run \
+  --case-id realistic-draft-07 --approach solver_augmented --format json
+```
+
+Explanations distinguish the extracted problem's proof from gold acceptance and report participant inconvenience without claiming fair allocation. For a standalone saved solve, use `--spec problem.json --result result.json` and, for repair, `--original-schedule original.json`. Newly saved results bind proof claims to their exact specification and repair context; mismatches are rejected. Legacy unbound standalone results retain candidate validation but cannot establish proof correspondence to a supplied problem. Historical checked-run replay remains supported.
+
+## SoCLaaS and bounded live runs
 
 ```sh
 [ -e .env ] || cp .env.example .env
 chmod 600 .env
 ```
 
-Edit `.env` locally to set your authorized `SOCLAAS_API_KEY`. The template supplies `SOCLAAS_BASE_URL` and a bootstrap `SOCLAAS_MODEL` alias. Never paste keys into chat, source, issues or logs. The CLI reads process environment variables and does not automatically load `.env`:
+Configure your authorized credential locally. Never put keys in chat, source, issues or logs. The CLI reads process environment variables; it does not automatically load `.env`:
 
 ```sh
 set +x
@@ -114,17 +176,30 @@ set -a
 set +a
 ```
 
-Live commands/configuration select an explicit model; the saved development configuration uses `qwen3.6:35b`. Verify model availability and provider capabilities before a new pilot. An existing configuration or saved key is not a new spending authorization. [Provider and budget rules](planning.md#9-nus-soclaas-and-execution-budget) distinguish development access from final-model eligibility.
+The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. Live configuration selects an explicit model; `default` is only a bootstrap alias. Verify current availability/capabilities and agree the request/token budget before each new run or session. **Previous pilot allowances are consumed.** A saved configuration or key grants no new spending permission. TLS certificate and hostname verification remain enabled. Current requests explicitly configure the model and output limit but leave sampling/reasoning controls to server defaults. Qualification must record those defaults or add verified options; do not assume temperature zero, JSON mode or an arbitrary compatible endpoint is supported.
 
-Certificate and hostname verification remain enabled. The Linux client includes ordinary issuer certificates to complete the service's previously incomplete chain; macOS uses native trust. If verification fails, investigate the chain/OS trust service rather than disabling TLS. [Issuer provenance](configs/development/tls-issuer-provenance.json) and the baseline report document the implementation.
+### Expanded development profile
 
-The [Yao Xiang follow-up](report/yaoxiang-formal-followup.md) records the R1–R3 extension now incorporated from main and its installed-build/live-pilot evidence. Solver JSON now includes optional versioned `domain_analysis`; extraction failures include `schema_diagnostics`. `scheduling explain` reads supported recorded conflicts while keeping solver proof and gold acceptance separate. Historical run files remain readable and unchanged.
+`configs/development/expanded-development-100.json` defines 200 calls, 16,384 output tokens per call, 30/600-second connect/read timeouts, no retries, 30-second B solves and 60-second references. The output reservation ceiling is 3,276,800 tokens, with input tokens additional. This is a generous tested profile for the selected packet, not blanket authorization for future calls. **The completed 200-call allowance is consumed.**
 
-The [30 September formal review](report/yaoxiang-reference-review.md) independently checks all v2 reference labels/optima and domain reasons. It adds six regression tests, passing **422 tests on both installed macOS/Linux runtimes** with production code unchanged. It also documents the matrix’s common UNSAT conflict pattern and uniformly one-slot SAT repairs; human review and broader final-study construction remain pending.
+```sh
+.venv/bin/python evaluation/prepare_development_expansion.py runs/NEW-expanded-input
+.venv/bin/python evaluation/v2_qualification.py runs/NEW-expanded-offline \
+  --cases runs/NEW-expanded-input/cases.json
+```
 
-### Run the integrated development baseline
+Preparation, reference checks and canned qualification are offline. With a new execution authorization:
 
-First generate and validate the 30 development references without credentials:
+```sh
+.venv/bin/scheduling evaluate-batch --allow-live \
+  --cases runs/NEW-expanded-input/cases.json \
+  --config configs/development/expanded-development-100.json \
+  --run-dir runs/NEW-expanded-live
+```
+
+### Legacy baseline reproduction
+
+The legacy configuration is paired with the legacy 30-case bundle. Generate references and inspect the request estimate offline:
 
 ```sh
 .venv/bin/scheduling benchmark-generate --output runs/NEW-input/cases.json
@@ -132,7 +207,7 @@ First generate and validate the 30 development references without credentials:
   --config configs/development/main-baseline.json --output runs/NEW-input/preflight.json
 ```
 
-The [saved configuration](configs/development/main-baseline.json) allows 60 serial calls, 8,192 requested output tokens per call, no retries, a 180-second read timeout, 10 seconds per B solve and 30 seconds per reference. Input tokens are additional. **The original 60-call allowance is consumed.** After obtaining a new cap and loading your local environment, use a new run directory:
+It specifies 60 serial calls, at most 8,192 requested output tokens per call, no retries, a 180-second read timeout, ten seconds per B solve and thirty seconds per reference. Input tokens are additional. With a newly authorized cap:
 
 ```sh
 .venv/bin/scheduling evaluate-batch --allow-live \
@@ -140,175 +215,82 @@ The [saved configuration](configs/development/main-baseline.json) allows 60 seri
   --run-dir runs/NEW-live
 ```
 
-Progress is written to stderr and the final outcome to stdout. A completed batch returns 0 even when model answers are rejected. Stopped/exhausted batches return 2. Provider failures, including malformed HTTP-200 response envelopes, stop the batch without hidden retries and keep a matching resume stopped. A valid provider envelope containing an invalid model answer remains a recorded outcome, so later cases continue. Resume reuses completed records only under the matching run contract; changed source/configuration requires a new run, and uncertain interrupted requests require reconciliation.
+Do not apply a twelve-case pilot configuration to the full v2/v3 matrix. Create a separate configuration and cap for a different case set. Progress goes to stderr; a completed batch returns 0 even if model answers were rejected. Stopped/exhausted batches return 2. Provider failures stop without hidden retries. Resume requires a matching contract; changed source/configuration needs a new run, and uncertain interrupted requests require reconciliation.
 
-Recompute saved results without model calls:
+### Replay and final-study controls
 
 ```sh
 .venv/bin/scheduling evaluate-replay --run-dir runs/NEW-live \
   --export-dir artifacts/NEW-live --figures
 ```
 
-A fresh clone contains aggregate evidence, not the private raw live run. To replay `main-baseline-20260929-01`, obtain the reviewed synthetic archive and checksum from the team; use the canned demo when that archive is unavailable. Do not substitute canned results for live evidence.
+Replay requires no credentials or new model requests. A fresh clone contains aggregate evidence, not raw live runs: obtain the reviewed synthetic archive/checksum for exact historical replay, or use the canned workflows for independent integration checks.
 
-### Revised benchmark and analysis
+`freeze-draft` creates an intentionally non-runnable configuration until review, eligibility and authorization references are supplied. See `scheduling freeze-draft --help` and [planning Section 8](planning.md#8-benchmark-and-evaluation-design). The versioned registry identifies scheduling structure independently of calendar presentation, while provenance hashes retain exact inputs. Legacy unversioned registries and frozen protocols cannot authorize new runs. Rebuild registries from source cases rather than relabelling old digests; retain old archives for replay.
 
-The [Yong Qing follow-up](report/yongqing-evaluation-followup.md) records the v2 benchmark, frozen-run controls, qualification and separately capped live pilot. V1 generation remains the default so the old inputs stay reproducible. V2 generates 144 **development** cases per repetition: balanced generation/repair and SAT/UNSAT, three repair events at every sweep level, structural seeds, checked witnesses and an exclusion ledger. Human language/fixture review is pending.
+The current registry is [`development-hard-fingerprints-v2-20260930.json`](benchmarks/manifests/development-hard-fingerprints-v2-20260930.json), rebuilt from 22 named bundles and 300 known structures. Supply this versioned object to `freeze-draft --development-registry`; protocol format 2.0 embeds it as `development_registry`. New benchmark manifests must declare `slot-graph-v2`. Historical protocols remain replayable, but cannot be resumed or used for new execution under the changed source contract.
 
-```sh
-.venv/bin/scheduling benchmark-generate --version 2 --seed 3264 \
-  --output runs/NEW-v2-input/cases.json
-# Full canned integration: 144 cases × 3 renderings × 2 paths, zero model calls.
-.venv/bin/python evaluation/v2_qualification.py runs/NEW-v2-qualification
-```
-
-The 24-call pilot config is for the **12 preselected cases only**; it does not authorize running the 144-case matrix live. Its recorded 24-call allowance is consumed. The completed pilot accepted A 2/6 generation and 1/6 repair answers, and B 6/6 for each, using 57,359 reported tokens. These six preselected families support descriptive development findings only. New live work requires a new cap and run identity.
-
-Replay exports the historical `summary.json` and a separate `analysis.json`: operational funnels, affected-instance violation counts, typed extraction differences, SAT/UNSAT paired strata, language objective changes and source-family difficulty intervals. Old summary meanings and raw archives are unchanged. Fewer than ten source families produces descriptive counts without a bootstrap interval.
-
-`freeze-draft` writes a deliberately non-runnable configuration with blank decision references; `scheduling freeze-draft --help` lists its inputs. A final protocol needs an exactly reviewed test-case manifest/renderings, the complete registry of previously developed hard structures (including legacy data), final model eligibility/access and explicit approval/budget references. Preflight checks source/prompt/input/config hashes, family grouping, leakage, caps and proven reference objectives before inference. Live frozen runs stop on backend-identity drift. Recorded references are audit fields, not automatic certification of human approval. Never retag development cases to populate a final study.
-
-### Development challenge cases (v3)
-
-V3 supplements v2 with resource and precedence repair chains, unary contradiction
-controls and competing preferences. Seed 3265 produces 108 cases in **nine source
-families**, with all three events, balanced task/label strata and feasible repairs
-moving 1, 3, 4 or 5 activities. Opaque case IDs keep reference labels out of public
-metadata. These are procedural development cases, not realistic or held-out data.
-See [the construction, checks and remaining limits](report/yongqing-v3-development.md).
+To rebuild from preserved inputs, use repeatable `--bundle` and `--archive-bundle` arguments; include every known development source, including prior pilots. For example, this command creates a **limited registry for the named authored bundle only**:
 
 ```sh
-.venv/bin/scheduling benchmark-generate --version 3 --seed 3265 \
-  --output runs/NEW-v3-input/cases.json
-# The existing qualification script supports both versions; default remains v2.
-.venv/bin/python evaluation/v2_qualification.py runs/NEW-v3-qualification --version 3
+.venv/bin/python evaluation/development_registry.py \
+  --bundle benchmarks/fixtures/realistic-drafts-v1.json \
+  --output artifacts/NEW-authored-registry.json
 ```
 
-The qualification exercises 648 canned attempts (108 cases × three renderings ×
-two approaches), exact replay and completed resume. It is wiring evidence with
-zero model calls. A new live pilot requires an explicit cap and new run identity.
+Do not substitute that limited example for the project's complete registry. Existing output files are never overwritten; raw archives referenced by the full registry must be obtained separately to rebuild it.
 
-### Authored scenario drafts
-
-The [twelve fictional drafts](report/realistic-drafts-review.md) are AI-assisted
-**development** material requested by Yong Qing. They include six generation/six
-repair cases and six SAT/six UNSAT labels, with gold encodings checked by complete
-finite enumeration. Human prose/gold review remains pending; these do not count
-as independently human-written or held-out scenarios.
-
-Case bundle 2.0 supports opt-in authored renderings with provenance and review
-references. Both approaches receive the selected prose verbatim; evaluator
-metadata stays private. Missing requested variants fail preflight instead of
-falling back to procedural text. Legacy bundle 1.0 and saved replays remain compatible.
-
-```sh
-.venv/bin/python evaluation/v2_qualification.py runs/NEW-authored-qualification \
-  --cases benchmarks/fixtures/realistic-drafts-v1.json
-```
-
-This executes 24 **canned** attempts without credentials. It verifies integration,
-not live language understanding. See [the implementation, checks and remaining gates](report/yongqing-authored-followup.md).
-
-### Explain saved evidence
-
-```sh
-.venv/bin/scheduling explain --run-dir runs/NEW-live \
-  --case-id repair --approach solver_augmented
-```
-
-Use the actual saved case ID; add `--format json` for structured output. The command
-checks record integrity and recomputes evaluation without inference or solving.
-It separates extracted-specification proofs from gold acceptance, shows stage
-bounds, before/after times and participant inconvenience. For a standalone saved
-solve, use `--spec problem.json --result result.json` and, for repair,
-`--original-schedule original.json`; that mode does not claim gold evaluation.
-See the [integrated demo](presentation/README.md) and
-[Li Hao follow-up](report/lihao-development-followup.md) for failure examples,
-current verification and review boundaries.
-
-### Scheduling dashboard
-
-```sh
-.venv/bin/scheduling dashboard --runs-dir runs --port 8876
-```
-
-Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved progress, shows metrics with denominators, and lets you inspect schedules, violations and extraction diagnostics. It is read-only, binds to localhost and needs no credentials. Live batches run separately through the CLI. A run lock indicates possible activity, not proof that the process is still running.
+No final study is currently approved or executed. Human review, fresh inputs and complete development exclusions, an eligible qualified model, the final protocol and an explicit cap remain prerequisites. Development generators do not produce the planned fresh final packet automatically. F3 implements that preparation; F4 uses separate configurations for canonical and selected-language conditions, and F5 verifies their compatibility before analysis. These planned additions are not commands available in the current CLI.
 
 ## Verification
 
-The [integrated audit](report/integration-audit-20260930.md) checks all three members'
-work against planning.md. All published member tips are included in GitHub main
-`92a975b`, the base for this integrated checkpoint. It adds authored-text support
-and the dashboard/CLI compatibility fix, with direct publication to `main`
-authorized by the user on 30 September. Both legacy and authored runs now work
-through the same saved-evidence readers. CI includes authored-case qualification.
+The [checkpoint readiness audit](report/checkpoint-readiness.md) records **521 passing Python tests and 7 passing frontend tests**, a fresh 200-attempt canned integration run, exact replay of 332 saved live attempts and all 100 expanded dashboard cases. It connects those checks to the original teaching materials and proposal. Canned success verifies integration; final scientific and submission gates remain open. Documentation updates do not constitute a new live benchmark or a new platform qualification.
 
-Fresh installed macOS/Linux ARM64 wheels each pass **489 Python tests**, **seven
-frontend tests**, dependency/asset checks, 180 legacy, 864 v2, 648 v3 and 24 authored
-canned attempts, figure export and exact replay of all four saved live summaries.
-The dashboard reads all twelve authored cases, and 24 installed CLI explanations
-pass without mutating records. See [the final stage source hashes and verification receipt](configs/development/stage-verification-20260930.json).
-Invalid out-of-horizon answers remain inspectable, and stale case-detail responses
-cannot replace a current selection or reopen a dismissed dialog. An actual browser
-check passed without console errors. This audit makes **zero model calls** and
-preserves historical scores.
-
-macOS used Python 3.12.2 / Node 20.15.0; local Linux ARM64 used Python 3.12.14 /
-Node 18.20.4. Hosted CI uses Python 3.12 and Node 20; its status could not be read
-with the available authentication. Human review, final-model eligibility, frozen
-evaluation and independent teammate replay remain open. Native macOS TLS tests
-require access to the OS certificate service.
-
-`check_installed.py` rejects editable imports and verifies that all three prompts, issuer certificates and dashboard assets match the source. Use a noneditable install for this qualification; ordinary editable development remains supported. CI also runs `python evaluation/v2_qualification.py artifacts/v2-qualification` to check the full v2 offline integration.
-
-For dashboard changes, additionally run:
+[Version 2 validation](report/version-2-validation.md) records the exact source hashes, environments, checks and residual limits for the current implementation. It includes regression tests for proof/input correspondence and calendar-invariant development exclusions, installed-package checks, full canned integration, historical replay, explanations and dashboard consumers.
 
 ```sh
 node --check src/scheduling/dashboard/static/app.js
 node --test tests/frontend/dashboard.test.cjs
 ```
 
-Routine tests are offline. Live checks must be selected explicitly under a confirmed cap.
+Routine tests are offline. Native macOS TLS tests require OS certificate-service access; investigate environment errors without disabling verification. Hosted CI status is separate from local macOS/Linux qualification. Passing tests does not establish human review or final scientific conclusions.
 
 ## Repository layout
 
 ```text
 src/scheduling/
-  schema.py, solver.py, objectives.py  # canonical types and CP-SAT formulation
-  validation.py                      # independent gold checks
-  providers/                         # SoCLaaS, TLS and accounting
-  pipelines/                         # direct and solver-assisted paths
-  evaluation/                        # generator, scoring, runner, replay, figures
-  dashboard/                         # read-only server and static UI
-prompts/                             # direct and extraction prompts
-configs/development/                 # development settings and receipts
-configs/experiments/                 # future frozen experiment configurations
-benchmarks/                          # synthetic fixtures and manifests
-evaluation/offline_demo.py           # canned integration demonstration
+  schema.py, solver.py, objectives.py  # canonical types, CP-SAT and repair
+  domain_analysis.py                  # bounded constraint reasons
+  validation.py                       # independent gold checks
+  explanations.py                     # proof-aware evidence formatting
+  providers/, pipelines/              # shared transport and A/B paths
+  evaluation/                         # cases, manifests, frozen controls, scoring
+  dashboard/                          # read-only server and static assets
+prompts/                              # direct and extraction templates
+configs/development/                  # bounded settings and verification receipts
+configs/experiments/                  # final experiment configurations when approved
+benchmarks/                           # fixtures, provenance and exclusion registries
+evaluation/                           # offline qualification entry points
+scripts/check_installed.py            # installed asset verification
 tests/                               # unit, integration and frontend checks
-results/summary/                     # reviewed aggregate evidence
-report/                              # method notes, validation report and figures
-presentation/                        # demo and presentation materials
-.github/workflows/                   # installed offline CI
+results/summary/                      # reviewed development aggregates
+report/, presentation/               # methods, validation, figures and demo guidance
+.github/workflows/                    # installed offline CI
 ```
 
-Local credentials, environments, raw runs and generated artifacts are ignored. Small fixtures, configurations, lockfiles and reviewed summaries remain trackable.
+Credentials, virtual environments, raw runs and large generated artifacts are ignored. Keep small fixtures, manifests, lockfiles and reviewed summaries versioned.
 
 ## Contributing and agent workflow
 
-| Member | Main responsibility | Branch |
-| --- | --- | --- |
-| Tea Li Hao | Direct baseline, provider, packaging/CLI/CI and demo | `lihao-llm-baseline` |
-| Tham Yao Xiang · leader | Schema, solver/repair, extraction and coordination | `yaoxiang-formal-core` |
-| Woo Yong Qing | Benchmark, independent validator, runner and analysis | `yongqing-evaluation` |
+The team is Tea Li Hao, Tham Yao Xiang and Woo Yong Qing. Existing member branches and component contacts are recorded in the plan for coordination; the next-stage queue describes deliverables rather than a new baseline job split.
 
-Read [AGENTS.md](AGENTS.md) and the [current work plan](planning.md#current-priorities-after-the-first-baseline). Use your own clone and assigned branch; merge the latest `origin/main` before extending an older member branch. Preserve existing work and use small reviewed PRs. Shared scientific changes need coordination; routine owned engineering choices do not require team-wide approval.
+Read [AGENTS.md](AGENTS.md) and [the current work plan](planning.md#current-priorities-after-the-first-baseline). Preserve existing work, incorporate current `origin/main` and use small reviewed changes. The core components are integrated; prioritize F1–F6 and verify their dependencies. Preserve unpublished local work when comparing with GitHub.
 
-To start with a coding agent, replace `[name]` with Li Hao, Yao Xiang, or Yong Qing:
+To start with a coding agent, replace `[name]` with your name:
 
 > I am [name]. Read README.md, AGENTS.md and planning.md in full. Inspect the current implementation and Git status, and ensure my working branch incorporates the latest GitHub main while preserving existing work.
 >
-> Identify my remaining responsibilities in Sections 4–5 of planning.md. Implement and verify the next incomplete work package, then continue through my other unblocked assigned improvements while prerequisites and authorization are available. Build on the integrated baseline and avoid rebuilding completed components.
+> Use Sections 4–5 of planning.md to confirm the next incomplete F1–F6 deliverable within my scope. Implement and verify it, then continue through unblocked agreed work while prerequisites and authorization are available. Build on the integrated baseline and avoid rebuilding completed components.
 >
 > Follow the architecture and formal reasoning guidance in Sections 6–7, the relevant evaluation and provider requirements in Sections 8–9, and the acceptance gates in Section 11. Distinguish required deliverables from optional optimizations.
 >
@@ -316,12 +298,12 @@ To start with a coding agent, replace `[name]` with Li Hao, Yao Xiang, or Yong Q
 >
 > Carry the work through implementation and relevant verification. Report completed changes, checks and observed results, remaining dependencies, and the next concrete task. Follow AGENTS.md for Git publication, live-call authorization, scientific integrity and handoff.
 
-Members must review and understand the work, record actual contributions and disclose AI assistance. The next priorities are benchmark refinement, contract review, development failure analysis and frozen-evaluation support; see [implementation work packages](planning.md#implementation-work-packages).
+Members must review and understand the system, record actual contributions and disclose AI assistance. Human sign-off and teaching-team decisions cannot be supplied by an agent.
 
 ## Responsible AI, references and license
 
-Use synthetic data; do not publish private calendars or identifiers. Preserve hard requirements, explain actual violations and objective trade-offs, and assess unequal participant inconvenience. The system does not claim to solve fair workload allocation. Responsible-AI analysis and honest human/AI contribution records are course deliverables.
+Use synthetic data and preserve privacy. Never silently relax hard requirements. Explain objective trade-offs and unequal participant inconvenience without claiming fair workload allocation. Responsible-AI analysis, source attribution and honest human/AI contribution records are course deliverables.
 
-Research and design sources include [SCHEDBench](https://arxiv.org/abs/2608.00991), [NATURAL PLAN](https://arxiv.org/abs/2406.04520), [Hao et al.](https://aclanthology.org/2025.naacl-long.176/) and [OR-Tools](https://developers.google.com/optimization/cp/cp_solver). The [source-grounding section](planning.md#16-source-grounding) maps these and additional research to specific project decisions. [SoCLaaS documentation](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) may require institutional access.
+[Planning's source-grounding section](planning.md#16-source-grounding) connects the design to SCHEDBench, NATURAL PLAN, formalization research and release-matched OR-Tools documentation. Public data adaptation and extra research arms remain optional, separately scoped work.
 
 A distribution license has not yet been selected. Third-party dependencies and cited materials retain their respective licenses.

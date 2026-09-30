@@ -1,0 +1,81 @@
+{
+  "audit_report_sha256": "f15d420c30ad0fb9fbe800175563d454e9c6391dd320cf9698b15ce09dd53175",
+  "course_source_sha256": {
+    "CS3263-Project-Guidelines 2627.docx": "8ea20f90553d2bf65965005c736d07d8519a636d288100c7a12cb1194f988281",
+    "CS3263_Project Proposal_Group 23.pdf": "7be966a575858dbf2928df20b663e67b6364418dc7167e3a922fc253b006cd71",
+    "Project.pdf": "2f1676dd76a7257fc80cb56cfb0e977d3b2c3ea19934720a5204414926f970bd",
+    "ResponsibleAI.pptx": "82762fb61e81377a17a9763c4ad392213b683fd382d052fe9e4c69b505d0fd74"
+  },
+  "current_frontend_tests_passed": 7,
+  "current_macos_python_suite": {
+    "passed": 521,
+    "seconds": 31.9
+  },
+  "dashboard_cases": 100,
+  "date": "2026-09-30",
+  "evidence": "offline_checkpoint_audit",
+  "expanded_result_receipt": {
+    "path": "configs/development/expanded-development-100-verification.json",
+    "sha256": "b65fe12a7b83105153da32402fa1c55cdd920f0e9405103cf994d60bb5e23ac5"
+  },
+  "explanations": 200,
+  "fresh_canned_qualification": {
+    "cases": 100,
+    "checks": [
+      "generation and repair",
+      "both pipelines",
+      "real CP-SAT",
+      "gold validation",
+      "completed resume",
+      "exact replay"
+    ],
+    "completed": 200,
+    "new_model_calls": 0,
+    "summary_sha256": "56cec7ad2921f39afe5ccf11f94aa8e2b29524b4fa9641403d0bd38874ca0764",
+    "workflow": "evaluation/v2_qualification.py --cases runs/expanded-development-100-inputs-20260930-01/cases.json"
+  },
+  "http": "assets, run overview, case list and case detail returned 200 with expected data",
+  "installed_assets_and_dependency_check": "passed",
+  "installed_cli_explanations": 2,
+  "installed_python_modules_equal_source": 31,
+  "limits": [
+    "Local uncommitted checkpoint; no publication.",
+    "No new Linux environment or hosted CI run claimed.",
+    "Human reviews and final-study gates remain open."
+  ],
+  "new_model_calls": 0,
+  "preserved_json_files_unchanged": 508,
+  "previously_qualified_files_unchanged": 100,
+  "remote_main": "63d68d8f594974e7204e7c096c110d637f9415e5",
+  "replays": {
+    "expanded-development-100-20260930-01": {
+      "attempts": 200,
+      "completed": 200,
+      "exact_summary_match": true
+    },
+    "lihao-boundary-pilot-20260930-01": {
+      "attempts": 24,
+      "completed": 24,
+      "exact_summary_match": true
+    },
+    "main-baseline-20260929-01": {
+      "attempts": 60,
+      "completed": 60,
+      "exact_summary_match": true
+    },
+    "yaoxiang-availability-pilot-20260930-01": {
+      "attempts": 24,
+      "completed": 24,
+      "exact_summary_match": true
+    },
+    "yongqing-v2-pilot-20260929-01": {
+      "attempts": 24,
+      "completed": 24,
+      "exact_summary_match": true
+    }
+  },
+  "source_qualification_receipt": {
+    "path": "configs/development/version-2-verification.json",
+    "sha256": "7cd47f43723d16ffa4957fd6eadcad9c7a8d760ed7e4f0dbb97bd349f9d90dd8"
+  }
+}

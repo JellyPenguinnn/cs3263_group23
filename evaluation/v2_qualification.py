@@ -16,7 +16,7 @@ from scheduling.evaluation.cases import case_bundle, load_cases
 from scheduling.evaluation.manifests import (
     benchmark_manifest_v2,
     benchmark_manifest_v3,
-    structural_fingerprint,
+    development_registry,
 )
 from scheduling.evaluation.runner import (
     RunConfig,
@@ -112,14 +112,7 @@ def main(directory, version="2", *, cases_path=None):
     )
     write_new(
         directory / "development-fingerprints.json",
-        sorted(
-            {
-                structural_fingerprint(s)
-                for c in cases
-                for s in (c.problem, c.original_problem)
-                if s is not None
-            }
-        ),
+        development_registry({"run/cases.json": cases}),
     )
     print(
         json.dumps(

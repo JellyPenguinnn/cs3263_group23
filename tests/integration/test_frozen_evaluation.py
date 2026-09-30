@@ -5,7 +5,9 @@ from dataclasses import replace
 import pytest
 from scheduling.evaluation.benchmark import tiny_fixtures, render
 from scheduling.evaluation.frozen import settings_digest, ANALYSIS_SETTINGS
-from scheduling.evaluation.manifests import structural_audit, structural_fingerprint
+from scheduling.evaluation.manifests import (
+    FINGERPRINT_VERSION, structural_audit, development_registry,
+)
 from scheduling.evaluation.runner import (
     RunConfig,
     _contract,
@@ -40,6 +42,7 @@ def frozen_setup(mode="offline_frozen"):
     contract = _contract(cases, cfg)
     manifest = {
         "format_version": "2.0",
+        "fingerprint_version": FINGERPRINT_VERSION,
         "status": "reviewed_frozen",
         "human_fixture_review": "approved",
         "human_language_review": "approved",
@@ -66,14 +69,14 @@ def frozen_setup(mode="offline_frozen"):
         for k in ("source_sha256", "case_bundle_sha256", "request_prompt_sha256")
     }
     freeze.update(
-        format_version="1.0",
+        format_version="2.0",
         protocol_id="test-only",
         model_id=cfg.model.model,
         eligibility_reference="TEST ONLY",
         approval_reference="TEST ONLY",
         authorization_reference="TEST ONLY",
         development_registry_reference="TEST ONLY",
-        development_hard_fingerprints=[],
+        development_registry=development_registry({}),
         benchmark_manifest=manifest,
         settings_sha256=settings_digest(cfg),
         analysis_settings=ANALYSIS_SETTINGS,
@@ -144,7 +147,7 @@ def test_changed_or_unreviewed_freeze_rejected_before_any_provider_call(
     elif mutation == "rendering":
         f["benchmark_manifest"]["cases"][0]["renderings"] = {}
     elif mutation == "development":
-        f["development_hard_fingerprints"] = [structural_fingerprint(cases[0].problem)]
+        f["development_registry"] = development_registry({"TEST ONLY": cases})
     elif mutation == "cap":
         cfg = replace(cfg, max_requests=1)
         f["settings_sha256"] = settings_digest(cfg)
@@ -242,7 +245,7 @@ def test_draft_cli_cannot_manufacture_approval_or_run(tmp_path):
         ("cases", case_bundle(cases)),
         ("config", to_data(plain)),
         ("manifest", cfg.freeze["benchmark_manifest"]),
-        ("registry", []),
+        ("registry", development_registry({})),
     ]:
         (tmp_path / (name + ".json")).write_text(json.dumps(data))
     output = tmp_path / "draft.json"
@@ -279,6 +282,58 @@ def test_malformed_frozen_metadata_has_explicit_validation_error(bad):
     elif bad == "renderings":
         f["benchmark_manifest"]["cases"][0]["renderings"] = []
     else:
-        f["development_hard_fingerprints"] = ["z" * 64]
+        f["development_registry"]["fingerprints"] = ["z" * 64]
     with pytest.raises(ValueError):
         plan_run(cases, replace(cfg, freeze=f))
+
+
+@pytest.mark.parametrize("changes", [
+    {"horizon_start": "2026-10-06T09:00:00+08:00"},
+    {"timezone": "Asia/Singapore"},
+])
+@pytest.mark.parametrize("original_only", [False, True])
+def test_calendar_metadata_cannot_evade_development_registry(changes, original_only):
+    from scheduling.evaluation.frozen import check_frozen
+
+    cases, cfg = frozen_setup()
+    case = cases[-1] if original_only else cases[0]
+    source_spec = case.original_problem if original_only else case.problem
+    # Registry must exclude an original repair problem even when the updated
+    # problem has a different fingerprint; no approval or solver/model involved.
+    source = replace(tiny_fixtures()[0], problem=replace(source_spec, instance_id="simple-sat", task_type="generation"), witness=None)
+    f = deepcopy(cfg.freeze)
+    f["development_registry"] = development_registry({"TEST ONLY SOURCE": (source,)})
+    changed = replace(case, problem=replace(case.problem, **changes),
+                      original_problem=replace(case.original_problem, **changes) if case.original_problem else None)
+    altered = tuple(changed if c.case_id == case.case_id else c for c in cases)
+    contract = _contract(altered, cfg)
+    for key in ("case_bundle_sha256", "source_sha256", "request_prompt_sha256"):
+        f[key] = contract[key]
+    with pytest.raises(ValueError, match="Previously developed"):
+        check_frozen(altered, replace(cfg, freeze=f), contract)
+
+
+@pytest.mark.parametrize("legacy", ["protocol", "raw_list", "algorithm", "digest", "manifest"])
+def test_old_protocol_and_registry_cannot_be_silently_reused(legacy):
+    cases, cfg = frozen_setup()
+    f = deepcopy(cfg.freeze)
+    if legacy == "protocol":
+        f["format_version"] = "1.0"
+    elif legacy == "raw_list":
+        f["development_registry"] = []
+    elif legacy == "manifest":
+        f["benchmark_manifest"].pop("fingerprint_version")
+    elif legacy == "algorithm":
+        f["development_registry"]["fingerprint_version"] = "calendar-graph-v1"
+    else:
+        f["development_registry"]["fingerprints"] = ["a" * 64]
+    with pytest.raises(ValueError):
+        plan_run(cases, replace(cfg, freeze=f))
+
+
+def test_draft_rejects_unversioned_registry_before_writing():
+    from scheduling.evaluation.frozen import draft_frozen_config
+
+    cases, cfg = frozen_setup()
+    with pytest.raises(ValueError, match="regenerate from source"):
+        draft_frozen_config(cases, cfg, cfg.freeze["benchmark_manifest"], [])

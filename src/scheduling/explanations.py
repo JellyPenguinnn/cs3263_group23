@@ -16,6 +16,7 @@ from scheduling.schema import (
     Schedule,
     SolveResult,
     to_data,
+    solver_input_binding,
 )
 from scheduling.validation import participant_disruption, validate_schedule
 
@@ -176,13 +177,30 @@ def explain_solver(
     context: RepairContext | None = None,
     *,
     scope: str = "supplied_specification",
+    legacy_record_context_verified: bool = False,
 ) -> dict:
-    """Format recorded proof stages; exact claims require a matching proven prefix."""
+    """Format recorded stages bound to these inputs and a matching proven prefix.
+
+    Only the checked saved-case consumer may establish legacy input correspondence
+    externally; standalone files cannot establish it from a feasible witness.
+    """
     if scope not in ("supplied_specification", "extracted_specification"):
         raise ValueError("Explicit solver evidence scope required")
     data = to_data(result) if isinstance(result, SolveResult) else dict(result)
     _check_saved_solver(data)
-    analysis = _recorded_domain_analysis(data)
+    binding = data.get("input_binding")
+    if binding is not None:
+        expected = to_data(solver_input_binding(spec, context))
+        if not isinstance(binding, Mapping) or dict(binding) != expected:
+            raise ValueError("Saved solver input binding does not match specification and repair context")
+    correspondence = binding is not None or legacy_record_context_verified
+    binding_status = (
+        "verified_input_binding" if binding is not None
+        else "verified_saved_record_context" if legacy_record_context_verified
+        else "unverified_legacy_inputs"
+    )
+    recorded_analysis = _recorded_domain_analysis(data)
+    analysis = recorded_analysis if correspondence else None
     status = data["status"]
     details = (
         schedule_details(spec, data["schedule"], context)
@@ -205,6 +223,7 @@ def explain_solver(
         name = stage["objective"]
         exact = (
             valid
+            and correspondence
             and len(proven) == index
             and index < len(names)
             and name == names[index]
@@ -220,7 +239,18 @@ def explain_solver(
         and data["optimality_proven"] is True
         and status == "OPTIMAL"
     )
-    if status == "INFEASIBLE":
+    if not correspondence:
+        summary = (
+            "Legacy result has no input binding; correspondence to this specification "
+            "and repair context is unverified. Recorded proof and contradiction claims "
+            "are not attributed to these inputs."
+        )
+        if details is not None:
+            summary += (
+                " The recorded candidate passes current specification validation."
+                if valid else " The recorded candidate fails current specification validation."
+            )
+    elif status == "INFEASIBLE":
         summary = "Solver reports infeasibility for this specification."
         if analysis and analysis["contradictions"]:
             summary += " Recorded sufficient contradictions are available; they are not minimum conflicts."
@@ -242,6 +272,7 @@ def explain_solver(
         summary = "A feasible incumbent is available; full optimality is not proven."
     return {
         "scope": scope,
+        "input_correspondence": binding_status,
         "status": status,
         "last_solver_status": data["last_solver_status"],
         "summary": summary,
@@ -250,7 +281,7 @@ def explain_solver(
         "unproven_objectives": [name for name in names if name not in proven],
         "stages": stages,
         "schedule": details,
-        "diagnostics": list(data.get("diagnostics", ())),
+        "diagnostics": list(data.get("diagnostics", ())) if correspondence else [],
         "domain_analysis": analysis,
     }
 
@@ -315,6 +346,7 @@ def explain_case(
             data["solve_result"],
             context,
             scope="extracted_specification",
+            legacy_record_context_verified=True,
         )
     if evaluation is not None:
         if (

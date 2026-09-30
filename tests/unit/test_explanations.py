@@ -14,6 +14,7 @@ from scheduling.schema import (
     BlockedInterval,
     Deadline,
     Entity,
+    FixedStart,
     ObjectiveValues,
     OptimizationStage,
     PipelineResult,
@@ -24,6 +25,7 @@ from scheduling.schema import (
     SolveResult,
     Window,
     to_data,
+    solver_input_binding,
 )
 from scheduling.solver import SolverLimits, solve
 from tests.formal_support import tiny
@@ -68,7 +70,8 @@ def test_partial_proof_retains_incumbent_but_not_shift_optimality(monkeypatch):
         "scheduling.solver.solve", lambda *_: pytest.fail("Formatter cannot solve")
     )
     result = explain_solver(
-        spec, saved_partial(), context(), scope="extracted_specification"
+        spec, replace(saved_partial(), input_binding=solver_input_binding(spec, context())),
+        context(), scope="extracted_specification"
     )
     assert result["proven_objectives"] == ["moved_count"]
     assert result["unproven_objectives"] == ["total_shift_slots", "preference_penalty"]
@@ -205,7 +208,8 @@ def test_solver_non_sat_never_becomes_source_request_proof(status):
     text = render_text({"solver": output})
     assert "does not establish faithful extraction" in text
     if status == "INFEASIBLE":
-        assert "No detailed conflict was derived" in text
+        assert "correspondence to this specification" in text
+        assert "not attributed to these inputs" in text
 
 
 def test_structurally_invalid_schedule_stays_inspectable_without_burden():
@@ -276,3 +280,87 @@ def test_out_of_horizon_candidate_remains_explainable(start):
     assert row["start"] == f"slot {start} (outside horizon)"
     assert row["end"] == f"slot {start + 1} (outside horizon)"
     assert details["participant_burden"] is None
+
+
+def test_bound_result_cannot_transfer_optimality_to_weaker_same_id_spec():
+    strong = tiny(constraints=(
+        PreferredStart("want", "A", 1, 2, 1), FixedStart("fix", "A", 0),
+    ))
+    weak = replace(strong, constraints=(strong.constraints[0],))
+    recorded = solve(strong, SolverLimits())
+    assert recorded.objectives.preference_penalty == 1
+    assert solve(weak, SolverLimits()).objectives.preference_penalty == 0
+    assert schedule_details(weak, recorded.schedule)["validation"]["hard_feasible"]
+    with pytest.raises(ValueError, match="input binding"):
+        explain_solver(weak, recorded)
+
+
+def test_bound_result_cannot_transfer_proof_to_different_repair_context():
+    spec = tiny(task_type="repair", constraints=(FixedStart("fix", "A", 1),))
+    old = RepairContext(schedule(0, 2))
+    changed = RepairContext(schedule(2, 2))
+    recorded = solve(spec, SolverLimits(), old)
+    # The same feasible candidate has the same full objective tuple under both
+    # contexts; witness/objective checks alone cannot establish correspondence.
+    before = schedule_details(spec, recorded.schedule, old)
+    after = schedule_details(spec, recorded.schedule, changed)
+    assert before["validation"]["objectives"] == after["validation"]["objectives"]
+    with pytest.raises(ValueError, match="input binding"):
+        explain_solver(spec, recorded, changed)
+
+
+def test_stale_unsat_reasons_are_rejected_or_withheld():
+    impossible = tiny(constraints=(Deadline("impossible", "A", 0),))
+    recorded = to_data(solve(impossible, SolverLimits()))
+    assert recorded["status"] == "INFEASIBLE"
+    with pytest.raises(ValueError, match="input binding"):
+        explain_solver(tiny(), recorded)
+    del recorded["input_binding"]
+    legacy = explain_solver(tiny(), recorded)
+    assert legacy["input_correspondence"] == "unverified_legacy_inputs"
+    assert legacy["domain_analysis"] is None
+    assert legacy["diagnostics"] == []
+    text = render_text({"solver": legacy})
+    assert "not attributed to these inputs" in text
+    assert "Applies only to this specification" not in text
+    assert "Solver reports infeasibility for this specification" not in text
+
+
+def test_legacy_candidate_validation_does_not_establish_optimality():
+    spec = tiny()
+    record = to_data(solve(spec, SolverLimits()))
+    del record["input_binding"]
+    explained = explain_solver(spec, record)
+    assert explained["schedule"]["validation"]["hard_feasible"]
+    assert not explained["optimality_proven"]
+    assert explained["proven_objectives"] == []
+    assert not any(s["usable_exact_proof"] for s in explained["stages"])
+    assert "passes current specification validation" in explained["summary"]
+
+
+def test_checked_legacy_case_retains_recorded_proof_but_cannot_bypass_binding():
+    spec = tiny()
+    solved = solve(spec, SolverLimits())
+    result = PipelineResult("tiny", "canonical", "solver_augmented", "SAT",
+                            solved.schedule, spec, solve_result=solved)
+    case, row = case_and_row(spec, result)
+    record = to_data(result)
+    del record["solve_result"]["input_binding"]
+    explained = explain_case(case, record, row)
+    assert explained["solver"]["optimality_proven"]
+    assert explained["solver"]["input_correspondence"] == "verified_saved_record_context"
+    record["solve_result"]["input_binding"] = to_data(solved.input_binding)
+    record["extracted_spec"]["constraints"] = [
+        {"type": "fixed_start", "id": "fix", "activity_id": "A", "slot": 0}
+    ]
+    with pytest.raises(ValueError, match="input binding"):
+        explain_case(case, record, row)
+
+
+@pytest.mark.parametrize("binding", [{}, "unknown", {"format_version": "2.0"}])
+def test_malformed_binding_is_not_treated_as_legacy(binding):
+    spec = tiny()
+    record = to_data(solve(spec, SolverLimits()))
+    record["input_binding"] = binding
+    with pytest.raises(ValueError, match="input binding"):
+        explain_solver(spec, record)

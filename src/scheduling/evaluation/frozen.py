@@ -5,8 +5,12 @@ The production protocol must be supplied by the team, not inferred by this code.
 """
 
 from collections.abc import Mapping
-import re
-from scheduling.evaluation.manifests import structural_audit, structural_fingerprint
+from scheduling.evaluation.manifests import (
+    FINGERPRINT_VERSION,
+    structural_audit,
+    structural_fingerprint,
+    check_development_registry,
+)
 from scheduling.evaluation.scoring import digest, check_reference
 from scheduling.schema import to_data
 from scheduling.evaluation.cases import AuthoredBenchmarkCase
@@ -52,14 +56,14 @@ def check_frozen(cases, config, contract):
         "case_bundle_sha256",
         "source_sha256",
         "request_prompt_sha256",
-        "development_hard_fingerprints",
+        "development_registry",
         "development_registry_reference",
         "analysis_settings",
     }
     if (
         not isinstance(freeze, Mapping)
         or set(freeze) != required
-        or freeze["format_version"] != "1.0"
+        or freeze["format_version"] != "2.0"
     ):
         raise ValueError("Missing or unsupported frozen protocol fields")
     for name in (
@@ -87,12 +91,7 @@ def check_frozen(cases, config, contract):
         or planned * config.model.max_tokens > config.max_requested_output_tokens
     ):
         raise ValueError("Frozen planned requests exceed authorized cap")
-    registry = freeze["development_hard_fingerprints"]
-    if not isinstance(registry, list) or any(
-        not isinstance(k, str) or re.fullmatch(r"[0-9a-f]{64}", k) is None
-        for k in registry
-    ):
-        raise ValueError("Invalid frozen development fingerprint registry")
+    registry = check_development_registry(freeze["development_registry"])
     for case in cases:
         for spec in (case.problem, case.original_problem):
             if spec is not None and structural_fingerprint(spec) in registry:
@@ -103,11 +102,12 @@ def check_frozen(cases, config, contract):
     if (
         not isinstance(manifest, Mapping)
         or manifest.get("format_version") != "2.0"
+        or manifest.get("fingerprint_version") != FINGERPRINT_VERSION
         or manifest.get("status") != "reviewed_frozen"
         or manifest.get("human_fixture_review") != "approved"
         or manifest.get("human_language_review") != "approved"
     ):
-        raise ValueError("Frozen mode needs a reviewed version-2 benchmark manifest")
+        raise ValueError("Frozen mode needs a reviewed version-2 manifest with current fingerprints")
     reviews = manifest.get("review_references")
     if not isinstance(reviews, dict) or any(
         not isinstance(reviews.get(k), str) or not reviews[k].strip()
@@ -198,7 +198,7 @@ def check_frozen_reference(case, ref):
 
 
 def draft_frozen_config(
-    cases, config, manifest, development_fingerprints, *, mode="offline_frozen"
+    cases, config, manifest, development_registry, *, mode="offline_frozen"
 ):
     """Produce a reviewable, deliberately non-runnable draft; never assert approval."""
     from dataclasses import replace
@@ -206,6 +206,7 @@ def draft_frozen_config(
 
     if mode not in FROZEN_MODES:
         raise ValueError("Unsupported frozen evidence mode")
+    check_development_registry(development_registry)
     cfg = replace(config, evidence=mode, freeze={})
     contract = _contract(cases, cfg)
     freeze = {
@@ -213,7 +214,7 @@ def draft_frozen_config(
         for name in ("case_bundle_sha256", "source_sha256", "request_prompt_sha256")
     }
     freeze.update(
-        format_version="1.0",
+        format_version="2.0",
         protocol_id="",
         model_id=cfg.model.model,
         eligibility_reference="",
@@ -221,7 +222,7 @@ def draft_frozen_config(
         authorization_reference="",
         benchmark_manifest=manifest,
         settings_sha256=settings_digest(cfg),
-        development_hard_fingerprints=development_fingerprints,
+        development_registry=development_registry,
         development_registry_reference="",
         analysis_settings=ANALYSIS_SETTINGS,
     )

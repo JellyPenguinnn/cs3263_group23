@@ -1,0 +1,28 @@
+{
+  "evidence": "live_development",
+  "max_requests": 200,
+  "max_requested_output_tokens": 3276800,
+  "model": {
+    "model": "qwen3.6:35b",
+    "max_tokens": 16384,
+    "connect_timeout": 30.0,
+    "read_timeout": 600.0,
+    "max_attempts": 1,
+    "retry_delay": 1.0
+  },
+  "solver": {
+    "time_limit_seconds": 30,
+    "random_seed": 0,
+    "num_workers": 1
+  },
+  "reference_solver": {
+    "time_limit_seconds": 60,
+    "random_seed": 0,
+    "num_workers": 1
+  },
+  "rendering_seed": 3263,
+  "repeats": 1,
+  "variants": [
+    "canonical"
+  ]
+}

@@ -119,3 +119,40 @@ def test_rejected_large_model_slot_survives_replay_and_explanation(tmp_path, cap
     assert json.loads(text)["evaluation"]["accepted"] is False
     assert f"slot {10**30} (outside horizon)" in text
     assert before == {p: p.read_bytes() for p in tmp_path.rglob("*") if p.is_file()}
+
+
+@pytest.mark.parametrize("repair", [False, True])
+def test_solve_explain_bound_roundtrip_and_legacy(tmp_path, capsys, repair):
+    from scheduling.schema import RepairContext, Schedule, ScheduledActivity
+
+    spec = tiny(task_type="repair" if repair else "generation")
+    spec_path, result_path = tmp_path / "spec.json", tmp_path / "result.json"
+    spec_path.write_text(spec.to_json())
+    original_args = []
+    if repair:
+        context = RepairContext(Schedule((ScheduledActivity("A", 0), ScheduledActivity("B", 2))))
+        original_path = tmp_path / "original.json"
+        original_path.write_text(json.dumps(to_data(context.original_schedule)))
+        original_args = ["--original-schedule", str(original_path)]
+    assert main(["solve", "--spec", str(spec_path), "--output", str(result_path)] + original_args) == 0
+    capsys.readouterr()
+    saved_result = json.loads(result_path.read_text())
+    assert saved_result["result"]["input_binding"]["format_version"] == "1.0"
+    args = ["explain", "--spec", str(spec_path), "--result", str(result_path), "--format", "json"] + original_args
+    assert main(args) == 0
+    output = json.loads(capsys.readouterr().out)["solver"]
+    assert output["optimality_proven"]
+    assert output["input_correspondence"] == "verified_input_binding"
+    if repair:
+        original_path.write_text('[{"activity_id":"A","start_slot":1},{"activity_id":"B","start_slot":3}]')
+    else:
+        spec_path.write_text(spec.to_json().replace('2026-10-05', '2026-10-06'))
+    assert main(args) == 2
+    assert json.loads(capsys.readouterr().out)["error"] == "invalid_input_or_provider_configuration"
+    del saved_result["result"]["input_binding"]
+    result_path.write_text(json.dumps(saved_result))
+    assert main(args) == 0
+    legacy = json.loads(capsys.readouterr().out)["solver"]
+    assert not legacy["optimality_proven"]
+    assert legacy["input_correspondence"] == "unverified_legacy_inputs"
+    assert legacy["schedule"]["validation"]["hard_feasible"]

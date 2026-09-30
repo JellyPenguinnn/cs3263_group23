@@ -6,6 +6,7 @@ availability. Well-formed contradictions remain problems for the solver.
 
 from dataclasses import asdict, dataclass, fields, is_dataclass
 from datetime import datetime, timedelta, timezone
+import hashlib
 import json
 import re
 from typing import TYPE_CHECKING, ClassVar, Literal
@@ -512,6 +513,26 @@ class OptimizationStage:
 
 
 @dataclass(frozen=True)
+class SolverInputBinding:
+    """Exact canonical input correspondence, not authentication of solver evidence."""
+
+    specification_sha256: str
+    repair_context_sha256: str
+    format_version: str = "1.0"
+
+
+def solver_input_binding(
+    spec: ProblemSpec, context: RepairContext | None = None
+) -> SolverInputBinding:
+    def digest(value: object) -> str:
+        payload = json.dumps(to_data(value), sort_keys=True, separators=(",", ":"),
+                             ensure_ascii=True, allow_nan=False)
+        return hashlib.sha256(payload.encode("utf-8")).hexdigest()
+
+    return SolverInputBinding(digest(spec), digest(context))
+
+
+@dataclass(frozen=True)
 class SolveResult:
     status: SolverStatus
     last_solver_status: SolverStatus
@@ -522,6 +543,7 @@ class SolveResult:
     optimality_proven: bool
     diagnostics: tuple[str, ...] = ()
     domain_analysis: "DomainAnalysis | None" = None
+    input_binding: SolverInputBinding | None = None
 
 
 @dataclass(frozen=True)

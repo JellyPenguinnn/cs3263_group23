@@ -1,8 +1,13 @@
 """Auditable split registries for fresh source groups; no retagging tuning data."""
 
 import random
-from scheduling.evaluation.cases import check_case_set
+import re
+from collections.abc import Mapping
+from scheduling.evaluation.cases import check_case_set, case_bundle
 from scheduling.evaluation.scoring import digest
+
+
+FINGERPRINT_VERSION = "slot-graph-v2"
 
 
 def allocate_fresh_groups(
@@ -77,7 +82,9 @@ def structural_fingerprint(spec, *, include_objective=False, original_schedule=N
 
     Equal hashes are possible graph-refinement collisions, not a proof of
     isomorphism. Treat them as related rather than independent samples. This
-    does not claim to detect all mathematically equivalent encodings.
+    does not claim to detect all mathematically equivalent encodings. Calendar
+    origin and timezone are presentation metadata: constraints use integer slots.
+    Exact case/provenance digests continue to retain both fields.
     """
     from dataclasses import asdict
     from collections import defaultdict
@@ -169,17 +176,95 @@ def structural_fingerprint(spec, *, include_objective=False, original_schedule=N
             )
             for key in labels
         }
-    return digest(
+    return FINGERPRINT_VERSION + ":" + digest(
         {
-            "horizon": [
-                spec.horizon_slots,
-                spec.slot_minutes,
-                spec.horizon_start,
-                spec.timezone,
-            ],
+            "fingerprint_version": FINGERPRINT_VERSION,
+            "horizon": [spec.horizon_slots, spec.slot_minutes],
             "colors": sorted(colors.values()),
         }
     )
+
+
+def development_registry(bundles):
+    """Recompute from explicit source cases; legacy hashes cannot be migrated alone.
+
+    Sources may overlap (for example a matrix and its saved pilot subset). Both
+    original and updated problems are included, irrespective of source labels.
+    """
+    fingerprints, sources = set(), []
+    for reference, source_cases in sorted(bundles.items()):
+        cases = check_case_set(tuple(source_cases))
+        if not isinstance(reference, str) or not reference.strip() or not cases:
+            raise ValueError("Registry sources require a reference and nonempty cases")
+        sources.append(
+            {
+                "reference": reference,
+                "case_count": len(cases),
+                "bundle_sha256": digest(case_bundle(cases)),
+            }
+        )
+        fingerprints.update(
+            structural_fingerprint(spec)
+            for case in cases
+            for spec in (case.problem, case.original_problem)
+            if spec is not None
+        )
+    return {
+        "format_version": "2.0",
+        "fingerprint_version": FINGERPRINT_VERSION,
+        "fingerprints": sorted(fingerprints),
+        "sources": sources,
+        "coverage": "Named source bundles only; add other inspected/private/external cases before freeze. No claim of semantic novelty or human approval.",
+    }
+
+
+def check_development_registry(registry):
+    """Reject stale/unversioned digests before any new frozen execution."""
+    required = {
+        "format_version", "fingerprint_version", "fingerprints", "sources", "coverage"
+    }
+    if (
+        not isinstance(registry, Mapping)
+        or set(registry) != required
+        or registry["format_version"] != "2.0"
+        or registry["fingerprint_version"] != FINGERPRINT_VERSION
+    ):
+        raise ValueError(
+            "Unsupported development registry; regenerate from source case bundles"
+        )
+    fingerprints, sources = registry["fingerprints"], registry["sources"]
+    pattern = re.escape(FINGERPRINT_VERSION) + r":[0-9a-f]{64}"
+    if (
+        not isinstance(fingerprints, list)
+        or any(
+            not isinstance(k, str) or re.fullmatch(pattern, k) is None
+            for k in fingerprints
+        )
+        or fingerprints != sorted(set(fingerprints))
+    ):
+        raise ValueError("Invalid versioned development fingerprints")
+    if not isinstance(sources, list):
+        raise ValueError("Invalid development registry source provenance")
+    for source in sources:
+        if (
+            not isinstance(source, Mapping)
+            or set(source) != {"reference", "case_count", "bundle_sha256"}
+            or not isinstance(source["reference"], str)
+            or not source["reference"].strip()
+            or type(source["case_count"]) is not int
+            or source["case_count"] <= 0
+            or not isinstance(source["bundle_sha256"], str)
+            or re.fullmatch(r"[0-9a-f]{64}", source["bundle_sha256"]) is None
+        ):
+            raise ValueError("Invalid development registry source provenance")
+    if (
+        len({s["reference"] for s in sources}) != len(sources)
+        or bool(fingerprints) != bool(sources)
+        or not isinstance(registry["coverage"], str)
+        or not registry["coverage"].strip()
+    ):
+        raise ValueError("Invalid development registry source provenance")
+    return frozenset(fingerprints)
 
 
 def structural_audit(cases):
@@ -218,7 +303,8 @@ def structural_audit(cases):
     for case in cases:
         splits[families[case.group_id]].add(case.split)
     return {
-        "format_version": "1.0",
+        "format_version": "2.0",
+        "fingerprint_version": FINGERPRINT_VERSION,
         "method": "colored_graph_refinement_conservative_families_not_semantic_equivalence",
         "hard_duplicate_sets": [v for _, v in sorted(hard.items()) if len(v) > 1],
         "objective_duplicate_sets": [v for _, v in sorted(full.items()) if len(v) > 1],
@@ -245,6 +331,7 @@ def benchmark_manifest_v2(
         raise ValueError("Related hard structures cross splits")
     return {
         "format_version": "2.0",
+        "fingerprint_version": FINGERPRINT_VERSION,
         "dataset_version": "controlled-v2-development",
         "schema_version": "1.0",
         "generator_version": "2.0",
@@ -259,7 +346,7 @@ def benchmark_manifest_v2(
         "human_language_review": "pending",
         "case_count": len(cases),
         "group_count": len({c.group_id for c in cases}),
-        "selection": selection,
+        "selection": {**selection, "fingerprint_version": FINGERPRINT_VERSION},
         "structural_audit": audit,
         "cases": [
             {

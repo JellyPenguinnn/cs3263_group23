@@ -196,3 +196,28 @@ def test_unresolved_candidates_remain_excluded_with_explicit_unfilled_quotas():
         )
         == 72
     )
+
+
+@pytest.mark.parametrize("changes", [
+    {"horizon_start": "2026-10-06T09:00:00+08:00"},
+    {"timezone": "Asia/Singapore"},
+    {"horizon_start": "2026-10-05T01:00:00+00:00", "timezone": "UTC"},
+])
+def test_structure_ignores_calendar_representation_but_provenance_retains_it(changes):
+    from scheduling.evaluation.scoring import digest
+
+    spec = tiny_fixtures()[0].problem
+    changed = replace(spec, **changes)
+    assert structural_fingerprint(changed) == structural_fingerprint(spec)
+    assert digest(changed) != digest(spec)
+
+
+def test_constraint_ids_are_ignored_but_real_slot_constraints_are_not():
+    from scheduling.schema import ReleaseTime
+
+    spec = tiny_fixtures()[0].problem
+    renamed_constraints = replace(spec, constraints=tuple(
+        replace(c, id=f"renamed-rule-{i}") for i, c in enumerate(spec.constraints)))
+    assert structural_fingerprint(spec) == structural_fingerprint(renamed_constraints)
+    changed = replace(spec, constraints=spec.constraints + (ReleaseTime("new", spec.activities[0].id, 1),))
+    assert structural_fingerprint(spec) != structural_fingerprint(changed)
