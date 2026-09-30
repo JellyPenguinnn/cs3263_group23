@@ -144,3 +144,81 @@ def test_deep_provider_envelope_is_recorded_as_failure_without_retry():
     assert result.error == "invalid_provider_response"
     assert len(result.attempts) == 1 and result.attempts[0].http_status == 200
     assert result.attempts[0].usage.total_tokens is None
+
+
+@pytest.mark.parametrize("reasoning_field", ["reasoning_content", "reasoning"])
+def test_reasoning_side_channel_is_never_used_or_recorded_as_final_content(reasoning_field):
+    data = body('{"status":"UNKNOWN","schedule":null}')
+    data['choices'][0]['message'][reasoning_field] = 'private-reasoning-sentinel'
+    result = call(lambda _: httpx.Response(200, json=data))
+    assert result.content == '{"status":"UNKNOWN","schedule":null}'
+    assert result.error is None
+    assert 'private-reasoning-sentinel' not in repr(result)
+
+
+@pytest.mark.parametrize("content", [None, [{"type": "text", "text": "OK"}]])
+def test_reasoning_only_or_content_parts_are_not_silently_coerced(content):
+    data = body(content)
+    data['choices'][0]['message']['reasoning_content'] = 'private-reasoning-sentinel'
+    result = call(lambda _: httpx.Response(200, json=data))
+    assert result.error == 'invalid_provider_response'
+    assert result.content is None and len(result.attempts) == 1
+    assert 'private-reasoning-sentinel' not in repr(result)
+
+
+def test_mixed_reasoning_in_final_field_is_retained_not_regex_repaired():
+    from scheduling.pipelines.direct import parse_direct_output
+    raw = '<think>synthetic explanation</think>{"status":"UNSAT","schedule":null}'
+    result = call(lambda _: httpx.Response(200, json=body(raw)))
+    assert result.content == raw and result.error is None
+    assert parse_direct_output(result.content, ['A']).status == 'INVALID_OUTPUT'
+
+
+@pytest.mark.parametrize("finish", ['length', 'content_filter', 'tool_calls'])
+def test_non_stop_finish_keeps_response_and_accounting_without_retry(finish):
+    data = body('{"status":"UNKNOWN","schedule":null}', usage={"total_tokens": 17})
+    data['choices'][0]['finish_reason'] = finish
+    result = call(lambda _: httpx.Response(200, json=data), config=ModelConfig('test', 100, max_attempts=3))
+    assert result.error == 'incomplete_completion' and result.finish_reason == finish
+    assert len(result.attempts) == 1 and result.attempts[0].usage.total_tokens == 17
+    assert result.content == data['choices'][0]['message']['content']
+
+
+def test_unverified_inference_options_are_rejected_not_ignored():
+    with pytest.raises(TypeError):
+        ModelConfig('test', 100, temperature=0)
+
+
+def test_execution_metadata_matches_wire_settings_and_retains_only_safe_backend_fields():
+    from scheduling.providers.execution import execution_contract
+    config = ModelConfig('test-model', 32768, connect_timeout=30, read_timeout=900)
+    def handler(request):
+        payload = json.loads(request.content)
+        contract = execution_contract(config)
+        assert {k: v for k, v in payload.items() if k != 'messages'} == contract['configured_body']
+        assert request.extensions['timeout'] == contract['timeouts']
+        data = body(usage={'completion_tokens': 100, 'completion_tokens_details': {'reasoning_tokens': 83}}, system_fingerprint='fp_test_revision')
+        data['choices'][0]['message']['reasoning_content'] = 'private-reasoning-sentinel'
+        return httpx.Response(200, json=data)
+    result = call(handler, config=config, budget=RequestBudget(1, 32768))
+    metadata = result.attempts[0].execution
+    assert metadata.contract == execution_contract(config)
+    assert metadata.contract['effective_omitted_values'] == 'server_defaults_unavailable'
+    assert metadata.contract['weight_revision'] is None
+    assert metadata.system_fingerprint == 'fp_test_revision'
+    assert metadata.reported_reasoning_tokens == 83 and metadata.reasoning_field_present
+    assert 'private-reasoning-sentinel' not in repr(result)
+
+
+@pytest.mark.parametrize('fingerprint', [None, 42, '', 'test-only-secret', 'bad fingerprint'])
+def test_unavailable_or_unsafe_fingerprint_not_invented_or_exposed(fingerprint):
+    result = call(lambda _: httpx.Response(200, json=body(system_fingerprint=fingerprint)))
+    assert result.attempts[0].execution.system_fingerprint is None
+    assert result.attempts[0].execution.reported_reasoning_tokens is None
+
+
+@pytest.mark.parametrize('count', [None, True, -1, '3'])
+def test_malformed_reasoning_count_remains_unavailable(count):
+    data = body(usage={'completion_tokens_details': {'reasoning_tokens': count}})
+    result = call(lambda _: httpx.Response(200, json=data))
+    assert result.attempts[0].execution.reported_reasoning_tokens is None

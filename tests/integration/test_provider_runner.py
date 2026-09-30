@@ -126,3 +126,47 @@ def test_model_format_failure_is_observation_not_provider_stop(tmp_path, mode):
     assert sum(r["pipeline_status"] == "INVALID_OUTPUT" for r in rows) == 1
     assert sum(r["accepted"] is True for r in rows) == 3
     assert sum(u["total_tokens"] for r in rows for u in r["usage"]) == 60
+
+
+@pytest.mark.parametrize('fingerprints', [('fp_one', 'fp_two'), ('fp_one', None), (None, 'fp_one')])
+def test_frozen_backend_fingerprint_drift_stops_and_remains_stopped(tmp_path, fingerprints):
+    cases, cfg = setup('live_frozen')
+    outputs = list(canned(cases, cfg).values())
+    calls = []
+    def handler(request):
+        index = len(calls)
+        calls.append(request)
+        return httpx.Response(200, json={
+            'model': cfg.model.model, 'system_fingerprint': fingerprints[index],
+            'choices': [{'message': {'content': outputs[index]}, 'finish_reason': 'stop'}],
+        })
+    with SoCLaaSProvider(api_key='test-only', budget=RequestBudget(4, 8192),
+                         transport=httpx.MockTransport(handler)) as provider:
+        for _ in range(2):
+            result = run_batch(cases, tmp_path, cfg, provider_complete=provider.complete)
+            assert result['state'] == 'stopped_provider'
+            assert result['stop_reason'] == 'backend_fingerprint_changed'
+    assert len(calls) == 2
+    assert replay(tmp_path)[1]['completed'] == 2
+
+
+def test_live_contract_and_both_arms_record_same_effective_settings(tmp_path):
+    from scheduling.providers.execution import execution_contract
+    cases, cfg = setup('live_development')
+    outputs = iter(canned(cases, cfg).values())
+    def handler(request):
+        return httpx.Response(200, json={
+            'model': cfg.model.model, 'system_fingerprint': 'fp_stable',
+            'choices': [{'message': {'content': next(outputs)}, 'finish_reason': 'stop'}],
+        })
+    with SoCLaaSProvider(api_key='test-only', budget=RequestBudget(4, 8192),
+                         transport=httpx.MockTransport(handler)) as provider:
+        assert run_batch(cases, tmp_path, cfg, provider_complete=provider.complete)['completed'] == 4
+    expected = execution_contract(cfg.model)
+    assert read(tmp_path / 'manifest.json')['contract']['provider_execution'] == expected
+    for file in (tmp_path / 'attempts').glob('*.json'):
+        response = read(file)['payload']['pipeline_result']['model_response']
+        assert response['attempts'][0]['execution']['contract'] == expected
+    with pytest.raises(ValueError, match='configuration/source/input changed'):
+        run_batch(cases, tmp_path, replace(cfg, model=replace(cfg.model, read_timeout=91)),
+                  provider_complete=lambda *_: pytest.fail('Changed settings must not call provider'))

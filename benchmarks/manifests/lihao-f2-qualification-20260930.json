@@ -1,0 +1,190 @@
+{
+  "case_bundle_sha256": "4850b125ba0267b01f0681c8109931c0d03fa99d857a517c364af1e1aef20443",
+  "case_groups": {
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-generation": "dev-v2-3264-activity_count-2-blocked-unsat-0",
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-repair": "dev-v2-3264-activity_count-2-blocked-unsat-0",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-generation": "dev-v2-3264-activity_count-2-fixed_start-sat-0",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-repair": "dev-v2-3264-activity_count-2-fixed_start-sat-0",
+    "dev-v2-3264-interaction_density-2-blocked-unsat-0-repair": "dev-v2-3264-interaction_density-2-blocked-unsat-0",
+    "dev-v2-3264-interaction_density-2-deadline-sat-0-repair": "dev-v2-3264-interaction_density-2-deadline-sat-0",
+    "dev-v2-3264-interaction_density-2-fixed_start-sat-0-generation": "dev-v2-3264-interaction_density-2-fixed_start-sat-0",
+    "dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation": "dev-v2-3264-interaction_density-2-fixed_start-unsat-0",
+    "dev-v2-3264-resource_contention-0-deadline-unsat-0-repair": "dev-v2-3264-resource_contention-0-deadline-unsat-0",
+    "dev-v2-3264-resource_contention-1-deadline-sat-0-repair": "dev-v2-3264-resource_contention-1-deadline-sat-0",
+    "dev-v2-3264-resource_contention-2-blocked-unsat-0-generation": "dev-v2-3264-resource_contention-2-blocked-unsat-0",
+    "dev-v2-3264-resource_contention-2-fixed_start-sat-0-generation": "dev-v2-3264-resource_contention-2-fixed_start-sat-0",
+    "dev-v2-3264-slack-0-fixed_start-unsat-0-repair": "dev-v2-3264-slack-0-fixed_start-unsat-0",
+    "dev-v2-3264-slack-1-blocked-unsat-0-generation": "dev-v2-3264-slack-1-blocked-unsat-0",
+    "dev-v2-3264-slack-1-fixed_start-sat-0-generation": "dev-v2-3264-slack-1-fixed_start-sat-0",
+    "dev-v2-3264-slack-2-blocked-sat-0-repair": "dev-v2-3264-slack-2-blocked-sat-0",
+    "dev-v3-126fdf2cca52d454283fefca-repair": "dev-v3-3265-precedence_chain-4-0",
+    "dev-v3-1cb82271f05a61f8e4b44569-generation": "dev-v3-3265-unary_boundary-4-0",
+    "dev-v3-7e976f3689ad97c2be91bb3b-repair": "dev-v3-3265-unary_boundary-5-0",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-generation": "dev-v3-3265-resource_chain-5-0",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-repair": "dev-v3-3265-resource_chain-5-0",
+    "dev-v3-a91ff21f8fda3c9faeab37db-generation": "dev-v3-3265-resource_chain-5-0",
+    "dev-v3-a91ff21f8fda3c9faeab37db-repair": "dev-v3-3265-resource_chain-5-0",
+    "dev-v3-d5a847054370f976b5c44ad7-generation": "dev-v3-3265-precedence_chain-5-0"
+  },
+  "case_ids": [
+    "dev-v3-1cb82271f05a61f8e4b44569-generation",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-generation",
+    "dev-v3-a91ff21f8fda3c9faeab37db-generation",
+    "dev-v2-3264-interaction_density-2-fixed_start-sat-0-generation",
+    "dev-v2-3264-resource_contention-2-fixed_start-sat-0-generation",
+    "dev-v2-3264-slack-1-fixed_start-sat-0-generation",
+    "dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation",
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-generation",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-generation",
+    "dev-v2-3264-resource_contention-2-blocked-unsat-0-generation",
+    "dev-v2-3264-slack-1-blocked-unsat-0-generation",
+    "dev-v3-d5a847054370f976b5c44ad7-generation",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-repair",
+    "dev-v3-a91ff21f8fda3c9faeab37db-repair",
+    "dev-v2-3264-interaction_density-2-deadline-sat-0-repair",
+    "dev-v2-3264-slack-2-blocked-sat-0-repair",
+    "dev-v2-3264-resource_contention-1-deadline-sat-0-repair",
+    "dev-v3-7e976f3689ad97c2be91bb3b-repair",
+    "dev-v2-3264-slack-0-fixed_start-unsat-0-repair",
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-repair",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-repair",
+    "dev-v2-3264-resource_contention-0-deadline-unsat-0-repair",
+    "dev-v2-3264-interaction_density-2-blocked-unsat-0-repair",
+    "dev-v3-126fdf2cca52d454283fefca-repair"
+  ],
+  "combined_public_request_characters": {
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-generation": 13623,
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-repair": 15106,
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-generation": 13615,
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-repair": 15096,
+    "dev-v2-3264-interaction_density-2-blocked-unsat-0-repair": 12984,
+    "dev-v2-3264-interaction_density-2-deadline-sat-0-repair": 12988,
+    "dev-v2-3264-interaction_density-2-fixed_start-sat-0-generation": 11833,
+    "dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation": 11833,
+    "dev-v2-3264-resource_contention-0-deadline-unsat-0-repair": 12816,
+    "dev-v2-3264-resource_contention-1-deadline-sat-0-repair": 12826,
+    "dev-v2-3264-resource_contention-2-blocked-unsat-0-generation": 11689,
+    "dev-v2-3264-resource_contention-2-fixed_start-sat-0-generation": 11687,
+    "dev-v2-3264-slack-0-fixed_start-unsat-0-repair": 12814,
+    "dev-v2-3264-slack-1-blocked-unsat-0-generation": 11671,
+    "dev-v2-3264-slack-1-fixed_start-sat-0-generation": 11677,
+    "dev-v2-3264-slack-2-blocked-sat-0-repair": 12822,
+    "dev-v3-126fdf2cca52d454283fefca-repair": 10928,
+    "dev-v3-1cb82271f05a61f8e4b44569-generation": 9931,
+    "dev-v3-7e976f3689ad97c2be91bb3b-repair": 11474,
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-generation": 10557,
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-repair": 11456,
+    "dev-v3-a91ff21f8fda3c9faeab37db-generation": 10565,
+    "dev-v3-a91ff21f8fda3c9faeab37db-repair": 11464,
+    "dev-v3-d5a847054370f976b5c44ad7-generation": 10883
+  },
+  "configs": {
+    "qwen3.6-35b": {
+      "evidence": "live_development",
+      "freeze": null,
+      "max_requested_output_tokens": 1572864,
+      "max_requests": 48,
+      "model": {
+        "connect_timeout": 30,
+        "max_attempts": 1,
+        "max_tokens": 32768,
+        "model": "qwen3.6:35b",
+        "read_timeout": 900,
+        "retry_delay": 1.0
+      },
+      "reference_solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 60
+      },
+      "rendering_seed": 3263,
+      "repeats": 1,
+      "solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 30
+      },
+      "variants": [
+        "canonical"
+      ]
+    },
+    "qwen3.8-27b": {
+      "evidence": "live_development",
+      "freeze": null,
+      "max_requested_output_tokens": 1572864,
+      "max_requests": 48,
+      "model": {
+        "connect_timeout": 30,
+        "max_attempts": 1,
+        "max_tokens": 32768,
+        "model": "qwen3.8:27b",
+        "read_timeout": 900,
+        "retry_delay": 1.0
+      },
+      "reference_solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 60
+      },
+      "rendering_seed": 3263,
+      "repeats": 1,
+      "solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 30
+      },
+      "variants": [
+        "canonical"
+      ]
+    }
+  },
+  "counts": {
+    "generation/SAT": 6,
+    "generation/UNSAT": 6,
+    "repair/SAT": 6,
+    "repair/UNSAT": 6
+  },
+  "format_version": "1.0",
+  "limitations": [
+    "Known development inputs selected partly to retain observed failures; not held-out.",
+    "Families remain related; 24 cases are not 24 independent families.",
+    "No new model decision, course eligibility, live budget or human review is implied.",
+    "Sampling/reasoning controls are omitted server defaults, not deterministic settings.",
+    "Capability checks must precede case calls; unsupported settings need a new decision."
+  ],
+  "planned_case_completions": 96,
+  "policy_version": "f2-development-selection-1",
+  "preparation_source_sha256": "d1ac91bcc0183cc6e83e2094d00e1a4931d62f511b1249b8d08d63b08f7cc644",
+  "proposed_capability_completions": 4,
+  "proposed_metadata_requests": 1,
+  "proposed_total_output_reservation": 3276800,
+  "selection_reasons": {
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-generation": "longest_combined_public_request_in_stratum",
+    "dev-v2-3264-activity_count-2-blocked-unsat-0-repair": "longest_combined_public_request_in_stratum",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-generation": "longest_combined_public_request_in_stratum",
+    "dev-v2-3264-activity_count-2-fixed_start-sat-0-repair": "longest_combined_public_request_in_stratum",
+    "dev-v2-3264-interaction_density-2-blocked-unsat-0-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-interaction_density-2-deadline-sat-0-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-interaction_density-2-fixed_start-sat-0-generation": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation": "predeclared_expanded_failure",
+    "dev-v2-3264-resource_contention-0-deadline-unsat-0-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-resource_contention-1-deadline-sat-0-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-resource_contention-2-blocked-unsat-0-generation": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-resource_contention-2-fixed_start-sat-0-generation": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-slack-0-fixed_start-unsat-0-repair": "predeclared_expanded_failure",
+    "dev-v2-3264-slack-1-blocked-unsat-0-generation": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-slack-1-fixed_start-sat-0-generation": "family_sweep_event_diversity_then_request_length",
+    "dev-v2-3264-slack-2-blocked-sat-0-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v3-126fdf2cca52d454283fefca-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v3-1cb82271f05a61f8e4b44569-generation": "predeclared_expanded_failure",
+    "dev-v3-7e976f3689ad97c2be91bb3b-repair": "family_sweep_event_diversity_then_request_length",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-generation": "five_activity_resource_chain",
+    "dev-v3-90ddb6a5fe76e37ee5d7ecf7-repair": "five_activity_resource_chain",
+    "dev-v3-a91ff21f8fda3c9faeab37db-generation": "five_activity_resource_chain",
+    "dev-v3-a91ff21f8fda3c9faeab37db-repair": "five_activity_resource_chain",
+    "dev-v3-d5a847054370f976b5c44ad7-generation": "family_sweep_event_diversity_then_request_length"
+  },
+  "source_bundle_sha256": "a52fbffd5fa1c86e400d614dbc363ec541c72b16724c21d101e6770e0be68e34",
+  "source_families": 19,
+  "status": "prepared_offline_not_live_authorization"
+}
