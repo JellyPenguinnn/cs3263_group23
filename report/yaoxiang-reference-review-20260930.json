@@ -1,0 +1,192 @@
+{
+  "activity_domains_checked": 1152,
+  "base_commit": "84cc95cbe6cdb21212f2081c86a0572f08d3bee3",
+  "case_bundle_sha256": "bc4af652f4e0bb1655968ecd47e453db44fbf51b40941ffe72a7708dce058cd7",
+  "cases": 144,
+  "complete_horizon_start_candidates": 55296,
+  "coordination": {
+    "final_model_eligibility": "unresolved",
+    "human_review": "pending",
+    "new_teaching_feedback": "unconfirmed",
+    "proposal_receipt": "unconfirmed",
+    "publication": "local_work_not_authorized_for_new_commit_or_push"
+  },
+  "evidence": "AI_assisted_independent_arithmetic_review_not_human_signoff",
+  "excluded_start_reasons_checked": 46734,
+  "limitations": [
+    "All v2 UNSAT references share the A0/A1 resource conflict; sweep labels do not establish varied UNSAT reasoning difficulty.",
+    "All SAT generation references attain zero preference and all SAT repair references attain M=T=1; repair-burden complexity is not varied.",
+    "Human review, realistic scenarios, final-model eligibility and frozen evaluation remain pending."
+  ],
+  "live_model_calls": 0,
+  "original_families": 72,
+  "pair_assignments_enumerated": 165888,
+  "pilot_semantic_review": {
+    "added_hard_bounds": [
+      {
+        "activity_id": "A0",
+        "availability_maximum_end": 7,
+        "availability_minimum_start": 2,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 2
+      },
+      {
+        "activity_id": "A0",
+        "availability_maximum_end": 7,
+        "availability_minimum_start": 2,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 7
+      },
+      {
+        "activity_id": "A1",
+        "availability_maximum_end": 7,
+        "availability_minimum_start": 2,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 2
+      },
+      {
+        "activity_id": "A1",
+        "availability_maximum_end": 7,
+        "availability_minimum_start": 2,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 7
+      },
+      {
+        "activity_id": "A2",
+        "availability_maximum_end": 16,
+        "availability_minimum_start": 7,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 7
+      },
+      {
+        "activity_id": "A2",
+        "availability_maximum_end": 16,
+        "availability_minimum_start": 7,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 16
+      },
+      {
+        "activity_id": "A3",
+        "availability_maximum_end": 16,
+        "availability_minimum_start": 7,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 7
+      },
+      {
+        "activity_id": "A3",
+        "availability_maximum_end": 16,
+        "availability_minimum_start": 7,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 16
+      },
+      {
+        "activity_id": "A4",
+        "availability_maximum_end": 22,
+        "availability_minimum_start": 12,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 12
+      },
+      {
+        "activity_id": "A4",
+        "availability_maximum_end": 22,
+        "availability_minimum_start": 12,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 22
+      },
+      {
+        "activity_id": "A5",
+        "availability_maximum_end": 22,
+        "availability_minimum_start": 12,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 12
+      },
+      {
+        "activity_id": "A5",
+        "availability_maximum_end": 22,
+        "availability_minimum_start": 12,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 22
+      },
+      {
+        "activity_id": "A6",
+        "availability_maximum_end": 28,
+        "availability_minimum_start": 18,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 18
+      },
+      {
+        "activity_id": "A6",
+        "availability_maximum_end": 28,
+        "availability_minimum_start": 18,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 28
+      },
+      {
+        "activity_id": "A7",
+        "availability_maximum_end": 28,
+        "availability_minimum_start": 18,
+        "constraint_type": "release",
+        "implied": true,
+        "stated_slot": 18
+      },
+      {
+        "activity_id": "A7",
+        "availability_maximum_end": 28,
+        "availability_minimum_start": 18,
+        "constraint_type": "deadline",
+        "implied": true,
+        "stated_slot": 28
+      }
+    ],
+    "case_id": "dev-v2-3264-interaction_density-2-deadline-sat-0-generation",
+    "conclusion": "All 16 added release/deadline bounds follow from unchanged availability; feasible schedules and objective values are identical for this saved pair. No assertion about general model understanding.",
+    "extracted_spec_sha256": "a885fc0f1550c9f6c086912063fcccd7bc551f1647a6e819901d11ea3d332b3b",
+    "gold_spec_sha256": "343f405d1c1b830b0728827d6c6f47c9d2872cb334e5d1d4c79f4cd81974689a",
+    "record_sha256": "cd42591a57486a04a39374849da8ffaf89afa64d7deb2f29c930ef0497242ed8",
+    "structural_mismatch_retained": true
+  },
+  "precedence_removal_counterexamples": 84,
+  "sat_generation_zero_lower_bounds": 36,
+  "sat_repair_lexicographic_certificates": 36,
+  "seed": 3264,
+  "unsat_pair_certificates": 72,
+  "verification": {
+    "changed_test_sha256": {
+      "tests/formal_support.py": "170c6c02615b3919712ce0d125793fa73369d1df508b6132690d0e2f5c48f13b",
+      "tests/unit/test_v2_formal_review.py": "9836ae81e167fa87080e200ebfbbd483d8a9a25e8b4952305a52a9835a104217"
+    },
+    "complete_installed_suite": {
+      "linux_arm64": {
+        "passed": 422,
+        "seconds": 14.86
+      },
+      "macos_arm64": {
+        "passed": 422,
+        "seconds": 17.65
+      }
+    },
+    "hosted_ci": "not_checked",
+    "installation": "Reused prior noneditable qualified wheel/dependencies; all current runtime .py files match installed macOS copy, packaged assets match on both. New tests run from a fresh secret-free source snapshot.",
+    "model_calls": 0,
+    "pip_check": "passed_on_both",
+    "prompts_changed": false,
+    "runtime_changed": false,
+    "source_manifest_sha256": "0be997aeff81dc433fffbdd089d4a2e68b1b555f5513833ce0f278090b877e4a",
+    "targeted_domain_review_tests": 16,
+    "targeted_formal_solver_tests": 97
+  }
+}

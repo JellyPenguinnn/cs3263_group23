@@ -114,6 +114,8 @@ Certificate and hostname verification remain enabled. The Linux client includes 
 
 The [Yao Xiang follow-up](report/yaoxiang-formal-followup.md) records the R1–R3 extension now incorporated from main and its installed-build/live-pilot evidence. Solver JSON now includes optional versioned `domain_analysis`; extraction failures include `schema_diagnostics`. `scheduling explain` reads supported recorded conflicts while keeping solver proof and gold acceptance separate. Historical run files remain readable and unchanged.
 
+The [30 September formal review](report/yaoxiang-reference-review.md) independently checks all v2 reference labels/optima and domain reasons. It adds six regression tests, passing **422 tests on both installed macOS/Linux runtimes** with production code unchanged. It also documents the matrix’s common UNSAT conflict pattern and uniformly one-slot SAT repairs; human review and broader final-study construction remain pending.
+
 ### Run the integrated development baseline
 
 First generate and validate the 30 development references without credentials:
