@@ -9,6 +9,7 @@ from scheduling.evaluation.scoring import reference, evaluate, digest
 from scheduling.evaluation.metrics import summarize, paired, wilson
 from scheduling.providers.types import ModelConfig, ModelResponse, Attempt, Usage
 from scheduling.schema import PipelineResult, Schedule, to_data
+from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
 from scheduling.solver import SolverLimits
 
 
@@ -27,7 +28,7 @@ def canned(cases, cfg):
     result = {}
     for key, identity, case, view in requests(cases, cfg):
         if identity["approach"] == "solver_augmented":
-            content = case.problem.to_json()
+            content = replace(case.problem, instance_id=PUBLIC_REQUEST_ID).to_json()
         else:
             content = json.dumps(
                 {
@@ -74,7 +75,7 @@ def test_invalid_wrong_and_unknown_keep_denominators_and_extraction_separate(tmp
         if identity["approach"] == "direct":
             responses[key] = "bad JSON"
         else:
-            wrong = case.problem.to_dict()
+            wrong = replace(case.problem, instance_id=PUBLIC_REQUEST_ID).to_dict()
             wrong["constraints"] = []
             # This may happen to return a valid schedule; scoring must independently check.
             responses[key] = json.dumps(wrong)
@@ -269,13 +270,15 @@ def test_live_boundary_only_receives_public_messages(tmp_path):
     def callback(messages, model):
         payloads.append(messages[1].content)
         if "instance_id" in json.loads(messages[1].content):
-            content = case.problem.to_json()
+            content = replace(case.problem, instance_id=PUBLIC_REQUEST_ID).to_json()
         else:
             content = json.dumps({"status": "SAT", "schedule": case.witness.to_list()})
         return ModelResponse(content, "backend", 0, ())
 
     run_batch((case,), tmp_path, cfg, provider_complete=callback)
     assert len(payloads) == 2
+    assert all(case.case_id not in p for p in payloads)
+    assert all("variant_id" not in json.loads(p) for p in payloads)
     assert all(
         "expected_label" not in p and "justification" not in p and "witness" not in p
         for p in payloads
