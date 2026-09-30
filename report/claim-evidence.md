@@ -19,6 +19,8 @@ raw run files require the separately supplied reviewed archive.
 | C8 | One move/four slots wins over two moves/two slots | [formal qualification](../tests/unit/test_formal_qualification.py), `test_movement_priority_beats_smaller_total_shift` | Yao Xiang, pending; tiny mathematical counterexample |
 | C9 | Instruction-like text remains public data in prompt construction | [direct tests](../tests/unit/test_direct.py), `test_repair_prompt_preserves_original_and_priority` | Li Hao, pending; no live adversarial-resistance claim |
 
+Engineering follow-up (1 October): [F3–F5 receipt](../configs/development/yongqing-f345-verification-20261001.json) and [handoff](yongqing-study-preparation.md) link the 24-family construction pilot, 16-attempt synthetic frozen rehearsal, exact cross-platform archive replay and 332 unchanged historical attempts. These support construction/bookkeeping/reproducibility claims only. The synthetic 15/16 accepted outputs are deliberately canned and must never become a model-performance result. Actual source-policy, gold/text and independent teammate reviews remain pending.
+
 Final-study canonical/difficulty, realistic, wording, repair and resource claims
 remain absent until F4/F5 provides compatible frozen blocks. Their eventual index
 must include block/run/config hashes, subsets and denominators, figure/table

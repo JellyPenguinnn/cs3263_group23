@@ -4,7 +4,7 @@
 
 Generate schedules and repair them when requirements change. This research system compares a language model that produces schedules directly with the same model translating requests into a structured problem solved by OR-Tools CP-SAT. An independent validator checks both approaches against the original requirements.
 
-**Status: integrated development version 2.** Generation, minimum-disruption repair, extraction diagnostics, constraint explanations, benchmark execution, replay and the read-only dashboard are implemented. The next stage is a focused extraction improvement, model qualification and fresh final-study preparation, followed by reviewed evaluation, analysis and submission. The final-data builder/selector and any required provider extension remain work items; the study has not yet run. Core delivery target: **30 October 2026**.
+**Status: integrated development version 2.** Generation, minimum-disruption repair, extraction diagnostics, constraint explanations, benchmark execution, replay and the read-only dashboard are implemented. The next stage is a focused extraction improvement, model qualification and fresh final-study preparation, followed by reviewed evaluation, analysis and submission. The candidate builder, frozen rehearsal and compatible-block archive are offline-verified; final policy/data review, model selection and the actual study remain open. Core delivery target: **30 October 2026**.
 
 [Development and final-study plan](planning.md) · [Contributor and agent instructions](AGENTS.md) · [Checkpoint readiness](report/checkpoint-readiness.md) · [Version 2 verification](report/version-2-validation.md)
 
@@ -89,6 +89,22 @@ A metadata-only SoCLaaS check on 30 September listed **`qwen3.8:27b`**, `gemma4:
 Internal targets are **18 October for freeze** and **30 October for a complete report draft and reproduction package**. Course delivery is a 15-minute presentation plus five-minute Q&A in the week of 9 November, and a report due 13 November with at most ten single-column, single-spaced body pages, at least 11-point font and 1-inch margins. Verify Canvas cutoffs and feedback. [Planning Section 17](planning.md#17-rubric-evidence-and-course-delivery) maps the qualitative rubric to technical evidence, responsible-AI cases, genuine member contributions and delivery checks.
 
 This checkpoint includes the audited integrity fixes, expanded development results and final-study plan. Historical audit receipts describe their earlier local snapshot based on `63d68d8`; use the current commit and GitHub branch state to verify publication. A clone contains source, tests, manifests and reviewed summaries; raw live records must be supplied separately in a reviewed reproduction archive.
+
+### Yong Qing F3–F5 follow-up
+
+[Current handoff](report/yongqing-study-preparation.md): the provisional candidate policy, synthetic frozen rehearsal and checked multi-block analysis/archive pass 580 tests on macOS/Linux ARM64. The development policy pilot produced 24 distinct families / 48 cases. This establishes engineering readiness, not final data, human review or model accuracy.
+
+After the locked noneditable installation, run each command with a new output directory:
+
+```sh
+.venv/bin/python evaluation/prepare_final_candidates.py runs/NEW-policy-pilot \
+  --registry benchmarks/manifests/development-hard-fingerprints-v2-20261001.json --seed 3266303
+.venv/bin/python evaluation/rehearse_study.py runs/NEW-frozen-rehearsal
+.venv/bin/python evaluation/analyze_study.py runs/NEW-frozen-rehearsal/blocks.json \
+  runs/NEW-study-export --figures
+```
+
+These commands use no model calls. Carry every new pilot's cumulative registry forward; never treat a pilot as final data. `--figures` uses the existing optional plotting dependency. The rehearsal's approvals and realistic-routing case are explicitly synthetic fixtures. Analysis accepts separate compatible frozen blocks, preserves failed attempts, rejects incomplete/incompatible input, and exports separate primary/realistic/wording summaries plus a checksummed local reproduction archive. `--no-archive` recomputes `analysis.json` from an existing block list. Actual final drawing/execution still requires the decisions and reviews in planning Sections 5 and 11.
 
 ### Li Hao F2/F6 follow-up
 
@@ -258,7 +274,7 @@ Replay requires no credentials or new model requests. A fresh clone contains agg
 
 `freeze-draft` creates an intentionally non-runnable configuration until review, eligibility and authorization references are supplied. See `scheduling freeze-draft --help` and [planning Section 8](planning.md#8-benchmark-and-evaluation-design). The versioned registry identifies scheduling structure independently of calendar presentation, while provenance hashes retain exact inputs. Legacy unversioned registries and frozen protocols cannot authorize new runs. Rebuild registries from source cases rather than relabelling old digests; retain old archives for replay.
 
-The current registry is [`development-hard-fingerprints-v2-20260930.json`](benchmarks/manifests/development-hard-fingerprints-v2-20260930.json), rebuilt from 22 named bundles and 300 known structures. Supply this versioned object to `freeze-draft --development-registry`; protocol format 2.0 embeds it as `development_registry`. New benchmark manifests must declare `slot-graph-v2`. Historical protocols remain replayable, but cannot be resumed or used for new execution under the changed source contract.
+The current registry is [`development-hard-fingerprints-v2-20261001.json`](benchmarks/manifests/development-hard-fingerprints-v2-20261001.json), covering 28 bundles and 1,071 known structures after the two F3 pilots and retained construction tests. Earlier registries are preserved; carry every subsequent pilot/test addition forward and review completeness before freeze. Supply this versioned object to `freeze-draft --development-registry`; protocol format 2.0 embeds it as `development_registry`. New benchmark manifests must declare `slot-graph-v2`. Historical protocols remain replayable, but cannot be resumed or used for new execution under the changed source contract.
 
 To rebuild from preserved inputs, use repeatable `--bundle` and `--archive-bundle` arguments; include every known development source, including prior pilots. For example, this command creates a **limited registry for the named authored bundle only**:
 
