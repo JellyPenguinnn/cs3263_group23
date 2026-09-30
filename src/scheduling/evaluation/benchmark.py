@@ -633,3 +633,249 @@ def generate_development_v2(seed=3264, *, repetitions=1, reference_limits=None):
         "repair_event_counts": dict(Counter(c.event for c in cases if c.context)),
     }
     return tuple(cases), records, selection
+
+
+V3_MECHANISMS = ("resource_chain", "precedence_chain", "unary_boundary")
+
+
+def _v3_candidate(seed, mechanism, size, event, label, repeat):
+    """Small binary-domain constructions with explicit repair propagation.
+
+    Deadline cases reflect the entire construction in time so that tightening
+    an end bound triggers the same propagation as blocking the initial start.
+    All windows fit exactly one activity; adjacent windows are not merged.
+    """
+    import hashlib
+
+    rng = random.Random(
+        int.from_bytes(
+            hashlib.sha256(f"v3/{seed}/{mechanism}/{size}/{repeat}".encode()).digest(),
+            "big",
+        )
+    )
+    duration, offset = rng.randint(1, 3), rng.randint(0, 8)
+    group = f"dev-v3-{seed}-{mechanism}-{size}-{repeat}"
+    # Case IDs can appear in model requests. Keep labels and construction
+    # factors in evaluator provenance, never in a public identifier.
+    ident = "dev-v3-" + hashlib.sha256(
+        f"{group}/{event}/{label}".encode()
+    ).hexdigest()[:24]
+
+    def clock(position):
+        start = offset + duration * position
+        return 48 - duration - start if event == "deadline" else start
+
+    old = {f"A{i}": clock(i) for i in range(size)}
+    alternate = {f"A{i}": clock(i + 1) for i in range(size)}
+    if mechanism == "resource_chain":
+        alternate[f"A{size - 1}"] = clock(0)
+    unavailable = (
+        (0 if mechanism == "unary_boundary" else size - 1) if label == "UNSAT" else None
+    )
+    full = (Window(0, 48),)
+    activities, rules = [], []
+    for i in range(size):
+        key = f"A{i}"
+        starts = [old[key]] if i == unavailable else [old[key], alternate[key]]
+        activities.append(
+            Activity(
+                key,
+                duration,
+                (f"P{i}",),
+                ("R",) if mechanism == "resource_chain" else (),
+                tuple(Window(s, s + duration) for s in sorted(starts)),
+            )
+        )
+        # Mutually exclusive preferences guarantee a positive penalty even
+        # before disruption. Higher old-start weights select a unique old plan.
+        rules.extend(
+            (
+                PreferredStart(
+                    f"old-pref-{i}", key, old[key], old[key] + 1, rng.randint(2, 5)
+                ),
+                PreferredStart(
+                    f"alt-pref-{i}", key, alternate[key], alternate[key] + 1, 1
+                ),
+            )
+        )
+    if mechanism == "precedence_chain":
+        for i in range(size - 1):
+            a, b = f"A{i}", f"A{i + 1}"
+            if event == "deadline":
+                a, b = b, a
+            rules.append(Precedence(f"edge-{i}", a, b))
+    if event == "fixed_start":
+        rules.append(FixedStart("appointment", "A0", old["A0"]))
+    original = ProblemSpec(
+        "1.0",
+        ident + "-original",
+        "generation",
+        48,
+        30,
+        "2026-10-05T00:00:00+08:00",
+        "+08:00",
+        tuple(Entity(f"P{i}", full) for i in range(size)),
+        (Entity("R", full),) if mechanism == "resource_chain" else (),
+        tuple(activities),
+        tuple(rules),
+    )
+    change = {
+        "blocked": BlockedInterval(
+            "event", "participant", "P0", old["A0"], old["A0"] + duration
+        ),
+        "deadline": Deadline("event", "A0", old["A0"] + duration - 1),
+        "fixed_start": FixedStart("event", "A0", alternate["A0"]),
+    }[event]
+    updated = replace(
+        original,
+        constraints=tuple(c for c in original.constraints if c.id != "appointment")
+        + (change,),
+    )
+    return (
+        group,
+        original,
+        replace(updated, instance_id=ident + "-generation"),
+        replace(updated, instance_id=ident + "-repair", task_type="repair"),
+        _schedule(old),
+    )
+
+
+def generate_development_v3(seed=3265, *, repetitions=1, reference_limits=None):
+    """108 challenge cases per repetition; no model-driven selection or test split.
+
+    Three mechanisms x three sizes x three events x two labels x two tasks.
+    Related hard structures, including originals, are conservatively grouped.
+    These challenge factors supplement rather than replace v2's four sweeps.
+    """
+    from collections import Counter
+    from scheduling.evaluation.manifests import structural_audit
+    from scheduling.schema import RepairContext
+    from scheduling.solver import SolverLimits, solve
+    from scheduling.validation import validate_schedule
+
+    if (
+        type(seed) is not int
+        or seed < 0
+        or type(repetitions) is not int
+        or not 1 <= repetitions <= 10
+    ):
+        raise ValueError("V3 requires a nonnegative seed and 1–10 repetitions")
+    limits = reference_limits or SolverLimits(5, 0, 1)
+    cases, records, exclusions = [], {}, []
+    for mechanism in V3_MECHANISMS:
+        for size in (3, 4, 5):
+            for repeat in range(repetitions):
+                for event in V2_EVENTS:
+                    for label in ("SAT", "UNSAT"):
+                        group, original, gen, repair, constructed = _v3_candidate(
+                            seed, mechanism, size, event, label, repeat
+                        )
+                        if not validate_schedule(original, constructed).hard_feasible:
+                            raise ValueError("V3 original witness invalid")
+                        old = solve(original, limits)
+                        if not old.optimality_proven or old.schedule is None:
+                            exclusions.append(
+                                {
+                                    "candidate": gen.instance_id,
+                                    "reason": "original_reference_unresolved",
+                                    "status": old.status,
+                                }
+                            )
+                            continue
+                        if old.schedule.starts() != constructed.starts():
+                            raise ValueError(
+                                "V3 old schedule policy lost unique optimum"
+                            )
+                        results = (
+                            solve(gen, limits),
+                            solve(repair, limits, RepairContext(old.schedule)),
+                        )
+                        if any(
+                            r.status not in ("OPTIMAL", "INFEASIBLE")
+                            or (r.status == "OPTIMAL" and not r.optimality_proven)
+                            for r in results
+                        ):
+                            exclusions.append(
+                                {
+                                    "candidate": gen.instance_id,
+                                    "reason": "updated_reference_unresolved",
+                                    "statuses": [r.status for r in results],
+                                }
+                            )
+                            continue
+                        if any(
+                            (r.status == "OPTIMAL") != (label == "SAT") for r in results
+                        ):
+                            raise ValueError(
+                                "V3 constructed label disagrees with reference"
+                            )
+                        for spec, result in zip((gen, repair), results):
+                            repairing = spec.task_type == "repair"
+                            cases.append(
+                                BenchmarkCase(
+                                    spec.instance_id,
+                                    group,
+                                    "development",
+                                    "controlled",
+                                    mechanism,
+                                    str(size),
+                                    spec,
+                                    original if repairing else None,
+                                    old.schedule if repairing else None,
+                                    event if repairing else None,
+                                    result.schedule,
+                                    label,
+                                    (
+                                        result.objectives.as_tuple()
+                                        if result.schedule
+                                        else None
+                                    ),
+                                    "Binary-domain challenge: resource displacement, precedence propagation, or unary boundary. Competing preferences; independent exhaustive regression certificates; human review pending.",
+                                )
+                            )
+                            records[spec.instance_id] = {
+                                "creation_method": "procedural",
+                                "code_authorship": "AI-assisted",
+                                "generation_seed": seed,
+                                "construction_repeat": repeat,
+                                "construction_mechanism": mechanism,
+                                "construction_event": event,
+                                "event_type": event if repairing else None,
+                                "gold_status": result.status,
+                                "gold_optimality_proven": result.optimality_proven,
+                                "reference_limits": {
+                                    "time_limit_seconds": limits.time_limit_seconds,
+                                    "random_seed": limits.random_seed,
+                                    "num_workers": limits.num_workers,
+                                },
+                                "fixture_review": "pending",
+                                "language_review": "pending",
+                                "selection_reason": "predeclared_challenge_cell_without_model_outputs",
+                            }
+    audit = structural_audit(cases)
+    # Keep every deliberately paired event/task/label, but never advertise
+    # their shared originals as independent source samples.
+    cases = tuple(
+        replace(c, group_id=audit["family_for_group"][c.group_id]) for c in cases
+    )
+    requested = 108 * repetitions
+    selection = {
+        "policy_version": "3.0",
+        "policy": "One candidate per challenge cell; exclude the generation/repair pair on unresolved reference; group shared hard structures; no model outcomes or silent retries.",
+        "requested_cases": requested,
+        "selected_cases": len(cases),
+        "constructed_pairs": requested // 2,
+        "excluded_candidates": len(exclusions),
+        "exclusions": exclusions,
+        "quota_complete": len(cases) == requested,
+        "source_families": len({c.group_id for c in cases}),
+        "repair_event_counts": dict(Counter(c.event for c in cases if c.context)),
+        "sat_repair_movement_counts": dict(
+            Counter(
+                str(c.expected_objective[0])
+                for c in cases
+                if c.context and c.expected_label == "SAT"
+            )
+        ),
+    }
+    return cases, records, selection

@@ -19,12 +19,12 @@ COMMANDS = (
 def add_commands(commands):
     generate = commands.add_parser(
         "benchmark-generate",
-        help="Write legacy v1 or balanced structural v2 development cases",
+        help="Write legacy v1, structural v2 or challenge v3 development cases",
     )
     generate.add_argument("--output", type=Path, required=True)
     generate.add_argument("--seed", type=int, default=3263)
     generate.add_argument("--fixtures-only", action="store_true")
-    generate.add_argument("--version", choices=("1", "2"), default="1")
+    generate.add_argument("--version", choices=("1", "2", "3"), default="1")
     generate.add_argument("--repetitions", type=int, default=1)
     draft = commands.add_parser(
         "freeze-draft",
@@ -110,37 +110,54 @@ def run_command(args):
         from scheduling.evaluation.manifests import (
             benchmark_manifest,
             benchmark_manifest_v2,
+            benchmark_manifest_v3,
         )
 
-        if args.version == "2":
+        if args.version in ("2", "3"):
             if args.fixtures_only:
                 raise ValueError(
-                    "V2 is a separate procedural dataset; fixtures stay v1"
+                    "V2/V3 are separate procedural datasets; fixtures stay v1"
                 )
-            from scheduling.evaluation.benchmark import generate_development_v2
+            from scheduling.evaluation.benchmark import (
+                generate_development_v2,
+                generate_development_v3,
+            )
             import subprocess
 
-            cases, provenance, selection = generate_development_v2(
+            generate = (
+                generate_development_v2
+                if args.version == "2"
+                else generate_development_v3
+            )
+            make_manifest = (
+                benchmark_manifest_v2 if args.version == "2" else benchmark_manifest_v3
+            )
+            cases, provenance, selection = generate(
                 args.seed, repetitions=args.repetitions
             )
-            revision = subprocess.run(
-                ["git", "rev-parse", "HEAD"], capture_output=True, text=True
-            )
-            manifest = benchmark_manifest_v2(
+            try:
+                revision = subprocess.run(
+                    ["git", "rev-parse", "HEAD"], capture_output=True, text=True
+                )
+                code_revision = (
+                    revision.stdout.strip()
+                    if revision.returncode == 0
+                    else "unavailable"
+                )
+            except FileNotFoundError:
+                # Git metadata is optional in a wheel-only installation.
+                code_revision = "unavailable"
+            manifest = make_manifest(
                 cases,
                 generation_seed=args.seed,
                 rendering_seed=3263,
                 selection=selection,
                 records=provenance,
-                code_revision=(
-                    revision.stdout.strip()
-                    if revision.returncode == 0
-                    else "unavailable"
-                ),
+                code_revision=code_revision,
             )
         else:
             if args.repetitions != 1:
-                raise ValueError("Repetitions require generator v2")
+                raise ValueError("Repetitions require generator v2 or v3")
             cases = (
                 tiny_fixtures()
                 if args.fixtures_only
