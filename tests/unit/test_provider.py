@@ -126,3 +126,21 @@ def test_model_listing_and_completion_share_budget():
 def test_reject_unapproved_endpoint():
     with pytest.raises(ValueError, match="approved SoCLaaS"):
         SoCLaaSProvider(api_key="test", budget=RequestBudget(1, 32), base_url="https://example.com")
+
+
+@pytest.mark.parametrize("payload", [b"not-json", b"\xff", b"[" * 1200 + b"]" * 1200])
+def test_model_listing_rejects_bad_json_with_safe_category_and_spent_budget(payload):
+    budget = RequestBudget(2, 32)
+    with SoCLaaSProvider(api_key="test", budget=budget,
+                        transport=httpx.MockTransport(lambda _: httpx.Response(200, content=payload))) as provider:
+        with pytest.raises(ValueError, match="^invalid_model_listing$"):
+            provider.list_models()
+    assert budget.requests_used == 1
+
+
+def test_deep_provider_envelope_is_recorded_as_failure_without_retry():
+    result = call(lambda _: httpx.Response(200, content=b"[" * 1200 + b"]" * 1200),
+                  config=ModelConfig("test", 32, max_attempts=3))
+    assert result.error == "invalid_provider_response"
+    assert len(result.attempts) == 1 and result.attempts[0].http_status == 200
+    assert result.attempts[0].usage.total_tokens is None

@@ -70,6 +70,7 @@ cd cs3263_group23
 python3.12 -m venv .venv
 .venv/bin/python -m pip install --require-hashes -r requirements.lock
 .venv/bin/python -m pip install --no-deps --no-build-isolation .
+.venv/bin/python scripts/check_installed.py
 .venv/bin/python -m pytest -q
 .venv/bin/python -m pip check
 .venv/bin/scheduling --help
@@ -131,7 +132,7 @@ The [saved configuration](configs/development/main-baseline.json) allows 60 seri
   --run-dir runs/NEW-live
 ```
 
-Progress is written to stderr and the final outcome to stdout. A completed batch returns 0 even when model answers are rejected. Stopped/exhausted batches return 2. Provider failures stop the batch without hidden retries. Resume reuses completed records only under the matching run contract; changed source/configuration requires a new run, and uncertain interrupted requests require reconciliation.
+Progress is written to stderr and the final outcome to stdout. A completed batch returns 0 even when model answers are rejected. Stopped/exhausted batches return 2. Provider failures, including malformed HTTP-200 response envelopes, stop the batch without hidden retries and keep a matching resume stopped. A valid provider envelope containing an invalid model answer remains a recorded outcome, so later cases continue. Resume reuses completed records only under the matching run contract; changed source/configuration requires a new run, and uncertain interrupted requests require reconciliation.
 
 Recompute saved results without model calls:
 
@@ -186,11 +187,11 @@ Open `http://127.0.0.1:8876` and select a run. The dashboard refreshes saved pro
 
 ## Verification
 
-The current Yong Qing follow-up passed **398 Python tests and three frontend tests from a fresh installed wheel on macOS**, dependency checks, 30 legacy references, 144 v2 references and 864 canned integration attempts. The original 60-call replay summary remains identical. This snapshot has not been executed on Linux; historical Linux results below apply to their recorded versions. See the follow-up report for commands and live-pilot evidence.
+The 30 September follow-up on `lihao-llm-baseline`, incorporating main `f12e521`, passed **416 Python tests and three frontend tests in fresh noneditable macOS ARM64 and Linux ARM64 installs**. Both passed dependency/asset checks, all 30 legacy references, 864 canned v2 attempts, exact summary replay of the saved 60-call and 24-call development runs, figure export and three saved-case demo explanations. These checks made **zero new model calls**. See [the qualification and assignment audit](report/lihao-integration-followup.md) and [machine-readable receipt](configs/development/lihao-integration-verification-20260930.json).
 
-The audit of code at `c2eeffc` on 29 September passed **284 Python tests, three frontend tests, JavaScript syntax checking, dependency checks, all 30 development references, and exact replay of all 60 saved records**. Source tests used `PYTHONPATH=src`. Native macOS TLS tests need access to the OS certificate service; a sandbox restriction was isolated and the complete suite passed with that access.
+The Linux check used a Debian container under Colima with Python 3.12.14, OpenSSL 3.0.22 and Node 18.20.4; macOS used Python 3.12.2, OpenSSL 3.6.3 and Node 20.15.0. This is current local platform evidence, not independent teammate review or a hosted-CI result. CI specifies Python 3.12 and Node 20 on Ubuntu/macOS; remote status could not be verified with the available GitHub authentication. Native macOS TLS tests require access to the OS certificate service.
 
-The earlier installed macOS ARM64/Linux ARM64 baseline passed 278 tests. That historical receipt does not certify every subsequent dashboard change on Linux. Hosted CI is configured for Ubuntu/macOS; its remote status was not inspected in the audit.
+`check_installed.py` rejects editable imports and verifies that all three prompts, issuer certificates and dashboard assets match the source. Use a noneditable install for this qualification; ordinary editable development remains supported. CI also runs `python evaluation/v2_qualification.py artifacts/v2-qualification` to check the full v2 offline integration.
 
 For dashboard changes, additionally run:
 

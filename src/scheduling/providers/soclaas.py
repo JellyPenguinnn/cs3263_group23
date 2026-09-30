@@ -74,7 +74,10 @@ class SoCLaaSProvider:
             response = self._client.get("models", timeout=httpx.Timeout(30, connect=10))
             if response.status_code != 200:
                 raise ValueError(f"model_listing_http_{response.status_code}")
-            data = response.json()
+            try:
+                data = response.json()
+            except (ValueError, RecursionError):
+                raise ValueError("invalid_model_listing") from None
             rows = data["data"]
             if not isinstance(rows, list) or not rows:
                 raise ValueError("invalid_model_listing")
@@ -113,7 +116,7 @@ class SoCLaaSProvider:
                 status = response.status_code
                 try:
                     data = response.json()
-                except ValueError:
+                except (ValueError, RecursionError):
                     data = None
                 usage = _usage(data)
                 if status != 200:

@@ -22,6 +22,21 @@ makes zero model calls. With the preserved synthetic live archive available:
 5. Use the read-only dashboard for monitoring/results, and explain that these
    are 30 development cases, not frozen held-out findings or a superiority claim.
 
+The 30 September [integration qualification](../report/lihao-integration-followup.md)
+verified the three explanation commands above on installed macOS/Linux builds.
+The later v2 pilot can be replayed separately when its synthetic archive is available:
+
+```sh
+.venv/bin/scheduling evaluate-replay --run-dir runs/yongqing-v2-pilot-20260929-01 --export-dir artifacts/demo-v2-replay --figures
+```
+
+Keep this 12-case/six-family pilot separate from the original 30-case run: A
+accepted 3/12 and B 12/12, with no live paraphrase/reordering checks. Show A's
+prose-wrapped JSON as a parser failure even though its discussion recognized
+infeasibility. These observed failures motivate analysis, not manual rescoring
+or a claim that a 12-case pilot establishes general superiority. The new local
+replay archive and checksums are listed in the qualification receipt.
+
 A fresh clone without raw live evidence can use the existing explicit canned demo:
 
 ```sh

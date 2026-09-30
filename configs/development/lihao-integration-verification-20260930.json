@@ -1,0 +1,100 @@
+{
+  "base_commit": "f12e5216e4777ef345240d06922be0917200d539",
+  "branch": "lihao-llm-baseline",
+  "date": "2026-09-30",
+  "dependencies_changed": false,
+  "evidence": "offline_installed_integration_qualification_not_model_performance",
+  "final_source_comparison": {
+    "qualified_runtime_test_prompt_build_files_unchanged": 83,
+    "subsequent_edits": "handoff documentation and verification receipt only"
+  },
+  "limits": [
+    "Linux ARM64 container on Colima, not independent teammate execution",
+    "Linux Node 18.20.4; hosted CI specifies Node 20",
+    "Hosted GitHub Actions status unavailable: CLI unauthenticated and connector returned 404",
+    "Human contract, wording and proof review remains pending",
+    "No new live pilot or final evaluation"
+  ],
+  "linux_base_image": "python:3.12-slim-bookworm@sha256:392307d22300de8b5986851a12d9176dfc0fc073e65bf6523ebd7dcbeb23564e",
+  "live_model_calls": 0,
+  "local_receipt": "runs/lihao-integration-20260930-01",
+  "local_replay_archive": {
+    "bytes": 593582,
+    "external_sharing": "not_performed",
+    "files": 308,
+    "path": "artifacts/lihao-integration-replay-20260930-01.tar.gz",
+    "sha256": "d55c7981e903ee8beaddac65b5cdf09e2da0a99722e2f5cbd5b540bb1f6e9c5f",
+    "verification": "unpacked; all 307 listed content hashes match; installed assets checked; both historical summaries replay exactly using the qualified installed wheel"
+  },
+  "member": "Li Hao",
+  "platforms": {
+    "linux": {
+      "demo_explanations": 3,
+      "frontend_tests_passed": 3,
+      "historical_summary_replay": "exact_for_both_runs",
+      "installed_python_tests_passed": 416,
+      "live_model_calls": 0,
+      "machine": "aarch64",
+      "node": "v18.20.4",
+      "openssl": "OpenSSL 3.0.22 25 Aug 2026 (Library: OpenSSL 3.0.22 25 Aug 2026)",
+      "packaged_assets_checked": 7,
+      "pip_check": "passed",
+      "platform": "Linux-6.8.0-117-generic-aarch64-with-glibc2.36",
+      "python": "3.12.14",
+      "reference_cases_passed": 30,
+      "v2_canned_attempts_accepted": 864,
+      "v2_cases": 144
+    },
+    "macos": {
+      "demo_explanations": 3,
+      "frontend_tests_passed": 3,
+      "historical_summary_replay": "exact_for_both_runs",
+      "installed_python_tests_passed": 416,
+      "live_model_calls": 0,
+      "machine": "arm64",
+      "node": "v20.15.0",
+      "openssl": "OpenSSL 3.6.3 9 Jun 2026 (Library: OpenSSL 3.6.3 9 Jun 2026)",
+      "packaged_assets_checked": 7,
+      "pip_check": "passed",
+      "platform": "macOS-26.5.2-arm64-arm-64bit",
+      "python": "3.12.2",
+      "reference_cases_passed": 30,
+      "v2_canned_attempts_accepted": 864,
+      "v2_cases": 144
+    }
+  },
+  "prompts_changed": false,
+  "public_view_audit": {
+    "cases": 144,
+    "checks": [
+      "evaluator metadata removal leaves both prompt paths unchanged",
+      "original repair schedule preserved",
+      "reordering preserves every fact line",
+      "paraphrase differs only by intro and precedence phrase"
+    ],
+    "evidence": "automated_public_view_audit_not_human_semantic_review",
+    "limitation": "Limited template variation does not establish realistic language coverage. Human semantic and wording review remains pending.",
+    "live_model_calls": 0,
+    "views": 432
+  },
+  "publication": "user_authorized_member_branch_commit_and_push_after_assignment_audit; resulting_commit_and_remote_verification_in_git_handoff",
+  "publication_audit": {
+    "local_archive_hash_matches": true,
+    "new_model_calls": 0,
+    "qualified_files_match": 83,
+    "scope": "current_development_checkpoint_not_all_course_responsibilities",
+    "source_manifest_hash_matches": true
+  },
+  "saved_runs": {
+    "main-baseline-20260929-01": {
+      "records": 60,
+      "summary_file": "results/summary/main-development-20260929.json"
+    },
+    "yongqing-v2-pilot-20260929-01": {
+      "records": 24,
+      "summary_file": "results/summary/yongqing-evaluation-followup-20260929.json"
+    }
+  },
+  "scientific_impact": "Malformed HTTP-200 envelopes now stop the batch and matching resumes; strict model-answer parsing and archived scoring are unchanged. New inference needs a new source contract/run ID.",
+  "tested_source_manifest_sha256": "296bbd3497ef80b1c7a801939e033e811a72318800fde6b145be2415f50463c7"
+}
