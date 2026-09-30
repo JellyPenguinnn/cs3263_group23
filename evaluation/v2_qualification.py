@@ -4,6 +4,7 @@ Usage: python evaluation/v2_qualification.py runs/NEW_QUALIFICATION [--version 2
 Canned gold-derived model responses verify integration, NOT model performance.
 """
 
+from dataclasses import replace
 import json
 from pathlib import Path
 import argparse
@@ -26,6 +27,7 @@ from scheduling.evaluation.runner import (
 )
 from scheduling.evaluation.metrics import summarize, analysis_details
 from scheduling.providers import ModelConfig
+from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
 from scheduling.solver import SolverLimits
 
 
@@ -64,7 +66,7 @@ def main(directory, version="2"):
     responses = {}
     for key, identity, case, _ in requests(cases, cfg):
         responses[key] = (
-            case.problem.to_json()
+            replace(case.problem, instance_id=PUBLIC_REQUEST_ID).to_json()
             if identity["approach"] == "solver_augmented"
             else json.dumps(
                 {

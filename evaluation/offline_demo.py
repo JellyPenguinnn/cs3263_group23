@@ -20,6 +20,7 @@ from scheduling.evaluation.scoring import reference
 from scheduling.evaluation.metrics import summarize, export_tables
 from scheduling.evaluation.figures import export_figures
 from scheduling.providers import ModelConfig
+from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
 from scheduling.solver import SolverLimits
 
 
@@ -54,6 +55,7 @@ def main(directory):
                 content = "deliberate malformed canned output"
         else:
             spec = case.problem.to_dict()
+            spec["instance_id"] = PUBLIC_REQUEST_ID
             if case.case_id == "precedence-deadline":
                 spec["constraints"] = [
                     {

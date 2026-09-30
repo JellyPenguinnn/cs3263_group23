@@ -48,7 +48,11 @@ All 60 requests completed; reported usage was 117,976 tokens. Currency cost is u
 
 The 30 September request audit also found label-bearing IDs in two original B requests and all twelve B requests in the later v2 pilot. A did not receive those IDs. Saved scores remain unchanged, but this confounds a fair A/B interpretation; see [the metadata audit](report/yongqing-v3-development.md#request-metadata-finding-and-historical-evidence).
 
+The separately authorized [v3 boundary pilot](report/lihao-request-boundary.md#bounded-live-pilot-and-failure-handoff) completed 24 new calls on twelve preselected cases: A accepted 5/12 and B 10/12, with 44,132 reported tokens. It verifies the corrected request path and preserves two B availability-extraction failures; different datasets prevent an accuracy-improvement claim. That allowance is consumed.
+
 These are **development results**, not evidence of general superiority. The set has 28 SAT and two UNSAT cases, no live language-robustness evaluation, and known generator limitations: redundant precedence edges, repair events tied to difficulty levels, and seeds that vary weights rather than hard scheduling structures. [The benchmark audit](planning.md#development-benchmark-audit--29-september-2026) defines the required improvements.
+
+The current Li Hao checkpoint closes this request-boundary leak for future calls: B receives only a neutral `instance_id: "request"`, with no variant ID. It must echo that ID; bookkeeping restores the evaluator ID locally while retaining the raw response. Canned extraction responses must use the same neutral ID. Saved archives remain readable; changed requests require a new run. See [request-boundary qualification](report/lihao-request-boundary.md) for the 444-test installed macOS/Linux checks and current handoff.
 
 The runner supports development runs and separately guarded `offline_frozen` / `live_frozen` modes. Frozen controls are technically qualified with synthetic tests; no real study has been frozen or run. Final experiments still require fresh data, human review, protocol/cap decisions and an eligible primary model or teaching-team acceptance. Development scheduling inference remains SoCLaaS-only.
 

@@ -1,7 +1,7 @@
 """One public-language extraction call followed by a fixed CP-SAT compiler."""
 
 from collections.abc import Callable, Sequence
-from dataclasses import asdict
+from dataclasses import asdict, replace
 import hashlib
 import json
 from pathlib import Path
@@ -13,6 +13,10 @@ from scheduling.schema import NaturalLanguageView, PipelineResult, ProblemSpec, 
 from scheduling.solver import SolverLimits, solve
 
 
+# Request-local metadata only; evaluator IDs may encode labels or selection strata.
+PUBLIC_REQUEST_ID = "request"
+
+
 def build_extraction_messages(view: NaturalLanguageView, *, prompt_path: Path | None = None) -> tuple[Message, ...]:
     if not isinstance(view, NaturalLanguageView):
         raise TypeError("Extraction requires a canonical public NaturalLanguageView")
@@ -21,7 +25,7 @@ def build_extraction_messages(view: NaturalLanguageView, *, prompt_path: Path | 
         prompt_path = checkout / "prompts/extraction/specification.txt"
         if not (checkout / "pyproject.toml").is_file() or not prompt_path.is_file():
             prompt_path = Path(sysconfig.get_path("data")) / "share/cs3263-scheduling/prompts/extraction/specification.txt"
-    payload = {"instance_id": view.instance_id, "variant_id": view.variant_id,
+    payload = {"instance_id": PUBLIC_REQUEST_ID,
                "task_type": view.task_type, "description": view.text, "activity_ids": view.activity_ids}
     if view.original_schedule is not None:
         payload["original_schedule"] = view.original_schedule.to_list()
@@ -47,13 +51,16 @@ def run_solver_augmented(nl_view: NaturalLanguageView, model_config: ModelConfig
                               timings=(("total_seconds", time.monotonic() - started),))
     try:
         extracted = ProblemSpec.from_json(response.content)
-        if extracted.instance_id != nl_view.instance_id or extracted.task_type != nl_view.task_type:
+        if extracted.instance_id != PUBLIC_REQUEST_ID or extracted.task_type != nl_view.task_type:
             raise SchemaError("Extracted metadata differs from public request")
         if {a.id for a in extracted.activities} != set(nl_view.activity_ids):
             raise SchemaError("Extracted activity set differs from public labels")
     except SchemaError as error:
         return PipelineResult(**base, status="INVALID_OUTPUT", diagnostics=(f"{error.detail.path}: {error}",), schema_diagnostics=(error.detail,),
                               timings=(("total_seconds", time.monotonic() - started),))
+    # Restore bookkeeping only after validating the wire ID. Raw content is retained;
+    # no scheduling field is normalized or repaired using evaluator information.
+    extracted = replace(extracted, instance_id=nl_view.instance_id)
     extracted_at = time.monotonic()
     context = RepairContext(nl_view.original_schedule) if nl_view.task_type == "repair" else None
     try:

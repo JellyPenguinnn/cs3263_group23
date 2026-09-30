@@ -2,6 +2,7 @@
 
 from datetime import datetime, timedelta
 from io import BytesIO
+from dataclasses import replace
 import json
 from types import SimpleNamespace
 
@@ -13,6 +14,7 @@ from scheduling.evaluation.benchmark import tiny_fixtures
 from scheduling.evaluation.runner import RunConfig, requests, run_batch, read, replay
 from scheduling.evaluation.scoring import digest
 from scheduling.providers import ModelConfig
+from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
 from scheduling.solver import SolverLimits
 
 
@@ -24,7 +26,7 @@ def saved(tmp_path):
     )
     responses = {
         key: (
-            case.problem.to_json()
+            replace(case.problem, instance_id=PUBLIC_REQUEST_ID).to_json()
             if ident["approach"] == "solver_augmented"
             else json.dumps(
                 {

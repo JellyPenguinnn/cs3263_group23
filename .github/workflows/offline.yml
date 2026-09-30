@@ -30,3 +30,5 @@ jobs:
           scheduling evaluate-plan --cases artifacts/development.json --config configs/development/main-baseline.json --output artifacts/preflight.json > artifacts/preflight.stdout.json
       - name: Qualify v2 generation, both pipelines, resume and replay offline
         run: python evaluation/v2_qualification.py artifacts/v2-qualification
+      - name: Qualify v3 challenge cases and request boundary offline
+        run: python evaluation/v2_qualification.py artifacts/v3-qualification --version 3
