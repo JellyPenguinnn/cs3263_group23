@@ -175,6 +175,14 @@ therefore does not establish correct interpretation. Ten structural mismatches
 include eight independently certified equivalent encodings; the structural
 metric and separate bounded semantic certificate must not be conflated (C5).
 
+For example, the failed fixed-appointment repair requires A0 and A1 to start
+at slot 1 while sharing capacity-one Rpair for one slot each. Both requirements
+cannot hold. Omitting A0’s appointment instead lets the unchanged original
+schedule appear optimal with zero disruption, although A0 remains at slot 3.
+The validator rejects it. Independent enumeration of the conflicting pair and
+restoring only the missing field in a diagnostic copy establish this failure’s
+mechanism; no correction enters primary scores (C5).
+
 The 200 calls reported 465,251 tokens with complete usage coverage. Mean model
 latency was 1.895 seconds for A and 10.115 seconds for B. CP-SAT averaged 4.69 ms
 over the 99 B attempts that reached it. This conditional timing suggests that

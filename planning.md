@@ -135,7 +135,7 @@ Read current Git status, this queue and the relevant contract before implementin
 
 | Work package | Lead / reviewer | Status and dependency | Completion evidence |
 | --- | --- | --- | --- |
-| F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Ready offline; any inference needs its own cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
+| F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Eight saved-failure regressions pass; bounded amendment reviewed but not activated; prompt qualification waits for F2 and a new cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
 | F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Offline packet/metadata qualified; six live completions, paired qualification stopped on serving-fingerprint drift; model decision/eligibility pending | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
 | F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Small builder/selector still needed; can start offline alongside F1/F2 | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
 | F4: freeze rehearsal and final study | Yong Qing / all | Rehearsal development fixtures can start now; final inference depends on F1–F3 and actual decisions | Successful offline frozen rehearsal, approved protocol/cap, complete final records with no silent exclusions |
@@ -156,6 +156,13 @@ remaining live/model gate stay open. No prompt, score, final data or historical
 record changed. Member-branch publication is now user-authorized; main integration
 and human approval remain separate. The verification receipt retains its original
 pre-publication status.
+
+Current Yao Xiang review: [F1/formal handoff](report/yaoxiang-f1-review.md).
+The member branch incorporates main `d12342c`; 560 macOS tests pass. Three exact
+synthetic failure responses are regression fixtures, and all 200 expanded attempts
+replay exactly with 302 saved JSON files unchanged. Eight equivalent encodings
+and two true omissions were rechecked separately. Revision 3 and all production
+semantics remain unchanged; a proposed prompt amendment is not live-qualified.
 
 ### F1 — focused extraction improvements
 
