@@ -9,9 +9,9 @@ from collections.abc import Callable, Sequence
 import httpx
 
 from .tls import create_tls_context
-from .types import Attempt, Message, ModelConfig, ModelResponse, RequestBudget, Usage
+from .types import Attempt, Message, ModelConfig, ModelResponse, ProviderExecution, RequestBudget, Usage
+from .execution import BASE_URL, execution_contract
 
-BASE_URL = "https://soclaas-api.comp.nus.edu.sg/v1"
 TRANSIENT_STATUS = {408, 429, 500, 502, 503, 504}
 
 
@@ -95,6 +95,7 @@ class SoCLaaSProvider:
         if not messages or any(not isinstance(m, Message) for m in messages):
             raise ValueError("At least one typed message is required")
         config = model_config
+        contract = execution_contract(config)
         attempts: list[Attempt] = []
         start = time.monotonic()
         content = model = finish = error = None
@@ -107,11 +108,11 @@ class SoCLaaSProvider:
             status = None
             usage = Usage()
             retry = uncertain = False
+            fingerprint = reasoning_tokens = reasoning_present = None
             content = model = finish = error = None
             try:
                 response = self._client.post("chat/completions", timeout=timeout, json={
-                    "model": config.model, "messages": [asdict(m) for m in messages],
-                    "max_tokens": config.max_tokens, "stream": False,
+                    **contract["configured_body"], "messages": [asdict(m) for m in messages],
                 })
                 status = response.status_code
                 try:
@@ -119,6 +120,15 @@ class SoCLaaSProvider:
                 except (ValueError, RecursionError):
                     data = None
                 usage = _usage(data)
+                if isinstance(data, dict):
+                    value = data.get("system_fingerprint")
+                    secret = self._client.headers["Authorization"][7:]
+                    if isinstance(value, str) and 0 < len(value) <= 200 and secret not in value and not any(c.isspace() for c in value):
+                        fingerprint = value
+                    raw_usage = data.get("usage")
+                    details = raw_usage.get("completion_tokens_details") if isinstance(raw_usage, dict) else None
+                    value = details.get("reasoning_tokens") if isinstance(details, dict) else None
+                    reasoning_tokens = value if type(value) is int and value >= 0 else None
                 if status != 200:
                     error = f"http_{status}"
                     retry = status in TRANSIENT_STATUS
@@ -131,7 +141,11 @@ class SoCLaaSProvider:
                         choices = data["choices"]
                         if not isinstance(choices, list) or len(choices) != 1:
                             raise ValueError
-                        content = choices[0]["message"]["content"]
+                        message = choices[0]["message"]
+                        if not isinstance(message, dict):
+                            raise ValueError
+                        reasoning_present = any(k in message for k in ("reasoning", "reasoning_content"))
+                        content = message["content"]
                         finish = choices[0]["finish_reason"]
                         if not isinstance(content, str) or not isinstance(finish, str):
                             raise ValueError
@@ -148,7 +162,8 @@ class SoCLaaSProvider:
                 # A read/write failure may already have consumed quota. Never retry it silently.
                 retry = not uncertain and error != "tls_verification_error"
             attempts.append(Attempt(number, time.monotonic() - tick, status, usage,
-                                    error, uncertain, model, finish))
+                                    error, uncertain, model, finish,
+                                    ProviderExecution(contract, fingerprint, reasoning_tokens, reasoning_present)))
             if not retry or number == config.max_attempts:
                 break
             self._sleep(min(config.retry_delay * 2 ** (number - 1), 10.0))

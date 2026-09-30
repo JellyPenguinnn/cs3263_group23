@@ -14,6 +14,7 @@ from scheduling.evaluation.manifests import (
 from scheduling.evaluation.scoring import digest, check_reference
 from scheduling.schema import to_data
 from scheduling.evaluation.cases import AuthoredBenchmarkCase
+from scheduling.providers.execution import execution_contract
 
 FROZEN_MODES = ("offline_frozen", "live_frozen")
 ANALYSIS_SETTINGS = {
@@ -29,6 +30,8 @@ ANALYSIS_SETTINGS = {
 def settings_digest(config):
     data = to_data(config)
     data.pop("freeze", None)
+    data["provider_execution"] = (execution_contract(config.model)
+                                  if config.evidence == "live_frozen" else None)
     return digest(data)
 
 

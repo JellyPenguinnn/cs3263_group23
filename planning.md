@@ -136,11 +136,26 @@ Read current Git status, this queue and the relevant contract before implementin
 | Work package | Lead / reviewer | Status and dependency | Completion evidence |
 | --- | --- | --- | --- |
 | F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Ready offline; any inference needs its own cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
-| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Catalogue checked; quality, endpoint options and final eligibility unqualified | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
+| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Offline packet/metadata qualified; six live completions, paired qualification stopped on serving-fingerprint drift; model decision/eligibility pending | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
 | F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Small builder/selector still needed; can start offline alongside F1/F2 | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
 | F4: freeze rehearsal and final study | Yong Qing / all | Rehearsal development fixtures can start now; final inference depends on F1–F3 and actual decisions | Successful offline frozen rehearsal, approved protocol/cap, complete final records with no silent exclusions |
 | F5: analysis and reproduction | Yong Qing / independent teammate | Build report tables from development now; final claims wait for F4 | Matched analysis, claim-to-run index, failure review, checksummed archive and independent replay |
-| F6: report and course delivery | Li Hao assembles / all | Start outline, methods and contribution records now | Audited ten-page body, responsible-AI cases, presentation/Q&A rehearsal and actual submission receipts |
+| F6: report and course delivery | Li Hao assembles / all | Report source, claim index, contribution log and rehearsal draft prepared; human/final-result/format work pending | Audited ten-page body, responsible-AI cases, presentation/Q&A rehearsal and actual submission receipts |
+
+Current Li Hao checkpoint (30 September): [F2/F6 handoff](report/lihao-f2-followup.md),
+[qualification selection](benchmarks/manifests/lihao-f2-qualification-20260930.json),
+[verification](configs/development/lihao-f2-verification-20260930.json),
+[report source](report/study-draft.md) and [claim index](report/claim-evidence.md).
+The branch incorporates main `8f3ff1b`. Installed macOS/Linux each pass 552 Python
+tests and 48 selected canned attempts; 332 historical live attempts replay exactly.
+New per-attempt execution metadata records known versus omitted/defaulted settings;
+frozen execution stops on fingerprint drift. The approved qualification used one
+metadata request and six completions (4,007 reported tokens) before two reference
+calls returned different serving fingerprints. The backend-policy decision and
+remaining live/model gate stay open. No prompt, score, final data or historical
+record changed. Member-branch publication is now user-authorized; main integration
+and human approval remain separate. The verification receipt retains its original
+pre-publication status.
 
 ### F1 — focused extraction improvements
 

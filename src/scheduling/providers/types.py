@@ -44,6 +44,16 @@ class Usage:
 
 
 @dataclass(frozen=True)
+class ProviderExecution:
+    """New-attempt audit metadata; absent in legacy/canned responses."""
+
+    contract: dict
+    system_fingerprint: str | None = None
+    reported_reasoning_tokens: int | None = None
+    reasoning_field_present: bool | None = None
+
+
+@dataclass(frozen=True)
 class Attempt:
     number: int
     elapsed_seconds: float
@@ -53,6 +63,7 @@ class Attempt:
     outcome_uncertain: bool = False
     returned_model: str | None = None
     finish_reason: str | None = None
+    execution: ProviderExecution | None = None
 
 
 @dataclass(frozen=True)

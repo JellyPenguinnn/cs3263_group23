@@ -90,6 +90,28 @@ Internal targets are **18 October for freeze** and **30 October for a complete r
 
 This checkpoint includes the audited integrity fixes, expanded development results and final-study plan. Historical audit receipts describe their earlier local snapshot based on `63d68d8`; use the current commit and GitHub branch state to verify publication. A clone contains source, tests, manifests and reviewed summaries; raw live records must be supplied separately in a reviewed reproduction archive.
 
+### Li Hao F2/F6 follow-up
+
+[The current handoff](report/lihao-f2-followup.md) records a tested 24-case model
+qualification packet and versioned provider execution metadata. New frozen runs
+stop on reported backend fingerprint drift; historical replay remains supported.
+The authorized live qualification stopped after its first pair because the
+reference model returned two serving fingerprints. Six completions including
+capability checks reported 4,007 tokens; no two-model quality conclusion follows.
+See the [report draft](report/study-draft.md) and [claim index](report/claim-evidence.md)
+for F6 preparation and explicitly pending human/final-study work.
+
+Prepare the packet offline from the preserved or regenerated expanded bundle:
+
+```sh
+.venv/bin/python evaluation/prepare_model_qualification.py runs/NEW-f2-input \
+  --cases runs/NEW-expanded-input/cases.json
+```
+
+This emits the exact selected cases, two proposed model configurations and
+reference/request preflights. It does not authorize calls. Resolve the recorded
+backend-policy stop before resuming qualification; do not repeat existing attempts.
+
 ## Data and evaluation scope
 
 | Dataset | Origin and coverage | Current use |

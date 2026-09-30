@@ -21,6 +21,7 @@ from scheduling.pipelines.solver_augmented import (
     run_solver_augmented,
 )
 from scheduling.providers import ModelConfig, ModelResponse
+from scheduling.providers.execution import execution_contract
 from scheduling.schema import load_json, to_data
 from scheduling.solver import SolverLimits
 from scheduling.evaluation.frozen import (
@@ -168,6 +169,8 @@ def _contract(cases, config):
         "format_version": "2.0" if config.evidence in FROZEN_MODES else "1.0",
         "case_bundle_sha256": digest(case_bundle(cases)),
         "config": to_data(config),
+        "provider_execution": (execution_contract(config.model)
+                               if config.evidence in ("live_development", "live_frozen") else None),
         "source_sha256": source,
         "request_prompt_sha256": prompts,
         "runtime": {
@@ -231,7 +234,7 @@ def plan_run(cases, config):
     }
 
 
-def _stop_reason(response, expected_model=None):
+def _stop_reason(response, expected_model=None, fingerprints=None):
     response = to_data(response) if response else {}
     for attempt in response.get("attempts", []):
         status = attempt.get("http_status")
@@ -250,6 +253,15 @@ def _stop_reason(response, expected_model=None):
         return error
     if expected_model is not None and response.get("returned_model") != expected_model:
         return "returned_model_mismatch"
+    if expected_model is not None and fingerprints is not None:
+        # Unknown is an identity observation too; a newly appearing/disappearing
+        # fingerprint must not silently change a frozen block's backend evidence.
+        attempts = response.get("attempts", [])
+        fingerprints.update((a.get("execution") or {}).get("system_fingerprint") for a in attempts)
+        if not attempts:
+            fingerprints.add(None)
+        if len(fingerprints) > 1:
+            return "backend_fingerprint_changed"
     return None
 
 
@@ -317,6 +329,7 @@ def run_batch(
             if config.evidence in FROZEN_MODES:
                 check_frozen_reference(case, saved["reference"])
             gold[case.case_id] = saved["reference"]
+        fingerprints = set()
         existing = list(records.glob("*.json"))
         reserved = len(existing)
         if (
@@ -338,6 +351,7 @@ def run_batch(
             reason = _stop_reason(
                 response,
                 config.model.model if config.evidence == "live_frozen" else None,
+                fingerprints,
             )
             if reason:
                 return {
@@ -419,6 +433,7 @@ def run_batch(
             reason = _stop_reason(
                 result.model_response,
                 config.model.model if config.evidence == "live_frozen" else None,
+                fingerprints,
             )
             if reason:
                 return {
