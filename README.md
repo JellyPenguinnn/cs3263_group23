@@ -112,6 +112,14 @@ This emits the exact selected cases, two proposed model configurations and
 reference/request preflights. It does not authorize calls. Resolve the recorded
 backend-policy stop before resuming qualification; do not repeat existing attempts.
 
+### Yao Xiang F1 follow-up
+
+[The F1 review](report/yaoxiang-f1-review.md) adds eight offline regressions for
+the expanded study’s three extraction failures. Exact synthetic final responses
+are included, so these tests need neither credentials nor a raw-run archive.
+The full macOS suite passes 560 tests. Prompt revision 3 stays active; the reviewed
+amendment awaits model qualification and its own bounded comparison.
+
 ## Data and evaluation scope
 
 | Dataset | Origin and coverage | Current use |
