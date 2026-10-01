@@ -2,7 +2,7 @@
 
 CS3263 Group 23 — Tea Li Hao, Tham Yao Xiang, Woo Yong Qing.
 
-**Working report source, 30 September 2026.** AI-assisted draft for human revision;
+**Working report source, updated 1 October 2026.** AI-assisted draft for human revision;
 not a submission, completed review or frozen-study report. Private student
 identifiers belong only on the submission title page. Numerical findings below
 are development evidence. See [claim index](claim-evidence.md) and
@@ -128,6 +128,10 @@ usage, refuses incompatible resume, and replays stored outputs without inference
 Missing usage is unavailable, not zero. Output reservations do not cap aggregate
 input-plus-output tokens or currency. Historical SoCLaaS sampling and reasoning
 controls were server defaults; a solver seed does not make model calls deterministic.
+A bounded follow-up observed two serving fingerprints across three reference-model
+calls (C10). This does not prove different weights, but prevents claiming a stable
+backend. Qualification remains paused under the team's retained strict requirement;
+no model recommendation follows from tiny JSON checks.
 
 ## 5. Dataset and protocol — target 1.50 pages
 
@@ -143,6 +147,10 @@ not a claim of unseen generators or freedom from pretraining contamination.
 Both original and updated repair structures must avoid all recorded development
 structures, including calendar/ID renamings. A second member reviews gold and
 language. Realistic provenance must reflect actual authorship.
+
+Candidate construction, synthetic frozen rehearsal and compatible-block analysis
+are implemented and offline-verified (C11). Canned rehearsal outputs verify controls
+and bookkeeping; they supply no model-performance evidence or human sign-off.
 
 **Final decisions pending:** eligible model/backend, verified effective settings,
 selected prompt, construction policy, actual reviews, study size, compatible
