@@ -8,15 +8,19 @@ import statistics
 import io
 import json
 import os
+import re
 from pathlib import Path
 import tarfile
 
+from scheduling.evaluation.benchmark import render, tiny_fixtures
 from scheduling.evaluation.cases import load_cases
 from scheduling.evaluation.frozen import check_frozen, check_frozen_reference
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.metrics import summarize, analysis_details, export_tables
 from scheduling.evaluation.runner import RunConfig, _contract, read, replay, write_new
 from scheduling.evaluation.scoring import digest
+from scheduling.pipelines.direct import build_messages
+from scheduling.pipelines.solver_augmented import build_extraction_messages
 from scheduling.providers import ModelConfig
 from scheduling.solver import SolverLimits
 
@@ -285,9 +289,88 @@ def analyze_blocks(blocks):
     }
 
 
+def _archive_read(root, relative):
+    """Read only regular files below the declared root; reject linked parents too."""
+    root, relative = Path(root), Path(relative)
+    if relative.is_absolute() or ".." in relative.parts:
+        raise ValueError("Archive path must stay inside its declared root")
+    if any(
+        (root / Path(*relative.parts[:i])).is_symlink()
+        for i in range(1, len(relative.parts) + 1)
+    ):
+        raise ValueError("Archive inputs cannot follow file or directory links")
+    path = root / relative
+    if not path.resolve().is_relative_to(root.resolve()) or not path.is_file():
+        raise ValueError("Archive input must be a regular file inside its root")
+    return path.read_bytes()
+
+
+def _archive_sources(project_root, settings):
+    """Snapshot and check the bytes to archive before creating any output files."""
+    project_root = Path(project_root)
+    package = Path(__file__).resolve().parents[1]
+    entries, source_map = {}, {}
+    for path in sorted(package.rglob("*")):
+        if path.is_file() and path.suffix in (".py", ".crt", ".js", ".css", ".html"):
+            relative = path.relative_to(package)
+            data = _archive_read(package, relative)
+            entries["source/src/scheduling/" + str(relative)] = data
+            if path.suffix in (".py", ".crt"):
+                # Match read_text's universal-newline semantics in run contracts.
+                source_map[str(relative)] = digest(
+                    io.TextIOWrapper(io.BytesIO(data), encoding="utf-8").read()
+                )
+    if source_map != settings["source"]:
+        raise ValueError("Archive needs the exact recorded package source")
+    # Both builders resolve the active installed/editable templates. These are
+    # also the builders whose complete request hashes analyze_blocks verifies.
+    prompts = {}
+    for case in (tiny_fixtures()[0], tiny_fixtures()[-1]):
+        view = render(case)
+        prompts[f"prompts/direct/{view.task_type}.txt"] = build_messages(
+            view.text,
+            task_type=view.task_type,
+            required_activity_ids=view.activity_ids,
+            original_schedule=(
+                view.original_schedule.to_list() if view.original_schedule else None
+            ),
+        )[0].content
+        prompts["prompts/extraction/specification.txt"] = build_extraction_messages(
+            view
+        )[0].content
+    for name, expected in prompts.items():
+        data = _archive_read(project_root, name)
+        text = io.TextIOWrapper(io.BytesIO(data), encoding="utf-8").read()
+        if text != expected:
+            raise ValueError(f"Archive prompt differs from verified runtime: {name}")
+        entries["source/" + name] = data
+    for name in ("pyproject.toml", "requirements.lock", "evaluation/analyze_study.py"):
+        entries["source/" + name] = _archive_read(project_root, name)
+    # The pinned project lock must install the versions recorded by the run.
+    # Unknown historical build settings are not reconstructed or silently updated.
+    pins = defaultdict(set)
+    for name, version in re.findall(
+        r"^([A-Za-z0-9_.-]+)==([^\s\\;]+)",
+        entries["source/requirements.lock"].decode("utf-8"),
+        re.MULTILINE,
+    ):
+        pins[name.lower().replace("_", "-").replace(".", "-")].add(version)
+    for name, version in settings["runtime"].items():
+        if name not in ("python", "platform") and pins.get(name) != {version}:
+            raise ValueError(f"Archive lock differs from recorded runtime: {name}")
+    return entries
+
+
 def export_study(blocks, directory, *, project_root, figures=False):
     """Export immutable analysis and an explicit allowlist archive, never .env."""
     result = analyze_blocks(blocks)
+    entries = _archive_sources(project_root, result["settings"])
+    for role, path in blocks.items():
+        for name, expected in result["block_checksums"][role].items():
+            data = _archive_read(path, name)
+            if hashlib.sha256(data).hexdigest() != expected:
+                raise ValueError("Run changed during export")
+            entries[f"runs/{role}/{name}"] = data
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False)
     write_new(directory / "analysis.json", result)
@@ -327,42 +410,6 @@ def export_study(blocks, directory, *, project_root, figures=False):
         export_figures(
             result["rows"], directory / "tables", evidence=result["evidence"]
         )
-    project_root = Path(project_root)
-    package = Path(__file__).resolve().parents[1]
-    source_map = {
-        str(p.relative_to(package)): digest(p.read_text())
-        for p in package.rglob("*")
-        if p.is_file() and p.suffix in (".py", ".crt")
-    }
-    if source_map != result["settings"]["source"]:
-        raise ValueError("Archive needs the exact recorded package source")
-    entries = {}
-    for role, path in blocks.items():
-        path = Path(path)
-        for name, expected in result["block_checksums"][role].items():
-            p = path / name
-            if p.is_symlink() or not p.resolve().is_relative_to(path.resolve()):
-                raise ValueError("Run archive cannot follow links outside its run")
-            data = p.read_bytes()
-            if hashlib.sha256(data).hexdigest() != expected:
-                raise ValueError("Run changed during export")
-            entries[f"runs/{role}/{name}"] = data
-    for parent, prefix in (
-        (package, "source/src/scheduling"),
-        (project_root / "prompts", "source/prompts"),
-    ):
-        for p in sorted(parent.rglob("*")):
-            if p.is_file() and p.suffix in (
-                ".py",
-                ".crt",
-                ".txt",
-                ".js",
-                ".css",
-                ".html",
-            ):
-                entries[prefix + "/" + str(p.relative_to(parent))] = p.read_bytes()
-    for name in ("pyproject.toml", "requirements.lock", "evaluation/analyze_study.py"):
-        entries["source/" + name] = (project_root / name).read_bytes()
     entries["analysis.json"] = (directory / "analysis.json").read_bytes()
     for p in sorted((directory / "tables").iterdir()):
         entries["tables/" + p.name] = p.read_bytes()

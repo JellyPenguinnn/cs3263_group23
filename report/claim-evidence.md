@@ -24,6 +24,12 @@ raw run files require the separately supplied reviewed archive.
 
 Engineering follow-up (1 October): [F3–F5 receipt](../configs/development/yongqing-f345-verification-20261001.json) and [handoff](yongqing-study-preparation.md) link the 24-family construction pilot, 16-attempt synthetic frozen rehearsal, exact cross-platform archive replay and 332 unchanged historical attempts. These support construction/bookkeeping/reproducibility claims only. The synthetic 15/16 accepted outputs are deliberately canned and must never become a model-performance result. Actual source-policy, gold/text and independent teammate reviews remain pending.
 
+Archive follow-up (1 October): [F5 export integrity](yongqing-archive-review.md) and
+[receipt](../configs/development/yongqing-archive-verification-20261001.json) record
+623 passing tests on both platforms and exact analysis replay from the corrected
+archive in network-disabled Linux. This is automated reproduction evidence, not
+human sign-off, final data or model-performance evidence.
+
 Final-study canonical/difficulty, realistic, wording, repair and resource claims
 remain absent until F4/F5 provides compatible frozen blocks. Their eventual index
 must include block/run/config hashes, subsets and denominators, figure/table
