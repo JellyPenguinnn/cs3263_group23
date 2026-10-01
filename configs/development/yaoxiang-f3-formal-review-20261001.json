@@ -1,0 +1,928 @@
+{
+  "base_main": "ebab01ebec5883eb156a7e1c5f605d66f2cd951b",
+  "branch": "yaoxiang-formal-core",
+  "checks": {
+    "fixture_original_updated_structures_already_excluded": true,
+    "hosted_ci": "Not yet verified for publication",
+    "installed_assets": "passed",
+    "linux_full_receipt_matches_macos": true,
+    "macos_full": "614 passed in 55.35s",
+    "new_focused_linux_arm64": "18 passed in 5.73s",
+    "new_focused_macos": "18 passed in 5.75s before formatting; final full suite includes all 18",
+    "pip_check": "passed",
+    "preserved_packet_json_files_unchanged": 76
+  },
+  "contradiction_counts": {
+    "precedence_deadline": 8,
+    "shared_resource_collision": 8,
+    "unary_availability": 8
+  },
+  "date": "2026-10-01",
+  "evidence": "Automated arithmetic and offline tests; no human sign-off or model-performance claim",
+  "fixture_cases": 12,
+  "fixture_families": 6,
+  "fixture_selection": "Within each repair event x label stratum, choose minimum recorded unary-domain product then case ID; retain both task siblings. No model outcomes used.",
+  "format_version": "1.0",
+  "human_gold_language_review": "pending",
+  "independent_optimum_scope": "Six SAT cases / three source families exhaustively checked within 60000 unary-domain assignments per case; remaining 18 SAT optima not independently enumerated",
+  "model_calls": 0,
+  "pilot_cases_sha256": "6a1e9fe77702b482d4c6cee30d74553e388dfc6aa11cc91f68dfe229563210be",
+  "pilot_run": "runs/yongqing-f3-pilot-20261001-01",
+  "production_prompt_solver_scoring_changes": false,
+  "publication": "User authorized commit and push to yaoxiang-formal-core after planning audit; main integration separate",
+  "review": {
+    "case_count": 48,
+    "cases": [
+      {
+        "case_id": "family-fee6c159a54d74a2cf6e96b0-generation",
+        "case_sha256": "992af46aabf030f2a0b63efeeaaedf38fe77d3de9ffa1b8cd7b555179c0abb91",
+        "contradiction": null,
+        "feasible_assignments": 328,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          8
+        ],
+        "original_witness_checked": false,
+        "unary_domain_product": 576,
+        "witness_objective": [
+          8
+        ]
+      },
+      {
+        "case_id": "family-fee6c159a54d74a2cf6e96b0-repair",
+        "case_sha256": "51cc0d57515fdadebe03edb10a4bae02a668a532e6c8795610b935b2c8d4f765",
+        "contradiction": null,
+        "feasible_assignments": 328,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          1,
+          3,
+          8
+        ],
+        "original_witness_checked": true,
+        "unary_domain_product": 576,
+        "witness_objective": [
+          1,
+          3,
+          8
+        ]
+      },
+      {
+        "case_id": "family-5ae1cbf47f2b20699c65a687-generation",
+        "case_sha256": "428efce781bd97aa2e7b51732b7fb38f1ac6c79193a1c24462017dab4f0bbedc",
+        "contradiction": {
+          "activities": [
+            "A0",
+            "A1"
+          ],
+          "deadline": 3,
+          "earliest_successor_end": 4,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 42
+      },
+      {
+        "case_id": "family-5ae1cbf47f2b20699c65a687-repair",
+        "case_sha256": "7c68179a36ca87b0b5a0edda4ed376f2790ed7a5ba75e42641add86fe7406a5d",
+        "contradiction": {
+          "activities": [
+            "A0",
+            "A1"
+          ],
+          "deadline": 3,
+          "earliest_successor_end": 4,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 42
+      },
+      {
+        "case_id": "family-dcfdf02b7189835066f5c487-generation",
+        "case_sha256": "42c6f6727b21531a3917dcf2d2e4af77cf1ad952bce69da55270ff4c96e55550",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 360150,
+        "witness_objective": [
+          14
+        ]
+      },
+      {
+        "case_id": "family-dcfdf02b7189835066f5c487-repair",
+        "case_sha256": "b19527cf3ed2eccef6e53f2d56fbd4c0f878d7251c00904007339b0b09f4e254",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 360150,
+        "witness_objective": [
+          2,
+          5,
+          14
+        ]
+      },
+      {
+        "case_id": "family-f53ec45e250330b2b7003657-generation",
+        "case_sha256": "8fa50a637e12cdb2a53be4e87b400fce10386058c9fef8518bf3d872959dea10",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-f53ec45e250330b2b7003657-repair",
+        "case_sha256": "c5c9de39c29852b15a976aa5a52fd57c2939e8c40d30c21462d31c18e28b72ad",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-eb70c243db43bebc13b4fc3c-generation",
+        "case_sha256": "3a12df609d5ac1a20b2c0aedee68ea13680c4c30e2bb8cdab02c664486068ad3",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 190512000,
+        "witness_objective": [
+          15
+        ]
+      },
+      {
+        "case_id": "family-eb70c243db43bebc13b4fc3c-repair",
+        "case_sha256": "ae6eed826b148f9978fe376cbf00b642e9059834f32ce9d1e1836e17497e6b68",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 190512000,
+        "witness_objective": [
+          1,
+          1,
+          15
+        ]
+      },
+      {
+        "case_id": "family-4b526fad6b0f047fd7f53a20-generation",
+        "case_sha256": "98bd249cd8ee5159d7dbb1a34f27c83fe5cdb0c1ebb402e82c11121658eb2b45",
+        "contradiction": {
+          "activities": [
+            "A2",
+            "A1"
+          ],
+          "intervals": [
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 94832640
+      },
+      {
+        "case_id": "family-4b526fad6b0f047fd7f53a20-repair",
+        "case_sha256": "506e3a9fa0e7fce9cbe7a109fc109fd68a0ccd6eded03fc1153d1d10d9c69741",
+        "contradiction": {
+          "activities": [
+            "A2",
+            "A1"
+          ],
+          "intervals": [
+            [
+              5,
+              6
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 94832640
+      },
+      {
+        "case_id": "family-8a630eb9ee15ad39458979ba-generation",
+        "case_sha256": "fee9c2ad1250b9f11fa4d541e11a684aea9d7e981d184210a837fde2424040d0",
+        "contradiction": null,
+        "feasible_assignments": 2025,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          10
+        ],
+        "original_witness_checked": false,
+        "unary_domain_product": 4374,
+        "witness_objective": [
+          10
+        ]
+      },
+      {
+        "case_id": "family-8a630eb9ee15ad39458979ba-repair",
+        "case_sha256": "cf62d9f520e353f870795da232ce7a54569a437a1a63c7f0d4db1aed52c57f17",
+        "contradiction": null,
+        "feasible_assignments": 2025,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          1,
+          1,
+          10
+        ],
+        "original_witness_checked": true,
+        "unary_domain_product": 4374,
+        "witness_objective": [
+          1,
+          1,
+          10
+        ]
+      },
+      {
+        "case_id": "family-a8d87411c714b6ad4cc64080-generation",
+        "case_sha256": "ff548599dbed996639e57487928ec519fe864fcd578306a7b4158e7498410fa7",
+        "contradiction": {
+          "activities": [
+            "A6",
+            "A7"
+          ],
+          "deadline": 19,
+          "earliest_successor_end": 20,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 729
+      },
+      {
+        "case_id": "family-a8d87411c714b6ad4cc64080-repair",
+        "case_sha256": "420a3be9205ab187c811cdb39969c934fb9ffe8664ed5532714d93744e3ab890",
+        "contradiction": {
+          "activities": [
+            "A6",
+            "A7"
+          ],
+          "deadline": 19,
+          "earliest_successor_end": 20,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 729
+      },
+      {
+        "case_id": "family-fb3ef866b748616a6d9a3c55-generation",
+        "case_sha256": "a7d592f4d509651828bbd14e48c4ffaba4a8713f3d19b60a19715f1a6eae348f",
+        "contradiction": null,
+        "feasible_assignments": 10080,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          12
+        ],
+        "original_witness_checked": false,
+        "unary_domain_product": 50400,
+        "witness_objective": [
+          12
+        ]
+      },
+      {
+        "case_id": "family-fb3ef866b748616a6d9a3c55-repair",
+        "case_sha256": "11cf8052f5074b2e6ce699e88ce9f74560df448c7fd4bbb11ac663ff6e413348",
+        "contradiction": null,
+        "feasible_assignments": 10080,
+        "label": "SAT",
+        "optimality_check": "exhaustive",
+        "optimum": [
+          2,
+          2,
+          12
+        ],
+        "original_witness_checked": true,
+        "unary_domain_product": 50400,
+        "witness_objective": [
+          2,
+          2,
+          12
+        ]
+      },
+      {
+        "case_id": "family-5ce3f7a040f633abf6d48828-generation",
+        "case_sha256": "e6dc18857e7e196598d4ea19ce30f436b9aa6b7c60cb298f044e38815383e9d2",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-5ce3f7a040f633abf6d48828-repair",
+        "case_sha256": "18418daab76641902e7c367fbf51669a608fc1a8dc4cc6f43d7f2d287f1a8ee9",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-8f485ee42379c63f0f18dc07-generation",
+        "case_sha256": "845f848b9eda971d012c124fbc5cabeaba39e68e753d91e0b757d971d7a8e288",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 3175200,
+        "witness_objective": [
+          11
+        ]
+      },
+      {
+        "case_id": "family-8f485ee42379c63f0f18dc07-repair",
+        "case_sha256": "68ee9b870ea9e520c899187774ac085b3549b22e8a67266dde1ee3300cf940da",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 3175200,
+        "witness_objective": [
+          1,
+          1,
+          11
+        ]
+      },
+      {
+        "case_id": "family-c42af610067d5bfd7044d8dc-generation",
+        "case_sha256": "42a493bb6015e991ab3adb7b8836497e242e67dbd5d4d3840de667358e945080",
+        "contradiction": {
+          "activities": [
+            "A2",
+            "A1"
+          ],
+          "intervals": [
+            [
+              5,
+              8
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 105600
+      },
+      {
+        "case_id": "family-c42af610067d5bfd7044d8dc-repair",
+        "case_sha256": "49fa5df34dc054560db04884d91602cabc658f02f4a092307174393cd3350220",
+        "contradiction": {
+          "activities": [
+            "A2",
+            "A1"
+          ],
+          "intervals": [
+            [
+              5,
+              8
+            ],
+            [
+              5,
+              6
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 105600
+      },
+      {
+        "case_id": "family-36f5e22e9c85b301512b2ff3-generation",
+        "case_sha256": "3817e2bbe52f12984fbdfd70c23a6282d1fdc5f9cadadb738e71d7d4750aed00",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 1234800,
+        "witness_objective": [
+          9
+        ]
+      },
+      {
+        "case_id": "family-36f5e22e9c85b301512b2ff3-repair",
+        "case_sha256": "a18abce9d2a2b8aee1dd2ab6fe843353b4bcb574971459f24c8a047ec71d3af6",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 1234800,
+        "witness_objective": [
+          1,
+          1,
+          9
+        ]
+      },
+      {
+        "case_id": "family-803936320e5d72e0f5cee0a4-generation",
+        "case_sha256": "bf02cebbaaf87a149b62dfdda675f38a10e4ba74a50062242c897394cc9e4ccb",
+        "contradiction": {
+          "activities": [
+            "A5",
+            "A6"
+          ],
+          "deadline": 17,
+          "earliest_successor_end": 18,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 19440
+      },
+      {
+        "case_id": "family-803936320e5d72e0f5cee0a4-repair",
+        "case_sha256": "c351ff8546187c8315c18ad93e0cc44ed86a477f8f21d358659ea9957d76426d",
+        "contradiction": {
+          "activities": [
+            "A5",
+            "A6"
+          ],
+          "deadline": 17,
+          "earliest_successor_end": 18,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 19440
+      },
+      {
+        "case_id": "family-a426dc3fb88f75f89f52af22-generation",
+        "case_sha256": "b75aceb5c6d6644b664060ea78e13dd9a9347bb07b5e4989f9436ce8683fffc7",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 151200,
+        "witness_objective": [
+          17
+        ]
+      },
+      {
+        "case_id": "family-a426dc3fb88f75f89f52af22-repair",
+        "case_sha256": "a46ee5500fc4ae8bf92f982be39063eb34e650a64a5810cad15b2e0306f2a400",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 151200,
+        "witness_objective": [
+          2,
+          4,
+          17
+        ]
+      },
+      {
+        "case_id": "family-857a0ca0da98b81fa1da0211-generation",
+        "case_sha256": "5a92759f6570dab1c95d48d45e304e31492dc743868044f06ad16bd9cd1407ee",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-857a0ca0da98b81fa1da0211-repair",
+        "case_sha256": "7bcb350bfe60068d17af59972954f7638723e7af2f66a52c0456501290bfc70f",
+        "contradiction": {
+          "activities": [
+            "A0"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-cdd4a2c461c83b05b8a80025-generation",
+        "case_sha256": "aa3da4b288c88bff639a2376b6ab8cd328b3db80f1b3ae1aba5f5886bede7b3c",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 272160,
+        "witness_objective": [
+          12
+        ]
+      },
+      {
+        "case_id": "family-cdd4a2c461c83b05b8a80025-repair",
+        "case_sha256": "4e9cbb945e3fc5ddf16ea475433a7c8c862122849ac74f93cb4e4350ac352757",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 272160,
+        "witness_objective": [
+          1,
+          1,
+          12
+        ]
+      },
+      {
+        "case_id": "family-fb7846b0db31feb9e261f887-generation",
+        "case_sha256": "8494e4217d194eff45c2333fcf1ecb15e598b0e05e59af4659b61eaa4dc2038b",
+        "contradiction": {
+          "activities": [
+            "A6",
+            "A5"
+          ],
+          "intervals": [
+            [
+              15,
+              16
+            ],
+            [
+              15,
+              16
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 109760
+      },
+      {
+        "case_id": "family-fb7846b0db31feb9e261f887-repair",
+        "case_sha256": "44d18ac2070371ed6872af8e0405cd2be99fabe05079848f0ad8ae15e1c39a85",
+        "contradiction": {
+          "activities": [
+            "A6",
+            "A5"
+          ],
+          "intervals": [
+            [
+              15,
+              16
+            ],
+            [
+              15,
+              16
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 109760
+      },
+      {
+        "case_id": "family-1e67d846b7168012898bc337-generation",
+        "case_sha256": "118800348b6f49636c4ea607f1224f682b533969cb30c6a49e9d886be78e3c64",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 1693440,
+        "witness_objective": [
+          11
+        ]
+      },
+      {
+        "case_id": "family-1e67d846b7168012898bc337-repair",
+        "case_sha256": "cd7a428e4d8ea67451b2d0fbf08528291e3f80a0886827d3d108c03499d899d9",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 1693440,
+        "witness_objective": [
+          1,
+          1,
+          11
+        ]
+      },
+      {
+        "case_id": "family-f183eed8328402725b2271f0-generation",
+        "case_sha256": "f575e6460cdb8ce47391b58c300af5128bdf45aea66fe559a07c22cb9961eae2",
+        "contradiction": {
+          "activities": [
+            "A1",
+            "A2"
+          ],
+          "deadline": 9,
+          "earliest_successor_end": 10,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 75600
+      },
+      {
+        "case_id": "family-f183eed8328402725b2271f0-repair",
+        "case_sha256": "a6cbcf7eecf37de3f71010355b2b0b9cc4c6cee86af666fb989b8a750b9eae93",
+        "contradiction": {
+          "activities": [
+            "A1",
+            "A2"
+          ],
+          "deadline": 9,
+          "earliest_successor_end": 10,
+          "mechanism": "precedence_deadline",
+          "rules": [
+            "anchor",
+            "event_precedence",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 75600
+      },
+      {
+        "case_id": "family-9a3228435f5b2cdd17884ddd-generation",
+        "case_sha256": "d108072b40cb0fde33774ac797cf54606683c0117ee8e5a711ef3bb197da5f04",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 94080,
+        "witness_objective": [
+          13
+        ]
+      },
+      {
+        "case_id": "family-9a3228435f5b2cdd17884ddd-repair",
+        "case_sha256": "bb4ef3ec5d997e5c7075ae97754dbc0f858b9e81f4e4f7bfa405d761bab5b318",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 94080,
+        "witness_objective": [
+          2,
+          2,
+          13
+        ]
+      },
+      {
+        "case_id": "family-1a0b20ab8a2e4d39191dd668-generation",
+        "case_sha256": "3fad0846f17866d28cd58057da43700f64d45575484d251e78f3ff55592276ae",
+        "contradiction": {
+          "activities": [
+            "A2"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-1a0b20ab8a2e4d39191dd668-repair",
+        "case_sha256": "8230565893b9af1712b5b40c0377947a063c3d7f9dc8c3a1cc17c0b577ba650e",
+        "contradiction": {
+          "activities": [
+            "A2"
+          ],
+          "mechanism": "unary_availability",
+          "reason": "No start satisfies all unary requirements"
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 0
+      },
+      {
+        "case_id": "family-a86ce3533cfcf70c3fcf8537-generation",
+        "case_sha256": "27dfa35330369c696d9e99c7d42b095b770be34d9f9cb1ee075dc0b0f6821bb8",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": false,
+        "unary_domain_product": 134400,
+        "witness_objective": [
+          12
+        ]
+      },
+      {
+        "case_id": "family-a86ce3533cfcf70c3fcf8537-repair",
+        "case_sha256": "30b5c004cbd53cf087fff37e2572361217a95190e5602085fb02847305a0d956",
+        "contradiction": null,
+        "label": "SAT",
+        "optimality_check": "not_checked_assignment_cap",
+        "original_witness_checked": true,
+        "unary_domain_product": 134400,
+        "witness_objective": [
+          1,
+          1,
+          12
+        ]
+      },
+      {
+        "case_id": "family-007b073d771bec5bb41615fa-generation",
+        "case_sha256": "4a29d6e189f695c8306bad3f9148c970bd69d2e57db9b9955c3414b13775ce69",
+        "contradiction": {
+          "activities": [
+            "A5",
+            "A4"
+          ],
+          "intervals": [
+            [
+              14,
+              16
+            ],
+            [
+              14,
+              16
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": false,
+        "unary_domain_product": 29400
+      },
+      {
+        "case_id": "family-007b073d771bec5bb41615fa-repair",
+        "case_sha256": "11865f00a2903148f12ff4d2df1fa14c8c0ba9f2da6ac765d576e32a1d875add",
+        "contradiction": {
+          "activities": [
+            "A5",
+            "A4"
+          ],
+          "intervals": [
+            [
+              14,
+              16
+            ],
+            [
+              14,
+              16
+            ]
+          ],
+          "mechanism": "shared_resource_collision",
+          "rules": [
+            "anchor",
+            "event"
+          ]
+        },
+        "label": "UNSAT",
+        "optimality_check": "not_applicable",
+        "original_witness_checked": true,
+        "unary_domain_product": 29400
+      }
+    ],
+    "evidence": "automated independent arithmetic, not human review or model performance",
+    "human_review": "pending",
+    "labels": {
+      "SAT": 24,
+      "UNSAT": 24
+    },
+    "manifest_sha256": "547270ec3b16557a4fb31b02de29a7232344bf5ee4edce28ff4bd8973ddf0917",
+    "max_assignments_per_case": 60000,
+    "optimality_checks": {
+      "exhaustive": 6,
+      "not_applicable": 24,
+      "not_checked_assignment_cap": 18
+    }
+  },
+  "scope": "F3 independent formal cross-check and F6 mathematical evidence; F1 prompt qualification still gated",
+  "source_sha256": {
+    "tests/candidate_review.py": "bfd9713f68e30b49592263c2e9873ee365f324fbdf8fd97a8dd840b713e5cc3e",
+    "tests/examples/f3-formal-review.json": "d1354180daf9d01cc9b56bef9bf9915e57037343c6fd32f2760bac44811cc937",
+    "tests/formal_support.py": "170c6c02615b3919712ce0d125793fa73369d1df508b6132690d0e2f5c48f13b",
+    "tests/integration/test_candidate_formal_review.py": "42ca7c48800514776f146ac6abac089c8ae273e4f6dbf4f4088c0e486e21a5bb"
+  }
+}

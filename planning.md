@@ -169,7 +169,18 @@ record changed. Member-branch publication is now user-authorized; main integrati
 and human approval remain separate. The verification receipt retains its original
 pre-publication status.
 
-Current Yao Xiang review: [F1/formal handoff](report/yaoxiang-f1-review.md).
+Current Yao Xiang F3 cross-check (1 October): branch incorporates main `ebab01e`.
+[Formal review](report/yaoxiang-f3-formal-review.md) and
+[receipt](configs/development/yaoxiang-f3-formal-review-20261001.json) record independent
+arithmetic checks of all 48 preserved pilot cases: 24 valid SAT witnesses, 24 UNSAT
+certificates across three mechanisms, 24 valid repair starting schedules and six
+exhaustively checked SAT optima (three families). Eighteen SAT optima exceed the
+review cap and retain their solver proofs. All 614 macOS tests and 18 new Linux tests
+pass; the complete arithmetic receipt matches across platforms. No model calls,
+prompt/production changes, new cases or human sign-off occurred. Actual gold/text
+review and F2-dependent F1 qualification remain pending.
+
+Historical Yao Xiang F1 review: [F1/formal handoff](report/yaoxiang-f1-review.md).
 The member branch incorporates main `d12342c`; 560 macOS tests pass. Three exact
 synthetic failure responses are regression fixtures, and all 200 expanded attempts
 replay exactly with 302 saved JSON files unchanged. Eight equivalent encodings

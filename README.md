@@ -133,7 +133,20 @@ This emits the exact selected cases, two proposed model configurations and
 reference/request preflights. It does not authorize calls. Resolve the recorded
 backend-policy stop before resuming qualification; do not repeat existing attempts.
 
-### Yao Xiang F1 follow-up
+### Yao Xiang formal-review follow-up
+
+The [1 October F3 review](report/yaoxiang-f3-formal-review.md) independently checks
+all 48 saved development-pilot cases using arithmetic: SAT witnesses, repair starts
+and three UNSAT mechanisms. Six SAT optima are exhaustively checked; 18 exceed the
+review cap and retain their solver proofs. The final macOS suite passes 614 tests;
+18 new tests and the complete arithmetic receipt also pass on Linux ARM64. Actual
+human gold/text review remains pending. Fresh-clone regression needs no model key:
+
+```sh
+.venv/bin/python -m pytest -q tests/integration/test_candidate_formal_review.py
+```
+
+### Historical Yao Xiang F1 follow-up
 
 [The F1 review](report/yaoxiang-f1-review.md) adds eight offline regressions for
 the expanded study’s three extraction failures. Exact synthetic final responses

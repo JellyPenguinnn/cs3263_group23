@@ -151,6 +151,11 @@ language. Realistic provenance must reflect actual authorship.
 Candidate construction, synthetic frozen rehearsal and compatible-block analysis
 are implemented and offline-verified (C11). Canned rehearsal outputs verify controls
 and bookkeeping; they supply no model-performance evidence or human sign-off.
+The separate 48-case construction pilot also has independent arithmetic support
+for all SAT witnesses and three UNSAT mechanisms. Bounded enumeration confirms
+six objective optima across three source families; 18 larger SAT cases retain only
+the recorded solver optimality proofs (C12). These checks do not establish wording
+fidelity, independent human review or held-out performance.
 
 **Final decisions pending:** eligible model/backend, verified effective settings,
 selected prompt, construction policy, actual reviews, study size, compatible
