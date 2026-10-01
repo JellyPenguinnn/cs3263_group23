@@ -14,10 +14,12 @@ import tarfile
 
 from scheduling.evaluation.benchmark import render, tiny_fixtures
 from scheduling.evaluation.cases import load_cases
-from scheduling.evaluation.frozen import check_frozen, check_frozen_reference
+from scheduling.evaluation.frozen import ANALYSIS_SETTINGS, check_frozen, check_frozen_reference
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.metrics import summarize, analysis_details, export_tables
-from scheduling.evaluation.runner import RunConfig, _contract, read, replay, write_new
+from scheduling.evaluation.runner import (
+    STRICT_QUALIFICATION_POLICY, RunConfig, _contract, _stop_reason, read, replay, write_new,
+)
 from scheduling.evaluation.scoring import digest
 from scheduling.pipelines.direct import build_messages
 from scheduling.pipelines.solver_augmented import build_extraction_messages
@@ -41,6 +43,15 @@ def _config(data):
 
 def _settings(contract):
     cfg = contract["config"]
+    protocol = (
+        {k: cfg["freeze"][k] for k in ("development_registry", "analysis_settings")}
+        if cfg.get("freeze") else {
+            "development_registry": None,
+            "analysis_settings": ANALYSIS_SETTINGS,
+            "qualification_policy": cfg.get("qualification_policy"),
+            "qualification_baseline": cfg.get("qualification_baseline"),
+        }
+    )
     # Block membership, cap, protocol ID and variants intentionally differ.
     return {
         "source": contract["source_sha256"],
@@ -56,7 +67,7 @@ def _settings(contract):
                 "evidence",
             )
         },
-        **{k: cfg["freeze"][k] for k in ("development_registry", "analysis_settings")},
+        **protocol,
     }
 
 
@@ -102,13 +113,14 @@ def resource_statistics(rows):
     return output
 
 
-def analyze_blocks(blocks):
+def analyze_blocks(blocks, *, development=False):
     """Require one canonical block and optional realistic/language blocks.
 
     Only the core one-repeat design is supported. Optional repeat mapping needs
     its separately agreed protocol and cannot be silently concatenated here.
     Current packaged prompt text must reproduce every saved request hash; use the
     archived runtime/prompts for historical analyses rather than guessing identity.
+    Development blocks require explicit opt-in and retain their evidence class.
     """
     if (
         not isinstance(blocks, dict)
@@ -132,10 +144,18 @@ def analyze_blocks(blocks):
     for role, path in sorted(paths.items()):
         contract = read(path / "manifest.json")["contract"]
         cfg = _config(contract["config"])
-        if cfg.evidence not in ("offline_frozen", "live_frozen"):
+        allowed = ("offline_canned", "live_development") if development else (
+            "offline_frozen", "live_frozen"
+        )
+        if cfg.evidence not in allowed:
             raise ValueError(
-                "Study analysis requires frozen blocks, not development runs"
+                "Study analysis requires matching frozen/development mode; development needs explicit opt-in"
             )
+        if (cfg.evidence == "live_development"
+                and cfg.qualification_policy != STRICT_QUALIFICATION_POLICY):
+            raise ValueError("Development study requires the strict model/backend policy")
+        if cfg.qualification_baseline is not None:
+            observations.add(cfg.qualification_baseline["system_fingerprint"])
         expected_variants = (
             {"paraphrase", "reordered"} if role == "language" else {"canonical"}
         )
@@ -208,14 +228,7 @@ def analyze_blocks(blocks):
             ]
             row["model_seconds"] = response.get("elapsed_seconds")
             row["provider_attempts"] = response.get("attempts", [])
-            returned = response.get("returned_model")
-            if (
-                cfg.evidence == "live_frozen"
-                and returned is not None
-                and returned != cfg.model.model
-            ):
-                raise ValueError("Returned model differs from frozen model")
-            if cfg.evidence == "live_frozen":
+            if cfg.evidence in ("live_frozen", "live_development"):
                 if not response.get("attempts"):
                     raise ValueError("Missing live provider attempt metadata")
                 for attempt in response.get("attempts", []):
@@ -226,7 +239,13 @@ def analyze_blocks(blocks):
                         raise ValueError(
                             "Missing or inconsistent live execution metadata"
                         )
-                    observations.add(execution.get("system_fingerprint"))
+                # Match the runner: provider failures remain failed observations,
+                # while returned answers must satisfy the frozen model contract.
+                reason = _stop_reason(response, cfg.model.model, observations)
+                if reason == "returned_model_mismatch":
+                    raise ValueError("Returned model differs from required study model")
+                if reason == "backend_fingerprint_changed":
+                    raise ValueError("Backend fingerprint changed across blocks")
         run_files = [
             path / "manifest.json",
             path / "cases.json",
@@ -361,16 +380,19 @@ def _archive_sources(project_root, settings):
     return entries
 
 
-def export_study(blocks, directory, *, project_root, figures=False):
+def export_study(blocks, directory, *, project_root, figures=False, development=False):
     """Export immutable analysis and an explicit allowlist archive, never .env."""
-    result = analyze_blocks(blocks)
+    result = analyze_blocks(blocks, development=development)
     entries = _archive_sources(project_root, result["settings"])
+    run_roots = {
+        role: f"runs/{role}/{Path(path).resolve().name}" for role, path in blocks.items()
+    }
     for role, path in blocks.items():
         for name, expected in result["block_checksums"][role].items():
             data = _archive_read(path, name)
             if hashlib.sha256(data).hexdigest() != expected:
                 raise ValueError("Run changed during export")
-            entries[f"runs/{role}/{name}"] = data
+            entries[f"{run_roots[role]}/{name}"] = data
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False)
     write_new(directory / "analysis.json", result)
@@ -414,12 +436,13 @@ def export_study(blocks, directory, *, project_root, figures=False):
     for p in sorted((directory / "tables").iterdir()):
         entries["tables/" + p.name] = p.read_bytes()
     entries["blocks.json"] = json.dumps(
-        {r: "runs/" + r for r in blocks}, sort_keys=True
+        run_roots, sort_keys=True
     ).encode()
+    mode_flag = " --development" if development else ""
     entries["REPRODUCE.txt"] = (
         "Offline replay of saved evidence; no key or model calls. From archive root, create a Python 3.12 venv, "
         "install source/requirements.lock with --require-hashes, then install ./source with --no-deps --no-build-isolation. "
-        "Run: .venv/bin/python source/evaluation/analyze_study.py blocks.json NEW-analysis --no-archive\n"
+        f"Run: .venv/bin/python source/evaluation/analyze_study.py blocks.json NEW-analysis --no-archive{mode_flag}\n"
         "Compare counts and scientific summaries with analysis.json. Evidence class is recorded there; canned rehearsal is not model-performance evidence.\n"
     ).encode()
     checksums = {

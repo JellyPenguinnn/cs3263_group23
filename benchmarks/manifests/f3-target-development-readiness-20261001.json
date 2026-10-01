@@ -1,0 +1,420 @@
+{
+  "archive": {
+    "bytes": 803306,
+    "content": "Complete pilot including proposals/rejections, cumulative registry, arithmetic receipt, reviewer-only packet and exact preparation/review source snapshots. Local artifact requires distribution; no teammate receipt implied.",
+    "path": "artifacts/f3-target-development-20261001.tar.gz",
+    "sha256": "a0574076d17af541464d189c18740a9d203734a87f3f695317b443ead6d2b13d"
+  },
+  "counts": {
+    "case_count": 240,
+    "counts": {
+      "activity_count/0/generation/SAT": 5,
+      "activity_count/0/generation/UNSAT": 5,
+      "activity_count/0/repair/SAT": 5,
+      "activity_count/0/repair/UNSAT": 5,
+      "activity_count/1/generation/SAT": 5,
+      "activity_count/1/generation/UNSAT": 5,
+      "activity_count/1/repair/SAT": 5,
+      "activity_count/1/repair/UNSAT": 5,
+      "activity_count/2/generation/SAT": 5,
+      "activity_count/2/generation/UNSAT": 5,
+      "activity_count/2/repair/SAT": 5,
+      "activity_count/2/repair/UNSAT": 5,
+      "interaction_density/0/generation/SAT": 5,
+      "interaction_density/0/generation/UNSAT": 5,
+      "interaction_density/0/repair/SAT": 5,
+      "interaction_density/0/repair/UNSAT": 5,
+      "interaction_density/1/generation/SAT": 5,
+      "interaction_density/1/generation/UNSAT": 5,
+      "interaction_density/1/repair/SAT": 5,
+      "interaction_density/1/repair/UNSAT": 5,
+      "interaction_density/2/generation/SAT": 5,
+      "interaction_density/2/generation/UNSAT": 5,
+      "interaction_density/2/repair/SAT": 5,
+      "interaction_density/2/repair/UNSAT": 5,
+      "resource_contention/0/generation/SAT": 5,
+      "resource_contention/0/generation/UNSAT": 5,
+      "resource_contention/0/repair/SAT": 5,
+      "resource_contention/0/repair/UNSAT": 5,
+      "resource_contention/1/generation/SAT": 5,
+      "resource_contention/1/generation/UNSAT": 5,
+      "resource_contention/1/repair/SAT": 5,
+      "resource_contention/1/repair/UNSAT": 5,
+      "resource_contention/2/generation/SAT": 5,
+      "resource_contention/2/generation/UNSAT": 5,
+      "resource_contention/2/repair/SAT": 5,
+      "resource_contention/2/repair/UNSAT": 5,
+      "slack/0/generation/SAT": 5,
+      "slack/0/generation/UNSAT": 5,
+      "slack/0/repair/SAT": 5,
+      "slack/0/repair/UNSAT": 5,
+      "slack/1/generation/SAT": 5,
+      "slack/1/generation/UNSAT": 5,
+      "slack/1/repair/SAT": 5,
+      "slack/1/repair/UNSAT": 5,
+      "slack/2/generation/SAT": 5,
+      "slack/2/generation/UNSAT": 5,
+      "slack/2/repair/SAT": 5,
+      "slack/2/repair/UNSAT": 5
+    },
+    "coupled_sat_repairs": 32,
+    "family_count": 120,
+    "positive_preference_cases": 120,
+    "quota_complete": true,
+    "repair_events": {
+      "blocked": 40,
+      "deadline": 40,
+      "fixed_start": 40
+    },
+    "requested_families": 120
+  },
+  "evidence": "offline_development_construction_and_automated_arithmetic_not_final_data",
+  "format_version": "1.0",
+  "generator_sha256": "86aae534786891d910eac46f2b4a307347e67611027727fec862e667ac7ad921",
+  "independent_arithmetic": {
+    "case_count": 240,
+    "evidence": "automated independent arithmetic, not human review or model performance",
+    "human_review": "pending",
+    "labels": {
+      "SAT": 120,
+      "UNSAT": 120
+    },
+    "manifest_sha256": "8dc23e42674aae196bc4d3544cb1717486aa18e2fe39dc33795f603aa507cbb7",
+    "max_assignments_per_case": 60000,
+    "optimality_checks": {
+      "exhaustive": 24,
+      "not_applicable": 120,
+      "not_checked_assignment_cap": 96
+    }
+  },
+  "inspected_structures": 358,
+  "limitations": [
+    "Known construction mechanisms, not unseen generators or guaranteed absence from pretraining.",
+    "Sweeps have coupled covariates; realized values do not establish causal difficulty.",
+    "Blocked UNSAT uses unary wipeout, fixed UNSAT a shared-resource collision, deadline UNSAT a precedence bound.",
+    "No independently human-written scenarios or completed human review.",
+    "Generation and repair share updated hard specifications within each family;240 cases are 120 source families.",
+    "Independent exhaustive optimum check covers24 of 120 SAT cases;96 retain solver proofs only.",
+    "All target-pilot cases and inspected candidates are development exclusions; final seed/policy/decisions are not selected by this receipt."
+  ],
+  "mechanisms_by_case": {
+    "participant_block": 40,
+    "precedence_deadline": 40,
+    "shared_resource_collision": 80,
+    "tightened_deadline": 40,
+    "unary_availability": 40
+  },
+  "model_calls": 0,
+  "observed_ranges_generation_cases": {
+    "activity_count/0": {
+      "activity_count": {
+        "max": 4,
+        "min": 4
+      },
+      "interaction_density": {
+        "max": 0.5,
+        "min": 0.3333333333333333
+      },
+      "mean_unary_slack": {
+        "max": 6.25,
+        "min": 3.0
+      },
+      "resource_contention": {
+        "max": 0.3333333333333333,
+        "min": 0.3333333333333333
+      },
+      "start_domain_product": {
+        "max": 1470,
+        "min": 0
+      }
+    },
+    "activity_count/1": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.25
+      },
+      "mean_unary_slack": {
+        "max": 5.875,
+        "min": 3.75
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.25
+      },
+      "start_domain_product": {
+        "max": 967680,
+        "min": 0
+      }
+    },
+    "activity_count/2": {
+      "activity_count": {
+        "max": 12,
+        "min": 12
+      },
+      "interaction_density": {
+        "max": 0.30303030303030304,
+        "min": 0.25757575757575757
+      },
+      "mean_unary_slack": {
+        "max": 6.0,
+        "min": 4.25
+      },
+      "resource_contention": {
+        "max": 0.24242424242424243,
+        "min": 0.22727272727272727
+      },
+      "start_domain_product": {
+        "max": 231525000,
+        "min": 0
+      }
+    },
+    "interaction_density/0": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "mean_unary_slack": {
+        "max": 5.25,
+        "min": 3.375
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 504000,
+        "min": 0
+      }
+    },
+    "interaction_density/1": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.25
+      },
+      "mean_unary_slack": {
+        "max": 6.125,
+        "min": 4.625
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 1764000,
+        "min": 0
+      }
+    },
+    "interaction_density/2": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.42857142857142855,
+        "min": 0.35714285714285715
+      },
+      "mean_unary_slack": {
+        "max": 5.75,
+        "min": 4.125
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 889056,
+        "min": 0
+      }
+    },
+    "resource_contention/0": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.10714285714285714,
+        "min": 0.07142857142857142
+      },
+      "mean_unary_slack": {
+        "max": 5.75,
+        "min": 4.25
+      },
+      "resource_contention": {
+        "max": 0.03571428571428571,
+        "min": 0.03571428571428571
+      },
+      "start_domain_product": {
+        "max": 907200,
+        "min": 0
+      }
+    },
+    "resource_contention/1": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.21428571428571427
+      },
+      "mean_unary_slack": {
+        "max": 5.75,
+        "min": 3.75
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 705600,
+        "min": 0
+      }
+    },
+    "resource_contention/2": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 1.0,
+        "min": 1.0
+      },
+      "mean_unary_slack": {
+        "max": 6.375,
+        "min": 4.0
+      },
+      "resource_contention": {
+        "max": 1.0,
+        "min": 1.0
+      },
+      "start_domain_product": {
+        "max": 1143072,
+        "min": 0
+      }
+    },
+    "slack/0": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.25
+      },
+      "mean_unary_slack": {
+        "max": 2.75,
+        "min": 2.5
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 2187,
+        "min": 0
+      }
+    },
+    "slack/1": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.25
+      },
+      "mean_unary_slack": {
+        "max": 4.75,
+        "min": 3.625
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 168000,
+        "min": 0
+      }
+    },
+    "slack/2": {
+      "activity_count": {
+        "max": 8,
+        "min": 8
+      },
+      "interaction_density": {
+        "max": 0.32142857142857145,
+        "min": 0.25
+      },
+      "mean_unary_slack": {
+        "max": 8.5,
+        "min": 6.375
+      },
+      "resource_contention": {
+        "max": 0.25,
+        "min": 0.21428571428571427
+      },
+      "start_domain_product": {
+        "max": 12509640,
+        "min": 0
+      }
+    }
+  },
+  "policy": {
+    "families_per_cell": 10,
+    "proposals_per_family": 20,
+    "reference_seconds": 5,
+    "rendering_seed": 3263,
+    "version": "source-family-v1",
+    "wall_seconds": 180
+  },
+  "policy_freeze": null,
+  "proposal_count": 179,
+  "proposal_outcomes": {
+    "binary_mechanism_has_unary_wipeout": 34,
+    "label_quota_mismatch": 25,
+    "selected": 120
+  },
+  "raw_evidence_sha256": {
+    "arithmetic-review.json": "ec59fe750c336323a5029623e8e6a2de9f152597c42c260a967055a253416a14",
+    "cases.json": "d13959252befdaf49780c78f4451dc06c6a0ebda019dbec0b2fc04e0e53013be",
+    "development-registry.json": "0b6c27f12220cb1dc5db67941881d247389ab4cee39e84eb5c8ff7258da8f3be",
+    "inspected.json": "baf60a8e9645b08041770f16c1e75289564e990a7d56ce66ce73f74c11bfd7ab",
+    "ledger.json": "9a46ab0a06cf67c025496ffcc10e7d26ffaec12e696f75227828c95b18461496",
+    "manifest.json": "41f9aa5e8d423042160ccb35ec68182d36391dad8cbf06876628db935cc2f3e0",
+    "references.json": "3ba6766b0d12e9043c190ae74851c631af2feb3ead07125f7d2a4747844177d6"
+  },
+  "recommendation": "Keep the 600-call working target provisionally: construction capacity demonstrated; actual model qualification, review capacity, final policy/seed and new authorized cap remain required.The 312-call compact alternative remains a pre-outcome team decision.",
+  "registry": {
+    "all_old_fingerprints_preserved": true,
+    "new_count": 1429,
+    "old_count": 1071,
+    "path": "benchmarks/manifests/development-hard-fingerprints-v2-20261001-target-pilot.json",
+    "source_count": 29
+  },
+  "review_packet": {
+    "all_three_renderings_included": true,
+    "case_count": 240,
+    "human_gold_review": "pending",
+    "human_text_review": "pending",
+    "no_human_authorship_claim": true
+  },
+  "seed": 32661001,
+  "selection_uses_model_outcomes": false,
+  "source_files_sha256": {
+    "evaluation/prepare_case_review.py": "86954d81dd2d804336609fc353e145ac82f7b04e66a1f280f516fd3016de3850",
+    "src/scheduling/evaluation/preparation.py": "86aae534786891d910eac46f2b4a307347e67611027727fec862e667ac7ad921",
+    "tests/candidate_review.py": "bfd9713f68e30b49592263c2e9873ee365f324fbdf8fd97a8dd840b713e5cc3e"
+  }
+}

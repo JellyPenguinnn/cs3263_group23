@@ -9,6 +9,7 @@ import hashlib
 import os
 from pathlib import Path
 import platform
+import re
 import subprocess
 import tempfile
 
@@ -30,6 +31,8 @@ from scheduling.evaluation.frozen import (
     check_frozen_reference,
 )
 
+STRICT_QUALIFICATION_POLICY = "strict_model_backend_v1"
+
 
 @dataclass(frozen=True)
 class RunConfig:
@@ -43,6 +46,8 @@ class RunConfig:
     repeats: int = 1
     rendering_seed: int = 3263
     freeze: dict | None = None
+    qualification_policy: str | None = None
+    qualification_baseline: dict | None = None
 
     def __post_init__(self):
         if not isinstance(self.model, ModelConfig) or not all(
@@ -59,6 +64,34 @@ class RunConfig:
                 raise ValueError("Frozen mode needs an explicit protocol")
         elif self.freeze is not None:
             raise ValueError("Development mode cannot carry frozen protocol")
+        if self.qualification_policy is not None and (
+            self.qualification_policy != STRICT_QUALIFICATION_POLICY
+            or self.evidence != "live_development"
+        ):
+            raise ValueError(
+                "Qualification policy requires live development and a supported version"
+            )
+        if self.qualification_baseline is not None:
+            baseline = self.qualification_baseline
+            if (
+                self.qualification_policy != STRICT_QUALIFICATION_POLICY
+                or not isinstance(baseline, dict)
+                or set(baseline) != {"system_fingerprint", "capability_sha256"}
+            ):
+                raise ValueError("Invalid qualification baseline")
+            fingerprint = baseline["system_fingerprint"]
+            hashes = baseline["capability_sha256"]
+            if (
+                fingerprint is not None and (
+                    not isinstance(fingerprint, str)
+                    or not 0 < len(fingerprint) <= 200
+                    or any(c.isspace() for c in fingerprint)
+                )
+                or not isinstance(hashes, list)
+                or len(hashes) != 2
+                or any(not isinstance(h, str) or re.fullmatch(r"[0-9a-f]{64}", h) is None for h in hashes)
+            ):
+                raise ValueError("Invalid qualification baseline observation or hashes")
         if self.model.max_attempts != 1:
             raise ValueError(
                 "Serial runner permits one request per attempt, no hidden retries"
@@ -135,6 +168,11 @@ def requests(cases, config):
 
 
 def _contract(cases, config):
+    config_data = to_data(config)
+    # Preserve the legacy wire shape when no qualification policy was selected.
+    for field in ("qualification_policy", "qualification_baseline"):
+        if config_data[field] is None:
+            config_data.pop(field)
     package = Path(__file__).resolve().parents[1]
     source = {
         str(p.relative_to(package)): digest(p.read_text(encoding="utf-8"))
@@ -168,7 +206,7 @@ def _contract(cases, config):
         "code_commit": revision,
         "format_version": "2.0" if config.evidence in FROZEN_MODES else "1.0",
         "case_bundle_sha256": digest(case_bundle(cases)),
-        "config": to_data(config),
+        "config": config_data,
         "provider_execution": (execution_contract(config.model)
                                if config.evidence in ("live_development", "live_frozen") else None),
         "source_sha256": source,
@@ -277,6 +315,12 @@ def run_batch(
     cases = check_case_set(tuple(cases))
     contract = _contract(cases, config)
     check_frozen(cases, config, contract)
+    expected_model = (
+        config.model.model
+        if config.evidence == "live_frozen"
+        or config.qualification_policy == STRICT_QUALIFICATION_POLICY
+        else None
+    )
     if config.evidence in ("offline_canned", "offline_frozen") and (
         canned is None or provider_complete is not None
     ):
@@ -329,7 +373,10 @@ def run_batch(
             if config.evidence in FROZEN_MODES:
                 check_frozen_reference(case, saved["reference"])
             gold[case.case_id] = saved["reference"]
-        fingerprints = set()
+        fingerprints = (
+            {config.qualification_baseline["system_fingerprint"]}
+            if config.qualification_baseline is not None else set()
+        )
         existing = list(records.glob("*.json"))
         reserved = len(existing)
         if (
@@ -350,7 +397,7 @@ def run_batch(
             response = saved["payload"]["pipeline_result"].get("model_response") or {}
             reason = _stop_reason(
                 response,
-                config.model.model if config.evidence == "live_frozen" else None,
+                expected_model,
                 fingerprints,
             )
             if reason:
@@ -432,7 +479,7 @@ def run_batch(
                 )
             reason = _stop_reason(
                 result.model_response,
-                config.model.model if config.evidence == "live_frozen" else None,
+                expected_model,
                 fingerprints,
             )
             if reason:

@@ -30,6 +30,9 @@ ANALYSIS_SETTINGS = {
 def settings_digest(config):
     data = to_data(config)
     data.pop("freeze", None)
+    for field in ("qualification_policy", "qualification_baseline"):
+        if data.get(field) is None:
+            data.pop(field, None)
     data["provider_execution"] = (execution_contract(config.model)
                                   if config.evidence == "live_frozen" else None)
     return digest(data)
@@ -210,7 +213,9 @@ def draft_frozen_config(
     if mode not in FROZEN_MODES:
         raise ValueError("Unsupported frozen evidence mode")
     check_development_registry(development_registry)
-    cfg = replace(config, evidence=mode, freeze={})
+    # Frozen execution already enforces identity; retire the development-only policy.
+    cfg = replace(config, evidence=mode, freeze={},
+                  qualification_policy=None, qualification_baseline=None)
     contract = _contract(cases, cfg)
     freeze = {
         name: contract[name]

@@ -56,11 +56,15 @@ def test_packet_preflight_two_models_same_inputs_settings_and_no_overwrite(pool,
     manifest = ROOT / "benchmarks/manifests/expanded-development-100-20260930.json"
     before = source.read_bytes()
     output = tmp_path / "packet"
-    selection = script.prepare(source, manifest, output)
+    selection = script.prepare(source, manifest, output, models=script.MODELS)
     assert selection["case_bundle_sha256"] == digest(case_bundle(load_cases(output / "cases.json")))
     configs = [read(output / (m.replace(":", "-") + ".json")) for m in script.MODELS]
     assert configs[0]["model"].pop("model") != configs[1]["model"].pop("model")
     assert configs[0] == configs[1]
+    assert configs[0]["qualification_policy"] == "strict_model_backend_v1"
+    assert selection["proposed_requests_including_metadata"] == 102
+    assert selection["proposed_metadata_requests"] == 2
+    assert selection["proposed_total_output_reservation"] == 3276800
     for model in script.MODELS:
         preflight = read(output / (model.replace(":", "-") + ".preflight.json"))
         assert preflight["state"] == "ready" and preflight["within_cap"]
@@ -69,6 +73,29 @@ def test_packet_preflight_two_models_same_inputs_settings_and_no_overwrite(pool,
     with pytest.raises(FileExistsError):
         script.prepare(source, manifest, output)
     assert source.read_bytes() == before
+
+
+def test_selected_candidate_default_has_explicit_per_model_and_session_caps(pool, tmp_path):
+    script = load_script("prepare_model_qualification")
+    source = tmp_path / "source.json"
+    write_new(source, case_bundle(pool))
+    output = tmp_path / "candidate"
+    selection = script.prepare(
+        source, ROOT / "benchmarks/manifests/expanded-development-100-20260930.json", output
+    )
+    assert selection["selected_models"] == ["qwen3.8:27b"]
+    assert selection["case_completions_per_model"] == selection["planned_case_completions"] == 48
+    assert selection["proposed_capability_completions"] == 2
+    assert selection["proposed_completion_calls_total"] == 50
+    assert selection["proposed_metadata_requests"] == 1
+    assert selection["proposed_requests_including_metadata"] == 51
+    assert selection["proposed_total_output_reservation"] == 1638400
+    cfg = read(output / "qwen3.8-27b.json")
+    assert cfg["evidence"] == "live_development"
+    assert cfg["qualification_policy"] == "strict_model_backend_v1"
+    assert cfg["max_requests"] == 48
+    assert cfg["max_requested_output_tokens"] == 1572864
+    assert not (output / "qwen3.6-35b.json").exists()
 
 
 @pytest.mark.parametrize("change", ["heldout", "duplicate", "missing_failure", "small_stratum", "missing_coupled"])

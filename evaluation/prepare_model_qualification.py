@@ -11,7 +11,9 @@ from pathlib import Path
 
 from scheduling.evaluation.benchmark import render
 from scheduling.evaluation.cases import case_bundle, load_cases
-from scheduling.evaluation.runner import RunConfig, plan_run, read, write_new
+from scheduling.evaluation.runner import (
+    STRICT_QUALIFICATION_POLICY, RunConfig, plan_run, read, write_new,
+)
 from scheduling.evaluation.scoring import digest
 from scheduling.pipelines.direct import build_messages
 from scheduling.pipelines.solver_augmented import build_extraction_messages
@@ -26,6 +28,7 @@ FAILURES = (
     "dev-v3-1cb82271f05a61f8e4b44569-generation",
 )
 MODELS = ("qwen3.6:35b", "qwen3.8:27b")
+DEFAULT_MODELS = ("qwen3.8:27b",)
 
 
 def request_characters(case):
@@ -87,7 +90,10 @@ def select_cases(cases):
     return tuple(chosen), reasons, sizes
 
 
-def prepare(cases_path, manifest_path, directory):
+def prepare(cases_path, manifest_path, directory, *, models=DEFAULT_MODELS):
+    models = tuple(models)
+    if not models or len(set(models)) != len(models) or any(m not in MODELS for m in models):
+        raise ValueError("Select distinct supported qualification models")
     cases = load_cases(cases_path)
     source = read(manifest_path)
     if len(cases) != 100 or digest(case_bundle(cases)) != source.get("case_bundle_sha256"):
@@ -96,12 +102,13 @@ def prepare(cases_path, manifest_path, directory):
     directory.mkdir(parents=True, exist_ok=False)
     write_new(directory / "cases.json", case_bundle(selected))
     configs = {}
-    for model in MODELS:
+    for model in models:
         name = model.replace(":", "-")
         cfg = RunConfig(
             ModelConfig(model, 32768, connect_timeout=30, read_timeout=900),
             SolverLimits(30), SolverLimits(60), 48, 48 * 32768,
             evidence="live_development",
+            qualification_policy=STRICT_QUALIFICATION_POLICY,
         )
         configs[name] = to_data(cfg)
         write_new(directory / (name + ".json"), cfg)
@@ -111,6 +118,8 @@ def prepare(cases_path, manifest_path, directory):
             raise ValueError("Qualification preflight failed; no inference authorized")
     manifest = {
         "format_version": "1.0", "policy_version": "f2-development-selection-1",
+        "qualification_policy": STRICT_QUALIFICATION_POLICY,
+        "selected_models": list(models),
         "status": "prepared_offline_not_live_authorization",
         "source_bundle_sha256": digest(case_bundle(cases)),
         "case_bundle_sha256": digest(case_bundle(selected)),
@@ -120,8 +129,13 @@ def prepare(cases_path, manifest_path, directory):
         "case_ids": [c.case_id for c in selected], "selection_reasons": reasons,
         "combined_public_request_characters": {c.case_id: sizes[c.case_id] for c in selected},
         "case_groups": {c.case_id: c.group_id for c in selected},
-        "planned_case_completions": 96, "proposed_capability_completions": 4,
-        "proposed_metadata_requests": 1, "proposed_total_output_reservation": 3276800,
+        "case_completions_per_model": 48,
+        "planned_case_completions": 48 * len(models),
+        "proposed_capability_completions": 2 * len(models),
+        "proposed_completion_calls_total": 50 * len(models),
+        "proposed_metadata_requests": len(models),
+        "proposed_requests_including_metadata": 51 * len(models),
+        "proposed_total_output_reservation": 50 * len(models) * 32768,
         "configs": configs,
         "limitations": [
             "Known development inputs selected partly to retain observed failures; not held-out.",
@@ -129,6 +143,8 @@ def prepare(cases_path, manifest_path, directory):
             "No new model decision, course eligibility, live budget or human review is implied.",
             "Sampling/reasoning controls are omitted server defaults, not deterministic settings.",
             "Capability checks must precede case calls; unsupported settings need a new decision.",
+            "Each selected model is a separate session: 48 case calls, 2 capability calls and 1 metadata request; aggregate caps include every session.",
+            "Strict model/backend stops apply to development qualification and persist on resume; this is not final eligibility or held-out evidence.",
         ],
     }
     write_new(directory / "selection.json", manifest)
@@ -139,7 +155,10 @@ if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("output", type=Path)
     parser.add_argument("--cases", type=Path, required=True)
+    parser.add_argument("--model", choices=MODELS, action="append",
+                        help="Selected model; repeat explicitly for a two-model packet. Default: qwen3.8:27b")
     parser.add_argument("--manifest", type=Path, default=Path("benchmarks/manifests/expanded-development-100-20260930.json"))
     args = parser.parse_args()
-    result = prepare(args.cases, args.manifest, args.output)
+    result = prepare(args.cases, args.manifest, args.output,
+                     models=tuple(args.model) if args.model else DEFAULT_MODELS)
     print({key: result[key] for key in ("status", "counts", "source_families", "planned_case_completions")})

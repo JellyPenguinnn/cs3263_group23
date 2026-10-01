@@ -16,6 +16,10 @@ def main():
     p.add_argument("directory", type=Path)
     p.add_argument("--no-archive", action="store_true")
     p.add_argument(
+        "--development", action="store_true",
+        help="Analyze explicitly development-labelled blocks; never grants frozen-study status",
+    )
+    p.add_argument(
         "--figures",
         action="store_true",
         help="Export existing diagnostic figures (requires plots extra)",
@@ -25,7 +29,7 @@ def main():
         p.error("--figures requires archive export")
     blocks = {k: a.blocks.parent / v for k, v in read(a.blocks).items()}
     if a.no_archive:
-        result = analyze_blocks(blocks)
+        result = analyze_blocks(blocks, development=a.development)
         a.directory.mkdir(parents=True, exist_ok=False)
         write_new(a.directory / "analysis.json", result)
     else:
@@ -34,6 +38,7 @@ def main():
             a.directory,
             project_root=Path(__file__).resolve().parents[1],
             figures=a.figures,
+            development=a.development,
         )
     print(result["counts"])
 

@@ -131,18 +131,20 @@ Keep real implementation, verified commands and evidence; do not add placeholder
 
 Read current Git status, this queue and the relevant contract before implementing. Verify that the checkout contains the audited fixes and current queue; a member branch or older clone may lag the integrated checkpoint. Follow `AGENTS.md` for consequential onboarding details. Delivered R1–R4 remain maintenance contracts in Section 7, not a new task list.
 
+The integration audit verified GitHub main `5d2f623` contains all three members' published work. The [audit and remaining gates](report/main-integration-audit-20261001.md) distinguish delivered preparation tooling from final scientific/human deliverables. The accompanying corrections align study eligibility with runner stop rules and preserve run identities in reproduction archives. They do not change prompts, solver semantics, metrics or historical results. Consult actual Git state for whether these corrections have been published; the audit is not a publication or final-study approval.
+
 ### Current priorities after the first baseline
 
 | Work package | Lead / reviewer | Status and dependency | Completion evidence |
 | --- | --- | --- | --- |
 | F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Eight saved-failure regressions pass; bounded amendment reviewed but not activated; prompt qualification waits for F2 and a new cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
-| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Offline packet/metadata qualified; original paired run stopped on fingerprint drift; separate six-call diagnostic confirms variation; user retained strict policy; model decision/eligibility pending | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
-| F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Builder/selector and development pilot verified; policy decision, fresh draw and human review pending | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
+| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | SoCLaaS `qwen3.8:27b` full development campaign authorized and launched; strict workflow and exact-input mock rehearsal verified; live results and final eligibility pending | Selected-model packet, tested accounting/stop policy, actual bounded qualification, effective settings and separate final eligibility |
+| F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Builder/selector, 120-family target-size development pilot and review exporter verified; actual policy/size decision, fresh draw and human review pending | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
 | F4: freeze rehearsal and final study | Yong Qing / all | Synthetic offline three-block rehearsal verified; final inference depends on F1–F3 and actual decisions | Successful offline frozen rehearsal, approved protocol/cap, complete final records with no silent exclusions |
 | F5: analysis and reproduction | Yong Qing / independent teammate | Core compatible-block analysis, resource export and archive verified on macOS/Linux; final claims and independent teammate replay pending | Matched analysis, claim-to-run index, failure review, checksummed archive and independent replay |
 | F6: report and course delivery | Li Hao assembles / all | Report source, claim index, contribution log and rehearsal draft prepared; human/final-result/format work pending | Audited ten-page body, responsible-AI cases, presentation/Q&A rehearsal and actual submission receipts |
 
-Current Yong Qing archive follow-up (1 October): branch incorporates main `80df71f`.
+Historical Yong Qing archive follow-up (1 October): branch incorporated main `80df71f`.
 [F5 handoff](report/yongqing-archive-review.md) and
 [receipt](configs/development/yongqing-archive-verification-20261001.json) record nine
 reproduced regression cases and their correction: mismatched prompts/dependency pins,
@@ -151,18 +153,19 @@ pass; a new 16-attempt synthetic rehearsal archive reproduces every analysis fie
 on network-disabled Linux. Earlier frozen analysis and archive checksums are
 unchanged. No model calls, new final data or human approval occurred. Actual
 policy/model/review decisions and final execution remain open. The user has now
-authorized member-branch publication of this checkpoint; main integration and
-human review remain separate. The verification receipt retains its original
+authorized member-branch publication of this checkpoint; it is now included in
+main `5d2f623`. Human review remains open. The verification receipt retains its original
 pre-publication status.
 
 Historical Yong Qing preparation checkpoint (1 October): [F3–F5 handoff](report/yongqing-study-preparation.md), [pilot manifest](benchmarks/manifests/yongqing-f3-policy-pilot-20261001.json), [verification](configs/development/yongqing-f345-verification-20261001.json). The branch incorporates GitHub main `24c267c`; 580 installed-package tests pass on both macOS/Linux ARM64. A 24-family development policy pilot and 16-attempt synthetic frozen rehearsal are verified; the local archive reproduces every analysis field on network-disabled Linux. All 332 historical development attempts replay exactly. The user subsequently authorized member-branch publication; main integration remains separate. No final draw, new inference or human sign-off is included. The cumulative 1 October registry includes both pilots and all retained construction-test originals/updates; completeness still needs team review.
 
-Current Li Hao follow-up (1 October): branch incorporates main `d0bfac0`.
+Historical Li Hao follow-up (1 October): branch incorporated main `d0bfac0`; the published work is included in main `5d2f623`.
 A separately authorized six-call identity diagnostic returned valid JSON and exact
 model IDs (493 reported tokens); `qwen3.6:35b` varied across two fingerprints.
 The user chose to retain strict backend requirements and continue offline: no
 variable-backend scheduling comparison is authorized. The new allowance is consumed.
-Diagnostic implementation and final 16-test macOS/Linux checks are recorded in the
+Diagnostic implementation and the focused 16-test macOS/Linux checks are recorded in the [F2 handoff](report/lihao-f2-followup.md).
+
 [receipt](configs/development/lihao-f2-diagnostic-20261001.json) and
 [handoff](report/lihao-f2-followup.md). F2 is still blocked; F6 remains a draft,
 with actual interpretation/review/final results and submission gates open.
@@ -182,7 +185,7 @@ record changed. Member-branch publication is now user-authorized; main integrati
 and human approval remain separate. The verification receipt retains its original
 pre-publication status.
 
-Current Yao Xiang F3 cross-check (1 October): branch incorporates main `ebab01e`.
+Historical Yao Xiang F3 cross-check (1 October): branch incorporated main `ebab01e`; the published work is included in main `5d2f623`.
 [Formal review](report/yaoxiang-f3-formal-review.md) and
 [receipt](configs/development/yaoxiang-f3-formal-review-20261001.json) record independent
 arithmetic checks of all 48 preserved pilot cases: 24 valid SAT witnesses, 24 UNSAT
@@ -202,7 +205,7 @@ semantics remain unchanged; a proposed prompt amendment is not live-qualified.
 
 ### F1 — focused extraction improvements
 
-Preserve all three failures in `expanded-development-100-20260930-01`. Inspect existing coverage and add only missing synthetic development regressions for the updated A0 fixed appointment in `dev-v2-3264-slack-0-fixed_start-unsat-0-repair`, the A1 anchor in `dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation`, and malformed JSON in `dev-v3-1cb82271f05a61f8e4b44569-generation`. Regressions should assert the observed parser/semantic failure and gold rejection, not claim that a mocked response tests model quality.
+Preserve all three failures in `expanded-development-100-20260930-01` and the eight delivered regressions documented in [F1 review](report/yaoxiang-f1-review.md). They cover the updated A0 fixed appointment in `dev-v2-3264-slack-0-fixed_start-unsat-0-repair`, the A1 anchor in `dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation`, and malformed JSON in `dev-v3-1cb82271f05a61f8e4b44569-generation`. Maintain coverage when changing extraction; add tests only for newly identified gaps. These assert parser/semantic behavior and gold rejection, not improved model quality.
 
 Work in `prompts/extraction/specification.txt`, the existing extraction pipeline/diagnostics and relevant tests. Review a bounded prompt amendment that explicitly accounts for each stated fixed appointment and the authoritative updated repair event before producing the same schema. Keep contradictory but complete requirements; do not invite the model to drop them to manufacture feasibility. Preserve strict duplicate-key/unknown-field rejection and neutral public IDs. Examples must parse and cover current semantics without copying final cases or gold answers.
 
@@ -212,13 +215,9 @@ B's 10 structural mismatches include eight independently certified equivalent en
 
 ### F2 — selected model, backend and settings
 
-Provider direction confirmed on 1 October: retain SoCLaaS for development, then
-use an official provider API (for example OpenAI) for the submission experiments.
-Exact provider/model, access, eligibility and budget remain undecided. This does
-not authorize an adapter for an unspecified endpoint or new calls; the current
-SoCLaaS paired qualification remains paused under the user's strict-policy choice.
+The latest user decision is to run the full 600-attempt development campaign on SoCLaaS `qwen3.8:27b`, instead of the optional small qualification. Use the existing adapter and keep revision 3 unchanged. The new campaign has its own authorized cap and identity; live results are pending. The earlier direction to use an official provider API for submission remains a later decision: exact final provider/model, eligibility and budget are not yet established. Do not implement an unspecified new adapter or reinterpret the development choice as final eligibility. The stopped Qwen3.6 comparison remains preserved under the strict-policy choice.
 
-Section 9 records the catalogue and recommended qualification. The implemented `SoCLaaSProvider` rejects other base URLs; `evaluate-batch` currently routes both live modes to it. `ModelConfig` contains model/output limits/timeouts/retry fields, while the request body sends only model, messages, `max_tokens` and `stream=False`. Historical sampling and reasoning controls were **server defaults, not explicitly configured**. Do not claim deterministic inference from a solver seed or assume a model-name/base-URL change supports an arbitrary final provider.
+Section 9 records the selected development campaign, optional qualification alternatives and historical catalogue. The implemented `SoCLaaSProvider` rejects other base URLs; `evaluate-batch` currently routes both live modes to it. `ModelConfig` contains model/output limits/timeouts/retry fields, while the request body sends only model, messages, `max_tokens` and `stream=False`. Historical sampling and reasoning controls were **server defaults, not explicitly configured**. Do not claim deterministic inference from a solver seed or assume a model-name/base-URL change supports an arbitrary final provider.
 
 If the chosen eligible model works through the current endpoint, retain the adapter. Otherwise implement one specific final-provider adapter and explicit final-mode routing through the existing completion interface; keep development routing on SoCLaaS. Coordinate that endpoint/scope decision before dependent implementation. No generic plugin framework is needed. Add only verified request options to typed configuration, include them in serialization/freeze identity, and reject unsupported options rather than silently ignoring them. Keep legacy run readers compatible.
 
@@ -226,9 +225,11 @@ Record requested/returned model, provider/API, available revision/fingerprint, c
 
 Acceptance: exact mock payload/response tests; no gold or secret leakage; complete/error/truncation/uncertain-request accounting; configuration changes rejected on resume; matching settings for A/B; installed package check; a separately authorized development qualification. F2 ends with an evidence-based model decision, not selection for the largest B-minus-A gap.
 
+Use the tracked `evaluation/prepare_development_campaign.py` and `evaluation/run_development_campaign.py` workflow for the selected full campaign. Prepared development configs select `qualification_policy="strict_model_backend_v1"`; the shared runner enforces model identity and backend observation continuity without inventing frozen approvals. The execution helper records metadata, two capability responses and a baseline linked to their hashes, then executes the controlled, realistic and selected-language blocks through A/B under one shared cap. The small `prepare_model_qualification.py` / `run_model_qualification.py` workflow remains an optional separately authorized alternative. The capability observation seeds batch checks, including an explicitly observed missing fingerprint. Missing/wrong returned model, fingerprint appearance/disappearance/drift and operational failures stop further dispatch. Genuine provider failures remain failed observations; missing backend data never becomes a pinned-weight claim. Runtime configuration and capability references are immutable, and changed policy/source refuses resume. Historical configs omit these optional fields and remain replayable. A new output directory and explicit authorization reference are required; no automatic reissue of uncertain requests.
+
 ### F3 — fresh final-data preparation
 
-Current `generate_development_v2/v3` functions create development matrices. Frozen mode can consume reviewed test bundles but does not create them. Add a small preparation entry point under `evaluation/`, with reusable construction/selection logic beside the existing benchmark/case/manifest modules. Reuse schema, registry, validator and reference helpers; do not create a second runner or redefine the domain.
+The implemented `evaluation/prepare_final_candidates.py` entry point and `src/scheduling/evaluation/preparation.py` construct and select candidates using the shared schema, registry, validator and reference helpers. The latest target-size development pilot has 120 source families / 240 cases, complete quotas, independent arithmetic witness/contradiction checks and a pending human-review packet. See [final-data preparation](report/final-data-preparation.md) and use `evaluation/prepare_case_review.py` to prepare reviewer-only evidence. Earlier 24-family pilots remain preserved. Use these tools; do not rebuild them. Remaining work is the policy/size decision, cumulative exclusion audit, fresh final draw and actual gold/text review. The older `generate_development_v2/v3` matrices and existing pilots remain development evidence.
 
 Define a versioned candidate policy: independently sampled source problems; supported durations/windows/assignments; nonredundant interactions; exact label/mechanism targets; feasible original repair schedules; event allocation; bounds on proposals/solver time; and explicit rejection reasons. Pilot this policy only on development candidates, including all inspected original and updated structures in development exclusions. Then freeze the policy and make the fresh final draw before any final model response. A held-out claim means new instances under this developed policy, not unseen generators or guaranteed absence from model pretraining.
 
@@ -240,7 +241,7 @@ Tests: deterministic selection; no silent quota replacement; known and calendar/
 
 ### F4 — one integrated freeze and execution workflow
 
-Use existing `freeze-draft`, `evaluate-plan`, `evaluate-batch` and `evaluate-replay`; inspect each command's current `--help`. A draft deliberately remains non-runnable until real eligibility/review/budget references exist. First rehearse with clearly labelled development/synthetic approval fixtures. After F1–F3, assemble the actual source/prompt/config hashes, reviewed final bundles, development registry, model decision, analysis definitions and authorized cap.
+Use existing `freeze-draft`, `evaluate-plan`, `evaluate-batch` and `evaluate-replay`; inspect each command's current `--help`. A draft deliberately remains non-runnable until real eligibility/review/budget references exist. `evaluation/rehearse_study.py` already verifies three blocks with explicitly synthetic approval fixtures, a retained failure, resume and replay. After F1–F3, rehearse the actual reviewed final packet/configuration, then assemble its source/prompt/config hashes, development registry, model decision, analysis definitions and authorized cap. The generic rehearsal is not that final-packet acceptance.
 
 The runner applies one `variants` and `repeats` setting per configuration. Use **separate frozen blocks** for controlled canonical, realistic canonical, and selected paraphrase/reordered conditions. Only the selected controlled cases appear in the language block; do not request variants for every case or repeat the canonical baseline unintentionally. Preserve case/family IDs and exact model, prompt, solver and request settings across blocks. In F5 verify cross-block pairing before accepting a robustness table.
 
@@ -250,13 +251,13 @@ Rehearse preflight rejection, failure stop, interrupted/uncertain accounting, co
 
 ### F5 — analysis and portable evidence
 
-Reuse the existing scoring, metrics, figure and dashboard paths. Add a thin analysis/reproduction entry point only where needed to join **verified compatible frozen blocks**, with an explicit block list and checks for duplicated attempts, missing canonical partners, incompatible inference settings and mismatched case/gold hashes. Source, prompts, model/backend and effective request/solver settings must agree; block IDs, selected cases, renderings, repeat ranges and corresponding budgets may differ intentionally. Compare these fields explicitly rather than requiring identical whole-configuration hashes. Keep the primary controlled denominator separate from realistic and language subsets. Do not concatenate unrelated CSVs or treat an aggregate alone as the raw evidence.
+Use the delivered `evaluation/analyze_study.py` entry point and `src/scheduling/evaluation/study.py` to join **verified compatible frozen blocks**, with an explicit block list and checks for duplicated attempts, missing canonical partners, incompatible inference settings and mismatched case/gold hashes. Source, prompts, model/backend and effective request/solver settings must agree; block IDs, selected cases, renderings and corresponding budgets may differ intentionally. The current analyzer supports one observation per rendering/arm; optional repeat mapping requires the separate F4 extension if selected. Keep the primary controlled denominator separate from realistic and language subsets. Do not concatenate unrelated CSVs or treat an aggregate alone as the raw evidence. Preserve provider failures in denominators, reject unqualified model identity/backend observations, and retain original run labels after archive replay.
 
 Produce the Section 8 figures and Section 17 claim index. Validate a hand-checked small analysis table, totals, pairing, missing usage, conditional objective denominators and grouped intervals. Preserve each run's own manifest; cross-block analysis does not rewrite records. Export per-attempt time/token usage, mean/median/tails and missing counts. Archive synthetic inputs, prompts, configs, raw attempts, failures, references, package/lock identity and reproduction instructions with checksums. A teammate replays in a fresh supported environment without credentials.
 
 ### F6 — report, review and delivery
 
-Create the report outline, methods, bibliography and genuine contribution log immediately. Draft the formal worked example and two-path diagram from current implementation. Result sections use clearly labelled development placeholders until the frozen study supplies measured findings. Follow Section 17's evidence/page budget and review queue. Each member must explain the whole pipeline and personally contribute interpretation, review and writing. Update this queue with concrete artifact links and check results as work finishes; never mark a human or scientific gate done from a passing test alone.
+Continue the existing `report/study-draft.md`, `report/claim-evidence.md`, `report/contributions.md` and `presentation/rehearsal.md`. Review the formal worked example and two-path diagram against current implementation. Result sections retain clearly labelled development evidence until the frozen study supplies measured findings. Remaining delivery work includes final analysis and interpretation, actual responsible-AI cases and contributions, a rendered page-limit audit, the presentation and timed rehearsal. Follow Section 17's evidence/page budget and review queue. Each member must explain the whole pipeline and personally contribute interpretation, review and writing. Never mark a human or scientific gate done from a passing test alone.
 
 ## 6. Version-1 shared contract
 
@@ -540,7 +541,7 @@ For each supported constraint/event, keep a tiny valid witness and a deliberate 
 
 ### Versioned development exclusions
 
-Use `benchmarks/manifests/development-hard-fingerprints-v2-20261001.json` and the `slot-graph-v2` algorithm for new frozen configurations. It extends the preserved 30 September registry (300 structures / 22 sources) to 1,071 known structures / 28 bundles, including both F3 development pilots and retained macOS/Linux construction-test structures. Carry subsequent pilots forward; these counts describe registered coverage, not proof that no other development data exists. Frozen protocol format 2.0 and its benchmark manifest must both declare the current fingerprint contract. Use `evaluation/development_registry.py` to rebuild from explicit source bundles; archived raw-list registries are historical only. The scheduling-structure fingerprint excludes absolute date/origin and timezone notation under the supported slot-based model, while exact case/provenance hashes preserve them. Activity/constraint renaming and calendar-only changes must not turn developed problems into fresh held-out cases. Regenerate obsolete registries from preserved source case bundles, including original and updated repair problems; never relabel old hashes. Keep registry version, algorithm, source-bundle hashes and coverage statement explicit. Technical checks cannot discover private unregistered development work, so the team must review registry completeness before freeze.
+Use `benchmarks/manifests/development-hard-fingerprints-v2-20261001-target-pilot.json` and the `slot-graph-v2` algorithm for new frozen configurations. It preserves all 1,071 structures from the preceding registry and adds the target-size development pilot, reaching 1,429 known structures / 29 sources, including every inspected original/updated proposal and rejection. Carry subsequent pilots forward; these counts describe registered coverage, not proof that no other development data exists. Frozen protocol format 2.0 and its benchmark manifest must both declare the current fingerprint contract. Use `evaluation/development_registry.py` to rebuild from explicit source bundles; archived raw-list registries are historical only. The scheduling-structure fingerprint excludes absolute date/origin and timezone notation under the supported slot-based model, while exact case/provenance hashes preserve them. Activity/constraint renaming and calendar-only changes must not turn developed problems into fresh held-out cases. Regenerate obsolete registries from preserved source case bundles, including original and updated repair problems; never relabel old hashes. Keep registry version, algorithm, source-bundle hashes and coverage statement explicit. Technical checks cannot discover private unregistered development work, so the team must review registry completeness before freeze.
 
 ### Construction and splits
 
@@ -631,6 +632,8 @@ Preserve malformed outputs and failures with appropriate redaction. Never hand-r
 
 ## 9. NUS SoCLaaS, model choice and execution budget
 
+**Current decision state:** the user selected and authorized the full SoCLaaS `qwen3.8:27b` development campaign: 600 scheduling completions, two capability completions and one metadata request. The campaign has launched; live results are pending. The earlier two-model comparison stopped after its first scheduling pair because Qwen3.6 reported different serving fingerprints; the diagnostic observed variation again and the user retained the strict policy. Those allowances are consumed and those records remain unchanged. Use the prepared full-development packet and tracked F2 campaign workflow; do not add the small qualification as an extra prerequisite. Final provider/model eligibility and the separate frozen-study budget remain unresolved. The catalogue below is a historical availability observation, not a current listing or live-call permission. Stable reported fingerprints are a team protocol choice, not a course grading rule or proof of identical model weights.
+
 ### Current availability and recommendation
 
 An authenticated `GET https://soclaas-api.comp.nus.edu.sg/v1/models` on **30 September 2026, 17:22 SGT** returned the following IDs. This check used one metadata request and **zero completion calls**. Availability is account/time-specific and is not proof of quality, model revision, parameter support or course eligibility. The institutional [SoCLaaS guide](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) was inaccessible to the research tool; no undocumented quota, pricing or capability is inferred.
@@ -645,12 +648,12 @@ ornith1.0:35b, qwen3.6:27b
 | Option | Evidence and role | Next decision |
 | --- | --- | --- |
 | `qwen3.6:35b` | Current qualified development reference with the preserved 200-call study | Retain as reference; no claim that all other IDs are weaker |
-| **`qwen3.8:27b`** | First qualification candidate. The [Qwen-authored card](https://huggingface.co/Qwen/Qwen3.8-27B) describes a newer open model with reasoning controls and broad capability gains | Plausible upgrade, not a measured scheduling improvement. Confirm the hosted alias/backend and compare on a fixed development packet |
+| **`qwen3.8:27b`** | Selected for the current development campaign; results pending. The [Qwen-authored card](https://huggingface.co/Qwen/Qwen3.8-27B) describes a newer open model with reasoning controls and broad capability gains | Plausible upgrade, not a measured scheduling improvement. Confirm the hosted alias/backend and compare on a fixed development packet |
 | `gemma4:26b` | Optional cross-family candidate; [Google's card](https://ai.google.dev/gemma/docs/core/model_card_4) describes a 26B mixture-of-experts reasoning model | Consider if the first candidate is unsuitable or a cross-family check has clear value; no extra final model by default |
 | `ornith1.5:35b` | Optional candidate; [the authors' card](https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B) emphasizes coding/agentic capability and separate reasoning/final-answer serving | Scheduling superiority is unmeasured; qualify final-content parsing and hosted identity before considering it |
 | Other IDs and aliases | Different sizes/modalities/specializations; generic aliases may change targets | Do not select by parameter count, newer-looking name or alias alone. Embedding/audio services are not the scheduling comparison |
 
-This is a **qualification order**, not a leaderboard. Upstream model cards do not verify NUS quantization, serving defaults or exact weight revision. Published coding/agent benchmarks do not predict this scheduling study. No candidate was benchmarked or selected by this documentation update, and current run configurations remain unchanged.
+This is a **qualification order**, not a leaderboard. Upstream model cards do not verify NUS quantization, serving defaults or exact weight revision. Published coding/agent benchmarks do not predict this scheduling study. The user's subsequent Qwen3.8 selection and authorized development campaign are recorded separately below; the historical catalogue is not evidence of its measured performance.
 
 ### Course eligibility and provider boundary
 
@@ -660,7 +663,25 @@ Prepare this precise clarification for the team to send if the handout/feedback 
 
 Continue scheduling-model development on SoCLaaS as agreed. A non-SoCLaaS frontier model belongs to the later evaluation phase, with explicit access/endpoint/budget authorization and F2 integration if needed. The existing adapter is intentionally endpoint-restricted; changing an environment base URL does not enable another service. A stronger SoCLaaS candidate may improve development while final eligibility is still unresolved.
 
-### Bounded qualification and selection
+### Selected full development campaign and optional qualification
+
+The current authorized run is `campaign-600-live-qwen38-20261001-01`, with live results pending. It retains revision-3 task prompts, one attempt per arm/rendering, model `qwen3.8:27b`, output ceiling 32,768, 30/900-second connect/read timeouts, no retries, and 30/60-second B/reference limits with one worker and seed 0. This is development evidence; the final-study matrix and human/eligibility gates in Sections 8 and 11 remain separate.
+
+| Block | Fixed development input and selection | Case calls |
+| --- | --- | ---: |
+| Controlled canonical | Target-size pilot seed `32661001`: 240 cases / 120 source families, 60 per task/label stratum | 480 |
+| Realistic canonical | All 12 AI-assisted fictional scenarios in `benchmarks/fixtures/realistic-drafts-v1.json`, preserving provenance and pending review | 24 |
+| Selected wording | 24 exact controlled partners, six per task/label and 24 distinct families; two additional renderings each | 96 |
+
+The [target-pilot readiness receipt](benchmarks/manifests/f3-target-development-readiness-20261001.json) identifies the original controlled bundle and preserved archive. All input bundles remain unchanged. Preparation normalizes source families across the canonical blocks, rejects cross-kind related families and records the mapping and exact input hashes. It selects language bases before model outcomes by least-used sweep then event within each stratum, with stable case-ID tie-breaking. Human gold/text review is pending. The realistic drafts are not independently human-written final cases.
+
+The two capability checks use the actual configured completion settings before any scheduling request. The shared session cap is **603 HTTP requests / 602 completions / 19,726,336 requested output tokens**; the block caps are 480/24/96. Input tokens are additional. Capability observations, including an explicitly missing fingerprint, seed every block's strict identity guard. Any capability issue or runner stop ends the campaign before further blocks. Write-once reservations preserve uncertain requests; no automatic restart, retries, substituted model or reuse of unused allowance is permitted.
+
+Use `evaluation/prepare_development_campaign.py`, then the explicitly authorized `evaluation/run_development_campaign.py`; README provides the commands and imported-input convention. For complete compatible blocks, `evaluation/analyze_study.py --development` exports separate canonical, realistic and wording analyses and a reproduction archive. Frozen analysis remains the default. The current installed macOS suite passed 684 tests and the actual selected packet completed a 600-attempt mocked rehearsal; live scores, usage, wall time and serving continuity remain pending. Record those only from the completed or stopped live artifacts, retaining failures and denominators. Do not pool this new model with the preserved Qwen3.6 results or infer improvement from changing both model and case distribution.
+
+The optional small qualification still prepares **24 known development cases**, 48 scheduling completions, two capability completions and one metadata request per selected model: **51 requests / 1,638,400 requested output tokens**. It is not the current next step or an extra campaign allowance. Choosing it later requires its own new authorization and output directory. A stopped historical qualification cannot be resumed under changed settings.
+
+The two-model design below remains available only if an explicit comparative model-selection experiment is later chosen. A successful single-model qualification supports using that model, not a claim that it beats Qwen3.6. Compare F1's candidate prompt separately after model qualification if still justified.
 
 Recommend a **fixed 24-case development packet**, six cases in each generation/repair × SAT/UNSAT stratum, including the expanded study's three B failures and representative longest/most coupled cases. Select IDs before calls. With two models and both approaches, one attempt each uses **96 completions**. Up to two capability completions per model add four, giving a proposed **100-completion qualification envelope**, plus separately counted metadata requests. This is a proposal requiring a new cap, not reuse of the consumed 200-call allowance.
 
@@ -668,24 +689,26 @@ Use the same revision-3 task prompts, public data, solver settings and verified 
 
 Decide on eligibility/access first, then supported and reproducible operation, balanced task performance and failure severity, then time/token cost. Do not choose the model that makes B's advantage largest or discard a model because A becomes competitive. If evidence is tied or mixed, prefer the already qualified simpler configuration and report uncertainty, or propose one additional preselected qualification; avoid repeated model shopping.
 
-Only after this model qualification should F1's prompt candidate be compared with revision 3 under otherwise identical settings and its own cap. Freeze the selected model/prompt combination before the final draw. If the eventual eligible final model differs again, qualify its exact backend/configuration on development inputs before final inference.
+Only after reviewing model/backend evidence from the current development campaign or a separately authorized qualification should F1's prompt candidate be compared with revision 3 under otherwise identical settings and its own cap. Freeze the selected model/prompt combination before the final draw. If the eventual eligible final model differs again, qualify its exact backend/configuration on development inputs before final inference.
 
 ### Effective settings, generous limits and measured usage
 
 The existing expanded profile is 16,384 requested output tokens per call, 30/600-second connect/read timeouts, no retries, 30 seconds per B solve and 60 seconds per reference. It completed without timeout/truncation; largest reported completion was 6,703 tokens. It remains an available configuration and historical evidence, not an open allowance.
 
-For the new reasoning-model qualification, start with a **proposed** 32,768 output-token ceiling and 30/900-second connect/read timeouts, if supported by the selected endpoint, with the same limit for A and B. Preserve the 30/60-second solver/reference limits, one worker, seed 0 and no retries. These comfortable limits are provisional: verify context/output semantics, whether reasoning tokens share the limit, timeout behavior and actual quota in the capability checks. If unsupported, choose and document a supported regime before paired qualification. Record actual wall time; read timeout is not a guaranteed overall request deadline.
+The selected development campaign uses a **32,768 output-token ceiling and 30/900-second connect/read timeouts**, with the same limit for A and B and preceding capability checks at those settings. Preserve the 30/60-second solver/reference limits, one worker, seed 0 and no retries. Final-study limits remain provisional: record what is actually verified about context/output semantics, whether reasoning tokens share the limit, timeout behavior and quota. A tiny JSON capability response does not itself establish the full maximum context/output behavior. If the configured regime is unsupported, stop and obtain a separate decision before changing it. Record actual wall time; read timeout is not a guaranteed overall request deadline.
 
 Current `ModelConfig` does not expose temperature, reasoning or JSON-decoding controls. F2 must explicitly record provider defaults or implement verified settings before making reproducibility claims. Do not copy upstream serving parameters into the NUS request and assume they work. The same configured options need not produce identical text or latency, even with temperature zero.
 
-| Planned envelope | Completions | Requested output reservation at 32,768/call |
+| Current campaign or optional envelope | Completions | Requested output reservation at 32,768/call |
 | --- | ---: | ---: |
-| Two-model development qualification including four capability checks | 100 | 3,276,800 |
+| Selected full Qwen3.8 development campaign including two capability checks | 602 | 19,726,336 |
+| Optional small single-model qualification including two capability checks | 50 | 1,638,400 |
+| Optional two-model development qualification including four capability checks | 100 | 3,276,800 |
 | Target final study, one model | 600 | 19,660,800 |
 | Compact final study, one model | 312 | 10,223,616 |
 | Optional repeat block: 12 bases × 3 renderings × 2 extra repeats × 2 arms | 144 | 4,718,592 |
 
-Input tokens are additional; requested reservation is not actual use or a currency estimate. At the *old measured* mean, 600 calls would be roughly 1.40 million reported tokens and 60 minutes, while 312 would be roughly 0.73 million and 31 minutes. These are workload illustrations only: a new model, thinking behavior, harder cases or different serving load can materially change them. Re-estimate from F2 before authorizing final execution. Reserve a reasonable operational window, but never count a timeout as UNSAT or silently exceed a cap to finish.
+Metadata requests add one to the full campaign or small single-model session, and two to the optional two-model workflow (each model has its own session). Input tokens are additional; requested reservation is not actual use or a currency estimate. At the *old measured* mean, 600 calls would be roughly 1.40 million reported tokens and 60 minutes, while 312 would be roughly 0.73 million and 31 minutes. These are workload illustrations only: a new model, thinking behavior, harder cases or different serving load can materially change them. Re-estimate from F2 before authorizing final execution. Reserve a reasonable operational window, but never count a timeout as UNSAT or silently exceed a cap to finish.
 
 Store per-attempt prompt/completion/total tokens and usage coverage, model-response and full-pipeline time, solver time on the subset that reached it, total batch wall time, request/metadata counts, finish reason and error category. Report mean, median, p95 and maximum with explicit denominators; missing is not zero. Store prices only if verified, with currency/date/source; the course reimbursement limit of $100 is not an automatic spending authorization or evidence SoCLaaS is free.
 
@@ -723,9 +746,9 @@ The [checkpoint audit](report/checkpoint-readiness.md) confirms a working develo
 | --- | --- | --- |
 | A: trustworthy formulation/reference | R1, independent tiny enumeration, repair and validator checks implemented | Human mathematical/fixture review of the declared contract, representative optima and text/gold mappings |
 | B: integrated development checkpoint | R1–R4 and both paths qualified; 200-call development run complete | Focused F1 changes if adopted; human proof/consumer review; normal review and verification of subsequent integrated changes |
-| Final execution readiness | Frozen controls exist; catalogue checked | F2 selected endpoint/settings and eligibility; F3 fresh packet; F4 integrated rehearsal; actual protocol and new cap |
+| Final execution readiness | Frozen controls, candidate preparation and generic synthetic three-block rehearsal delivered; earlier two-model qualification stopped; new full development campaign live results pending | F2 selected endpoint/settings, reproducible qualification policy and eligibility; F3 reviewed fresh packet; F4 rehearsal of that actual packet/configuration; actual protocol and new cap |
 | C: defensible results | Descriptive development evidence available | Frozen canonical/realistic/language study, declared analyses, failure review and independent teammate replay |
-| D: course delivery | Notes, diagrams and dashboard available | Complete audited report, responsible-AI cases, genuine contribution/disclosure records, presentation/Q&A and submission receipts |
+| D: course delivery | Report/claim/contribution and rehearsal drafts available | Final results and interpretation, rendered report audit, responsible-AI cases, genuine contribution/disclosure records, presentation/Q&A and submission receipts |
 
 ### Gate A — contract and trustworthy reference
 
@@ -840,7 +863,7 @@ Offline replay must reproduce metrics from saved outputs without credentials or 
 | Scientific direction | Preserve direct reasoning versus extraction plus CP-SAT for generation and repair; no broader assistant/calendar product |
 | Formal contract | Implemented v1 integer-slot/fixed-assignment semantics and lexicographic `(M,T,P)`; human review pending |
 | Development reference | `qwen3.6:35b`, extraction revision 3 and the unchanged 100-case study |
-| Next model candidate | Qualify `qwen3.8:27b` first using Section 9; listing is not performance or eligibility approval |
+| Current development campaign | Authorized Qwen3.8 full 600-attempt campaign with two capability checks and one metadata request; live results pending; no final eligibility approval |
 | Final-model decision | Open; resolve endpoint/settings and course eligibility before freeze |
 | Final data | F3 builder/policy pilot verified; actual policy/size decision and fresh reviewed draw pending; target 600 calls or compact 312 only by an explicit pre-outcome decision |
 | Human realistic policy | Retained team commitment; AI-assisted drafts remain development and retain their actual provenance |

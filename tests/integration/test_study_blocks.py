@@ -13,6 +13,7 @@ from evaluation.rehearse_study import rehearse, synthetic_config
 from scheduling.evaluation.benchmark import tiny_fixtures
 from scheduling.evaluation.frozen import settings_digest
 from scheduling.evaluation.runner import run_batch, read
+from scheduling.evaluation.runner import STRICT_QUALIFICATION_POLICY
 from scheduling.evaluation.scoring import digest
 from scheduling.evaluation.study import (
     analyze_blocks,
@@ -353,3 +354,131 @@ def test_archive_lock_must_reproduce_recorded_runtime(rehearsal, tmp_path, chang
     with pytest.raises(ValueError, match="lock"):
         export_study(blocks(path), output, project_root=project)
     assert not output.exists()
+
+
+@pytest.mark.parametrize("returned_model", [None, "other-model"])
+@pytest.mark.parametrize("evidence", ["live_frozen", "live_development"])
+def test_final_response_model_mismatch_cannot_become_a_completed_study(
+    tmp_path, returned_model, evidence
+):
+    cases = (replace(tiny_fixtures()[0], split="test"),)
+    cfg = replace(
+        synthetic_config(cases, "controlled", ("canonical",)),
+        evidence="live_frozen",
+    )
+    cfg = replace(cfg, freeze={**cfg.freeze, "settings_sha256": settings_digest(cfg)})
+    development = evidence == "live_development"
+    if development:
+        cases = tuple(replace(c, split="development") for c in cases)
+        cfg = replace(cfg, evidence=evidence, freeze=None,
+                      qualification_policy=STRICT_QUALIFICATION_POLICY)
+    responses = iter(zip(canned(cases, cfg).values(), (cfg.model.model, returned_model)))
+
+    def callback(*_):
+        content, model = next(responses)
+        return ModelResponse(
+            content, model, 0.1,
+            (Attempt(1, 0.1, 200, Usage(2, 3, 5), returned_model=model,
+                     execution=ProviderExecution(execution_contract(cfg.model), "stable")),),
+        )
+
+    path = tmp_path / "controlled"
+    progress = run_batch(cases, path, cfg, provider_complete=callback)
+    assert progress["completed"] == 2
+    assert progress["stop_reason"] == "returned_model_mismatch"
+    with pytest.raises(ValueError, match="Returned model differs"):
+        analyze_blocks({"controlled": path}, development=development)
+
+
+def test_final_transport_failure_remains_a_failure_without_inventing_backend_drift(tmp_path):
+    cases = (replace(tiny_fixtures()[0], split="test"),)
+    cfg = replace(
+        synthetic_config(cases, "controlled", ("canonical",)),
+        evidence="live_frozen",
+    )
+    cfg = replace(cfg, freeze={**cfg.freeze, "settings_sha256": settings_digest(cfg)})
+    response = next(iter(canned(cases, cfg).values()))
+    responses = iter((
+        ModelResponse(response, cfg.model.model, 0.1,
+                      (Attempt(1, 0.1, 200, Usage(2, 3, 5), returned_model=cfg.model.model,
+                               execution=ProviderExecution(execution_contract(cfg.model), "stable")),)),
+        ModelResponse(None, None, 0.1,
+                      (Attempt(1, 0.1, None, Usage(), error="transport_error",
+                               execution=ProviderExecution(execution_contract(cfg.model))),),
+                      error="transport_error"),
+    ))
+    path = tmp_path / "controlled"
+    progress = run_batch(cases, path, cfg, provider_complete=lambda *_: next(responses))
+    assert progress["stop_reason"] == "transport_error"
+    assert progress["completed"] == 2
+    result = analyze_blocks({"controlled": path})
+    assert result["counts"]["primary_attempts"] == 2
+    assert sum(row["accepted"] for row in result["rows"]) == 1
+    assert result["backend_fingerprints"] == ["stable"]
+
+
+@pytest.mark.parametrize("parent_path", [False, True])
+def test_archive_retains_original_run_names_and_exact_analysis(
+    rehearsal, tmp_path, parent_path
+):
+    path, _ = rehearsal
+    renamed = {}
+    for role in ("controlled", "realistic", "language"):
+        renamed[role] = tmp_path / "runs" / f"{role}-20261001-01"
+        shutil.copytree(path / role, renamed[role])
+        if parent_path:
+            renamed[role] = renamed[role] / "references" / ".."
+    output = tmp_path / "export"
+    expected = export_study(
+        renamed, output, project_root=Path(__file__).resolve().parents[2]
+    )
+    restored = tmp_path / "restored"
+    with tarfile.open(output / "reproduction.tar.gz") as archive:
+        assert all(".." not in Path(name).parts for name in archive.getnames())
+        archive.extractall(restored, filter="data")
+    actual = analyze_blocks({
+        role: restored / relative
+        for role, relative in read(restored / "blocks.json").items()
+    })
+    assert digest(actual) == digest(expected)
+    assert {row["raw_run"] for row in actual["rows"]} == {
+        directory.resolve().name for directory in renamed.values()
+    }
+
+
+def test_development_archive_requires_explicit_mode_and_retains_evidence(tmp_path):
+    cases = (replace(tiny_fixtures()[0], split="development"),)
+    frozen = synthetic_config(tuple(replace(c, split="test") for c in cases),
+                              "controlled", ("canonical",))
+    cfg = replace(frozen, evidence="offline_canned", freeze=None)
+    path = tmp_path / "development-run"
+    run_batch(cases, path, cfg, canned=canned(cases, cfg))
+    declared = {"controlled": path}
+    with pytest.raises(ValueError, match="explicit opt-in"):
+        analyze_blocks(declared)
+    output = tmp_path / "export"
+    result = export_study(declared, output,
+                          project_root=Path(__file__).resolve().parents[2], development=True)
+    assert result["evidence"] == "offline_canned"
+    assert result["counts"]["primary_attempts"] == 2
+    assert result["settings"]["development_registry"] is None
+    restored = tmp_path / "restored"
+    with tarfile.open(output / "reproduction.tar.gz") as archive:
+        archive.extractall(restored, filter="data")
+    assert "--development" in (restored / "REPRODUCE.txt").read_text()
+    replayed = analyze_blocks({r: restored / p for r, p in read(restored / "blocks.json").items()},
+                              development=True)
+    assert digest(result) == digest(replayed)
+
+
+def test_live_development_analysis_refuses_unqualified_identity_policy(tmp_path):
+    cases = (replace(tiny_fixtures()[0], split="development"),)
+    frozen = synthetic_config(tuple(replace(c, split="test") for c in cases),
+                              "controlled", ("canonical",))
+    cfg = replace(frozen, evidence="live_development", freeze=None)
+    outputs = iter(canned(cases, cfg).values())
+    callback = lambda *_: ModelResponse(next(outputs), cfg.model.model, 0.1, ())
+    path = tmp_path / "run"
+    run_batch(cases, path, cfg, provider_complete=callback)
+    with pytest.raises(ValueError, match="strict model/backend policy"):
+        analyze_blocks({"controlled": path}, development=True)

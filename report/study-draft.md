@@ -6,7 +6,8 @@ CS3263 Group 23 — Tea Li Hao, Tham Yao Xiang, Woo Yong Qing.
 not a submission, completed review or frozen-study report. Private student
 identifiers belong only on the submission title page. Numerical findings below
 are development evidence. See [claim index](claim-evidence.md) and
-[contribution record](contributions.md).
+[contribution record](contributions.md). The [submission checklist](submission-checklist.md)
+separates executable evidence from the remaining study and human delivery tasks.
 
 ## Abstract draft
 
@@ -59,8 +60,10 @@ For every mandatory activity i, let its integer start be s_i, fixed duration d_i
 and end e_i = s_i + d_i. The horizon is H <= 48 slots. D_i contains starts in
 0,...,H-d_i satisfying every unary requirement: release, deadline, fixed start,
 blocked intervals, and full containment within one available window for each
-required activity, participant and resource. Adjacent half-open intervals are
-allowed; a task cannot bridge a gap between windows.
+required activity, participant and resource. Activities use half-open intervals
+[s_i,e_i), so one activity may start when another ends. Each activity must fit
+inside a single listed availability window; even adjacent windows are not silently
+merged to admit a longer activity.
 
 The CSP consists of variables s_i, domains D_i and hard constraints. Precedence
 i → j requires e_i <= s_j. Each shared entity induces non-overlapping intervals.
@@ -88,9 +91,11 @@ components equal their proven reference optima.
 [0,3). Their original legal starts are A={0,1}, B={1,2}, C={0,1,2}; the original
 schedule is (0,1,2). A participant block removes A's start 0. A must start 1,
 forcing B to 2 and C to 0. This is the only feasible repair, with (M,T,P)=(3,4,0).
-B and C move although their unary requirements were unchanged. Fixing them at
-their old positions would incorrectly report infeasibility. Independent tiny
-enumeration, the arithmetic validator and CP-SAT check this example (C2).
+B and C move although their unary requirements were unchanged. The displacement
+is |1-0| + |2-1| + |0-2| = 4 slots: two hours summed over activities, not two hours
+of elapsed calendar time. Fixing B or C at its old position would incorrectly
+report infeasibility. Independent tiny enumeration, the arithmetic validator and
+CP-SAT check this example (C2).
 
 ## 4. System and evidence boundaries — target 1.00 page
 
@@ -130,8 +135,11 @@ input-plus-output tokens or currency. Historical SoCLaaS sampling and reasoning
 controls were server defaults; a solver seed does not make model calls deterministic.
 A bounded follow-up observed two serving fingerprints across three reference-model
 calls (C10). This does not prove different weights, but prevents claiming a stable
-backend. Qualification remains paused under the team's retained strict requirement;
-no model recommendation follows from tiny JSON checks.
+backend. The original paired qualification stopped under the retained strict backend
+requirement; no scheduling-quality conclusion follows from tiny JSON checks.
+The next development target is `qwen3.8:27b`, as recorded in planning Section 9.
+That choice supplies neither measured improvement nor final-model eligibility;
+all numerical comparisons in this draft still concern `qwen3.6:35b`.
 
 ## 5. Dataset and protocol — target 1.50 pages
 
@@ -164,11 +172,27 @@ frozen blocks and explicit execution cap. The proposed 600-call target and
 realistic and selected language blocks have separate estimands. Additional
 wordings cannot give selected cases extra primary weight.
 
-We will report validity on gold-SAT cases, UNSAT accuracy, all-attempt accepted
-answers, failure categories, conditional objective quality and resources. Paired
-comparisons retain A/B pairs and source-family grouping. The final analysis must
-record its interval method, seed, denominators and achieved family counts before
-outcomes. Tiny constructed strata cannot establish population difficulty thresholds.
+The observed development estimands are defined as follows; the final protocol
+must freeze its corresponding definitions before outcomes:
+
+| Quantity | Numerator and denominator / interpretation |
+| --- | --- |
+| SAT validity | Gold-valid schedules / all gold-SAT attempts, including malformed and failed attempts |
+| UNSAT accuracy | Correct UNSAT answers / all gold-UNSAT attempts; A predicts infeasibility, B proves it only for its extracted model |
+| Accepted answer | Gold-valid schedule or correct UNSAT answer / all labelled attempts; depends on the artificial label balance |
+| Objective gap | Candidate minus proven reference component, on gold-valid SAT schedules; evaluate a later repair component only when earlier components match |
+| Extraction fidelity | Structural comparison against gold, with separately labelled bounded semantic certificates; neither parsing nor structural agreement proves general language understanding |
+
+Pair A and B on the same case, rendering and repeat. For the expanded development
+study, intervals resample source families with replacement 10,000 times using
+seed 3263 and preserve their A/B pairs; they do not treat 100 cases as independent.
+These intervals describe the selected generator distribution, not population
+representativeness or new-generator transfer (C13). Report task/label results
+separately, since a single accepted-answer percentage conceals distinct failure
+modes. Keep realistic inputs, language variants and inference repeats out of the
+canonical primary denominator. The final analysis must declare achieved families,
+missing pairs, interval settings and selection/exclusion rules before outcomes.
+Tiny constructed strata cannot establish population difficulty thresholds.
 
 ## 6. Development findings and final-results slots — target 2.50 pages
 
@@ -181,6 +205,15 @@ and 60-second reference budgets. No new experiment generated this table.
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Generation | 23/50 | 48/50 | 17/25 | 24/25 | 6/25 | 24/25 |
 | Repair | 12/50 | 49/50 | 8/25 | 25/25 | 4/25 | 24/25 |
+| Total | 35/100 | 97/100 | 25/50 | 49/50 | 10/50 | 48/50 |
+
+On generation, B alone was accepted on 25 pairs, A alone on none, both on 23,
+and neither on two. The accepted-answer difference was 50 percentage points
+with a family-bootstrap 95% interval of 36.54–63.27 points. For repair, the
+corresponding counts were 37, zero, 12 and one: a 74-point difference with
+interval 59.18–88.89 points. Each task has 50 paired cases in 41 families (C13).
+This paired evidence supports a development advantage on the selected inputs;
+it is not a confirmatory held-out result.
 
 All failed attempts remain in denominators. B's three failures were two omitted
 fixed appointments and one malformed JSON response. A schema-valid extraction
@@ -196,11 +229,28 @@ The validator rejects it. Independent enumeration of the conflicting pair and
 restoring only the missing field in a diagnostic copy establish this failure’s
 mechanism; no correction enters primary scores (C5).
 
-The 200 calls reported 465,251 tokens with complete usage coverage. Mean model
-latency was 1.895 seconds for A and 10.115 seconds for B. CP-SAT averaged 4.69 ms
-over the 99 B attempts that reached it. This conditional timing suggests that
-solver speed was not the dominant cost on these small development instances.
-There was no measured currency cost (C6).
+Solution quality has a different denominator from validity. B's 25 valid repairs
+all attained the gold lexicographic tuple; A had eight valid repairs, six matching
+the full tuple. The mean moved-count excess was 0.375 for those eight A repairs;
+shift/preference gaps were evaluated only for the six matching earlier priorities.
+All 24 valid B generation schedules had zero preference gap (C14). These
+conditional results do not imply that invalid attempts have zero disruption,
+or compare two equally selected groups of successful schedules.
+
+| Resource, 100 calls per arm | A | B |
+| --- | ---: | ---: |
+| Reported tokens | 124,696 | 340,555 |
+| Mean model latency | 1.895 s | 10.115 s |
+| Median model latency | 1.278 s | 9.413 s |
+| p95 model latency, nearest rank | 2.074 s | 14.954 s |
+| Maximum model latency | 48.195 s | 20.321 s |
+
+Usage was present for all 200 calls: 465,251 tokens and 1,204.72 seconds of batch
+wall time. B used 2.73 times the reported tokens and 5.34 times the mean model
+latency. CP-SAT averaged 4.69 ms over 99 executed B solves; malformed extraction
+never reached the solver and is excluded from this conditional timing. On these
+small instances, extraction rather than CP-SAT dominated the added time. The slow
+A outlier remains in the table. There was no measured currency cost (C6).
 
 The data support a development comparison under this particular construction and
 configuration. They do not establish production reliability, final held-out
@@ -218,19 +268,29 @@ unfilled until F4/F5 supplies reviewed evidence; no expected scores are inserted
 `dev-3263-interaction_density-1-repair`, participant P7 bears one moved activity
 and 30 minutes of shift while P0–P6 bear none. This shows concentration, not proof
 that a feasible fairer solution exists. Shared events count for each participant;
-fixed assignments do not solve fair workload allocation (C7).
+fixed assignments do not solve fair workload allocation (C7). Displaying each
+participant's burden makes the trade-off visible, but does not itself mitigate
+inequity. Deciding whether a burden cap is appropriate requires stakeholder input;
+adding one would change the formal problem and is outside the current comparison.
 
 **Objective side effect.** A tiny independently enumerated repair admits a
 two-move/two-slot solution but chooses one move/four slots under the stated
 priority. Avoiding an extra moved commitment can therefore require greater total
-shift. The choice should be disclosed to users rather than called universally
-best (C8).
+shift. The one-move option shifts A from 0 to 4 while B stays at 1; the two-move option
+places A at 1 and B at 2. The choice should be disclosed rather than called
+universally best (C8). A user who values total time displacement more would need
+an explicitly different objective, followed by a new evaluation; the current
+system must not silently change priorities.
 
 **Negotiability and privacy.** A supplied deadline is hard unless explicitly
 modelled otherwise. The system cannot decide which unstated commitment may be
 relaxed. Only fictional data are used; real routines could reveal identity even
 after renaming. Future real calendars would require consent and a retention plan.
 The interface presents proposals without sending invitations or editing calendars.
+If a request says a meeting is “preferably” before lunch without stating whether
+that is negotiable, the appropriate limitation is to require clarification, not
+claim the prototype inferred the intended hardness. This is a design scenario,
+not an evaluated interaction or implemented dialogue feature.
 
 **Instruction-like text.** A synthetic prompt-boundary regression keeps an
 embedded “ignore all rules” string in the user-data message, outside system
@@ -267,6 +327,8 @@ teaching-team approval or rehearsal is claimed.
 These four source records were checked for this draft; related scheduling and
 language-robustness literature listed in planning Section 16 still needs final
 selection and human synthesis. Markdown is the single working report source.
-Its section budgets total ten pages, but no rendered page/font/margin compliance
-is claimed. Final typesetting, figure placement and the course-format audit remain
-F6 delivery work.
+A derived development PDF has been checked at seven body pages, plus separate
+title and references pages, with single-column text, at least 11-point type and
+one-inch margins. See the submission checklist for rebuild and audit details.
+This checks the current draft only: final results, human revisions and any added
+figures require a new format audit before submission.

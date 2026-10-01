@@ -4,9 +4,9 @@
 
 Generate schedules and repair them when requirements change. This research system compares a language model that produces schedules directly with the same model translating requests into a structured problem solved by OR-Tools CP-SAT. An independent validator checks both approaches against the original requirements.
 
-**Status: integrated development version 2.** Generation, minimum-disruption repair, extraction diagnostics, constraint explanations, benchmark execution, replay and the read-only dashboard are implemented. The next stage is a focused extraction improvement, model qualification and fresh final-study preparation, followed by reviewed evaluation, analysis and submission. The candidate builder, frozen rehearsal and compatible-block archive are offline-verified; final policy/data review, model selection and the actual study remain open. Core delivery target: **30 October 2026**.
+**Status: integrated development system with final-study preparation tooling.** Generation, minimum-disruption repair, extraction diagnostics, constraint explanations, benchmark execution, replay and the read-only dashboard are implemented. All three members' work is integrated. Candidate preparation now reaches 240 cases / 120 source families in a development pilot; frozen rehearsal and compatible-block analysis/archive are implemented. The selected SoCLaaS **`qwen3.8:27b`** development campaign covers 600 scheduling attempts across controlled, realistic and wording blocks; its live results are pending. Final eligibility, reviewed fresh data, the frozen study and member review remain open. Core delivery target: **30 October 2026**.
 
-[Development and final-study plan](planning.md) · [Contributor and agent instructions](AGENTS.md) · [Checkpoint readiness](report/checkpoint-readiness.md) · [Version 2 verification](report/version-2-validation.md)
+[Development and final-study plan](planning.md) · [Contributor and agent instructions](AGENTS.md) · [Integration audit](report/main-integration-audit-20261001.md) · [Submission checklist](report/submission-checklist.md)
 
 ## Capabilities
 
@@ -76,25 +76,29 @@ The [current work queue](planning.md#current-priorities-after-the-first-baseline
 
 | Work | Intended outcome |
 | --- | --- |
-| F1 — extraction fidelity | Regressions for the two omitted fixed appointments and malformed JSON; qualify a prompt amendment only if failure analysis justifies one, after model selection |
-| F2 — model and execution contract | Qualify a candidate against the current model, record effective settings and eligibility, and add a specific backend adapter only if required |
-| F3 — fresh final cases | Versioned construction/selection, complete development exclusions, independent gold/text review and explicit family/label quotas |
+| F1 — extraction fidelity | Maintain the delivered failure regressions; qualify the one justified prompt amendment only after model qualification, under a separate cap |
+| F2 — model and execution contract | Complete and analyze the authorized Qwen3.8 development campaign with strict identity/accounting; resolve final eligibility separately |
+| F3 — fresh final cases | Use the delivered builder and review-packet exporter; review the target-size pilot, approve policy/size, then draw and review fresh final cases |
 | F4 — freeze and study | Rehearse the frozen workflow, finalize actual review/budget decisions, then execute separate controlled, realistic and wording blocks |
 | F5–F6 — evidence and delivery | Validate cross-block analysis, archive replayable evidence, write the report and rehearse the presentation |
 
-The working study target is **600 calls**: 240 controlled canonical cases, 12 realistic cases and 48 additional renderings, each evaluated by A and B. A **312-call compact alternative** is available if family diversity, review capacity or resources do not support that target. Select the design using development evidence before final outcomes; neither count is a course requirement, a power guarantee or spending permission. See [the study design](planning.md#final-experiment-matrix-and-size-decision).
+The separate final-study working target is **600 calls**: 240 controlled canonical cases, 12 realistic cases and 48 additional renderings, each evaluated by A and B. A **312-call compact alternative** is available if family diversity, review capacity or resources do not support that target. Select the design using development evidence before final outcomes; neither count is a course requirement, a power guarantee or spending permission. See [the study design](planning.md#final-experiment-matrix-and-size-decision).
 
-A metadata-only SoCLaaS check on 30 September listed **`qwen3.8:27b`**, `gemma4:26b` and `ornith1.5:35b` alongside the current `qwen3.6:35b`. Qualify Qwen3.8 first as a possible upgrade; its [official model card](https://huggingface.co/Qwen/Qwen3.8-27B) motivates checking it, but no project result establishes it as better. Current configurations still use the existing model. [Planning Section 9](planning.md#9-nus-soclaas-model-choice-and-execution-budget) records availability, the proposed bounded comparison, settings and course-eligibility decision. The course's frontier-model requirement must be resolved before the final freeze; an endpoint listing alone does not settle it.
+The user selected and authorized a **full development campaign on SoCLaaS `qwen3.8:27b`**, using the inspected target-size pilot and existing authored drafts. Its 600 scheduling completions, two capability checks and one metadata request have a separate bounded allowance; live results are pending. The [current workflow](#selected-full-development-campaign) preserves the strict backend policy and unchanged revision-3 prompts. The preserved Qwen3.6 results above and stopped two-model qualification remain separate evidence. This development authorization does not approve the future frozen study or resolve the course's frontier-model requirement; see [Planning Section 9](planning.md#9-nus-soclaas-model-choice-and-execution-budget).
 
 Internal targets are **18 October for freeze** and **30 October for a complete report draft and reproduction package**. Course delivery is a 15-minute presentation plus five-minute Q&A in the week of 9 November, and a report due 13 November with at most ten single-column, single-spaced body pages, at least 11-point font and 1-inch margins. Verify Canvas cutoffs and feedback. [Planning Section 17](planning.md#17-rubric-evidence-and-course-delivery) maps the qualitative rubric to technical evidence, responsible-AI cases, genuine member contributions and delivery checks.
 
 This checkpoint includes the audited integrity fixes, expanded development results and final-study plan. Historical audit receipts describe their earlier local snapshot based on `63d68d8`; use the current commit and GitHub branch state to verify publication. A clone contains source, tests, manifests and reviewed summaries; raw live records must be supplied separately in a reviewed reproduction archive.
 
-### Yong Qing F3–F5 follow-up
+### Integrated preparation and preserved handoffs
+
+The [target-size preparation](report/final-data-preparation.md) produced **240 development cases / 120 source families** with complete quotas, independently checked SAT witnesses and UNSAT certificates, and a pending human-review packet. Its cumulative registry preserves **1,429 inspected structures / 29 sources**, including rejected proposals. This verifies construction capacity; these inspected cases are not final data. The [integration audit](report/main-integration-audit-20261001.md) records current verification and the archive/model-accounting corrections.
+
+The following member handoffs are historical evidence for their recorded source versions:
 
 [Current archive follow-up](report/yongqing-archive-review.md): F5 now rejects
 checkout-prompt drift, mismatched runtime dependency pins and linked archive inputs,
-and excludes unrelated prompt notes. All 623 tests pass on macOS/Linux ARM64; a new
+and excludes unrelated prompt notes. That checkpoint passed 623 tests on macOS/Linux ARM64; its
 16-attempt canned rehearsal archive reproduces every analysis field in a separate
 network-disabled Linux environment. This is offline engineering evidence; actual
 human review and the final study remain pending.
@@ -105,13 +109,22 @@ After the locked noneditable installation, run each command with a new output di
 
 ```sh
 .venv/bin/python evaluation/prepare_final_candidates.py runs/NEW-policy-pilot \
-  --registry benchmarks/manifests/development-hard-fingerprints-v2-20261001.json --seed 3266303
+  --registry benchmarks/manifests/development-hard-fingerprints-v2-20261001-target-pilot.json --seed 3266303
 .venv/bin/python evaluation/rehearse_study.py runs/NEW-frozen-rehearsal
 .venv/bin/python evaluation/analyze_study.py runs/NEW-frozen-rehearsal/blocks.json \
   runs/NEW-study-export --figures
 ```
 
 These commands use no model calls. Carry every new pilot's cumulative registry forward; never treat a pilot as final data. `--figures` uses the existing optional plotting dependency. The rehearsal's approvals and realistic-routing case are explicitly synthetic fixtures. Analysis accepts separate compatible frozen blocks, preserves failed attempts, rejects incomplete/incompatible input, and exports separate primary/realistic/wording summaries plus a checksummed local reproduction archive. `--no-archive` recomputes `analysis.json` from an existing block list. Actual final drawing/execution still requires the decisions and reviews in planning Sections 5 and 11.
+
+To create a reviewer-only packet from an existing candidate output:
+
+```sh
+.venv/bin/python evaluation/prepare_case_review.py \
+  runs/NEW-policy-pilot artifacts/NEW-case-review
+```
+
+This exports gold/reference evidence, all three public renderings and a CSV whose review fields begin pending. Never feed these reviewer files to a scheduling model. The final-data preparation report supplies the realistic-authorship worksheet and exact review procedure.
 
 ### Li Hao F2/F6 follow-up
 
@@ -123,22 +136,13 @@ reference model returned two serving fingerprints. That original qualification u
 six completions including capability checks (4,007 reported tokens). A separate
 1 October six-call tiny-JSON diagnostic used 493 reported tokens and again observed
 reference-backend variation. The user chose to retain the strict requirement;
-qualification remains blocked; no existing allowance permits continuation. See the
+that historical qualification remains stopped; its allowance cannot be reused. The separately authorized Qwen3.8 development campaign below has a new identity. See the
 [diagnostic receipt](configs/development/lihao-f2-diagnostic-20261001.json).
 No two-model quality conclusion follows.
 See the [report draft](report/study-draft.md) and [claim index](report/claim-evidence.md)
 for F6 preparation and explicitly pending human/final-study work.
 
-Prepare the packet offline from the preserved or regenerated expanded bundle:
-
-```sh
-.venv/bin/python evaluation/prepare_model_qualification.py runs/NEW-f2-input \
-  --cases runs/NEW-expanded-input/cases.json
-```
-
-This emits the exact selected cases, two proposed model configurations and
-reference/request preflights. It does not authorize calls. Resolve the recorded
-backend-policy stop before resuming qualification; do not repeat existing attempts.
+The optional small workflow remains available through `evaluation/prepare_model_qualification.py` and `evaluation/run_model_qualification.py`: the default selects Qwen3.8 and 24 cases, giving 48 scheduling completions plus two capability checks and one metadata request. Repeated explicit `--model` arguments prepare a two-model packet; each model executes as its own 51-request session. These alternatives need separate authorization and are not a prerequisite or extra allowance for the selected full campaign. Do not repeat consumed historical attempts.
 
 ### Yao Xiang formal-review follow-up
 
@@ -169,6 +173,7 @@ amendment awaits model qualification and its own bounded comparison.
 | Structural v2 | 144 procedural cases per repetition; balanced task/label strata, structural variation and three repair events at each level | Development and offline qualification |
 | Challenge v3 | 108 procedural cases in nine source families; coupled repairs, contradictions and preference trade-offs | Development, pilots and the expanded 100-case comparison |
 | Authored drafts | Twelve AI-assisted fictional scenarios; six generation/six repair and six SAT/six UNSAT | Development integration; human prose/gold review pending |
+| Source-family policy pilots | Procedural development inputs; latest target-size pilot has 240 cases / 120 families with balanced task/label strata | Construction-capacity and mathematical checks; all inspected structures excluded from future final data |
 
 No public benchmark instances or real calendars have been imported. SCHEDBench, NATURAL PLAN and related work inform the methodology. The authored drafts are not independently human-written or untouched test data. [Planning Section 8](planning.md#8-benchmark-and-evaluation-design) describes provenance, construction limits, human review and the final study.
 
@@ -254,6 +259,41 @@ set +a
 
 The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. Live configuration selects an explicit model; `default` is only a bootstrap alias. Verify current availability/capabilities and agree the request/token budget before each new run or session. **Previous pilot allowances are consumed.** A saved configuration or key grants no new spending permission. TLS certificate and hostname verification remain enabled. Current requests explicitly configure the model and output limit but leave sampling/reasoning controls to server defaults. Qualification must record those defaults or add verified options; do not assume temperature zero, JSON mode or an arbitrary compatible endpoint is supported.
 
+### Selected full development campaign
+
+The current development run uses **`qwen3.8:27b`**, unchanged revision-3 prompts, **32,768 requested output tokens per completion**, 30/900-second connect/read timeouts and no retries. B uses a 30-second solve; references use 60 seconds, one worker and seed 0. Sampling/reasoning options remain server defaults. The current installed suite passed **684 tests on both macOS and network-disabled Linux ARM64**, and the exact selected inputs completed a **600-attempt mocked rehearsal**; neither establishes live model performance. Live results remain pending in the [integration audit](report/main-integration-audit-20261001.md).
+
+| Block | Development inputs | Scheduling completions |
+| --- | --- | ---: |
+| Controlled | 240 cases / 120 source families from the target-size pilot, seed `32661001`; canonical wording | 480 |
+| Realistic | The 12 AI-assisted fictional cases in [`realistic-drafts-v1.json`](benchmarks/fixtures/realistic-drafts-v1.json); canonical wording | 24 |
+| Language | 24 selected controlled bases, six per task/label and from distinct families; paraphrase and reordered wording | 96 |
+
+Selection precedes model outcomes and balances sweep/event counts within each language stratum. Family normalization and exact source hashes are recorded; language cases retain their controlled partners. The [target-pilot receipt](benchmarks/manifests/f3-target-development-readiness-20261001.json) identifies the actual controlled bundle and its local archive. Import that preserved bundle before running the preparation example; it is not shipped as raw data in a clone. Human gold/text review remains pending, and the authored drafts retain their AI-assisted provenance. These inspected cases cannot become fresh final evaluation data.
+
+The following sequence documents preparation, authorized execution and completed-run analysis. `runs/IMPORTED-target-pilot/cases.json` denotes the imported receipt-matched input; `NEW-*` paths must be unused. It does not grant another campaign allowance.
+
+```sh
+.venv/bin/python evaluation/prepare_development_campaign.py \
+  runs/IMPORTED-target-pilot/cases.json runs/NEW-campaign-input
+
+# Only for a separately authorized run; use its actual authorization reference.
+.venv/bin/python evaluation/run_development_campaign.py \
+  runs/NEW-campaign-input runs/NEW-campaign-live \
+  --allow-live --authorization-reference 'ACTUAL_AUTHORIZATION_REFERENCE'
+
+# After all three blocks complete; no model calls.
+.venv/bin/python evaluation/analyze_study.py \
+  runs/NEW-campaign-live/blocks.json artifacts/NEW-campaign-analysis \
+  --development --figures
+```
+
+The helper shares a cap of **603 HTTP requests**: one model-list request, two tiny JSON capability completions at the configured ceiling, then 600 scheduling completions. The **19,726,336-token output reservation** covers all 602 completions; input tokens are additional, so it is not a total-token or currency cap. Each block has its own 480/24/96 cap under the shared budget.
+
+Strict model/backend checks span both capability responses and every block. Missing/wrong returned model, fingerprint change/appearance/disappearance, capability failure or a runner stop prevents further dispatch. Capability hashes and the observed fingerprint are embedded in each runtime configuration. Directory creation, reservations and responses are write-once; an interrupted campaign cannot be automatically reissued. Preserve its records and reconcile the interruption before proposing further calls.
+
+The summary records actual request/output reservations, elapsed campaign time and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. A successful campaign would remain development evidence, with final eligibility, independent human authorship/review, fresh data and frozen authorization still pending.
+
 ### Expanded development profile
 
 `configs/development/expanded-development-100.json` defines 200 calls, 16,384 output tokens per call, 30/600-second connect/read timeouts, no retries, 30-second B solves and 60-second references. The output reservation ceiling is 3,276,800 tokens, with input tokens additional. This is a generous tested profile for the selected packet, not blanket authorization for future calls. **The completed 200-call allowance is consumed.**
@@ -304,7 +344,7 @@ Replay requires no credentials or new model requests. A fresh clone contains agg
 
 `freeze-draft` creates an intentionally non-runnable configuration until review, eligibility and authorization references are supplied. See `scheduling freeze-draft --help` and [planning Section 8](planning.md#8-benchmark-and-evaluation-design). The versioned registry identifies scheduling structure independently of calendar presentation, while provenance hashes retain exact inputs. Legacy unversioned registries and frozen protocols cannot authorize new runs. Rebuild registries from source cases rather than relabelling old digests; retain old archives for replay.
 
-The current registry is [`development-hard-fingerprints-v2-20261001.json`](benchmarks/manifests/development-hard-fingerprints-v2-20261001.json), covering 28 bundles and 1,071 known structures after the two F3 pilots and retained construction tests. Earlier registries are preserved; carry every subsequent pilot/test addition forward and review completeness before freeze. Supply this versioned object to `freeze-draft --development-registry`; protocol format 2.0 embeds it as `development_registry`. New benchmark manifests must declare `slot-graph-v2`. Historical protocols remain replayable, but cannot be resumed or used for new execution under the changed source contract.
+The current registry is [`development-hard-fingerprints-v2-20261001-target-pilot.json`](benchmarks/manifests/development-hard-fingerprints-v2-20261001-target-pilot.json), covering 29 sources and 1,429 known structures after the target-size development pilot, earlier pilots and retained construction tests. Earlier registries are preserved; carry every subsequent pilot/test addition forward and review completeness before freeze. Supply this versioned object to `freeze-draft --development-registry`; protocol format 2.0 embeds it as `development_registry`. New benchmark manifests must declare `slot-graph-v2`. Historical protocols remain replayable, but cannot be resumed or used for new execution under the changed source contract.
 
 To rebuild from preserved inputs, use repeatable `--bundle` and `--archive-bundle` arguments; include every known development source, including prior pilots. For example, this command creates a **limited registry for the named authored bundle only**:
 
@@ -320,9 +360,9 @@ No final study is currently approved or executed. Human review, fresh inputs and
 
 ## Verification
 
-The [checkpoint readiness audit](report/checkpoint-readiness.md) records **521 passing Python tests and 7 passing frontend tests**, a fresh 200-attempt canned integration run, exact replay of 332 saved live attempts and all 100 expanded dashboard cases. It connects those checks to the original teaching materials and proposal. Canned success verifies integration; final scientific and submission gates remain open. Documentation updates do not constitute a new live benchmark or a new platform qualification.
+The [current integration audit](report/main-integration-audit-20261001.md) records exact tested source, installation, regression results, end-to-end checks, historical replay and outstanding gates. Use it for this checkpoint. The earlier [checkpoint readiness audit](report/checkpoint-readiness.md) records 521 Python and seven frontend tests against its historical source, the 200-attempt canned run and 332 historical replays. Canned success verifies integration; final scientific and submission gates remain open.
 
-[Version 2 validation](report/version-2-validation.md) records the exact source hashes, environments, checks and residual limits for the current implementation. It includes regression tests for proof/input correspondence and calendar-invariant development exclusions, installed-package checks, full canned integration, historical replay, explanations and dashboard consumers.
+[Version 2 validation](report/version-2-validation.md) preserves the earlier source hashes, environments and residual limits. It includes proof/input correspondence, calendar-invariant development exclusions, installed-package checks, canned integration, replay, explanations and dashboard consumers. Historical receipts are not verification of later source changes.
 
 ```sh
 node --check src/scheduling/dashboard/static/app.js

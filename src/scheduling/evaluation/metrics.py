@@ -91,6 +91,24 @@ def paired(rows, *, seed=3263, resamples=10000):
     }
 
 
+def token_usage_summary(usage):
+    """Sum reported per-attempt usage; missing values never become zero tokens."""
+    usage = list(usage)
+    tokens = {}
+    for field in ("prompt_tokens", "completion_tokens", "total_tokens"):
+        values = [u.get(field) for u in usage]
+        tokens[field] = {
+            "reported_sum": (
+                sum(v for v in values if v is not None)
+                if any(v is not None for v in values)
+                else None
+            ),
+            "reported_attempts": sum(v is not None for v in values),
+            "all_provider_attempts": len(values),
+        }
+    return tokens
+
+
 def summarize(rows):
     rows = list(rows)
     summaries = []
@@ -113,18 +131,7 @@ def summarize(rows):
         unsat = [r for r in labelled if r["gold_label"] == "UNSAT"]
         groups = len({r["group_id"] for r in items})
         accepted = sum(r["accepted"] is True for r in labelled)
-        tokens = {}
-        for field in ("prompt_tokens", "completion_tokens", "total_tokens"):
-            values = [u.get(field) for r in items for u in r["usage"]]
-            tokens[field] = {
-                "reported_sum": (
-                    sum(v for v in values if v is not None)
-                    if any(v is not None for v in values)
-                    else None
-                ),
-                "reported_attempts": sum(v is not None for v in values),
-                "all_provider_attempts": len(values),
-            }
+        tokens = token_usage_summary(u for r in items for u in r["usage"])
         violations = Counter(
             v["category"]
             for r in items

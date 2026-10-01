@@ -21,6 +21,8 @@ raw run files require the separately supplied reviewed archive.
 | C10 | Reference serving fingerprint varied in bounded identity diagnostic | [Diagnostic receipt](../configs/development/lihao-f2-diagnostic-20261001.json), `summary.models`, [handoff](lihao-f2-followup.md) | Li Hao/Yao Xiang, pending; three calls per model, not a scheduling comparison or proof of weights |
 | C11 | F3–F5 controls implemented and offline-verified | [Preparation receipt](../configs/development/yongqing-f345-verification-20261001.json), [handoff](yongqing-study-preparation.md) | All, pending; canned outputs and automated portability checks only |
 | C12 | Candidate-pilot witness/contradiction and bounded optimum cross-check | [Formal review](yaoxiang-f3-formal-review.md), [receipt](../configs/development/yaoxiang-f3-formal-review-20261001.json), [regressions](../tests/integration/test_candidate_formal_review.py) | Yao Xiang/Yong Qing human review pending; 48 cases / 24 families, only six optima independently enumerated |
+| C13 | Paired development advantage and family-bootstrap intervals | [Aggregate](../results/summary/expanded-development-100-20260930.json), `summary.paired`: select `[controlled, generation/repair, canonical, 0]`; `counts`, `pair_count`, `group_count`, `B_minus_A_percentage_points`, `cluster_bootstrap_95`, `seed`, `resamples` | Yong Qing, pending; 41 selected families per task, development-only; no population or final-study claim |
+| C14 | Conditional generation/repair quality | Same aggregate, `summary.subsets`: approach/task, `sat_validity` and ordered `objective_gaps`; [expanded analysis](expanded-development-100.md#results) records full-tuple matching | Yong Qing/Yao Xiang, pending; B repair 25/25 valid optima, A 6/8; secondary gaps only when prior components match; failures never treated as zero gap |
 
 Engineering follow-up (1 October): [F3–F5 receipt](../configs/development/yongqing-f345-verification-20261001.json) and [handoff](yongqing-study-preparation.md) link the 24-family construction pilot, 16-attempt synthetic frozen rehearsal, exact cross-platform archive replay and 332 unchanged historical attempts. These support construction/bookkeeping/reproducibility claims only. The synthetic 15/16 accepted outputs are deliberately canned and must never become a model-performance result. Actual source-policy, gold/text and independent teammate reviews remain pending.
 
@@ -35,3 +37,21 @@ remain absent until F4/F5 provides compatible frozen blocks. Their eventual inde
 must include block/run/config hashes, subsets and denominators, figure/table
 commands, exclusions and actual independent review/replay receipts. Do not attach
 development counts to an empty final-results table.
+
+## Audit procedure for the next report revision
+
+1. Recompute each numerical claim from the named aggregate or the preserved raw
+   archive. Match run/configuration, task, label, variant, repeat and family count;
+   rounding must not change denominators. C4/C6/C13/C14 refer to the same expanded
+   development run, not the selected next development model.
+2. Have a member review the worked proofs and the source-request meaning of each
+   diagnostic example. Automated tests and solver certificates are separate evidence.
+3. Add final-study claim IDs only after the compatible frozen blocks exist. Link
+   the analysis manifest, exact source/data/config hashes, command, output and
+   caveat; do not overwrite the historical development claim locators.
+4. Record an actual reviewer, date and correction or acceptance decision only after
+   review. See [submission checklist](submission-checklist.md) for unresolved gates.
+
+The method and interpretation additions on 1 October are AI-assisted editorial
+work grounded in existing artifacts. They do not add inference or certify a human
+review. The selected next development model is a decision, not a C4/C13 result.
