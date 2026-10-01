@@ -1,6 +1,6 @@
 # Report claim-to-evidence index
 
-Applies to [study-draft.md](study-draft.md), 30 September 2026. All human reviews
+Applies to [study-draft.md](study-draft.md), updated 1 October 2026. All human reviews
 below are pending. File/record links establish traceability, not sign-off.
 Development run: `expanded-development-100-20260930-01`; configuration:
 [expanded-development-100.json](../configs/development/expanded-development-100.json).
@@ -18,6 +18,8 @@ raw run files require the separately supplied reviewed archive.
 | C7 | Concentrated participant inconvenience | [recorded case discussion](lihao-development-followup.md#four-responsible-ai-cases-for-team-discussion), run `main-baseline-20260929-01`, case `dev-3263-interaction_density-1-repair`, B | All, pending; historical development case; no proof of an avoidable inequity |
 | C8 | One move/four slots wins over two moves/two slots | [formal qualification](../tests/unit/test_formal_qualification.py), `test_movement_priority_beats_smaller_total_shift` | Yao Xiang, pending; tiny mathematical counterexample |
 | C9 | Instruction-like text remains public data in prompt construction | [direct tests](../tests/unit/test_direct.py), `test_repair_prompt_preserves_original_and_priority` | Li Hao, pending; no live adversarial-resistance claim |
+| C10 | Reference serving fingerprint varied in bounded identity diagnostic | [Diagnostic receipt](../configs/development/lihao-f2-diagnostic-20261001.json), `summary.models`, [handoff](lihao-f2-followup.md) | Li Hao/Yao Xiang, pending; three calls per model, not a scheduling comparison or proof of weights |
+| C11 | F3–F5 controls implemented and offline-verified | [Preparation receipt](../configs/development/yongqing-f345-verification-20261001.json), [handoff](yongqing-study-preparation.md) | All, pending; canned outputs and automated portability checks only |
 
 Engineering follow-up (1 October): [F3–F5 receipt](../configs/development/yongqing-f345-verification-20261001.json) and [handoff](yongqing-study-preparation.md) link the 24-family construction pilot, 16-attempt synthetic frozen rehearsal, exact cross-platform archive replay and 332 unchanged historical attempts. These support construction/bookkeeping/reproducibility claims only. The synthetic 15/16 accepted outputs are deliberately canned and must never become a model-performance result. Actual source-policy, gold/text and independent teammate reviews remain pending.
 

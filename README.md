@@ -112,8 +112,13 @@ These commands use no model calls. Carry every new pilot's cumulative registry f
 qualification packet and versioned provider execution metadata. New frozen runs
 stop on reported backend fingerprint drift; historical replay remains supported.
 The authorized live qualification stopped after its first pair because the
-reference model returned two serving fingerprints. Six completions including
-capability checks reported 4,007 tokens; no two-model quality conclusion follows.
+reference model returned two serving fingerprints. That original qualification used
+six completions including capability checks (4,007 reported tokens). A separate
+1 October six-call tiny-JSON diagnostic used 493 reported tokens and again observed
+reference-backend variation. The user chose to retain the strict requirement;
+qualification remains blocked; no existing allowance permits continuation. See the
+[diagnostic receipt](configs/development/lihao-f2-diagnostic-20261001.json).
+No two-model quality conclusion follows.
 See the [report draft](report/study-draft.md) and [claim index](report/claim-evidence.md)
 for F6 preparation and explicitly pending human/final-study work.
 
@@ -208,6 +213,11 @@ Explanations distinguish the extracted problem's proof from gold acceptance and 
 
 ## SoCLaaS and bounded live runs
 
+SoCLaaS remains the development provider. The intended submission experiments will
+use an official provider API, such as OpenAI; exact provider/model selection,
+adapter qualification, eligibility and execution authorization are still pending.
+The current package does not yet implement that final-provider adapter.
+
 ```sh
 [ -e .env ] || cp .env.example .env
 chmod 600 .env
@@ -286,7 +296,7 @@ To rebuild from preserved inputs, use repeatable `--bundle` and `--archive-bundl
 
 Do not substitute that limited example for the project's complete registry. Existing output files are never overwritten; raw archives referenced by the full registry must be obtained separately to rebuild it.
 
-No final study is currently approved or executed. Human review, fresh inputs and complete development exclusions, an eligible qualified model, the final protocol and an explicit cap remain prerequisites. Development generators do not produce the planned fresh final packet automatically. F3 implements that preparation; F4 uses separate configurations for canonical and selected-language conditions, and F5 verifies their compatibility before analysis. These planned additions are not commands available in the current CLI.
+No final study is currently approved or executed. Human review, fresh inputs and complete development exclusions, an eligible qualified model, the final protocol and an explicit cap remain prerequisites. Development generators do not produce the planned fresh final packet automatically. F3 implements that preparation; F4 uses separate configurations for canonical and selected-language conditions, and F5 verifies their compatibility before analysis. The implemented standalone entry points are `evaluation/prepare_final_candidates.py`, `evaluation/rehearse_study.py` and `evaluation/analyze_study.py`; see the F3–F5 instructions above. Their offline checks do not satisfy the outstanding human or live-study gates.
 
 ## Verification
 

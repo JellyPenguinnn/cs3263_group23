@@ -136,7 +136,7 @@ Read current Git status, this queue and the relevant contract before implementin
 | Work package | Lead / reviewer | Status and dependency | Completion evidence |
 | --- | --- | --- | --- |
 | F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Eight saved-failure regressions pass; bounded amendment reviewed but not activated; prompt qualification waits for F2 and a new cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
-| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Offline packet/metadata qualified; six live completions, paired qualification stopped on serving-fingerprint drift; model decision/eligibility pending | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
+| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | Offline packet/metadata qualified; original paired run stopped on fingerprint drift; separate six-call diagnostic confirms variation; user retained strict policy; model decision/eligibility pending | Chosen model/endpoint decision, tested payload/accounting, measured qualification and recorded effective settings |
 | F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Builder/selector and development pilot verified; policy decision, fresh draw and human review pending | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
 | F4: freeze rehearsal and final study | Yong Qing / all | Synthetic offline three-block rehearsal verified; final inference depends on F1–F3 and actual decisions | Successful offline frozen rehearsal, approved protocol/cap, complete final records with no silent exclusions |
 | F5: analysis and reproduction | Yong Qing / independent teammate | Core compatible-block analysis, resource export and archive verified on macOS/Linux; final claims and independent teammate replay pending | Matched analysis, claim-to-run index, failure review, checksummed archive and independent replay |
@@ -144,7 +144,17 @@ Read current Git status, this queue and the relevant contract before implementin
 
 Current Yong Qing checkpoint (1 October): [F3–F5 handoff](report/yongqing-study-preparation.md), [pilot manifest](benchmarks/manifests/yongqing-f3-policy-pilot-20261001.json), [verification](configs/development/yongqing-f345-verification-20261001.json). The branch incorporates GitHub main `24c267c`; 580 installed-package tests pass on both macOS/Linux ARM64. A 24-family development policy pilot and 16-attempt synthetic frozen rehearsal are verified; the local archive reproduces every analysis field on network-disabled Linux. All 332 historical development attempts replay exactly. The user subsequently authorized member-branch publication; main integration remains separate. No final draw, new inference or human sign-off is included. The cumulative 1 October registry includes both pilots and all retained construction-test originals/updates; completeness still needs team review.
 
-Current Li Hao checkpoint (30 September): [F2/F6 handoff](report/lihao-f2-followup.md),
+Current Li Hao follow-up (1 October): branch incorporates main `d0bfac0`.
+A separately authorized six-call identity diagnostic returned valid JSON and exact
+model IDs (493 reported tokens); `qwen3.6:35b` varied across two fingerprints.
+The user chose to retain strict backend requirements and continue offline: no
+variable-backend scheduling comparison is authorized. The new allowance is consumed.
+Diagnostic implementation and final 16-test macOS/Linux checks are recorded in the
+[receipt](configs/development/lihao-f2-diagnostic-20261001.json) and
+[handoff](report/lihao-f2-followup.md). F2 is still blocked; F6 remains a draft,
+with actual interpretation/review/final results and submission gates open.
+
+Historical Li Hao checkpoint (30 September): [F2/F6 handoff](report/lihao-f2-followup.md),
 [qualification selection](benchmarks/manifests/lihao-f2-qualification-20260930.json),
 [verification](configs/development/lihao-f2-verification-20260930.json),
 [report source](report/study-draft.md) and [claim index](report/claim-evidence.md).
@@ -177,6 +187,12 @@ First preserve revision 3 as the reference configuration. Qualify model choice w
 B's 10 structural mismatches include eight independently certified equivalent encodings and two true omissions. Retain the original structural metric and separate bounded equivalence diagnostics. The 4.69 ms mean solver time over 99 solves does not justify a solver speed project. After a focused qualification, freeze the best justified configuration, retain remaining failures and proceed; do not chase 100% on known development cases.
 
 ### F2 — selected model, backend and settings
+
+Provider direction confirmed on 1 October: retain SoCLaaS for development, then
+use an official provider API (for example OpenAI) for the submission experiments.
+Exact provider/model, access, eligibility and budget remain undecided. This does
+not authorize an adapter for an unspecified endpoint or new calls; the current
+SoCLaaS paired qualification remains paused under the user's strict-policy choice.
 
 Section 9 records the catalogue and recommended qualification. The implemented `SoCLaaSProvider` rejects other base URLs; `evaluate-batch` currently routes both live modes to it. `ModelConfig` contains model/output limits/timeouts/retry fields, while the request body sends only model, messages, `max_tokens` and `stream=False`. Historical sampling and reasoning controls were **server defaults, not explicitly configured**. Do not claim deterministic inference from a solver seed or assume a model-name/base-URL change supports an arbitrary final provider.
 

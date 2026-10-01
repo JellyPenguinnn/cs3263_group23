@@ -1,4 +1,93 @@
-# Li Hao F2/F6 handoff — 30 September 2026
+# Li Hao F2/F6 follow-up — 1 October 2026
+
+The member branch now incorporates GitHub main `d0bfac0` by fast-forward, preserving
+all prior work. The user has now authorized committing and pushing this checkpoint
+to `lihao-llm-baseline`; main integration remains separate.
+
+## Backend diagnostic and current decision
+
+The user authorized six serial tiny-JSON completions (three per model), no retries,
+256 output tokens each / 1,536 reserved output tokens total, 30/120-second
+connect/read timeouts and no metadata request. The existing authorized credential
+was used without exposing its value. All six calls returned valid requested JSON,
+the exact model ID and finish `stop`; usage was available for every call.
+
+| Model | Fingerprints across three calls | Reported tokens |
+| --- | --- | ---: |
+| `qwen3.6:35b` | `vllm-0.26.0-2ccdf8cb` once; `vllm-0.28.0-f8aad13e` twice | 126 |
+| `qwen3.8:27b` | `vllm-0.26.0-b73e56ef` three times | 367 |
+
+Total: **493 reported tokens**. Variation persists for the reference model; three
+matching observations do not establish stable candidate hosting or pinned weights.
+This is transport/identity evidence, not scheduling accuracy or final eligibility.
+The new [sanitized receipt](../configs/development/lihao-f2-diagnostic-20261001.json)
+contains hashes and exact accounting. Raw records remain in ignored
+`runs/lihao-f2-diagnostic-20261001-01`, unavailable from a fresh clone.
+
+**Decision:** the user chose to keep the backend requirement strict and continue
+offline. No variable-backend comparison is authorized. The six-call allowance is
+consumed. The earlier stopped comparison and all frozen guards remain unchanged;
+no scheduling calls were made in this follow-up. F2 remains incomplete until a
+suitable stable serving environment and new qualification authorization are available.
+No adapter, prompt or scoring change is justified by the diagnostic alone.
+
+## Scope audit against planning Sections 4–5 and 11
+
+| Li Hao responsibility | Current evidence / remaining gate |
+| --- | --- |
+| F1 packaging support | Installed prompts match source; revision 3 retained. Candidate prompt qualification waits for model selection and a new cap. |
+| F2 provider and integration | Packet, execution metadata, stop/accounting controls and diagnostic verified. Paired model qualification, final adapter/settings and eligibility remain incomplete. |
+| F3 wording cross-review | Construction support is integrated. Actual member review of selected prose against gold remains pending; automated checks do not supply human sign-off. |
+| F4 joint protocol review | Synthetic rehearsal is integrated. Actual final protocol and live authorization remain pending. |
+| F5 reproduction support | Existing archive and replay tooling are integrated. Final-study archive and actual independent teammate replay remain pending. |
+| F6 report assembly and demo | Draft methods, diagram, claim index, responsible-AI cases and rehearsal guide exist. Final findings, member interpretation, typeset/page audit, recorded fallback and actual rehearsal/submission remain pending. |
+
+The user clarified the provider direction: SoCLaaS remains for development; the
+submission experiments will use an official provider API, such as OpenAI. The exact
+provider/model, eligibility, credentials and final budget have not been selected.
+This records intended direction, not an implemented adapter or a new call allowance.
+The strict-policy pause on the current SoCLaaS paired comparison remains in force.
+
+## Implemented and verified this session
+
+[The diagnostic command](../scripts/diagnose_provider.py) uses the existing provider
+and record writer. It records exact settings/source hashes, reserves before each
+request, rejects malformed/truncated answers and model mismatches, and refuses
+reuse of any output directory, including interrupted runs. An interruption leaves
+a reservation to reconcile, never permission to reissue. Missing usage/fingerprint
+remains unavailable. There is no benchmark or alternate scheduling runner here.
+
+The final complete macOS suite passed **596 tests** after the Git-less installation
+portability fix. All **16 diagnostic tests passed on both macOS and Linux ARM64**.
+Installed package source/assets and `pip check` passed. Tests cover caps/order/settings, provider failures, exact model
+identity, malformed envelopes/JSON, duplicate keys, truncation, missing/zero usage
+and durable interruptions. The exact script used for live calls is preserved with
+its original hash; the final portability edit does not rewrite that evidence.
+Hosted CI is unverified because GitHub CLI authentication is unavailable.
+
+Offline reproduction (no credential or inference):
+
+```sh
+.venv/bin/python -m pytest -q tests/integration/test_provider_diagnostic.py
+.venv/bin/python scripts/diagnose_provider.py --help
+```
+
+A future diagnostic needs a fresh six-call authorization and new directory before
+using `scripts/diagnose_provider.py DIRECTORY --allow-live --authorization-reference REF`.
+The flag is a technical gate, not budget permission. Do not repeat the consumed run.
+
+F6's draft now links the provider limitation and implemented F3–F5 controls to their
+receipts; it does not fill final-result slots with diagnostic or canned scores.
+Human interpretation, wording review, report format/page audit and submission
+remain pending. Next Li Hao task: obtain a stable serving policy, then complete a
+newly authorized paired model qualification with unchanged prompts; assemble its
+measured recommendation before any separate prompt experiment or final freeze.
+Optional extra models, adapters for unselected providers, solver tuning and UI
+expansion remain deferred.
+
+---
+
+## Historical checkpoint — 30 September 2026
 
 Working branch: `lihao-llm-baseline`, fast-forwarded from `8cc43b6` to GitHub main
 `8f3ff1b` with existing history preserved. The user subsequently authorized

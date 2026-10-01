@@ -1,0 +1,103 @@
+{
+  "authorization": {
+    "connect_timeout_seconds": 30,
+    "consumed": true,
+    "input_tokens_additional": true,
+    "max_output_tokens_each": 256,
+    "metadata_requests": 0,
+    "read_timeout_seconds": 120,
+    "requested_output_tokens_total": 1536,
+    "requests": 6,
+    "retries": 0
+  },
+  "backend_policy_decision": "User chose keep strict and continue offline; no variable-backend comparison authorized",
+  "base_main": "d0bfac0",
+  "branch": "lihao-llm-baseline",
+  "checks": {
+    "final_diagnostic_linux_arm64": "16 passed in 1.35s against existing locked installed package",
+    "final_diagnostic_macos": "16 passed in 1.04s",
+    "final_installed_source": "All installed scheduling Python files match checkout",
+    "final_macos_full": "596 passed in 47.06s",
+    "final_tests_log_sha256": "352e0053746b2b1b86a08869cfd493a9146aec6559aa8433e1c7074b1982291c",
+    "hosted_ci": "not verified; gh unauthenticated",
+    "installed_assets": "passed",
+    "macos_full_before_portability_edit": "595 passed in 47.13s",
+    "pip_check": "passed"
+  },
+  "date": "2026-10-01",
+  "evidence": "Bounded provider identity diagnostic, not a scheduling benchmark or model qualification",
+  "executed_script_sha256": "37794f9a4aa60d0e0a9e24270f114a31352b8f00d6837fd531fd1a1c11c61388",
+  "final_provider_direction": "SoCLaaS development; official provider API for submission, exact provider/model/access/eligibility/cap pending",
+  "format_version": "1.0",
+  "manifest_sha256": "311ab16f65a6b75123e8304756317d7501512257eb4dff83bc89d422b46e3015",
+  "post_run_change": "Git-less installation portability only; executed script preserved separately and original manifest unchanged",
+  "publication": "User authorized commit and push to lihao-llm-baseline after final scope audit; main integration separate",
+  "raw_records_available_in_fresh_clone": false,
+  "remaining": [
+    "Stable serving environment and separately authorized paired qualification",
+    "Model recommendation and course eligibility",
+    "Actual human wording/gold reviews and frozen protocol",
+    "F6 final evidence, interpretation, formatting, rehearsal and submission"
+  ],
+  "reported_tokens_total": 493,
+  "response_sha256": {
+    "response-00.json": "e4abdb097694399bf2a797b6cafc37248f819a49f001281d2a3b4f6ac09e496d",
+    "response-01.json": "6835db16a3e6616d6d6e10a2fa5b9536e53bd5581cda47c1f1d54e4cd4af5320",
+    "response-02.json": "2f4c6f561eda7534d73d4251582aed717e8b99901fcc7a52bcfc8d52e3b95c20",
+    "response-03.json": "8401d5b32bbc54eb08e73365790240c6560259fcbeff1fe69df7fe90977d5065",
+    "response-04.json": "1adc12101a6e987f891fce37a4174ce35f6317f8def5d5aefacdcc8b5420a11e",
+    "response-05.json": "a559600bdbb98e8abe862220ae05ac43334421b978692a3ae6c50e5fe4959088"
+  },
+  "run_path": "runs/lihao-f2-diagnostic-20261001-01",
+  "source_sha256": {
+    "scripts/diagnose_provider.py": "f9e73d7bccc3652484a27d499deb08b72eeb389add3181a77fc22c8939c207c3",
+    "tests/integration/test_provider_diagnostic.py": "e63f1fca9867afadcb37df29dbdbe738c654af2e65f4a27ac08b96725adb5744"
+  },
+  "summary": {
+    "batch_wall_seconds": 3.7757522501051426,
+    "completed_responses": 6,
+    "limits": [
+      "Three observations cannot establish stable hosting or pinned weights.",
+      "Tiny JSON checks do not qualify scheduling accuracy, long outputs, reasoning budgets or eligibility.",
+      "Fingerprint variation is recorded only in this diagnostic; frozen study checks remain strict.",
+      "Input tokens are additional; unavailable usage is not zero."
+    ],
+    "models": [
+      {
+        "completed_responses": 3,
+        "fingerprints": [
+          {
+            "count": 1,
+            "value": "vllm-0.26.0-2ccdf8cb"
+          },
+          {
+            "count": 2,
+            "value": "vllm-0.28.0-f8aad13e"
+          }
+        ],
+        "identity_observation": "varied",
+        "model": "qwen3.6:35b",
+        "observed_variation": true,
+        "reported_tokens": 126,
+        "usage_reported_attempts": 3
+      },
+      {
+        "completed_responses": 3,
+        "fingerprints": [
+          {
+            "count": 3,
+            "value": "vllm-0.26.0-b73e56ef"
+          }
+        ],
+        "identity_observation": "same_in_three_calls",
+        "model": "qwen3.8:27b",
+        "observed_variation": false,
+        "reported_tokens": 367,
+        "usage_reported_attempts": 3
+      }
+    ],
+    "requested_output_tokens_reserved": 1536,
+    "requests_reserved": 6,
+    "stop_reason": null
+  }
+}
