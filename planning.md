@@ -142,7 +142,20 @@ Read current Git status, this queue and the relevant contract before implementin
 | F5: analysis and reproduction | Yong Qing / independent teammate | Core compatible-block analysis, resource export and archive verified on macOS/Linux; final claims and independent teammate replay pending | Matched analysis, claim-to-run index, failure review, checksummed archive and independent replay |
 | F6: report and course delivery | Li Hao assembles / all | Report source, claim index, contribution log and rehearsal draft prepared; human/final-result/format work pending | Audited ten-page body, responsible-AI cases, presentation/Q&A rehearsal and actual submission receipts |
 
-Current Yong Qing checkpoint (1 October): [F3–F5 handoff](report/yongqing-study-preparation.md), [pilot manifest](benchmarks/manifests/yongqing-f3-policy-pilot-20261001.json), [verification](configs/development/yongqing-f345-verification-20261001.json). The branch incorporates GitHub main `24c267c`; 580 installed-package tests pass on both macOS/Linux ARM64. A 24-family development policy pilot and 16-attempt synthetic frozen rehearsal are verified; the local archive reproduces every analysis field on network-disabled Linux. All 332 historical development attempts replay exactly. The user subsequently authorized member-branch publication; main integration remains separate. No final draw, new inference or human sign-off is included. The cumulative 1 October registry includes both pilots and all retained construction-test originals/updates; completeness still needs team review.
+Current Yong Qing archive follow-up (1 October): branch incorporates main `80df71f`.
+[F5 handoff](report/yongqing-archive-review.md) and
+[receipt](configs/development/yongqing-archive-verification-20261001.json) record nine
+reproduced regression cases and their correction: mismatched prompts/dependency pins,
+linked inputs and unrelated prompt sidecars. All 623 installed macOS/Linux tests
+pass; a new 16-attempt synthetic rehearsal archive reproduces every analysis field
+on network-disabled Linux. Earlier frozen analysis and archive checksums are
+unchanged. No model calls, new final data or human approval occurred. Actual
+policy/model/review decisions and final execution remain open. The user has now
+authorized member-branch publication of this checkpoint; main integration and
+human review remain separate. The verification receipt retains its original
+pre-publication status.
+
+Historical Yong Qing preparation checkpoint (1 October): [F3–F5 handoff](report/yongqing-study-preparation.md), [pilot manifest](benchmarks/manifests/yongqing-f3-policy-pilot-20261001.json), [verification](configs/development/yongqing-f345-verification-20261001.json). The branch incorporates GitHub main `24c267c`; 580 installed-package tests pass on both macOS/Linux ARM64. A 24-family development policy pilot and 16-attempt synthetic frozen rehearsal are verified; the local archive reproduces every analysis field on network-disabled Linux. All 332 historical development attempts replay exactly. The user subsequently authorized member-branch publication; main integration remains separate. No final draw, new inference or human sign-off is included. The cumulative 1 October registry includes both pilots and all retained construction-test originals/updates; completeness still needs team review.
 
 Current Li Hao follow-up (1 October): branch incorporates main `d0bfac0`.
 A separately authorized six-call identity diagnostic returned valid JSON and exact

@@ -92,7 +92,14 @@ This checkpoint includes the audited integrity fixes, expanded development resul
 
 ### Yong Qing F3–F5 follow-up
 
-[Current handoff](report/yongqing-study-preparation.md): the provisional candidate policy, synthetic frozen rehearsal and checked multi-block analysis/archive pass 580 tests on macOS/Linux ARM64. The development policy pilot produced 24 distinct families / 48 cases. This establishes engineering readiness, not final data, human review or model accuracy.
+[Current archive follow-up](report/yongqing-archive-review.md): F5 now rejects
+checkout-prompt drift, mismatched runtime dependency pins and linked archive inputs,
+and excludes unrelated prompt notes. All 623 tests pass on macOS/Linux ARM64; a new
+16-attempt canned rehearsal archive reproduces every analysis field in a separate
+network-disabled Linux environment. This is offline engineering evidence; actual
+human review and the final study remain pending.
+
+[Earlier preparation handoff](report/yongqing-study-preparation.md): the provisional candidate policy, synthetic frozen rehearsal and checked multi-block analysis/archive pass 580 tests on macOS/Linux ARM64. The development policy pilot produced 24 distinct families / 48 cases. This establishes engineering readiness, not final data, human review or model accuracy.
 
 After the locked noneditable installation, run each command with a new output directory:
 

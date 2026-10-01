@@ -279,3 +279,77 @@ def test_resource_distributions_keep_missing_usage_and_tails():
     assert result["total_tokens"]["missing"] == 1
     assert result["total_tokens"]["median"] == 30
     assert result["solver_seconds"]["reported"] == 0
+
+
+def archive_project(tmp_path):
+    root = Path(__file__).resolve().parents[2]
+    project = tmp_path / "project"
+    (project / "evaluation").mkdir(parents=True)
+    shutil.copytree(root / "prompts", project / "prompts")
+    for name in ("pyproject.toml", "requirements.lock", "evaluation/analyze_study.py"):
+        shutil.copy2(root / name, project / name)
+    return project
+
+
+@pytest.mark.parametrize(
+    "prompt",
+    ["direct/generation.txt", "direct/repair.txt", "extraction/specification.txt"],
+)
+def test_archive_rejects_checkout_prompt_drift_before_writing(
+    rehearsal, tmp_path, prompt
+):
+    path, _ = rehearsal
+    project = archive_project(tmp_path)
+    (project / "prompts" / prompt).write_text(
+        "Different instructions from the recorded run"
+    )
+    output = tmp_path / "export"
+    with pytest.raises(ValueError, match="prompt"):
+        export_study(blocks(path), output, project_root=project)
+    assert not output.exists()
+
+
+@pytest.mark.parametrize(
+    "linked",
+    ["prompts/direct/generation.txt", "evaluation/analyze_study.py", "prompts/direct"],
+)
+def test_archive_rejects_linked_project_inputs(rehearsal, tmp_path, linked):
+    path, _ = rehearsal
+    project = archive_project(tmp_path)
+    original = project / linked
+    outside = tmp_path / "outside"
+    original.rename(outside)
+    original.symlink_to(outside, target_is_directory=outside.is_dir())
+    output = tmp_path / "export"
+    with pytest.raises(ValueError, match="link"):
+        export_study(blocks(path), output, project_root=project)
+    assert not output.exists()
+
+
+def test_archive_excludes_unrelated_prompt_sidecars(rehearsal, tmp_path):
+    path, _ = rehearsal
+    project = archive_project(tmp_path)
+    (project / "prompts/private-notes.txt").write_text("synthetic-private-sentinel")
+    output = tmp_path / "export"
+    export_study(blocks(path), output, project_root=project)
+    with tarfile.open(output / "reproduction.tar.gz") as archive:
+        assert "source/prompts/private-notes.txt" not in archive.getnames()
+
+
+@pytest.mark.parametrize("change", ["version", "missing"])
+def test_archive_lock_must_reproduce_recorded_runtime(rehearsal, tmp_path, change):
+    path, _ = rehearsal
+    project = archive_project(tmp_path)
+    lock = project / "requirements.lock"
+    text = lock.read_text()
+    assert "httpx==0.28.1" in text
+    lock.write_text(
+        text.replace(
+            "httpx==0.28.1",
+            "httpx==0.1.0" if change == "version" else "removed-httpx==0.28.1",
+        )
+    )
+    output = tmp_path / "export"
+    with pytest.raises(ValueError, match="lock"):
+        export_study(blocks(path), output, project_root=project)
+    assert not output.exists()
