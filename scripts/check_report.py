@@ -11,6 +11,7 @@ from pathlib import Path
 import re
 
 import pdfplumber
+from render_report import math_layout
 
 ROOT = Path(__file__).resolve().parents[1]
 
@@ -22,7 +23,7 @@ def visible(text):
 
 
 def source_chunks(source):
-    chunks, paragraph, fence = [], [], None
+    chunks, paragraph, fence, equation = [], [], None, []
     def flush():
         if paragraph:
             chunks.append(' '.join(paragraph))
@@ -30,9 +31,15 @@ def source_chunks(source):
     for line in source.splitlines():
         if line.startswith('```'):
             flush()
+            if fence == 'math':
+                layout = math_layout(' '.join(equation))
+                chunks.append(''.join(chr(g[2]) for g in layout.glyphs))
+                equation.clear()
             fence = None if fence else line[3:]
         elif fence == 'mermaid':
             chunks.extend(re.findall(r'\[([^\]]+)\]', line))
+        elif fence == 'math':
+            equation.append(line)
         elif fence:
             chunks.append(line)
         elif line.startswith('|'):
@@ -85,12 +92,20 @@ def main():
         missing = [c for c in chunks if visible(c) not in combined]
         if missing:
             raise ValueError(f'Visible source text missing from PDF: {missing[:3]}')
+        formulas = re.findall(r'^```math\n(.*?)^```', args.source.read_text(), re.M | re.S)
+        math_text = re.sub(r'\s+', '', '\n'.join(texts))
+        for formula in formulas:
+            glyphs = math_layout(' '.join(formula.splitlines())).glyphs
+            expected = ''.join(chr(g[2]) for g in glyphs)
+            if re.sub(r'\s+', '', expected) not in math_text:
+                raise ValueError(f'Mathematical symbols missing or changed in PDF: {formula}')
         receipt = {'source_sha256': hashlib.sha256(args.source.read_bytes()).hexdigest(),
                    'pdf_sha256': hashlib.sha256(args.pdf.read_bytes()).hexdigest(),
                    'total_pages': len(doc.pages), 'body_pages': body_pages,
                    'title_pages': abstract[0], 'reference_pages': len(doc.pages)-references[0],
                    'minimum_text_font_pt': min_font, 'margin_inches': 1,
                    'visible_text_chunks_verified': len(chunks), 'figure_images': sum(len(p.images) for p in doc.pages),
+                   'math_expressions_verified': len(formulas),
                    'automated_checks_passed': True,
                    'visual_review': 'Separately recorded in docs/publication-verification.md; not implied by this script'}
     args.receipt.parent.mkdir(parents=True, exist_ok=True)

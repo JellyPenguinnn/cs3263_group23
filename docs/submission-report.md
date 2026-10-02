@@ -34,14 +34,25 @@ For activity i, let s_i be its integer start, d_i its fixed duration and e_i = s
 
 Precedence i before j requires e_i <= s_j. Every shared participant or resource imposes non-overlap on its activity intervals. Empty start domains encode contradictions, rather than malformed input. These variables, domains and hard constraints form a constraint satisfaction problem. Adding preferences produces a constraint optimization problem. A weighted preference contributes its weight when an activity starts outside its preferred start window. Generation minimizes the sum P(s).
 
-Repair validates the previous schedule against the original specification, then solves the updated specification using the same activity identities and original starts old_i. The objective is:
+Repair validates the previous schedule against the original specification, then solves the updated specification using the same activity identities and previous starts. Let *A* index activities and *K* index preferences. Each preference *k* has a weight, a preferred start window and a target activity *a(k)*. The indicator is 1 when its condition holds and 0 otherwise. The four expressions below define moved count, total shift, preference penalty and the repair objective, respectively:
 
-```text
-M(s) = sum_i [s_i != old_i]
-T(s) = sum_i abs(s_i - old_i)
-P(s) = sum_k weight_k * [start misses preference k]
-minimize (M(s), T(s), P(s)) lexicographically
+```math
+M(\mathbf{s}) = \sum_{i \in A} \mathbf{1}[s_i \neq s_i^{\mathrm{old}}]
 ```
+
+```math
+T(\mathbf{s}) = \sum_{i \in A} |s_i-s_i^{\mathrm{old}}|
+```
+
+```math
+P(\mathbf{s}) = \sum_{k \in K} w_k\,\mathbf{1}[s_{a(k)} \notin W_k]
+```
+
+```math
+\underset{\mathbf{s}\in F}{\mathrm{lexmin}}\;\left(M(\mathbf{s}),\,T(\mathbf{s}),\,P(\mathbf{s})\right)
+```
+
+Here, *F* is the set of schedules satisfying all updated hard constraints; the superscript "old" denotes the previous start; weights and preferred windows are indexed by preference. A start outside its preferred window contributes that preference's weight once, regardless of distance. Lexicographic minimization gives moved count priority over total shift, and total shift priority over preference penalty.
 
 CP-SAT proves the best moved count M, fixes it, proves the best shift T, and finally minimizes P. Stages share a 30-second solve budget with zero absolute and relative optimality gaps. A valid incumbent may survive a timeout, but unproved later priorities remain unproved. `UNKNOWN` is distinct from `INFEASIBLE`, and `FEASIBLE` from `OPTIMAL`. A secondary objective gap is reported only when earlier priorities equal their proven reference values.
 
@@ -97,14 +108,20 @@ Within each controlled task, paired family bootstrap intervals resample source g
 
 ![Figure 3. Wording acceptance; variants reuse 24 controlled bases.](figures/submission/language-accepted.png)
 
-**Feasibility by task and label.** Table 1 separates solving SAT instances from recognizing contradictions. Every entry has denominator 60. A correct direct UNSAT response is a prediction; B's infeasibility certificate is for its extracted problem and must still agree with gold.
+**Feasibility by task and label.** Table 1 separates finding a valid schedule when one exists (SAT) from correctly reporting that none exists (UNSAT). Each cell gives the number correct out of 60 attempts and its percentage; operational failures remain in the denominator. A direct UNSAT response is a prediction. The solver-assisted certificate concerns the extracted problem and must still agree with gold.
 
-| Model / task | A SAT-valid | B SAT-valid | A correct UNSAT | B correct UNSAT |
-| --- | ---: | ---: | ---: | ---: |
-| Qwen3.6 generation | 27/60 | 59/60 | 26/60 | 56/60 |
-| Qwen3.6 repair | 22/60 | 59/60 | 20/60 | 55/60 |
-| Qwen3.8 generation | 59/60 | 60/60 | 60/60 | 60/60 |
-| Qwen3.8 repair | 60/60 | 60/60 | 60/60 | 60/60 |
+**Table 1. Controlled feasibility results by model, task and method.**
+
+| Model / task | Method | Valid schedules<br/>(SAT) | Correct infeasibility<br/>(UNSAT) |
+| --- | --- | ---: | ---: |
+| Qwen3.6<br/>Generation | Direct LLM | 27/60 (45.0%) | 26/60 (43.3%) |
+| Qwen3.6<br/>Generation | LLM + CP-SAT | 59/60 (98.3%) | 56/60 (93.3%) |
+| Qwen3.6<br/>Repair | Direct LLM | 22/60 (36.7%) | 20/60 (33.3%) |
+| Qwen3.6<br/>Repair | LLM + CP-SAT | 59/60 (98.3%) | 55/60 (91.7%) |
+| Qwen3.8<br/>Generation | Direct LLM | 59/60 (98.3%) | 60/60 (100.0%) |
+| Qwen3.8<br/>Generation | LLM + CP-SAT | 60/60 (100.0%) | 60/60 (100.0%) |
+| Qwen3.8<br/>Repair | Direct LLM | 60/60 (100.0%) | 60/60 (100.0%) |
+| Qwen3.8<br/>Repair | LLM + CP-SAT | 60/60 (100.0%) | 60/60 (100.0%) |
 
 For Qwen3.6, B minus A acceptance is +51.7 percentage points for generation (95% paired interval 41.7 to 61.7) and +60.0 for repair (50.0 to 70.0). For Qwen3.8 the differences are +0.8 (0.0 to 2.5) and 0.0 (0.0 to 0.0). The latter ceiling and degenerate empirical interval do not establish equivalence or population perfection. The practical improvement from augmentation depends on model and task; it is not uniformly positive across observed blocks.
 
@@ -116,12 +133,16 @@ For Qwen3.6, B minus A acceptance is +51.7 percentage points for generation (95%
 
 **Matched wording.** In 48 variant/canonical comparisons per approach, Qwen3.6 A changes from accepted to rejected 16 times and rejected to accepted twice. B has one and two such transitions. Qwen3.8 has two accepted-to-rejected transitions for A and four for B, all operational failures. The latter does not demonstrate semantic degradation from paraphrasing. Canonical comparisons use only the selected bases; comparing wording scores with all 240 canonical cases would confound selection and wording.
 
-**Resources.** Table 2 reports means on 240 controlled attempts per arm. All time observations are present. Qwen3.8 A reports tokens for 239/240 attempts; every other cell has complete token coverage. Missing usage is unknown.
+**Resources.** Table 2 separates the two methods and reports mean resources per controlled scheduling attempt. Call time covers all 240 attempts in each row, including failures; it excludes the subsequent local solver. Token means use available provider-reported usage: Qwen3.8 Direct LLM has 239/240 observations, and the other rows have 240/240. Missing usage is unknown, not zero.
 
-| Model | Mean model-call time A / B | Mean total tokens A / B |
-| --- | ---: | ---: |
-| Qwen3.6 | 3.57 s / 14.08 s | 1,778.8 / 4,254.1 |
-| Qwen3.8 | 42.42 s / 90.46 s | 4,420.5 / 9,045.5 |
+**Table 2. Mean model-call resources per controlled attempt.**
+
+| Model | Method | Mean call time<br/>(seconds) | Mean total tokens<br/>(tokens/call) |
+| --- | --- | ---: | ---: |
+| Qwen3.6 | Direct LLM | 3.57 | 1,778.8 |
+| Qwen3.6 | LLM + CP-SAT | 14.08 | 4,254.1 |
+| Qwen3.8 | Direct LLM | 42.42 | 4,420.5 |
+| Qwen3.8 | LLM + CP-SAT | 90.46 | 9,045.5 |
 
 Conditional CP-SAT time averages 13.15 ms over 230 executed Qwen3.6 controlled solves and 17.60 ms over 240 Qwen3.8 solves. Extraction/model calls dominate the added time on these instances. These are shared-service timings, including request overhead and failures, not hardware-independent speed or monetary cost. Complete campaigns including capability calls report 1,773,823 tokens with 602/602 coverage and 3,994,657 with 593/602 coverage. Qwen3.8 was safely paused twice without reissuing saved responses. Total elapsed campaign clocks therefore cannot be presented as uninterrupted inference time.
 

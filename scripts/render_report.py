@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the canonical Markdown report. Optional dependency: reportlab==4.4.9.
+"""Render the canonical Markdown report with ReportLab and Matplotlib MathText.
 
 Run from any directory: python scripts/render_report.py [--source PATH] [--output PATH]
 This deliberately supports the Markdown subset used by this report and fails on
@@ -14,10 +14,14 @@ import math
 from pathlib import Path
 import re
 
+from matplotlib.font_manager import FontProperties
+from matplotlib.mathtext import MathTextParser
 from reportlab.lib import colors
-from reportlab.lib.enums import TA_CENTER
+from reportlab.lib.enums import TA_CENTER, TA_RIGHT
 from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
+from reportlab.pdfbase import pdfmetrics
+from reportlab.pdfbase.ttfonts import TTFont
 from reportlab.platypus import (
     BaseDocTemplate, Flowable, Frame, PageBreak, PageTemplate, Paragraph,
     Spacer, Table, TableStyle, Image, KeepTogether,
@@ -45,6 +49,7 @@ def inline(text: str) -> str:
         return label
     text = re.sub(r'\[([^\]]+)\]\(([^)]+)\)', link, text)
     text = escape(text)
+    text = re.sub(r'&lt;br\s*/?&gt;', '<br/>', text)
     for index, (label, target) in enumerate(links):
         text = text.replace(f'@@LINK{index}@@',
                             f'<link href="{escape(target, quote=True)}" color="#1C5D7E">{escape(label)}</link>')
@@ -64,6 +69,38 @@ TITLE = ParagraphStyle('Title', parent=HEAD, fontSize=23, leading=27,
 CENTER = ParagraphStyle('Center', parent=BODY, alignment=TA_CENTER, spaceAfter=12)
 CODE = ParagraphStyle('Equation', parent=BODY, fontName='Courier', leading=13,
                       leftIndent=8, rightIndent=8)
+CAPTION = ParagraphStyle('TableCaption', parent=BODY, keepWithNext=True)
+
+
+def math_layout(expression: str):
+    # A 16-point base keeps MathText's 70% subscripts above the 11-point minimum.
+    return MathTextParser('path').parse(
+        f'${expression}$', dpi=72, prop=FontProperties(size=16, math_fontfamily='stix'))
+
+
+class Equation(Flowable):
+    """Draw parsed TeX as selectable vector glyphs, without a TeX installation."""
+    def __init__(self, expression: str):
+        super().__init__()
+        self.layout = math_layout(expression)
+        self.width, self.height = WIDTH, float(self.layout.height)+10
+        if self.layout.width > WIDTH or min(g[1] for g in self.layout.glyphs) < 11:
+            raise ValueError('Equation exceeds the report width or minimum font size')
+
+    def draw(self):
+        c = self.canv
+        c.saveState()
+        c.setFillColor(INK)
+        c.translate((WIDTH-self.layout.width)/2, self.layout.depth+5)
+        for font, size, codepoint, x, y in self.layout.glyphs:
+            name = 'Math-'+Path(font.fname).stem
+            if name not in pdfmetrics.getRegisteredFontNames():
+                pdfmetrics.registerFont(TTFont(name, font.fname))
+            c.setFont(name, size)
+            c.drawString(x, y, chr(codepoint))
+        for x, y, width, height in self.layout.rects:
+            c.rect(x, y, width, height, fill=1, stroke=0)
+        c.restoreState()
 
 
 class Architecture(Flowable):
@@ -190,10 +227,17 @@ def table(lines: list[str]):
         widths = [WIDTH*.16]+[WIDTH*.14]*6
     elif columns == 5:
         widths = [WIDTH*.28]+[WIDTH*.18]*4
+    elif columns == 4 and rows[0][1] == 'Method':
+        ratios = (.23,.23,.26,.28) if rows[0][0] == 'Model / task' else (.18,.26,.26,.30)
+        widths = [WIDTH*ratio for ratio in ratios]
     else:
         widths = [WIDTH/columns]*columns
-    cells = [[Paragraph(('<b>'+inline(x)+'</b>') if i==0 else inline(x),CELL)
-              for x in row] for i,row in enumerate(rows)]
+    method_table = columns == 4 and rows[0][1] == 'Method'
+    metric_alignment = TA_CENTER if rows[0][0] == 'Model / task' else TA_RIGHT
+    metric = ParagraphStyle('Metric', parent=CELL, alignment=metric_alignment)
+    cells = [[Paragraph(('<b>'+inline(x)+'</b>') if i==0 else inline(x),
+                        metric if method_table and j>=2 else CELL)
+              for j,x in enumerate(row)] for i,row in enumerate(rows)]
     result = Table(cells,colWidths=widths,repeatRows=1,hAlign='LEFT')
     result.setStyle(TableStyle([
         ('BACKGROUND',(0,0),(-1,0),BLUE),('VALIGN',(0,0),(-1,-1),'TOP'),
@@ -201,6 +245,20 @@ def table(lines: list[str]):
         ('LEFTPADDING',(0,0),(-1,-1),5),('RIGHTPADDING',(0,0),(-1,-1),5),
         ('TOPPADDING',(0,0),(-1,-1),5),('BOTTOMPADDING',(0,0),(-1,-1),5),
     ]))
+    if method_table:
+        start, group = 1, 0
+        while start < len(rows):
+            end = start
+            while end+1 < len(rows) and rows[end+1][0] == rows[start][0]:
+                end += 1
+            if end > start:
+                result.setStyle(TableStyle([('SPAN',(0,start),(0,end)),
+                                           ('VALIGN',(0,start),(0,end),'MIDDLE')]))
+            if group % 2 == 0:
+                result.setStyle(TableStyle([('BACKGROUND',(0,start),(-1,end),
+                                            colors.HexColor('#F5F7FA'))]))
+            result.setStyle(TableStyle([('LINEBELOW',(0,end),(-1,end),.4,MUTED)]))
+            start, group = end+1, group+1
     return result
 
 
@@ -243,6 +301,8 @@ def render(source: Path, output: Path):
             elif kind == 'text':
                 for item in lines[i+1:end]:
                     story.append(Paragraph(escape(item.translate(NORMALIZE)),CODE))
+            elif kind == 'math':
+                story.append(Equation(' '.join(lines[i+1:end])))
             else:
                 raise ValueError(f'Unsupported fence: {kind}')
             i = end+1
@@ -274,7 +334,8 @@ def render(source: Path, output: Path):
         while end < len(lines) and lines[end].strip() and not lines[end].startswith(('#','```','|','![')) and not re.match(r'^\d+\. ', lines[end]):
             end += 1
         text = ' '.join(lines[i:end])
-        story.append(Paragraph(inline(text),CENTER if phase=='Title' else BODY))
+        style = CENTER if phase=='Title' else CAPTION if text.startswith('**Table ') else BODY
+        story.append(Paragraph(inline(text),style))
         i = end
     output.parent.mkdir(parents=True,exist_ok=True)
     document = Report(output)

@@ -10,7 +10,7 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 - [x] Three grouped bar charts derive from the saved summary, with exact denominators and consistent scales.
 - [x] Report covers formulation, design, related work, limitations, responsible AI, reproducibility and disclosed AI assistance.
 - [x] Two original replay archives are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
-- [x] Public report rendered and all ten pages visually inspected: title page 1, eight body pages 2-9, references page 10. Text and compact figure labels are at least 11 pt, with one-inch margins and a single column. The [format receipt](../results/summary/submission-report-format.json) binds this check to exact bytes.
+- [x] Public report rendered and all eleven pages visually inspected: title page 1, nine body pages 2-10, references page 11. Text, mathematical subscripts and compact figure labels are at least 11 pt, with one-inch margins and a single column. The [format receipt](../results/summary/submission-report-format.json) binds this check to exact bytes.
 
 The previous report and format check are historical. Every substantive revision, new figure or private-title edit requires an appropriate fresh render/check; do not reuse a previous page count for a changed document.
 
@@ -49,9 +49,11 @@ Report tooling is separate from the scheduling runtime:
 
 ```sh
 python3.12 -m venv .venv-docs
-.venv-docs/bin/python -m pip install reportlab==4.4.9 pdfplumber==0.11.9
+.venv-docs/bin/python -m pip install reportlab==4.4.9 pdfplumber==0.11.9 matplotlib==3.10.8
 .venv-docs/bin/python scripts/render_report.py
 .venv-docs/bin/python scripts/check_report.py
 ```
+
+The Markdown uses TeX syntax in `math` fences. Matplotlib MathText parses the equations; ReportLab embeds them as selectable vector text, so no system TeX installation is required. The checker verifies mathematical operators as well as ordinary report text. Tables show each method in its own row and preserve counts, rates, units and missing-usage coverage.
 
 Use Poppler `pdftoppm` to render every PDF page for visual inspection. Automated bounds/text checks supplement that inspection. Report plotting and rendering are offline; no provider key is needed. For private title details, edit a separate private Markdown copy and render with `--source` / `--output`; never overwrite the public evidence with identifiers.
