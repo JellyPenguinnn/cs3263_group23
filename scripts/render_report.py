@@ -10,6 +10,7 @@ from __future__ import annotations
 
 import argparse
 from html import escape
+import math
 from pathlib import Path
 import re
 
@@ -69,7 +70,7 @@ class Architecture(Flowable):
     """Draw the source diagram's exact nodes/edges using a fixed readable layout."""
     def __init__(self, source: list[str]):
         super().__init__()
-        self.width, self.height = WIDTH, 394
+        self.width, self.height = WIDTH, 440
         self.nodes, self.edges = {}, []
         pattern = r'([A-Z])(?:\[([^\]]+)\])?\s*-->\s*([A-Z])(?:\[([^\]]+)\])?'
         for line in source:
@@ -87,30 +88,35 @@ class Architecture(Flowable):
         if set(self.nodes) != set('GRVABSOIED'):
             raise ValueError('Diagram nodes changed: review layout before rendering')
         self.positions = {
-            'G': (225, 365, 190), 'R': (225, 317, 190), 'V': (225, 269, 210),
-            'A': (108, 221, 192), 'B': (343, 221, 192), 'S': (343, 173, 190),
-            'O': (87, 77, 150), 'I': (274, 125, 190),
-            'E': (274, 77, 190), 'D': (274, 29, 270),
+            'G': (225, 413, 190), 'R': (225, 359, 190), 'V': (225, 305, 210),
+            'A': (108, 251, 192), 'B': (343, 251, 192), 'S': (343, 197, 190),
+            'O': (91, 89, 150), 'I': (274, 143, 190),
+            'E': (274, 89, 190), 'D': (274, 35, 270),
         }
 
     def draw(self):
         c = self.canv
         c.saveState()
-        c.setStrokeColor(MUTED)
-        c.setLineWidth(.7)
+        c.setStrokeColor(INK)
+        c.setFillColor(INK)
+        c.setLineWidth(1.25)
+        half_height, tip_gap = 18, 3
         for a, b in self.edges:
             x, y, w = self.positions[a]
             tx, ty, tw = self.positions[b]
             if (a, b) == ('G', 'O'):
-                points = [(x-w/2,y), (5,y), (5,ty), (tx-tw/2,ty)]
+                points = [(x-w/2,y), (5,y), (5,ty), (tx-tw/2-tip_gap,ty)]
             elif (a, b) == ('G', 'I'):
-                points = [(x+w/2,y), (WIDTH-5,y), (WIDTH-5,ty), (tx+tw/2,ty)]
+                points = [(x+w/2,y), (WIDTH-5,y), (WIDTH-5,ty), (tx+tw/2+tip_gap,ty)]
             elif (a, b) == ('O', 'E'):
-                points = [(x+w/2,y), (tx-tw/2,ty)]
+                points = [(x+w/2,y), (tx-tw/2-tip_gap,ty)]
             elif (a, b) == ('A', 'I'):
-                points = [(x,y-20), (x,149), (tx,149), (tx,ty+20)]
+                # Separate input ports keep the direct and solver arrows distinct.
+                points = [(x,y-half_height), (x,ty), (tx-tw/2-tip_gap,ty)]
+            elif (a, b) == ('S', 'I'):
+                points = [(x,y-half_height), (x,ty+half_height+tip_gap)]
             else:
-                points = [(x,y-20), (tx,ty+20)]
+                points = [(x,y-half_height), (tx,ty+half_height+tip_gap)]
             path = c.beginPath()
             path.moveTo(*points[0])
             for point in points[1:]:
@@ -118,18 +124,27 @@ class Architecture(Flowable):
             c.drawPath(path)
             px, py = points[-2]
             ex, ey = points[-1]
-            import math
             angle = math.atan2(ey-py, ex-px)
-            for offset in (-.45, .45):
-                c.line(ex,ey,ex-5*math.cos(angle+offset),ey-5*math.sin(angle+offset))
+            # Filled heads and a small box clearance remain visible at print size.
+            ux, uy = math.cos(angle), math.sin(angle)
+            bx, by = ex-6.5*ux, ey-6.5*uy
+            head = c.beginPath()
+            head.moveTo(ex, ey)
+            head.lineTo(bx-3.2*uy, by+3.2*ux)
+            head.lineTo(bx+3.2*uy, by-3.2*ux)
+            head.close()
+            c.drawPath(head, stroke=0, fill=1)
         style = ParagraphStyle('Node', parent=CELL, alignment=TA_CENTER, leading=12)
         for key, label in self.nodes.items():
             x, y, width = self.positions[key]
+            c.setStrokeColor(MUTED)
+            c.setLineWidth(.8)
             c.setFillColor(BLUE)
-            c.roundRect(x-width/2,y-20,width,40,5,stroke=1,fill=1)
-            p = Paragraph(inline(label), style)
-            _, height = p.wrap(width-10,36)
-            if height > 36:
+            c.roundRect(x-width/2,y-half_height,width,2*half_height,5,stroke=1,fill=1)
+            label = '<br/>'.join(inline(part) for part in re.split(r'<br\s*/?>', label))
+            p = Paragraph(label, style)
+            _, height = p.wrap(width-10,30)
+            if height > 30:
                 raise ValueError(f'Diagram label does not fit: {key}')
             p.drawOn(c,x-width/2+5,y-height/2)
         c.restoreState()

@@ -95,20 +95,20 @@ Keep one installable Python package, one CLI and one shared provider interface. 
 
 ```mermaid
 flowchart LR
-    C[Evaluator-only case bundle] --> R[Public renderer]
-    R --> V[Same public view and original schedule]
-    V --> A[Direct model call and schedule parser]
-    V --> B[Extraction model call and schema check]
-    B --> S[Fixed CP-SAT compiler]
-    C --> G[Gold reference solver]
-    C --> I[Independent gold validator]
+    C[Evaluator-only<br/>case bundle] --> R[Public renderer]
+    R --> V[Same public view<br/>and original schedule]
+    V --> A[Direct model call<br/>and schedule parser]
+    V --> B[Extraction model call<br/>and schema check]
+    B --> S[Fixed CP-SAT<br/>compiler]
+    C --> G[Gold reference<br/>solver]
+    C --> I[Independent<br/>gold validator]
     A --> I
     S --> I
-    G --> E[Evaluator and objective comparison]
+    G --> E[Evaluator and<br/>objective comparison]
     I --> E
-    E --> D[Durable attempt records]
-    D --> P[Replay, metrics and figures]
-    P --> U[Read-only dashboard and report]
+    E --> D[Durable attempt<br/>records]
+    D --> P[Replay, metrics<br/>and figures]
+    P --> U[Read-only dashboard<br/>and report]
 ```
 
 | Boundary | Existing implementation | Design rule / next extension |

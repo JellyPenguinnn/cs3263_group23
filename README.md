@@ -22,13 +22,13 @@ Inputs are synthetic or AI-assisted fictional scenarios. The system does not con
 
 ```mermaid
 flowchart LR
-  R[Public request and original schedule] --> A[Direct LLM]
-  R --> B[LLM specification extraction]
-  B --> S[Fixed CP-SAT compiler]
-  A --> V[Independent gold validator]
+  R[Public request and<br/>original schedule] --> A[Direct LLM]
+  R --> B[LLM specification<br/>extraction]
+  B --> S[Fixed CP-SAT<br/>compiler]
+  A --> V[Independent<br/>gold validator]
   S --> V
-  G[Evaluator-only gold and reference] --> V
-  V --> E[Saved evidence, analysis and dashboard]
+  G[Evaluator-only gold<br/>and reference] --> V
+  V --> E[Saved evidence,<br/>analysis and dashboard]
 ```
 
 Both approaches receive equivalent task information and one model call. Gold specifications and labels remain evaluator-only. Solver success establishes a property of the **extracted problem**; it does not establish that extraction preserved the request. [The plan](planning.md#6-system-architecture-and-contract) documents the interfaces and mathematical semantics.

@@ -16,6 +16,7 @@ ROOT = Path(__file__).resolve().parents[1]
 
 
 def visible(text):
+    text = re.sub(r'<br\s*/?>', ' ', text)
     text = re.sub(r'!?\[([^\]]+)\]\([^)]+\)', r'\1', text)
     return re.sub(r'[^a-z0-9]', '', text.lower())
 

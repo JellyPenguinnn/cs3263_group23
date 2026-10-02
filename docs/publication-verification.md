@@ -45,6 +45,8 @@ The TLS follow-up used the same module outside the sandbox, not a new provider c
 
 No new model inference was performed for this finalization. These results support a working, reproducible research repository and a complete report for member review. They do not establish teaching-team approval of the hosted models, human authorship/review, presentation delivery, independent teammate reproduction or course submission.
 
+The diagram-readability follow-up adds explicit Mermaid line breaks and darker filled PDF arrowheads, greater box spacing and separate validator entry points. All three current Mermaid diagrams rendered in Chromium with Mermaid 11.12.0, with no label overflow observed. Diagram wording and connections were checked unchanged after normalizing line breaks. The PDF was regenerated, all ten pages visually inspected again, and its format/text checks passed with the updated hashes in the format receipt. No experiment code or result data changed.
+
 ## Publication and future changes
 
 Publish without force after verifying the destination and ancestry; verify the resulting `origin/main` SHA against the local commit. The GitHub commit and its files are the publication record. Keep private identifiers, local operational-path manifests, credentials and environments outside Git. The historical evidence bundle remains private; the two complete scientific replay packages are in the repository.

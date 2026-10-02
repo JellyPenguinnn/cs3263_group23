@@ -52,17 +52,17 @@ CP-SAT proves the best moved count M, fixes it, proves the best shift T, and fin
 ```mermaid
 flowchart LR
   G[Evaluator-only gold case] --> R[Public renderer]
-  R --> V[Same description and original schedule]
-  V --> A[One direct call / strict schedule parser]
-  V --> B[One extraction call / schema parser]
+  R --> V[Same description<br/>and original schedule]
+  V --> A[One direct call /<br/>strict schedule parser]
+  V --> B[One extraction call /<br/>schema parser]
   B --> S[Fixed CP-SAT compiler]
-  G --> O[Gold reference solver]
-  G --> I[Independent arithmetic validator]
+  G --> O[Gold reference<br/>solver]
+  G --> I[Independent arithmetic<br/>validator]
   A --> I
   S --> I
-  O --> E[Scoring and conditional objective comparison]
+  O --> E[Scoring and conditional<br/>objective comparison]
   I --> E
-  E --> D[Immutable records / replay / read-only dashboard]
+  E --> D[Immutable records / replay /<br/>read-only dashboard]
 ```
 
 **A: Direct LLM.** One call returns a schedule or an infeasibility prediction. It receives neither a solver nor oracle feedback. **B: LLM-to-CP-SAT.** One call translates the same public information into the canonical specification; a fixed compiler constructs and solves the model. A neutral request identifier avoids exposing label-bearing evaluator IDs. Both repair paths receive the same original schedule and updated requirements. Malformed output, duplicate keys and omitted requirements are not silently repaired.
