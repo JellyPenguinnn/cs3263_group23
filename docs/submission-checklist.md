@@ -19,10 +19,9 @@ The previous report and format check are historical. Every substantive revision,
 - [ ] Check actual proposal receipt/feedback and current Canvas arrangements; the proposal was mandatory for a project grade (Guidelines P37/P43).
 - [ ] Confirm the teaching team's interpretation of the hosted Qwen models against the frontier-model wording (Project p5 / Guidelines P25; SoCLaaS/open weights suggested in Project p6 / P33). No automatic approval or rejection is inferred.
 - [ ] Members review the natural-language/gold meaning, reference assumptions and failure examples, and record actual findings in [contributions.md](contributions.md) and the [claim index](claim-evidence.md).
-- [ ] Members interpret, revise and take responsibility for the complete report, with accurate actual contributions and human/AI division (Guidelines P56-60/P87-88).
+- [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Replace the interim contribution paragraph only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
 - [ ] Add each member's name, matriculation number and email to the **private** submitted title page (P51); do not put private identifiers in public Git.
 - [ ] Produce the actual presentation/deck or requested recording and rehearse **15 minutes plus five-minute Q&A** (P47). All members understand the whole system (P57); a storyboard is not a completed presentation.
-- [ ] Have a teammate follow [evidence.md](evidence.md) from a clean compatible environment and record the actual replay/review; existing automated replay does not establish that human action.
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).
 - [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14). **30 October** is the team's complete-draft target.
 
@@ -31,6 +30,15 @@ The previous report and format check are historical. Every substantive revision,
 Constructed or downloaded instances are explicitly allowed (Project p5 / P25). The course values meaningful comparison and insight about assumptions, realism, representation and results (P84), not a prescribed accuracy, solver victory, external benchmark or extra feature count. The current report presents known synthetic/AI-assisted development evidence honestly. A fresh holdout, exactly 600 calls, independent-human prose and fixed backend were team study choices, not additional course rules.
 
 An additional model or fresh study is conditional on actual teaching feedback or a separately agreed scientific need. If chosen, define the question, eligibility, exact protocol, new data/review and separate execution allowance first. Never relabel inspected cases as held out. The new report's scope does not resolve model eligibility or supply human review.
+
+The appendix may contain relevant model printouts, screenshots or planning graphs (P49); these are permitted examples, not a requirement to invent a probabilistic graphical model for a CSP/COP project. The report already contains the actual system architecture and measured-result charts. Keep essential formulation, results and discussion in the counted body.
+
+## Recommended team verification
+
+These support a reliable handoff; the course does not prescribe these particular records or procedures. The detailed remaining-work queue is [planning Section 5](../planning.md#5-current-task-queue-and-acceptance-evidence).
+
+- [ ] A teammate follows [evidence.md](evidence.md) from a clean compatible environment and records the actual replay/review. Existing automated replay does not establish that human action.
+- [ ] If the team wants protection against loss of this computer, copy the verified private historical bundle to approved private off-device storage and verify it there. The current same-device backup is not off-device protection.
 
 ## Responsible-AI review
 

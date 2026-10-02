@@ -1,76 +1,49 @@
-# Fifteen-minute study presentation — working rehearsal guide
+# Fifteen-minute presentation — working rehearsal guide
 
-AI-assisted preparation, not a completed rehearsal or final deck. Use the
-[report source](../docs/study-draft.md) and [claim index](../docs/claim-evidence.md).
-Until the final study is available, label every numerical slide **development**.
+Use the [current report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [archived demonstrations](README.md). This AI-assisted storyboard is not a finished deck or evidence of a human rehearsal. Both model comparisons are complete; numerical slides must identify them as exploratory development results. Choose speakers as a team, and ensure every member understands the complete system.
 
-This is a slide-by-slide storyboard, not an existing slide deck. Speaker assignments
-are proposed for the team to confirm: Li Hao introduces/integrates, Yao Xiang explains
-the formulation, and Yong Qing explains evaluation; all must understand every section.
-The final deck should reuse the same few readable evidence views, not screenshots of code.
+## Suggested storyboard
 
-| Slide / elapsed time | Main message and visual | Evidence / proposed speaker |
+| Slide / elapsed time | Main message and visual | Evidence |
 | --- | --- | --- |
-| 1 / 0–2 min | One changed commitment can force several moves. Show the concrete shared-room problem, scope and research questions | Development scenario; Li Hao |
-| 2 / 2–3:30 | Start variables, legal domains and shared-resource constraints define a CSP; a proof concerns the encoded problem | C1; Yao Xiang |
-| 3 / 3:30–5 | Walk A0/B1/C2 → A1/B2/C0; all three activities move and summed shift is four slots. State `(M,T,P)` priorities | C2/C8; Yao Xiang |
-| 4 / 5–7 | Same public request, direct versus extraction+CP-SAT, independent gold validator. Show the two-path diagram and sampling design | C1/C3; 41 development families, not 100 independent cases; Yong Qing |
-| 5 / 7–9 | Separate SAT validity and UNSAT accuracy by task; show paired accepted-answer differences with uncertainty | C4/C13; development-only, not final model results; Yong Qing |
-| 6 / 9–10:30 | An omitted fixed appointment makes an infeasible request appear solvable. Show one saved before/after failure and gold rejection | C5; no corrected primary answer; Yao Xiang |
-| 7 / 10:30–12 | More valid answers cost more extraction time/tokens; repair-quality comparisons are conditional on validity | C6/C14; 99 solver executions, not 100; Yong Qing |
-| 8 / 12–14 | Global minimum disruption can burden one person; requirements and objective priorities need user control. Explain privacy and prompt-boundary limits | C7–C9; Li Hao |
-| 9 / 14–15 | State what this evidence supports, where either method may be preferable, and the scope of the final study | Bounded conclusions; Li Hao |
+| 1 / 0–1:30 | A changed commitment can force several schedule changes. Introduce generation, minimum-disruption repair and the comparison question. | Report Sections 1–2; a clearly labelled illustrative scenario |
+| 2 / 1:30–3 | Integer start variables, legal domains, availability and shared-resource constraints define a CSP/COP. A solver proof concerns its encoded input. | R1; report formulation |
+| 3 / 3–4:30 | Walk A0/B1/C2 → A1/B2/C0: all three activities move, summed shift is four slots. Explain the lexicographic (M,T,P) objective. | R2; tested coupled-repair example |
+| 4 / 4:30–6 | Show the two-path architecture and evaluation boundary. Same public request and original schedule; independent gold validation. | R3–R5; 240 controlled cases/120 families, 12 fictional scenarios, wording variants of 24 bases |
+| 5 / 6–8:30 | Present one grouped chart for each block, then distinguish SAT validity and correct UNSAT. Qwen3.6 benefits strongly from solver assistance; Qwen3.8 approaches the validity ceiling. | R6–R9; current figures and Table 1, exact denominators and paired intervals |
+| 6 / 8:30–10 | A deadline changed from 3 to 7 during extraction makes the encoded problem easier. Show the saved Qwen3.6 output and independent rejection. | R11; first current demonstration in README |
+| 7 / 10–12 | Near-perfect validity does not prove equivalence or optimal repair. Show the Qwen3.8 direct repair with two moves versus one, plus time/token overhead and operational failures. | R10, R12–R14; second demonstration and Table 2 |
+| 8 / 12–14 | Objective priorities can concentrate inconvenience. Explain privacy, requirement ambiguity, synthetic-data limits and shared-backend uncertainty. | R15–R17; report responsible-AI and limitations discussion |
+| 9 / 14–15 | State bounded conclusions, actual team contributions and AI support. Explain what was learned and when direct reasoning may be preferable. | R18–R20; confirmed contribution accounts and final report |
 
-At most one short saved-record demonstration belongs inside slides 6–7; it must
-fit their time budget. Current material uses `qwen3.6:35b` development data.
-The selected next development target `qwen3.8:27b` is not a result, completed
-qualification or final-course model decision. Replace or clearly separate the
-results section only when final-study claims are verified.
+Use at most one short interactive saved-record demonstration within this timing; a static annotated extract is sufficient for the other example. No live model call is needed. If recording a fallback, use the same preserved evidence and label canned integration examples explicitly. No recording or timed rehearsal is claimed here.
 
-Use [the existing offline demo](README.md) or replay the saved expanded run. For
-the latter, obtain its reviewed raw-record archive first. No model call is needed:
+## Quantities to state consistently
 
-```sh
-.venv/bin/scheduling explain --run-dir runs/expanded-development-100-20260930-01 \
-  --case-id dev-v2-3264-slack-0-fixed_start-unsat-0-repair \
-  --approach solver_augmented --format json
-```
-
-The example preserves B's missing updated appointment and gold rejection. Do not
-edit the extraction to make the demonstration successful. Keep a screen recording
-of the same saved evidence as a later fallback; none has been recorded in this
-session. Present canned fallback answers explicitly as integration tests.
-
-For the five-minute Q&A, every member should answer: why CP-SAT; why (M,T,P);
-how independent validation differs from reference solving; why UNKNOWN is not
-UNSAT; why extraction can invalidate source-level correctness; how families and
-exclusions work; whether the final model meets course requirements; and when
-direct reasoning may be preferable. Actual speaker assignments and timed rehearsal
-results must be recorded by the team.
+- Each model completed **600 scheduling attempts**: 480 controlled, 24 realistic and 96 additional-wording attempts. Capability checks are outside these scoring denominators.
+- Each approach receives 240 controlled cases, 12 realistic scenarios and 48 wording conditions. Wording conditions reuse selected controlled bases, so they are not independent new problems.
+- Controlled acceptance is **95/240 versus 229/240** for Qwen3.6 and **239/240 versus 240/240** for Qwen3.8, direct versus solver-assisted. All failures stay in the denominator.
+- All **nine Qwen3.8 rejected attempts across the three blocks** are provider failures, not demonstrated reasoning failures. Controlled valid repair optimum matching is **59/60 direct versus 60/60 solver-assisted**.
+- More model capability is a plausible explanation for Qwen3.8's stronger observed performance, not an isolated causal result. Shared-service differences and hidden defaults remain uncontrolled; the known synthetic inputs may be too easy to separate these methods.
 
 ## Q&A preparation
 
-These are answer points for members to explain in their own words, not a record
-that anybody has rehearsed them.
+These are evidence boundaries for members to explain in their own words, not a record that anyone has rehearsed them.
 
 | Question | Answer boundary / evidence |
 | --- | --- |
-| Why CP-SAT? Is the solver itself the contribution? | Fixed integer time domains and coupled constraints fit CP-SAT. The contribution is the bounded comparison and failure analysis; CP-SAT and minimum-perturbation repair are established methods. |
-| Why solve three objectives sequentially? | A weighted sum can trade a higher-priority objective against a lower one. Exact sequential proof fixes each optimum before proceeding; a timeout limits the proof claim. C2/C8. |
-| Could solver and gold share the same bug? | Yes. The independent arithmetic validator and exhaustive tiny checks reduce this risk; they do not prove every compiler/input is correct. C2/C12. |
-| Does 97/100 mean 97% deployment reliability? | No. This is a balanced synthetic development packet with related families and canonical wording; realistic language, model selection and final study remain separate. C3/C4. |
-| Why are the uncertainty intervals grouped? | Several cases descend from a common source. Resampling source families preserves that dependence and A/B pairing; it does not eliminate generator bias. C13. |
-| Why not count a semantically equivalent extraction as a structural match? | They measure different properties. Keep the original structural score and report bounded equivalence certificates separately. C5. |
-| Is B's repair quality better on every request? | Quality is conditional on a valid output and a proven reference. B had 25 valid repairs and A eight; unequal survivor groups are not an unconditional quality comparison. C14. |
-| Is a changed serving fingerprint proof of new weights? | No. It shows reported backend variation. The retained execution policy and model eligibility decision are separate from claims about weight identity. C10. |
-| When might direct reasoning be preferable? | It was faster and used fewer tokens here; simpler or unsupported/ambiguous tasks may change the trade-off. Do not claim an untested difficulty threshold or guaranteed future trend. C6. |
-| How does the project satisfy responsible AI? | Explain the concrete burden/objective examples, privacy boundaries and limits of formalization. Formal validation does not establish fairness or resolve unstated negotiability. C7–C9. |
+| Why CP-SAT? Is inventing a new solver the contribution? | Integer time domains and coupled constraints fit CP-SAT. The contribution is a controlled comparison, repair formulation and failure analysis; CP-SAT and minimum-perturbation repair are established methods. R1–R3. |
+| Why solve three objectives sequentially? | A weighted sum may trade away a higher-priority objective. Sequential proof fixes each optimum before proceeding; timeout limits the proof claim. UNKNOWN is not UNSAT, and FEASIBLE is not OPTIMAL. R1–R2. |
+| Could the solver and reference share a bug? | Yes. Independent arithmetic validation and exhaustive tiny checks reduce this risk, without proving the compiler or every gold input correct. R1–R3. |
+| Does 240/240 mean deployment reliability or that methods are equivalent? | No. It is finite synthetic development evidence at a ceiling, with related source families. Realism, harder instances and unseen-generator generalization are not established. R5–R8. |
+| Why are uncertainty intervals grouped? | Generation/repair cases descend from common sources. Resampling source families preserves that dependence and A/B pairing; it does not remove generator bias. R8. |
+| Does a structural extraction mismatch prove a semantic error? | No. Structural equality, bounded semantic checks and gold-valid output measure different things. The saved deadline example demonstrates a concrete semantic failure. R11–R12. |
+| Is solver-assisted repair always better? | The observed optimum comparison is conditional on gold-valid SAT outputs and proven reference optima. A valid but suboptimal direct repair is evidence for this case, not a universal result. R10. |
+| Does backend variation prove the weights changed? | No. It records reported serving differences. Exact model IDs were required; hidden defaults and serving conditions were not controlled. R4, R14. |
+| When might direct reasoning be preferable? | It used less time and fewer tokens in these runs; Qwen3.8's direct validity was near the ceiling. No untested difficulty threshold or guaranteed future trend is claimed. R6, R14. |
+| How is responsible AI addressed? | Explain concentrated burden, objective choices, privacy, negotiability and user control. Formal validity does not establish fairness or adversarial robustness. R15–R17. |
+| Do the hosted models satisfy the teaching team's frontier-model wording? | The sources also suggest SoCLaaS/open weights. Actual eligibility or feedback still needs confirmation; neither approval nor rejection is inferred. R20; planning S1. |
 
-## Human rehearsal record — not yet completed
+## Human rehearsal record — pending
 
-Record the actual date, speakers, slide/deck version, elapsed time, questions each
-member answered, weak explanations and assigned corrections. Verify that the saved
-example runs offline, charts are legible and every numeric slide names its model,
-run stage and denominator. A teammate should independently question the formal
-and empirical claims. Leave entries pending until these actions occur; see the
-[submission checklist](../docs/submission-checklist.md) for course delivery.
+Record the actual date, speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, model/block labels and the saved example commands. Members must verify their own contribution accounts and understand every part, including work supported by AI. Do not mark this complete from a generated storyboard; follow [planning Section 5](../planning.md#5-current-task-queue-and-acceptance-evidence) and the [submission checklist](../docs/submission-checklist.md).

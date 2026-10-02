@@ -20,6 +20,8 @@ The former `report/` directory is now `docs/`. Update active navigation and tool
 
 Course requirements come from the supplied teaching materials and confirmed feedback. The course permits constructed or downloaded instances. Fresh holdouts, exact sample counts, human-only scenario provenance and fixed backends are team study choices. A commercial API, third model or larger benchmark is not automatically required. Resolve the exact hosted-model interpretation with actual teaching feedback; do not infer eligibility from API success or replace unknown approval with an agent assertion.
 
+Follow planning Section 5's S1-S7 queue for remaining delivery. Actual member contributions, interpretation and whole-system understanding are substantive course requirements; an AI-use disclosure alone does not establish them. Collect factual accounts from each member before replacing the report's interim contribution paragraph. Do not infer manual authorship, equal effort or completed review from directions to an agent, branch names or passing tests. Team review logs and independent teammate replay are useful verification practices, not extra course-mandated forms or hours requirements.
+
 ## Start with the correct checkout
 
 1. Inspect current directory, `git status --short --branch`, remotes and applicable nested instructions.

@@ -6,6 +6,8 @@ This is the active plan for Group 23's **Direct LLM versus LLM-to-CP-SAT dynamic
 
 The user requested final repository publication and a report based on the completed runs on 2 October 2026. The report therefore presents an **exploratory study** using these existing inputs. This is an explicit change of delivery focus from the earlier proposed fresh frozen study, not a claim that development inputs became held out. The earlier detailed plan is preserved in [development-plan-history.md](docs/development-plan-history.md). A further frozen study is conditional on teaching-team feedback or a separately agreed scientific need.
 
+The implementation, mathematical report, figures and replay archives are published on GitHub `main`. The public PDF has nine body pages plus title and references. Publication and automated checks are complete engineering milestones; the actual member contributions, technical interpretation and course delivery below remain unconfirmed. Keep the contribution disclosure interim until factual member accounts are supplied.
+
 | Authority | Requirement or decision |
 | --- | --- |
 | Course | Course-related formal problem; direct/model-to-tool comparison; evidence and analysis; responsible AI; actual contributions and AI disclosure; prescribed report/presentation format |
@@ -70,20 +72,73 @@ These are engineering/evidence completions. They do not claim human sign-off, he
 
 ### Remaining delivery work
 
-| Work | Concrete action and acceptance |
-| --- | --- |
-| Course-model decision | Check actual feedback or obtain teaching-team interpretation for these exact hosted models. Record genuine evidence privately. If an additional model is required, plan only that justified extension |
-| Human problem/metric review | Review request/gold meaning, reference assumptions, all cited failure mechanisms, objective denominators, small-cell difficulty and wording results; record reviewer/date/findings |
-| Report ownership and private title | All members revise/understand [submission-report.md](docs/submission-report.md), confirm actual contributions, add identifiers only to the private copy, and rebuild/recheck the final PDF |
-| Presentation and Q&A | Produce the actual deck/recording, explain both pipelines and the strong-model ceiling, demonstrate generation/repair, rehearse 15+5 minutes |
-| Independent handoff | A teammate verifies checked-in archive hashes and replays in a clean compatible environment; automated replay is already delivered but does not supply that human action |
-| Submission | Check course feedback/cutoffs, final files, private title data and upload; retain actual receipts |
+The items below remain **open or unconfirmed**. Human contribution and understanding are substantive course requirements, not administrative sign-offs. Course obligations are distinguished from team review procedures; the handout does not prescribe a review template, hours log, contribution percentage or minimum number of code commits.
 
-Prioritize analysis and delivery. Fix a demonstrated correctness defect if review finds one; assess its effect on prior results and preserve the original evidence. Do not add features or commission another full run merely because some administrative/human gates remain open.
+| Item | Basis | Completion evidence |
+| --- | --- | --- |
+| S1. Course scope and model eligibility | Course requirement / unresolved interpretation | Actual proposal feedback and eligibility basis for the exact hosted models; current Canvas arrangements checked |
+| S2. Human contribution and AI disclosure | Course, Guidelines P56-60/P87-88 | Factual accounts from all three members, explicit human/AI division in the final report, whole-system understanding |
+| S3. Scientific interpretation and technical review | Course P57/P62/P84; team procedure below | Reviewed claims/examples, own interpretations and corrections or limitations recorded |
+| S4. Final report and private submission copy | Course P49/P51/P58/P92 | Reviewed report, actual contributions, private title identifiers, fresh PDF format/visual check |
+| S5. Presentation and Q&A | Course P47/P57 | Actual deck or requested recording; team explains the project within 15 minutes plus five-minute Q&A |
+| S6. Independent reproduction handoff | Recommended team verification, not a separate course mandate | A teammate's actual clean-environment replay outcome, or a record that this optional check was not performed |
+| S7. Final submission | Course P13-14/P51 | Required files uploaded under actual Canvas instructions and private receipts retained |
+
+### S1. Resolve the actual course requirements
+
+- Check the submitted proposal receipt and teaching-team feedback. Read current Canvas instructions for format, presentation arrangements and exact cutoff times.
+- Resolve the frontier-model wording for SoCLaaS `qwen3.6:35b` and `qwen3.8:27b`. The handout suggests considering hosted open-weight models, but API success does not establish eligibility. Use existing written feedback if it resolves this; otherwise a member obtains clarification. Keep private correspondence out of Git.
+- If the current study satisfies the intended scope, proceed with S2-S5. If another comparison is required, record that requirement and agree a limited protocol, exact model and new execution budget before any calls. An agent must not commission it automatically.
+
+### S2. Record genuine member work and AI support
+
+Each of Li Hao, Yao Xiang and Yong Qing supplies a concise account of personal design/implementation/analysis/writing, technical decisions and reasons, concrete reviewed artifacts or claims, corrections/findings, and which parts Codex generated, executed or drafted. Leave unknown or unfinished work explicit. Contacts and branch names do not establish authorship.
+
+Record these accounts in [contributions.md](docs/contributions.md), then replace the interim contribution paragraph in the final report with accurate per-member statements and explicit AI support. Retain the current report version until those facts are available. Do not claim manual implementation of generated code, infer equal effort, invent hours or relabel AI-assisted scenarios as human-authored.
+
+Disclosure alone does not satisfy P60's instruction not to delegate all work to an LLM. Each member must actually contribute and understand the project. If substantive interpretation/review has not happened, perform it rather than merely approving generated text. If acceptable AI involvement remains uncertain after an honest account, seek teaching-team clarification. An agent can organize evidence and explain concepts, but cannot attest to another person's contribution or understanding.
+
+### S3. Review scientific claims and explain the findings
+
+Use [claim-evidence.md](docs/claim-evidence.md) to record reviewed cases/claims, reviewer, finding and correction where needed. This is the team's procedure, not a rubric requiring a particular count of sign-offs.
+
+1. **Formal correctness:** explain hard constraints, half-open intervals, start windows and the three repair priorities. Work through the coupled repair with objective `(3,4,0)` and the one-move/four-slot versus two-move/two-slot trade-off. Distinguish solver proof, validation, extraction fidelity and reference assumptions (R1-R3/R16).
+2. **Input meaning:** review the twelve fictional prose/gold pairs and representative controlled SAT/UNSAT generation/repair cases and difficulty levels. Record checked IDs and ambiguous wording. These remain AI-assisted/project-generated development inputs; sampled review does not certify every case or create a holdout (R4-R5/R9).
+3. **Results and failures:** verify the three block denominators, SAT/UNSAT table, family-paired intervals and conditional optimum fractions. Inspect the saved Qwen3.6 deadline mistranslation and Qwen3.8 valid but suboptimal direct repair. Keep operational failures in denominators and missing usage distinct from zero (R6-R14).
+4. **Qwen3.8 interpretation:** explain the validity ceiling on bounded inputs, its nine provider failures, the one suboptimal direct repair and extra solver-assisted call time/tokens. Stronger capability is plausible; hidden serving defaults prevent a causal weight-level claim. A dedicated explanatory paragraph would be an optional clarity edit, not a missing experiment.
+5. **Responsible AI and method choice:** explain inconvenience distribution, objective priorities, hard-constraint negotiability, privacy and formalization limits. Justify where either approach may be preferable without claiming universal superiority or production reliability (R15-R17).
+
+All members need whole-system understanding even when they review different details. If a correctness issue is found, record its impact, fix the demonstrated defect and run affected offline checks. Preserve original evidence. A new live study requires a scientific need and separate authorization; unconfirmed human work is not a reason to add features or rerun benchmarks.
+
+### S4. Prepare the final report copy
+
+Use [submission-report.md](docs/submission-report.md) as the source. Incorporate S1-S3 findings and actual contributions; remove pending-review/title reminders only when the corresponding work is complete. Check citations and distinguish measured findings from hypotheses.
+
+Create the submitted copy under ignored `docs/private/`, with names, matriculation numbers and email addresses on its title page. Follow [the rebuild instructions](docs/submission-checklist.md#rebuild-the-report), using `--source`/`--output` for the private copy and `scripts/check_report.py --source ... --pdf ... --receipt ...` with a private receipt path. Inspect every page. Each changed copy must independently meet the ten-body-page, single-column/single-spacing, 11-point and one-inch-margin requirements.
+
+The handout permits supplementary model printouts, screenshots or planning graphs in an appendix; it does not mandate those artifacts for this CSP/COP project. The current report includes its architecture diagram and three result charts. Add a relevant saved-schedule screenshot only if it helps explain a claim; do not invent a probabilistic model or move required analysis into an appendix to avoid the body limit.
+
+### S5. Build and rehearse the presentation
+
+Use the updated [storyboard and Q&A](presentation/rehearsal.md) and [demo guide](presentation/README.md). Produce the actual deck or requested recording; neither currently exists in this repository. Use both completed models, three charts, the formal repair example, extraction failure, optimization/cost distinction and responsible-AI implications. Agree speakers as a team; coding contacts do not determine speaking roles.
+
+Rehearse 15 minutes plus five-minute Q&A. Every member should explain both methods, generated-data limitations, Qwen3.8's ceiling, validator/reference differences and their own work. Record actual timing, unclear explanations and corrections. Demonstrations should work offline; label a canned fallback clearly. Do not rely on a new live call during the presentation.
+
+### S6. Recommended independent handoff
+
+A teammate can clone the published revision, follow [evidence.md](docs/evidence.md), verify both archives and compare exact-source replay with the saved analyses. Record the commit, platform, commands and outcome. Automated clean-clone checks and replay are already available; they do not imply a teammate performed this check. This recommendation is separate from course contribution and understanding requirements.
+
+### S7. Deliver the correct files on time
+
+The complete-reviewed-draft target remains **30 October 2026**. Work on S1-S3 and initial presentation preparation in parallel, then finalize S4 after those findings. Finish the presentation before the assigned slot in the week of **9 November**, and submit the report by the verified Canvas cutoff on **13 November**. These course dates come from the supplied handout; check later announcements for changes.
+
+Confirm filename/file requirements, private title identifiers, citations, contribution statements, page limit and any requested deck/recording/code/evidence attachments. Submit the requested deliverables, verify the uploaded versions and retain receipts privately. GitHub publication is complete and is not a Canvas submission.
 
 ### Agent execution from a short prompt
 
 Inspect current Git state and these documents, select the agreed task above, then implement and verify its concrete deliverable. Ask focused questions only for unresolved identity/workspace, conflicting requirements, scientific scope, credentials availability, live budget or publication authority. Routine engineering choices are autonomous. A request to write code does not authorize inference or publication. Human approvals and contributions must come from actual human actions.
+
+For S2/S3, collect factual member accounts or support a real review session. Do not mark student work complete by writing an attribution. For S4/S5, help edit/format supplied material while keeping unconfirmed facts and rehearsal status explicit.
 
 ## 6. System architecture and contract
 
@@ -367,9 +422,9 @@ Keys stay in ignored `.env` or a secret source, never in chat/code/archives. TLS
 | --- | --- | --- |
 | Formal/implementation | Both paths, repair/diagnostics and independent validator implemented; mathematical fixtures and regression suite verified | Actual member semantic/code review and any defect-specific follow-up |
 | Complete development evaluation | Both 600-attempt runs, preserved failures, fresh scoring and archive replay complete | Genuine interpretation of limitations and optional independent teammate replay |
-| Reproducible repository | Source, tests, figures, summaries and verified replay archives included; historical raw evidence privately backed up | Successful publication and matching clean-checkout handoff |
+| Reproducible repository | Published on main; source, tests, figures and verified archives included; automated clean-clone checks and historical backup complete | Recommended teammate handoff (S6); optional off-device copy of the private historical bundle |
 | Scientific course fit | Proposal scope and constructed-data direction fit | Exact hosted-model eligibility and actual teaching feedback |
-| Report/delivery | Full exploratory report and formatted PDF prepared | Member revisions/contributions/private title; final render audit; actual deck/rehearsal and submission receipt |
+| Report/delivery | Full exploratory report and checked nine-body-page PDF prepared | S2-S5 member work, private-copy audit, actual presentation and S7 receipt |
 
 [Publication verification](docs/publication-verification.md) records the exact commands and results, including platform-specific TLS handling. Run targeted checks first; full suites are appropriate for shared runtime changes. Do not repeat live benchmarks or unchanged full suites for documentation edits. If a semantics-changing fix is needed, record its scientific impact before making updated performance claims.
 
@@ -377,7 +432,7 @@ Keys stay in ignored `.env` or a secret source, never in chat/code/archives. TLS
 
 The report must trace every numerical claim to a saved artifact, retain all failures and metric denominators, distinguish interpretation from measured evidence, explain why direct and solver-assisted methods differ, and discuss synthetic-data assumptions and realism. Uncertainty and small samples stay visible. A strong direct result is a valid outcome.
 
-The submission must include the course-required private title information, actual contributions and AI disclosure, member understanding, a compliant PDF and complete presentation. Only real review dates, approval evidence and upload receipts satisfy those gates. An agent cannot sign for a member or award course-model eligibility.
+The submission must include course-required private title information, actual contributions and AI disclosure, member understanding, a compliant PDF and presentation. Record actual actions and eligibility/submission evidence; do not substitute generated approvals. Team review logs and S6 replay are verification practices, not extra course-mandated forms. An agent cannot sign for a member or award course-model eligibility.
 
 If teaching feedback requires an additional comparison, establish that limited follow-up explicitly, with exact provider/model, inputs, outcomes, cap and source snapshot. Existing report scope stays exploratory. Otherwise focus on completing the report and human delivery rather than reopening architecture.
 
@@ -412,8 +467,8 @@ The former `report/` directory is now `docs/`. Active links and scripts use the 
 | Major implementation | Delivered; only defect-driven maintenance needed for this report |
 | Extra model/fresh holdout | Conditional future work, not automatically required by course |
 | Provider eligibility | Pending exact interpretation/feedback |
-| Human review/authorship | Actual actions still required; cannot infer from tests, branches or assigned roles |
-| Publication | User authorized commit and push to GitHub main for this finalization |
+| Human review/authorship | Accounts, substantive review and understanding remain unconfirmed; follow S2-S3 without inferring from tests, branches or roles |
+| Publication | Implementation, report and evidence published on GitHub main; maintain matching source, PDF and format/figure receipts |
 | Further inference | Not authorized by publication; prior full-run allowances consumed |
 
 ## 16. Source grounding
@@ -426,6 +481,6 @@ The report cites NATURAL PLAN, minimal-perturbation work, language models as pla
 
 The canonical source is [docs/submission-report.md](docs/submission-report.md), rendered by `scripts/render_report.py` to `docs/submission-report.pdf`. The previous 200-call report is preserved as historical material. The current narrative covers abstract, motivation/questions, related work, CSP/COP and repair, architecture, provenance/protocol, acceptance/SAT/UNSAT/difficulty/optimization/extraction/wording/resources, implications, responsible AI, reproducibility, contributions and conclusion. [claim-evidence.md](docs/claim-evidence.md) connects these to artifacts.
 
-Regenerate figures offline from the portable summary. Compact report figures use labels at least 11 pt at the final page width. Rebuild and inspect every page after substantive changes; confirm body page count, single column/spacing, text size and one-inch margins. Title and references are excluded from the ten-page body maximum. Actual final revisions may change the current count.
+Regenerate figures offline from the portable summary. Compact report figures and mathematical subscripts use at least 11 pt at final size. Current PDF: eleven total pages, comprising one title, nine body and one references page. Rebuild and inspect every page after substantive changes; confirm body page count, single column/spacing, text size and one-inch margins. Title and references are excluded from the ten-page body maximum. Future revisions may change the count; S4 and the submission checklist give the checking procedure.
 
 Produce the actual presentation using a clear problem example, formal repair objective, comparison diagram, three evaluation blocks, the model-dependent finding, one extraction failure, the quality/cost trade-off and responsible-AI limits. Rehearse the whole pipeline and questions on gold independence, generated data, backend failures and solver proof. A storyboard is preparation, not delivery. Record genuine contributions, citations, AI assistance and final submission receipts; no grade or course acceptance is inferred from repository publication.

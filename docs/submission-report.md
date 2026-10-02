@@ -102,7 +102,7 @@ Within each controlled task, paired family bootstrap intervals resample source g
 
 **Acceptance.** Figures 1-3 compare the approaches on a common scale. With Qwen3.6, B accepts 229/240 controlled attempts (95.4%) versus A's 95/240 (39.6%). The corresponding realistic scores are 12/12 versus 6/12, and wording scores 47/48 versus 8/48. Qwen3.8 reaches 240/240 versus 239/240 controlled, 11/12 for both realistic arms, and 44/48 versus 46/48 wording. All nine rejected Qwen3.8 attempts are provider errors; every non-error returned scheduling answer is accepted (591/591). This conditional diagnostic does not replace failure-inclusive rates or prove perfect reasoning.
 
-![Figure 1. Controlled acceptance; all failed attempts are retained.](figures/submission/controlled-accepted.png)
+![Figure 1. Controlled acceptance. Percentages are above bars; accepted/total counts are inside. All failures remain in the denominators.](figures/submission/controlled-accepted.png)
 
 ![Figure 2. Realistic-scenario acceptance; twelve AI-assisted cases per approach.](figures/submission/realistic-accepted.png)
 

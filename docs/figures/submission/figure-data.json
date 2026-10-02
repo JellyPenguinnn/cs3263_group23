@@ -4,12 +4,12 @@
   "matplotlib_version": "3.10.8",
   "new_model_calls": 0,
   "output_sha256": {
-    "controlled-accepted.pdf": "3ba50dd01c63ab59c32d34ba6b11b1a75e76e2e5ed91e2e410453cc9076354de",
-    "controlled-accepted.png": "b300c55d163d7cfc4ef1b3cdc2fc5f9aa1a2f104d44b2da6f5c71b1de7661765",
-    "language-accepted.pdf": "576e4a10f3ef50b87a1e42cb2390dffd95271d659d83b2aa7af51dd7545ba574",
-    "language-accepted.png": "982ba0c876a99efe73c572a291bb9638b977793b0b90da744fb1a58b5937f0d2",
-    "realistic-accepted.pdf": "9e93a29bb063c18da1d0686f05aa9abb2ee71e18248e9223bc71c22cb997ee06",
-    "realistic-accepted.png": "67e552dcfc9e36dc19c9721f4a4932c8d86d902a43e0f308c1748362d9770401"
+    "controlled-accepted.pdf": "be28b7332d643b9a01d8ef3441e765c9d87c6b5b79145238c23b4fd97aeeabdd",
+    "controlled-accepted.png": "aa104d433f5dab4999044bd3fed15504688d02ab9358e3112f90a392daa3ae86",
+    "language-accepted.pdf": "0bc6498c200e9797b07624ae7fce090af1e903ec71824ecafce334e06e412e97",
+    "language-accepted.png": "c095dae440d73710596f55160317bfd0fec374d88e497e747942a11aef107006",
+    "realistic-accepted.pdf": "f3dae5baa2a509aa1be1b232fe902a80df9cbe00b84c1ba1f069d0a105d41240",
+    "realistic-accepted.png": "6345d752cd8796ebc1032289c59bb95752ca20fb70cee6aacfbfbd5ff45308ff"
   },
   "plotted_data": {
     "controlled": {
@@ -161,7 +161,7 @@
       }
     }
   },
-  "renderer_sha256": "66dc9c82a40a138cf0490fa31f4cabd031156d8bf5331e383d5656eedc4fa95b",
+  "renderer_sha256": "03ac36628dea84ae8371604b07c576f17eb18e7c73db9dd2d217ece2de6f254b",
   "source": "two-model-development-20261002.json",
   "source_sha256": "a08d59e9f6f42ba0fc90fa4372c2cb824ed5ffd2937e0d4439fa4ccde17a167e"
 }

@@ -24,7 +24,7 @@ DEFAULT_OUTPUT = ROOT / "results/figures/two-model-development-20261002"
 MODELS = ("qwen36", "qwen38")
 APPROACHES = ("direct", "solver_augmented")
 LABELS = {"direct": "A · Direct LLM", "solver_augmented": "B · LLM + CP-SAT"}
-COLORS = {"direct": "#326DA8", "solver_augmented": "#C66B24"}
+COLORS = {"direct": "#326DA8", "solver_augmented": "#B45B1F"}
 INK, MUTED = "#182A3E", "#4F6072"
 BLOCKS = {
     "controlled": ("Controlled scheduling", "240 canonical cases per approach · generation and repair",
@@ -65,10 +65,10 @@ def render_block(block: str, data: dict, *, report: bool = False):
     if report:
         # At 6.2 inches this fits the report body without shrinking 11-point labels.
         fig, ax = plt.subplots(figsize=(6.2, 3.2))
-        fig.subplots_adjust(left=0.12, right=0.98, bottom=0.14, top=0.75)
-        fig.text(0.12, 0.955, title, fontsize=13, weight="bold", color=INK)
+        fig.subplots_adjust(left=0.14, right=0.98, bottom=0.14, top=0.75)
+        fig.text(0.14, 0.94, title, fontsize=13, weight="bold", color=INK)
         fig.legend(handles=[Patch(color=COLORS[a], label=LABELS[a]) for a in APPROACHES],
-                   loc="upper left", bbox_to_anchor=(0.105, 0.925), ncol=2, frameon=False,
+                   loc="upper left", bbox_to_anchor=(0.125, 0.91), ncol=2, frameon=False,
                    fontsize=11, handlelength=1.4, columnspacing=1.2)
     else:
         fig, ax = plt.subplots(figsize=(10, 6.5))
@@ -81,11 +81,21 @@ def render_block(block: str, data: dict, *, report: bool = False):
         rows = [data[key]["approaches"][approach] for key in MODELS]
         bars = ax.bar([x + (j - 0.5) * 0.32 for x in range(2)],
                       [r["percent"] for r in rows], width=0.29, color=COLORS[approach])
-        ax.bar_label(bars, labels=[f'{r["percent"]:.1f}%\n{r["accepted"]}/{r["attempts"]}'
-                                  for r in rows], padding=6, fontsize=11)
+        labels = [f'{r["percent"]:.1f}%' +
+                  (f'\n{r["accepted"]}/{r["attempts"]}' if r["percent"] < 12 else "")
+                  for r in rows]
+        ax.bar_label(bars, labels=labels,
+                     padding=5, fontsize=11, fontweight="bold")
+        for bar, row in zip(bars, rows):
+            # Short bars cannot contain an 11-point label; show that count above.
+            if row["percent"] < 12:
+                continue
+            x = bar.get_x()+bar.get_width()/2
+            ax.text(x, row["percent"]/2, f'{row["accepted"]}/{row["attempts"]}',
+                    ha="center", va="center", color="white", fontsize=11)
     ax.set_xticks(range(2), [data[key]["model"] for key in MODELS], fontsize=12)
     ax.set_xlim(-0.55, 1.55)
-    ax.set_ylim(0, 137 if report else 116)
+    ax.set_ylim(0, 118)
     ax.set_yticks(range(0, 101, 20))
     ax.yaxis.set_major_formatter(PercentFormatter(100, decimals=0))
     ax.set_ylabel("Accepted answers", fontsize=11)
@@ -98,7 +108,7 @@ def render_block(block: str, data: dict, *, report: bool = False):
         return fig
     fig.text(0.075, 0.145, "Accepted = gold-valid feasible schedule or correct UNSAT; optimality is a separate measure.",
              fontsize=9.5, color=MUTED)
-    fig.text(0.075, 0.104, "All errors remain in the denominators. Labels show accepted / attempted; bars are descriptive rates.",
+    fig.text(0.075, 0.104, "Rates above bars; accepted/total inside (above short bars). All errors remain in the denominators.",
              fontsize=9.5, color=MUTED)
     fig.text(0.075, 0.057, note, fontsize=9, color=MUTED)
     return fig

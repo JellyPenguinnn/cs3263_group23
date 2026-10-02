@@ -1,4 +1,26 @@
-# Integrated scheduling demonstration
+# Evidence-based scheduling demonstration
+
+Use the [current report](../docs/submission-report.md), [three evaluation charts](../results/figures/two-model-development-20261002/) and [rehearsal guide](rehearsal.md). Both Qwen3.6 and Qwen3.8 comparisons are complete. These are exploratory development results, with 600 scheduling attempts per model; model eligibility and actual human review remain separate course-delivery items.
+
+## Current archived examples
+
+Run from the repository root after the README installation steps. Verify and extract the committed evidence into a **new** directory; these commands make no model calls:
+
+```sh
+python3.12 scripts/verify_evidence.py --extract-to runs/presentation-evidence
+.venv/bin/scheduling explain --run-dir runs/presentation-evidence/qwen36/runs/controlled/controlled \
+  --case-id family-1b6a21e9eaa5121c07e7b362-generation --approach solver_augmented --format json
+.venv/bin/scheduling explain --run-dir runs/presentation-evidence/qwen38/runs/controlled/controlled \
+  --case-id family-178d62b21632eb32c9dcb923-repair --approach direct --format json
+```
+
+The first example shows Qwen3.6 changing A1's deadline from slot 3 to slot 7 during extraction. The compiled specification permits a schedule, but independent gold validation rejects it. The second shows a gold-valid Qwen3.8 direct repair that moves two activities while the reference needs only one. It illustrates why acceptance and optimal repair are separate measures. Claims R11 and R10 in the [claim index](../docs/claim-evidence.md) bind these examples to saved evidence.
+
+Use the current CLI to inspect saved records. To reproduce the original analysis, follow [the exact-source replay instructions](../docs/evidence.md); do not silently rescore archived results with a changed implementation. Never correct a failed extraction and present it as the original model answer. A saved-record demonstration can supplement the presentation; a deck, recording and timed human rehearsal still need to be completed.
+
+## Historical baseline demonstrations
+
+The following examples document earlier integration checkpoints. Their smaller runs and rates are historical, not the completed two-model comparison above. The original private archives are needed for these old run paths.
 
 Run from the repository root after the README installation steps. This workflow
 makes zero model calls. With the preserved synthetic live archive available:
@@ -48,7 +70,7 @@ The canned demo is integration evidence only. Choose a fresh directory. Do not
 present its injected answers as model responses. Review the whole pipeline and
 rehearse timing as a team; no rehearsal or teammate sign-off is recorded here.
 
-# Historical direct-component examples
+## Historical direct-component examples
 
 These are public synthetic examples and explicitly canned replies, not the shared
 benchmark fixtures, recorded model outputs, or independent validation evidence.
