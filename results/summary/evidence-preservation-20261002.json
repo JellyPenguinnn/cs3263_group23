@@ -1,0 +1,20 @@
+{
+  "archive": "evidence.tar.gz",
+  "archive_bytes": 37539046,
+  "archive_checksum_mismatches": 0,
+  "archive_sha256": "261376861781a4a71c57ab0ac2c60d9c967cc88a552b816bc4ac4dea5f700127",
+  "excluded_entries": 15,
+  "links": 0,
+  "manifest_sha256": "c8421965eca3d10a73994d5d6a370e1695410016196864a18853f1f39d55e926",
+  "missing_or_extra_members": 0,
+  "new_model_calls": 0,
+  "originals_rechecked_unchanged": 10811,
+  "preserved_source_bytes": 181613871,
+  "preserved_source_files": 10811,
+  "public_receipt_only": true,
+  "published": false,
+  "redundancy_limit": "Same-machine private copy; not an off-device backup.",
+  "scope": "Private full historical/operational archive; separate full-run replay archives are tracked in results/archives.",
+  "verified_archive_members": 10812,
+  "verified_utc": "2026-10-02T07:28:57.220564+00:00"
+}

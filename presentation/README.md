@@ -22,7 +22,7 @@ makes zero model calls. With the preserved synthetic live archive available:
 5. Use the read-only dashboard for monitoring/results, and explain that these
    are 30 development cases, not frozen held-out findings or a superiority claim.
 
-The 30 September [integration qualification](../report/lihao-integration-followup.md)
+The 30 September [integration qualification](../docs/lihao-integration-followup.md)
 verified the three explanation commands above on installed macOS/Linux builds.
 The later v2 pilot can be replayed separately when its synthetic archive is available:
 

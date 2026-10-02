@@ -80,7 +80,7 @@ function status(value) {
 function outcome(row) {
   if (!row) return status("not started");
   if (row.category === "interrupted_or_uncertain")
-    return status(run?.active ? "pending" : "interrupted");
+    return status(run?.active ? "pending" : run?.liveness === "unknown_legacy" ? "pending / uncertain" : "interrupted");
   if (row.accepted == null) return status("UNRESOLVED");
   return status(row.accepted ? "accepted" : "rejected");
 }
@@ -175,8 +175,10 @@ function renderMonitor() {
     c = run.manifest.contract,
     cfg = c.config;
   const state = run.active
-    ? "active / interrupted"
-    : p.completed === p.planned
+    ? "running"
+    : run.liveness === "unknown_legacy"
+      ? "activity unknown"
+      : p.completed === p.planned
       ? "completed"
       : "incomplete";
   const totals = run.summary.subsets.reduce(
@@ -190,7 +192,7 @@ function renderMonitor() {
     { sum: 0, reported: 0, calls: 0 },
   );
   $("#monitor-content").innerHTML =
-    `<div class="kpis">${kpi("Completed", `${p.completed}<span class="muted"> / ${p.planned}</span>`, "Includes rejected answers")}${kpi("Pending / uncertain", p.pending_attempt_ids.length, p.pending_attempt_ids.length ? (run.active ? "Requests reserved; awaiting results" : "Requires reconciliation before resume") : "No pending requests")}${kpi("Not started", p.not_started, "No request sent")}${kpi("Reported tokens", totals.reported ? num(totals.sum) : "—", `Usage available: ${totals.reported} / ${totals.calls}`)}</div><section class="card"><div class="progress-head"><h2>Progress</h2>${status(state)}</div><div class="progress-track" role="progressbar" aria-label="Completed attempts" aria-valuemin="0" aria-valuemax="${p.planned}" aria-valuenow="${p.completed}"><div class="progress-fill" style="width:${p.planned ? (100 * p.completed) / p.planned : 0}%"></div></div><div class="progress-meta"><span>${p.completed} of ${p.planned} attempts complete</span><span>Sequential · no retries</span></div></section><section class="card"><div class="card-heading"><h2>Latest activity</h2></div><div class="table-scroll"><table><thead><tr><th>Case</th><th>Approach</th><th>Result</th><th>Started · UTC</th></tr></thead><tbody>${run.activity.map((a) => `<tr><td>${esc(a.case_id)}</td><td>${names[a.approach]}</td><td>${a.state !== "completed" ? status("pending / uncertain") : outcome(a)}</td><td class="muted">${esc(a.started_utc ? a.started_utc.slice(11, 19) : "—")}</td></tr>`).join("") || '<tr><td colspan="4">No requests reserved yet.</td></tr>'}</tbody></table></div></section><section class="card"><h2>Run details</h2><dl class="facts"><dt>Model requested</dt><dd>${esc(cfg.model.model)}</dd><dt>Started</dt><dd>${esc(run.manifest.created_utc.replace("T", " ").slice(0, 19))} UTC</dd><dt>Budget</dt><dd>${cfg.max_requests} requests · ${num(cfg.max_requested_output_tokens)} requested output tokens · input tokens additional</dd><dt>Solver</dt><dd>${cfg.solver.time_limit_seconds}s / case · ${cfg.solver.num_workers} worker(s) · seed ${cfg.solver.random_seed}</dd></dl><details><summary>Configuration & provenance</summary><pre class="raw">${esc(pretty(run.manifest))}</pre></details></section>`;
+    `<div class="kpis">${kpi("Completed", `${p.completed}<span class="muted"> / ${p.planned}</span>`, "Includes rejected answers")}${kpi("Pending / uncertain", p.pending_attempt_ids.length, p.pending_attempt_ids.length ? (run.active ? "Requests reserved; awaiting results" : run.liveness === "unknown_legacy" ? "Activity unknown; check the original runner" : "Requires reconciliation before resume") : "No pending requests")}${kpi("Not started", p.not_started, "No request sent")}${kpi("Reported tokens", totals.reported ? num(totals.sum) : "—", `Usage available: ${totals.reported} / ${totals.calls}`)}</div><section class="card"><div class="progress-head"><h2>Progress</h2>${status(state)}</div><div class="progress-track" role="progressbar" aria-label="Completed attempts" aria-valuemin="0" aria-valuemax="${p.planned}" aria-valuenow="${p.completed}"><div class="progress-fill" style="width:${p.planned ? (100 * p.completed) / p.planned : 0}%"></div></div><div class="progress-meta"><span>${p.completed} of ${p.planned} attempts complete</span><span>Sequential · no retries</span></div></section><section class="card"><div class="card-heading"><h2>Latest activity</h2></div><div class="table-scroll"><table><thead><tr><th>Case</th><th>Approach</th><th>Result</th><th>Started · UTC</th></tr></thead><tbody>${run.activity.map((a) => `<tr><td>${esc(a.case_id)}</td><td>${names[a.approach]}</td><td>${a.state !== "completed" ? status("pending / uncertain") : outcome(a)}</td><td class="muted">${esc(a.started_utc ? a.started_utc.slice(11, 19) : "—")}</td></tr>`).join("") || '<tr><td colspan="4">No requests reserved yet.</td></tr>'}</tbody></table></div></section><section class="card"><h2>Run details</h2><dl class="facts"><dt>Model requested</dt><dd>${esc(cfg.model.model)}</dd><dt>Started</dt><dd>${esc(run.manifest.created_utc.replace("T", " ").slice(0, 19))} UTC</dd><dt>Budget</dt><dd>${cfg.max_requests} requests · ${num(cfg.max_requested_output_tokens)} requested output tokens · input tokens additional</dd><dt>Solver</dt><dd>${cfg.solver.time_limit_seconds}s / case · ${cfg.solver.num_workers} worker(s) · seed ${cfg.solver.random_seed}</dd></dl><details><summary>Configuration & provenance</summary><pre class="raw">${esc(pretty(run.manifest))}</pre></details></section>`;
 }
 function sliceControls() {
   const slices = run.slices.length
@@ -378,7 +380,10 @@ async function refresh() {
     if (id !== runId) return;
     const changed = refreshError || run?.revision !== data.revision;
     run = data;
-    $("#evidence-label").textContent = human(run.progress.evidence);
+    $("#evidence-label").textContent =
+      run.manifest.contract.config.qualification_policy === "strict_model_observe_backend_v1"
+        ? "Shared-service development · backend variation recorded"
+        : human(run.progress.evidence);
     if (refreshError) {
       notice("");
       refreshError = false;

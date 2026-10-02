@@ -11,8 +11,11 @@ import hashlib
 from pathlib import Path
 
 from scheduling.evaluation.cases import AuthoredBenchmarkCase, case_bundle, load_cases
+from scheduling.evaluation.failure_policy import CONTINUE_TRANSIENT_POLICY
 from scheduling.evaluation.manifests import structural_audit
-from scheduling.evaluation.runner import STRICT_QUALIFICATION_POLICY, RunConfig, plan_run, write_new
+from scheduling.evaluation.runner import (
+    DEVELOPMENT_QUALIFICATION_POLICIES, STRICT_QUALIFICATION_POLICY, RunConfig, plan_run, write_new,
+)
 from scheduling.evaluation.scoring import digest
 from scheduling.providers import ModelConfig
 from scheduling.schema import to_data
@@ -40,7 +43,12 @@ def select_language(cases):
     return tuple(chosen)
 
 
-def prepare(controlled_path, realistic_path, directory):
+def prepare(controlled_path, realistic_path, directory, *, model="qwen3.8:27b",
+            qualification_policy=STRICT_QUALIFICATION_POLICY):
+    if not isinstance(model, str) or not model or model == "default" or any(c.isspace() for c in model):
+        raise ValueError("Select an explicit provider model ID, not the default alias")
+    if qualification_policy not in DEVELOPMENT_QUALIFICATION_POLICIES:
+        raise ValueError("Select a supported development qualification policy")
     controlled, realistic = load_cases(controlled_path), load_cases(realistic_path)
     if (
         len(controlled) != 240 or len(realistic) != 12
@@ -70,10 +78,11 @@ def prepare(controlled_path, realistic_path, directory):
         variants = ("paraphrase", "reordered") if role == "language" else ("canonical",)
         count = 2 * len(cases) * len(variants)
         cfg = RunConfig(
-            ModelConfig("qwen3.8:27b", 32768, connect_timeout=30, read_timeout=900),
+            ModelConfig(model, 32768, connect_timeout=30, read_timeout=1800),
             SolverLimits(30), SolverLimits(60), count, count * 32768,
             evidence="live_development", variants=variants,
-            qualification_policy=STRICT_QUALIFICATION_POLICY,
+            qualification_policy=qualification_policy,
+            provider_failure_policy=CONTINUE_TRANSIENT_POLICY,
         )
         preflight = plan_run(cases, cfg)
         if preflight["state"] != "ready" or not preflight["within_cap"]:
@@ -89,11 +98,12 @@ def prepare(controlled_path, realistic_path, directory):
             "planned_requests": count, "variants": list(variants),
         }
     manifest = {
-        "format_version": "1.0", "policy_version": "development-campaign-1",
+        "format_version": "1.0", "policy_version": "development-campaign-2",
         "status": "prepared_offline_not_live_authorization", "evidence": "development_only",
-        "model": "qwen3.8:27b", "inputs": inputs, "family_mapping": families,
+        "model": model, "inputs": inputs, "family_mapping": families,
         "preparation_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "configs": configs, "blocks": details,
+        "qualification_policy": qualification_policy,
         "language_selection": "Six per task/label, distinct source families; least-used sweep then event within stratum, stable case-ID tie-break; no model outcomes",
         "authored_creation_methods": dict(Counter(
             r.creation_method for c in realistic for r in c.authored_renderings if r.variant_id == "canonical"
@@ -116,8 +126,13 @@ def main():
     parser.add_argument("controlled", type=Path)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--realistic", type=Path, default=Path("benchmarks/fixtures/realistic-drafts-v1.json"))
+    parser.add_argument("--model", default="qwen3.8:27b", help="Exact authorized SoCLaaS model ID; no fallback")
+    parser.add_argument("--qualification-policy", choices=DEVELOPMENT_QUALIFICATION_POLICIES,
+                        default=STRICT_QUALIFICATION_POLICY,
+                        help="Backend observation requires separate explicit development authorization")
     args = parser.parse_args()
-    result = prepare(args.controlled, args.realistic, args.directory)
+    result = prepare(args.controlled, args.realistic, args.directory, model=args.model,
+                     qualification_policy=args.qualification_policy)
     print({k: result[k] for k in ("status", "planned_scheduling_completions", "total_requests", "requested_output_tokens")})
 
 

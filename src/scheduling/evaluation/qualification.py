@@ -4,6 +4,7 @@ This adds capability checks and a shared session budget, not a second scheduling
 pipeline. Each output directory is write-once; interrupted calls stay reserved.
 """
 
+from collections import Counter
 from dataclasses import replace
 from datetime import datetime, timezone
 import hashlib
@@ -11,8 +12,12 @@ from pathlib import Path
 import time
 
 from scheduling.evaluation.cases import case_bundle
+from scheduling.evaluation.failure_policy import FailureState
 from scheduling.evaluation.metrics import token_usage_summary
-from scheduling.evaluation.runner import STRICT_QUALIFICATION_POLICY, _stop_reason, read, run_batch, write_new
+from scheduling.evaluation.runner import (
+    DEVELOPMENT_QUALIFICATION_POLICIES, OBSERVE_BACKEND_POLICY,
+    _stop_reason, read, run_batch, write_new,
+)
 from scheduling.evaluation.scoring import digest
 from scheduling.providers import Message, RequestBudget, SoCLaaSProvider
 from scheduling.providers.execution import execution_contract
@@ -25,7 +30,8 @@ MESSAGES = (
 
 
 def capability_issue(response, cfg, fingerprints):
-    reason = _stop_reason(response, cfg.model.model, fingerprints)
+    reason = _stop_reason(response, cfg.model.model, fingerprints,
+                          allow_backend_variation=cfg.qualification_policy == OBSERVE_BACKEND_POLICY)
     if reason:
         return reason
     if response.error:
@@ -60,12 +66,14 @@ def execute_blocks(blocks, directory, *, authorization_reference, allow_live=Fal
         if (cfg.model != model or cfg.solver != first.solver
                 or cfg.reference_solver != first.reference_solver
                 or cfg.rendering_seed != first.rendering_seed
+                or cfg.provider_failure_policy != first.provider_failure_policy
                 or cfg.evidence != "live_development"
-                or cfg.qualification_policy != STRICT_QUALIFICATION_POLICY
+                or cfg.qualification_policy not in DEVELOPMENT_QUALIFICATION_POLICIES
+                or cfg.qualification_policy != first.qualification_policy
                 or cfg.qualification_baseline is not None
                 or preflight["state"] != "ready" or not preflight["within_cap"]
                 or preflight["planned_requests"] != cfg.max_requests):
-            raise ValueError("Development blocks must share strict qualified model settings and exact caps")
+            raise ValueError("Development blocks must share qualified model settings, backend policy and exact caps")
     directory = Path(directory)
     directory.mkdir(parents=True, exist_ok=False, mode=0o700)
     scheduling_calls = sum(cfg.max_requests for _, cfg, _ in blocks.values())
@@ -109,9 +117,24 @@ def execute_blocks(blocks, directory, *, authorization_reference, allow_live=Fal
             "requested_output_tokens_reserved": budget.completion_tokens_reserved,
             "total_wall_seconds": time.monotonic() - started,
             "tokens": token_usage_summary(a["usage"] for a in attempts),
+            "provider_failure_counts": dict(Counter(a["error"] for a in attempts if a.get("error"))),
             "usage_scope": "Recorded capability and scheduling provider attempts; metadata request has no token usage record",
             "blocks": results,
         }
+        if first.qualification_policy == OBSERVE_BACKEND_POLICY:
+            observed = Counter(
+                (a.get("execution") or {}).get("system_fingerprint")
+                for a in attempts if a.get("http_status") == 200 and not a.get("error")
+            )
+            result["backend_policy"] = OBSERVE_BACKEND_POLICY
+            result["backend_observations"] = [
+                {"system_fingerprint": fp, "successful_provider_attempts": count}
+                for fp, count in sorted(observed.items(), key=lambda item: str(item[0]))
+            ]
+            result["backend_note"] = (
+                "Shared-service development evidence; backend variation is recorded, not pinned. "
+                "Counts cover capability and scheduling responses; failed requests retain unknown backend."
+            )
         if "batch" in blocks:
             result["batch"] = results.get("batch")
         write_new(directory / "summary.json", result)
@@ -145,13 +168,18 @@ def execute_blocks(blocks, directory, *, authorization_reference, allow_live=Fal
             capability_hashes.append(digest(record))
             if issue:
                 return finish(issue)
-        baseline = {"system_fingerprint": next(iter(fingerprints)),
-                    "capability_sha256": capability_hashes}
+        baseline = {"capability_sha256": capability_hashes}
+        if first.qualification_policy == OBSERVE_BACKEND_POLICY:
+            baseline["system_fingerprints"] = sorted(fingerprints, key=str)
+        else:
+            baseline["system_fingerprint"] = next(iter(fingerprints))
+        failure_state = FailureState(first.provider_failure_policy)
         for role, (cases, cfg, _) in blocks.items():
             cfg = replace(cfg, qualification_baseline=baseline)
             config_name = "runtime-config.json" if role == "batch" else f"{role}-runtime-config.json"
             write_new(directory / config_name, cfg)
-            result = run_batch(cases, directory / role, cfg, provider_complete=provider.complete)
+            result = run_batch(cases, directory / role, cfg, provider_complete=provider.complete,
+                               failure_state=failure_state)
             results[role] = result
             if result["state"] != "completed":
                 return finish(result.get("stop_reason", result["state"]))

@@ -16,6 +16,8 @@ jobs:
       - name: Verify installed prompts and runtime assets
         run: python scripts/check_installed.py
       - run: python -m pytest -q
+      - name: Verify immutable benchmark evidence archives
+        run: python scripts/verify_evidence.py
       - run: python -m pip check
       - uses: actions/setup-node@v4
         with:

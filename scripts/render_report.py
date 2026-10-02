@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Render the canonical Markdown draft. Optional dependency: reportlab==4.4.9.
+"""Render the canonical Markdown report. Optional dependency: reportlab==4.4.9.
 
 Run from any directory: python scripts/render_report.py [--source PATH] [--output PATH]
 This deliberately supports the Markdown subset used by this report and fails on
@@ -19,7 +19,7 @@ from reportlab.lib.pagesizes import A4
 from reportlab.lib.styles import ParagraphStyle
 from reportlab.platypus import (
     BaseDocTemplate, Flowable, Frame, PageBreak, PageTemplate, Paragraph,
-    Spacer, Table, TableStyle,
+    Spacer, Table, TableStyle, Image, KeepTogether,
 )
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -139,7 +139,7 @@ class Report(BaseDocTemplate):
     def __init__(self, output: Path):
         super().__init__(str(output), pagesize=A4, leftMargin=MARGIN, rightMargin=MARGIN,
                          topMargin=MARGIN, bottomMargin=MARGIN,
-                         title='CS3263 Group 23 - Development draft', author='CS3263 Group 23')
+                         title='CS3263 Group 23 - Scheduling study', author='CS3263 Group 23')
         self.phase = 'Title'
         self.phase_pages = []
         frame = Frame(MARGIN,100,WIDTH,PAGE_H-202,leftPadding=0,rightPadding=0,
@@ -149,7 +149,7 @@ class Report(BaseDocTemplate):
     def footer(self, canvas, doc):
         canvas.setFillColor(MUTED)
         canvas.setFont('Times-Roman',11)
-        canvas.drawString(MARGIN,PAGE_H-82,'CS3263 Group 23 | DEVELOPMENT DRAFT')
+        canvas.drawString(MARGIN,PAGE_H-82,'CS3263 Group 23 | Scheduling study')
         canvas.drawRightString(PAGE_W-MARGIN,78,str(doc.page))
 
     def afterFlowable(self, flowable):
@@ -173,6 +173,8 @@ def table(lines: list[str]):
         widths = [WIDTH*.54,WIDTH*.23,WIDTH*.23]
     elif columns == 7:
         widths = [WIDTH*.16]+[WIDTH*.14]*6
+    elif columns == 5:
+        widths = [WIDTH*.28]+[WIDTH*.18]*4
     else:
         widths = [WIDTH/columns]*columns
     cells = [[Paragraph(('<b>'+inline(x)+'</b>') if i==0 else inline(x),CELL)
@@ -230,6 +232,18 @@ def render(source: Path, output: Path):
                 raise ValueError(f'Unsupported fence: {kind}')
             i = end+1
             continue
+        image_match = re.fullmatch(r'!\[([^\]]+)\]\(([^)]+)\)', line)
+        if image_match:
+            caption, target = image_match.groups()
+            image_path = (source.parent/target).resolve()
+            if not image_path.is_file():
+                raise ValueError(f'Missing report figure: {target}')
+            figure = Image(str(image_path))
+            figure.drawHeight *= WIDTH/figure.drawWidth
+            figure.drawWidth = WIDTH
+            story.append(KeepTogether([figure, Paragraph(inline(caption), BODY), Spacer(1, 5)]))
+            i += 1
+            continue
         if line.startswith('|'):
             end = i
             while end < len(lines) and lines[end].startswith('|'):
@@ -242,7 +256,7 @@ def render(source: Path, output: Path):
             i += 1
             continue
         end = i+1
-        while end < len(lines) and lines[end].strip() and not lines[end].startswith(('#','```','|')) and not re.match(r'^\d+\. ', lines[end]):
+        while end < len(lines) and lines[end].strip() and not lines[end].startswith(('#','```','|','![')) and not re.match(r'^\d+\. ', lines[end]):
             end += 1
         text = ' '.join(lines[i:end])
         story.append(Paragraph(inline(text),CENTER if phase=='Title' else BODY))
@@ -257,7 +271,7 @@ def render(source: Path, output: Path):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source',type=Path,default=ROOT/'report/study-draft.md')
-    parser.add_argument('--output',type=Path,default=ROOT/'output/pdf/study-draft.pdf')
+    parser.add_argument('--source',type=Path,default=ROOT/'docs/submission-report.md')
+    parser.add_argument('--output',type=Path,default=ROOT/'docs/submission-report.pdf')
     args = parser.parse_args()
     render(args.source,args.output)

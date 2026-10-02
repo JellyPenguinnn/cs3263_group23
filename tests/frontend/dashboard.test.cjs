@@ -204,3 +204,27 @@ test("dismissed or switched-context requests cannot reopen case details", async 
     assert.equal(ui.element("#detail-title").textContent, "", action);
   }
 });
+
+test("monitor distinguishes confirmed liveness, stale locks and unknown legacy activity", async () => {
+  const ui = await dashboard();
+  ui.call('run.progress = {completed:1, planned:2, pending_attempt_ids:["pending"], not_started:0}; run.active=true; run.liveness="active"; renderMonitor()');
+  assert.match(ui.element("#monitor-content").innerHTML, />running</);
+  ui.call('run.active=false; run.liveness="inactive"; renderMonitor()');
+  assert.match(ui.element("#monitor-content").innerHTML, />incomplete</);
+  assert.doesNotMatch(ui.element("#monitor-content").innerHTML, />running</);
+  assert.match(ui.element("#monitor-content").innerHTML, /Requires reconciliation/);
+  ui.call('run.liveness="unknown_legacy"; renderMonitor()');
+  assert.match(ui.element("#monitor-content").innerHTML, />activity unknown</);
+  assert.match(ui.element("#monitor-content").innerHTML, /check the original runner/);
+  assert.match(ui.call('outcome({category:"interrupted_or_uncertain"})'), /pending \/ uncertain/);
+});
+
+test("shared-service runs disclose their evidence scope without changing strict run labels", async () => {
+  const ui = await dashboard();
+  ui.call('run.progress.evidence="live_development"; run.manifest.contract.config.qualification_policy="strict_model_observe_backend_v1"');
+  await ui.call("refresh()");
+  assert.match(ui.element("#evidence-label").textContent, /Shared-service development/);
+  ui.call('run.manifest.contract.config.qualification_policy="strict_model_backend_v1"');
+  await ui.call("refresh()");
+  assert.doesNotMatch(ui.element("#evidence-label").textContent, /Shared-service/);
+});

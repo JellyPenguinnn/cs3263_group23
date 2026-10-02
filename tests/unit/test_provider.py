@@ -222,3 +222,91 @@ def test_malformed_reasoning_count_remains_unavailable(count):
     data = body(usage={'completion_tokens_details': {'reasoning_tokens': count}})
     result = call(lambda _: httpx.Response(200, json=data))
     assert result.attempts[0].execution.reported_reasoning_tokens is None
+
+
+@pytest.mark.parametrize("exception_type,kind,error,uncertain,count", [
+    (httpx.ConnectTimeout, "connect_timeout", "timeout", False, 2),
+    (httpx.ReadTimeout, "read_timeout", "timeout", True, 1),
+    (httpx.WriteTimeout, "write_timeout", "timeout", True, 1),
+    (httpx.PoolTimeout, "pool_timeout", "timeout", False, 2),
+    (httpx.TimeoutException, "timeout", "timeout", True, 1),
+    (httpx.ConnectError, "connect_error", "transport_error", False, 2),
+    (httpx.ReadError, "read_error", "transport_error", True, 1),
+    (httpx.WriteError, "write_error", "transport_error", True, 1),
+    (httpx.CloseError, "close_error", "transport_error", True, 1),
+    (httpx.LocalProtocolError, "local_protocol_error", "transport_error", True, 1),
+    (httpx.RemoteProtocolError, "remote_protocol_error", "transport_error", True, 1),
+    (httpx.ProxyError, "proxy_error", "transport_error", True, 1),
+    (httpx.UnsupportedProtocol, "unsupported_protocol", "transport_error", True, 1),
+    (httpx.DecodingError, "decoding_error", "transport_error", True, 1),
+    (httpx.TooManyRedirects, "too_many_redirects", "transport_error", True, 1),
+    (httpx.TransportError, "transport_error", "transport_error", True, 1),
+    (httpx.RequestError, "request_error", "transport_error", True, 1),
+])
+def test_transport_subtype_is_safe_and_preserves_existing_failure_semantics(
+    exception_type, kind, error, uncertain, count,
+):
+    from dataclasses import asdict
+    budget = RequestBudget(2, 200)
+    def handler(request):
+        raise exception_type("test-only-secret https://private.invalid/private-message", request=request)
+    result = call(handler, config=ModelConfig("test", 100, max_attempts=2), budget=budget)
+    assert result.error == error and len(result.attempts) == count
+    assert budget.requests_used == count and budget.completion_tokens_reserved == count * 100
+    for attempt in result.attempts:
+        assert attempt.error == error and attempt.outcome_uncertain is uncertain
+        assert attempt.execution.transport_error_kind == kind
+        assert attempt.usage.total_tokens is None
+    serialized = json.dumps(asdict(result))
+    assert all(value not in serialized for value in ("test-only-secret", "private.invalid", "private-message"))
+
+
+def test_tls_subtype_uses_safe_cause_and_does_not_retry():
+    import ssl
+    def handler(request):
+        try:
+            raise ssl.SSLCertVerificationError("private-certificate-sentinel")
+        except ssl.SSLCertVerificationError as cause:
+            raise httpx.ConnectError("test-only-secret", request=request) from cause
+    result = call(handler, config=ModelConfig("test", 100, max_attempts=2))
+    assert result.error == "tls_verification_error" and len(result.attempts) == 1
+    assert result.attempts[0].execution.transport_error_kind == "tls_verification_error"
+    assert not result.attempts[0].outcome_uncertain
+    assert "private-certificate-sentinel" not in repr(result)
+
+
+def test_custom_exception_name_is_not_saved():
+    private_type = type("private_custom_class_sentinel", (httpx.RequestError,), {})
+    def handler(request):
+        raise private_type("private-message", request=request)
+    result = call(handler)
+    assert result.attempts[0].execution.transport_error_kind == "request_error"
+    assert "private_custom_class_sentinel" not in repr(result)
+
+
+def test_transport_subtype_resets_after_retry_and_legacy_metadata_defaults():
+    from dataclasses import asdict
+    from scheduling.providers.types import ProviderExecution
+    calls = []
+    def handler(request):
+        calls.append(request)
+        if len(calls) == 1:
+            raise httpx.ConnectTimeout("private-message", request=request)
+        return httpx.Response(200, json=body(usage={"total_tokens": 7}))
+    result = call(handler, config=ModelConfig("test", 100, max_attempts=2))
+    assert result.error is None and len(result.attempts) == 2
+    assert result.attempts[0].execution.transport_error_kind == "connect_timeout"
+    assert result.attempts[1].execution.transport_error_kind is None
+    assert result.attempts[1].usage.total_tokens == 7
+    old = ProviderExecution({"version": "legacy"}, "fp", 3, True)
+    assert old.transport_error_kind is None
+    serialized = asdict(old)
+    del serialized["transport_error_kind"]
+    assert ProviderExecution(**serialized) == old
+    assert ProviderExecution(**asdict(result.attempts[0].execution)) == result.attempts[0].execution
+
+
+def test_http_status_failure_has_no_transport_subtype():
+    result = call(lambda _: httpx.Response(503))
+    assert result.error == "http_503"
+    assert result.attempts[0].execution.transport_error_kind is None

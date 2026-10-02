@@ -1,0 +1,34 @@
+# Report claim-to-evidence index
+
+Applies to [submission-report.md](submission-report.md) and its rendered PDF. This index describes the two complete exploratory comparisons. The [previous 200-call index](claim-evidence-20261001.md) is historical. All actual human reviews remain pending until recorded; artifact links and automated checks are not sign-offs.
+
+Both original archives are in [results/archives](../results/archives/) and bound by the [evidence manifest](../results/evidence-manifest.json). Archive-relative paths below refer to a checksum-verified extraction. `analysis.json` contains rows, settings and all block analyses; `blocks.json` maps the original attempt directories. [Evidence instructions](evidence.md) describe exact-source replay without model calls.
+
+| ID / report section | Claim | Exact evidence and interpretation |
+| --- | --- | --- |
+| R1 / 3 | CSP domains, non-overlap, availability and exact lexicographic repair | `src/scheduling/solver.py`, `schema.py`, `validation.py`, [formal regressions](../tests/unit/test_formal_qualification.py); compiler/reference sharing is disclosed |
+| R2 / 3 | Unique coupled repair (1,2,0), objective (3,4,0) | `test_coupled_repair_requires_moving_unaffected_activities` in [formal qualification](../tests/unit/test_formal_qualification.py); independent tiny enumeration, not population evidence |
+| R3 / 4 | Gold/solver/validator boundaries and evidence-bound explanation | [explanation regressions](../tests/unit/test_explanations.py), `test_bound_result_cannot_transfer_optimality_to_weaker_same_id_spec`; [independent validation](../src/scheduling/validation.py) |
+| R4 / 5 | Same 230-file source, runtime, input/configuration and 600 prompts per model | [two-model summary](../results/summary/two-model-development-20261002.json): `comparability`, `source_files_identical_between_models`, `runtime_identical`; original full source snapshots/private preservation manifest |
+| R5 / 5 | 240 controlled cases/120 families, twelve fictional scenarios, selected wording bases | Archive `analysis.json`: `counts`, `rows[].group_id`, `settings`; each block's `cases.json` and manifest; [realistic fixture](../benchmarks/fixtures/realistic-drafts-v1.json). Wording reuses controlled bases |
+| R6 / 6, Figures 1-3 | Block acceptance counts and rates, failures retained | Summary `models.*.accepted_by_block`; [figure receipt](../results/figures/two-model-development-20261002/figure-data.json); [report-layout receipt](figures/submission/figure-data.json); `scripts/render_benchmark_results.py` |
+| R7 / 6, Table 1 | SAT validity/UNSAT accuracy by model/task | [supplemental tables](../results/summary/two-model-report-tables-20261002.json): `models.*.task_label`; reproducible via `scripts/build_report_tables.py`; denominator 60 per label/task/approach |
+| R8 / 6 | Paired acceptance effects and intervals | Summary `models.*.paired_controlled`; archive `analysis.json.primary_controlled.paired`: pairs/groups, bootstrap 10,000, seed 3263. Within-task/model inference only; ceiling not equivalence |
+| R9 / 6 | Activity-count/resource-contention trends and domain ranges | Supplemental `models.qwen36.difficulty`: filter generation/SAT and relevant sweep; includes each case ID and all levels/approaches. Five cases per cell, no monotonicity or causal guarantee |
+| R10 / 6 | Conditional gold objective matching | Summary `models.*.controlled_by_task`, `gold_sat_valid`, `reference_objective_matched`; archive rows `objective_gaps`. Qwen3.8 direct suboptimal repair: `family-178d62b21632eb32c9dcb923-repair`, moved count 2 versus reference 1 |
+| R11 / 6 | Qwen3.6 B deadline mistranslation | Qwen3.6 archive controlled B attempt `family-1b6a21e9eaa5121c07e7b362-generation`: extracted A1 deadline 7 versus gold 3; gold validation rejects. Archive cases/reference/attempt preserve original request and response |
+| R12 / 6 | Failure categories and structural extraction counts | Summary `accepted_by_block.*.*.categories`, `extraction`, `provider_failure_records`, `validation.provider_failures`; nine Qwen3.8 provider failures, not demonstrated reasoning failures |
+| R13 / 6 | Matched wording transitions | Summary `models.*.wording_transitions`; archive `analysis.json.diagnostics.language_transitions` links variant to its selected canonical partner, 48 comparisons per approach |
+| R14 / 6, Table 2 | Model/solver time, tokens and missing coverage | Summary `models.*.resources`, `validation.usage`, `execution.safe_pauses`; conditional solver denominators 230/240. No currency or uninterrupted-inference claim |
+| R15 / 7 | Concentrated participant burden | Historical run `main-baseline-20260929-01`, case `dev-3263-interaction_density-1-repair`, B; [case discussion](lihao-development-followup.md#four-responsible-ai-cases-for-team-discussion). Preserved private historical bundle; no fairer-solution proof |
+| R16 / 7 | One moved/four shifted slots can outrank two moved/two shifted | `test_movement_priority_beats_smaller_total_shift` in formal qualification. Declared objective consequence, not universally desirable behavior |
+| R17 / 7 | Prompt boundary and fixed compiler limit code execution | [direct regression](../tests/unit/test_direct.py), `test_repair_prompt_preserves_original_and_priority`; no empirical adversarial-resistance claim |
+| R18 / 8 | 941 verified files/600 attempts per archive and matching replay | [evidence manifest](../results/evidence-manifest.json), `scripts/verify_evidence.py`, archive `CHECKSUMS.json`, [publication verification](publication-verification.md) |
+| R19 / 8 | Full historical/operational preservation | [portable preservation receipt](../results/summary/evidence-preservation-20261002.json); private manifest and original/source rehash verification. Same-machine backup, not off-device protection |
+| R20 / throughout | Course requirements, proposal fit, references and human limitations | Original course documents as located in [submission checklist](submission-checklist.md); report References 1-6 and [contribution log](contributions.md). No invented course eligibility, authorship or grade |
+
+## Review procedure
+
+A reviewer checks the exact model/block/task/label/rendering/repeat and denominator, verifies archive identity, follows the saved case where a mechanism is claimed, and records findings/corrections with date and name. Automated checks establish arithmetic/record consistency, not intended natural-language meaning or human understanding. Keep original scores even when a later interpretation or implementation changes.
+
+The report deliberately separates measured outcomes from hypotheses: solver assistance benefits Qwen3.6 on these inputs; Qwen3.8 is near the validity ceiling; extraction may alter constraints; operational failures affect observed rates. It does not claim universal superiority, production reliability, unseen-generator generalization or course approval.

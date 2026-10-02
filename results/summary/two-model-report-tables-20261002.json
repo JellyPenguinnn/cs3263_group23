@@ -1,0 +1,4828 @@
+{
+  "format_version": "1.0",
+  "models": {
+    "qwen36": {
+      "archive_sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+      "difficulty": [
+        {
+          "accepted": 3,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-generation",
+            "family-6c1591e93f8714f522746a48-generation",
+            "family-7049f6f9b58e5a6db7a91239-generation",
+            "family-97d7d2c5153e8bd3da72d117-generation",
+            "family-9dfb9ac49e9abdf479659976-generation"
+          ],
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-generation",
+            "family-272e97533643fbc50331c6a6-generation",
+            "family-981f82b5f4e7580580048c87-generation",
+            "family-a595445f3a9573b121032146-generation",
+            "family-d14e5a0798459594fb462086-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-generation",
+            "family-6681c8b1f7cde37082a583de-generation",
+            "family-dc8ea699abe4ecf78a548b62-generation",
+            "family-df8d279942e5b98ce754df67-generation",
+            "family-fb29c8453b95f2191d016897-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 2,
+            "invalid_output": 1
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-generation",
+            "family-50a111f120aeb3703ce3a2be-generation",
+            "family-716a2798db0127d92d08debe-generation",
+            "family-8ddcc32193d5256604a9bfac-generation",
+            "family-d47e2e98a7a1633e6a4266b3-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-generation",
+            "family-267125960478cb4932d94d4d-generation",
+            "family-45f317c690a0d666158c1a8a-generation",
+            "family-745c12ace7c697c61f6131bd-generation",
+            "family-e809c68168b202c0429820fa-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 3,
+            "invalid_output": 1
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-generation",
+            "family-1666af86ef8f3f95c286ad23-generation",
+            "family-41fcff5b033eb8bd1b82a4e7-generation",
+            "family-bcb57d1b8870c5331aa6b42a-generation",
+            "family-c6cff6e37111accef5ba5c5d-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 1
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-generation",
+            "family-27dce49385961971b27cc885-generation",
+            "family-8310941b4936a412b1cfd73d-generation",
+            "family-94573b2717a4a47d7e3d1035-generation",
+            "family-a4f51214ca2a24f22cb09aed-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-generation",
+            "family-704140389453f43dd0ad6e6f-generation",
+            "family-77f75d9fdebb184337a8091b-generation",
+            "family-9636d2ee7d813ae91ca8f234-generation",
+            "family-c2859e651f9480164ae4cbd8-generation"
+          ],
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 1,
+            "invalid_output": 1
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-generation",
+            "family-55922e62691ba944e29766b0-generation",
+            "family-6bb949ffb9329cd8582c6ab9-generation",
+            "family-aaa765a2e1fd25200ac76d5d-generation",
+            "family-e41a5eb46c65d48e11b97338-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-generation",
+            "family-392d8962c57ff1574cf694f4-generation",
+            "family-9c1935e8d14d077e5b13d9b3-generation",
+            "family-caee1a65bef6476f73dbf6cc-generation",
+            "family-f169532527ad550de37b4ac2-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 2,
+            "invalid_output": 1
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-generation",
+            "family-4aac3c44762a5efffa938fec-generation",
+            "family-676126a22628663bc4b9e35c-generation",
+            "family-8cc203b34ceb21375853442e-generation",
+            "family-b77456119d00fa2622ee06b3-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 3,
+            "invalid_output": 1
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-generation",
+            "family-36887696e06e42512c4e06db-generation",
+            "family-d5ccfb814a690d318a05822c-generation",
+            "family-dd7b7f35755c135ed2765e27-generation",
+            "family-ed5bb3bca0fc258768296efc-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-generation",
+            "family-1eaa674ce84949f768a421cf-generation",
+            "family-359bedb52046114df50b9740-generation",
+            "family-537f5af4708489af81864704-generation",
+            "family-c3020401fab6a544db50de8f-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 2
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-generation",
+            "family-48eebc9ebc19eaf3c4bd966f-generation",
+            "family-94f3d88fa73a3bfee00a71b3-generation",
+            "family-98e9e2c7a7c12183f673af29-generation",
+            "family-fc5e30ac50d2b9cea2871c67-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-generation",
+            "family-77104524d73e3b335222c987-generation",
+            "family-809787592325386bcb02a95b-generation",
+            "family-dc3fb1938781e7791b39cf0b-generation",
+            "family-f98814675d321c69e110e7ee-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-generation",
+            "family-60fce268ce430df8e365fe93-generation",
+            "family-7792d988a3b1ce0abed92cdf-generation",
+            "family-af333a2bb9dc0434b52a3ec9-generation",
+            "family-e376ef30844947bbe6c7190a-generation"
+          ],
+          "categories": {
+            "accepted": 3,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-generation",
+            "family-394fbd989fcc774498019638-generation",
+            "family-cc0aa04c9386bfa2c33bc0b4-generation",
+            "family-e2edf72de8ed7c2589eb2d3c-generation",
+            "family-fe16edf9530a9e1ed3782c3c-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-generation",
+            "family-0bd33dde4227c6317f737ed2-generation",
+            "family-0f349399cfca8ea0534346b2-generation",
+            "family-52d432abfafbd394a0967acc-generation",
+            "family-68577447f012d4fe24ba05bc-generation"
+          ],
+          "categories": {
+            "accepted": 3,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-generation",
+            "family-471e966137585ecd2083bbc8-generation",
+            "family-56b539ad1bc5437892ab33e0-generation",
+            "family-74d2d90047d15a50e4a5747b-generation",
+            "family-88b1dee983a98d9a13926033-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-generation",
+            "family-131df50bdf4c70d6dfc6be9f-generation",
+            "family-37aa322096ec93e23b81197e-generation",
+            "family-6ddcba033a08e163525cee46-generation",
+            "family-8e88819bd8042f375bbf2b50-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-generation",
+            "family-4d6e8ad874dcbd25f53cc121-generation",
+            "family-5050db1bf7aa5433ad53c6f7-generation",
+            "family-ba50b7033bb44d131f797aab-generation",
+            "family-d6ce29614e1cc748236ad7ac-generation"
+          ],
+          "categories": {
+            "accepted": 3,
+            "invalid_output": 2
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-generation",
+            "family-3958e8d6f4d92225f657588a-generation",
+            "family-98b17c047b1c072897fd23d1-generation",
+            "family-e9fed87fa64465858324158b-generation",
+            "family-f24e9f944d69879380ed8c3d-generation"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-generation",
+            "family-7056fc1c24a2d2eea3c63b7c-generation",
+            "family-947ddb1797d5d3b5997072e2-generation",
+            "family-bc559c09e3e07fe31f7e84dc-generation",
+            "family-d025767529ff7545d2b86295-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-generation",
+            "family-486eb7fba9de4f78831a721f-generation",
+            "family-8b6193035787550460aff4c7-generation",
+            "family-b3cea1442bf29c57e96fdf85-generation",
+            "family-bbcd8ee1c567e8500cb491fa-generation"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-generation",
+            "family-6c1591e93f8714f522746a48-generation",
+            "family-7049f6f9b58e5a6db7a91239-generation",
+            "family-97d7d2c5153e8bd3da72d117-generation",
+            "family-9dfb9ac49e9abdf479659976-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-generation",
+            "family-272e97533643fbc50331c6a6-generation",
+            "family-981f82b5f4e7580580048c87-generation",
+            "family-a595445f3a9573b121032146-generation",
+            "family-d14e5a0798459594fb462086-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-generation",
+            "family-6681c8b1f7cde37082a583de-generation",
+            "family-dc8ea699abe4ecf78a548b62-generation",
+            "family-df8d279942e5b98ce754df67-generation",
+            "family-fb29c8453b95f2191d016897-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-generation",
+            "family-50a111f120aeb3703ce3a2be-generation",
+            "family-716a2798db0127d92d08debe-generation",
+            "family-8ddcc32193d5256604a9bfac-generation",
+            "family-d47e2e98a7a1633e6a4266b3-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-generation",
+            "family-267125960478cb4932d94d4d-generation",
+            "family-45f317c690a0d666158c1a8a-generation",
+            "family-745c12ace7c697c61f6131bd-generation",
+            "family-e809c68168b202c0429820fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-generation",
+            "family-1666af86ef8f3f95c286ad23-generation",
+            "family-41fcff5b033eb8bd1b82a4e7-generation",
+            "family-bcb57d1b8870c5331aa6b42a-generation",
+            "family-c6cff6e37111accef5ba5c5d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-generation",
+            "family-27dce49385961971b27cc885-generation",
+            "family-8310941b4936a412b1cfd73d-generation",
+            "family-94573b2717a4a47d7e3d1035-generation",
+            "family-a4f51214ca2a24f22cb09aed-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-generation",
+            "family-704140389453f43dd0ad6e6f-generation",
+            "family-77f75d9fdebb184337a8091b-generation",
+            "family-9636d2ee7d813ae91ca8f234-generation",
+            "family-c2859e651f9480164ae4cbd8-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-generation",
+            "family-55922e62691ba944e29766b0-generation",
+            "family-6bb949ffb9329cd8582c6ab9-generation",
+            "family-aaa765a2e1fd25200ac76d5d-generation",
+            "family-e41a5eb46c65d48e11b97338-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-generation",
+            "family-392d8962c57ff1574cf694f4-generation",
+            "family-9c1935e8d14d077e5b13d9b3-generation",
+            "family-caee1a65bef6476f73dbf6cc-generation",
+            "family-f169532527ad550de37b4ac2-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-generation",
+            "family-4aac3c44762a5efffa938fec-generation",
+            "family-676126a22628663bc4b9e35c-generation",
+            "family-8cc203b34ceb21375853442e-generation",
+            "family-b77456119d00fa2622ee06b3-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-generation",
+            "family-36887696e06e42512c4e06db-generation",
+            "family-d5ccfb814a690d318a05822c-generation",
+            "family-dd7b7f35755c135ed2765e27-generation",
+            "family-ed5bb3bca0fc258768296efc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-generation",
+            "family-1eaa674ce84949f768a421cf-generation",
+            "family-359bedb52046114df50b9740-generation",
+            "family-537f5af4708489af81864704-generation",
+            "family-c3020401fab6a544db50de8f-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-generation",
+            "family-48eebc9ebc19eaf3c4bd966f-generation",
+            "family-94f3d88fa73a3bfee00a71b3-generation",
+            "family-98e9e2c7a7c12183f673af29-generation",
+            "family-fc5e30ac50d2b9cea2871c67-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-generation",
+            "family-77104524d73e3b335222c987-generation",
+            "family-809787592325386bcb02a95b-generation",
+            "family-dc3fb1938781e7791b39cf0b-generation",
+            "family-f98814675d321c69e110e7ee-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-generation",
+            "family-60fce268ce430df8e365fe93-generation",
+            "family-7792d988a3b1ce0abed92cdf-generation",
+            "family-af333a2bb9dc0434b52a3ec9-generation",
+            "family-e376ef30844947bbe6c7190a-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-generation",
+            "family-394fbd989fcc774498019638-generation",
+            "family-cc0aa04c9386bfa2c33bc0b4-generation",
+            "family-e2edf72de8ed7c2589eb2d3c-generation",
+            "family-fe16edf9530a9e1ed3782c3c-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-generation",
+            "family-0bd33dde4227c6317f737ed2-generation",
+            "family-0f349399cfca8ea0534346b2-generation",
+            "family-52d432abfafbd394a0967acc-generation",
+            "family-68577447f012d4fe24ba05bc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-generation",
+            "family-471e966137585ecd2083bbc8-generation",
+            "family-56b539ad1bc5437892ab33e0-generation",
+            "family-74d2d90047d15a50e4a5747b-generation",
+            "family-88b1dee983a98d9a13926033-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-generation",
+            "family-131df50bdf4c70d6dfc6be9f-generation",
+            "family-37aa322096ec93e23b81197e-generation",
+            "family-6ddcba033a08e163525cee46-generation",
+            "family-8e88819bd8042f375bbf2b50-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-generation",
+            "family-4d6e8ad874dcbd25f53cc121-generation",
+            "family-5050db1bf7aa5433ad53c6f7-generation",
+            "family-ba50b7033bb44d131f797aab-generation",
+            "family-d6ce29614e1cc748236ad7ac-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-generation",
+            "family-3958e8d6f4d92225f657588a-generation",
+            "family-98b17c047b1c072897fd23d1-generation",
+            "family-e9fed87fa64465858324158b-generation",
+            "family-f24e9f944d69879380ed8c3d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-generation",
+            "family-7056fc1c24a2d2eea3c63b7c-generation",
+            "family-947ddb1797d5d3b5997072e2-generation",
+            "family-bc559c09e3e07fe31f7e84dc-generation",
+            "family-d025767529ff7545d2b86295-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-generation",
+            "family-486eb7fba9de4f78831a721f-generation",
+            "family-8b6193035787550460aff4c7-generation",
+            "family-b3cea1442bf29c57e96fdf85-generation",
+            "family-bbcd8ee1c567e8500cb491fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-repair",
+            "family-6c1591e93f8714f522746a48-repair",
+            "family-7049f6f9b58e5a6db7a91239-repair",
+            "family-97d7d2c5153e8bd3da72d117-repair",
+            "family-9dfb9ac49e9abdf479659976-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-repair",
+            "family-272e97533643fbc50331c6a6-repair",
+            "family-981f82b5f4e7580580048c87-repair",
+            "family-a595445f3a9573b121032146-repair",
+            "family-d14e5a0798459594fb462086-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-repair",
+            "family-6681c8b1f7cde37082a583de-repair",
+            "family-dc8ea699abe4ecf78a548b62-repair",
+            "family-df8d279942e5b98ce754df67-repair",
+            "family-fb29c8453b95f2191d016897-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-repair",
+            "family-50a111f120aeb3703ce3a2be-repair",
+            "family-716a2798db0127d92d08debe-repair",
+            "family-8ddcc32193d5256604a9bfac-repair",
+            "family-d47e2e98a7a1633e6a4266b3-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "false_unsat": 2,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 1
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-repair",
+            "family-267125960478cb4932d94d4d-repair",
+            "family-45f317c690a0d666158c1a8a-repair",
+            "family-745c12ace7c697c61f6131bd-repair",
+            "family-e809c68168b202c0429820fa-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 2
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 0,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-repair",
+            "family-1666af86ef8f3f95c286ad23-repair",
+            "family-41fcff5b033eb8bd1b82a4e7-repair",
+            "family-bcb57d1b8870c5331aa6b42a-repair",
+            "family-c6cff6e37111accef5ba5c5d-repair"
+          ],
+          "categories": {
+            "false_unsat": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-repair",
+            "family-27dce49385961971b27cc885-repair",
+            "family-8310941b4936a412b1cfd73d-repair",
+            "family-94573b2717a4a47d7e3d1035-repair",
+            "family-a4f51214ca2a24f22cb09aed-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-repair",
+            "family-704140389453f43dd0ad6e6f-repair",
+            "family-77f75d9fdebb184337a8091b-repair",
+            "family-9636d2ee7d813ae91ca8f234-repair",
+            "family-c2859e651f9480164ae4cbd8-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "false_unsat": 2,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 1
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-repair",
+            "family-55922e62691ba944e29766b0-repair",
+            "family-6bb949ffb9329cd8582c6ab9-repair",
+            "family-aaa765a2e1fd25200ac76d5d-repair",
+            "family-e41a5eb46c65d48e11b97338-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 1
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-repair",
+            "family-392d8962c57ff1574cf694f4-repair",
+            "family-9c1935e8d14d077e5b13d9b3-repair",
+            "family-caee1a65bef6476f73dbf6cc-repair",
+            "family-f169532527ad550de37b4ac2-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-repair",
+            "family-4aac3c44762a5efffa938fec-repair",
+            "family-676126a22628663bc4b9e35c-repair",
+            "family-8cc203b34ceb21375853442e-repair",
+            "family-b77456119d00fa2622ee06b3-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-repair",
+            "family-36887696e06e42512c4e06db-repair",
+            "family-d5ccfb814a690d318a05822c-repair",
+            "family-dd7b7f35755c135ed2765e27-repair",
+            "family-ed5bb3bca0fc258768296efc-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-repair",
+            "family-1eaa674ce84949f768a421cf-repair",
+            "family-359bedb52046114df50b9740-repair",
+            "family-537f5af4708489af81864704-repair",
+            "family-c3020401fab6a544db50de8f-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-repair",
+            "family-48eebc9ebc19eaf3c4bd966f-repair",
+            "family-94f3d88fa73a3bfee00a71b3-repair",
+            "family-98e9e2c7a7c12183f673af29-repair",
+            "family-fc5e30ac50d2b9cea2871c67-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 2,
+            "invalid_output": 2
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-repair",
+            "family-77104524d73e3b335222c987-repair",
+            "family-809787592325386bcb02a95b-repair",
+            "family-dc3fb1938781e7791b39cf0b-repair",
+            "family-f98814675d321c69e110e7ee-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-repair",
+            "family-60fce268ce430df8e365fe93-repair",
+            "family-7792d988a3b1ce0abed92cdf-repair",
+            "family-af333a2bb9dc0434b52a3ec9-repair",
+            "family-e376ef30844947bbe6c7190a-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-repair",
+            "family-394fbd989fcc774498019638-repair",
+            "family-cc0aa04c9386bfa2c33bc0b4-repair",
+            "family-e2edf72de8ed7c2589eb2d3c-repair",
+            "family-fe16edf9530a9e1ed3782c3c-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 2,
+            "invalid_output": 1
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-repair",
+            "family-0bd33dde4227c6317f737ed2-repair",
+            "family-0f349399cfca8ea0534346b2-repair",
+            "family-52d432abfafbd394a0967acc-repair",
+            "family-68577447f012d4fe24ba05bc-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 2,
+            "invalid_output": 1
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 0,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-repair",
+            "family-471e966137585ecd2083bbc8-repair",
+            "family-56b539ad1bc5437892ab33e0-repair",
+            "family-74d2d90047d15a50e4a5747b-repair",
+            "family-88b1dee983a98d9a13926033-repair"
+          ],
+          "categories": {
+            "gold_invalid_schedule": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-repair",
+            "family-131df50bdf4c70d6dfc6be9f-repair",
+            "family-37aa322096ec93e23b81197e-repair",
+            "family-6ddcba033a08e163525cee46-repair",
+            "family-8e88819bd8042f375bbf2b50-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 3
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 2,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-repair",
+            "family-4d6e8ad874dcbd25f53cc121-repair",
+            "family-5050db1bf7aa5433ad53c6f7-repair",
+            "family-ba50b7033bb44d131f797aab-repair",
+            "family-d6ce29614e1cc748236ad7ac-repair"
+          ],
+          "categories": {
+            "accepted": 2,
+            "gold_invalid_schedule": 2,
+            "invalid_output": 1
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 1,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-repair",
+            "family-3958e8d6f4d92225f657588a-repair",
+            "family-98b17c047b1c072897fd23d1-repair",
+            "family-e9fed87fa64465858324158b-repair",
+            "family-f24e9f944d69879380ed8c3d-repair"
+          ],
+          "categories": {
+            "accepted": 1,
+            "gold_invalid_schedule": 4
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 0,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-repair",
+            "family-7056fc1c24a2d2eea3c63b7c-repair",
+            "family-947ddb1797d5d3b5997072e2-repair",
+            "family-bc559c09e3e07fe31f7e84dc-repair",
+            "family-d025767529ff7545d2b86295-repair"
+          ],
+          "categories": {
+            "gold_invalid_schedule": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 3,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-repair",
+            "family-486eb7fba9de4f78831a721f-repair",
+            "family-8b6193035787550460aff4c7-repair",
+            "family-b3cea1442bf29c57e96fdf85-repair",
+            "family-bbcd8ee1c567e8500cb491fa-repair"
+          ],
+          "categories": {
+            "accepted": 3,
+            "gold_invalid_schedule": 2
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-repair",
+            "family-6c1591e93f8714f522746a48-repair",
+            "family-7049f6f9b58e5a6db7a91239-repair",
+            "family-97d7d2c5153e8bd3da72d117-repair",
+            "family-9dfb9ac49e9abdf479659976-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-repair",
+            "family-272e97533643fbc50331c6a6-repair",
+            "family-981f82b5f4e7580580048c87-repair",
+            "family-a595445f3a9573b121032146-repair",
+            "family-d14e5a0798459594fb462086-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-repair",
+            "family-6681c8b1f7cde37082a583de-repair",
+            "family-dc8ea699abe4ecf78a548b62-repair",
+            "family-df8d279942e5b98ce754df67-repair",
+            "family-fb29c8453b95f2191d016897-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-repair",
+            "family-50a111f120aeb3703ce3a2be-repair",
+            "family-716a2798db0127d92d08debe-repair",
+            "family-8ddcc32193d5256604a9bfac-repair",
+            "family-d47e2e98a7a1633e6a4266b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-repair",
+            "family-267125960478cb4932d94d4d-repair",
+            "family-45f317c690a0d666158c1a8a-repair",
+            "family-745c12ace7c697c61f6131bd-repair",
+            "family-e809c68168b202c0429820fa-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-repair",
+            "family-1666af86ef8f3f95c286ad23-repair",
+            "family-41fcff5b033eb8bd1b82a4e7-repair",
+            "family-bcb57d1b8870c5331aa6b42a-repair",
+            "family-c6cff6e37111accef5ba5c5d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-repair",
+            "family-27dce49385961971b27cc885-repair",
+            "family-8310941b4936a412b1cfd73d-repair",
+            "family-94573b2717a4a47d7e3d1035-repair",
+            "family-a4f51214ca2a24f22cb09aed-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-repair",
+            "family-704140389453f43dd0ad6e6f-repair",
+            "family-77f75d9fdebb184337a8091b-repair",
+            "family-9636d2ee7d813ae91ca8f234-repair",
+            "family-c2859e651f9480164ae4cbd8-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-repair",
+            "family-55922e62691ba944e29766b0-repair",
+            "family-6bb949ffb9329cd8582c6ab9-repair",
+            "family-aaa765a2e1fd25200ac76d5d-repair",
+            "family-e41a5eb46c65d48e11b97338-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-repair",
+            "family-392d8962c57ff1574cf694f4-repair",
+            "family-9c1935e8d14d077e5b13d9b3-repair",
+            "family-caee1a65bef6476f73dbf6cc-repair",
+            "family-f169532527ad550de37b4ac2-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-repair",
+            "family-4aac3c44762a5efffa938fec-repair",
+            "family-676126a22628663bc4b9e35c-repair",
+            "family-8cc203b34ceb21375853442e-repair",
+            "family-b77456119d00fa2622ee06b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-repair",
+            "family-36887696e06e42512c4e06db-repair",
+            "family-d5ccfb814a690d318a05822c-repair",
+            "family-dd7b7f35755c135ed2765e27-repair",
+            "family-ed5bb3bca0fc258768296efc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-repair",
+            "family-1eaa674ce84949f768a421cf-repair",
+            "family-359bedb52046114df50b9740-repair",
+            "family-537f5af4708489af81864704-repair",
+            "family-c3020401fab6a544db50de8f-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-repair",
+            "family-48eebc9ebc19eaf3c4bd966f-repair",
+            "family-94f3d88fa73a3bfee00a71b3-repair",
+            "family-98e9e2c7a7c12183f673af29-repair",
+            "family-fc5e30ac50d2b9cea2871c67-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-repair",
+            "family-77104524d73e3b335222c987-repair",
+            "family-809787592325386bcb02a95b-repair",
+            "family-dc3fb1938781e7791b39cf0b-repair",
+            "family-f98814675d321c69e110e7ee-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-repair",
+            "family-60fce268ce430df8e365fe93-repair",
+            "family-7792d988a3b1ce0abed92cdf-repair",
+            "family-af333a2bb9dc0434b52a3ec9-repair",
+            "family-e376ef30844947bbe6c7190a-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-repair",
+            "family-394fbd989fcc774498019638-repair",
+            "family-cc0aa04c9386bfa2c33bc0b4-repair",
+            "family-e2edf72de8ed7c2589eb2d3c-repair",
+            "family-fe16edf9530a9e1ed3782c3c-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-repair",
+            "family-0bd33dde4227c6317f737ed2-repair",
+            "family-0f349399cfca8ea0534346b2-repair",
+            "family-52d432abfafbd394a0967acc-repair",
+            "family-68577447f012d4fe24ba05bc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-repair",
+            "family-471e966137585ecd2083bbc8-repair",
+            "family-56b539ad1bc5437892ab33e0-repair",
+            "family-74d2d90047d15a50e4a5747b-repair",
+            "family-88b1dee983a98d9a13926033-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-repair",
+            "family-131df50bdf4c70d6dfc6be9f-repair",
+            "family-37aa322096ec93e23b81197e-repair",
+            "family-6ddcba033a08e163525cee46-repair",
+            "family-8e88819bd8042f375bbf2b50-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-repair",
+            "family-4d6e8ad874dcbd25f53cc121-repair",
+            "family-5050db1bf7aa5433ad53c6f7-repair",
+            "family-ba50b7033bb44d131f797aab-repair",
+            "family-d6ce29614e1cc748236ad7ac-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-repair",
+            "family-3958e8d6f4d92225f657588a-repair",
+            "family-98b17c047b1c072897fd23d1-repair",
+            "family-e9fed87fa64465858324158b-repair",
+            "family-f24e9f944d69879380ed8c3d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-repair",
+            "family-7056fc1c24a2d2eea3c63b7c-repair",
+            "family-947ddb1797d5d3b5997072e2-repair",
+            "family-bc559c09e3e07fe31f7e84dc-repair",
+            "family-d025767529ff7545d2b86295-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-repair",
+            "family-486eb7fba9de4f78831a721f-repair",
+            "family-8b6193035787550460aff4c7-repair",
+            "family-b3cea1442bf29c57e96fdf85-repair",
+            "family-bbcd8ee1c567e8500cb491fa-repair"
+          ],
+          "categories": {
+            "accepted": 4,
+            "invalid_output": 1
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        }
+      ],
+      "model": "qwen3.6:35b",
+      "task_label": [
+        {
+          "accepted": 27,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 26,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 59,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 56,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 22,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 20,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 59,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 55,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "repair"
+        }
+      ]
+    },
+    "qwen38": {
+      "archive_sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+      "difficulty": [
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-generation",
+            "family-6c1591e93f8714f522746a48-generation",
+            "family-7049f6f9b58e5a6db7a91239-generation",
+            "family-97d7d2c5153e8bd3da72d117-generation",
+            "family-9dfb9ac49e9abdf479659976-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-generation",
+            "family-272e97533643fbc50331c6a6-generation",
+            "family-981f82b5f4e7580580048c87-generation",
+            "family-a595445f3a9573b121032146-generation",
+            "family-d14e5a0798459594fb462086-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 4,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-generation",
+            "family-6681c8b1f7cde37082a583de-generation",
+            "family-dc8ea699abe4ecf78a548b62-generation",
+            "family-df8d279942e5b98ce754df67-generation",
+            "family-fb29c8453b95f2191d016897-generation"
+          ],
+          "categories": {
+            "accepted": 4,
+            "provider_error": 1
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-generation",
+            "family-50a111f120aeb3703ce3a2be-generation",
+            "family-716a2798db0127d92d08debe-generation",
+            "family-8ddcc32193d5256604a9bfac-generation",
+            "family-d47e2e98a7a1633e6a4266b3-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-generation",
+            "family-267125960478cb4932d94d4d-generation",
+            "family-45f317c690a0d666158c1a8a-generation",
+            "family-745c12ace7c697c61f6131bd-generation",
+            "family-e809c68168b202c0429820fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-generation",
+            "family-1666af86ef8f3f95c286ad23-generation",
+            "family-41fcff5b033eb8bd1b82a4e7-generation",
+            "family-bcb57d1b8870c5331aa6b42a-generation",
+            "family-c6cff6e37111accef5ba5c5d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-generation",
+            "family-27dce49385961971b27cc885-generation",
+            "family-8310941b4936a412b1cfd73d-generation",
+            "family-94573b2717a4a47d7e3d1035-generation",
+            "family-a4f51214ca2a24f22cb09aed-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-generation",
+            "family-704140389453f43dd0ad6e6f-generation",
+            "family-77f75d9fdebb184337a8091b-generation",
+            "family-9636d2ee7d813ae91ca8f234-generation",
+            "family-c2859e651f9480164ae4cbd8-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-generation",
+            "family-55922e62691ba944e29766b0-generation",
+            "family-6bb949ffb9329cd8582c6ab9-generation",
+            "family-aaa765a2e1fd25200ac76d5d-generation",
+            "family-e41a5eb46c65d48e11b97338-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-generation",
+            "family-392d8962c57ff1574cf694f4-generation",
+            "family-9c1935e8d14d077e5b13d9b3-generation",
+            "family-caee1a65bef6476f73dbf6cc-generation",
+            "family-f169532527ad550de37b4ac2-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-generation",
+            "family-4aac3c44762a5efffa938fec-generation",
+            "family-676126a22628663bc4b9e35c-generation",
+            "family-8cc203b34ceb21375853442e-generation",
+            "family-b77456119d00fa2622ee06b3-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-generation",
+            "family-36887696e06e42512c4e06db-generation",
+            "family-d5ccfb814a690d318a05822c-generation",
+            "family-dd7b7f35755c135ed2765e27-generation",
+            "family-ed5bb3bca0fc258768296efc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-generation",
+            "family-1eaa674ce84949f768a421cf-generation",
+            "family-359bedb52046114df50b9740-generation",
+            "family-537f5af4708489af81864704-generation",
+            "family-c3020401fab6a544db50de8f-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-generation",
+            "family-48eebc9ebc19eaf3c4bd966f-generation",
+            "family-94f3d88fa73a3bfee00a71b3-generation",
+            "family-98e9e2c7a7c12183f673af29-generation",
+            "family-fc5e30ac50d2b9cea2871c67-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-generation",
+            "family-77104524d73e3b335222c987-generation",
+            "family-809787592325386bcb02a95b-generation",
+            "family-dc3fb1938781e7791b39cf0b-generation",
+            "family-f98814675d321c69e110e7ee-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-generation",
+            "family-60fce268ce430df8e365fe93-generation",
+            "family-7792d988a3b1ce0abed92cdf-generation",
+            "family-af333a2bb9dc0434b52a3ec9-generation",
+            "family-e376ef30844947bbe6c7190a-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-generation",
+            "family-394fbd989fcc774498019638-generation",
+            "family-cc0aa04c9386bfa2c33bc0b4-generation",
+            "family-e2edf72de8ed7c2589eb2d3c-generation",
+            "family-fe16edf9530a9e1ed3782c3c-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-generation",
+            "family-0bd33dde4227c6317f737ed2-generation",
+            "family-0f349399cfca8ea0534346b2-generation",
+            "family-52d432abfafbd394a0967acc-generation",
+            "family-68577447f012d4fe24ba05bc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-generation",
+            "family-471e966137585ecd2083bbc8-generation",
+            "family-56b539ad1bc5437892ab33e0-generation",
+            "family-74d2d90047d15a50e4a5747b-generation",
+            "family-88b1dee983a98d9a13926033-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-generation",
+            "family-131df50bdf4c70d6dfc6be9f-generation",
+            "family-37aa322096ec93e23b81197e-generation",
+            "family-6ddcba033a08e163525cee46-generation",
+            "family-8e88819bd8042f375bbf2b50-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-generation",
+            "family-4d6e8ad874dcbd25f53cc121-generation",
+            "family-5050db1bf7aa5433ad53c6f7-generation",
+            "family-ba50b7033bb44d131f797aab-generation",
+            "family-d6ce29614e1cc748236ad7ac-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-generation",
+            "family-3958e8d6f4d92225f657588a-generation",
+            "family-98b17c047b1c072897fd23d1-generation",
+            "family-e9fed87fa64465858324158b-generation",
+            "family-f24e9f944d69879380ed8c3d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-generation",
+            "family-7056fc1c24a2d2eea3c63b7c-generation",
+            "family-947ddb1797d5d3b5997072e2-generation",
+            "family-bc559c09e3e07fe31f7e84dc-generation",
+            "family-d025767529ff7545d2b86295-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-generation",
+            "family-486eb7fba9de4f78831a721f-generation",
+            "family-8b6193035787550460aff4c7-generation",
+            "family-b3cea1442bf29c57e96fdf85-generation",
+            "family-bbcd8ee1c567e8500cb491fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-generation",
+            "family-6c1591e93f8714f522746a48-generation",
+            "family-7049f6f9b58e5a6db7a91239-generation",
+            "family-97d7d2c5153e8bd3da72d117-generation",
+            "family-9dfb9ac49e9abdf479659976-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-generation",
+            "family-272e97533643fbc50331c6a6-generation",
+            "family-981f82b5f4e7580580048c87-generation",
+            "family-a595445f3a9573b121032146-generation",
+            "family-d14e5a0798459594fb462086-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-generation",
+            "family-6681c8b1f7cde37082a583de-generation",
+            "family-dc8ea699abe4ecf78a548b62-generation",
+            "family-df8d279942e5b98ce754df67-generation",
+            "family-fb29c8453b95f2191d016897-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-generation",
+            "family-50a111f120aeb3703ce3a2be-generation",
+            "family-716a2798db0127d92d08debe-generation",
+            "family-8ddcc32193d5256604a9bfac-generation",
+            "family-d47e2e98a7a1633e6a4266b3-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-generation",
+            "family-267125960478cb4932d94d4d-generation",
+            "family-45f317c690a0d666158c1a8a-generation",
+            "family-745c12ace7c697c61f6131bd-generation",
+            "family-e809c68168b202c0429820fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-generation",
+            "family-1666af86ef8f3f95c286ad23-generation",
+            "family-41fcff5b033eb8bd1b82a4e7-generation",
+            "family-bcb57d1b8870c5331aa6b42a-generation",
+            "family-c6cff6e37111accef5ba5c5d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-generation",
+            "family-27dce49385961971b27cc885-generation",
+            "family-8310941b4936a412b1cfd73d-generation",
+            "family-94573b2717a4a47d7e3d1035-generation",
+            "family-a4f51214ca2a24f22cb09aed-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-generation",
+            "family-704140389453f43dd0ad6e6f-generation",
+            "family-77f75d9fdebb184337a8091b-generation",
+            "family-9636d2ee7d813ae91ca8f234-generation",
+            "family-c2859e651f9480164ae4cbd8-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-generation",
+            "family-55922e62691ba944e29766b0-generation",
+            "family-6bb949ffb9329cd8582c6ab9-generation",
+            "family-aaa765a2e1fd25200ac76d5d-generation",
+            "family-e41a5eb46c65d48e11b97338-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-generation",
+            "family-392d8962c57ff1574cf694f4-generation",
+            "family-9c1935e8d14d077e5b13d9b3-generation",
+            "family-caee1a65bef6476f73dbf6cc-generation",
+            "family-f169532527ad550de37b4ac2-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-generation",
+            "family-4aac3c44762a5efffa938fec-generation",
+            "family-676126a22628663bc4b9e35c-generation",
+            "family-8cc203b34ceb21375853442e-generation",
+            "family-b77456119d00fa2622ee06b3-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-generation",
+            "family-36887696e06e42512c4e06db-generation",
+            "family-d5ccfb814a690d318a05822c-generation",
+            "family-dd7b7f35755c135ed2765e27-generation",
+            "family-ed5bb3bca0fc258768296efc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-generation",
+            "family-1eaa674ce84949f768a421cf-generation",
+            "family-359bedb52046114df50b9740-generation",
+            "family-537f5af4708489af81864704-generation",
+            "family-c3020401fab6a544db50de8f-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-generation",
+            "family-48eebc9ebc19eaf3c4bd966f-generation",
+            "family-94f3d88fa73a3bfee00a71b3-generation",
+            "family-98e9e2c7a7c12183f673af29-generation",
+            "family-fc5e30ac50d2b9cea2871c67-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-generation",
+            "family-77104524d73e3b335222c987-generation",
+            "family-809787592325386bcb02a95b-generation",
+            "family-dc3fb1938781e7791b39cf0b-generation",
+            "family-f98814675d321c69e110e7ee-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-generation",
+            "family-60fce268ce430df8e365fe93-generation",
+            "family-7792d988a3b1ce0abed92cdf-generation",
+            "family-af333a2bb9dc0434b52a3ec9-generation",
+            "family-e376ef30844947bbe6c7190a-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-generation",
+            "family-394fbd989fcc774498019638-generation",
+            "family-cc0aa04c9386bfa2c33bc0b4-generation",
+            "family-e2edf72de8ed7c2589eb2d3c-generation",
+            "family-fe16edf9530a9e1ed3782c3c-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-generation",
+            "family-0bd33dde4227c6317f737ed2-generation",
+            "family-0f349399cfca8ea0534346b2-generation",
+            "family-52d432abfafbd394a0967acc-generation",
+            "family-68577447f012d4fe24ba05bc-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-generation",
+            "family-471e966137585ecd2083bbc8-generation",
+            "family-56b539ad1bc5437892ab33e0-generation",
+            "family-74d2d90047d15a50e4a5747b-generation",
+            "family-88b1dee983a98d9a13926033-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-generation",
+            "family-131df50bdf4c70d6dfc6be9f-generation",
+            "family-37aa322096ec93e23b81197e-generation",
+            "family-6ddcba033a08e163525cee46-generation",
+            "family-8e88819bd8042f375bbf2b50-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-generation",
+            "family-4d6e8ad874dcbd25f53cc121-generation",
+            "family-5050db1bf7aa5433ad53c6f7-generation",
+            "family-ba50b7033bb44d131f797aab-generation",
+            "family-d6ce29614e1cc748236ad7ac-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-generation",
+            "family-3958e8d6f4d92225f657588a-generation",
+            "family-98b17c047b1c072897fd23d1-generation",
+            "family-e9fed87fa64465858324158b-generation",
+            "family-f24e9f944d69879380ed8c3d-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-generation",
+            "family-7056fc1c24a2d2eea3c63b7c-generation",
+            "family-947ddb1797d5d3b5997072e2-generation",
+            "family-bc559c09e3e07fe31f7e84dc-generation",
+            "family-d025767529ff7545d2b86295-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-generation",
+            "family-486eb7fba9de4f78831a721f-generation",
+            "family-8b6193035787550460aff4c7-generation",
+            "family-b3cea1442bf29c57e96fdf85-generation",
+            "family-bbcd8ee1c567e8500cb491fa-generation"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "generation"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-repair",
+            "family-6c1591e93f8714f522746a48-repair",
+            "family-7049f6f9b58e5a6db7a91239-repair",
+            "family-97d7d2c5153e8bd3da72d117-repair",
+            "family-9dfb9ac49e9abdf479659976-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-repair",
+            "family-272e97533643fbc50331c6a6-repair",
+            "family-981f82b5f4e7580580048c87-repair",
+            "family-a595445f3a9573b121032146-repair",
+            "family-d14e5a0798459594fb462086-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-repair",
+            "family-6681c8b1f7cde37082a583de-repair",
+            "family-dc8ea699abe4ecf78a548b62-repair",
+            "family-df8d279942e5b98ce754df67-repair",
+            "family-fb29c8453b95f2191d016897-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-repair",
+            "family-50a111f120aeb3703ce3a2be-repair",
+            "family-716a2798db0127d92d08debe-repair",
+            "family-8ddcc32193d5256604a9bfac-repair",
+            "family-d47e2e98a7a1633e6a4266b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-repair",
+            "family-267125960478cb4932d94d4d-repair",
+            "family-45f317c690a0d666158c1a8a-repair",
+            "family-745c12ace7c697c61f6131bd-repair",
+            "family-e809c68168b202c0429820fa-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-repair",
+            "family-1666af86ef8f3f95c286ad23-repair",
+            "family-41fcff5b033eb8bd1b82a4e7-repair",
+            "family-bcb57d1b8870c5331aa6b42a-repair",
+            "family-c6cff6e37111accef5ba5c5d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-repair",
+            "family-27dce49385961971b27cc885-repair",
+            "family-8310941b4936a412b1cfd73d-repair",
+            "family-94573b2717a4a47d7e3d1035-repair",
+            "family-a4f51214ca2a24f22cb09aed-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-repair",
+            "family-704140389453f43dd0ad6e6f-repair",
+            "family-77f75d9fdebb184337a8091b-repair",
+            "family-9636d2ee7d813ae91ca8f234-repair",
+            "family-c2859e651f9480164ae4cbd8-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-repair",
+            "family-55922e62691ba944e29766b0-repair",
+            "family-6bb949ffb9329cd8582c6ab9-repair",
+            "family-aaa765a2e1fd25200ac76d5d-repair",
+            "family-e41a5eb46c65d48e11b97338-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-repair",
+            "family-392d8962c57ff1574cf694f4-repair",
+            "family-9c1935e8d14d077e5b13d9b3-repair",
+            "family-caee1a65bef6476f73dbf6cc-repair",
+            "family-f169532527ad550de37b4ac2-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-repair",
+            "family-4aac3c44762a5efffa938fec-repair",
+            "family-676126a22628663bc4b9e35c-repair",
+            "family-8cc203b34ceb21375853442e-repair",
+            "family-b77456119d00fa2622ee06b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-repair",
+            "family-36887696e06e42512c4e06db-repair",
+            "family-d5ccfb814a690d318a05822c-repair",
+            "family-dd7b7f35755c135ed2765e27-repair",
+            "family-ed5bb3bca0fc258768296efc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-repair",
+            "family-1eaa674ce84949f768a421cf-repair",
+            "family-359bedb52046114df50b9740-repair",
+            "family-537f5af4708489af81864704-repair",
+            "family-c3020401fab6a544db50de8f-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-repair",
+            "family-48eebc9ebc19eaf3c4bd966f-repair",
+            "family-94f3d88fa73a3bfee00a71b3-repair",
+            "family-98e9e2c7a7c12183f673af29-repair",
+            "family-fc5e30ac50d2b9cea2871c67-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-repair",
+            "family-77104524d73e3b335222c987-repair",
+            "family-809787592325386bcb02a95b-repair",
+            "family-dc3fb1938781e7791b39cf0b-repair",
+            "family-f98814675d321c69e110e7ee-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-repair",
+            "family-60fce268ce430df8e365fe93-repair",
+            "family-7792d988a3b1ce0abed92cdf-repair",
+            "family-af333a2bb9dc0434b52a3ec9-repair",
+            "family-e376ef30844947bbe6c7190a-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-repair",
+            "family-394fbd989fcc774498019638-repair",
+            "family-cc0aa04c9386bfa2c33bc0b4-repair",
+            "family-e2edf72de8ed7c2589eb2d3c-repair",
+            "family-fe16edf9530a9e1ed3782c3c-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-repair",
+            "family-0bd33dde4227c6317f737ed2-repair",
+            "family-0f349399cfca8ea0534346b2-repair",
+            "family-52d432abfafbd394a0967acc-repair",
+            "family-68577447f012d4fe24ba05bc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-repair",
+            "family-471e966137585ecd2083bbc8-repair",
+            "family-56b539ad1bc5437892ab33e0-repair",
+            "family-74d2d90047d15a50e4a5747b-repair",
+            "family-88b1dee983a98d9a13926033-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-repair",
+            "family-131df50bdf4c70d6dfc6be9f-repair",
+            "family-37aa322096ec93e23b81197e-repair",
+            "family-6ddcba033a08e163525cee46-repair",
+            "family-8e88819bd8042f375bbf2b50-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-repair",
+            "family-4d6e8ad874dcbd25f53cc121-repair",
+            "family-5050db1bf7aa5433ad53c6f7-repair",
+            "family-ba50b7033bb44d131f797aab-repair",
+            "family-d6ce29614e1cc748236ad7ac-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-repair",
+            "family-3958e8d6f4d92225f657588a-repair",
+            "family-98b17c047b1c072897fd23d1-repair",
+            "family-e9fed87fa64465858324158b-repair",
+            "family-f24e9f944d69879380ed8c3d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-repair",
+            "family-7056fc1c24a2d2eea3c63b7c-repair",
+            "family-947ddb1797d5d3b5997072e2-repair",
+            "family-bc559c09e3e07fe31f7e84dc-repair",
+            "family-d025767529ff7545d2b86295-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "direct",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-repair",
+            "family-486eb7fba9de4f78831a721f-repair",
+            "family-8b6193035787550460aff4c7-repair",
+            "family-b3cea1442bf29c57e96fdf85-repair",
+            "family-bbcd8ee1c567e8500cb491fa-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-178d62b21632eb32c9dcb923-repair",
+            "family-6c1591e93f8714f522746a48-repair",
+            "family-7049f6f9b58e5a6db7a91239-repair",
+            "family-97d7d2c5153e8bd3da72d117-repair",
+            "family-9dfb9ac49e9abdf479659976-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1470,
+          "domain_product_min": 140,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1736bf545489b64e2751b71a-repair",
+            "family-272e97533643fbc50331c6a6-repair",
+            "family-981f82b5f4e7580580048c87-repair",
+            "family-a595445f3a9573b121032146-repair",
+            "family-d14e5a0798459594fb462086-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 967680,
+          "domain_product_min": 60480,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-6658737ecc7f3312ad0fce51-repair",
+            "family-6681c8b1f7cde37082a583de-repair",
+            "family-dc8ea699abe4ecf78a548b62-repair",
+            "family-df8d279942e5b98ce754df67-repair",
+            "family-fb29c8453b95f2191d016897-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 231525000,
+          "domain_product_min": 162570240,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-29b7dd16aa7157136cc73739-repair",
+            "family-50a111f120aeb3703ce3a2be-repair",
+            "family-716a2798db0127d92d08debe-repair",
+            "family-8ddcc32193d5256604a9bfac-repair",
+            "family-d47e2e98a7a1633e6a4266b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 504000,
+          "domain_product_min": 96000,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0a850576ab19d418dec5b295-repair",
+            "family-267125960478cb4932d94d4d-repair",
+            "family-45f317c690a0d666158c1a8a-repair",
+            "family-745c12ace7c697c61f6131bd-repair",
+            "family-e809c68168b202c0429820fa-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1764000,
+          "domain_product_min": 226800,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-08c10a5818fea2877fbeb337-repair",
+            "family-1666af86ef8f3f95c286ad23-repair",
+            "family-41fcff5b033eb8bd1b82a4e7-repair",
+            "family-bcb57d1b8870c5331aa6b42a-repair",
+            "family-c6cff6e37111accef5ba5c5d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 889056,
+          "domain_product_min": 68040,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-16f861d3ff9ef5f4e6ff4973-repair",
+            "family-27dce49385961971b27cc885-repair",
+            "family-8310941b4936a412b1cfd73d-repair",
+            "family-94573b2717a4a47d7e3d1035-repair",
+            "family-a4f51214ca2a24f22cb09aed-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 907200,
+          "domain_product_min": 40320,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-430035443d23973bbd403905-repair",
+            "family-704140389453f43dd0ad6e6f-repair",
+            "family-77f75d9fdebb184337a8091b-repair",
+            "family-9636d2ee7d813ae91ca8f234-repair",
+            "family-c2859e651f9480164ae4cbd8-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 705600,
+          "domain_product_min": 145152,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-21656c0077dbaeb06d98f149-repair",
+            "family-55922e62691ba944e29766b0-repair",
+            "family-6bb949ffb9329cd8582c6ab9-repair",
+            "family-aaa765a2e1fd25200ac76d5d-repair",
+            "family-e41a5eb46c65d48e11b97338-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 1143072,
+          "domain_product_min": 113400,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-24a17f83cbdb00dd54a54e58-repair",
+            "family-392d8962c57ff1574cf694f4-repair",
+            "family-9c1935e8d14d077e5b13d9b3-repair",
+            "family-caee1a65bef6476f73dbf6cc-repair",
+            "family-f169532527ad550de37b4ac2-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 2187,
+          "domain_product_min": 1458,
+          "gold_label": "SAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-3de2a97b4c6447032972abc1-repair",
+            "family-4aac3c44762a5efffa938fec-repair",
+            "family-676126a22628663bc4b9e35c-repair",
+            "family-8cc203b34ceb21375853442e-repair",
+            "family-b77456119d00fa2622ee06b3-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 168000,
+          "domain_product_min": 60000,
+          "gold_label": "SAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1a027d4a84e2ba4338eb1236-repair",
+            "family-36887696e06e42512c4e06db-repair",
+            "family-d5ccfb814a690d318a05822c-repair",
+            "family-dd7b7f35755c135ed2765e27-repair",
+            "family-ed5bb3bca0fc258768296efc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 12509640,
+          "domain_product_min": 884736,
+          "gold_label": "SAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            4
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-09faeebc0e807dcb2679fc6c-repair",
+            "family-1eaa674ce84949f768a421cf-repair",
+            "family-359bedb52046114df50b9740-repair",
+            "family-537f5af4708489af81864704-repair",
+            "family-c3020401fab6a544db50de8f-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 60,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0410aae78543d70a9dafd4a6-repair",
+            "family-48eebc9ebc19eaf3c4bd966f-repair",
+            "family-94f3d88fa73a3bfee00a71b3-repair",
+            "family-98e9e2c7a7c12183f673af29-repair",
+            "family-fc5e30ac50d2b9cea2871c67-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 51840,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            12
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-016591815a09707eafea8852-repair",
+            "family-77104524d73e3b335222c987-repair",
+            "family-809787592325386bcb02a95b-repair",
+            "family-dc3fb1938781e7791b39cf0b-repair",
+            "family-f98814675d321c69e110e7ee-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 66134880,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "activity_count",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-168f6566912e51ab05658c9d-repair",
+            "family-60fce268ce430df8e365fe93-repair",
+            "family-7792d988a3b1ce0abed92cdf-repair",
+            "family-af333a2bb9dc0434b52a3ec9-repair",
+            "family-e376ef30844947bbe6c7190a-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 69120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098ea9fae5082314bf5ab146-repair",
+            "family-394fbd989fcc774498019638-repair",
+            "family-cc0aa04c9386bfa2c33bc0b4-repair",
+            "family-e2edf72de8ed7c2589eb2d3c-repair",
+            "family-fe16edf9530a9e1ed3782c3c-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 141120,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-098c1ae7d91912637ccf7a60-repair",
+            "family-0bd33dde4227c6317f737ed2-repair",
+            "family-0f349399cfca8ea0534346b2-repair",
+            "family-52d432abfafbd394a0967acc-repair",
+            "family-68577447f012d4fe24ba05bc-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 30240,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "interaction_density",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-0dfd34440276f82000a5aeb5-repair",
+            "family-471e966137585ecd2083bbc8-repair",
+            "family-56b539ad1bc5437892ab33e0-repair",
+            "family-74d2d90047d15a50e4a5747b-repair",
+            "family-88b1dee983a98d9a13926033-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 55296,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-02019483134786d872a32a89-repair",
+            "family-131df50bdf4c70d6dfc6be9f-repair",
+            "family-37aa322096ec93e23b81197e-repair",
+            "family-6ddcba033a08e163525cee46-repair",
+            "family-8e88819bd8042f375bbf2b50-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 395136,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1b6a21e9eaa5121c07e7b362-repair",
+            "family-4d6e8ad874dcbd25f53cc121-repair",
+            "family-5050db1bf7aa5433ad53c6f7-repair",
+            "family-ba50b7033bb44d131f797aab-repair",
+            "family-d6ce29614e1cc748236ad7ac-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 24696,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "resource_contention",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-34904cfa656c681463bc4b4d-repair",
+            "family-3958e8d6f4d92225f657588a-repair",
+            "family-98b17c047b1c072897fd23d1-repair",
+            "family-e9fed87fa64465858324158b-repair",
+            "family-f24e9f944d69879380ed8c3d-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 729,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "0",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-347c86a158732c103dddd236-repair",
+            "family-7056fc1c24a2d2eea3c63b7c-repair",
+            "family-947ddb1797d5d3b5997072e2-repair",
+            "family-bc559c09e3e07fe31f7e84dc-repair",
+            "family-d025767529ff7545d2b86295-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 63504,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "1",
+          "sweep": "slack",
+          "task": "repair"
+        },
+        {
+          "accepted": 5,
+          "activity_counts": [
+            8
+          ],
+          "approach": "solver_augmented",
+          "attempts": 5,
+          "case_ids": [
+            "family-1d0a382988e4b86c15b4bce7-repair",
+            "family-486eb7fba9de4f78831a721f-repair",
+            "family-8b6193035787550460aff4c7-repair",
+            "family-b3cea1442bf29c57e96fdf85-repair",
+            "family-bbcd8ee1c567e8500cb491fa-repair"
+          ],
+          "categories": {
+            "accepted": 5
+          },
+          "domain_product_max": 648648,
+          "domain_product_min": 0,
+          "gold_label": "UNSAT",
+          "level": "2",
+          "sweep": "slack",
+          "task": "repair"
+        }
+      ],
+      "model": "qwen3.8:27b",
+      "task_label": [
+        {
+          "accepted": 59,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 60,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 60,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 60,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "generation"
+        },
+        {
+          "accepted": 60,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 60,
+          "approach": "direct",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 60,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "SAT",
+          "task": "repair"
+        },
+        {
+          "accepted": 60,
+          "approach": "solver_augmented",
+          "attempts": 60,
+          "gold_label": "UNSAT",
+          "task": "repair"
+        }
+      ]
+    }
+  },
+  "new_model_calls": 0,
+  "scope": "Exploratory development; descriptive difficulty cells, not independent causal effects"
+}

@@ -1,0 +1,167 @@
+{
+  "evidence_scope": "Exploratory development results; not held-out evidence",
+  "layout": "standalone",
+  "matplotlib_version": "3.10.8",
+  "new_model_calls": 0,
+  "output_sha256": {
+    "controlled-accepted.pdf": "36e015c6ab8af0dfd19a1c37d3913254d8f2648402ad62157cb47f5ed3656ad5",
+    "controlled-accepted.png": "4e144d5f6c600cd9c026261e5f9253eaf4267baff4f4bd5f9c0d0615ca900366",
+    "language-accepted.pdf": "57adb14750a380813cf685d134ec87743b1545cec9b023cf58f72c7ee63c22b3",
+    "language-accepted.png": "60b68780388c7687c9488caec5ef1e7baa37a886b44e8be84cf061a070e37a13",
+    "realistic-accepted.pdf": "c6592091bd348d798134da3c03294859cb8410884cdff3f5e3c2e67fcd6f798d",
+    "realistic-accepted.png": "5e149b6dc28b30c42875fe9213c7a63e6195144861cd0f7f74b6fcdbd7b3681c"
+  },
+  "plotted_data": {
+    "controlled": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 95,
+            "attempts": 240,
+            "categories": {
+              "accepted": 95,
+              "false_unsat": 19,
+              "gold_invalid_schedule": 105,
+              "invalid_output": 21
+            },
+            "percent": 39.583333333333336
+          },
+          "solver_augmented": {
+            "accepted": 229,
+            "attempts": 240,
+            "categories": {
+              "accepted": 229,
+              "gold_invalid_schedule": 1,
+              "invalid_output": 10
+            },
+            "percent": 95.41666666666667
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 239,
+            "attempts": 240,
+            "categories": {
+              "accepted": 239,
+              "provider_error": 1
+            },
+            "percent": 99.58333333333333
+          },
+          "solver_augmented": {
+            "accepted": 240,
+            "attempts": 240,
+            "categories": {
+              "accepted": 240
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    },
+    "language": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 8,
+            "attempts": 48,
+            "categories": {
+              "accepted": 8,
+              "false_unsat": 5,
+              "gold_invalid_schedule": 30,
+              "invalid_output": 5
+            },
+            "percent": 16.666666666666668
+          },
+          "solver_augmented": {
+            "accepted": 47,
+            "attempts": 48,
+            "categories": {
+              "accepted": 47,
+              "invalid_output": 1
+            },
+            "percent": 97.91666666666667
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 46,
+            "attempts": 48,
+            "categories": {
+              "accepted": 46,
+              "provider_error": 2
+            },
+            "percent": 95.83333333333333
+          },
+          "solver_augmented": {
+            "accepted": 44,
+            "attempts": 48,
+            "categories": {
+              "accepted": 44,
+              "provider_error": 4
+            },
+            "percent": 91.66666666666667
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    },
+    "realistic": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 12,
+            "categories": {
+              "accepted": 6,
+              "gold_invalid_schedule": 5,
+              "invalid_output": 1
+            },
+            "percent": 50.0
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "percent": 91.66666666666667
+          },
+          "solver_augmented": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "percent": 91.66666666666667
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    }
+  },
+  "renderer_sha256": "66dc9c82a40a138cf0490fa31f4cabd031156d8bf5331e383d5656eedc4fa95b",
+  "source": "two-model-development-20261002.json",
+  "source_sha256": "a08d59e9f6f42ba0fc90fa4372c2cb824ed5ffd2937e0d4439fa4ccde17a167e"
+}

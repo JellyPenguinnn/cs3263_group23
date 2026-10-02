@@ -1,6 +1,6 @@
 # Report claim-to-evidence index
 
-Applies to [study-draft.md](study-draft.md), updated 1 October 2026. All human reviews
+Applies to [study-draft-20261001.md](study-draft-20261001.md), updated 1 October 2026. All human reviews
 below are pending. File/record links establish traceability, not sign-off.
 Development run: `expanded-development-100-20260930-01`; configuration:
 [expanded-development-100.json](../configs/development/expanded-development-100.json).

@@ -6,10 +6,14 @@ from pathlib import Path
 
 from scheduling.evaluation.cases import case_bundle, load_cases
 from scheduling.evaluation.cli import load_config
+from scheduling.evaluation.failure_policy import CONTINUE_TRANSIENT_POLICY
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.qualification import execute_blocks
-from scheduling.evaluation.runner import STRICT_QUALIFICATION_POLICY, plan_run, read
+from scheduling.evaluation.runner import (
+    DEVELOPMENT_QUALIFICATION_POLICIES, STRICT_QUALIFICATION_POLICY, plan_run, read,
+)
 from scheduling.evaluation.scoring import digest
+from scheduling.providers import ModelConfig
 from scheduling.schema import to_data
 from scheduling.solver import SolverLimits
 
@@ -20,10 +24,16 @@ EXPECTED_CALLS = {"controlled": 480, "realistic": 24, "language": 96}
 def load_packet(packet):
     packet = Path(packet)
     manifest = read(packet / "campaign.json")
-    if (manifest.get("policy_version") != "development-campaign-1"
+    model = manifest.get("model")
+    if (manifest.get("policy_version") != "development-campaign-2"
             or manifest.get("evidence") != "development_only"
-            or manifest.get("model") != "qwen3.8:27b"):
+            or not isinstance(model, str) or not model or model == "default"
+            or any(c.isspace() for c in model)):
         raise ValueError("Unsupported development campaign packet")
+    expected_model = ModelConfig(model, 32768, connect_timeout=30, read_timeout=1800)
+    policy = manifest.get("qualification_policy", STRICT_QUALIFICATION_POLICY)
+    if policy not in DEVELOPMENT_QUALIFICATION_POLICIES:
+        raise ValueError("Unsupported development qualification policy")
     blocks = {}
     for role in ROLES:
         cases = load_cases(packet / f"{role}-cases.json")
@@ -33,10 +43,10 @@ def load_packet(packet):
             digest(case_bundle(cases)) != manifest["blocks"][role]["case_bundle_sha256"]
             or to_data(cfg) != manifest["configs"][role]
             or cfg.evidence != "live_development"
-            or cfg.qualification_policy != STRICT_QUALIFICATION_POLICY
+            or cfg.qualification_policy != policy
+            or cfg.provider_failure_policy != CONTINUE_TRANSIENT_POLICY
             or cfg.qualification_baseline is not None
-            or cfg.model.model != "qwen3.8:27b" or cfg.model.max_tokens != 32768
-            or cfg.model.connect_timeout != 30 or cfg.model.read_timeout != 900
+            or cfg.model != expected_model
             or cfg.solver != SolverLimits(30) or cfg.reference_solver != SolverLimits(60)
             or cfg.rendering_seed != 3263
             or cfg.max_requests != EXPECTED_CALLS[role]

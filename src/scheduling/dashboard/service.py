@@ -6,6 +6,7 @@ import threading
 from scheduling.evaluation.cases import load_cases
 from scheduling.schema import to_data
 from scheduling.evaluation.metrics import summarize
+from scheduling.evaluation.liveness import probe_run_liveness
 from scheduling.evaluation.runner import read, replay
 from scheduling.evaluation.scoring import check_reference, digest
 
@@ -26,7 +27,7 @@ def fingerprint(path):
 
 def snapshot(path):
     """Take a consistent, revalidated view without trusting stored evaluation rows."""
-    before = fingerprint(path)
+    before = (fingerprint(path), probe_run_liveness(path))
     rows, progress = replay(path)
     manifest = read(path / "manifest.json")
     cases = load_cases(path / "cases.json")
@@ -85,8 +86,9 @@ def snapshot(path):
                 raise ValueError("Reference checksum mismatch")
             check_reference(case, record["reference"])
             references[case.case_id] = record["reference"]["result"]
-    active = (path / ".lock").exists()
-    if before != fingerprint(path):
+    liveness = before[1]
+    active = liveness == "active"
+    if before != (fingerprint(path), probe_run_liveness(path)):
         raise BusyError("Run changed during refresh; retrying shortly")
     # A reserved request is still running, not a failed model answer.
     scored = [
@@ -101,6 +103,7 @@ def snapshot(path):
         "attempts": attempts,
         "references": references,
         "active": active,
+        "liveness": liveness,
         "signature": before,
         "activity": sorted(
             activity, key=lambda r: r["started_utc"] or "", reverse=True
@@ -152,11 +155,11 @@ class Dashboard:
         if path is None:
             raise LookupError("Run not found")
         with self.lock:
-            signature = (fingerprint(path), (path / ".lock").exists())
+            signature = (fingerprint(path), probe_run_liveness(path))
             cached = self.cache.get(key)
             if cached is None or cached[0] != signature:
                 data = snapshot(path)
-                self.cache[key] = (signature, data)
+                self.cache[key] = (data["signature"], data)
                 while len(self.cache) > 4:
                     self.cache.pop(next(iter(self.cache)))
             return self.cache[key][1]
@@ -165,7 +168,7 @@ class Dashboard:
         data = self.get_run(key)
         return {
             k: data[k]
-            for k in ("summary", "progress", "manifest", "active", "activity")
+            for k in ("summary", "progress", "manifest", "active", "liveness", "activity")
         } | {
             "case_count": len(data["cases"]),
             "revision": digest((data["signature"], data["active"])),

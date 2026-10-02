@@ -51,6 +51,8 @@ class ProviderExecution:
     system_fingerprint: str | None = None
     reported_reasoning_tokens: int | None = None
     reasoning_field_present: bool | None = None
+    # Fixed provider classification only; never raw exception text or URLs.
+    transport_error_kind: str | None = None
 
 
 @dataclass(frozen=True)

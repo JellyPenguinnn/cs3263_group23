@@ -113,5 +113,5 @@ and cap remain undecided. Yao Xiang coordinates course eligibility and reviews t
 model/formal assumptions. Keep the stopped development comparison and strict
 frozen guards intact. Once model qualification is available, the next F1 experiment
 is the one proposed amendment versus revision 3 under otherwise equal settings and
-a new cap. F4/F5 final execution/analysis and F6 final report/rehearsal depend on those
+a new cap. F4/F5 final execution/analysis and F6 final docs/rehearsal depend on those
 actual decisions and reviews. No optional optimization is needed to fill that gap.

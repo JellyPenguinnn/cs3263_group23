@@ -5,7 +5,7 @@ CS3263 Group 23 — Tea Li Hao, Tham Yao Xiang, Woo Yong Qing.
 **Working report source, updated 1 October 2026.** AI-assisted draft for human revision;
 not a submission, completed review or frozen-study report. Private student
 identifiers belong only on the submission title page. Numerical findings below
-are development evidence. See [claim index](claim-evidence.md) and
+are development evidence. See [claim index](claim-evidence-20261001.md) and
 [contribution record](contributions.md). The [submission checklist](submission-checklist.md)
 separates executable evidence from the remaining study and human delivery tasks.
 

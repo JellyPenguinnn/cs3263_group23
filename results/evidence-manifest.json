@@ -1,0 +1,26 @@
+{
+  "format_version": "1.0",
+  "archives": [
+    {
+      "id": "qwen36",
+      "run_id": "benchmark-qwen36-20261001-02",
+      "path": "results/archives/benchmark-qwen36-20261001-02.tar.gz",
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+      "bytes": 1838407,
+      "checksummed_members": 941,
+      "scheduling_attempts": 600,
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    },
+    {
+      "id": "qwen38",
+      "run_id": "benchmark-qwen38-20261001-04",
+      "path": "results/archives/benchmark-qwen38-20261001-04.tar.gz",
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+      "bytes": 1682254,
+      "checksummed_members": 941,
+      "scheduling_attempts": 600,
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    }
+  ],
+  "policy": "Original reproduction archives copied byte-for-byte. Capability/supervisor/pause receipts and full source snapshots are preserved separately; see docs/evidence.md."
+}

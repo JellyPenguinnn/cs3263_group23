@@ -15,6 +15,8 @@ import tempfile
 
 from scheduling.evaluation.benchmark import render
 from scheduling.evaluation.cases import case_bundle, check_case_set, load_cases
+from scheduling.evaluation.failure_policy import CONTINUE_TRANSIENT_POLICY, FailureState
+from scheduling.evaluation.liveness import RunLock
 from scheduling.evaluation.scoring import digest, evaluate, reference, check_reference
 from scheduling.pipelines.direct import build_messages, run_direct
 from scheduling.pipelines.solver_augmented import (
@@ -32,6 +34,18 @@ from scheduling.evaluation.frozen import (
 )
 
 STRICT_QUALIFICATION_POLICY = "strict_model_backend_v1"
+OBSERVE_BACKEND_POLICY = "strict_model_observe_backend_v1"
+DEVELOPMENT_QUALIFICATION_POLICIES = (STRICT_QUALIFICATION_POLICY, OBSERVE_BACKEND_POLICY)
+
+
+def baseline_fingerprints(config):
+    """Restore actual capability observations without inventing a single backend."""
+    baseline = config.qualification_baseline
+    if baseline is None:
+        return set()
+    if config.qualification_policy == OBSERVE_BACKEND_POLICY:
+        return set(baseline["system_fingerprints"])
+    return {baseline["system_fingerprint"]}
 
 
 @dataclass(frozen=True)
@@ -48,6 +62,7 @@ class RunConfig:
     freeze: dict | None = None
     qualification_policy: str | None = None
     qualification_baseline: dict | None = None
+    provider_failure_policy: str | None = None
 
     def __post_init__(self):
         if not isinstance(self.model, ModelConfig) or not all(
@@ -65,7 +80,7 @@ class RunConfig:
         elif self.freeze is not None:
             raise ValueError("Development mode cannot carry frozen protocol")
         if self.qualification_policy is not None and (
-            self.qualification_policy != STRICT_QUALIFICATION_POLICY
+            self.qualification_policy not in DEVELOPMENT_QUALIFICATION_POLICIES
             or self.evidence != "live_development"
         ):
             raise ValueError(
@@ -73,20 +88,21 @@ class RunConfig:
             )
         if self.qualification_baseline is not None:
             baseline = self.qualification_baseline
+            observing = self.qualification_policy == OBSERVE_BACKEND_POLICY
+            field = "system_fingerprints" if observing else "system_fingerprint"
             if (
-                self.qualification_policy != STRICT_QUALIFICATION_POLICY
+                self.qualification_policy not in DEVELOPMENT_QUALIFICATION_POLICIES
                 or not isinstance(baseline, dict)
-                or set(baseline) != {"system_fingerprint", "capability_sha256"}
+                or set(baseline) != {field, "capability_sha256"}
             ):
                 raise ValueError("Invalid qualification baseline")
-            fingerprint = baseline["system_fingerprint"]
+            fingerprints = baseline[field] if observing else [baseline[field]]
             hashes = baseline["capability_sha256"]
             if (
-                fingerprint is not None and (
-                    not isinstance(fingerprint, str)
-                    or not 0 < len(fingerprint) <= 200
-                    or any(c.isspace() for c in fingerprint)
-                )
+                not isinstance(fingerprints, list) or not 1 <= len(fingerprints) <= 2
+                or any(f is not None and (not isinstance(f, str) or not 0 < len(f) <= 200
+                                         or any(c.isspace() for c in f)) for f in fingerprints)
+                or len(set(fingerprints)) != len(fingerprints)
                 or not isinstance(hashes, list)
                 or len(hashes) != 2
                 or any(not isinstance(h, str) or re.fullmatch(r"[0-9a-f]{64}", h) is None for h in hashes)
@@ -96,6 +112,8 @@ class RunConfig:
             raise ValueError(
                 "Serial runner permits one request per attempt, no hidden retries"
             )
+        if self.provider_failure_policy not in (None, CONTINUE_TRANSIENT_POLICY):
+            raise ValueError("Unsupported provider failure policy")
         if any(
             type(x) is not int or x < 0
             for x in (
@@ -169,8 +187,8 @@ def requests(cases, config):
 
 def _contract(cases, config):
     config_data = to_data(config)
-    # Preserve the legacy wire shape when no qualification policy was selected.
-    for field in ("qualification_policy", "qualification_baseline"):
+    # Preserve the legacy wire shape when optional policies were not selected.
+    for field in ("qualification_policy", "qualification_baseline", "provider_failure_policy"):
         if config_data[field] is None:
             config_data.pop(field)
     package = Path(__file__).resolve().parents[1]
@@ -272,7 +290,7 @@ def plan_run(cases, config):
     }
 
 
-def _stop_reason(response, expected_model=None, fingerprints=None):
+def _stop_reason(response, expected_model=None, fingerprints=None, *, allow_backend_variation=False):
     response = to_data(response) if response else {}
     for attempt in response.get("attempts", []):
         status = attempt.get("http_status")
@@ -298,7 +316,7 @@ def _stop_reason(response, expected_model=None, fingerprints=None):
         fingerprints.update((a.get("execution") or {}).get("system_fingerprint") for a in attempts)
         if not attempts:
             fingerprints.add(None)
-        if len(fingerprints) > 1:
+        if len(fingerprints) > 1 and not allow_backend_variation:
             return "backend_fingerprint_changed"
     return None
 
@@ -311,14 +329,19 @@ def run_batch(
     canned=None,
     provider_complete=None,
     progress=None,
+    failure_state=None,
 ):
     cases = check_case_set(tuple(cases))
     contract = _contract(cases, config)
     check_frozen(cases, config, contract)
+    if failure_state is None:
+        failure_state = FailureState(config.provider_failure_policy)
+    elif failure_state.policy != config.provider_failure_policy:
+        raise ValueError("Shared provider failure policy changed between blocks")
     expected_model = (
         config.model.model
         if config.evidence == "live_frozen"
-        or config.qualification_policy == STRICT_QUALIFICATION_POLICY
+        or config.qualification_policy in DEVELOPMENT_QUALIFICATION_POLICIES
         else None
     )
     if config.evidence in ("offline_canned", "offline_frozen") and (
@@ -332,9 +355,7 @@ def run_batch(
     if canned is not None:
         contract["canned_sha256"] = digest(canned)
     directory.mkdir(parents=True, exist_ok=True, mode=0o700)
-    lock = directory / ".lock"
-    fd = os.open(lock, os.O_WRONLY | os.O_CREAT | os.O_EXCL, 0o600)
-    os.close(fd)
+    lock = RunLock(directory / ".lock")
     try:
         manifest = directory / "manifest.json"
         if manifest.exists():
@@ -373,10 +394,7 @@ def run_batch(
             if config.evidence in FROZEN_MODES:
                 check_frozen_reference(case, saved["reference"])
             gold[case.case_id] = saved["reference"]
-        fingerprints = (
-            {config.qualification_baseline["system_fingerprint"]}
-            if config.qualification_baseline is not None else set()
-        )
+        fingerprints = baseline_fingerprints(config)
         existing = list(records.glob("*.json"))
         reserved = len(existing)
         if (
@@ -394,12 +412,20 @@ def run_batch(
                 )
             if saved["sha256"] != digest(saved["payload"]):
                 raise ValueError("Completed record changed")
+        # Replay recovery state in planned order, never hash/filename order.
+        # Completed timeouts stay completed; pending reservations still block above.
+        for key, _, _, _ in requests(cases, config):
+            path = records / (key + ".json")
+            if not path.exists():
+                continue
+            saved = read(path)
             response = saved["payload"]["pipeline_result"].get("model_response") or {}
-            reason = _stop_reason(
+            reason = failure_state.observe(_stop_reason(
                 response,
                 expected_model,
                 fingerprints,
-            )
+                allow_backend_variation=config.qualification_policy == OBSERVE_BACKEND_POLICY,
+            ))
             if reason:
                 return {
                     "state": "stopped_provider",
@@ -425,6 +451,7 @@ def run_batch(
                 }
             if canned is not None and key not in canned:
                 raise ValueError("Missing canned response; no attempt consumed")
+            failure_state.before_request()
             pending = {
                 "state": "pending_or_interrupted",
                 "identity": identity,
@@ -477,11 +504,12 @@ def run_batch(
                         "gold_valid": scored["gold_valid"],
                     }
                 )
-            reason = _stop_reason(
+            reason = failure_state.observe(_stop_reason(
                 result.model_response,
                 expected_model,
                 fingerprints,
-            )
+                allow_backend_variation=config.qualification_policy == OBSERVE_BACKEND_POLICY,
+            ))
             if reason:
                 return {
                     "state": "stopped_provider",
@@ -496,7 +524,7 @@ def run_batch(
             "reserved_output_tokens": reserved * config.model.max_tokens,
         }
     finally:
-        lock.unlink()
+        lock.release()
 
 
 def replay(directory: Path):

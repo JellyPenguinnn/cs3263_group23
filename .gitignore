@@ -12,6 +12,7 @@ credentials/
 
 # Python environments, builds, and caches
 .venv/
+.venv-*/
 venv/
 env/
 __pycache__/
@@ -32,6 +33,7 @@ coverage.xml
 
 # Local/private data and generated experiment outputs
 data/private/
+docs/private/
 data/generated/
 artifacts/
 output/pdf/

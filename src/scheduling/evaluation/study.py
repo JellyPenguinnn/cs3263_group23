@@ -1,6 +1,6 @@
 """Checked frozen-block analysis and local reproduction archives; no inference."""
 
-from collections import defaultdict
+from collections import Counter, defaultdict
 import csv
 import hashlib
 import math
@@ -18,7 +18,8 @@ from scheduling.evaluation.frozen import ANALYSIS_SETTINGS, check_frozen, check_
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.metrics import summarize, analysis_details, export_tables
 from scheduling.evaluation.runner import (
-    STRICT_QUALIFICATION_POLICY, RunConfig, _contract, _stop_reason, read, replay, write_new,
+    OBSERVE_BACKEND_POLICY, STRICT_QUALIFICATION_POLICY, RunConfig, _contract,
+    _stop_reason, baseline_fingerprints, read, replay, write_new,
 )
 from scheduling.evaluation.scoring import digest
 from scheduling.pipelines.direct import build_messages
@@ -67,6 +68,8 @@ def _settings(contract):
                 "evidence",
             )
         },
+        **({"provider_failure_policy": cfg["provider_failure_policy"]}
+           if cfg.get("provider_failure_policy") is not None else {}),
         **protocol,
     }
 
@@ -113,6 +116,91 @@ def resource_statistics(rows):
     return output
 
 
+def backend_statistics(rows):
+    """Describe observed routing and paired outcomes without attributing causality.
+
+    Pipeline outcomes are associated with their final recorded provider attempt;
+    coverage counts every provider attempt. Missing metadata and failed requests
+    remain explicit categories rather than being assigned to a known backend.
+    """
+    coverage = Counter(pipeline_attempts=len(rows), provider_attempts=0,
+                       reported_fingerprints=0, missing_fingerprints=0,
+                       successful_provider_responses=0,
+                       successful_responses_with_fingerprint=0)
+    outcomes, pairs = defaultdict(list), defaultdict(dict)
+
+    def observation(attempt):
+        fingerprint = (attempt.get("execution") or {}).get("system_fingerprint")
+        if not attempt:
+            return "no_provider_attempt", None
+        if attempt.get("http_status") != 200 or attempt.get("error"):
+            return "provider_failure", fingerprint
+        return ("reported" if fingerprint is not None else "missing"), fingerprint
+
+    for row in rows:
+        attempts = row.get("provider_attempts", [])
+        for attempt in attempts:
+            state, fingerprint = observation(attempt)
+            coverage["provider_attempts"] += 1
+            coverage["reported_fingerprints" if fingerprint is not None
+                     else "missing_fingerprints"] += 1
+            if state in ("reported", "missing"):
+                coverage["successful_provider_responses"] += 1
+                coverage["successful_responses_with_fingerprint"] += state == "reported"
+        state, fingerprint = observation(attempts[-1] if attempts else {})
+        outcomes[(row["study_block"], row["approach"], state, fingerprint)].append(row)
+        key = (row["study_block"], row["case_id"], row["variant_id"], row["repeat"])
+        pairs[key][row["approach"]] = (state, fingerprint, row["accepted"])
+
+    by_backend = []
+    for (block, approach, state, fingerprint), items in sorted(outcomes.items(), key=str):
+        by_backend.append({
+            "study_block": block, "approach": approach,
+            "backend_observation": state, "system_fingerprint": fingerprint,
+            "pipeline_attempts": len(items),
+            "accepted": sum(r["accepted"] is True for r in items),
+            "failed": sum(r["accepted"] is False for r in items),
+            "unscored": sum(r["accepted"] is None for r in items),
+            "categories": dict(sorted(Counter(r["category"] for r in items).items())),
+        })
+    combinations = defaultdict(Counter)
+    missing_pairs = 0
+    for (block, *_), pair in pairs.items():
+        if set(pair) != {"direct", "solver_augmented"}:
+            missing_pairs += 1
+            continue
+        a_state, a_fingerprint, accepted_a = pair["direct"]
+        b_state, b_fingerprint, accepted_b = pair["solver_augmented"]
+        counts = combinations[(block, a_state, a_fingerprint, b_state, b_fingerprint)]
+        counts["pairs"] += 1
+        outcome = ("unscored" if accepted_a is None or accepted_b is None else
+                   "both_accepted" if accepted_a and accepted_b else
+                   "direct_only_accepted" if accepted_a else
+                   "solver_only_accepted" if accepted_b else "neither_accepted")
+        counts[outcome] += 1
+    pair_combinations = []
+    for (block, a_state, a_fp, b_state, b_fp), counts in sorted(combinations.items(), key=str):
+        pair_combinations.append({
+            "study_block": block,
+            "direct_backend_observation": a_state, "direct_system_fingerprint": a_fp,
+            "solver_backend_observation": b_state, "solver_system_fingerprint": b_fp,
+            **{key: counts[key] for key in ("pairs", "both_accepted", "direct_only_accepted",
+                                           "solver_only_accepted", "neither_accepted", "unscored")},
+        })
+    return {
+        "scope": "Scheduling attempts only; capability observations remain in the qualification baseline.",
+        "interpretation": (
+            "Descriptive shared-service routing evidence. Backend assignment is not randomized; "
+            "case difficulty, method and request time may differ between groups. Fingerprints are "
+            "reported metadata, not proof of pinned weights. No backend-causal or fixed-backend "
+            "superiority claim is supported. All failures remain in the study denominators."
+        ),
+        "coverage": dict(coverage), "outcomes": by_backend,
+        "pair_fingerprint_combinations": pair_combinations,
+        "missing_method_pairs": missing_pairs,
+    }
+
+
 def analyze_blocks(blocks, *, development=False):
     """Require one canonical block and optional realistic/language blocks.
 
@@ -151,11 +239,11 @@ def analyze_blocks(blocks, *, development=False):
             raise ValueError(
                 "Study analysis requires matching frozen/development mode; development needs explicit opt-in"
             )
-        if (cfg.evidence == "live_development"
-                and cfg.qualification_policy != STRICT_QUALIFICATION_POLICY):
-            raise ValueError("Development study requires the strict model/backend policy")
-        if cfg.qualification_baseline is not None:
-            observations.add(cfg.qualification_baseline["system_fingerprint"])
+        if (cfg.evidence == "live_development" and cfg.qualification_policy not in
+                (STRICT_QUALIFICATION_POLICY, OBSERVE_BACKEND_POLICY)):
+            raise ValueError("Development study requires an explicit model/backend policy")
+        observe_backend = development and cfg.qualification_policy == OBSERVE_BACKEND_POLICY
+        observations.update(baseline_fingerprints(cfg))
         expected_variants = (
             {"paraphrase", "reordered"} if role == "language" else {"canonical"}
         )
@@ -241,7 +329,8 @@ def analyze_blocks(blocks, *, development=False):
                         )
                 # Match the runner: provider failures remain failed observations,
                 # while returned answers must satisfy the frozen model contract.
-                reason = _stop_reason(response, cfg.model.model, observations)
+                reason = _stop_reason(response, cfg.model.model, observations,
+                                      allow_backend_variation=observe_backend)
                 if reason == "returned_model_mismatch":
                     raise ValueError("Returned model differs from required study model")
                 if reason == "backend_fingerprint_changed":
@@ -256,7 +345,8 @@ def analyze_blocks(blocks, *, development=False):
             str(p.relative_to(path)): hashlib.sha256(p.read_bytes()).hexdigest()
             for p in run_files
         }
-    if len(observations) > 1:
+    shared_service = common.get("qualification_policy") == OBSERVE_BACKEND_POLICY
+    if len(observations) > 1 and not shared_service:
         raise ValueError("Backend fingerprint changed across blocks")
     controlled = cases_by_role["controlled"]
     realistic = cases_by_role.get("realistic", {})
@@ -290,7 +380,14 @@ def analyze_blocks(blocks, *, development=False):
         "settings": common,
         "block_checksums": snapshots,
         "backend_fingerprints": sorted(observations, key=str),
-        "backend_note": "Reported metadata only; unavailable fingerprints do not establish pinned weights.",
+        "backend_note": (
+            "Shared-service development evidence: exact model identity was required, backend "
+            "variation was explicitly permitted and recorded. This is not a fixed-backend study."
+            if shared_service else
+            "Reported metadata only; unavailable fingerprints do not establish pinned weights."
+        ),
+        **({"evidence_scope": "shared_service_development",
+            "backend_diagnostics": backend_statistics(all_rows)} if shared_service else {}),
         "primary_controlled": summarize(canonical),
         "realistic": summarize(realistic_rows),
         "language": summarize(language_rows),
@@ -426,6 +523,19 @@ def export_study(blocks, directory, *, project_root, figures=False, development=
                     for k in fields
                 }
             )
+    if "backend_diagnostics" in result:
+        for name in ("outcomes", "pair_fingerprint_combinations"):
+            values = result["backend_diagnostics"][name]
+            if not values:
+                continue
+            with (directory / "tables" / f"backend_{name}.csv").open(
+                "x", newline="", encoding="utf-8"
+            ) as out:
+                writer = csv.DictWriter(out, list(values[0]))
+                writer.writeheader()
+                for value in values:
+                    writer.writerow({k: json.dumps(v, sort_keys=True) if isinstance(v, dict)
+                                     else v for k, v in value.items()})
     if figures:
         from scheduling.evaluation.figures import export_figures
 

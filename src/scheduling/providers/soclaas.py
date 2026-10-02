@@ -26,6 +26,33 @@ def _tls_failure(error: BaseException) -> bool:
     return False
 
 
+def _transport_error_kind(error: httpx.RequestError) -> str:
+    """Classify with fixed labels so provider messages and custom types stay private."""
+    if _tls_failure(error):
+        return "tls_verification_error"
+    for error_type, kind in (
+        (httpx.ConnectTimeout, "connect_timeout"),
+        (httpx.ReadTimeout, "read_timeout"),
+        (httpx.WriteTimeout, "write_timeout"),
+        (httpx.PoolTimeout, "pool_timeout"),
+        (httpx.ConnectError, "connect_error"),
+        (httpx.ReadError, "read_error"),
+        (httpx.WriteError, "write_error"),
+        (httpx.CloseError, "close_error"),
+        (httpx.LocalProtocolError, "local_protocol_error"),
+        (httpx.RemoteProtocolError, "remote_protocol_error"),
+        (httpx.ProxyError, "proxy_error"),
+        (httpx.UnsupportedProtocol, "unsupported_protocol"),
+        (httpx.DecodingError, "decoding_error"),
+        (httpx.TooManyRedirects, "too_many_redirects"),
+        (httpx.TimeoutException, "timeout"),
+        (httpx.TransportError, "transport_error"),
+    ):
+        if isinstance(error, error_type):
+            return kind
+    return "request_error"
+
+
 def _usage(data: object) -> Usage:
     raw = data.get("usage") if isinstance(data, dict) else None
     if not isinstance(raw, dict):
@@ -109,6 +136,7 @@ class SoCLaaSProvider:
             usage = Usage()
             retry = uncertain = False
             fingerprint = reasoning_tokens = reasoning_present = None
+            transport_error_kind = None
             content = model = finish = error = None
             try:
                 response = self._client.post("chat/completions", timeout=timeout, json={
@@ -156,6 +184,7 @@ class SoCLaaSProvider:
                     if error is None and finish != "stop":
                         error = "incomplete_completion"
             except httpx.RequestError as exc:
+                transport_error_kind = _transport_error_kind(exc)
                 error = ("tls_verification_error" if _tls_failure(exc) else
                          "timeout" if isinstance(exc, httpx.TimeoutException) else "transport_error")
                 uncertain = not isinstance(exc, (httpx.ConnectError, httpx.ConnectTimeout, httpx.PoolTimeout))
@@ -163,7 +192,8 @@ class SoCLaaSProvider:
                 retry = not uncertain and error != "tls_verification_error"
             attempts.append(Attempt(number, time.monotonic() - tick, status, usage,
                                     error, uncertain, model, finish,
-                                    ProviderExecution(contract, fingerprint, reasoning_tokens, reasoning_present)))
+                                    ProviderExecution(contract, fingerprint, reasoning_tokens, reasoning_present,
+                                                      transport_error_kind)))
             if not retry or number == config.max_attempts:
                 break
             self._sleep(min(config.retry_delay * 2 ** (number - 1), 10.0))

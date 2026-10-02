@@ -108,6 +108,7 @@ def test_legacy_configuration_loads_with_unchanged_default_contract_shape(tmp_pa
     legacy = to_data(cfg)
     legacy.pop("qualification_policy")
     legacy.pop("qualification_baseline")
+    legacy.pop("provider_failure_policy")
     path = tmp_path / "legacy.json"
     path.write_text(json.dumps(legacy))
     loaded = load_config(path)
@@ -121,6 +122,7 @@ def test_legacy_frozen_settings_digest_retains_absent_policy_shape():
     legacy.pop("freeze")
     legacy.pop("qualification_policy")
     legacy.pop("qualification_baseline")
+    legacy.pop("provider_failure_policy")
     legacy["provider_execution"] = execution_contract(cfg.model)
     assert settings_digest(cfg) == digest(legacy)
 

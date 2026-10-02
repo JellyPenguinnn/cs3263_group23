@@ -86,7 +86,7 @@ qualification alongside v1 preflight and v2/v3 qualification.
 
 | Requirement | Implemented and checked | Remaining acceptance work |
 | --- | --- | --- |
-| §4 Li Hao: provider/direct/CLI/package/demo | Shared bounded provider; strict direct generation/repair; neutral B metadata; installed prompts/TLS/assets; R4 formatter; read-only dashboard and demo | Human consumer/wording review; final-model capability/access checks under a new cap; final report/demo assembly |
+| §4 Li Hao: provider/direct/CLI/package/demo | Shared bounded provider; strict direct generation/repair; neutral B metadata; installed prompts/TLS/assets; R4 formatter; read-only dashboard and demo | Human consumer/wording review; final-model capability/access checks under a new cap; final docs/demo assembly |
 | §4 Yao Xiang / WP1, R1–R3 | Canonical schema and repair invariants; exact sequential CP-SAT objectives; parser-checked extraction revision 3; typed differences; bounded domain reasons; independent tiny certificates | Human mathematical/semantic sign-off; final-model eligibility and proposal receipt/feedback coordination |
 | §4 Yong Qing / WP2 | V1 preserved; seeded v2 matrix, v3 challenge cases, family/duplicate audits; authored prose support and twelve explicitly AI-assisted drafts | Human prose/gold and equivalent-rendering review; independently human-written requirement; fresh final allocation and construction policy review |
 | WP3 failure analysis | Saved A/provider and B extraction failures retained; semantic counterexamples; evaluator regression checks; four historical summaries replayed | Final-study error analysis and named teammate review; no retrospective correction of model answers |

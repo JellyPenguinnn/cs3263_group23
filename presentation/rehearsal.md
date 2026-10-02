@@ -1,7 +1,7 @@
 # Fifteen-minute study presentation — working rehearsal guide
 
 AI-assisted preparation, not a completed rehearsal or final deck. Use the
-[report source](../report/study-draft.md) and [claim index](../report/claim-evidence.md).
+[report source](../docs/study-draft.md) and [claim index](../docs/claim-evidence.md).
 Until the final study is available, label every numerical slide **development**.
 
 This is a slide-by-slide storyboard, not an existing slide deck. Speaker assignments
@@ -73,4 +73,4 @@ member answered, weak explanations and assigned corrections. Verify that the sav
 example runs offline, charts are legible and every numeric slide names its model,
 run stage and denominator. A teammate should independently question the formal
 and empirical claims. Leave entries pending until these actions occur; see the
-[submission checklist](../report/submission-checklist.md) for course delivery.
+[submission checklist](../docs/submission-checklist.md) for course delivery.

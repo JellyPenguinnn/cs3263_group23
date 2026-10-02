@@ -30,7 +30,7 @@ ANALYSIS_SETTINGS = {
 def settings_digest(config):
     data = to_data(config)
     data.pop("freeze", None)
-    for field in ("qualification_policy", "qualification_baseline"):
+    for field in ("qualification_policy", "qualification_baseline", "provider_failure_policy"):
         if data.get(field) is None:
             data.pop(field, None)
     data["provider_execution"] = (execution_contract(config.model)

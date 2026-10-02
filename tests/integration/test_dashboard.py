@@ -13,6 +13,7 @@ from scheduling.dashboard.server import Handler
 from scheduling.evaluation.benchmark import render, tiny_fixtures
 from scheduling.evaluation.cases import AuthoredBenchmarkCase, AuthoredRendering, BenchmarkCase
 from scheduling.evaluation.runner import RunConfig, requests, run_batch, read, replay
+from scheduling.evaluation.liveness import RunLock
 from scheduling.evaluation.scoring import digest
 from scheduling.providers import ModelConfig
 from scheduling.pipelines.solver_augmented import PUBLIC_REQUEST_ID
@@ -108,12 +109,12 @@ def test_active_pending_is_not_counted_as_model_rejection(saved):
     record_path.write_text(
         json.dumps({"state": "pending_or_interrupted", "identity": record["identity"]})
     )
-    (path / ".lock").touch()
+    lock = RunLock(path / ".lock")
     result = snapshot(path)
     assert result["progress"]["completed"] == 11
     assert len(result["progress"]["pending_attempt_ids"]) == 1
     assert sum(s["attempt_count"] for s in result["summary"]["subsets"]) == 11
-    (path / ".lock").unlink()
+    lock.release()
     assert sum(s["attempt_count"] for s in snapshot(path)["summary"]["subsets"]) == 12
 
 
@@ -209,13 +210,13 @@ def test_cached_monitor_refreshes_external_progress_without_solver_or_provider(
             }
         )
     )
-    (path / ".lock").touch()
+    lock = RunLock(path / ".lock")
     pending = app.overview(key)
     assert pending["revision"] != first["revision"]
     assert pending["progress"]["completed"] == 11
     assert pending["activity"][0]["state"] == "pending_or_interrupted"
     record_path.write_bytes(original)
-    (path / ".lock").unlink()
+    lock.release()
     complete = app.overview(key)
     assert complete["progress"]["completed"] == 12
     assert complete["progress"]["pending_attempt_ids"] == []
@@ -256,3 +257,18 @@ def test_http_reads_versioned_case_bundle_without_changing_records(saved):
         assert detail["case"]["authored_renderings"][0]["text"] == render(cases[-1]).text
         assert detail["case"]["gold_review_reference"] is None
     assert before == {p: p.read_bytes() for p in path.rglob("*") if p.is_file()}
+
+
+def test_dashboard_legacy_lock_does_not_assert_activity_and_invalidates_cache(saved):
+    path, *_ = saved
+    app = Dashboard(path.parent, run_dir=path)
+    key = app.bootstrap()["selected"]
+    before = app.overview(key)
+    lock = path / ".lock"
+    lock.touch()
+    original = {p: p.read_bytes() for p in path.rglob("*") if p.is_file()}
+    result = app.overview(key)
+    assert result["liveness"] == "unknown_legacy" and not result["active"]
+    assert result["revision"] != before["revision"]
+    assert result["progress"] == before["progress"]
+    assert all(p.read_bytes() == value for p, value in original.items())

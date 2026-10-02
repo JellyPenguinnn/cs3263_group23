@@ -480,5 +480,5 @@ def test_live_development_analysis_refuses_unqualified_identity_policy(tmp_path)
     callback = lambda *_: ModelResponse(next(outputs), cfg.model.model, 0.1, ())
     path = tmp_path / "run"
     run_batch(cases, path, cfg, provider_complete=callback)
-    with pytest.raises(ValueError, match="strict model/backend policy"):
+    with pytest.raises(ValueError, match="explicit model/backend policy"):
         analyze_blocks({"controlled": path}, development=True)

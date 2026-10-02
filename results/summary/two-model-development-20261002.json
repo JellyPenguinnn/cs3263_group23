@@ -1,0 +1,1832 @@
+{
+  "audit_new_model_calls": 0,
+  "audited_utc": "2026-10-02T06:42:50.043775+00:00",
+  "comparability": {
+    "controlled": {
+      "case_bundle_sha256": "d13959252befdaf49780c78f4451dc06c6a0ebda019dbec0b2fc04e0e53013be",
+      "matched_request_prompts": 480,
+      "only_config_difference": "model.model",
+      "same_case_bytes": true
+    },
+    "language": {
+      "case_bundle_sha256": "47803a7e844e8ebe4980022775e8ddf3a4d628556852226c9d99e20f7b079ace",
+      "matched_request_prompts": 96,
+      "only_config_difference": "model.model",
+      "same_case_bytes": true
+    },
+    "realistic": {
+      "case_bundle_sha256": "b7cb3aa2c3de6bca7e54221764147f80077f252d352d4baab67d76de8f5abf5c",
+      "matched_request_prompts": 24,
+      "only_config_difference": "model.model",
+      "same_case_bytes": true
+    }
+  },
+  "course_submission_ready": false,
+  "evidence_scope": "Complete exploratory shared-service development comparisons; not held-out evidence",
+  "format_version": "1.0",
+  "interpretation_limits": [
+    "Same configured experiment except model ID; backend versions, model/tokenizer behavior and unexposed server defaults are not controlled.",
+    "Cases are known synthetic/AI-assisted development inputs; wording reuses 24 controlled bases.",
+    "Accepted means a gold-valid feasible schedule or correct UNSAT answer, not necessarily an optimal schedule.",
+    "Provider failures remain in denominators. Missing usage is unknown, not zero.",
+    "Qwen3.8 has two recorded safe same-process pauses; elapsed clocks and operational delays are not pure inference time.",
+    "Within-model paired intervals use existing family bootstrap; ceiling/degenerate intervals do not prove equivalence or population perfection.",
+    "Automated audit and replay do not establish course model eligibility, human review or submission."
+  ],
+  "models": {
+    "qwen36": {
+      "accepted_by_block": {
+        "controlled": {
+          "direct": {
+            "accepted": 95,
+            "attempts": 240,
+            "categories": {
+              "accepted": 95,
+              "false_unsat": 19,
+              "gold_invalid_schedule": 105,
+              "invalid_output": 21
+            },
+            "gold_sat_cases": 120,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 6,
+            "valid_gold_sat_schedules": 49
+          },
+          "solver_augmented": {
+            "accepted": 229,
+            "attempts": 240,
+            "categories": {
+              "accepted": 229,
+              "gold_invalid_schedule": 1,
+              "invalid_output": 10
+            },
+            "gold_sat_cases": 120,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 118,
+            "valid_gold_sat_schedules": 118
+          }
+        },
+        "language": {
+          "direct": {
+            "accepted": 8,
+            "attempts": 48,
+            "categories": {
+              "accepted": 8,
+              "false_unsat": 5,
+              "gold_invalid_schedule": 30,
+              "invalid_output": 5
+            },
+            "gold_sat_cases": 24,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 1,
+            "valid_gold_sat_schedules": 3
+          },
+          "solver_augmented": {
+            "accepted": 47,
+            "attempts": 48,
+            "categories": {
+              "accepted": 47,
+              "invalid_output": 1
+            },
+            "gold_sat_cases": 24,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 23,
+            "valid_gold_sat_schedules": 23
+          }
+        },
+        "realistic": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 12,
+            "categories": {
+              "accepted": 6,
+              "gold_invalid_schedule": 5,
+              "invalid_output": 1
+            },
+            "gold_sat_cases": 6,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 3,
+            "valid_gold_sat_schedules": 4
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "gold_sat_cases": 6,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 6,
+            "valid_gold_sat_schedules": 6
+          }
+        }
+      },
+      "controlled_by_task": [
+        {
+          "accepted": 53,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 27,
+          "reference_objective_matched": 1,
+          "task": "generation"
+        },
+        {
+          "accepted": 115,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "generation"
+        },
+        {
+          "accepted": 42,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 22,
+          "reference_objective_matched": 5,
+          "task": "repair"
+        },
+        {
+          "accepted": 114,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "repair"
+        }
+      ],
+      "execution": {
+        "automatic_restarts": 0,
+        "backend_policy": "strict_model_observe_backend_v1",
+        "failure_policy": "continue_transient_v1",
+        "model_settings": {
+          "connect_timeout": 30,
+          "max_attempts": 1,
+          "max_tokens": 32768,
+          "model": "qwen3.6:35b",
+          "read_timeout": 1800,
+          "retry_delay": 1.0
+        },
+        "provider_execution": {
+          "configured_body": {
+            "max_tokens": 32768,
+            "model": "qwen3.6:35b",
+            "stream": false
+          },
+          "effective_omitted_values": "server_defaults_unavailable",
+          "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+          "final_content_field": "choices[0].message.content",
+          "format_version": "1.0",
+          "max_attempts": 1,
+          "omitted_controls": [
+            "temperature",
+            "top_p",
+            "seed",
+            "reasoning_effort",
+            "response_format"
+          ],
+          "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+          "provider": "soclaas",
+          "retry_delay": 1.0,
+          "timeouts": {
+            "connect": 30,
+            "pool": 1800,
+            "read": 1800,
+            "write": 1800
+          },
+          "weight_revision": null
+        },
+        "reference_solver": {
+          "num_workers": 1,
+          "random_seed": 0,
+          "time_limit_seconds": 60
+        },
+        "runner_monotonic_elapsed_seconds": 5184.867954541929,
+        "runtime": {
+          "certifi": "2026.7.22",
+          "httpcore": "1.0.9",
+          "httpx": "0.28.1",
+          "numpy": "2.5.3",
+          "ortools": "9.14.6206",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "protobuf": "6.31.1",
+          "python": "3.12.2",
+          "truststore": "0.10.4"
+        },
+        "safe_pauses": [],
+        "solver": {
+          "num_workers": 1,
+          "random_seed": 0,
+          "time_limit_seconds": 30
+        },
+        "supervisor_wall_seconds": 5208.432739
+      },
+      "extraction": {
+        "caution": "Structural differences do not alone establish semantic errors.",
+        "recorded": 289,
+        "structurally_equal": 228
+      },
+      "model": "qwen3.6:35b",
+      "paired_controlled": [
+        {
+          "B_minus_A_percentage_points": 51.666666666666664,
+          "cluster_bootstrap_95": [
+            41.666666666666664,
+            61.666666666666664
+          ],
+          "counts": {
+            "both": 50,
+            "neither": 2,
+            "only_A": 3,
+            "only_B": 65
+          },
+          "group_count": 120,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 120,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        },
+        {
+          "B_minus_A_percentage_points": 60.0,
+          "cluster_bootstrap_95": [
+            50.0,
+            70.0
+          ],
+          "counts": {
+            "both": 39,
+            "neither": 3,
+            "only_A": 3,
+            "only_B": 75
+          },
+          "group_count": 120,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 120,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "repair",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "provider_failure_records": [],
+      "resources": [
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 10063,
+              "mean": 474.15,
+              "median": 161.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 1185,
+              "reported": 240
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 240,
+              "observations": 240,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 75.72686308249831,
+              "mean": 3.5736520887546552,
+              "median": 1.4048585835844278,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 9.162109083496034,
+              "reported": 240
+            },
+            "prompt_tokens": {
+              "max": 1905,
+              "mean": 1304.6625,
+              "median": 1313.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 1631,
+              "reported": 240
+            },
+            "provider_attempt_seconds": {
+              "max": 75.72684491612017,
+              "mean": 3.573617126540436,
+              "median": 1.4048378746956587,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 9.1620913753286,
+              "reported": 240
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 240,
+              "observations": 240,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 75.72737549990416,
+              "mean": 3.574837100676571,
+              "median": 1.4056036253459752,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 9.163909457623959,
+              "reported": 240
+            },
+            "total_tokens": {
+              "max": 11260,
+              "mean": 1778.8125,
+              "median": 1427.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 2535,
+              "reported": 240
+            }
+          },
+          "pipeline_attempts": 240,
+          "study_block": "controlled",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 3577,
+              "mean": 1981.9375,
+              "median": 1972.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 2604,
+              "reported": 240
+            },
+            "extraction_seconds": {
+              "max": 26.90623129159212,
+              "mean": 14.008626035361996,
+              "median": 12.759381791576743,
+              "missing": 10,
+              "observations": 240,
+              "p95_nearest_rank": 19.357128334231675,
+              "reported": 230
+            },
+            "model_seconds": {
+              "max": 26.90286970883608,
+              "mean": 14.075534640605717,
+              "median": 12.910941291134804,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 19.351149166934192,
+              "reported": 240
+            },
+            "prompt_tokens": {
+              "max": 2850,
+              "mean": 2272.1625,
+              "median": 2280.5,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 2621,
+              "reported": 240
+            },
+            "provider_attempt_seconds": {
+              "max": 26.902844457887113,
+              "mean": 14.075490140658804,
+              "median": 12.910912166815251,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 19.351115415804088,
+              "reported": 240
+            },
+            "solver_seconds": {
+              "max": 0.05850216560065746,
+              "mean": 0.013148579382054184,
+              "median": 0.011041041929274797,
+              "missing": 10,
+              "observations": 240,
+              "p95_nearest_rank": 0.029793666675686836,
+              "reported": 230
+            },
+            "total_seconds": {
+              "max": 26.92004904150963,
+              "mean": 14.09256370992322,
+              "median": 12.926809208467603,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 19.36631133314222,
+              "reported": 240
+            },
+            "total_tokens": {
+              "max": 6414,
+              "mean": 4254.1,
+              "median": 4205.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 5044,
+              "reported": 240
+            }
+          },
+          "pipeline_attempts": 240,
+          "study_block": "controlled",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 10491,
+              "mean": 544.6875,
+              "median": 182.5,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 2674,
+              "reported": 48
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 48,
+              "observations": 48,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 75.37320824991912,
+              "mean": 4.07633170747431,
+              "median": 1.5120123964734375,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 12.813659791834652,
+              "reported": 48
+            },
+            "prompt_tokens": {
+              "max": 1640,
+              "mean": 1294.625,
+              "median": 1331.5,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 1468,
+              "reported": 48
+            },
+            "provider_attempt_seconds": {
+              "max": 75.3731380412355,
+              "mean": 4.076308307490156,
+              "median": 1.5119826877489686,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 12.813631416298449,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 48,
+              "observations": 48,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 75.37429633364081,
+              "mean": 4.0777113291163305,
+              "median": 1.5178508958779275,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 12.814119166694582,
+              "reported": 48
+            },
+            "total_tokens": {
+              "max": 11294,
+              "mean": 1839.3125,
+              "median": 1474.0,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 3872,
+              "reported": 48
+            }
+          },
+          "pipeline_attempts": 48,
+          "study_block": "language",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 3475,
+              "mean": 2006.5833333333333,
+              "median": 1978.5,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 2643,
+              "reported": 48
+            },
+            "extraction_seconds": {
+              "max": 25.147712083533406,
+              "mean": 14.313403319131504,
+              "median": 14.336977125145495,
+              "missing": 1,
+              "observations": 48,
+              "p95_nearest_rank": 19.889455291442573,
+              "reported": 47
+            },
+            "model_seconds": {
+              "max": 25.14371499978006,
+              "mean": 14.114926087553613,
+              "median": 14.330083645880222,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 19.88646154012531,
+              "reported": 48
+            },
+            "prompt_tokens": {
+              "max": 2630,
+              "mean": 2262.125,
+              "median": 2299.0,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 2413,
+              "reported": 48
+            },
+            "provider_attempt_seconds": {
+              "max": 25.143585165962577,
+              "mean": 14.11486825265456,
+              "median": 14.33006131183356,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 19.886436625383794,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "max": 0.04009779170155525,
+              "mean": 0.012279436963194229,
+              "median": 0.009272958151996136,
+              "missing": 1,
+              "observations": 48,
+              "p95_nearest_rank": 0.02794445864856243,
+              "reported": 47
+            },
+            "total_seconds": {
+              "max": 25.151063665747643,
+              "mean": 14.131908180580163,
+              "median": 14.358153874985874,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 19.892163082957268,
+              "reported": 48
+            },
+            "total_tokens": {
+              "max": 6096,
+              "mean": 4268.708333333333,
+              "median": 4332.5,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 5056,
+              "reported": 48
+            }
+          },
+          "pipeline_attempts": 48,
+          "study_block": "language",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 93,
+              "mean": 60.166666666666664,
+              "median": 69.0,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 93,
+              "reported": 12
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 12,
+              "observations": 12,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 1.124545625410974,
+              "mean": 0.7411141840275377,
+              "median": 0.8374641668051481,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 1.124545625410974,
+              "reported": 12
+            },
+            "prompt_tokens": {
+              "max": 640,
+              "mean": 566,
+              "median": 569.0,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 640,
+              "reported": 12
+            },
+            "provider_attempt_seconds": {
+              "max": 1.1245109997689724,
+              "mean": 0.7410819342670342,
+              "median": 0.8374332711100578,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 1.1245109997689724,
+              "reported": 12
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 12,
+              "observations": 12,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 1.1275660004466772,
+              "mean": 0.742623031216984,
+              "median": 0.8390408954583108,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 1.1275660004466772,
+              "reported": 12
+            },
+            "total_tokens": {
+              "max": 733,
+              "mean": 626.1666666666666,
+              "median": 620.0,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 733,
+              "reported": 12
+            }
+          },
+          "pipeline_attempts": 12,
+          "study_block": "realistic",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 881,
+              "mean": 561.5833333333334,
+              "median": 562.0,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 881,
+              "reported": 12
+            },
+            "extraction_seconds": {
+              "max": 5.1229262091219425,
+              "mean": 3.905653020987908,
+              "median": 4.25529562542215,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 5.1229262091219425,
+              "reported": 12
+            },
+            "model_seconds": {
+              "max": 5.120302999392152,
+              "mean": 3.9029509583488107,
+              "median": 4.2530544167384505,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 5.120302999392152,
+              "reported": 12
+            },
+            "prompt_tokens": {
+              "max": 1585,
+              "mean": 1533.5,
+              "median": 1536.5,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 1585,
+              "reported": 12
+            },
+            "provider_attempt_seconds": {
+              "max": 5.120275500230491,
+              "mean": 3.9029116075641164,
+              "median": 4.253024708013982,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 5.120275500230491,
+              "reported": 12
+            },
+            "solver_seconds": {
+              "max": 0.022609791718423367,
+              "mean": 0.005028892386083801,
+              "median": 0.002874833531677723,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 0.022609791718423367,
+              "reported": 12
+            },
+            "total_seconds": {
+              "max": 5.127302125096321,
+              "mean": 3.910750013853734,
+              "median": 4.260313021019101,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 5.127302125096321,
+              "reported": 12
+            },
+            "total_tokens": {
+              "max": 2430,
+              "mean": 2095.0833333333335,
+              "median": 2098.5,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 2430,
+              "reported": 12
+            }
+          },
+          "pipeline_attempts": 12,
+          "study_block": "realistic",
+          "without_provider_records": 0
+        }
+      ],
+      "run_id": "benchmark-qwen36-20261001-02",
+      "validation": {
+        "analysis_sha256": "73fbaace8b782099616116ceb06e3e2d9c96bdb8b1e1ec57243ae99fee9b0657",
+        "archive_sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+        "archive_verified_files": 941,
+        "backend_fingerprints": [
+          "vllm-0.23.0-7cd694fa",
+          "vllm-0.26.0-2ccdf8cb",
+          "vllm-0.28.0-f8aad13e"
+        ],
+        "campaign_seconds": 5184.867954541929,
+        "canonical_analysis_sha256": "a9f84433b12b4a4d8701704344ff03f8278a74cbeb2428d8233d0d68e0b6b052",
+        "counts": {
+          "additional_language_attempts": 96,
+          "primary_attempts": 480,
+          "realistic_attempts": 24,
+          "unique_attempts": 600
+        },
+        "independent_archive_replay_matches": true,
+        "new_model_calls": 0,
+        "original_files_unchanged": 910,
+        "provider_failures": {},
+        "requests": 603,
+        "results": {
+          "controlled": {
+            "direct": {
+              "accepted": 95,
+              "attempts": 240,
+              "categories": {
+                "accepted": 95,
+                "false_unsat": 19,
+                "gold_invalid_schedule": 105,
+                "invalid_output": 21
+              }
+            },
+            "solver_augmented": {
+              "accepted": 229,
+              "attempts": 240,
+              "categories": {
+                "accepted": 229,
+                "gold_invalid_schedule": 1,
+                "invalid_output": 10
+              }
+            }
+          },
+          "language": {
+            "direct": {
+              "accepted": 8,
+              "attempts": 48,
+              "categories": {
+                "accepted": 8,
+                "false_unsat": 5,
+                "gold_invalid_schedule": 30,
+                "invalid_output": 5
+              }
+            },
+            "solver_augmented": {
+              "accepted": 47,
+              "attempts": 48,
+              "categories": {
+                "accepted": 47,
+                "invalid_output": 1
+              }
+            }
+          },
+          "realistic": {
+            "direct": {
+              "accepted": 6,
+              "attempts": 12,
+              "categories": {
+                "accepted": 6,
+                "gold_invalid_schedule": 5,
+                "invalid_output": 1
+              }
+            },
+            "solver_augmented": {
+              "accepted": 12,
+              "attempts": 12,
+              "categories": {
+                "accepted": 12
+              }
+            }
+          }
+        },
+        "scope": "Completed shared-service development benchmark; not held-out/fixed-backend evidence",
+        "usage": {
+          "completion_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 602,
+            "reported_sum": 719395
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 602,
+            "reported_sum": 1054428
+          },
+          "total_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 602,
+            "reported_sum": 1773823
+          }
+        },
+        "valid": true,
+        "validated_utc": "2026-10-02T06:35:04.871348+00:00"
+      },
+      "wording_transitions": {
+        "direct": {
+          "accepted_to_accepted": 6,
+          "accepted_to_rejected": 16,
+          "rejected_to_accepted": 2,
+          "rejected_to_rejected": 24
+        },
+        "solver_augmented": {
+          "accepted_to_accepted": 45,
+          "accepted_to_rejected": 1,
+          "rejected_to_accepted": 2
+        }
+      }
+    },
+    "qwen38": {
+      "accepted_by_block": {
+        "controlled": {
+          "direct": {
+            "accepted": 239,
+            "attempts": 240,
+            "categories": {
+              "accepted": 239,
+              "provider_error": 1
+            },
+            "gold_sat_cases": 120,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 118,
+            "valid_gold_sat_schedules": 119
+          },
+          "solver_augmented": {
+            "accepted": 240,
+            "attempts": 240,
+            "categories": {
+              "accepted": 240
+            },
+            "gold_sat_cases": 120,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 120,
+            "valid_gold_sat_schedules": 120
+          }
+        },
+        "language": {
+          "direct": {
+            "accepted": 46,
+            "attempts": 48,
+            "categories": {
+              "accepted": 46,
+              "provider_error": 2
+            },
+            "gold_sat_cases": 24,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 24,
+            "valid_gold_sat_schedules": 24
+          },
+          "solver_augmented": {
+            "accepted": 44,
+            "attempts": 48,
+            "categories": {
+              "accepted": 44,
+              "provider_error": 4
+            },
+            "gold_sat_cases": 24,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 21,
+            "valid_gold_sat_schedules": 21
+          }
+        },
+        "realistic": {
+          "direct": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "gold_sat_cases": 6,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 6,
+            "valid_gold_sat_schedules": 6
+          },
+          "solver_augmented": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "gold_sat_cases": 6,
+            "optimality_denominator": "valid gold-SAT schedules only",
+            "reference_objective_matched": 5,
+            "valid_gold_sat_schedules": 5
+          }
+        }
+      },
+      "controlled_by_task": [
+        {
+          "accepted": 119,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "generation"
+        },
+        {
+          "accepted": 120,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 60,
+          "task": "generation"
+        },
+        {
+          "accepted": 120,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 59,
+          "task": "repair"
+        },
+        {
+          "accepted": 120,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 60,
+          "task": "repair"
+        }
+      ],
+      "execution": {
+        "automatic_restarts": 0,
+        "backend_policy": "strict_model_observe_backend_v1",
+        "failure_policy": "continue_transient_v1",
+        "model_settings": {
+          "connect_timeout": 30,
+          "max_attempts": 1,
+          "max_tokens": 32768,
+          "model": "qwen3.8:27b",
+          "read_timeout": 1800,
+          "retry_delay": 1.0
+        },
+        "provider_execution": {
+          "configured_body": {
+            "max_tokens": 32768,
+            "model": "qwen3.8:27b",
+            "stream": false
+          },
+          "effective_omitted_values": "server_defaults_unavailable",
+          "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+          "final_content_field": "choices[0].message.content",
+          "format_version": "1.0",
+          "max_attempts": 1,
+          "omitted_controls": [
+            "temperature",
+            "top_p",
+            "seed",
+            "reasoning_effort",
+            "response_format"
+          ],
+          "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+          "provider": "soclaas",
+          "retry_delay": 1.0,
+          "timeouts": {
+            "connect": 30,
+            "pool": 1800,
+            "read": 1800,
+            "write": 1800
+          },
+          "weight_revision": null
+        },
+        "reference_solver": {
+          "num_workers": 1,
+          "random_seed": 0,
+          "time_limit_seconds": 60
+        },
+        "runner_monotonic_elapsed_seconds": 45989.33209154103,
+        "runtime": {
+          "certifi": "2026.7.22",
+          "httpcore": "1.0.9",
+          "httpx": "0.28.1",
+          "numpy": "2.5.3",
+          "ortools": "9.14.6206",
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "protobuf": "6.31.1",
+          "python": "3.12.2",
+          "truststore": "0.10.4"
+        },
+        "safe_pauses": [
+          {
+            "checkpoint": {
+              "controlled": 467,
+              "language": 0,
+              "realistic": 0
+            },
+            "pause_monotonic_seconds": 701.222930916585,
+            "pause_wall_seconds": 2814.006875,
+            "paused_utc": "2026-10-02T00:53:53.232419+00:00",
+            "resumed_utc": "2026-10-02T01:40:47.244359+00:00",
+            "same_process_response_preserved": true
+          },
+          {
+            "checkpoint": {
+              "controlled": 480,
+              "language": 36,
+              "realistic": 24
+            },
+            "pause_monotonic_seconds": 3482.7879073340446,
+            "pause_wall_seconds": 6565.517529,
+            "paused_utc": "2026-10-02T03:22:39.427405+00:00",
+            "resumed_utc": "2026-10-02T05:12:04.952516+00:00",
+            "same_process_response_preserved": true
+          }
+        ],
+        "solver": {
+          "num_workers": 1,
+          "random_seed": 0,
+          "time_limit_seconds": 30
+        },
+        "supervisor_wall_seconds": 51208.237592
+      },
+      "extraction": {
+        "caution": "Structural differences do not alone establish semantic errors.",
+        "recorded": 295,
+        "structurally_equal": 295
+      },
+      "model": "qwen3.8:27b",
+      "paired_controlled": [
+        {
+          "B_minus_A_percentage_points": 0.8333333333333334,
+          "cluster_bootstrap_95": [
+            0.0,
+            2.5
+          ],
+          "counts": {
+            "both": 119,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 1
+          },
+          "group_count": 120,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 120,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        },
+        {
+          "B_minus_A_percentage_points": 0.0,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.0
+          ],
+          "counts": {
+            "both": 120,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 0
+          },
+          "group_count": 120,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 120,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "repair",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "provider_failure_records": [
+        {
+          "approach": "direct",
+          "block": "controlled",
+          "case_id": "family-df8d279942e5b98ce754df67-generation",
+          "error": "http_502",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-01T17:56:32.607196+00:00"
+        },
+        {
+          "approach": "solver_augmented",
+          "block": "realistic",
+          "case_id": "realistic-draft-11",
+          "error": "http_503",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T02:06:36.985294+00:00"
+        },
+        {
+          "approach": "direct",
+          "block": "realistic",
+          "case_id": "realistic-draft-12",
+          "error": "http_503",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T02:07:07.107043+00:00"
+        },
+        {
+          "approach": "direct",
+          "block": "language",
+          "case_id": "family-347c86a158732c103dddd236-repair",
+          "error": "transport_error",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T06:15:24.000293+00:00"
+        },
+        {
+          "approach": "solver_augmented",
+          "block": "language",
+          "case_id": "family-0f349399cfca8ea0534346b2-repair",
+          "error": "transport_error",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T06:20:03.335756+00:00"
+        },
+        {
+          "approach": "solver_augmented",
+          "block": "language",
+          "case_id": "family-16f861d3ff9ef5f4e6ff4973-generation",
+          "error": "timeout",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T02:17:16.249404+00:00"
+        },
+        {
+          "approach": "solver_augmented",
+          "block": "language",
+          "case_id": "family-6bb949ffb9329cd8582c6ab9-repair",
+          "error": "transport_error",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T05:39:50.888277+00:00"
+        },
+        {
+          "approach": "solver_augmented",
+          "block": "language",
+          "case_id": "family-272e97533643fbc50331c6a6-repair",
+          "error": "transport_error",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T05:49:18.819286+00:00"
+        },
+        {
+          "approach": "direct",
+          "block": "language",
+          "case_id": "family-0410aae78543d70a9dafd4a6-generation",
+          "error": "transport_error",
+          "provider_attempts": 1,
+          "started_utc": "2026-10-02T05:16:06.696130+00:00"
+        }
+      ],
+      "resources": [
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 15450,
+              "mean": 3081.154811715481,
+              "median": 2404,
+              "missing": 1,
+              "observations": 240,
+              "p95_nearest_rank": 8696,
+              "reported": 239
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 240,
+              "observations": 240,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 300.329588833265,
+              "mean": 42.42250861183275,
+              "median": 32.432728562969714,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 114.30373379215598,
+              "reported": 240
+            },
+            "prompt_tokens": {
+              "max": 1941,
+              "mean": 1339.3221757322176,
+              "median": 1306,
+              "missing": 1,
+              "observations": 240,
+              "p95_nearest_rank": 1671,
+              "reported": 239
+            },
+            "provider_attempt_seconds": {
+              "max": 300.3295024577528,
+              "mean": 42.42247280503313,
+              "median": 32.43270654184744,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 114.30294474959373,
+              "reported": 240
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 240,
+              "observations": 240,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 300.33138787560165,
+              "mean": 42.42371649742515,
+              "median": 32.43380847899243,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 114.30639049969614,
+              "reported": 240
+            },
+            "total_tokens": {
+              "max": 16688,
+              "mean": 4420.476987447699,
+              "median": 3796,
+              "missing": 1,
+              "observations": 240,
+              "p95_nearest_rank": 9929,
+              "reported": 239
+            }
+          },
+          "pipeline_attempts": 240,
+          "study_block": "controlled",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 15104,
+              "mean": 6737.320833333333,
+              "median": 6333.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 10825,
+              "reported": 240
+            },
+            "extraction_seconds": {
+              "max": 210.03929958399385,
+              "mean": 90.46888410714067,
+              "median": 84.12342260451987,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 146.9419140405953,
+              "reported": 240
+            },
+            "model_seconds": {
+              "max": 210.03304108325392,
+              "mean": 90.46338038610217,
+              "median": 84.11928960401565,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 146.93762804102153,
+              "reported": 240
+            },
+            "prompt_tokens": {
+              "max": 2886,
+              "mean": 2308.1625,
+              "median": 2316.5,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 2657,
+              "reported": 240
+            },
+            "provider_attempt_seconds": {
+              "max": 210.03296691644937,
+              "mean": 90.46333226389251,
+              "median": 84.11925712507218,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 146.93757450021803,
+              "reported": 240
+            },
+            "solver_seconds": {
+              "max": 0.0870633339509368,
+              "mean": 0.017596564069390298,
+              "median": 0.013478479348123074,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 0.05139725003391504,
+              "reported": 240
+            },
+            "total_seconds": {
+              "max": 210.0615973751992,
+              "mean": 90.48658245572588,
+              "median": 84.17149262549356,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 146.9648374579847,
+              "reported": 240
+            },
+            "total_tokens": {
+              "max": 17492,
+              "mean": 9045.483333333334,
+              "median": 8672.0,
+              "missing": 0,
+              "observations": 240,
+              "p95_nearest_rank": 13192,
+              "reported": 240
+            }
+          },
+          "pipeline_attempts": 240,
+          "study_block": "controlled",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 13922,
+              "mean": 4215.260869565217,
+              "median": 3527.0,
+              "missing": 2,
+              "observations": 48,
+              "p95_nearest_rank": 8841,
+              "reported": 46
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 48,
+              "observations": 48,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 184.90246291738003,
+              "mean": 53.67769786381783,
+              "median": 50.41062316671014,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 113.06985250022262,
+              "reported": 48
+            },
+            "prompt_tokens": {
+              "max": 1676,
+              "mean": 1329.8478260869565,
+              "median": 1367.5,
+              "missing": 2,
+              "observations": 48,
+              "p95_nearest_rank": 1504,
+              "reported": 46
+            },
+            "provider_attempt_seconds": {
+              "max": 184.902155415155,
+              "mean": 53.67760900860109,
+              "median": 50.410525375045836,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 113.06972237490118,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 48,
+              "observations": 48,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 184.91853045858443,
+              "mean": 53.68129637658907,
+              "median": 50.41268214629963,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 113.07093037571758,
+              "reported": 48
+            },
+            "total_tokens": {
+              "max": 15357,
+              "mean": 5545.108695652174,
+              "median": 4735.5,
+              "missing": 2,
+              "observations": 48,
+              "p95_nearest_rank": 10286,
+              "reported": 46
+            }
+          },
+          "pipeline_attempts": 48,
+          "study_block": "language",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 13442,
+              "mean": 7602.25,
+              "median": 7373.5,
+              "missing": 4,
+              "observations": 48,
+              "p95_nearest_rank": 11258,
+              "reported": 44
+            },
+            "extraction_seconds": {
+              "max": 175.19023250043392,
+              "mean": 100.73621454447593,
+              "median": 97.96342275012285,
+              "missing": 4,
+              "observations": 48,
+              "p95_nearest_rank": 149.79159741662443,
+              "reported": 44
+            },
+            "model_seconds": {
+              "max": 1800.0264969579875,
+              "mean": 130.9599107290851,
+              "median": 97.1490509789437,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 153.64136683382094,
+              "reported": 48
+            },
+            "prompt_tokens": {
+              "max": 2666,
+              "mean": 2292.818181818182,
+              "median": 2300.5,
+              "missing": 4,
+              "observations": 48,
+              "p95_nearest_rank": 2440,
+              "reported": 44
+            },
+            "provider_attempt_seconds": {
+              "max": 1800.0263192495331,
+              "mean": 130.95973900183648,
+              "median": 97.14896804187447,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 153.6412890003994,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "max": 0.11055812519043684,
+              "mean": 0.030762862710451536,
+              "median": 0.016667479649186134,
+              "missing": 4,
+              "observations": 48,
+              "p95_nearest_rank": 0.09129895735532045,
+              "reported": 44
+            },
+            "total_seconds": {
+              "max": 1800.0284391660243,
+              "mean": 130.9962880172922,
+              "median": 97.17867397936061,
+              "missing": 0,
+              "observations": 48,
+              "p95_nearest_rank": 153.67927604168653,
+              "reported": 48
+            },
+            "total_tokens": {
+              "max": 15823,
+              "mean": 9895.068181818182,
+              "median": 9784.0,
+              "missing": 4,
+              "observations": 48,
+              "p95_nearest_rank": 13647,
+              "reported": 44
+            }
+          },
+          "pipeline_attempts": 48,
+          "study_block": "language",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "direct",
+          "distributions": {
+            "completion_tokens": {
+              "max": 4631,
+              "mean": 2086.2727272727275,
+              "median": 1788,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 4631,
+              "reported": 11
+            },
+            "extraction_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 12,
+              "observations": 12,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "model_seconds": {
+              "max": 59.718862290494144,
+              "mean": 26.867031906265765,
+              "median": 23.27399572916329,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 59.718862290494144,
+              "reported": 12
+            },
+            "prompt_tokens": {
+              "max": 676,
+              "mean": 599.0909090909091,
+              "median": 595,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 676,
+              "reported": 11
+            },
+            "provider_attempt_seconds": {
+              "max": 59.718833208084106,
+              "mean": 26.866992277636502,
+              "median": 23.273946749512106,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 59.718833208084106,
+              "reported": 12
+            },
+            "solver_seconds": {
+              "max": null,
+              "mean": null,
+              "median": null,
+              "missing": 12,
+              "observations": 12,
+              "p95_nearest_rank": null,
+              "reported": 0
+            },
+            "total_seconds": {
+              "max": 59.72017104178667,
+              "mean": 26.86853169106568,
+              "median": 23.27541702054441,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 59.72017104178667,
+              "reported": 12
+            },
+            "total_tokens": {
+              "max": 5161,
+              "mean": 2685.3636363636365,
+              "median": 2371,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 5161,
+              "reported": 11
+            }
+          },
+          "pipeline_attempts": 12,
+          "study_block": "realistic",
+          "without_provider_records": 0
+        },
+        {
+          "approach": "solver_augmented",
+          "distributions": {
+            "completion_tokens": {
+              "max": 4523,
+              "mean": 2707.3636363636365,
+              "median": 2281,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 4523,
+              "reported": 11
+            },
+            "extraction_seconds": {
+              "max": 64.61335466708988,
+              "mean": 39.04013371992517,
+              "median": 31.059312667697668,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 64.61335466708988,
+              "reported": 11
+            },
+            "model_seconds": {
+              "max": 64.5902435425669,
+              "mean": 35.78280219094207,
+              "median": 29.960850395727903,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 64.5902435425669,
+              "reported": 12
+            },
+            "prompt_tokens": {
+              "max": 1621,
+              "mean": 1567.090909090909,
+              "median": 1572,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 1621,
+              "reported": 11
+            },
+            "provider_attempt_seconds": {
+              "max": 64.59009008388966,
+              "mean": 35.782725788342454,
+              "median": 29.96072637522593,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 64.59009008388966,
+              "reported": 12
+            },
+            "solver_seconds": {
+              "max": 0.020336666144430637,
+              "mean": 0.00702217813919891,
+              "median": 0.007132500410079956,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 0.020336666144430637,
+              "reported": 11
+            },
+            "total_seconds": {
+              "max": 64.62410054262727,
+              "mean": 35.796033781487495,
+              "median": 29.977474083658308,
+              "missing": 0,
+              "observations": 12,
+              "p95_nearest_rank": 64.62410054262727,
+              "reported": 12
+            },
+            "total_tokens": {
+              "max": 6096,
+              "mean": 4274.454545454545,
+              "median": 3860,
+              "missing": 1,
+              "observations": 12,
+              "p95_nearest_rank": 6096,
+              "reported": 11
+            }
+          },
+          "pipeline_attempts": 12,
+          "study_block": "realistic",
+          "without_provider_records": 0
+        }
+      ],
+      "run_id": "benchmark-qwen38-20261001-04",
+      "validation": {
+        "analysis_sha256": "dfddae6d4095cc36f547d9983094bb8ef0094c1e5b89126e219a8fcc9a4fa7f4",
+        "archive_sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+        "archive_verified_files": 941,
+        "backend_fingerprints": [
+          "vllm-0.26.0-b73e56ef"
+        ],
+        "campaign_seconds": 45989.33209154103,
+        "canonical_analysis_sha256": "b55da24ba5b6b1131d8255a6a257d321bf6ad0524253fe7a612e25a8dd883502",
+        "counts": {
+          "additional_language_attempts": 96,
+          "primary_attempts": 480,
+          "realistic_attempts": 24,
+          "unique_attempts": 600
+        },
+        "independent_archive_replay_matches": true,
+        "new_model_calls": 0,
+        "original_files_unchanged": 910,
+        "provider_failures": {
+          "http_502": 1,
+          "http_503": 2,
+          "timeout": 1,
+          "transport_error": 5
+        },
+        "requests": 603,
+        "results": {
+          "controlled": {
+            "direct": {
+              "accepted": 239,
+              "attempts": 240,
+              "categories": {
+                "accepted": 239,
+                "provider_error": 1
+              }
+            },
+            "solver_augmented": {
+              "accepted": 240,
+              "attempts": 240,
+              "categories": {
+                "accepted": 240
+              }
+            }
+          },
+          "language": {
+            "direct": {
+              "accepted": 46,
+              "attempts": 48,
+              "categories": {
+                "accepted": 46,
+                "provider_error": 2
+              }
+            },
+            "solver_augmented": {
+              "accepted": 44,
+              "attempts": 48,
+              "categories": {
+                "accepted": 44,
+                "provider_error": 4
+              }
+            }
+          },
+          "realistic": {
+            "direct": {
+              "accepted": 11,
+              "attempts": 12,
+              "categories": {
+                "accepted": 11,
+                "provider_error": 1
+              }
+            },
+            "solver_augmented": {
+              "accepted": 11,
+              "attempts": 12,
+              "categories": {
+                "accepted": 11,
+                "provider_error": 1
+              }
+            }
+          }
+        },
+        "scope": "Completed shared-service development benchmark; not held-out/fixed-backend evidence",
+        "usage": {
+          "completion_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 593,
+            "reported_sum": 2934571
+          },
+          "prompt_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 593,
+            "reported_sum": 1060086
+          },
+          "total_tokens": {
+            "all_provider_attempts": 602,
+            "reported_attempts": 593,
+            "reported_sum": 3994657
+          }
+        },
+        "valid": true,
+        "validated_utc": "2026-10-02T06:35:04.858984+00:00"
+      },
+      "wording_transitions": {
+        "direct": {
+          "accepted_to_accepted": 46,
+          "accepted_to_rejected": 2
+        },
+        "solver_augmented": {
+          "accepted_to_accepted": 44,
+          "accepted_to_rejected": 4
+        }
+      }
+    }
+  },
+  "runtime_identical": true,
+  "source_files_identical_between_models": 230,
+  "source_git_base": "2f0562b90c4bec86bff4fe8ef6f2a17fec1acedf",
+  "source_was_uncommitted_snapshot": true
+}

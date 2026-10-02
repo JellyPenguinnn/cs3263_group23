@@ -1,271 +1,97 @@
-# Development and evaluation plan
+# Development and submission plan
 
-## 1. Authority, status, and completion target
+## 1. Authority, current status and delivery target
 
-This is the active plan for Group 23's **AI Assistant for Dynamic Constraint-Aware Scheduling: Direct LLM Reasoning vs Constraint-Solver-Augmented Reasoning**. The next stage turns the integrated development checkpoint into a defensible final study, report and presentation. Section 5 is the execution queue; Sections 6–7 are the architecture and mathematical contract; Sections 8–9 define data and model decisions; Sections 10–11 define delivery gates; Section 17 maps evidence to the rubric.
+This is the active plan for Group 23's **Direct LLM versus LLM-to-CP-SAT dynamic scheduling study**. The core implementation, both full development comparisons, offline replay and result figures are complete. The current deliverable is a reviewed report and reproducible repository based on that evidence. Do not restart delivered components from historical member plans.
 
-| Milestone | Date and meaning |
+The user requested final repository publication and a report based on the completed runs on 2 October 2026. The report therefore presents an **exploratory study** using these existing inputs. This is an explicit change of delivery focus from the earlier proposed fresh frozen study, not a claim that development inputs became held out. The earlier detailed plan is preserved in [development-plan-history.md](docs/development-plan-history.md). A further frozen study is conditional on teaching-team feedback or a separately agreed scientific need.
+
+| Authority | Requirement or decision |
 | --- | --- |
-| Mandatory proposal | Course deadline: 28 September 2026. Confirm the actual Canvas receipt and feedback; a local PDF is not a receipt |
-| Preparation | 30 September–4 October: preserve the checkpoint, establish review tasks, plan model qualification and pilot final-data construction offline |
-| Final-study freeze | Internal target: 18 October, after model eligibility, development qualification and dataset/protocol review |
-| Submission-ready draft | Internal target: Friday 30 October, Week 11. Complete evaluated results, report draft, reproduction package and rehearsable presentation |
-| Presentation | Course: week of 9 November; 15 minutes plus 5 minutes of questions, or a recording if requested |
-| Final report | Course: 13 November; target an audited upload by 12 November and retain receipt |
+| Course | Course-related formal problem; direct/model-to-tool comparison; evidence and analysis; responsible AI; actual contributions and AI disclosure; prescribed report/presentation format |
+| Proposal | Schedule generation and minimum-disruption repair; controlled difficulty, realistic scenarios and equivalent wording; feasibility, solution quality, extraction and resources |
+| Team scientific choices | Single day, 30-minute slots, fixed assignments, lexicographic repair, paired comparison, independent gold checking, immutable evidence |
+| Current report scope | Completed two-model exploratory comparison; known synthetic and AI-assisted development inputs; no held-out or production claim |
+| Conditional future study | Fresh instance holdout, independently human-authored scenarios, additional models/repeats or pinned backend only with an explicit rationale and authorization |
+| Routine engineering | Choose compatible helpers, paths, packaging and focused checks autonomously; do not change scientific semantics silently |
 
-The project contributes 25% of the course grade. The proposal is ungraded but mandatory to receive a project grade. Its body is at most one single-spaced, single-column page with 1-inch margins, excluding title/references. The final report is at most **10 single-spaced, single-column body pages**, with 1-inch margins and font at least 11 point. Figures, tables and substantive discussion count; title and references are excluded. Keep member names, matriculation numbers and emails on the private submission title page. Write for classmates with general AI knowledge. Verify Canvas updates, exact cutoff times and proposal feedback before freeze and submission.
+**Remaining course questions:** confirm whether the hosted Qwen aliases satisfy the handout's frontier-model wording, actual proposal submission/feedback, and any later Canvas arrangements. The handout suggests considering SoCLaaS/open weights but does not explicitly approve these aliases. Constructed or downloaded cases are permitted. No exact call count, external dataset, commercial API, third model, ablation or target accuracy is prescribed.
 
-### Baseline assessment and next goal
+| Milestone | Date / evidence |
+| --- | --- |
+| Proposal | Course deadline 28 September 2026; actual private receipt/feedback must be confirmed |
+| Repository and report preparation | Current publication; complete scientific draft, preserved evidence and repeatable checks |
+| Complete reviewed draft | Internal target 30 October 2026, Week 11 |
+| Presentation | Week of 9 November; 15 minutes plus five minutes Q&A, or recording if requested |
+| Report | Course deadline 13 November; verify exact Canvas cutoff and upload receipt |
 
-**The integrated development checkpoint works end to end.** It includes both approaches and task types, independent gold validation, exact lexicographic repair, extraction diagnostics, bounded explanations, v2/v3 and authored-case consumers, frozen controls, replay and a read-only dashboard. The [readiness audit](report/checkpoint-readiness.md) verified 521 Python tests, 7 frontend tests, a fresh 200-attempt canned workflow, exact replay of 332 saved live attempts and all 100 expanded dashboard cases. Earlier [macOS/Linux qualification](report/version-2-validation.md) identifies the unchanged tested source.
+The earlier 18 October freeze was an internal target for the conditional fresh study. It is not a course deadline. Report format: at most **10 single-column, single-spaced body pages**, at least 11-point type, one-inch margins; title/references excluded, all substantive figures/tables included. Keep names, matriculation numbers and emails on the private submitted title page; public Git omits the private identifiers.
 
-The [expanded development study](report/expanded-development-100.md) used `qwen3.6:35b`: A accepted 35/100 and B 97/100. Generation was 23/50 versus 48/50; repair 12/50 versus 49/50. Usage was 465,251 tokens and about 20 minutes 5 seconds. B's three failures were two omitted fixed appointments and malformed JSON. This is known synthetic, canonical-only development evidence, not a final held-out finding. Preserve the original failures, scores and budgets.
+## 2. Research questions and supported conclusions
 
-The next work is concrete: **F1 extraction regressions; F2 selected-model/backend qualification; F3 fresh final-case preparation; F4 frozen rehearsal and study; F5 analysis/reproduction; F6 report and delivery**. F3 construction and F4/F5 core rehearsal/analysis support are now offline-verified; actual model/policy decisions, fresh reviewed data and final execution remain gated. A specific F2 adapter is needed only if the selected provider requires it; changing a base URL does not enable an arbitrary backend. No solver rewrite or larger product is needed.
+1. When do structural size, slack, resource sharing and constraint interactions affect direct and solver-assisted scheduling?
+2. How do interpretation, hard validity, optimality and service failures contribute separately to end-to-end results?
+3. How well do both methods repair the same starting schedule under the declared priorities?
+4. What changes under equivalent wording, conditional on matched canonical partners?
 
-This checkpoint integrates the audited fixes, expanded results and final-study documentation on top of `63d68d8`. Historical receipts retain their pre-publication snapshot and status; verify the current commit and remote branch on every handoff. Source, tests, manifests and reviewed summaries belong in Git; exact live replay also requires a separately supplied, reviewed raw-record archive. A package version of `0.1.0` and wire contract v1 are compatible with calling this the project's version 2 checkpoint; no public release is implied.
+The contribution is the integrated formulation, implementation and transparent comparison, not a new solver algorithm. Strong direct performance is informative: the report must explain it rather than introduce tasks or scoring changes to force a solver win. No grade is guaranteed by accuracy, test count or extra features.
 
-### Requirements and implementation discretion
+## 3. Maintained scope
 
-| Authority | What it requires | How to act |
-| --- | --- | --- |
-| Course | Course-related formal subproblem, frontier-model direct/tool comparison, evidence and analysis, responsible AI, honest contributions/AI disclosure, prescribed report/presentation | Preserve these obligations. Obtain actual teaching-team clarification for a material deviation |
-| Proposal | Generation and minimum-disruption repair, CP-SAT, gold specifications/validator, difficulty analysis, realistic scenarios and equivalent wording; feedback/UI are optional | Retain the scientific direction and explain supported simplifications |
-| Team scientific decisions | Single day, 30-minute slots, fixed assignments, lexicographic objective, pairing, independent gold checking and development exclusions | Keep semantics consistent. Review/version changes that alter the comparison |
-| Provisional study choices | Candidate model, sample counts, budgets, selection policy, confidence intervals and optional analyses | Finalize using development evidence before final outcomes. They are not additional course rules or current spending permission |
-| Routine engineering | Helper structure, filenames, data structures, bounded tests, internal refactoring | Choose the simplest compatible solution and verify it without repeated approval requests |
+Mandatory fixed-duration non-preemptive activities use fixed participants and capacity-one resources on a single-day grid. Hard constraints cover full-window availability, release/deadline, fixed appointments, precedence and non-overlap. Generation minimizes preference penalty; repair minimizes moved activities, total shift, then preferences. Preserve the schema's exact interval and preference semantics.
 
-The course allows constructed or downloaded instances; a public benchmark is optional. The independently human-written realistic condition is a team provenance policy, not a separate course mandate. Human review and honest academic contribution remain real responsibilities. Success is sound, explainable evidence; neither a predetermined B win nor a particular accuracy guarantees a grade.
+Both pipelines, independent validator, gold references, bounded extraction diagnostics, explanations, dashboard, durable request accounting, failure continuation, supervised execution, frozen controls and offline replay are implemented. Multi-day scheduling, changing assignments, live calendars, RAG, training, arbitrary provider integration and automatic calendar actions are out of scope. Verifier feedback and additional optimizations remain optional follow-up studies, not missing submission features.
 
-### Recommended implementation defaults
+## 4. Collaboration and repository responsibilities
 
-Maintain one Python package, canonical schema, shared completion interface, fixed compiler, independent validator and evidence format. Use existing helpers and paths. Keep a single direct call versus a single extraction call plus CP-SAT as the core comparison. Version prompts and effective inference settings. A malformed answer remains a failure; gold-assisted diagnostic corrections never enter primary scores.
+The baseline job split is complete. Members coordinate the next concrete deliverable rather than repeating their original streams. Existing branches are `lihao-llm-baseline`, `yaoxiang-formal-core` and `yongqing-evaluation`; shared integration is `main`. Do not use `codex/` for new project branches. Explicit user authorization may allow a direct main publication; otherwise use reviewed PRs.
 
-Proceed independently on reversible implementation, offline tests, review materials and report drafts. Ask focused questions only when missing information changes the scientific contract, member/path/branch identity, approved endpoint/model, live-call cap, publication authorization or final-study decision. Continue unrelated work while a decision is pending. Do not ask the team to choose routine code organization, and do not invent a decision to bypass a genuine dependency.
+| Concern | Coordination |
+| --- | --- |
+| Provider, packaging, CLI and operational run controls | Li Hao |
+| Schema, compiler, repair objectives, extraction and mathematical proof boundaries | Yao Xiang |
+| Benchmarks, independent evaluation, statistics and replay | Yong Qing |
+| Scientific interpretation, responsible AI, report, presentation and whole-system understanding | All members; actual actions recorded individually |
 
-## 2. Research questions and contribution
+These contacts do not prove authorship or completed human review. An authorized integrator may fix cross-component issues. Read [AGENTS.md](AGENTS.md), preserve existing changes and avoid simultaneous edits to shared files.
 
-1. How do problem size, slack, constraint interactions, and shared resources affect direct versus solver-assisted scheduling?
-2. How often do formalization, schedule construction/optimization, and operational failures occur, and which causes can diagnostic checks substantiate?
-3. How well does each approach repair a common starting schedule while preserving unaffected activities?
-4. How stable is performance under semantically equivalent paraphrases and constraint reorderings?
+Directory roles: `src/scheduling/` contains the single package; `evaluation/` thin experiment entry points; `tests/` independent fixtures/regressions; `benchmarks/`, `configs/`, `prompts/` versioned inputs; `results/` summaries/figures/approved archives; `docs/` scientific report, methods, usage and handoffs; `presentation/` demo/rehearsal preparation. `runs/` and private credentials remain ignored. Historical archive paths may retain the old `report/` spelling.
 
-Hypotheses: solver assistance may improve hard-constraint satisfaction as interactions increase, but extraction mistakes may dominate end-to-end failures; direct models may be adequate on simpler cases; equivalent wording may affect both paths. These hypotheses can be rejected by the results. Do not claim superiority or novelty in advance.
+## 5. Current task queue and acceptance evidence
 
-The intended contribution is a reproducible, bounded comparison combining generation, repair, language robustness, and failure attribution. The report should explain conditions under which each approach is useful and the limits of the constructed instances.
+### Delivered and preserved
 
-## 3. Scope and explicit exclusions
+- R1-R4 formal invariants, extraction contract, bounded constraint diagnostics and evidence-bound explanations.
+- F1 saved-failure regressions; F2 provider metadata/qualification and complete two-model development execution; F3 candidate construction and mathematical checks; F4 supervised multi-block execution; F5 scoring/replay/archive integrity.
+- Two full campaigns, each 480 controlled + 24 realistic + 96 wording attempts; zero retries; preserved failures and two Qwen3.8 pauses.
+- Current report narrative, grouped bar charts, claim index, compressed replay archives and private historical preservation bundle.
 
-### Core
+These are engineering/evidence completions. They do not claim human sign-off, held-out data, teaching-team approval or submission.
 
-- Both schedule generation and minimum-disruption repair.
-- One-day horizon, integer 30-minute slots, explicit date/timezone context when rendered as clock times.
-- Mandatory fixed-duration, non-preemptive activities; fixed participants and required capacity-one resources.
-- Hard constraints: full-activity availability, release times, deadlines, fixed appointments, precedence, participant non-overlap, resource non-overlap.
-- Soft constraints: weighted penalties for a task starting outside a preferred start window; preferences and weights explicitly described to both approaches.
-- Initial repair events: a new blocked interval, a tightened deadline, or a changed fixed appointment. Events supply an authoritative updated problem; no ambiguous conversational state.
-- Direct LLM, LLM-to-CP-SAT, a gold reference solver, and an independent validator.
-- Controlled synthetic instances, a small human-written realistic set, and selected paired language variants.
+### Remaining delivery work
 
-### Supporting tooling and remaining stretch
+| Work | Concrete action and acceptance |
+| --- | --- |
+| Course-model decision | Check actual feedback or obtain teaching-team interpretation for these exact hosted models. Record genuine evidence privately. If an additional model is required, plan only that justified extension |
+| Human problem/metric review | Review request/gold meaning, reference assumptions, all cited failure mechanisms, objective denominators, small-cell difficulty and wording results; record reviewer/date/findings |
+| Report ownership and private title | All members revise/understand [submission-report.md](docs/submission-report.md), confirm actual contributions, add identifiers only to the private copy, and rebuild/recheck the final PDF |
+| Presentation and Q&A | Produce the actual deck/recording, explain both pipelines and the strong-model ceiling, demonstrate generation/repair, rehearse 15+5 minutes |
+| Independent handoff | A teammate verifies checked-in archive hashes and replays in a clean compatible environment; automated replay is already delivered but does not supply that human action |
+| Submission | Check course feedback/cutoffs, final files, private title data and upload; retain actual receipts |
 
-The authorized read-only dashboard is implemented as development/demo tooling: it monitors saved runs and inspects results, with no run control or calendar actions. It supports presentation and diagnosis but is not additional scientific evidence. Prioritize the open research gates over further UI expansion.
+Prioritize analysis and delivery. Fix a demonstrated correctness defect if review finds one; assess its effect on prior results and preserve the original evidence. Do not add features or commission another full run merely because some administrative/human gates remain open.
 
-Remaining stretch, after the core gates pass:
+### Agent execution from a short prompt
 
-- One verifier-feedback correction round, reported separately with its exact information and budget.
-- A second research model beyond the required primary comparison, or a second initial-schedule policy sensitivity check.
+Inspect current Git state and these documents, select the agreed task above, then implement and verify its concrete deliverable. Ask focused questions only for unresolved identity/workspace, conflicting requirements, scientific scope, credentials availability, live budget or publication authority. Routine engineering choices are autonomous. A request to write code does not authorize inference or publication. Human approvals and contributions must come from actual human actions.
 
-Participant assignment, multi-capacity resources, new/cancelled tasks, longer horizons, and repeated disruption sequences are future extensions, outside the four-week delivery.
-
-Live calendars, account integrations, RAG, autonomous calendar edits, mobile applications, model training, and production deployment are outside the four-week delivery. Do not add them as implicit dependencies.
-
-Generation-only is the proposal's fallback. Taking it requires an explicit team decision and a documented scope reduction; it does not satisfy the original generation-and-repair completion claim.
-
-## 4. Team responsibilities and workload
-
-Component ownership coordinates edits; it is not a reason to rebuild completed work or prevent another member from identifying a defect. Each member reviews and understands the whole system. Use one editor per shared file and preserve existing changes.
-
-| Member | Branch | Current coordination |
-| --- | --- | --- |
-| Tea Li Hao | `lihao-llm-baseline` | F2 provider/packaging, consumer integration, report assembly and demo |
-| Tham Yao Xiang, leader | `yaoxiang-formal-core` | F1 extraction/formal review, final-model eligibility coordination, formulation and repair explanation |
-| Woo Yong Qing | `yongqing-evaluation` | F3–F5 data, frozen execution, independent evaluation and analysis |
-
-All jointly review final inputs, interpret results, write responsible-AI/limitations discussion and rehearse questions. Actual contributions may differ from initial ownership; record work performed, review decisions and AI assistance rather than copying planned hour allocations into the report. Rebalance support at two brief weekly checkpoints while avoiding overlapping edits.
-
-### Current file ownership
-
-| Area | Lead | Review/coordination |
-| --- | --- | --- |
-| `src/scheduling/schema.py`, `src/scheduling/solver.py`, `src/scheduling/objectives.py` | Yao Xiang | Other two approve contract changes |
-| `src/scheduling/providers/`, `src/scheduling/pipelines/direct.py`, `prompts/direct/` | Li Hao | Yao Xiang reviews scientific assumptions |
-| `src/scheduling/pipelines/solver_augmented.py`, `src/scheduling/extraction_diagnostics.py`, `prompts/extraction/` | Yao Xiang | Yong Qing reviews extraction/validation boundaries and owns scoring consumers |
-| `src/scheduling/validation.py`, `src/scheduling/evaluation/`, `benchmarks/`, `evaluation/` | Yong Qing | Yao Xiang cross-checks validity rules |
-| Implemented deterministic result-explanation formatter (Section 7 R4) | Li Hao | Yao Xiang reviews proof/objective semantics; Yong Qing reviews gold/evaluation labels; keep one shared formatter |
-| Corresponding component tests | Component owner | Rotating reviewer |
-| `pyproject.toml`, lockfile, CI, shared CLI, `src/scheduling/dashboard/`, README | Li Hao implements/integrates | Routine owned edits proceed; coordinate interface changes and avoid overlapping edits |
-| `planning.md`, `AGENTS.md` | One editor at a time | Team agrees material scope/contract changes; factual corrections and status updates need normal review |
-
-The baseline modules, R1–R4, v2/v3 benchmarks, authored-case consumers, frozen controls and neutral B request boundary are integrated. Preserve the single canonical schema and component boundaries. Sections 5 and 11 define current review and study-preparation work; historical component handoffs do not imply those modules must be rebuilt. New work normally enters `main` through small reviewed changes.
-
-### Directory backbone and artifact placement
-
-| Directory | Intended contents | Owner |
-| --- | --- | --- |
-| `src/scheduling/`, `src/scheduling/providers/`, `src/scheduling/pipelines/` | Shared schema, solver/objectives, validator, provider adapter, and two pipelines; exact module ownership above | Component owners |
-| `prompts/direct/`, `prompts/extraction/` | Versioned prompt templates; no hidden gold answers | Li Hao / Yao Xiang |
-| `configs/development/` | SoCLaaS development model/settings, solver limits, small pilot caps; no credentials | Li Hao, reviewed by all |
-| `configs/experiments/` | Frozen model, prompt, solver, sampling, and budget references for main runs | Yong Qing, approved by all |
-| `benchmarks/fixtures/`, `benchmarks/manifests/` | Small synthetic development cases and versioned split/seed/hash manifests; declare split explicitly and keep gold evaluator-only | Yong Qing |
-| `src/scheduling/evaluation/`, `evaluation/` | Implemented benchmark/rendering, orchestration, scoring, metrics/replay and figures in the package; root `evaluation/` contains the canned demo | Yong Qing |
-| `src/scheduling/dashboard/`, `tests/frontend/` | Read-only local run monitor/case explorer and frontend regression tests | Li Hao |
-| `tests/unit/`, `tests/integration/` | Offline component tests and shared-contract/end-to-end checks | Component owners; Li Hao integrates |
-| `.github/workflows/` | Installed-package offline macOS/Linux CI and reference preflight; hosted run status must be checked separately | Li Hao |
-| `results/summary/` | Reviewed aggregate tables and claim-to-run references | Yong Qing |
-| `report/`, `report/figures/`, `presentation/` | Report/presentation sources, selected figures, and demo materials; no private submission identifiers in Git | Section owners; Li Hao assembles |
-
-Keep real implementation, verified commands and evidence; do not add placeholder modules, pretend CI jobs or fabricated sample results. Generated large/raw outputs go to ignored local `runs/`, `artifacts/`, or `results/raw/`; private inputs go to ignored `data/private/`. These runtime directories need not exist until used. Preserve reproducibility through the reviewed archive and checksums described in Section 14, rather than committing raw outputs.
-
-## 5. Current work and dependency management
-
-Read current Git status, this queue and the relevant contract before implementing. Verify that the checkout contains the audited fixes and current queue; a member branch or older clone may lag the integrated checkpoint. Follow `AGENTS.md` for consequential onboarding details. Delivered R1–R4 remain maintenance contracts in Section 7, not a new task list.
-
-The integration audit verified GitHub main `5d2f623` contains all three members' published work. The [audit and remaining gates](report/main-integration-audit-20261001.md) distinguish delivered preparation tooling from final scientific/human deliverables. The accompanying corrections align study eligibility with runner stop rules and preserve run identities in reproduction archives. They do not change prompts, solver semantics, metrics or historical results. Consult actual Git state for whether these corrections have been published; the audit is not a publication or final-study approval.
-
-### Current priorities after the first baseline
-
-| Work package | Lead / reviewer | Status and dependency | Completion evidence |
-| --- | --- | --- | --- |
-| F1: extraction fidelity | Yao Xiang / Yong Qing; Li Hao checks prompt packaging | Eight saved-failure regressions pass; bounded amendment reviewed but not activated; prompt qualification waits for F2 and a new cap | Saved failure regressions, reviewed candidate prompt if warranted, separate development qualification |
-| F2: model and execution contract | Li Hao / Yao Xiang; Yong Qing checks frozen identity | SoCLaaS `qwen3.8:27b` full development campaign authorized and launched; strict workflow and exact-input mock rehearsal verified; live results and final eligibility pending | Selected-model packet, tested accounting/stop policy, actual bounded qualification, effective settings and separate final eligibility |
-| F3: final dataset preparation | Yong Qing / Yao Xiang and Li Hao | Builder/selector, 120-family target-size development pilot and review exporter verified; actual policy/size decision, fresh draw and human review pending | Versioned policy, development pilot, fresh reviewed packet, achieved quotas/families, exclusion and gold/text audit |
-| F4: freeze rehearsal and final study | Yong Qing / all | Synthetic offline three-block rehearsal verified; final inference depends on F1–F3 and actual decisions | Successful offline frozen rehearsal, approved protocol/cap, complete final records with no silent exclusions |
-| F5: analysis and reproduction | Yong Qing / independent teammate | Core compatible-block analysis, resource export and archive verified on macOS/Linux; final claims and independent teammate replay pending | Matched analysis, claim-to-run index, failure review, checksummed archive and independent replay |
-| F6: report and course delivery | Li Hao assembles / all | Report source, claim index, contribution log and rehearsal draft prepared; human/final-result/format work pending | Audited ten-page body, responsible-AI cases, presentation/Q&A rehearsal and actual submission receipts |
-
-Historical Yong Qing archive follow-up (1 October): branch incorporated main `80df71f`.
-[F5 handoff](report/yongqing-archive-review.md) and
-[receipt](configs/development/yongqing-archive-verification-20261001.json) record nine
-reproduced regression cases and their correction: mismatched prompts/dependency pins,
-linked inputs and unrelated prompt sidecars. All 623 installed macOS/Linux tests
-pass; a new 16-attempt synthetic rehearsal archive reproduces every analysis field
-on network-disabled Linux. Earlier frozen analysis and archive checksums are
-unchanged. No model calls, new final data or human approval occurred. Actual
-policy/model/review decisions and final execution remain open. The user has now
-authorized member-branch publication of this checkpoint; it is now included in
-main `5d2f623`. Human review remains open. The verification receipt retains its original
-pre-publication status.
-
-Historical Yong Qing preparation checkpoint (1 October): [F3–F5 handoff](report/yongqing-study-preparation.md), [pilot manifest](benchmarks/manifests/yongqing-f3-policy-pilot-20261001.json), [verification](configs/development/yongqing-f345-verification-20261001.json). The branch incorporates GitHub main `24c267c`; 580 installed-package tests pass on both macOS/Linux ARM64. A 24-family development policy pilot and 16-attempt synthetic frozen rehearsal are verified; the local archive reproduces every analysis field on network-disabled Linux. All 332 historical development attempts replay exactly. The user subsequently authorized member-branch publication; main integration remains separate. No final draw, new inference or human sign-off is included. The cumulative 1 October registry includes both pilots and all retained construction-test originals/updates; completeness still needs team review.
-
-Historical Li Hao follow-up (1 October): branch incorporated main `d0bfac0`; the published work is included in main `5d2f623`.
-A separately authorized six-call identity diagnostic returned valid JSON and exact
-model IDs (493 reported tokens); `qwen3.6:35b` varied across two fingerprints.
-The user chose to retain strict backend requirements and continue offline: no
-variable-backend scheduling comparison is authorized. The new allowance is consumed.
-Diagnostic implementation and the focused 16-test macOS/Linux checks are recorded in the [F2 handoff](report/lihao-f2-followup.md).
-
-[receipt](configs/development/lihao-f2-diagnostic-20261001.json) and
-[handoff](report/lihao-f2-followup.md). F2 is still blocked; F6 remains a draft,
-with actual interpretation/review/final results and submission gates open.
-
-Historical Li Hao checkpoint (30 September): [F2/F6 handoff](report/lihao-f2-followup.md),
-[qualification selection](benchmarks/manifests/lihao-f2-qualification-20260930.json),
-[verification](configs/development/lihao-f2-verification-20260930.json),
-[report source](report/study-draft.md) and [claim index](report/claim-evidence.md).
-The branch incorporates main `8f3ff1b`. Installed macOS/Linux each pass 552 Python
-tests and 48 selected canned attempts; 332 historical live attempts replay exactly.
-New per-attempt execution metadata records known versus omitted/defaulted settings;
-frozen execution stops on fingerprint drift. The approved qualification used one
-metadata request and six completions (4,007 reported tokens) before two reference
-calls returned different serving fingerprints. The backend-policy decision and
-remaining live/model gate stay open. No prompt, score, final data or historical
-record changed. Member-branch publication is now user-authorized; main integration
-and human approval remain separate. The verification receipt retains its original
-pre-publication status.
-
-Historical Yao Xiang F3 cross-check (1 October): branch incorporated main `ebab01e`; the published work is included in main `5d2f623`.
-[Formal review](report/yaoxiang-f3-formal-review.md) and
-[receipt](configs/development/yaoxiang-f3-formal-review-20261001.json) record independent
-arithmetic checks of all 48 preserved pilot cases: 24 valid SAT witnesses, 24 UNSAT
-certificates across three mechanisms, 24 valid repair starting schedules and six
-exhaustively checked SAT optima (three families). Eighteen SAT optima exceed the
-review cap and retain their solver proofs. All 614 macOS tests and 18 new Linux tests
-pass; the complete arithmetic receipt matches across platforms. No model calls,
-prompt/production changes, new cases or human sign-off occurred. Actual gold/text
-review and F2-dependent F1 qualification remain pending.
-
-Historical Yao Xiang F1 review: [F1/formal handoff](report/yaoxiang-f1-review.md).
-The member branch incorporates main `d12342c`; 560 macOS tests pass. Three exact
-synthetic failure responses are regression fixtures, and all 200 expanded attempts
-replay exactly with 302 saved JSON files unchanged. Eight equivalent encodings
-and two true omissions were rechecked separately. Revision 3 and all production
-semantics remain unchanged; a proposed prompt amendment is not live-qualified.
-
-### F1 — focused extraction improvements
-
-Preserve all three failures in `expanded-development-100-20260930-01` and the eight delivered regressions documented in [F1 review](report/yaoxiang-f1-review.md). They cover the updated A0 fixed appointment in `dev-v2-3264-slack-0-fixed_start-unsat-0-repair`, the A1 anchor in `dev-v2-3264-interaction_density-2-fixed_start-unsat-0-generation`, and malformed JSON in `dev-v3-1cb82271f05a61f8e4b44569-generation`. Maintain coverage when changing extraction; add tests only for newly identified gaps. These assert parser/semantic behavior and gold rejection, not improved model quality.
-
-Work in `prompts/extraction/specification.txt`, the existing extraction pipeline/diagnostics and relevant tests. Review a bounded prompt amendment that explicitly accounts for each stated fixed appointment and the authoritative updated repair event before producing the same schema. Keep contradictory but complete requirements; do not invite the model to drop them to manufacture feasibility. Preserve strict duplicate-key/unknown-field rejection and neutral public IDs. Examples must parse and cover current semantics without copying final cases or gold answers.
-
-First preserve revision 3 as the reference configuration. Qualify model choice with unchanged prompts, then evaluate at most one justified prompt candidate on the selected development model; use a separate run/configuration and cap for the prompt comparison. Do not attribute a joint model-plus-prompt change to either factor alone. Provider-supported JSON constraints are conditional format assistance, not proof of semantic fidelity; use equivalent format assistance for both arms if adopted and disclose it. No silent JSON repair, constraint insertion or extra model call.
-
-B's 10 structural mismatches include eight independently certified equivalent encodings and two true omissions. Retain the original structural metric and separate bounded equivalence diagnostics. The 4.69 ms mean solver time over 99 solves does not justify a solver speed project. After a focused qualification, freeze the best justified configuration, retain remaining failures and proceed; do not chase 100% on known development cases.
-
-### F2 — selected model, backend and settings
-
-The latest user decision is to run the full 600-attempt development campaign on SoCLaaS `qwen3.8:27b`, instead of the optional small qualification. Use the existing adapter and keep revision 3 unchanged. The new campaign has its own authorized cap and identity; live results are pending. The earlier direction to use an official provider API for submission remains a later decision: exact final provider/model, eligibility and budget are not yet established. Do not implement an unspecified new adapter or reinterpret the development choice as final eligibility. The stopped Qwen3.6 comparison remains preserved under the strict-policy choice.
-
-Section 9 records the selected development campaign, optional qualification alternatives and historical catalogue. The implemented `SoCLaaSProvider` rejects other base URLs; `evaluate-batch` currently routes both live modes to it. `ModelConfig` contains model/output limits/timeouts/retry fields, while the request body sends only model, messages, `max_tokens` and `stream=False`. Historical sampling and reasoning controls were **server defaults, not explicitly configured**. Do not claim deterministic inference from a solver seed or assume a model-name/base-URL change supports an arbitrary final provider.
-
-If the chosen eligible model works through the current endpoint, retain the adapter. Otherwise implement one specific final-provider adapter and explicit final-mode routing through the existing completion interface; keep development routing on SoCLaaS. Coordinate that endpoint/scope decision before dependent implementation. No generic plugin framework is needed. Add only verified request options to typed configuration, include them in serialization/freeze identity, and reject unsupported options rather than silently ignoring them. Keep legacy run readers compatible.
-
-Record requested/returned model, provider/API, available revision/fingerprint, configured settings and deliberately omitted/defaulted settings. Unknown backend details remain marked unavailable; do not invent a pinned weight revision. Qualify content versus reasoning-field handling, output-limit semantics, usage coverage, errors/timeouts and model aliases. Extract final JSON only from the documented final-answer field; do not regex-strip mixed reasoning to turn an invalid answer into success. Do not request or publish private reasoning traces as research evidence.
-
-Acceptance: exact mock payload/response tests; no gold or secret leakage; complete/error/truncation/uncertain-request accounting; configuration changes rejected on resume; matching settings for A/B; installed package check; a separately authorized development qualification. F2 ends with an evidence-based model decision, not selection for the largest B-minus-A gap.
-
-Use the tracked `evaluation/prepare_development_campaign.py` and `evaluation/run_development_campaign.py` workflow for the selected full campaign. Prepared development configs select `qualification_policy="strict_model_backend_v1"`; the shared runner enforces model identity and backend observation continuity without inventing frozen approvals. The execution helper records metadata, two capability responses and a baseline linked to their hashes, then executes the controlled, realistic and selected-language blocks through A/B under one shared cap. The small `prepare_model_qualification.py` / `run_model_qualification.py` workflow remains an optional separately authorized alternative. The capability observation seeds batch checks, including an explicitly observed missing fingerprint. Missing/wrong returned model, fingerprint appearance/disappearance/drift and operational failures stop further dispatch. Genuine provider failures remain failed observations; missing backend data never becomes a pinned-weight claim. Runtime configuration and capability references are immutable, and changed policy/source refuses resume. Historical configs omit these optional fields and remain replayable. A new output directory and explicit authorization reference are required; no automatic reissue of uncertain requests.
-
-### F3 — fresh final-data preparation
-
-The implemented `evaluation/prepare_final_candidates.py` entry point and `src/scheduling/evaluation/preparation.py` construct and select candidates using the shared schema, registry, validator and reference helpers. The latest target-size development pilot has 120 source families / 240 cases, complete quotas, independent arithmetic witness/contradiction checks and a pending human-review packet. See [final-data preparation](report/final-data-preparation.md) and use `evaluation/prepare_case_review.py` to prepare reviewer-only evidence. Earlier 24-family pilots remain preserved. Use these tools; do not rebuild them. Remaining work is the policy/size decision, cumulative exclusion audit, fresh final draw and actual gold/text review. The older `generate_development_v2/v3` matrices and existing pilots remain development evidence.
-
-Define a versioned candidate policy: independently sampled source problems; supported durations/windows/assignments; nonredundant interactions; exact label/mechanism targets; feasible original repair schedules; event allocation; bounds on proposals/solver time; and explicit rejection reasons. Pilot this policy only on development candidates, including all inspected original and updated structures in development exclusions. Then freeze the policy and make the fresh final draw before any final model response. A held-out claim means new instances under this developed policy, not unseen generators or guaranteed absence from model pretraining.
-
-Audit both original and updated repair structures against the complete versioned registry, group all descendants of a common source, and keep normalized duplicates in one family. A new seed, name, date, preference weight or split label is insufficient. Conservative audits may merge proposed groups; report the achieved count rather than overriding grouping to hit a quota. Retain all candidate/exclusion counts, provenance, gold bounds and selection reasons. If quotas cannot be met, emit an incomplete packet and revise policy/size before final inference.
-
-Use the supported authored bundle format for realistic prose and selected equivalent renderings. Record actual human authorship/review separately from AI assistance. Review every selected text against gold, including objective order and clock conversions. A second member checks ambiguity, hidden hints and preserved meaning. Final prose/gold correction before inference is quality review; adjusting cases or prompts after seeing final responses changes the experiment.
-
-Tests: deterministic selection; no silent quota replacement; known and calendar/ID-renamed structures excluded; original-problem overlap caught; whole-family allocation; unresolved reference rejected or separately classified; deliberately invalid schedules caught; preserved authorship/text; successful offline frozen packet. Use tiny synthetic test packets, not invented human approval records.
-
-### F4 — one integrated freeze and execution workflow
-
-Use existing `freeze-draft`, `evaluate-plan`, `evaluate-batch` and `evaluate-replay`; inspect each command's current `--help`. A draft deliberately remains non-runnable until real eligibility/review/budget references exist. `evaluation/rehearse_study.py` already verifies three blocks with explicitly synthetic approval fixtures, a retained failure, resume and replay. After F1–F3, rehearse the actual reviewed final packet/configuration, then assemble its source/prompt/config hashes, development registry, model decision, analysis definitions and authorized cap. The generic rehearsal is not that final-packet acceptance.
-
-The runner applies one `variants` and `repeats` setting per configuration. Use **separate frozen blocks** for controlled canonical, realistic canonical, and selected paraphrase/reordered conditions. Only the selected controlled cases appear in the language block; do not request variants for every case or repeat the canonical baseline unintentionally. Preserve case/family IDs and exact model, prompt, solver and request settings across blocks. In F5 verify cross-block pairing before accepting a robustness table.
-
-If the optional repeat study is selected, its 12 bases must be a subset of the 24 language bases. The current runner numbers repeats from zero in every run; it has no global repeat offset. Use a new block with all three renderings and `repeats=2`, and record in the frozen analysis manifest that its local repeats 0/1 map to study repeats 1/2. Existing canonical/language records supply study repeat 0. F5 must verify this mapping while retaining each raw run/repeat identity; do not rewrite archived records. Acceptance is exactly 144 new attempts, three total observations per base/rendering/arm, each original observation used once, and tested rejection of duplicate or inconsistent mappings. This analysis support is planned work if that option is taken.
-
-Rehearse preflight rejection, failure stop, interrupted/uncertain accounting, completed zero-call resume, replay and explanation consumers. The reviewer reads actual artifacts; machine-readable decision references are records, not a substitute for review. Run the final blocks only after the freeze gate, with no tuning from outcomes. Record operational interruptions and backend changes; do not replace failures or silently switch providers.
-
-### F5 — analysis and portable evidence
-
-Use the delivered `evaluation/analyze_study.py` entry point and `src/scheduling/evaluation/study.py` to join **verified compatible frozen blocks**, with an explicit block list and checks for duplicated attempts, missing canonical partners, incompatible inference settings and mismatched case/gold hashes. Source, prompts, model/backend and effective request/solver settings must agree; block IDs, selected cases, renderings and corresponding budgets may differ intentionally. The current analyzer supports one observation per rendering/arm; optional repeat mapping requires the separate F4 extension if selected. Keep the primary controlled denominator separate from realistic and language subsets. Do not concatenate unrelated CSVs or treat an aggregate alone as the raw evidence. Preserve provider failures in denominators, reject unqualified model identity/backend observations, and retain original run labels after archive replay.
-
-Produce the Section 8 figures and Section 17 claim index. Validate a hand-checked small analysis table, totals, pairing, missing usage, conditional objective denominators and grouped intervals. Preserve each run's own manifest; cross-block analysis does not rewrite records. Export per-attempt time/token usage, mean/median/tails and missing counts. Archive synthetic inputs, prompts, configs, raw attempts, failures, references, package/lock identity and reproduction instructions with checksums. A teammate replays in a fresh supported environment without credentials.
-
-### F6 — report, review and delivery
-
-Continue the existing `report/study-draft.md`, `report/claim-evidence.md`, `report/contributions.md` and `presentation/rehearsal.md`. Review the formal worked example and two-path diagram against current implementation. Result sections retain clearly labelled development evidence until the frozen study supplies measured findings. Remaining delivery work includes final analysis and interpretation, actual responsible-AI cases and contributions, a rendered page-limit audit, the presentation and timed rehearsal. Follow Section 17's evidence/page budget and review queue. Each member must explain the whole pipeline and personally contribute interpretation, review and writing. Never mark a human or scientific gate done from a passing test alone.
-
-## 6. Version-1 shared contract
+## 6. System architecture and contract
 
 This section describes the implemented version-1 contract. Human team review/sign-off is still pending; schema v1 is distinct from the project checkpoint number. Source types in `schema.py` and the shipped prompts concretize the wire fields. Reconcile this description, callers, tests and prompts together if review changes the contract.
 
 ### System architecture and data flow
 
-Keep one installable Python package, one CLI and one shared provider interface. The current implementation has one SoCLaaS adapter; F2 may add a specific final-provider adapter if required. Local computation is CPU-only; only the provider sends model requests. The dashboard reads saved records and adds no alternate execution path. Gold access is an explicit evaluation boundary, not a distinction inferred from file names.
+Keep one installable Python package, one CLI and one shared provider interface. The current implementation has one SoCLaaS adapter; a new provider adapter is conditional on an explicit future study decision. Local computation is CPU-only; only the provider sends model requests. The dashboard reads saved records and adds no alternate execution path. Gold access is an explicit evaluation boundary, not a distinction inferred from file names.
 
 ```mermaid
 flowchart LR
@@ -292,16 +118,16 @@ flowchart LR
 | Direct path | `pipelines/direct.py`, `prompts/direct/` | One call, strict public schedule parsing, no solver or gold repair of A's answer |
 | Solver path | `pipelines/solver_augmented.py`, `solver.py`, `prompts/extraction/` | One extraction, validated schema, fixed compiler and bounded lexicographic solving; preserve extracted input and native solver outcomes |
 | Independent correctness | `validation.py`, `extraction_diagnostics.py`, `evaluation/scoring.py` | Recompute gold feasibility/objectives independently; compare extraction separately and retain conditional objective denominators |
-| Data and experiment control | `evaluation/benchmark.py`, `cases.py`, `manifests.py`, `runner.py` | Render equal public information, protect source-family splits, preflight references, reserve calls durably; maintain frozen controls and add only the explicit F2/F3/F5 extensions |
+| Data and experiment control | `evaluation/benchmark.py`, `cases.py`, `manifests.py`, `runner.py` | Render equal public information, protect source-family splits, preflight references, reserve calls durably; preserve compatible frozen-study controls |
 | Analysis and presentation | `evaluation/metrics.py`, `figures.py`, `dashboard/` | Consume saved evidence; no model calls from dashboard/replay and no second metric definition in the UI |
 
 Paths in this table are relative to `src/scheduling/` except `prompts/`. The gold validator can check final outputs regardless of whether B's extracted specification is faithful; these are separate measurements. Gold reference solver success is infrastructure evidence, not a third natural-language competitor. For UNSAT, compare the prediction with the independently established gold label; a timeout remains unresolved.
 
 ### Run lifecycle and stored evidence
 
-The implemented development path is: load/validate cases and config → check references and estimate requests → establish immutable run contract → reserve each attempt → call A or B → save output → independently score → persist completion → export/replay. Reservation precedes the external request so a crash cannot silently erase possible spending. A saved failure is a completed observation; a pending/uncertain reservation needs explicit reconciliation, not automatic reissue. Authentication, TLS, rate-limit and transport stops retain completed work. An exclusive lock prevents overlapping writes; a stale lock alone does not prove an active process.
+The implemented development path is: load/validate cases and config → check references and estimate requests → establish immutable run contract → reserve each attempt → call A or B → save output → independently score → persist completion → export/replay. Reservation precedes the external request so a crash cannot silently erase possible spending. A saved failure is a completed observation; a pending/uncertain reservation needs explicit reconciliation, not automatic reissue. Fatal authentication, TLS, quota and identity failures stop while retaining completed work; the selected development policy records eligible transient transport/service failures and continues with the next distinct attempt. An exclusive lock prevents overlapping writes; a stale lock alone does not prove an active process.
 
-A run stores `manifest.json`, `cases.json`, `references/` and `attempts/` under an ignored run directory. The manifest identifies cases, prompts, model/solver configuration, source and runtime; reference and attempt records carry their checksums and statuses. Offline replay verifies stored records and recomputes validation/metrics from saved pipeline outputs and references without calling the provider or rerunning CP-SAT. It demonstrates reproducibility of recorded evidence, not identical future live answers. Raw records must remain preserved locally and be supplied through a reviewed team archive when omitted from Git; sharing that archive is still a Gate C deliverable.
+A run stores `manifest.json`, `cases.json`, `references/` and `attempts/` under an ignored run directory. The manifest identifies cases, prompts, model/solver configuration, source and runtime; reference and attempt records carry their checksums and statuses. Offline replay verifies stored records and recomputes validation/metrics from saved pipeline outputs and references without calling the provider or rerunning CP-SAT. It demonstrates reproducibility of recorded evidence, not identical future live answers. Both completed full-run reproduction archives are now included in results/archives/; fuller operational and historical records are preserved in the private checksummed bundle. See docs/evidence.md for exact coverage and replay.
 
 The implemented frozen mode adds protocol and eligibility/cap decision references to this lifecycle. Section 5 specifies remaining preparation and analysis work; it does not require a database, web service, generic agent framework or new scheduler. Keep the current serial execution until measured runtime/rate-limit evidence justifies bounded parallelism.
 
@@ -398,7 +224,7 @@ The unpruned assignment space is `product_i |D_i|`; it is an upper bound on comb
 
 The integrated `solver.py` compiles finite legal domains, global non-overlap, precedence, preferences and the three repair stages. `objectives.py` computes the tuple, while `validation.py` checks schedules independently. Existing tests exercise tiny exhaustive optima, boundaries and timeout/incumbent handling. These features are delivered and should be preserved.
 
-The [expanded study](report/expanded-development-100.md) reports **4.69 ms mean solver time over 99 B solves**, compared with **10.12 s mean model-response time over 100 B calls**. The malformed response never reached CP-SAT. These conditional measurements cover 3–12 activities and 48 slots; they are not a large-instance scaling benchmark. A faster CP-SAT run cannot repair an omitted constraint or malformed specification. Prioritize formal correctness and extraction reliability; claim a runtime improvement only after measuring it.
+The [expanded study](docs/expanded-development-100.md) reports **4.69 ms mean solver time over 99 B solves**, compared with **10.12 s mean model-response time over 100 B calls**. The malformed response never reached CP-SAT. These conditional measurements cover 3–12 activities and 48 slots; they are not a large-instance scaling benchmark. A faster CP-SAT run cannot repair an omitted constraint or malformed specification. Prioritize formal correctness and extraction reliability; claim a runtime improvement only after measuring it.
 
 | Component | Owner / integration partner | Implemented capability | Acceptance evidence |
 | --- | --- | --- | --- |
@@ -459,7 +285,7 @@ Do not obtain misleading explanations by blindly attaching assumptions to every 
 
 ### R4 — explanations tied to actual evidence
 
-Implemented by Li Hao and merged through PR #4 (`61d9fbb`, 29 September): shared `explanations.py` and the read-only `scheduling explain` CLI consume current and saved results. The original formatter made no schema, prompt or solver changes. Formal semantic/evaluation sign-off remains pending; the integrated Yao Xiang extension adds compatible recorded R3 reasons. See [Li Hao follow-up](report/lihao-development-followup.md) for tests, measured failures and the participant-burden example. The behavior requirements below remain the review criteria.
+Implemented by Li Hao and merged through PR #4 (`61d9fbb`, 29 September): shared `explanations.py` and the read-only `scheduling explain` CLI consume current and saved results. The original formatter made no schema, prompt or solver changes. Formal semantic/evaluation sign-off remains pending; the integrated Yao Xiang extension adds compatible recorded R3 reasons. See [Li Hao follow-up](docs/lihao-development-followup.md) for tests, measured failures and the participant-burden example. The behavior requirements below remain the review criteria.
 
 The shared formatter consumes `ProblemSpec`, `SolveResult`, `OptimizationStage`, repair context and validation records through the CLI and read-only case view. A formatter does not solve, call a model, change the schedule or invent a proof. Keep gold/extraction comparisons evaluator-only and visibly separate from what B itself knows.
 
@@ -471,7 +297,7 @@ New `SolveResult` records carry a versioned exact specification/repair-context b
 
 ### Conditional solver optimizations and boundaries
 
-The following are optional candidates after F1–F4; existing evidence does not make them a current priority. Make one change at a time, use the same difficult development specifications and total budget, and retain it only when the evidence or explanatory value justifies the maintenance cost.
+The following are optional candidates for a separately authorized follow-up; existing evidence does not make them a current priority. Make one change at a time, use the same difficult development specifications and total budget, and retain it only when the evidence or explanatory value justifies the maintenance cost.
 
 | Candidate | Implementation direction | Correctness/performance boundary |
 | --- | --- | --- |
@@ -490,499 +316,116 @@ R1–R4 have reviewable implementation and evidence. Qualification requires the 
 
 The report should then explain three technical insights using this implementation: **how domains/global constraints reduce the scheduling search; why minimum-disruption repair can propagate beyond the changed activity; and why solver proof does not guarantee faithful language interpretation.** These connect the project's core to the course's formulation, technical-depth, analysis and responsible-AI criteria without requiring a broader product or a new optimization algorithm.
 
-## 8. Benchmark and evaluation design
+## 8. Dataset, metrics and final report evidence
 
-### Current dataset provenance
+### Actual data used
 
-All current inputs are synthetic. No public benchmark instances or real calendars have been imported. Citing SCHEDBench or NATURAL PLAN describes methodological influence, not dataset use.
-
-| Dataset/evidence | Origin and size | Use and limitation |
-| --- | --- | --- |
-| Legacy v1 | Six fixed fixtures plus 24 procedural cases; 30 canonical cases / 60 live calls | Historical development reference; 28 SAT/2 UNSAT and limited structural/event diversity |
-| Structural v2 | 144 procedural cases per repetition; four sweeps and three repair events | Development; independent review found repeated contradiction mechanisms and simple repair optima |
-| Challenge v3 | 108 procedural cases in nine conservative source families | Development mechanisms for coupled repairs, contradictions and preference trade-offs; variants are related |
-| Authored drafts | Twelve AI-assisted fictional scenarios, six generation/six repair, six SAT/six UNSAT | Implemented consumers and offline checks; not independently human-written or untouched final data |
-| Expanded study | 100 preselected v2/v3 cases, 41 families, 200 live calls | A 35/100; B 97/100; known development structures and canonical wording only; 14 IDs appeared in earlier pilots |
-| Canned qualification | Gold-derived responses through real pipelines/solver/validator | Integration evidence, not model performance or additional independent problems |
-| Final controlled/realistic/language blocks | Not yet constructed, reviewed or run | F3/F4 deliverables; never relabel the above datasets as final held-out evidence |
-
-See the [expanded selection manifest](benchmarks/manifests/expanded-development-100-20260930.json), [development report](report/expanded-development-100.md) and [readiness audit](report/checkpoint-readiness.md). `tiny_fixtures`, development generators and renderers are deterministic Python; their code was AI-assisted. Saved repair starts are reference-solver outputs. Dataset authorship, language authorship, human review and model-generated responses are separate provenance facts.
-
-The independently human-written realistic condition remains the team's chosen final policy. Existing AI-assisted drafts are useful development material; a human edit does not erase their origin. If the team changes that provenance policy, record it before final construction and describe the final condition honestly. Synthetic versus real and public versus private are different distinctions.
-
-### Dataset strategy and external resources
-
-The teaching handout's *Project Topic* permits constructing instances or downloading available ones. Its *Information Resources* recommends trying public datasets/APIs. The proposal explicitly selects controlled construction plus a small realistic set. Thus a purpose-built primary benchmark is compliant; an external dataset is a useful possible supplement, not a missing mandatory requirement. The scientific rationale is control over difficulty, known constraints, SAT/UNSAT labels and common repair starting schedules. The cost is limited realism and possible generator bias, which the report must analyze.
-
-| Public resource checked | Fit and limitation | Project decision |
-| --- | --- | --- |
-| [NATURAL PLAN data/repository](https://github.com/google-deepmind/natural-plan) and [Calendar Scheduling construction](https://arxiv.org/html/2406.04520v1) | Its calendar task uses synthetically constructed calendars to place one meeting. Single-day cases are close to our representation; they do not test our multi-activity repair. Repository software is Apache-2.0; other materials are CC-BY-4.0 | Preferred candidate for a small, separately reported external transfer check. Preserve attribution and record adaptations; do not pool it with the controlled matrix |
-| [SCHEDBench release/card](https://huggingface.co/datasets/SCHEDBench/SCHEDBench/blob/main/README.md) | Public natural-language renderings span six operations-research families. The card includes source IDs and best-known objectives; canonical source matrices are not redistributed. Renderings are CC-BY-4.0; original source terms still apply | Keep as the primary wording/constraint-faithfulness reference. A faithful import needs compatible constraints, source formal data and checked scoring. Do not expand v1 into industrial rostering/multimode scheduling or label best-known values proven optima |
-| [TCP, EMNLP 2025](https://aclanthology.org/2025.emnlp-main.1142/) and [released dataset](https://huggingface.co/datasets/Beanbagdzf/TCP) | Combines generated temporal problems with scenario/dialogue descriptions and sampled human quality checks. Break rules, time zones and longer horizons exceed parts of v1 | Use its separation of abstract correctness and language review to improve our construction process. Retain the current schema; importing TCP is not a core deliverable |
-
-**Recommended optional external check:** Yong Qing screens NATURAL PLAN with Yao Xiang checking semantics and Li Hao checking wording. Limit initial adapter/feasibility work to roughly half a working day; decide by the evaluation freeze whether the added evidence merits the remaining effort. If feasible and budgeted, select 8–12 previously unused single-day generation cases using a declared eligibility rule and seed, adding 16–24 calls for one paired pass. These calls are outside either provisional core estimate (600 or 312 calls) and require inclusion in the authorized cap. No external cases are imported or evaluated by this planning update.
-
-Implementation guidance for that optional check:
-
-1. Pin the source revision/file hash and original IDs. Use one movable meeting, all attendees as participants, and existing commitments as blocked intervals. Accept only exact 30-minute-grid mappings within one day and unambiguous supported constraints/objectives; never round times, drop a preference, or manufacture a repair history to force compatibility. Record eligibility and exclusion counts before model inference.
-2. Give both paths the same task text from `prompt_0shot`, with documented common wrapper/output-format changes. Keep `golden_plan`, upstream predictions and demonstration answers evaluator-only. Independently review the adapted gold specification; do not reconstruct it solely from the supplied answer or the model being evaluated.
-3. Score constraint validity with our independent validator. The [upstream calendar evaluator](https://github.com/google-deepmind/natural-plan/blob/main/evaluate_calendar_scheduling.py) compares parsed day/start/end against its stored answer; that differs from accepting every valid schedule. Label our result an **adapted subset**, not an official NATURAL PLAN score or a comparison against published leaderboard numbers. Keep any separately computed upstream metric clearly named.
-4. Keep this all-feasible, single-meeting sample separate from repair, UNSAT and controlled-difficulty conclusions. Public release does not establish absence from model pretraining. The source examples `calendar_scheduling_example_0` and `calendar_scheduling_example_1` were inspected during this feasibility review; reserve them for development, not a new untouched evaluation subset. Any further prompt/adapter debugging cases follow the same rule.
-
-If a faithful bounded adapter is not practical, record the incompatibility and finish the stronger controlled/realistic study. Public data is valuable when it probes a new limitation; dataset prestige or additional rows alone do not improve the evidence.
-
-### Provenance and quality checks for the next dataset version
-
-Extend the existing benchmark manifest rather than adding another data system. Record dataset/schema/generator versions and code revision, creation method (`fixed_fixture`, `procedural`, `human_written`, or `external_adaptation`), generation/rendering seeds, source-family ID, split, realized difficulty/event counts, selection/exclusion reasons, gold proof status and review status. For external material, also record source URL/revision, original ID/hash, applicable attribution/terms and each transformation. For any future LLM-assisted rendering, record model/prompt/settings and human review; do not describe it as independently human-written. Current v2/v3 and authored formats implement the corresponding provenance paths; legacy v1 manifests remain historical and do not contain every newer field. Review completeness for the selected final dataset.
-
-Use two complementary review directions. Controlled cases start from formal specifications, checked witnesses/contradictions and reviewed renderings. For each of the 12 realistic cases, a member independently writes a fictional personal/shared situation with a brief rationale; a second member derives/checks its gold specification from the prose and resolves ambiguities. Record authorship, review and simplifications needed for the single-day/fixed-duration setting. This prevents template fidelity from being mistaken for realistic language coverage and avoids collecting private calendars.
-
-For each supported constraint/event, keep a tiny valid witness and a deliberate violation checked by the independent validator. Retain exhaustive cross-checks on tiny problems; using the same CP-SAT implementation for reference generation and B does not independently validate its compiler. Audit rendered objective priorities as well as hard constraints. Group related source problems before splitting, then freeze sampling and semantics before held-out model responses. Review may inspect gold to ensure correctness; prompt tuning and case selection must not use held-out model performance.
-
-### Versioned development exclusions
-
-Use `benchmarks/manifests/development-hard-fingerprints-v2-20261001-target-pilot.json` and the `slot-graph-v2` algorithm for new frozen configurations. It preserves all 1,071 structures from the preceding registry and adds the target-size development pilot, reaching 1,429 known structures / 29 sources, including every inspected original/updated proposal and rejection. Carry subsequent pilots forward; these counts describe registered coverage, not proof that no other development data exists. Frozen protocol format 2.0 and its benchmark manifest must both declare the current fingerprint contract. Use `evaluation/development_registry.py` to rebuild from explicit source bundles; archived raw-list registries are historical only. The scheduling-structure fingerprint excludes absolute date/origin and timezone notation under the supported slot-based model, while exact case/provenance hashes preserve them. Activity/constraint renaming and calendar-only changes must not turn developed problems into fresh held-out cases. Regenerate obsolete registries from preserved source case bundles, including original and updated repair problems; never relabel old hashes. Keep registry version, algorithm, source-bundle hashes and coverage statement explicit. Technical checks cannot discover private unregistered development work, so the team must review registry completeness before freeze.
-
-### Construction and splits
-
-F3 now provides `evaluation/prepare_final_candidates.py` and a development-tested provisional `source-family-v1` policy; the actual policy/model decision and fresh reviewed final draw remain outstanding. Existing v2/v3 generators remain development references. Preserve legacy/v2/v3/authored data and all expanded failures as development. Test only the construction policy on development candidates, then freeze that policy before drawing fresh final families. Record all inspected structures, not merely those sent to a model.
-
-A source family contains all task/event/label/rendering descendants of one sampled scheduling problem. Distinct IDs are not independent samples. Apply conservative structure/group audits and disclose any merged families. Mechanisms and shared templates remain limitations even when instances differ; holdout here concerns instances from a known construction process.
-
-### Final experiment matrix and size decision
-
-Retain the existing **600-call working target** only if F3 produces enough reviewed, distinct families and F2 supports the actual resource budget. The target is not a course minimum or a statistical power calculation. Decide by October 11 using development-only construction/qualification evidence, before final model outcomes. A smaller sound study is preferable to duplicated structures or unreviewed text.
-
-| Block | Working target | Predeclared compact alternative | Calls, target / compact |
-| --- | --- | --- | ---: |
-| Controlled canonical | 120 source families, one generation + one repair per family: 240 cases | 48 families, one pair each: 96 cases | 480 / 192 |
-| Realistic canonical | 12 reviewed independently written cases: 6 generation/6 repair, target 6 SAT/6 UNSAT | Same | 24 / 24 |
-| Selected language variants | 24 preselected controlled cases, 2 additional renderings each; canonical already in first block | Same | 96 / 96 |
-| **Total, one model and one attempt per arm** | **300 renderings** | **156 renderings** | **600 / 312** |
-
-Counts assume all quotas are achieved. Inspect the achieved family/overlap audit before committing to either allocation. If even the compact design cannot produce the required fresh families, revise the construction policy and design before inference; do not silently manufacture independence. Keep the model decision and packet size independent of which method looks better.
-
-| Controlled sweep | Levels | Target families per level | Compact families per level |
-| --- | --- | ---: | ---: |
-| Activity count | 4 / 8 / 12 | 10 | 4 |
-| Unary slack | Low / medium / high at fixed nominal task count | 10 | 4 |
-| Meaningful interaction density | Low / medium / high | 10 | 4 |
-| Resource contention | Low / medium / high | 10 | 4 |
-
-Each cell targets equal SAT/UNSAT pairs: 5+5 families for the target, 2+2 for the compact design. This yields 60 SAT/60 UNSAT cases per task in the target or 24/24 in the compact design. Only use same-label generation/repair pairs when both checked constructions satisfy the policy; never relabel a case to fill a quota. Retain the common original schedule and updated event for repair. Balance blocked/deadline/fixed-start events marginally: 40 each target, 16 each compact. Within a level, exact thirds are impossible for 10 or 4 families; rotate the extra events across levels and disclose realized counts.
-
-Use independently checked witnesses/contradictions and optima. Include multiple supported infeasibility mechanisms, both simple and coupled repairs, and some unavoidable preference costs. Avoid reproducing v2's single A0/A1 conflict mechanism for every UNSAT case or `(1,1)` for every SAT repair. V3 supplies useful constructions but its nine related families are not enough to establish broad generalization. Mechanism diversity is an audited marginal property, not another full Cartesian study.
-
-Define unary slack from legal-start counts before binary interactions; keep interaction density separate from resource contention and record realized values. Measure meaningful precedence effects rather than counting redundant edges. Factors are coupled: record unmatched covariates and selection rates; call these controlled construction sweeps, not perfect causal interventions. No invented optimum for UNKNOWN or unfinished reference search. Retain candidate rejection reasons and a predeclared policy for unresolved references.
-
-Select the 24 language bases before inference, ideally one per source family, balanced 12 generation/12 repair and within each task 6 SAT/6 UNSAT. Spread over sweeps/levels and keep family grouping. Review all 48 extra renderings for identical constraints, objectives and old schedules. Review all 12 realistic texts independently against gold and record plausible use cases/simplifications. Do not generate final prose using the model being evaluated or tune prompts against these final outcomes.
-
-The controlled study's primary comparison uses **canonical only**, separately by task and SAT/UNSAT. Realistic and wording blocks are separate estimands. Label-balanced synthetic demand is not a population sample. Small cells, even ten families, support cautious descriptive trends rather than precise difficulty thresholds. With only one response per rendering, observed wording sensitivity also includes model sampling variability.
-
-### Metrics
-
-- Valid-schedule rate on gold-SAT instances, including all failed attempts in the denominator.
-- Hard violations by type and instance, plus missing/duplicate/extra activity counts.
-- SAT/UNSAT confusion matrix; UNKNOWN, invalid output, transport errors, and timeouts shown separately. Also report overall coverage and correctness across all labelled cases.
-- Preference objective gap on gold-feasible, validated outputs with proven reference optima. For other cases, report bounds or unknown gaps; do not invent an optimum. Show denominators to expose survivorship bias.
-- Repair moved count, total shift, and excess disruption relative to a proven optimum; preserve component-wise reporting.
-- Formalization errors: omitted, invented, or altered constraints; wrong IDs, durations, endpoints, preference weights, and objectives. Canonical structural comparison is a diagnostic, supplemented by semantic review where equivalent encodings differ.
-- Paired changes in validity/objective across renderings, with repeated identical prompts on a small subset if resources permit to estimate model variability.
-- End-to-end latency plus extraction/solver components; token usage; request count; retries; rate-limit events; cost where known. Missing prices/usage are marked unavailable, never zero.
-
-Within each explicitly named evaluation subset, define accepted-answer rate as `(gold-valid SAT schedules + correct UNSAT answers) / all gold-labelled attempts`, with errors/unknowns contributing no successes. Report SAT validity and UNSAT accuracy separately so a high score on one class cannot hide failure on the other. A gold-UNSAT instance with an independently validated schedule signals a reference/validator defect: investigate before publishing any affected scores.
-
-### Aggregation and uncertainty
-
-Use one canonical rendering per controlled base for the primary A/B comparison, reporting generation and repair separately, with SAT/UNSAT strata and sweep-level results. Report the 12 realistic scenarios separately. F5 must verify common source/model/prompt/settings and unique attempt identities when joining the separate frozen blocks. Additional renderings and repeats belong to robustness/variability analyses; do not pool all 300 renderings into a primary score that gives selected bases three times the weight. For paired binary outcomes, show both succeed / only A / only B / neither, plus the B-minus-A percentage-point difference. These are project estimand choices, to freeze before test access.
-
-Following [Miller's evaluation guidance, Sections 2.2 and 4.2](https://arxiv.org/html/2411.00640v1), preserve A/B pairing and dependence. Record a common source-problem group ID for related generation/repair cases, variants, and repeats. Recommended default for paired differences is a 95% paired cluster-bootstrap interval (10,000 resamples, frozen seed), resampling these groups within the reported subset. For a binary rate with independent canonical units, use a predeclared [Wilson interval](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm); use clustered estimates when units are related. These estimator settings are team choices, not course rules. Always show numerator/denominator and group count. Tiny cells or too few independent groups support descriptive counts, not strong significance claims; avoid ranking methods from unstable intervals. Uncertainty does not establish real-world representativeness. Keep changed model/backend configurations separate.
-
-### Priorities and analysis outputs
-
-The two approaches, both task types, gold validation, and failure accounting are mandatory. The 300-rendering target and 156-rendering compact alternative are provisional designs, not course minima. If the pilot exceeds time/quota, reduce the predeclared matrix proportionally while retaining every primary comparison; freeze the revised counts before test access. Do not select easy cases from main-run outcomes.
-
-| Question | Controlled comparison | Required report evidence |
-| --- | --- | --- |
-| Difficulty and feasibility | A versus B within SAT/UNSAT strata and each sweep | Validity curves with uncertainty; status/coverage table; explanation of interactions |
-| Formalization failure | Gold solver versus extracted-spec solver, with independent gold validation | Error-category table; one omitted/altered constraint case; semantic review notes |
-| Repair quality | Common old schedule and disruption, A versus B versus gold optimum | Movement/shift results with valid-solution denominators; an annotated repair example |
-| Language robustness | Matched canonical/paraphrased/reordered descriptions | Paired validity transitions and objective changes, grouped by base |
-
-Use the same evidence to discuss privacy, participant inconvenience, and objective trade-offs. Bound responsible-AI case analysis to four synthetic cases, drawn from development/realistic examples where possible: unequal inconvenience, an objective trade-off, ambiguous negotiability, and instruction-like task text. Do not build a separate large adversarial benchmark.
-
-For language-effect claims, obtain three total attempts for all three renderings of a preselected 12-base subset of the 24 language bases per approach if the pilot budget permits. The core pass already supplies the first attempt; two additional attempts require 144 additional calls beyond the chosen core pass (600 or 312 calls), with the explicit repeat mapping in F4. Otherwise report observed one-attempt variation and the inability to separate it fully from model sampling variability. Extra final-study models, feedback and further UI remain optional after the required analysis; the bounded development model selection in Section 9 is a separate qualification task.
-
-Track benchmark-generation seed, rendering seed, and model-call repeat separately. SCHEDBench Section 4.3 varies rendering seeds; our identical-prompt repeats estimate inference variability and are not a replication of that test. One paraphrase and one reordering per base support claims about the selected renderings, not all possible wording. Keep canonical success alongside paired transitions: consistently invalid schedules are not evidence of useful robustness. Review all additional renderings (48 under the provisional matrix) for preserved semantics before main inference; correct renderer defects without consulting model performance, version the fixtures, and keep prompt tuning separate from that audit.
-
-
-Explain technical depth through the start-domain search space `product_i |D_i|`, the constraints that couple choices, and the distinction between finding a witness, proving infeasibility, and proving optimality. Do not use constraint count alone as a complexity proof. Discuss when ambiguous/missing information, solver availability, translation cost, or time limits make tool use less helpful. Relate any forecast about improved models to observed failures and label it as a hypothesis.
-
-### Fair comparison and error attribution
-
-Use the same verified model ID, problem information, reasoning settings where supported, and predeclared per-call output budget for A and B. Pilot that budget on the longest supported outputs of both paths so one format is not artificially truncated. Freeze each approach's task-appropriate prompt and record both; do not give either path private hints or unreported tools; CP-SAT is the declared tool for B. Direct inference has no external solver/code execution or hidden agent tools. Record prompt lengths and token usage because output tasks differ. One model attempt per approach is the core condition; transport retries are bounded, recorded, and distinct from semantic corrections. Neither path gets hidden gold feedback.
-
-Record an evaluation funnel: all attempts → parsed/schema-valid outputs → schedule or infeasibility prediction (and solver status for B) → independent gold outcome. Show both all-attempt and stage-conditional denominators where used. Separately assess extracted-spec semantics; successful parsing or finding a solution to an extracted model does not establish that it represents the request. Keep deterministic parsing/normalization rules fixed before main runs, retain the raw response, and never let normalization change constraints or repair an answer using gold.
-
-Gold-to-Solver isolates the reference/modeling layer. Compare B's extracted specification to gold and validate B's final schedule against gold. A correct output despite an extraction mistake remains an end-to-end success but an extraction failure. If the gold solver or independent validator fails cross-checks, fix the infrastructure before interpreting model results.
-
-Assign deterministic operational categories first: provider/transport error, malformed output, unsupported specification, solver model error, solver limit, or gold-invalid schedule. Track extraction mismatches separately; an associated mismatch does not alone prove the cause of a failure. On a preselected diagnostic sample of up to 20 B failures (or all if fewer), review normalized constraints and, where useful, replace one erroneous extraction component with gold in an explicitly labelled diagnostic rerun. Keep these reruns outside primary scores. A second member reviews ambiguous equivalences and disagreements. If sampling failures, state the sampling rule and denominator rather than extrapolating unsupported causal percentages.
-
-Preserve malformed outputs and failures with appropriate redaction. Never hand-repair a test response or keep only successful retries. An optional feedback experiment must state whether feedback uses gold constraints or only the model's extracted specification; those are different information settings.
-
-## 9. NUS SoCLaaS, model choice and execution budget
-
-**Current decision state:** the user selected and authorized the full SoCLaaS `qwen3.8:27b` development campaign: 600 scheduling completions, two capability completions and one metadata request. The campaign has launched; live results are pending. The earlier two-model comparison stopped after its first scheduling pair because Qwen3.6 reported different serving fingerprints; the diagnostic observed variation again and the user retained the strict policy. Those allowances are consumed and those records remain unchanged. Use the prepared full-development packet and tracked F2 campaign workflow; do not add the small qualification as an extra prerequisite. Final provider/model eligibility and the separate frozen-study budget remain unresolved. The catalogue below is a historical availability observation, not a current listing or live-call permission. Stable reported fingerprints are a team protocol choice, not a course grading rule or proof of identical model weights.
-
-### Current availability and recommendation
-
-An authenticated `GET https://soclaas-api.comp.nus.edu.sg/v1/models` on **30 September 2026, 17:22 SGT** returned the following IDs. This check used one metadata request and **zero completion calls**. Availability is account/time-specific and is not proof of quality, model revision, parameter support or course eligibility. The institutional [SoCLaaS guide](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) was inaccessible to the research tool; no undocumented quota, pricing or capability is inferred.
-
-```text
-bge-m3, gemma4:26b, llama3.1:8b, ornith1.5:35b,
-qwen3.5:9b, qwen3.6:35b, qwen3.8:27b, qwen3-coder-next,
-qwen3-vl:32b, whisper-large-v3, coder, coding, default,
-ornith1.0:35b, qwen3.6:27b
-```
-
-| Option | Evidence and role | Next decision |
-| --- | --- | --- |
-| `qwen3.6:35b` | Current qualified development reference with the preserved 200-call study | Retain as reference; no claim that all other IDs are weaker |
-| **`qwen3.8:27b`** | Selected for the current development campaign; results pending. The [Qwen-authored card](https://huggingface.co/Qwen/Qwen3.8-27B) describes a newer open model with reasoning controls and broad capability gains | Plausible upgrade, not a measured scheduling improvement. Confirm the hosted alias/backend and compare on a fixed development packet |
-| `gemma4:26b` | Optional cross-family candidate; [Google's card](https://ai.google.dev/gemma/docs/core/model_card_4) describes a 26B mixture-of-experts reasoning model | Consider if the first candidate is unsuitable or a cross-family check has clear value; no extra final model by default |
-| `ornith1.5:35b` | Optional candidate; [the authors' card](https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B) emphasizes coding/agentic capability and separate reasoning/final-answer serving | Scheduling superiority is unmeasured; qualify final-content parsing and hosted identity before considering it |
-| Other IDs and aliases | Different sizes/modalities/specializations; generic aliases may change targets | Do not select by parameter count, newer-looking name or alias alone. Embedding/audio services are not the scheduling comparison |
-
-This is a **qualification order**, not a leaderboard. Upstream model cards do not verify NUS quantization, serving defaults or exact weight revision. Published coding/agent benchmarks do not predict this scheduling study. The user's subsequent Qwen3.8 selection and authorized development campaign are recorded separately below; the historical catalogue is not evidence of its measured performance.
-
-### Course eligibility and provider boundary
-
-The teaching documents require a frontier model used directly and for translation; the SoCLaaS/open-weight paragraph permits considering those models but does not explicitly waive that comparison. An open model can be a credible candidate; neither its size nor vendor wording proves course acceptance. Yao Xiang should resolve eligibility early with the actual teaching-team feedback, ideally before October 11 and no later than the October 18 freeze.
-
-Prepare this precise clarification for the team to send if the handout/feedback does not resolve it: “Can our primary direct-versus-CP-SAT comparison use the currently hosted SoCLaaS `qwen3.8:27b` model, with documented capability qualification, or is an additional frontier-provider comparison expected?” Attach the verified model identity and describe both arms. Do not manufacture an approval or send the message without human authorization.
-
-Continue scheduling-model development on SoCLaaS as agreed. A non-SoCLaaS frontier model belongs to the later evaluation phase, with explicit access/endpoint/budget authorization and F2 integration if needed. The existing adapter is intentionally endpoint-restricted; changing an environment base URL does not enable another service. A stronger SoCLaaS candidate may improve development while final eligibility is still unresolved.
-
-### Selected full development campaign and optional qualification
-
-The current authorized run is `campaign-600-live-qwen38-20261001-01`, with live results pending. It retains revision-3 task prompts, one attempt per arm/rendering, model `qwen3.8:27b`, output ceiling 32,768, 30/900-second connect/read timeouts, no retries, and 30/60-second B/reference limits with one worker and seed 0. This is development evidence; the final-study matrix and human/eligibility gates in Sections 8 and 11 remain separate.
-
-| Block | Fixed development input and selection | Case calls |
+| Block, per model | Source and pairing | Attempts |
 | --- | --- | ---: |
-| Controlled canonical | Target-size pilot seed `32661001`: 240 cases / 120 source families, 60 per task/label stratum | 480 |
-| Realistic canonical | All 12 AI-assisted fictional scenarios in `benchmarks/fixtures/realistic-drafts-v1.json`, preserving provenance and pending review | 24 |
-| Selected wording | 24 exact controlled partners, six per task/label and 24 distinct families; two additional renderings each | 96 |
+| Controlled | 240 canonical cases / 120 source families; 120 generation and 120 repair; each task 60 SAT / 60 UNSAT | 480 |
+| Realistic | Twelve AI-assisted fictional scenarios, canonical prose, three cases per joint task/label stratum | 24 |
+| Additional wording | 24 selected controlled bases from distinct families; paraphrase and reordered versions; matched to their canonical partners | 96 |
 
-The [target-pilot readiness receipt](benchmarks/manifests/f3-target-development-readiness-20261001.json) identifies the original controlled bundle and preserved archive. All input bundles remain unchanged. Preparation normalizes source families across the canonical blocks, rejects cross-kind related families and records the mapping and exact input hashes. It selects language bases before model outcomes by least-used sweep then event within each stratum, with stable case-ID tie-breaking. Human gold/text review is pending. The realistic drafts are not independently human-written final cases.
+The two models used identical input bytes and request-prompt hashes. Four controlled sweeps cover activity count, slack, resource contention and interaction density at three levels. All are known development cases. No public benchmark or real calendar was imported. Historical v1/v2/v3 pilots, the 200-call comparison and inspected candidate structures remain development evidence. See [data preparation](docs/final-data-preparation.md) and the source-family exclusion registry for future draws.
 
-The two capability checks use the actual configured completion settings before any scheduling request. The shared session cap is **603 HTTP requests / 602 completions / 19,726,336 requested output tokens**; the block caps are 480/24/96. Input tokens are additional. Capability observations, including an explicitly missing fingerprint, seed every block's strict identity guard. Any capability issue or runner stop ends the campaign before further blocks. Write-once reservations preserve uncertain requests; no automatic restart, retries, substituted model or reuse of unused allowance is permitted.
+### Metrics and reporting contract
 
-Use `evaluation/prepare_development_campaign.py`, then the explicitly authorized `evaluation/run_development_campaign.py`; README provides the commands and imported-input convention. For complete compatible blocks, `evaluation/analyze_study.py --development` exports separate canonical, realistic and wording analyses and a reproduction archive. Frozen analysis remains the default. The current installed macOS suite passed 684 tests and the actual selected packet completed a 600-attempt mocked rehearsal; live scores, usage, wall time and serving continuity remain pending. Record those only from the completed or stopped live artifacts, retaining failures and denominators. Do not pool this new model with the preserved Qwen3.6 results or infer improvement from changing both model and case distribution.
+- Primary acceptance: gold-valid SAT schedule or correct UNSAT answer over all labelled attempts. Preserve every provider/parser/solver failure in the denominator.
+- SAT validity and UNSAT accuracy: separate task/label denominators. Direct UNSAT is a prediction; solver infeasibility proves only the compiled problem.
+- Optimization: compare proven reference objectives only on valid SAT schedules; secondary repair gaps require equality on earlier components. Also report how many attempts reached that conditional subset.
+- Extraction: parsing, structural equality, bounded semantic evidence and end-to-end gold validity are distinct. Structural mismatch alone does not establish semantic error.
+- Resources: request/model/solver time, reported tokens and missing coverage; no invented zero usage or monetary cost. CP-SAT times are conditional on actual solver execution.
+- Pair A/B on case, rendering and repeat. Canonical controlled, realistic and wording rates stay separate. Wording reuses base problems, so the 1,200 attempts are not 1,200 independent cases.
+- Existing controlled paired intervals use family bootstrap, 10,000 resamples, seed 3263, within each task/model. Do not interpret a ceiling or degenerate interval as equivalence/perfection.
+- Difficulty cells with five SAT cases are descriptive. Domain-product size is a bound on naive combinations, not measured CP-SAT search nodes. Preserve nonmonotonic results and avoid cherry-picked thresholds.
 
-The optional small qualification still prepares **24 known development cases**, 48 scheduling completions, two capability completions and one metadata request per selected model: **51 requests / 1,638,400 requested output tokens**. It is not the current next step or an extra campaign allowance. Choosing it later requires its own new authorization and output directory. A stopped historical qualification cannot be resumed under changed settings.
+### Verified findings and scope
 
-The two-model design below remains available only if an explicit comparative model-selection experiment is later chosen. A successful single-model qualification supports using that model, not a claim that it beats Qwen3.6. Compare F1's candidate prompt separately after model qualification if still justified.
+Qwen3.6 controlled acceptance is A 95/240 and B 229/240; realistic 6/12 and 12/12; wording 8/48 and 47/48. Qwen3.8 is 239/240 and 240/240; 11/12 each; and 46/48 and 44/48 respectively. Its nine rejected attempts are all operational failures. On controlled valid repairs, Qwen3.8 A matches the optimum on 59/60 and B on 60/60. Explain model-dependent usefulness, interpretation failure, optimality and cost rather than claiming universal solver superiority.
 
-Recommend a **fixed 24-case development packet**, six cases in each generation/repair × SAT/UNSAT stratum, including the expanded study's three B failures and representative longest/most coupled cases. Select IDs before calls. With two models and both approaches, one attempt each uses **96 completions**. Up to two capability completions per model add four, giving a proposed **100-completion qualification envelope**, plus separately counted metadata requests. This is a proposal requiring a new cap, not reuse of the consumed 200-call allowance.
+The [report](docs/submission-report.md), [audit](docs/two-model-development-audit.md), [claim index](docs/claim-evidence.md), [portable summary](results/summary/two-model-development-20261002.json) and [figure data](results/figures/two-model-development-20261002/figure-data.json) identify exact values and limitations. Do not mix old and current settings or update immutable result files to reflect later documentation status.
 
-Use the same revision-3 task prompts, public data, solver settings and verified output/reasoning regime for the two model configurations. Re-run the reference in that qualification block; do not substitute historical responses generated under different settings. Compare parsing, semantic omissions, gold-SAT validity, gold-UNSAT accuracy, conditional repair quality and model/pipeline latency/tokens. Compare each model's A and B separately. A small development packet supports selection, not a superiority claim or final hypothesis test.
+### Conditional future evaluation
 
-Decide on eligibility/access first, then supported and reproducible operation, balanced task performance and failure severity, then time/token cost. Do not choose the model that makes B's advantage largest or discard a model because A becomes competitive. If evidence is tied or mixed, prefer the already qualified simpler configuration and report uncertainty, or propose one additional preselected qualification; avoid repeated model shopping.
+If a further study is required, define the question and model eligibility first. Freeze the construction policy, prompts, metrics and explicit budget before new outcomes; use fresh structural families excluded from every inspected/rejected development structure. Review prose/gold semantics and keep related renderings in one split. Use implemented frozen controls and compatible separate blocks. Additional repeats require their explicit repeat mapping and tests; they are not already supported by assuming a larger loop. Do not rename current inputs as fresh or reuse consumed allowances. The historical detailed plan supplies candidate policies and optional experiments, not current obligations.
 
-Only after reviewing model/backend evidence from the current development campaign or a separately authorized qualification should F1's prompt candidate be compared with revision 3 under otherwise identical settings and its own cap. Freeze the selected model/prompt combination before the final draw. If the eventual eligible final model differs again, qualify its exact backend/configuration on development inputs before final inference.
+## 9. Provider, execution and resource contract
 
-### Effective settings, generous limits and measured usage
+Only the approved NUS SoCLaaS adapter is implemented. The reported model IDs are `qwen3.6:35b` and `qwen3.8:27b`; their hosted weights and unexposed inference defaults are not independently known. Both complete runs used revision-3 prompts, 32,768 requested output tokens per completion, 30-second connect and 1,800-second read/write/pool limits, no retries, one worker and solver seed 0. B uses 30 seconds; references use 60 seconds. HTTPX read timeout concerns waiting for response chunks, not a guaranteed whole-request wall limit.
 
-The existing expanded profile is 16,384 requested output tokens per call, 30/600-second connect/read timeouts, no retries, 30 seconds per B solve and 60 seconds per reference. It completed without timeout/truncation; largest reported completion was 6,703 tokens. It remains an available configuration and historical evidence, not an open allowance.
+Each consumed campaign allowance covered 603 HTTP requests: one metadata request, two capability completions and 600 scheduling completions. The 19,726,336 reserved output tokens are not actual consumption, an input-inclusive cap or a currency budget. Reported totals including capabilities are 1,773,823 tokens with 602/602 coverage for Qwen3.6 and 3,994,657 with 593/602 for Qwen3.8.
 
-The selected development campaign uses a **32,768 output-token ceiling and 30/900-second connect/read timeouts**, with the same limit for A and B and preceding capability checks at those settings. Preserve the 30/60-second solver/reference limits, one worker, seed 0 and no retries. Final-study limits remain provisional: record what is actually verified about context/output semantics, whether reasoning tokens share the limit, timeout behavior and quota. A tiny JSON capability response does not itself establish the full maximum context/output behavior. If the configured regime is unsupported, stop and obtain a separate decision before changing it. Record actual wall time; read timeout is not a guaranteed overall request deadline.
+The authorized development policy `strict_model_observe_backend_v1` requires the exact model while recording backend variation. Qwen3.6 returned three fingerprints; Qwen3.8 one. `continue_transient_v1` retains timeout/transport/HTTP 408/500/502/503/504 failures and cools down before the next distinct attempt. It never retries failed attempts. Fatal authentication, permission/quota, TLS, malformed-envelope, model-identity, integrity or budget errors still stop. Frozen mode retains the strict backend rule. Preserve every prior policy under its original run identity.
 
-Current `ModelConfig` does not expose temperature, reasoning or JSON-decoding controls. F2 must explicitly record provider defaults or implement verified settings before making reproducibility claims. Do not copy upstream serving parameters into the NUS request and assume they work. The same configured options need not produce identical text or latency, even with temperature zero.
+Run long campaigns through an independent one-shot service with automatic restart disabled. Check heartbeat, worker state, real OS lock ownership and exit receipts. A stale lock file alone does not prove a live run. An uncertain request reservation cannot be reissued without reconciliation. App independence does not prevent Mac sleep, logout or reboot. The completed Qwen3.8 run has two verified safe pauses; elapsed wall and monotonic clocks include different effects and cannot be labelled pure inference time. See [operations](docs/usage.md) and [recovery evidence](docs/benchmark-process-recovery.md).
 
-| Current campaign or optional envelope | Completions | Requested output reservation at 32,768/call |
-| --- | ---: | ---: |
-| Selected full Qwen3.8 development campaign including two capability checks | 602 | 19,726,336 |
-| Optional small single-model qualification including two capability checks | 50 | 1,638,400 |
-| Optional two-model development qualification including four capability checks | 100 | 3,276,800 |
-| Target final study, one model | 600 | 19,660,800 |
-| Compact final study, one model | 312 | 10,223,616 |
-| Optional repeat block: 12 bases × 3 renderings × 2 extra repeats × 2 arms | 144 | 4,718,592 |
+Keys stay in ignored `.env` or a secret source, never in chat/code/archives. TLS validation remains enabled. No further live model request is authorized by this publication or these examples.
 
-Metadata requests add one to the full campaign or small single-model session, and two to the optional two-model workflow (each model has its own session). Input tokens are additional; requested reservation is not actual use or a currency estimate. At the *old measured* mean, 600 calls would be roughly 1.40 million reported tokens and 60 minutes, while 312 would be roughly 0.73 million and 31 minutes. These are workload illustrations only: a new model, thinking behavior, harder cases or different serving load can materially change them. Re-estimate from F2 before authorizing final execution. Reserve a reasonable operational window, but never count a timeout as UNSAT or silently exceed a cap to finish.
+## 10. Verification and readiness gates
 
-Store per-attempt prompt/completion/total tokens and usage coverage, model-response and full-pipeline time, solver time on the subset that reached it, total batch wall time, request/metadata counts, finish reason and error category. Report mean, median, p95 and maximum with explicit denominators; missing is not zero. Store prices only if verified, with currency/date/source; the course reimbursement limit of $100 is not an automatic spending authorization or evidence SoCLaaS is free.
-
-Before each run/session, agree its identity, blocks, completion and metadata allowance, output reservation, stop conditions and any verified total/currency limit. The implemented runner caps requests and requested output, **not aggregate input+output tokens or money**. If the chosen budget requires a hard total/currency ceiling, add a conservative validated guard or choose a provider-enforced limit before execution; do not claim the current counter enforces it. Execute within an agreed cap without asking before each request. New scope or exceeded caps require a new decision.
-
-### Credentials and execution records
-
-Keep `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL` in the ignored local environment; never print or commit credentials. Retain TLS verification and safe error categories. Recheck availability once when needed; avoid repeated metadata polling. Begin serially; concurrency requires measured need and verified rate limits.
-
-Keep model/provider decisions and `configs/development/` distinct from reviewed `configs/experiments/`. Every run records source/prompt/input/settings hashes, solver seed/worker/limits, environment, requested/returned model and available backend metadata. Changed settings or endpoints get a new run identity. Never pool different model configurations or silently substitute a backend. Preserve earlier bootstrap and pilot evidence in their reports rather than treating old connectivity as current capability qualification.
-
-## 10. Delivery schedule
-
-These are internal milestones except the course dates in Section 1. Work on report methods, reviews and offline dataset preparation in parallel; no need to wait for model access to begin them.
-
-| Target | Work and dependency | Reviewable output |
+| Gate | Current status | Remaining evidence |
 | --- | --- | --- |
-| By Oct 4 | F1 failure regressions; F2 endpoint/model checklist; F3 development construction prototype; F6 outline; verify proposal receipt/feedback | Small verified changes, selected qualification packet, draft figures/table shells and actual open questions |
-| Oct 5–11 | Qualify model within new cap; review any one prompt candidate; pilot and fix construction policy; resolve realistic authorship and final size | Model decision evidence, stable source policy, achieved family audit, reviewed formal examples and methods draft |
-| Oct 12–15 | Fresh draw after policy freeze; full text/gold review; selected equivalent wording; offline frozen rehearsal and portable reproduction | Final candidate manifests, separate compatible experiment blocks, checksummed rehearsal and review records |
-| By Oct 18 | Resolve model eligibility/access, provider integration, final prompts/inputs/analysis and actual budget; complete Section 11 freeze | Reviewed executable protocol; no unresolved prerequisite hidden as a TODO |
-| Oct 19–23 | Run the authorized frozen blocks; validate accounting; independent rescoring and initial figures | Complete records, failures retained, no tuning from final outcomes |
-| Oct 24–27 | F5 independent teammate replay; mechanism/error/robustness analysis; responsible-AI cases; draft results/discussion | Claim-to-run/figure index, reproducible tables and near-final report |
-| Oct 28–30 | Cross-review, page/claim audit, complete presentation and recorded fallback demo | Submission-ready draft, contribution/AI disclosure, core freeze |
-| Nov 2–6 | Edit/rehearse and verify current Canvas arrangements | Timed talk and substantive Q&A review |
-| Week of Nov 9 / by Nov 13 | Course presentation and report submission; aim report upload Nov 12 | Actual submission/recording receipts |
+| Formal/implementation | Both paths, repair/diagnostics and independent validator implemented; mathematical fixtures and regression suite verified | Actual member semantic/code review and any defect-specific follow-up |
+| Complete development evaluation | Both 600-attempt runs, preserved failures, fresh scoring and archive replay complete | Genuine interpretation of limitations and optional independent teammate replay |
+| Reproducible repository | Source, tests, figures, summaries and verified replay archives included; historical raw evidence privately backed up | Successful publication and matching clean-checkout handoff |
+| Scientific course fit | Proposal scope and constructed-data direction fit | Exact hosted-model eligibility and actual teaching feedback |
+| Report/delivery | Full exploratory report and formatted PDF prepared | Member revisions/contributions/private title; final render audit; actual deck/rehearsal and submission receipt |
 
-If a model/human/access decision slips, continue independent offline/report work and explicitly revise the schedule or predeclared sample allocation before final outcomes. Do not convert developed data into final evidence, omit proposal conditions silently, or add features to compensate for missing analysis.
+[Publication verification](docs/publication-verification.md) records the exact commands and results, including platform-specific TLS handling. Run targeted checks first; full suites are appropriate for shared runtime changes. Do not repeat live benchmarks or unchanged full suites for documentation edits. If a semantics-changing fix is needed, record its scientific impact before making updated performance claims.
 
-## 11. Verification and acceptance gates
+## 11. Acceptance criteria
 
-The [checkpoint audit](report/checkpoint-readiness.md) confirms a working development system. It does not approve the future study. Use these gates to identify remaining evidence rather than repeatedly retesting unchanged delivered components.
+The report must trace every numerical claim to a saved artifact, retain all failures and metric denominators, distinguish interpretation from measured evidence, explain why direct and solver-assisted methods differ, and discuss synthetic-data assumptions and realism. Uncertainty and small samples stay visible. A strong direct result is a valid outcome.
 
-| Gate | Current state | Evidence still required |
-| --- | --- | --- |
-| A: trustworthy formulation/reference | R1, independent tiny enumeration, repair and validator checks implemented | Human mathematical/fixture review of the declared contract, representative optima and text/gold mappings |
-| B: integrated development checkpoint | R1–R4 and both paths qualified; 200-call development run complete | Focused F1 changes if adopted; human proof/consumer review; normal review and verification of subsequent integrated changes |
-| Final execution readiness | Frozen controls, candidate preparation and generic synthetic three-block rehearsal delivered; earlier two-model qualification stopped; new full development campaign live results pending | F2 selected endpoint/settings, reproducible qualification policy and eligibility; F3 reviewed fresh packet; F4 rehearsal of that actual packet/configuration; actual protocol and new cap |
-| C: defensible results | Descriptive development evidence available | Frozen canonical/realistic/language study, declared analyses, failure review and independent teammate replay |
-| D: course delivery | Report/claim/contribution and rehearsal drafts available | Final results and interpretation, rendered report audit, responsible-AI cases, genuine contribution/disclosure records, presentation/Q&A and submission receipts |
+The submission must include the course-required private title information, actual contributions and AI disclosure, member understanding, a compliant PDF and complete presentation. Only real review dates, approval evidence and upload receipts satisfy those gates. An agent cannot sign for a member or award course-model eligibility.
 
-### Gate A — contract and trustworthy reference
+If teaching feedback requires an additional comparison, establish that limited follow-up explicitly, with exact provider/model, inputs, outcomes, cap and source snapshot. Existing report scope stays exploratory. Otherwise focus on completing the report and human delivery rather than reopening architecture.
 
-- Schema and formal semantics agree; unsupported fields/time rounding/repair mutations are rejected.
-- Independent arithmetic/enumeration checks support tiny feasibility and exact objective claims; deliberately invalid schedules are rejected.
-- Members review no-op and coupled repair, objective order, full-window containment and proof scope. Record actual review and unresolved assumptions.
-- Reference UNKNOWN, feasible incumbents and unproven bounds never become invented SAT/UNSAT labels or optima.
+## 12. Responsible AI
 
-### Gate B — maintained integration
+Analyse concrete consequences: participant inconvenience can concentrate despite low total disruption; minimizing moved count may increase total time shift; unsupported/ambiguous requirements require clarification; explanations must distinguish extracted-model proof from source correctness. Preserve user control and never silently relax hard constraints. Fictional data reduces privacy exposure but does not establish real-calendar consent or anonymity. Prompt-boundary tests are not live adversarial-robustness evidence. See report Section 7 and the genuine review/contribution records.
 
-- Both task types run through A/B and gold validation with accurate provider/parser/extraction/solver/validation statuses.
-- R2–R4 diagnostics, proof bindings and deterministic explanations retain their regression coverage. Remaining model failures are reported, not hidden by parser repair.
-- Any F1/F2 code or prompt change passes targeted tests, installed checks and the relevant broader suite. Requalify macOS/Linux where changes affect the supported runtime; a previous receipt applies only to its exact source.
-- Preserve development evidence and source identity, and complete normal code/human review. Hosted CI is verified separately from local runs.
-
-### Final-study freeze — target October 18
-
-Do not run final inference until all items are recorded:
-
-1. Eligible primary model or genuine teaching-team acceptance; authorized endpoint/access; F2 capability and development qualification; known versus unavailable backend/settings metadata.
-2. Chosen prompt/parser/provider configuration; exact solver/reference limits, proof policy and worker/seed; no unsupported request controls.
-3. F3 candidate-policy version, full development exclusions including inspected/rejected development candidates, fresh original/updated structures, actual family counts, label/event/mechanism allocation and rejection ledger.
-4. Human gold/wording review; realistic provenance; all selected equivalent variants checked; no hidden label-bearing public metadata.
-5. Explicit frozen blocks and compatible cross-block analysis; canonical primary estimand, strata, conditional denominators, grouped uncertainty, failure/exclusion rules and optional-repeat decision.
-6. Successful offline frozen rehearsal, stop/resume/accounting checks and usable reproduction instructions. Test approval fixtures never masquerade as real approvals.
-7. Actual approved request/token/resource budget and stop conditions for every block; no reuse of consumed allowances.
-
-Before freeze, development findings may change provisional settings. After final outcomes are available, any behavior-changing fix must be recorded with its affected results and a revised experiment decision. Preserve the original run and do not tune against its outcomes while still calling the replacement an untouched confirmatory study.
-
-### Gate C — defensible results
-
-- Every planned attempt is present or its missing/uncertain status is disclosed; failures remain in denominators.
-- Saved outputs rescore exactly; reference proofs/bounds, pairing, strata and actual family counts are checked.
-- Report controlled, realistic and wording results separately. Include repair quality, semantic failures, uncertainty, time/token use, construction assumptions and limits.
-- A teammate independently replays the reviewed archive without a key and verifies key tables/figures. A live rerun is separate evidence, not exact response reproduction.
-
-### Gate D — report and submission readiness
-
-- Section 17's claim/figure/page audit passes, essential arguments remain within ten pages, and findings are supported even if the preferred method loses.
-- Responsible-AI cases relate to actual system behavior; fair allocation or adversarial robustness is not claimed without evidence.
-- Genuine member contributions, AI assistance and consulted sources are disclosed. Every member can explain the complete study and answer questions.
-- Presentation and recorded fallback are rehearsed; course requirements/Canvas feedback and actual receipts are checked. No unresolved critical code or evidence defect remains.
-
-## 12. Responsible AI and limitations
-
-Use synthetic schedules initially. Real routines can reveal identity and sensitive activities even after names are removed; any later real-data collection needs consent and a defined retention/access policy. Never commit raw private calendars or personal student identifiers.
-
-Measure per-participant inconvenience for valid repairs: count moved activities involving each participant and sum their absolute start shifts; show the distribution and maximum burden. A shared activity contributes to every involved participant, so these totals need not equal the schedule-level objective. Fixed participant assignments permit analysis of unequal disruption, not a claim of fair workload allocation. Explain this simplification of the proposal's fairness ambition in the report. A fairness-aware alternative objective is optional and must disclose its trade-off with total disruption.
-
-Explanations must refer to actual interpreted constraints and validation results. Do not present an LLM narrative as a solver proof or a purported minimum conflict set without verification. Keep ambiguous requests separate from clean benchmark cases; do not silently guess negotiability.
-
-Treat instruction-like text embedded in activity descriptions as untrusted data. Schema validation and a fixed compiler restrict its effect; neither provides a guarantee that extraction is correct. Test this boundary on synthetic adversarial variants, separately from meaning-preserving paraphrases.
-
-The system proposes schedules. It does not send messages or modify calendars. Future external actions require explicit user control. A mathematically optimal schedule can still be undesirable because of missing constraints or poorly selected objectives.
-
-## 13. Risks and pre-agreed responses
+## 13. Risks and responses
 
 | Risk | Response |
 | --- | --- |
-| Shared changes break integration | Preserve the implemented v1 contract and shared fixtures; review interface changes and merge small PRs with consumer regressions |
-| Final evaluation model eligibility/access is unresolved | Resolve by Oct 18 with a qualifying authorized model or documented teaching-team acceptance; keep SoCLaaS development progressing, hold main runs, and record any schedule impact |
-| Unreliable formalization | Measure it explicitly; simplify supported language/schema before freeze; retain failures |
-| Quota, cost, latency, or rate limits | Pilot first; bounded concurrency and retries; reduce predeclared sample size/repeats before dropping core comparisons |
-| Reference optimality cannot be proven | Reduce pilot difficulty or report bounds/unknown gaps; never invent gold optima |
-| Shared solver/validator defect | Separate implementations and exhaustive tiny-case cross-checks |
-| Excessive scope | Defer further UI expansion, feedback, extra models and long horizons; generation-only fallback requires an explicit scope decision |
-| Unequal workload or absence | Rebalance at weekly checkpoints; keep reviewable intermediate work on branches |
-| Provider/model drift after freeze | Record change and separate or rerun affected experiment blocks within budget |
+| Course model interpretation unresolved | Check real feedback; obtain targeted clarification before claiming eligibility |
+| Gold/text mismatch or compiler bug found | Preserve original evidence, diagnose independently, record impact; new study only if claims require it |
+| Strong-model ceiling | Analyse optimum quality, resources and limits; do not change scores or benchmark to manufacture a win |
+| Provider/backend variation | Preserve failure coverage/fingerprints; keep shared-service interpretation and no causal speed claim |
+| Private historical records lost | Verified local preservation bundle plus tracked full-run replay archives; a same-machine backup is not protection against device loss |
+| Report overclaims human work | Keep assistance explicit; require actual member revisions and review records |
 
-## 14. Git workflow and reproducibility
+## 14. Git, portability and evidence preservation
 
-`main` contains the integrated baseline. Member branch tips may still point to earlier contributions; inspect ancestry and merge current `origin/main` normally before extending them. Matching branch heads are no longer a project invariant. Each member uses their own clone; agents must verify their branch and worktree before editing. Never switch branches in another member's active checkout.
+Use the Python 3.12 hashed lockfile and noneditable installed checks for handoff. macOS and Linux are documented targets; this publication's current suite was executed on macOS and prior Linux receipts apply to their recorded source. Native Windows is unqualified. The runner uses POSIX file locks. CPU-only computation is local; remote model latency includes hosted service conditions.
 
-After bootstrap, use small PRs from the assigned branch to `main`, with one other member reviewing and relevant checks passing. Include behavior, validation, and scientific impact. Sync from `origin/main` regularly by a normal merge on shared branches; do not rewrite published history or force push. When scope overlaps, agree a single editor. No branch protection is assumed until configured and verified.
+Preserve existing work, inspect diffs, stage explicit paths and scan for secrets before publication. No force pushes, history rewrites, silent branch switches or deletion of run history. Publish only with user authorization. After publication verify the actual remote SHA and a clean source/artifact checkout, not just command exit status.
 
-Commit source code, tests, small synthetic fixtures, benchmark generation configuration/manifests, dependency lockfiles, report sources, and reviewed aggregate results. Keep secrets, raw/private data, caches, environments, and large run artifacts out of Git. Never use `git add .` without inspecting all candidate files.
+The former `report/` directory is now `docs/`. Active links and scripts use the new path; original paths inside immutable archives/receipts remain unchanged. Keep the approved byte-for-byte reproduction archives in `results/archives/` and verify them against `results/evidence-manifest.json`. Private full-run/source/capability/supervisor/pause and historical traces are preserved in the separately checksummed bundle described by [evidence.md](docs/evidence.md). Do not overwrite either original or archived results. Saved traces are recorded final outputs and metadata, not complete raw HTTP captures or hidden reasoning.
 
-Maintain immutable run directories and manifest hashes; fixes require a new run ID. Offline/mock success, provider connectivity, and actual benchmark results are separate evidence classes.
+## 15. Active decisions
 
-### Portable runtime and supported environments
-
-Li Hao owns packaging and CI. The current `pyproject.toml` requires **Python 3.12** and `requirements.lock` pins and hashes the installed dependency set. Verify OR-Tools and provider-client compatibility before freezing versions. Use CPU execution locally and remote model inference; a GPU, local model server, paid desktop app, or developer-specific environment must not be required.
-
-Supported targets are macOS and Linux, verified from fresh environments by Gate B. Windows users can use WSL2 with the Linux workflow; native Windows support is optional and must not be claimed without a check. Keep POSIX shell examples labelled. Use repository-relative paths or explicit CLI/config paths and `pathlib`; no hardcoded home directories, absolute personal paths, shell-only business logic, or implicit local timezone. Configuration changes must not require source edits.
-
-Maintain the implemented installable CLI for fixture generation, gold solving, single-case A/B execution, validation, development batch/resume, offline replay and metric/figure export. Preserve its implemented frozen-evaluation controls. Add only the specific F2/F3/F5 preparation or compatibility support still needed, without a parallel runner, generic plugin framework or service layer. Freeze the command syntax with the implementation and document only commands actually tested. Maintain documented offline examples and explicitly selected live smoke examples; do not invent commands or repeat a live check without a relevant reason and cap. Routine tests and CI run offline. Validate outputs semantically across platforms: different tied optimal schedules are acceptable; compare feasibility, objective tuple, and recorded proof status.
-
-When intentionally updating dependencies, regenerate the existing lock with pip-tools 7.5.1 and inspect the resulting pins/hashes; normal installation uses the committed lock:
-
-```sh
-pip-compile --allow-unsafe --extra dev --extra solver --extra plots --generate-hashes --strip-extras --no-emit-index-url --no-emit-trusted-host --output-file requirements.lock pyproject.toml
-```
-
-Pip-tools is a lock-maintenance tool, not a runtime prerequisite. Preserve the single lock and validate installation plus affected tests after a justified change. Current pins include HTTPX 0.28.1, truststore 0.10.4, certifi 2026.7.22, OR-Tools 9.14.6206 and Matplotlib 3.10.8; the `solver` compatibility extra is empty because CP-SAT is already a runtime dependency.
-
-### Bounded execution and restart behavior
-
-Yong Qing owns run bookkeeping. Identify attempts by base/variant/task/approach/model-config/repeat ID and immutable config hashes. Write each completed attempt atomically and save manifest/progress incrementally. Resume only matching configurations and reuse completed records without another API call; configuration changes create a new run. Keep interrupted/uncertain requests visible because the provider may already have charged them. Any retry is explicit, bounded, recorded, and counted toward the approved cap.
-
-Begin with one worker and a small pilot. Scale with bounded concurrency and disjoint instance shards under verified rate limits; each attempt has one owner. The current replay loads saved records for scoring, and the dashboard caches checked runs. This is qualified at the present project scale, not an unbounded streaming implementation. Profile before increasing scale; add streaming or bounded concurrency only if measured demand warrants it. A database/service is unnecessary at this scale; per-attempt files plus a manifest are sufficient. Include stop conditions for budget exhaustion, persistent authentication/rate-limit failures, or invalid reference results.
-
-### Reproduction package
-
-By Gate C, preserve a versioned package containing synthetic benchmark inputs/gold references, frozen prompts/configs, sanitized attempt records, status/usage accounting, and scripts that regenerate all reported tables/figures. Include checksums and a short manifest-to-figure index. Keep small configurations and aggregate outputs in Git; share larger reviewed synthetic records in a team-accessible archive with a recorded checksum and location. Ignoring `runs/` must not make the reported results unrecoverable. Retain failed attempts and disclose any redaction affecting reproducibility.
-
-Offline replay must reproduce metrics from saved outputs without credentials or live model access. Exact live text and exact tied solver schedules are not guaranteed; retain their original records and separate reruns. Keep a replay-based demo available for presentation failures and label it clearly as recorded evidence.
-
-## 15. Active decisions and evidence history
-
-| Decision | Current status and rationale |
+| Decision | State |
 | --- | --- |
-| Scientific direction | Preserve direct reasoning versus extraction plus CP-SAT for generation and repair; no broader assistant/calendar product |
-| Formal contract | Implemented v1 integer-slot/fixed-assignment semantics and lexicographic `(M,T,P)`; human review pending |
-| Development reference | `qwen3.6:35b`, extraction revision 3 and the unchanged 100-case study |
-| Current development campaign | Authorized Qwen3.8 full 600-attempt campaign with two capability checks and one metadata request; live results pending; no final eligibility approval |
-| Final-model decision | Open; resolve endpoint/settings and course eligibility before freeze |
-| Final data | F3 builder/policy pilot verified; actual policy/size decision and fresh reviewed draw pending; target 600 calls or compact 312 only by an explicit pre-outcome decision |
-| Human realistic policy | Retained team commitment; AI-assisted drafts remain development and retain their actual provenance |
-| Remaining engineering | F1 regressions complete; prompt experiment waits for F2; F3 policy pilot, F4 synthetic rehearsal and F5 core join/archive verified; actual selection/review/final study and optional repeat mapping remain gated |
-| Resource authorizations | Previous live allowances, including the 200-call expansion, are consumed. The catalogue check used one newly requested metadata call, zero completions. Future envelopes are proposals |
-| Publication | The checkpoint builds on `63d68d8`; verify current local/remote commit identity on handoff. Historical receipts retain their audit-time publication status; raw-record archive delivery remains a Gate C task |
-| Human/course decisions | No fabricated review, proposal receipt, eligibility acceptance, final freeze or submission is implied |
-
-Historical evidence remains in [baseline validation](report/main-baseline-validation.md), [Yong Qing's v2 analysis](report/yongqing-evaluation-followup.md), [v3 construction](report/yongqing-v3-development.md), [neutral request-boundary qualification](report/lihao-request-boundary.md), [formal review](report/yaoxiang-reference-review.md), [revision-3 qualification](report/yaoxiang-availability-followup.md), [version 2 integrity verification](report/version-2-validation.md), the [expanded study](report/expanded-development-100.md), and the [readiness audit](report/checkpoint-readiness.md). Their original runs, source/configuration hashes and scores are preserved. Earlier branch-publication instructions describe their checkpoint and do not grant new publication or inference permission.
-
-For each new material decision, record the question, chosen option, evidence/alternatives, affected semantics or comparison, owner/reviewer, source/config version and actual authorization when needed. Keep task chronology and raw logs in their run/review artifacts; this section should communicate current decisions rather than accumulate stale instructions.
+| Report evidence | Completed two-model exploratory comparisons; explicitly not held out |
+| Major implementation | Delivered; only defect-driven maintenance needed for this report |
+| Extra model/fresh holdout | Conditional future work, not automatically required by course |
+| Provider eligibility | Pending exact interpretation/feedback |
+| Human review/authorship | Actual actions still required; cannot infer from tests, branches or assigned roles |
+| Publication | User authorized commit and push to GitHub main for this finalization |
+| Further inference | Not authorized by publication; prior full-run allowances consumed |
 
 ## 16. Source grounding
 
-- Group 23 project proposal: problem definition, two approaches, schedule repair, evaluation metrics, and research scope. The current implementation schedule and responsibilities are defined in this plan.
-- CS3263 Project.pdf and CS3263-Project-Guidelines 2627.docx: course comparison requirement, deliverables, evaluation, responsible AI, team contributions, and AI-assistance disclosure.
-- ResponsibleAI.pptx: privacy, fairness/trade-offs, transparency, adversarial behavior, unintended effects, and human control.
-- [SCHEDBench](https://arxiv.org/abs/2608.00991): scheduling under equivalent language forms.
-- [NATURAL PLAN](https://arxiv.org/abs/2406.04520): natural-language planning and complexity.
-- [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/): formal-tool-assisted planning and verification.
-- [CP-SAT](https://developers.google.com/optimization/cp/cp_solver): integer modeling and distinct solver statuses.
-- [SoCLaaS](https://dochub.comp.nus.edu.sg/cf/guides/soclaas/start) and NUS SoCLaaS connection instructions: API configuration. Institutional documentation access and actual provider capability are separate checks.
+The original *Project.pdf*, *CS3263-Project-Guidelines 2627.docx*, *ResponsibleAI.pptx* and Group 23 proposal govern scope and grading. They are private course inputs, not uploaded to public Git. [The source audit](docs/two-model-development-audit.md#course-proposal-and-remaining-delivery) and [submission checklist](docs/submission-checklist.md) give page/paragraph locators.
 
-### Research basis for the recommendations
+The report cites NATURAL PLAN, minimal-perturbation work, language models as planning formalizers, CP-SAT-LP and official OR-Tools statuses. These primary sources motivate design; they do not establish our scores or course rules. [The historical research plan](docs/development-plan-history.md#research-basis-for-the-recommendations) preserves the broader literature review and release-matched technical sources without making them mandatory features.
 
-These sources inform design, not course rules or predicted scores. The implications below are project decisions; distinguish them from the authors' reported findings in the report. Cite the original research, and verify API details against the package version actually locked during implementation.
+## 17. Report and presentation delivery
 
-| Primary source | Relevant evidence | Implication and boundary for this project |
-| --- | --- | --- |
-| [NATURAL PLAN](https://arxiv.org/abs/2406.04520) and [authors' evaluation repository](https://github.com/google-deepmind/natural-plan) | Studies natural-language planning with supplied task information, complexity variation, and executable response evaluation | Supply sufficient information to both paths and evaluate saved outputs. This motivates the design; their older model scores are not predictions for our models or scheduling tasks. |
-| [SCHEDBench, Sections 4.2–4.4 and Appendix A.6–A.7](https://arxiv.org/html/2608.00991v1) | Paired scheduling renderings, semantic audits, rendering-seed sensitivity, and feasible-only objective reporting | Preserve pairing and audit wording. Separate model-repeat noise from rendering variation. Do not equate a benchmark best-known solution with a proven optimum or adopt its scale as a course requirement. |
-| [TCP, EMNLP 2025](https://aclanthology.org/2025.emnlp-main.1142/) and [construction details](https://arxiv.org/html/2505.19927v2) | Separates abstract temporal-problem construction, naturalistic language realization and quality checking | Audit structural correctness and language fidelity separately; use independent realistic prose to test renderer-specific assumptions. Its richer temporal rules and results do not justify expanding our schema or predicting our scores. Section 8 records dataset compatibility decisions. |
-| [Hao et al., NAACL 2025](https://aclanthology.org/2025.naacl-long.176/) | Reports a formal-solver planning framework and handling of infeasible requests | Supports studying tool-assisted planning, but does not establish that our extraction is correct or guarantee its reported success rate here. Our fixed JSON-to-CP-SAT pipeline is a bounded design choice. |
-| [Barták, Müller and Rudová, Minimal Perturbation Problem — A Formal View](https://www.unitime.org/papers/ercimprelimin03.pdf) | Formalizes changing a constraint problem while limiting deviation from its previous solution; also discusses broader partial-solution variants | Grounds the repair task in existing constraint research. Our complete schedules, fixed activity set and specific three-stage objective are a narrower chosen formulation; minimum-disruption repair itself is not a novelty claim. |
-| [OR-Tools scheduling example](https://developers.google.com/optimization/scheduling/job_shop), [solver statuses](https://developers.google.com/optimization/cp/cp_solver), and [gap parameters](https://github.com/google/or-tools/blob/v9.14/ortools/sat/sat_parameters.proto) | Documents interval/non-overlap modeling, solver outcomes, and tolerance-based stopping | Use supported primitives and preserve proof/bound distinctions. Exact reference optimality needs appropriate settings; an infeasibility result applies only to the compiled specification. |
-| [The CP-SAT-LP Solver, CP 2023](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.CP.2023.3) | Describes the solver's integration of constraint/SAT reasoning, linear methods and search techniques | Keep global scheduling constraints and the mature backend. Our contribution is the problem formulation, faithful translation, repair design and analysis; extra search machinery is justified by evidence, not algorithm names. |
-| [OR-Tools v9.14 scheduling](https://github.com/google/or-tools/blob/v9.14/ortools/sat/docs/scheduling.md), [hints](https://github.com/google/or-tools/blob/v9.14/ortools/sat/docs/model.md#solution-hinting), and [assumption/proof fields](https://github.com/google/or-tools/blob/v9.14/ortools/sat/cp_model.proto) | Release-matched modeling and search/explanation interfaces | Ground Section 7's interval/hint choices and conflict-diagnostic limits in the locked release. Installed model validation confirms direct NoOverlap enforcement is unsupported; do not assume generic reification or minimum conflict guarantees. |
-| [On the Limit of Language Models as Planning Formalizers, ACL 2025](https://aclanthology.org/2025.acl-long.242/) | Finds formalization benefits in studied planning settings, but degradation as descriptions become more natural; analyzes syntax and semantic errors | Measure parsing, semantic fidelity, and final validity separately. Keep human-written scenarios distinct from templates. PDDL planning findings motivate diagnostics, not numerical predictions for CP-SAT scheduling. |
-| [Language Model as Planner and Formalizer under Constraints (CoPE), ACL 2026](https://aclanthology.org/2026.acl-long.624/) | Tests direct planning and formalization with additional fine-grained natural-language constraints and reports substantial performance losses | Study meaningful constraint interactions and inspect omissions/alterations, not just task counts. Do not assume either path will win or transplant the paper's scores. Use the published ACL version when citing its experimental details. |
-| [LLM-Modulo position paper, ICML 2024](https://proceedings.mlr.press/v235/kambhampati24a.html) | Advocates combining LLM proposals with external model-based verification and feedback | Motivates independent checking. Its position is not proof that every current LLM fails to plan; feedback is a separately budgeted optional arm, not hidden assistance to either core path. |
-| [NL2Plan, version 2](https://arxiv.org/abs/2405.04215v2) | Develops a staged natural-language-to-PDDL planning pipeline with intermediate representations | Retain inspectable extracted specifications. A multi-call domain-generation pipeline is an alternative, not needed for our fixed scheduling schema; adopting it would change scope, latency, and comparison budget. |
-| [Adding Error Bars to Evals](https://arxiv.org/html/2411.00640v1) and [NIST binary-proportion intervals](https://www.itl.nist.gov/div898/handbook/prc/section2/prc241.htm) | Explain paired/clustered evaluation uncertainty and alternatives to unreliable simple normal intervals for proportions | Preserve related-case grouping, show uncertainty and small-cell denominators, and freeze the analysis procedure. These sources inform Section 8's statistical choices; they do not prescribe our sample counts or make the constructed benchmark representative. |
+The canonical source is [docs/submission-report.md](docs/submission-report.md), rendered by `scripts/render_report.py` to `docs/submission-report.pdf`. The previous 200-call report is preserved as historical material. The current narrative covers abstract, motivation/questions, related work, CSP/COP and repair, architecture, provenance/protocol, acceptance/SAT/UNSAT/difficulty/optimization/extraction/wording/resources, implications, responsible AI, reproducibility, contributions and conclusion. [claim-evidence.md](docs/claim-evidence.md) connects these to artifacts.
 
-Current model screening also uses the [Qwen3.8 model card](https://huggingface.co/Qwen/Qwen3.8-27B), [Gemma 4 model card](https://ai.google.dev/gemma/docs/core/model_card_4) and [Ornith 1.5 authors' card](https://huggingface.co/ornith-ai/Ornith-1.5-35B-A3B), checked alongside the authenticated SoCLaaS catalogue on 30 September. They motivate candidate selection; hosted aliases, supported controls, scheduling quality and course eligibility still need the separate Section 9 checks. Do not transfer published benchmark scores into this project's expected results.
+Regenerate figures offline from the portable summary. Compact report figures use labels at least 11 pt at the final page width. Rebuild and inspect every page after substantive changes; confirm body page count, single column/spacing, text size and one-inch margins. Title and references are excluded from the ten-page body maximum. Actual final revisions may change the current count.
 
-Apply new literature selectively: a source may improve a diagnostic, explain a limitation, or justify deferring an alternative without becoming a new implementation requirement. The core remains a single direct call versus a single extraction call plus fixed CP-SAT, for both generation and repair. Further research is welcome when it resolves a concrete design uncertainty; record evidence and coordinate changes that affect the scientific contract.
-
-The intended distinction from prior work is this study's combined analysis of direct versus extracted-spec solving, minimum-disruption repair, and wording sensitivity in a small personal/shared scheduling domain. Describe it as a scoped empirical contribution; any stronger novelty claim needs a broader literature review. A CLI, fixed compiler, sequential repair optimization, and simple file-based runner are engineering recommendations for auditability and the four-week budget, not methods proven universally best by these papers.
-
-## 17. Rubric evidence and course delivery
-
-The teaching handout provides qualitative criteria, not numerical weights or a guaranteed top-grade checklist. Use this mapping to gather substantive evidence; implementation claims and research conclusions still require validation. Prioritize a few well-explained findings: where solver assistance helps or fails, why translation errors matter, and what repair changes for users. A finding that direct reasoning is competitive or that solver assistance does not help can be valuable when the experiment and analysis are sound. The proposed small difficulty cells support exploratory patterns with uncertainty, not precise thresholds or broad causal claims.
-
-| Teaching criterion | Project evidence | Lead and review |
-| --- | --- | --- |
-| Motivation, problem definition, relevance | Concrete personal/shared scheduling use case; explicit variables, domains, constraints, objectives, and assumptions | Li Hao + Yao Xiang; all review |
-| Innovativeness and literature | Comparison of related work's task, method, metrics, and limitations; precise account of what this study adds without unsupported novelty claims | Li Hao; Yao Xiang reviews |
-| Knowledge, technical depth, achievement | Section 7 CSP/COP equations, exact repair method, domain reasoning/proof boundaries, worked coupled-repair example and independent correctness checks | Yao Xiang; Yong Qing reviews |
-| Methodology and implementation | Frozen paired design, clean split, fair model access, reference proofs/bounds, tested pipelines, portable reproduction package | All component owners |
-| Analysis and insights | Section 8's four evidence outputs, failures, uncertainty, assumptions, tool limitations, and recommendations supported by results | Yong Qing integrates; all interpret |
-| Responsible AI | Four bounded case analyses; privacy boundaries, unequal inconvenience, objective choice, transparency, and user control | All; Li Hao edits |
-| Effort, initiative, teamwork | Actual contribution log linked to PRs, experiment/review work, and report sections; AI-assistance disclosure | Each member records; leader reconciles |
-| Report quality | Technical accuracy, coherent argument, readable figures, clear writing, citations, strict page/format audit | Li Hao assembles; rotating review |
-| Presentation and Q&A | Timed coherent explanation, legible results/demo, rehearsed questions, each member able to explain the whole study | All three |
-
-### Report structure and evidence budget
-
-Create one report source under `report/` and one claim-to-evidence index; choose a practical writing format once, without building a document framework. Each claim entry identifies the exact run/block/config, subset and denominator, script/table/figure, reviewer and limitation. Mark development findings explicitly. Do not write expected final scores into the abstract or conclusion.
-
-| Body section | Page budget | Required content/evidence |
-| --- | ---: | --- |
-| Motivation and questions | 0.75 | Concrete scheduling/repair need, scoped questions and assumptions |
-| Related work and contribution | 0.75 | Compare tasks, methods and evaluation boundaries; no claim of inventing CP-SAT or minimum perturbation |
-| Formalization and repair | 1.50 | Variables/domains/constraints, exact `(M,T,P)` objective, proof/timeout meanings and one coupled repair |
-| Systems | 1.00 | One architecture figure, equal public inputs, model/provider/settings and gold separation |
-| Dataset and protocol | 1.50 | Origin/families, controlled versus realistic/wording blocks, exclusions, model eligibility, frozen settings and primary estimand |
-| Results and failure analysis | 2.50 | Canonical task/label table, difficulty trends, conditional repair quality, extraction failures, paired wording and resource trade-off |
-| Responsible AI and limitations | 1.00 | Concrete cases, realism/generalization limits, objective choice, privacy and user control |
-| Synthesis, contributions and AI disclosure | 1.00 | Answer the questions with bounded claims; actual member/AI work; no unsupported future-performance promise |
-| **Total body** | **10.00** | Includes all substantive figures, tables and discussion; title/references separate |
-
-The result section should make a few connected findings clear rather than fill pages with every available chart. Use a compact composite figure/table when it helps; archive secondary detail but retain the essential argument within the body limit.
-
-| Evidence artifact | Interpretation check |
-| --- | --- |
-| Canonical A/B table by task and SAT/UNSAT | Show successes/denominators, errors/UNKNOWN and source-family count; no pooling of language repeats |
-| Paired difference and difficulty plot | Explain construction factors, sample size and uncertainty; tiny cells cannot establish thresholds |
-| Repair example and objective summary | Common old schedule, moved IDs, shifts, preference penalty and exact/proven bounds; conditional denominators visible |
-| Extraction failure table/example | Distinguish syntax, meaningful omission and equivalent encoding; compiled proof is not source-language correctness |
-| Paired language transitions | Verify compatible blocks and equivalent text; distinguish successful robustness from consistently invalid answers |
-| Time/token table | Usage coverage; mean/median/p95/max, solver subset, full wall time, actual settings and unknown currency prices |
-| Reproduction manifest | Exact source/config/data/record checksums, commands, claim index and independent teammate receipt |
-
-### Responsible-AI case analysis
-
-Use four bounded synthetic cases, selected from development or reviewed realistic material; no new large benchmark is required. For each, explain the potential harm, observed system behavior, mitigation and residual limitation:
-
-1. **Unequal inconvenience:** show participant moved-event/shift accounting; explain why global minimal disruption need not distribute burden evenly.
-2. **Objective side effect:** compare two valid repairs that trade moved count against shift/preference. Explain the chosen lexicographic priority rather than claim it is universally desirable.
-3. **Ambiguous negotiability/privacy:** distinguish hard constraints from preferences, avoid collecting real calendars and explain that anonymized routines may still identify people. Do not silently choose what a user can relax.
-4. **Instruction-like task text:** inspect the data/prompt boundary and a synthetic example. A separation regression is not empirical proof of adversarial robustness; report only behavior actually tested.
-
-Members should write their own interpretation of these cases and critique the model/formalization assumptions. The guidelines require honest contributions and explicitly caution against having LLMs do all the work. Record code, review, experiment, analysis and writing contributions with actual evidence; disclose assistance without presenting agent-generated material as independent human work.
-
-### Report and presentation review
-
-Before the October 30 draft, one member other than each section's author verifies mathematical claims and run/figure links. Check that every percentage has a denominator, all model identities/settings match their run, and development results are not labelled final. Recompute key tables from the archive. Audit references for original sources, accurate paraphrase and applicable data/code attribution. Inspect the rendered report's actual pages, font, margins, figures and table legibility; do not rely on source word count.
-
-Prepare a 15-minute presentation: motivation/questions (2 min), formulation/systems (3), benchmark/fairness of comparison (2), results/failures (5), responsible AI/limitations (2), conclusion (1). Rehearse the five-minute Q&A: why CP-SAT, why lexicographic repair, how gold is checked, why UNKNOWN differs from UNSAT, why extraction can invalidate a proof, dataset bias/families, why the model qualifies, and when direct reasoning is preferable. Every member should answer beyond their own component.
-
-Use the current read-only dashboard for one successful repair and one extraction failure. Prepare a recorded replay that requires no API access and label it as recorded evidence. Avoid making a live model demo the only evidence of reproducibility.
-
-### Submission checklist and dates
-
-- **Now:** verify the mandatory September 28 proposal receipt and feedback privately; a missing repository receipt does not imply non-submission.
-- **By October 18:** complete the actual final-study decisions and freeze; no pending approval represented as complete.
-- **By October 30:** complete report draft, figures, reproduction package, genuine contribution/AI disclosure and presentation material.
-- **November 2–6:** cross-review and timed rehearsal; confirm exact Canvas presentation/video arrangements and report cutoff.
-- **Week of November 9:** present or submit the required recording and verify delivery.
-- **By November 12, ahead of the November 13 deadline:** audit the <=10-page body, single spacing/column, >=11pt font, 1-inch margins, references and private title-page member identifiers; upload and retain actual receipt.
-
-These are planned actions, not claims of submission or instructor approval. The qualitative rubric rewards soundness, difficulty/achievement, insight, responsible AI, clear writing and understanding. This plan aims to produce that evidence; it cannot guarantee a grade.
+Produce the actual presentation using a clear problem example, formal repair objective, comparison diagram, three evaluation blocks, the model-dependent finding, one extraction failure, the quality/cost trade-off and responsible-AI limits. Rehearse the whole pipeline and questions on gold independence, generated data, backend failures and solver proof. A storyboard is preparation, not delivery. Record genuine contributions, citations, AI assistance and final submission receipts; no grade or course acceptance is inferred from repository publication.
