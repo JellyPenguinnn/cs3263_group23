@@ -8,9 +8,9 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 - [x] Both full 600-attempt comparisons are complete; all failed attempts remain scored and both archived analyses reproduce offline.
 - [x] Current report replaces the older 200-call results with two-model acceptance, SAT/UNSAT, difficulty, paired uncertainty, optimality, extraction, wording and resource analysis.
 - [x] Three grouped bar charts derive from the saved summary, with exact denominators and consistent scales.
-- [x] Report covers formulation, design, related work, limitations, responsible AI, reproducibility and disclosed AI assistance.
+- [x] Report covers formulation, design, related work, dataset construction, protocol, results, separate responsible-AI and limitations sections, and disclosed AI assistance. Reproducibility details remain in the accompanying evidence documentation.
 - [x] Two original replay archives are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
-- [x] Public report rendered and all eleven pages visually inspected: title page 1, nine body pages 2-10, references page 11. Text, mathematical subscripts and compact figure labels are at least 11 pt, with one-inch margins and a single column. The [format receipt](../results/summary/submission-report-format.json) binds this check to exact bytes.
+- [x] Public report rendered and all twelve pages visually inspected: title page 1, ten body pages 2-11, references page 12. Text, mathematical subscripts and compact figure labels are at least 11 pt, with one-inch margins and a single column. The [format receipt](../results/summary/submission-report-format.json) binds this check to exact bytes.
 
 The previous report and format check are historical. Every substantive revision, new figure or private-title edit requires an appropriate fresh render/check; do not reuse a previous page count for a changed document.
 

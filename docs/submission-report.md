@@ -12,15 +12,17 @@ Public report copy. Matriculation numbers and email addresses belong on the priv
 
 ## Abstract
 
-We compare direct language-model scheduling with language-model extraction followed by a fixed constraint solver. The task includes generating a feasible schedule and repairing a previous schedule after a requirement changes, minimizing disruption lexicographically. Both approaches receive equivalent descriptions and one model call; an independent validator checks the returned schedule against evaluator-only gold constraints. Two hosted Qwen models each complete 600 scheduling attempts across controlled synthetic cases, fictional realistic scenarios and equivalent wording variants. On controlled cases, solver augmentation raises Qwen3.6 acceptance from 95/240 to 229/240. Qwen3.8 reaches 239/240 directly and 240/240 with the solver, but its direct repair is suboptimal in one otherwise valid case. All nine Qwen3.8 rejections across the three blocks are provider failures. Model calls dominate solver runtime. The results demonstrate a model-dependent trade-off between direct reasoning, formal optimization and extraction overhead. Known development inputs, limited language diversity and shared-service execution restrict generalization; no held-out or production-reliability claim is made.
+This project investigates an AI assistant for generating schedules and repairing them when requirements change. Activities must satisfy hard constraints, while repairs should preserve existing commitments. We compare a language model that produces a schedule directly with a language model that translates the request into a specification for OR-Tools CP-SAT. An independent validator checks both against the original requirements. Two hosted Qwen models are evaluated on controlled synthetic problems, fictional realistic scenarios and equivalent wording variants. Evaluation covers feasibility, repair quality, extraction accuracy, time and token use. The report presents the formulation, implementation and experimental design, followed by comparative analysis, responsible-AI considerations and project limitations. Known development inputs support an exploratory study within a bounded scheduling domain.
 
-## 1. Problem, motivation and research questions
+## 1. Motivation and problem context
 
-A room becoming unavailable can force several activities to move even when only one activity's requirements change. Finding any feasible replacement may unnecessarily disrupt existing commitments. We study when a language model can handle this reasoning directly, when a formal solver helps, and what limits the combined system. Our questions concern hard-constraint validity, minimal-disruption repair, sensitivity to structural difficulty and wording, and resource cost.
+People balance work, education, family responsibilities and personal commitments. Organizing these activities requires coordinating individual availability, shared facilities and deadlines. Even arranging a meeting can become difficult when participants have conflicting schedules and suitable spaces are limited.
 
-The domain is deliberately bounded: mandatory non-preemptive activities, fixed durations and participant/resource assignments, capacity-one resources, and a single day divided into 30-minute slots. Requirements include availability windows, release times, deadlines, fixed appointments and precedence. Preferences penalize starts outside stated preferred windows. The system proposes a schedule or reports infeasibility; it does not edit calendars. Travel inference, multi-day planning and participant assignment are excluded.
+These arrangements must also adapt when circumstances change. An unavailable room or a revised deadline can affect several connected activities, creating clashes beyond the original disruption. An effective scheduling assistant should therefore produce a feasible replacement while preserving existing commitments wherever possible.
 
-The contribution is an inspectable experimental system that separates natural-language interpretation, formal feasibility, optimization quality and operational reliability. CP-SAT and minimum-perturbation repair are established methods; neither is claimed as a new algorithm. The value of the project lies in implementing and analysing a fair comparison and identifying when a correct solver still gives the wrong answer to the original request.
+Large language models offer a convenient way to express scheduling requirements in everyday language. However, a plausible response may overlook a constraint or introduce unnecessary changes. Formal solvers provide explicit feasibility checks and optimization, but their answers depend on an accurate translation of the original request into a structured specification.
+
+This project examines that trade-off by comparing direct LLM scheduling with an approach that combines LLM interpretation and constraint solving. We study both initial schedule generation and repair, evaluating whether improvements in validity and solution quality justify the additional time and computational resources. By assessing interpretation accuracy, feasibility and optimization separately, we identify the strengths and failure points of each approach.
 
 ## 2. Related work
 
@@ -30,11 +32,25 @@ Huang and Zhang study language models as PDDL formalizers and find that syntax, 
 
 ## 3. Formal model and repair objective
 
-For activity i, let s_i be its integer start, d_i its fixed duration and e_i = s_i + d_i its end. The horizon H is at most 48 slots. Its domain D_i contains starts from 0 to H-d_i satisfying all unary restrictions: release, deadline, fixed start, blocked intervals, and full containment in an availability window for every required activity, participant and resource. Each activity must fit inside one listed window; adjacent windows are not silently merged. Half-open activity intervals allow one activity to begin exactly when another ends.
+We model scheduling as a constraint satisfaction problem (CSP); adding preference and disruption objectives yields a constraint optimization problem (COP) [7].
 
-Precedence i before j requires e_i <= s_j. Every shared participant or resource imposes non-overlap on its activity intervals. Empty start domains encode contradictions, rather than malformed input. These variables, domains and hard constraints form a constraint satisfaction problem. Adding preferences produces a constraint optimization problem. A weighted preference contributes its weight when an activity starts outside its preferred start window. Generation minimizes the sum P(s).
+Let *A* be mandatory, non-preemptive activities over H <= 48 half-hour slots, with fixed participant/resource assignments. Activity i has fixed positive duration d_i, integer start s_i and end e_i = s_i + d_i. Its domain D_i contains starts from 0 to H-d_i satisfying release times, deadlines, fixed starts and blocks. The interval [s_i,e_i) must fit within one listed window for the activity and every required participant/resource; adjacent windows remain separate. An empty domain encodes infeasibility, not malformed input.
 
-Repair validates the previous schedule against the original specification, then solves the updated specification using the same activity identities and previous starts. Let *A* index activities and *K* index preferences. Each preference *k* has a weight, a preferred start window and a target activity *a(k)*. The indicator is 1 when its condition holds and 0 otherwise. The four expressions below define moved count, total shift, preference penalty and the repair objective, respectively:
+Precedence i before j requires e_i <= s_j. For every pair sharing a required participant or capacity-one resource, we require:
+
+```math
+e_i \leq s_j \;\vee\; e_j \leq s_i
+```
+
+Half-open intervals permit back-to-back activities. The compiler uses interval variables and `NoOverlap` [8]. Let *F* contain complete assignments satisfying every domain and hard constraint: the instance is satisfiable (SAT) when *F* is nonempty, otherwise unsatisfiable (UNSAT).
+
+Preference k in *K* assigns nonnegative integer weight w_k to activity a(k) starting outside its preferred half-open start window W_k. Generation minimizes P over *F*, without relaxing hard constraints. Each violation costs its weight once, regardless of distance. The indicator is 1 for a true condition and 0 otherwise:
+
+```math
+P(\mathbf{s}) = \sum_{k \in K} w_k\,\mathbf{1}[s_{a(k)} \notin W_k]
+```
+
+We validate the supplied schedule against its original specification, then solve the updated one, preserving identities and fixed assignments. Superscript "old" denotes previous starts. M counts moved activities; T measures absolute shift in slots:
 
 ```math
 M(\mathbf{s}) = \sum_{i \in A} \mathbf{1}[s_i \neq s_i^{\mathrm{old}}]
@@ -45,20 +61,18 @@ T(\mathbf{s}) = \sum_{i \in A} |s_i-s_i^{\mathrm{old}}|
 ```
 
 ```math
-P(\mathbf{s}) = \sum_{k \in K} w_k\,\mathbf{1}[s_{a(k)} \notin W_k]
-```
-
-```math
 \underset{\mathbf{s}\in F}{\mathrm{lexmin}}\;\left(M(\mathbf{s}),\,T(\mathbf{s}),\,P(\mathbf{s})\right)
 ```
 
-Here, *F* is the set of schedules satisfying all updated hard constraints; the superscript "old" denotes the previous start; weights and preferred windows are indexed by preference. A start outside its preferred window contributes that preference's weight once, regardless of distance. Lexicographic minimization gives moved count priority over total shift, and total shift priority over preference penalty.
+Here, *F* uses updated requirements. We minimize M first, then T among tied solutions, then P among solutions tied on both. This specializes minimum-perturbation repair [2].
 
-CP-SAT proves the best moved count M, fixes it, proves the best shift T, and finally minimizes P. Stages share a 30-second solve budget with zero absolute and relative optimality gaps. A valid incumbent may survive a timeout, but unproved later priorities remain unproved. `UNKNOWN` is distinct from `INFEASIBLE`, and `FEASIBLE` from `OPTIMAL`. A secondary objective gap is reported only when earlier priorities equal their proven reference values.
+Sequential stages fix only proven optima, sharing 30 seconds with zero absolute/relative gaps. An unproved stage stops optimization while preserving any feasible incumbent. `FEASIBLE` differs from `OPTIMAL`, and `UNKNOWN` from `INFEASIBLE` [5]. Secondary gaps require earlier objectives to match proven references. Solver claims concern the compiled specification.
 
-**Worked repair.** A, B and C each last one slot and share a resource over slots 0 to 3. Their original legal starts are A={0,1}, B={1,2}, C={0,1,2}, with original schedule (0,1,2). A new block removes A's start 0. The unique feasible repair is (1,2,0): moving A forces B and C to move. Its objective is (3,4,0), since the total shift is 1+1+2 slots. Fixing unaffected activities at their previous starts would incorrectly report infeasibility. Independent enumeration, arithmetic validation and CP-SAT agree on this small example.
+For example, three one-slot activities share a resource over [0,3), with legal starts A={0,1}, B={1,2}, C={0,1,2} and original schedule (0,1,2). Blocking A's start 0 forces the unique repair (1,2,0): all three move, with shift 1+1+2=4 and objective (3,4,0). Freezing activities unaffected by the new block would incorrectly imply infeasibility. Independent enumeration, arithmetic validation and CP-SAT agree.
 
-## 4. System design and comparison controls
+## 4. Software architecture
+
+The system separates request interpretation, schedule construction and evaluation. Both approaches enter the same independent validation and scoring process. Gold constraints and reference answers remain evaluator-only.
 
 ```mermaid
 flowchart LR
@@ -76,13 +90,15 @@ flowchart LR
   E --> D[Immutable records / replay /<br/>read-only dashboard]
 ```
 
-**A: Direct LLM.** One call returns a schedule or an infeasibility prediction. It receives neither a solver nor oracle feedback. **B: LLM-to-CP-SAT.** One call translates the same public information into the canonical specification; a fixed compiler constructs and solves the model. A neutral request identifier avoids exposing label-bearing evaluator IDs. Both repair paths receive the same original schedule and updated requirements. Malformed output, duplicate keys and omitted requirements are not silently repaired.
+The shared types in `schema.py` connect the two pipeline modules to solving and evaluation. The direct pipeline parses a returned schedule or infeasibility prediction; the solver-assisted pipeline parses a specification before invoking `solver.py`. Domain analysis builds legal starts, and the compiler creates interval constraints and objective stages. A neutral request identifier keeps label-bearing evaluator IDs out of extraction prompts. Both repair paths receive the same original schedule and updated requirements, with one model call and no corrective feedback. Malformed output, duplicate keys and omitted requirements are not silently repaired.
 
-The independent validator checks hard constraints and recomputes objectives arithmetically, without CP-SAT or its compilation helpers. A gold reference solve uses 60 seconds and supplies proven feasibility/objective information. Tiny exhaustive fixtures help detect shared modelling assumptions. The validator's independence reduces correlated errors but does not replace human review of whether the text and gold describe the intended problem. Solver proof applies to the extracted specification only.
+The separate `validation.py` module checks hard constraints and recomputes objectives arithmetically, without CP-SAT or its compilation helpers. Evaluation modules compare these checks with the gold references and aggregate the metrics. A gold reference solve uses 60 seconds and supplies proven feasibility/objective information. Tiny exhaustive fixtures help detect shared modelling assumptions. Independent validation reduces correlated errors but does not replace human review of text/gold correspondence. Solver proof applies to the extracted specification only.
 
-The runner reserves requests durably, saves responses and failures, rejects incompatible resume and supports offline replay. A read-only dashboard exposes progress, before/after schedules and evidence-bound explanations. Completed attempts are not retried. Transient timeouts, transport errors and selected service errors remain failed observations while later distinct attempts continue; authentication, model-identity and integrity failures stop dispatch. Long runs use independent process supervision. These controls preserve experimental accounting rather than improve model answers.
+The runner saves responses and failures without retrying completed attempts. A read-only dashboard shows before/after schedules and evidence-bound explanations. Transient service failures remain failed observations while later distinct requests continue; authentication, model-identity and integrity failures stop dispatch. Independent process supervision and durable request accounting prevent accidental reissuance.
 
-## 5. Dataset and experimental protocol
+## 5. Dataset construction and selection
+
+Constructed cases make requirements and labels inspectable. Controlled cases vary scheduling structure, fictional scenarios add practical context, and wording variants change expression while retaining the underlying problem.
 
 Each model was evaluated on the same 300 case/rendering conditions with both approaches, for 600 scheduling attempts. The controlled set contains 240 canonical cases from 120 source families: 120 generation and 120 repair cases, each balanced across 60 SAT and 60 UNSAT labels. Four construction sweeps vary activity count, unary slack, resource contention and constraint interaction, with three levels and 60 cases per sweep. Related generation/repair cases are not independent samples.
 
@@ -90,17 +106,23 @@ The realistic block contains twelve AI-assisted fictional scenarios, balanced ac
 
 All inputs are known project-generated development data. Public benchmarks informed methodology but supplied no instances. Controlled construction makes contradictions, objectives and difficulty parameters inspectable, while small templates and artificial SAT/UNSAT balance limit representativeness. These comparisons are exploratory; inspecting them cannot turn them into a held-out test. Earlier pilots and the separate 200-call study remain historical evidence and are not pooled here.
 
-The requested SoCLaaS identifiers were `qwen3.6:35b` and `qwen3.8:27b`. Both used the same 230-file source snapshot, Python 3.12.2/macOS ARM64 runtime, OR-Tools 9.14.6206, revision-3 prompts, cases and 600 request-prompt hashes. Configurations differ only in model ID. Each completion requested at most 32,768 output tokens; connect/read limits were 30/1,800 seconds, with no retries. Solver/reference runs used one worker and seed 0. Each campaign additionally made two capability completions and one metadata request.
+## 6. Comparison protocol and evaluation metrics
 
-Temperature, sampling and reasoning controls remained unexposed server defaults. Qwen3.6 reported three backend fingerprints and Qwen3.8 one. Hosted weight revisions, hardware and load were not controlled. Thus configuration comparability does not isolate model weights as a causal factor. Course eligibility of these exact hosted aliases remains a teaching-team interpretation, separate from their measured performance.
+Each approach processes 300 conditions per model: 240 controlled, twelve fictional realistic and 48 additional-wording conditions. This gives 600 attempts per model and 1,200 overall. Both receive equivalent information and one model call. Repair uses the same supplied original schedule, with no feedback-driven correction or retries.
 
-**Metrics.** Accepted-answer rate counts a gold-valid schedule or correct UNSAT response over all labelled attempts. SAT validity and UNSAT accuracy retain their own denominators. Objective matching is conditional on a gold-valid SAT schedule and proven reference objectives; failures do not receive zero gap. Structural extraction agreement is a diagnostic, not a complete semantic equivalence test. Time and token statistics retain missing coverage. Primary controlled, realistic and wording results stay separate.
+The SoCLaaS identifiers were `qwen3.6:35b` and `qwen3.8:27b`. Both used the same source, Python 3.12.2/macOS ARM64 runtime, OR-Tools 9.14.6206, revision-3 prompts and inputs. All 600 request-prompt hashes match across models; configurations differ only in model ID. Each completion requested at most 32,768 output tokens with connect/read limits of 30/1,800 seconds. Solver/reference runs used one worker and seed 0. Each campaign also made two capability completions and one metadata request.
+
+Temperature, sampling and reasoning controls remained unexposed server defaults. Qwen3.6 reported three backend fingerprints and Qwen3.8 one. Hosted weight revisions, hardware and load were not controlled. Thus configuration comparability does not isolate model weights as a causal factor. Course eligibility of these hosted aliases remains unconfirmed.
+
+Accepted-answer rate counts a gold-valid schedule or correct UNSAT response over all labelled attempts. SAT validity and UNSAT accuracy retain their own denominators. Objective matching is conditional on a gold-valid SAT schedule and proven reference objectives; failures do not receive zero gap. Structural extraction agreement is a diagnostic, not a complete semantic equivalence test. Time and token statistics retain missing coverage. Primary controlled, realistic and wording results stay separate.
 
 Within each controlled task, paired family bootstrap intervals resample source groups with replacement 10,000 times using seed 3263, retaining the A/B pairs. There are 120 pairs/families per task. These intervals quantify variability within the observed construction, not transfer to a real scheduling population. Only one model sample was taken per condition, so wording effects are not fully separated from sampling variation.
 
-## 6. Results and analysis
+## 7. Results and analysis
 
-**Acceptance.** Figures 1-3 compare the approaches on a common scale. With Qwen3.6, B accepts 229/240 controlled attempts (95.4%) versus A's 95/240 (39.6%). The corresponding realistic scores are 12/12 versus 6/12, and wording scores 47/48 versus 8/48. Qwen3.8 reaches 240/240 versus 239/240 controlled, 11/12 for both realistic arms, and 44/48 versus 46/48 wording. All nine rejected Qwen3.8 attempts are provider errors; every non-error returned scheduling answer is accepted (591/591). This conditional diagnostic does not replace failure-inclusive rates or prove perfect reasoning.
+We report the three evaluation blocks separately, examining answer acceptance, objective quality and resource use alongside the observed failures.
+
+Figures 1-3 compare the approaches on a common scale. With Qwen3.6, B accepts 229/240 controlled attempts (95.4%) versus A's 95/240 (39.6%). The corresponding realistic scores are 12/12 versus 6/12, and wording scores 47/48 versus 8/48. Qwen3.8 reaches 240/240 versus 239/240 controlled, 11/12 for both realistic arms, and 44/48 versus 46/48 wording. All nine rejected Qwen3.8 attempts are provider errors; every non-error returned scheduling answer is accepted (591/591). This conditional diagnostic does not replace failure-inclusive rates or prove perfect reasoning.
 
 ![Figure 1. Controlled acceptance. Percentages are above bars; accepted/total counts are inside. All failures remain in the denominators.](figures/submission/controlled-accepted.png)
 
@@ -108,7 +130,7 @@ Within each controlled task, paired family bootstrap intervals resample source g
 
 ![Figure 3. Wording acceptance; variants reuse 24 controlled bases.](figures/submission/language-accepted.png)
 
-**Feasibility by task and label.** Table 1 separates finding a valid schedule when one exists (SAT) from correctly reporting that none exists (UNSAT). Each cell gives the number correct out of 60 attempts and its percentage; operational failures remain in the denominator. A direct UNSAT response is a prediction. The solver-assisted certificate concerns the extracted problem and must still agree with gold.
+Table 1 separates finding a valid schedule when one exists (SAT) from correctly reporting that none exists (UNSAT). Each cell gives the number correct out of 60 attempts and its percentage; operational failures remain in the denominator. A direct UNSAT response is a prediction. The solver-assisted certificate concerns the extracted problem and must still agree with gold.
 
 **Table 1. Controlled feasibility results by model, task and method.**
 
@@ -125,15 +147,15 @@ Within each controlled task, paired family bootstrap intervals resample source g
 
 For Qwen3.6, B minus A acceptance is +51.7 percentage points for generation (95% paired interval 41.7 to 61.7) and +60.0 for repair (50.0 to 70.0). For Qwen3.8 the differences are +0.8 (0.0 to 2.5) and 0.0 (0.0 to 0.0). The latter ceiling and degenerate empirical interval do not establish equivalence or population perfection. The practical improvement from augmentation depends on model and task; it is not uniformly positive across observed blocks.
 
-**Difficulty.** On Qwen3.6's SAT generation activity-count sweep, A is valid on 3/5, 2/5 and 1/5 instances with 4, 8 and 12 activities; B is valid on 5/5 at each level. Unary-domain-product ranges rise from 140-1,470 to 60,480-967,680 and 162,570,240-231,525,000. This product bounds naive assignments, not CP-SAT's visited states. A's SAT generation validity across resource-contention levels is 5/5, 3/5 and 1/5, while B remains 5/5. Each cell contains only five cases. Other sweeps and repair are not uniformly monotonic, so these are descriptive patterns rather than causal difficulty thresholds. Qwen3.8's ceiling makes this set insufficient to distinguish its reasoning limits.
+On Qwen3.6's SAT generation activity-count sweep, A is valid on 3/5, 2/5 and 1/5 instances with 4, 8 and 12 activities; B is valid on 5/5 at each level. Unary-domain-product ranges rise from 140-1,470 to 60,480-967,680 and 162,570,240-231,525,000. This product bounds naive assignments, not CP-SAT's visited states. A's SAT generation validity across resource-contention levels is 5/5, 3/5 and 1/5, while B remains 5/5. Each cell contains only five cases. Other sweeps and repair are not uniformly monotonic, so these are descriptive patterns rather than causal difficulty thresholds. Qwen3.8's ceiling makes this set insufficient to distinguish its reasoning limits.
 
-**Optimization quality.** Among Qwen3.6's valid controlled SAT schedules, A matches the reference objective on 1/27 generation and 5/22 repair cases; B matches on 59/59 for both. Qwen3.8 matches on all valid generation outputs (A 59/59, B 60/60), but A repair matches on 59/60 against B's 60/60. In one accepted direct repair, two activities move although the proven minimum is one. Its first-priority gap is +1; later gaps are undefined once that priority differs. Acceptance alone would conceal this error. Conditional optimum fractions must be interpreted alongside validity because the successful subsets differ.
+Among Qwen3.6's valid controlled SAT schedules, A matches the reference objective on 1/27 generation and 5/22 repair cases; B matches on 59/59 for both. Qwen3.8 matches on all valid generation outputs (A 59/59, B 60/60), but A repair matches on 59/60 against B's 60/60. In one accepted direct repair, two activities move although the proven minimum is one. Its first-priority gap is +1; later gaps are undefined once that priority differs. Acceptance alone would conceal this error. Conditional optimum fractions must be interpreted alongside validity because the successful subsets differ.
 
-**Failure mechanisms.** Across all blocks, Qwen3.6 A has 140 gold-invalid schedules, 24 false UNSAT answers and 27 invalid outputs; B has one gold-invalid schedule and eleven invalid outputs. In the controlled B failure ending `1b6a21e9eaa5121c07e7b362-generation`, extraction changes A1's deadline from slot 3 to slot 7. Solving that relaxed problem produces a schedule violating the original deadline. The compiler cannot recover an omitted or altered requirement. Of 289 recorded Qwen3.6 B extractions, 228 are structurally equal to gold; remaining differences are not automatically semantic errors. Qwen3.8 has structural equality for all 295 recorded B extractions. Its errors comprise one timeout, five transport errors, one HTTP 502 and two HTTP 503s; client receipts do not identify every underlying service/network cause.
+Across all blocks, Qwen3.6 A has 140 gold-invalid schedules, 24 false UNSAT answers and 27 invalid outputs; B has one gold-invalid schedule and eleven invalid outputs. In one controlled Qwen3.6 solver-assisted generation case, extraction changes activity A1's deadline from slot 3 to slot 7. This relaxes the latest permitted completion time. CP-SAT solves the extracted problem, but the resulting schedule violates the original deadline and is rejected by independent validation. This is a formalization error: the compiler cannot recover an omitted or altered requirement. Of 289 recorded Qwen3.6 B extractions, 228 are structurally equal to gold; remaining differences are not automatically semantic errors. Qwen3.8 has structural equality for all 295 recorded B extractions. Its errors comprise one timeout, five transport errors, one HTTP 502 and two HTTP 503s; client receipts do not identify every underlying service/network cause.
 
-**Matched wording.** In 48 variant/canonical comparisons per approach, Qwen3.6 A changes from accepted to rejected 16 times and rejected to accepted twice. B has one and two such transitions. Qwen3.8 has two accepted-to-rejected transitions for A and four for B, all operational failures. The latter does not demonstrate semantic degradation from paraphrasing. Canonical comparisons use only the selected bases; comparing wording scores with all 240 canonical cases would confound selection and wording.
+In 48 variant/canonical comparisons per approach, Qwen3.6 A changes from accepted to rejected 16 times and rejected to accepted twice. B has one and two such transitions. Qwen3.8 has two accepted-to-rejected transitions for A and four for B, all operational failures. The latter does not demonstrate semantic degradation from paraphrasing. Canonical comparisons use only the selected bases; comparing wording scores with all 240 canonical cases would confound selection and wording.
 
-**Resources.** Table 2 separates the two methods and reports mean resources per controlled scheduling attempt. Call time covers all 240 attempts in each row, including failures; it excludes the subsequent local solver. Token means use available provider-reported usage: Qwen3.8 Direct LLM has 239/240 observations, and the other rows have 240/240. Missing usage is unknown, not zero.
+Table 2 separates the two methods and reports mean resources per controlled scheduling attempt. Call time covers all 240 attempts in each row, including failures; it excludes the subsequent local solver. Token means use available provider-reported usage: Qwen3.8 Direct LLM has 239/240 observations, and the other rows have 240/240. Missing usage is unknown, not zero.
 
 **Table 2. Mean model-call resources per controlled attempt.**
 
@@ -146,27 +168,43 @@ For Qwen3.6, B minus A acceptance is +51.7 percentage points for generation (95%
 
 Conditional CP-SAT time averages 13.15 ms over 230 executed Qwen3.6 controlled solves and 17.60 ms over 240 Qwen3.8 solves. Extraction/model calls dominate the added time on these instances. These are shared-service timings, including request overhead and failures, not hardware-independent speed or monetary cost. Complete campaigns including capability calls report 1,773,823 tokens with 602/602 coverage and 3,994,657 with 593/602 coverage. Qwen3.8 was safely paused twice without reissuing saved responses. Total elapsed campaign clocks therefore cannot be presented as uninterrupted inference time.
 
-## 7. Implications, limitations and responsible AI
+Direct reasoning is attractive when a capable model is already reliable on small, familiar inputs and lower latency matters. Formal augmentation is useful when explicit feasibility/optimization evidence matters or direct reasoning struggles with interactions. It adds extraction cost and inherits extraction errors. A fixed compiler and independent validator provide inspectability, but unsupported or ambiguous requirements require clarification or a revised schema. No operational dialogue feature or universally reliable natural-language interpretation is established.
 
-**Method choice.** Direct reasoning is attractive when a capable model is already reliable on small, familiar inputs and lower latency matters. Formal augmentation is useful when explicit feasibility/optimization evidence matters or direct reasoning struggles with interactions. It adds extraction cost and inherits extraction errors. A fixed compiler and independent validator provide inspectability, but unsupported or ambiguous requirements require clarification or a revised schema. No operational dialogue feature or universally reliable natural-language interpretation is established.
+## 8. Responsible AI
 
-**Validity threats.** Artificial label balance influences aggregate acceptance. Synthetic templates, related source families, twelve fictional scenarios and one sample per condition limit external validity and statistical power. Independent arithmetic checks and small exhaustive proofs do not certify every natural-language/gold pairing. The gold solver shares the compiler with B, so remaining compiler errors could affect optimality references even though validity is checked independently. Unknown hosted defaults, differing backend fingerprints and sequential service execution limit causal model comparisons. A fresh reviewed dataset or another model would strengthen some claims but would be a separate study, not a relabelling of these results.
+Our architecture supports responsible use through explicit validation, inspectable decisions and human control [6]. We apply these principles to the data sent to the models, the evidence attached to each schedule and the authority to change real commitments.
 
-**Unequal inconvenience.** A preserved historical repair concentrates one move and 30 minutes of shift on participant P7 while P0-P6 incur none. This demonstrates concentration, not that a fairer feasible solution exists. Reporting participant burden makes a trade-off visible; fixed assignments and aggregate disruption do not solve fair allocation. Stakeholder review would be needed before introducing burden caps.
+We evaluate fictional activities and participants, keeping actual personal routines out of requests sent to the hosted models. This reduces privacy exposure during experimentation. For real calendars, simply removing names would be insufficient because patterns of availability can reveal identity. Consent, access controls and retention policies would be needed before collecting such data.
 
-**Objective consequences.** An independently checked tiny case prefers one moved activity shifted four slots over two moved activities shifted two slots in total. This follows the declared moved-count priority, but may conflict with a user's notion of inconvenience. The objective must be explained rather than described as universally best. Changing priorities requires an explicit new specification and evaluation.
+We retain extracted constraints, solver status, validation outcomes and repair objectives so that decisions can be inspected. The architecture separates a solver's proof from independent checks against the original requirements. This exposes mistakes such as the altered deadline instead of presenting every solver-produced schedule as correct. Before/after schedules also show which activities move and by how much.
 
-**Privacy, control and explanation.** Fictional data avoids exposing private routines. Real calendars could reveal identity even after names are removed, requiring consent and retention controls. A deadline stays hard unless explicitly made negotiable; the system cannot silently relax commitments. Explanations distinguish a proof about the extracted model from validity against the original request, and users retain control over any action. The application does not send invitations or edit calendars.
+We report participant disruption because minimizing total changes can concentrate inconvenience. A preserved historical repair places all 30 minutes of shift on one participant while seven incur none; a fairer feasible alternative is not established. An independently checked tiny example also shows that our objective prefers one activity shifted four slots over two shifted two slots in total. Reporting these consequences makes the priorities open to scrutiny. Our objective does not guarantee fairness; adding burden limits would require stakeholder agreement and separate evaluation.
 
-**Adversarial text.** Prompt-boundary tests keep instruction-like strings in public task data, and the fixed compiler does not execute generated code. This limits one attack surface but is not measured live adversarial robustness. Incorrect extraction remains possible. Responsible deployment would need human oversight and monitoring beyond the present research prototype.
+The application recommends schedules without sending invitations or editing calendars. Users retain authority over actual commitments, and hard requirements are not silently relaxed to obtain a solution. The stated repair priorities allow users to assess whether fewer moved activities or less total time shift better reflects their needs.
 
-## 8. Reproducibility, contributions and conclusion
+We use strict parsers and a fixed compiler so that model outputs are processed as data without executing generated code. Independent validation checks returned schedules, while prompt-boundary tests exercise instruction-like task strings. These safeguards limit specific failure paths without establishing live adversarial robustness. Provider failures and unproved solver outcomes remain visible rather than becoming successful answers or infeasibility proofs.
 
-Both complete archives preserve cases, prompts, configurations, model outputs, failures, references and scoring source. Each archive has 941 checksummed files; fresh scoring and extraction/replay reproduce the saved analysis. The repository includes both original archives, a verification/extraction script, portable result summaries and figure-generation code. The fuller source snapshots and operational records, including interrupted attempts and pauses, are preserved separately with checksums. Earlier runs are retained without altering or pooling their outcomes. Exact replay is reproducible; nondeterministic shared-service generation is not promised.
+## 9. Current limitations
 
-Codex assisted implementation, tests, experiment operations, evidence analysis and report drafting under team direction. Repository evidence distinguishes assistance from actual human interpretation and review. The accompanying contribution log records observed work without inferring hours or independent authorship from branch names. Each member must confirm their own contributions and review the complete system before submission; this public report does not fabricate those confirmations.
+The following limitations explain how the chosen scope, data and execution conditions restrict interpretation of the results.
 
-The findings support solver augmentation as a conditional engineering choice. It substantially improves Qwen3.6's performance on the constructed study, while Qwen3.8 demonstrates that direct reasoning can already approach the validity ceiling. Formal optimization still exposes a meaningful repair-quality difference. The most important boundary is between solving a formal model correctly and interpreting the user's problem correctly. The system makes that boundary measurable, while the evidence supports bounded conclusions rather than universal superiority.
+To make the two approaches comparable under an explicit formal model, we use one day, 30-minute slots, fixed durations and fixed assignments. This excludes travel, setup times, uncertain durations and changes in who performs an activity. Success on these tasks therefore does not establish performance on unrestricted personal or organizational scheduling. The current schema would need extension before such requirements could be evaluated.
+
+Synthetic cases permit known contradictions and controlled structural changes, but their templates and balanced SAT/UNSAT labels differ from naturally occurring requests. The realistic block contains only twelve AI-assisted fictional scenarios, with human prose/gold review still pending. Related source families and wording variants also reduce the number of independent problems. The results characterize this development dataset rather than an unseen population of real schedules.
+
+One model sample per condition does not fully separate wording effects from sampling variation. Five cases per difficulty cell support descriptive comparisons, rather than precise thresholds. Qwen3.8's near-ceiling validity further limits what this benchmark reveals about its reasoning boundaries. A fresh reviewed dataset, additional repeats or harder cases could investigate these questions in a separately designed study; the present inputs cannot be relabelled as held out.
+
+We control the submitted cases, prompts and configured limits, but not hosted weight revisions, sampling defaults, hardware or load. Backend fingerprints also vary in the Qwen3.6 run. Sequential service execution and operational failures affect observed timing and acceptance, so the model comparison cannot isolate model weights as the cause of each difference. Missing token usage remains unknown, and token counts do not establish monetary cost.
+
+CP-SAT can optimize only the extracted specification. A missed deadline or unsupported requirement may therefore yield an internally correct answer to the wrong problem. The independent validator detects violations against gold, but it cannot establish that every natural-language description matches its gold specification. The gold reference solver also shares the compiler with the solver-assisted approach. Independent arithmetic checks and tiny exhaustive examples reduce, without eliminating, the risk of shared modelling errors. Solver proofs additionally depend on completing the relevant optimization stages within the stated budget.
+
+## 10. Team contributions
+
+The proposal's planned division of work assigns CSP/COP formulation, solver implementation and validation to Tea Li Hao; the direct-LLM and natural-language-to-formal pipelines to Tham Yao Xiang; and benchmark construction, experiment automation and evaluation to Woo Yong Qing. Analysis, report preparation and presentation are shared planned responsibilities. AI tools supported implementation, testing, experiment operations, evidence analysis and drafting. Actual individual contributions remain subject to member confirmation.
+
+## 11. Conclusion
+
+This project implements and evaluates direct LLM scheduling and LLM-to-CP-SAT scheduling for both generation and minimum-disruption repair. Solver assistance substantially improves Qwen3.6's validity and objective quality on the constructed study. Qwen3.8 shows that direct reasoning can already approach the validity ceiling, although formal optimization still exposes a repair-quality difference. The combined approach also requires more model-call time and tokens and remains vulnerable to extraction errors. The appropriate method therefore depends on the model, the scheduling requirements and the need for optimization evidence. Within the stated experimental limits, the study demonstrates the value of evaluating request interpretation, schedule validity and objective quality separately.
 
 ## References
 
@@ -176,3 +214,5 @@ The findings support solver augmentation as a conditional engineering choice. It
 4. Perron, L., Didier, F., and Gay, S. (2023). *The CP-SAT-LP Solver (Invited Talk)*. CP 2023, LIPIcs 280, pp. 3:1-3:2. [doi:10.4230/LIPIcs.CP.2023.3](https://drops.dagstuhl.de/entities/document/10.4230/LIPIcs.CP.2023.3).
 5. Google OR-Tools. *CP-SAT Solver*. [Solver status documentation](https://developers.google.com/optimization/cp/cp_solver); implementation pinned to 9.14.6206.
 6. CS3263 teaching team (2026). *Project*; *CS3263 Project Guidelines AY2026/27*; *Responsible AI*. Supplied course materials. Group 23 (2026), *Project Proposal*. These define course expectations and project scope, not measured benchmark results.
+7. Poole, D. L., and Mackworth, A. K. (2023). *Artificial Intelligence: Foundations of Computational Agents*, 3rd ed. Cambridge University Press. [Variables and constraints](https://artint.info/3e/html/ArtInt3e.Ch4.S1.html).
+8. Google OR-Tools. *The Job Shop Problem*. [Interval variables, precedence and non-overlap](https://developers.google.com/optimization/scheduling/job_shop). Used for modelling guidance; our objective is preference/disruption minimization rather than makespan.

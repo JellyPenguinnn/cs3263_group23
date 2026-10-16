@@ -1,0 +1,951 @@
+{
+  "acceptance_renderer_sha256": "88175a3fa17f09b2895ace93b3d4af1447b275daa4ab90c67f3d6f60995c4292",
+  "matplotlib_version": "3.10.8",
+  "new_model_calls": 0,
+  "output_sha256": {
+    "activity-count.png": "613568f6dc3237f07bd5b59d3c997583bead4396f4aaa1166d26a46311681815",
+    "activity-count.svg": "f30503054b45e55cf51b1e7c6663e89d924504dab5300e92db895108dc6259fe",
+    "controlled-accepted.png": "9d4efd7dff76dc3a6c1049ef54aa9fe296828ac0e4a23fe2a84f61e24fd75548",
+    "controlled-accepted.svg": "47358faacdc673724073306c7ed907a44eeb80a1be9c2e0b7b99cbaa5c5aad75",
+    "language-accepted.png": "fcf1b102ad222cfa6aad7d56c9b946fef394f66ff7f5eacd06c8e54d84441478",
+    "language-accepted.svg": "05a022e952122486ea2d3dfaf2c380491a197e92110c85af79cc89ebbf16c5fe",
+    "optimality.png": "1701009a1fe2cfa4333fe2ef9184678ad76b6c69021969cba1f1f0dbf1f82c76",
+    "optimality.svg": "01465b79fba069864f7cf2b61ca2de88ce9b6c5c3496760f82f1f01fb2e72565",
+    "outcomes.png": "d488246a5812850308cdb92ff7c55b92ff16106ac459496d32054710a8a4d166",
+    "outcomes.svg": "7d43bd5f9e5d0d5ea25d31f1abc1bd3b1d61be79aba8876d38f18bdb1360e73e",
+    "realistic-accepted.png": "79e149dd77bbf8b5cfa42e7dcc04652918a4774e4f7421fc074ee7477fcbd866",
+    "realistic-accepted.svg": "4631a803aa738f46be6ac3d4b7d25b756440830f3ae016b7bda72cd4d5a38f1f",
+    "resources.png": "d03db04ba8cd36557eab22bfe8ce23732f9b1f9938a0f575087fa9538ab3607b",
+    "resources.svg": "443276a81d7916032cbe91a299f1757c3709ce023d44fd9a618b40957b3ed5b0"
+  },
+  "plotted_data": {
+    "activity-count": {
+      "qwen36": {
+        "direct": [
+          {
+            "accepted": 3,
+            "activity_counts": [
+              4
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-178d62b21632eb32c9dcb923-generation",
+              "family-6c1591e93f8714f522746a48-generation",
+              "family-7049f6f9b58e5a6db7a91239-generation",
+              "family-97d7d2c5153e8bd3da72d117-generation",
+              "family-9dfb9ac49e9abdf479659976-generation"
+            ],
+            "categories": {
+              "accepted": 3,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 1
+            },
+            "domain_product_max": 1470,
+            "domain_product_min": 140,
+            "gold_label": "SAT",
+            "level": "0",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 2,
+            "activity_counts": [
+              8
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-1736bf545489b64e2751b71a-generation",
+              "family-272e97533643fbc50331c6a6-generation",
+              "family-981f82b5f4e7580580048c87-generation",
+              "family-a595445f3a9573b121032146-generation",
+              "family-d14e5a0798459594fb462086-generation"
+            ],
+            "categories": {
+              "accepted": 2,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 2
+            },
+            "domain_product_max": 967680,
+            "domain_product_min": 60480,
+            "gold_label": "SAT",
+            "level": "1",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 1,
+            "activity_counts": [
+              12
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-6658737ecc7f3312ad0fce51-generation",
+              "family-6681c8b1f7cde37082a583de-generation",
+              "family-dc8ea699abe4ecf78a548b62-generation",
+              "family-df8d279942e5b98ce754df67-generation",
+              "family-fb29c8453b95f2191d016897-generation"
+            ],
+            "categories": {
+              "accepted": 1,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 2,
+              "invalid_output": 1
+            },
+            "domain_product_max": 231525000,
+            "domain_product_min": 162570240,
+            "gold_label": "SAT",
+            "level": "2",
+            "sweep": "activity_count",
+            "task": "generation"
+          }
+        ],
+        "solver_augmented": [
+          {
+            "accepted": 5,
+            "activity_counts": [
+              4
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-178d62b21632eb32c9dcb923-generation",
+              "family-6c1591e93f8714f522746a48-generation",
+              "family-7049f6f9b58e5a6db7a91239-generation",
+              "family-97d7d2c5153e8bd3da72d117-generation",
+              "family-9dfb9ac49e9abdf479659976-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 1470,
+            "domain_product_min": 140,
+            "gold_label": "SAT",
+            "level": "0",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 5,
+            "activity_counts": [
+              8
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-1736bf545489b64e2751b71a-generation",
+              "family-272e97533643fbc50331c6a6-generation",
+              "family-981f82b5f4e7580580048c87-generation",
+              "family-a595445f3a9573b121032146-generation",
+              "family-d14e5a0798459594fb462086-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 967680,
+            "domain_product_min": 60480,
+            "gold_label": "SAT",
+            "level": "1",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 5,
+            "activity_counts": [
+              12
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-6658737ecc7f3312ad0fce51-generation",
+              "family-6681c8b1f7cde37082a583de-generation",
+              "family-dc8ea699abe4ecf78a548b62-generation",
+              "family-df8d279942e5b98ce754df67-generation",
+              "family-fb29c8453b95f2191d016897-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 231525000,
+            "domain_product_min": 162570240,
+            "gold_label": "SAT",
+            "level": "2",
+            "sweep": "activity_count",
+            "task": "generation"
+          }
+        ]
+      },
+      "qwen38": {
+        "direct": [
+          {
+            "accepted": 5,
+            "activity_counts": [
+              4
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-178d62b21632eb32c9dcb923-generation",
+              "family-6c1591e93f8714f522746a48-generation",
+              "family-7049f6f9b58e5a6db7a91239-generation",
+              "family-97d7d2c5153e8bd3da72d117-generation",
+              "family-9dfb9ac49e9abdf479659976-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 1470,
+            "domain_product_min": 140,
+            "gold_label": "SAT",
+            "level": "0",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 5,
+            "activity_counts": [
+              8
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-1736bf545489b64e2751b71a-generation",
+              "family-272e97533643fbc50331c6a6-generation",
+              "family-981f82b5f4e7580580048c87-generation",
+              "family-a595445f3a9573b121032146-generation",
+              "family-d14e5a0798459594fb462086-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 967680,
+            "domain_product_min": 60480,
+            "gold_label": "SAT",
+            "level": "1",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 4,
+            "activity_counts": [
+              12
+            ],
+            "approach": "direct",
+            "attempts": 5,
+            "case_ids": [
+              "family-6658737ecc7f3312ad0fce51-generation",
+              "family-6681c8b1f7cde37082a583de-generation",
+              "family-dc8ea699abe4ecf78a548b62-generation",
+              "family-df8d279942e5b98ce754df67-generation",
+              "family-fb29c8453b95f2191d016897-generation"
+            ],
+            "categories": {
+              "accepted": 4,
+              "provider_error": 1
+            },
+            "domain_product_max": 231525000,
+            "domain_product_min": 162570240,
+            "gold_label": "SAT",
+            "level": "2",
+            "sweep": "activity_count",
+            "task": "generation"
+          }
+        ],
+        "solver_augmented": [
+          {
+            "accepted": 5,
+            "activity_counts": [
+              4
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-178d62b21632eb32c9dcb923-generation",
+              "family-6c1591e93f8714f522746a48-generation",
+              "family-7049f6f9b58e5a6db7a91239-generation",
+              "family-97d7d2c5153e8bd3da72d117-generation",
+              "family-9dfb9ac49e9abdf479659976-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 1470,
+            "domain_product_min": 140,
+            "gold_label": "SAT",
+            "level": "0",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 5,
+            "activity_counts": [
+              8
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-1736bf545489b64e2751b71a-generation",
+              "family-272e97533643fbc50331c6a6-generation",
+              "family-981f82b5f4e7580580048c87-generation",
+              "family-a595445f3a9573b121032146-generation",
+              "family-d14e5a0798459594fb462086-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 967680,
+            "domain_product_min": 60480,
+            "gold_label": "SAT",
+            "level": "1",
+            "sweep": "activity_count",
+            "task": "generation"
+          },
+          {
+            "accepted": 5,
+            "activity_counts": [
+              12
+            ],
+            "approach": "solver_augmented",
+            "attempts": 5,
+            "case_ids": [
+              "family-6658737ecc7f3312ad0fce51-generation",
+              "family-6681c8b1f7cde37082a583de-generation",
+              "family-dc8ea699abe4ecf78a548b62-generation",
+              "family-df8d279942e5b98ce754df67-generation",
+              "family-fb29c8453b95f2191d016897-generation"
+            ],
+            "categories": {
+              "accepted": 5
+            },
+            "domain_product_max": 231525000,
+            "domain_product_min": 162570240,
+            "gold_label": "SAT",
+            "level": "2",
+            "sweep": "activity_count",
+            "task": "generation"
+          }
+        ]
+      }
+    },
+    "controlled-accepted": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 95,
+            "attempts": 240,
+            "categories": {
+              "accepted": 95,
+              "false_unsat": 19,
+              "gold_invalid_schedule": 105,
+              "invalid_output": 21
+            },
+            "percent": 39.583333333333336
+          },
+          "solver_augmented": {
+            "accepted": 229,
+            "attempts": 240,
+            "categories": {
+              "accepted": 229,
+              "gold_invalid_schedule": 1,
+              "invalid_output": 10
+            },
+            "percent": 95.41666666666667
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 239,
+            "attempts": 240,
+            "categories": {
+              "accepted": 239,
+              "provider_error": 1
+            },
+            "percent": 99.58333333333333
+          },
+          "solver_augmented": {
+            "accepted": 240,
+            "attempts": 240,
+            "categories": {
+              "accepted": 240
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    },
+    "language-accepted": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 8,
+            "attempts": 48,
+            "categories": {
+              "accepted": 8,
+              "false_unsat": 5,
+              "gold_invalid_schedule": 30,
+              "invalid_output": 5
+            },
+            "percent": 16.666666666666668
+          },
+          "solver_augmented": {
+            "accepted": 47,
+            "attempts": 48,
+            "categories": {
+              "accepted": 47,
+              "invalid_output": 1
+            },
+            "percent": 97.91666666666667
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 46,
+            "attempts": 48,
+            "categories": {
+              "accepted": 46,
+              "provider_error": 2
+            },
+            "percent": 95.83333333333333
+          },
+          "solver_augmented": {
+            "accepted": 44,
+            "attempts": 48,
+            "categories": {
+              "accepted": 44,
+              "provider_error": 4
+            },
+            "percent": 91.66666666666667
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    },
+    "optimality": {
+      "qwen36": [
+        {
+          "accepted": 53,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 27,
+          "reference_objective_matched": 1,
+          "task": "generation"
+        },
+        {
+          "accepted": 115,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "generation"
+        },
+        {
+          "accepted": 42,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 22,
+          "reference_objective_matched": 5,
+          "task": "repair"
+        },
+        {
+          "accepted": 114,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "repair"
+        }
+      ],
+      "qwen38": [
+        {
+          "accepted": 119,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 59,
+          "reference_objective_matched": 59,
+          "task": "generation"
+        },
+        {
+          "accepted": 120,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 60,
+          "task": "generation"
+        },
+        {
+          "accepted": 120,
+          "approach": "direct",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 59,
+          "task": "repair"
+        },
+        {
+          "accepted": 120,
+          "approach": "solver_augmented",
+          "attempts": 120,
+          "gold_sat": 60,
+          "gold_sat_valid": 60,
+          "reference_objective_matched": 60,
+          "task": "repair"
+        }
+      ]
+    },
+    "outcomes": [
+      {
+        "accepted": 95,
+        "approach": "direct",
+        "attempts": 240,
+        "categories": {
+          "accepted": 95,
+          "false_unsat": 19,
+          "gold_invalid_schedule": 105,
+          "invalid_output": 21
+        },
+        "gold_sat_cases": 120,
+        "model": "qwen36",
+        "optimality_denominator": "valid gold-SAT schedules only",
+        "reference_objective_matched": 6,
+        "valid_gold_sat_schedules": 49
+      },
+      {
+        "accepted": 229,
+        "approach": "solver_augmented",
+        "attempts": 240,
+        "categories": {
+          "accepted": 229,
+          "gold_invalid_schedule": 1,
+          "invalid_output": 10
+        },
+        "gold_sat_cases": 120,
+        "model": "qwen36",
+        "optimality_denominator": "valid gold-SAT schedules only",
+        "reference_objective_matched": 118,
+        "valid_gold_sat_schedules": 118
+      },
+      {
+        "accepted": 239,
+        "approach": "direct",
+        "attempts": 240,
+        "categories": {
+          "accepted": 239,
+          "provider_error": 1
+        },
+        "gold_sat_cases": 120,
+        "model": "qwen38",
+        "optimality_denominator": "valid gold-SAT schedules only",
+        "reference_objective_matched": 118,
+        "valid_gold_sat_schedules": 119
+      },
+      {
+        "accepted": 240,
+        "approach": "solver_augmented",
+        "attempts": 240,
+        "categories": {
+          "accepted": 240
+        },
+        "gold_sat_cases": 120,
+        "model": "qwen38",
+        "optimality_denominator": "valid gold-SAT schedules only",
+        "reference_objective_matched": 120,
+        "valid_gold_sat_schedules": 120
+      }
+    ],
+    "realistic-accepted": {
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 12,
+            "categories": {
+              "accepted": 6,
+              "gold_invalid_schedule": 5,
+              "invalid_output": 1
+            },
+            "percent": 50.0
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "qwen3.6:35b"
+      },
+      "qwen38": {
+        "approaches": {
+          "direct": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "percent": 91.66666666666667
+          },
+          "solver_augmented": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "percent": 91.66666666666667
+          }
+        },
+        "model": "qwen3.8:27b"
+      }
+    },
+    "resources": [
+      {
+        "approach": "direct",
+        "distributions": {
+          "completion_tokens": {
+            "max": 10063,
+            "mean": 474.15,
+            "median": 161.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 1185,
+            "reported": 240
+          },
+          "extraction_seconds": {
+            "max": null,
+            "mean": null,
+            "median": null,
+            "missing": 240,
+            "observations": 240,
+            "p95_nearest_rank": null,
+            "reported": 0
+          },
+          "model_seconds": {
+            "max": 75.72686308249831,
+            "mean": 3.5736520887546552,
+            "median": 1.4048585835844278,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 9.162109083496034,
+            "reported": 240
+          },
+          "prompt_tokens": {
+            "max": 1905,
+            "mean": 1304.6625,
+            "median": 1313.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 1631,
+            "reported": 240
+          },
+          "provider_attempt_seconds": {
+            "max": 75.72684491612017,
+            "mean": 3.573617126540436,
+            "median": 1.4048378746956587,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 9.1620913753286,
+            "reported": 240
+          },
+          "solver_seconds": {
+            "max": null,
+            "mean": null,
+            "median": null,
+            "missing": 240,
+            "observations": 240,
+            "p95_nearest_rank": null,
+            "reported": 0
+          },
+          "total_seconds": {
+            "max": 75.72737549990416,
+            "mean": 3.574837100676571,
+            "median": 1.4056036253459752,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 9.163909457623959,
+            "reported": 240
+          },
+          "total_tokens": {
+            "max": 11260,
+            "mean": 1778.8125,
+            "median": 1427.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 2535,
+            "reported": 240
+          }
+        },
+        "model": "qwen36",
+        "pipeline_attempts": 240,
+        "study_block": "controlled",
+        "without_provider_records": 0
+      },
+      {
+        "approach": "solver_augmented",
+        "distributions": {
+          "completion_tokens": {
+            "max": 3577,
+            "mean": 1981.9375,
+            "median": 1972.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 2604,
+            "reported": 240
+          },
+          "extraction_seconds": {
+            "max": 26.90623129159212,
+            "mean": 14.008626035361996,
+            "median": 12.759381791576743,
+            "missing": 10,
+            "observations": 240,
+            "p95_nearest_rank": 19.357128334231675,
+            "reported": 230
+          },
+          "model_seconds": {
+            "max": 26.90286970883608,
+            "mean": 14.075534640605717,
+            "median": 12.910941291134804,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 19.351149166934192,
+            "reported": 240
+          },
+          "prompt_tokens": {
+            "max": 2850,
+            "mean": 2272.1625,
+            "median": 2280.5,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 2621,
+            "reported": 240
+          },
+          "provider_attempt_seconds": {
+            "max": 26.902844457887113,
+            "mean": 14.075490140658804,
+            "median": 12.910912166815251,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 19.351115415804088,
+            "reported": 240
+          },
+          "solver_seconds": {
+            "max": 0.05850216560065746,
+            "mean": 0.013148579382054184,
+            "median": 0.011041041929274797,
+            "missing": 10,
+            "observations": 240,
+            "p95_nearest_rank": 0.029793666675686836,
+            "reported": 230
+          },
+          "total_seconds": {
+            "max": 26.92004904150963,
+            "mean": 14.09256370992322,
+            "median": 12.926809208467603,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 19.36631133314222,
+            "reported": 240
+          },
+          "total_tokens": {
+            "max": 6414,
+            "mean": 4254.1,
+            "median": 4205.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 5044,
+            "reported": 240
+          }
+        },
+        "model": "qwen36",
+        "pipeline_attempts": 240,
+        "study_block": "controlled",
+        "without_provider_records": 0
+      },
+      {
+        "approach": "direct",
+        "distributions": {
+          "completion_tokens": {
+            "max": 15450,
+            "mean": 3081.154811715481,
+            "median": 2404,
+            "missing": 1,
+            "observations": 240,
+            "p95_nearest_rank": 8696,
+            "reported": 239
+          },
+          "extraction_seconds": {
+            "max": null,
+            "mean": null,
+            "median": null,
+            "missing": 240,
+            "observations": 240,
+            "p95_nearest_rank": null,
+            "reported": 0
+          },
+          "model_seconds": {
+            "max": 300.329588833265,
+            "mean": 42.42250861183275,
+            "median": 32.432728562969714,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 114.30373379215598,
+            "reported": 240
+          },
+          "prompt_tokens": {
+            "max": 1941,
+            "mean": 1339.3221757322176,
+            "median": 1306,
+            "missing": 1,
+            "observations": 240,
+            "p95_nearest_rank": 1671,
+            "reported": 239
+          },
+          "provider_attempt_seconds": {
+            "max": 300.3295024577528,
+            "mean": 42.42247280503313,
+            "median": 32.43270654184744,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 114.30294474959373,
+            "reported": 240
+          },
+          "solver_seconds": {
+            "max": null,
+            "mean": null,
+            "median": null,
+            "missing": 240,
+            "observations": 240,
+            "p95_nearest_rank": null,
+            "reported": 0
+          },
+          "total_seconds": {
+            "max": 300.33138787560165,
+            "mean": 42.42371649742515,
+            "median": 32.43380847899243,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 114.30639049969614,
+            "reported": 240
+          },
+          "total_tokens": {
+            "max": 16688,
+            "mean": 4420.476987447699,
+            "median": 3796,
+            "missing": 1,
+            "observations": 240,
+            "p95_nearest_rank": 9929,
+            "reported": 239
+          }
+        },
+        "model": "qwen38",
+        "pipeline_attempts": 240,
+        "study_block": "controlled",
+        "without_provider_records": 0
+      },
+      {
+        "approach": "solver_augmented",
+        "distributions": {
+          "completion_tokens": {
+            "max": 15104,
+            "mean": 6737.320833333333,
+            "median": 6333.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 10825,
+            "reported": 240
+          },
+          "extraction_seconds": {
+            "max": 210.03929958399385,
+            "mean": 90.46888410714067,
+            "median": 84.12342260451987,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 146.9419140405953,
+            "reported": 240
+          },
+          "model_seconds": {
+            "max": 210.03304108325392,
+            "mean": 90.46338038610217,
+            "median": 84.11928960401565,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 146.93762804102153,
+            "reported": 240
+          },
+          "prompt_tokens": {
+            "max": 2886,
+            "mean": 2308.1625,
+            "median": 2316.5,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 2657,
+            "reported": 240
+          },
+          "provider_attempt_seconds": {
+            "max": 210.03296691644937,
+            "mean": 90.46333226389251,
+            "median": 84.11925712507218,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 146.93757450021803,
+            "reported": 240
+          },
+          "solver_seconds": {
+            "max": 0.0870633339509368,
+            "mean": 0.017596564069390298,
+            "median": 0.013478479348123074,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 0.05139725003391504,
+            "reported": 240
+          },
+          "total_seconds": {
+            "max": 210.0615973751992,
+            "mean": 90.48658245572588,
+            "median": 84.17149262549356,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 146.9648374579847,
+            "reported": 240
+          },
+          "total_tokens": {
+            "max": 17492,
+            "mean": 9045.483333333334,
+            "median": 8672.0,
+            "missing": 0,
+            "observations": 240,
+            "p95_nearest_rank": 13192,
+            "reported": 240
+          }
+        },
+        "model": "qwen38",
+        "pipeline_attempts": 240,
+        "study_block": "controlled",
+        "without_provider_records": 0
+      }
+    ]
+  },
+  "renderer_sha256": "d0b2b50f7cdb233017f63db211c73b552c5e82d3261e6c95fe5db6a8f53865c4",
+  "scope": "Complete exploratory shared-service development comparisons; not held-out evidence",
+  "source_sha256": {
+    "results/summary/two-model-development-20261002.json": "1649ad02c7441c54798aa49532291ea343fa6cff1c530fa0c18001506cd7b9e0",
+    "results/summary/two-model-report-tables-20261002.json": "51fdf3e3de896d9f39d6bcad27e4594ef9ec5042f8bc4c207e29151f25fd2f80"
+  }
+}
