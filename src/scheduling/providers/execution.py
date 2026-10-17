@@ -6,8 +6,14 @@ from .types import ModelConfig
 BASE_URL = "https://soclaas-api.comp.nus.edu.sg/v1"
 
 
+def expected_response_model(requested_model: str) -> str:
+    # SoCLaaS exposes this route alias but reports its canonical name in replies.
+    # Pin the observed identity; a future remapping must not silently pass.
+    return {"x-test-1": "glm-5.3-flash"}.get(requested_model, requested_model)
+
+
 def execution_contract(config: ModelConfig) -> dict:
-    return {
+    contract = {
         "format_version": "1.0",
         "provider": "soclaas",
         "endpoint": BASE_URL + "/chat/completions",
@@ -22,3 +28,11 @@ def execution_contract(config: ModelConfig) -> dict:
         "weight_revision": None,
         "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
     }
+    expected = expected_response_model(config.model)
+    if expected != config.model:
+        contract["model_identity"] = {
+            "requested_alias": config.model,
+            "required_returned_model": expected,
+            "policy": "explicit_alias_pin_v1",
+        }
+    return contract

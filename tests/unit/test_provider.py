@@ -28,6 +28,46 @@ def test_request_and_response_contract():
     assert result.attempts[0].usage.total_tokens == 9
 
 
+@pytest.mark.parametrize("returned,expected_stop", [
+    ("glm-5.3-flash", None),
+    ("x-test-1", "returned_model_mismatch"),
+    ("qwen3.8:27b", "returned_model_mismatch"),
+    ("ornith1.5:35b", "returned_model_mismatch"),
+    ("another-model", "returned_model_mismatch"),
+    (None, "returned_model_mismatch"),
+])
+def test_explicit_route_alias_preserves_wire_and_response_identity(returned, expected_stop):
+    from scheduling.evaluation.runner import _stop_reason
+    from scheduling.providers.execution import execution_contract
+
+    config = ModelConfig("x-test-1", 100)
+
+    def handler(request):
+        assert json.loads(request.content)["model"] == "x-test-1"
+        return httpx.Response(200, json=body(model=returned))
+
+    response = call(handler, config=config)
+    assert response.returned_model == returned
+    assert response.attempts[0].returned_model == returned
+    assert execution_contract(config)["model_identity"] == {
+        "requested_alias": "x-test-1",
+        "required_returned_model": "glm-5.3-flash",
+        "policy": "explicit_alias_pin_v1",
+    }
+    assert response.attempts[0].execution.contract == execution_contract(config)
+    assert _stop_reason(response, config.model) == expected_stop
+
+
+def test_other_models_keep_exact_identity_without_alias_contract():
+    from scheduling.evaluation.runner import _stop_reason
+    from scheduling.providers.execution import execution_contract
+
+    for name in ("qwen3.6:35b", "qwen3.8:27b", "unregistered-alias"):
+        assert "model_identity" not in execution_contract(ModelConfig(name, 100))
+        assert _stop_reason({"returned_model": name}, name) is None
+        assert _stop_reason({"returned_model": "glm-5.3-flash"}, name) == "returned_model_mismatch"
+
+
 @pytest.mark.parametrize("raw", [None, {}, {"prompt_tokens": True, "completion_tokens": -1, "total_tokens": "9"}])
 def test_missing_or_invalid_usage_is_not_zero(raw):
     result = call(lambda _: httpx.Response(200, json=body(usage=raw)))

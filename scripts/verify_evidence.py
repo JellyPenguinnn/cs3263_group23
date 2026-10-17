@@ -53,9 +53,11 @@ def verify_archive(path: Path, expected: dict) -> dict:
 
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--extract-to', type=Path, help='New directory; creates qwen36/ and qwen38/ inside it')
+    parser.add_argument('--manifest', type=Path, default=ROOT/'results/evidence-manifest.json',
+                        help='Archive manifest; defaults to the historical Qwen study')
+    parser.add_argument('--extract-to', type=Path, help='New directory; creates one subdirectory per archive ID')
     args = parser.parse_args()
-    manifest = json.loads((ROOT/'results/evidence-manifest.json').read_text())
+    manifest = json.loads(args.manifest.read_text())
     verified = []
     for entry in manifest['archives']:
         verified.append(verify_archive(ROOT/entry['path'], entry))

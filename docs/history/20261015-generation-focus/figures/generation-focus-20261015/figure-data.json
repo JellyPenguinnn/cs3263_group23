@@ -1,0 +1,2066 @@
+{
+  "generation_tiers": {
+    "glm53flash": {
+      "easy": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 2,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 19.040501090387504,
+                "median": 6.787262437865138,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 3180.6666666666665,
+                "median": 1821.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 12.909547319014868,
+                "median": 14.546009166166186,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.01056524288530151,
+                "median": 0.0073629990220069885,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 3304.8333333333335,
+                "median": 3303.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-390ed27e0d18a5fcd3245800-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-390ed27e0d18a5fcd3245800-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ecdd584a599de7b78799f3dc-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ecdd584a599de7b78799f3dc-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-faab3611349cada081c8e0b0-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-faab3611349cada081c8e0b0-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "extreme": {
+        "approaches": {
+          "direct": {
+            "accepted": 3,
+            "attempts": 6,
+            "categories": {
+              "accepted": 3,
+              "provider_error": 3
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 1,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 168.79725373582914,
+                "median": 184.25245137466118,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 5118,
+                "median": 4481,
+                "missing": 3,
+                "reported": 3
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 1,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 85.54837328506012,
+                "median": 82.19567081239074,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.14708434014270702,
+                "median": 0.04206812521442771,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 11209.5,
+                "median": 10602.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 5,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0020c5ec0fe4660f50b9020b-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0020c5ec0fe4660f50b9020b-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-00eaf3055a3435619e8c32fc-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-00eaf3055a3435619e8c32fc-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-9fa7b12430c5191bd2fb930e-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-9fa7b12430c5191bd2fb930e-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "hard": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 88.13913898604612,
+                "median": 33.930104687809944,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 11114.833333333334,
+                "median": 4913.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 42.876044999652855,
+                "median": 27.402943041641265,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.05157913205524286,
+                "median": 0.027644666843116283,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 7224,
+                "median": 5895.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-81df31c2af1d216b78dd1e91-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-81df31c2af1d216b78dd1e91-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "moderate": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 40.346867409379534,
+                "median": 21.962200832553208,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 5480,
+                "median": 3253.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 23.79761421509708,
+                "median": 24.091486958321184,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.021109555537501972,
+                "median": 0.016818604432046413,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 4797.333333333333,
+                "median": 4704.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-bfa06007795e9eb38210a6e2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-bfa06007795e9eb38210a6e2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ead7eeab45febddec0232b30-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ead7eeab45febddec0232b30-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "very_hard": {
+        "approaches": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 6,
+            "categories": {
+              "accepted": 4,
+              "provider_error": 2
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 1,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 142.15475779166445,
+                "median": 107.42635400034487,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 7702.5,
+                "median": 4759.5,
+                "missing": 2,
+                "reported": 4
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 1,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 47.458655291392155,
+                "median": 48.281893000006676,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.07089113894229133,
+                "median": 0.02047822903841734,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 7996.666666666667,
+                "median": 8153.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      }
+    },
+    "qwen36": {
+      "easy": {
+        "approaches": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 6,
+            "categories": {
+              "accepted": 4,
+              "gold_invalid_schedule": 1,
+              "provider_error": 1
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 2,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 20.746111610904336,
+                "median": 1.2043911251239479,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 850.2,
+                "median": 843,
+                "missing": 1,
+                "reported": 5
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 2,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 11.50253109758099,
+                "median": 9.40979954181239,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.017364763965209324,
+                "median": 0.004797645844519138,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 2825.8333333333335,
+                "median": 2819.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-390ed27e0d18a5fcd3245800-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-390ed27e0d18a5fcd3245800-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ecdd584a599de7b78799f3dc-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ecdd584a599de7b78799f3dc-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-faab3611349cada081c8e0b0-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-faab3611349cada081c8e0b0-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "extreme": {
+        "approaches": {
+          "direct": {
+            "accepted": 2,
+            "attempts": 6,
+            "categories": {
+              "accepted": 2,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 3
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 6.714226208316783,
+                "median": 3.8757471670396626,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 3871.6666666666665,
+                "median": 4013.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 0,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 70.76276378442223,
+                "median": 72.92581579135731,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.1524123470298946,
+                "median": 0.017934625037014484,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 10028.5,
+                "median": 10631.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 5,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0020c5ec0fe4660f50b9020b-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0020c5ec0fe4660f50b9020b-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-00eaf3055a3435619e8c32fc-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-00eaf3055a3435619e8c32fc-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-9fa7b12430c5191bd2fb930e-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-9fa7b12430c5191bd2fb930e-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "hard": {
+        "approaches": {
+          "direct": {
+            "accepted": 3,
+            "attempts": 6,
+            "categories": {
+              "accepted": 3,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 2
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 2.928699089990308,
+                "median": 1.2460735831409693,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 1658.1666666666667,
+                "median": 1688.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 0,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 5,
+            "attempts": 6,
+            "categories": {
+              "accepted": 5,
+              "invalid_output": 1
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 26.649370381919045,
+                "median": 28.914327604230493,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.0473948746919632,
+                "median": 0.005608958192169666,
+                "missing": 1,
+                "reported": 5
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 5322,
+                "median": 5200.0,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-81df31c2af1d216b78dd1e91-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-81df31c2af1d216b78dd1e91-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "moderate": {
+        "approaches": {
+          "direct": {
+            "accepted": 2,
+            "attempts": 6,
+            "categories": {
+              "accepted": 2,
+              "false_unsat": 3,
+              "invalid_output": 1
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 1.9331996810312073,
+                "median": 0.35874293791130185,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 1342.8333333333333,
+                "median": 1183.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 0,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 6,
+            "attempts": 6,
+            "categories": {
+              "accepted": 6
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 16.301315020925056,
+                "median": 16.03714660461992,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.021117541939020157,
+                "median": 0.016805125400424004,
+                "missing": 0,
+                "reported": 6
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 3828.5,
+                "median": 3759.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-bfa06007795e9eb38210a6e2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-bfa06007795e9eb38210a6e2-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ead7eeab45febddec0232b30-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ead7eeab45febddec0232b30-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      },
+      "very_hard": {
+        "approaches": {
+          "direct": {
+            "accepted": 0,
+            "attempts": 6,
+            "categories": {
+              "false_unsat": 2,
+              "gold_invalid_schedule": 3,
+              "invalid_output": 1
+            },
+            "correct_unsat": 0,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 24.381604153042037,
+                "median": 8.06459066690877,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": null,
+                "median": null,
+                "missing": 6,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 3473,
+                "median": 2542.5,
+                "missing": 0,
+                "reported": 6
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 0,
+            "unsat_attempts": 3
+          },
+          "solver_augmented": {
+            "accepted": 5,
+            "attempts": 6,
+            "categories": {
+              "accepted": 5,
+              "provider_error": 1
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 3,
+            "objective_matches": 3,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 6,
+                "mean": 54.43940775686254,
+                "median": 43.9117819997482,
+                "missing": 0,
+                "reported": 6
+              },
+              "solver_seconds": {
+                "attempts": 6,
+                "mean": 0.10781665835529566,
+                "median": 0.02674291655421257,
+                "missing": 1,
+                "reported": 5
+              },
+              "total_tokens": {
+                "attempts": 6,
+                "mean": 7203.4,
+                "median": 7406,
+                "missing": 1,
+                "reported": 5
+              }
+            },
+            "sat_attempts": 3,
+            "sat_valid": 3,
+            "unsat_attempts": 3
+          }
+        },
+        "cases": 6,
+        "normalized_groups": 6,
+        "observation_ids": [
+          [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ]
+        ]
+      }
+    }
+  },
+  "layout": "report",
+  "matplotlib_version": "3.10.8",
+  "new_model_calls": 0,
+  "output_sha256": {
+    "generation-core.pdf": "298781fd6bb8bd05c5a0d72a2591e415d2d22251e02f2799f698d879904699e4",
+    "generation-core.png": "6667410024907f95ccea161e26dc60f317218f1430a087c7882fd891fb90b755",
+    "generation-small.pdf": "4ec1ff6bc57578b2d5bd856fe2cd554539d2c9a63123337f4f5a79ca421405f7",
+    "generation-small.png": "f031f810bf3712d251be5d61da9e27c8a94b366c7a9f5c460c63433eee4c10a8",
+    "generation-tiers.pdf": "f60adca40a2eea6893bde6a82aaddeeea8bafeefc831404f0a2adfd66ce0ee18",
+    "generation-tiers.png": "ccc36db0681c448c7239ea78819be6dfa5701b004781fd2b952f49a1e118f537"
+  },
+  "plotted_data": {
+    "generation_core": {
+      "glm53flash": {
+        "approaches": {
+          "direct": {
+            "accepted": 25,
+            "attempts": 30,
+            "categories": {
+              "accepted": 25,
+              "provider_error": 5
+            },
+            "correct_unsat": 14,
+            "objective_comparable": 11,
+            "objective_matches": 10,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "percent": 83.33333333333333,
+            "resources": {
+              "model_seconds": {
+                "attempts": 30,
+                "mean": 91.69570380266136,
+                "median": 28.77582637500018,
+                "missing": 0,
+                "reported": 30
+              },
+              "solver_seconds": {
+                "attempts": 30,
+                "mean": null,
+                "median": null,
+                "missing": 30,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 30,
+                "mean": 6592.68,
+                "median": 3878,
+                "missing": 5,
+                "reported": 25
+              }
+            },
+            "sat_attempts": 15,
+            "sat_valid": 11,
+            "unsat_attempts": 15
+          },
+          "solver_augmented": {
+            "accepted": 30,
+            "attempts": 30,
+            "categories": {
+              "accepted": 30
+            },
+            "correct_unsat": 15,
+            "objective_comparable": 15,
+            "objective_matches": 15,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "percent": 100.0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 30,
+                "mean": 42.51804702204342,
+                "median": 30.875886770430952,
+                "missing": 0,
+                "reported": 30
+              },
+              "solver_seconds": {
+                "attempts": 30,
+                "mean": 0.06024588191260894,
+                "median": 0.019022854510694742,
+                "missing": 0,
+                "reported": 30
+              },
+              "total_tokens": {
+                "attempts": 30,
+                "mean": 6906.466666666666,
+                "median": 5951.0,
+                "missing": 0,
+                "reported": 30
+              }
+            },
+            "sat_attempts": 15,
+            "sat_valid": 15,
+            "unsat_attempts": 15
+          }
+        },
+        "model": "glm-5.3-flash"
+      },
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 11,
+            "attempts": 30,
+            "categories": {
+              "accepted": 11,
+              "false_unsat": 7,
+              "gold_invalid_schedule": 9,
+              "invalid_output": 2,
+              "provider_error": 1
+            },
+            "correct_unsat": 9,
+            "objective_comparable": 2,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "percent": 36.666666666666664,
+            "resources": {
+              "model_seconds": {
+                "attempts": 30,
+                "mean": 11.340768148656934,
+                "median": 1.2043911251239479,
+                "missing": 0,
+                "reported": 30
+              },
+              "solver_seconds": {
+                "attempts": 30,
+                "mean": null,
+                "median": null,
+                "missing": 30,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 30,
+                "mean": 2287.0689655172414,
+                "median": 1741,
+                "missing": 1,
+                "reported": 29
+              }
+            },
+            "sat_attempts": 15,
+            "sat_valid": 2,
+            "unsat_attempts": 15
+          },
+          "solver_augmented": {
+            "accepted": 28,
+            "attempts": 30,
+            "categories": {
+              "accepted": 28,
+              "invalid_output": 1,
+              "provider_error": 1
+            },
+            "correct_unsat": 13,
+            "objective_comparable": 15,
+            "objective_matches": 15,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "percent": 93.33333333333333,
+            "resources": {
+              "model_seconds": {
+                "attempts": 30,
+                "mean": 35.93107760834197,
+                "median": 29.024849895387888,
+                "missing": 0,
+                "reported": 30
+              },
+              "solver_seconds": {
+                "attempts": 30,
+                "mean": 0.06862234224432281,
+                "median": 0.010753145907074213,
+                "missing": 2,
+                "reported": 28
+              },
+              "total_tokens": {
+                "attempts": 30,
+                "mean": 5794.689655172414,
+                "median": 5181,
+                "missing": 1,
+                "reported": 29
+              }
+            },
+            "sat_attempts": 15,
+            "sat_valid": 15,
+            "unsat_attempts": 15
+          }
+        },
+        "model": "qwen3.6:35b"
+      }
+    },
+    "generation_small": {
+      "glm53flash": {
+        "approaches": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 5,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "percent": 100.0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 12,
+                "mean": 29.693684249883518,
+                "median": 16.561996187083423,
+                "missing": 0,
+                "reported": 12
+              },
+              "solver_seconds": {
+                "attempts": 12,
+                "mean": null,
+                "median": null,
+                "missing": 12,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 12,
+                "mean": 4330.333333333333,
+                "median": 2646.0,
+                "missing": 0,
+                "reported": 12
+              }
+            },
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "percent": 100.0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 12,
+                "mean": 18.353580767055973,
+                "median": 15.747786417137831,
+                "missing": 0,
+                "reported": 12
+              },
+              "solver_seconds": {
+                "attempts": 12,
+                "mean": 0.015837399211401742,
+                "median": 0.012181895319372416,
+                "missing": 0,
+                "reported": 12
+              },
+              "total_tokens": {
+                "attempts": 12,
+                "mean": 4051.0833333333335,
+                "median": 3862.0,
+                "missing": 0,
+                "reported": 12
+              }
+            },
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "model": "glm-5.3-flash"
+      },
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 12,
+            "categories": {
+              "accepted": 6,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 1,
+              "invalid_output": 1,
+              "provider_error": 1
+            },
+            "correct_unsat": 4,
+            "objective_comparable": 2,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "percent": 50.0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 12,
+                "mean": 11.339655645967772,
+                "median": 0.4221663330681622,
+                "missing": 0,
+                "reported": 12
+              },
+              "solver_seconds": {
+                "attempts": 12,
+                "mean": null,
+                "median": null,
+                "missing": 12,
+                "reported": 0
+              },
+              "total_tokens": {
+                "attempts": 12,
+                "mean": 1118.909090909091,
+                "median": 1065,
+                "missing": 1,
+                "reported": 11
+              }
+            },
+            "sat_attempts": 6,
+            "sat_valid": 2,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "percent": 100.0,
+            "resources": {
+              "model_seconds": {
+                "attempts": 12,
+                "mean": 13.901923059253022,
+                "median": 11.073301729746163,
+                "missing": 0,
+                "reported": 12
+              },
+              "solver_seconds": {
+                "attempts": 12,
+                "mean": 0.019241152952114742,
+                "median": 0.007438437547534704,
+                "missing": 0,
+                "reported": 12
+              },
+              "total_tokens": {
+                "attempts": 12,
+                "mean": 3327.1666666666665,
+                "median": 3178.5,
+                "missing": 0,
+                "reported": 12
+              }
+            },
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "model": "qwen3.6:35b"
+      }
+    }
+  },
+  "renderer_sha256": "5ca68a0370d5cde6c6ab4cb326f90a2bd9f358e9852934826fd8f0d978652f6d",
+  "shared_renderer_sha256": "418444ca00eaee17cf2a81e71e5e65d5868c69c9db93c468dbae9d77297a1be6",
+  "source_sha256": "56ee4e53b00a0fcb66a4529d2222a94a328f170c91db9e31b5d90ba0a83347d5",
+  "style_renderer_sha256": "84f8bbc06557982c050f7c4c4ce298793d26efb4915cc3d02bea62811e9a2198"
+}

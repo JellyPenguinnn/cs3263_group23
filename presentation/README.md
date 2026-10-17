@@ -1,8 +1,18 @@
 # Evidence-based scheduling demonstration
 
-Use the [current report](../docs/submission-report.md), [three evaluation charts](../results/figures/two-model-development-20261002/) and [rehearsal guide](rehearsal.md). Both Qwen3.6 and Qwen3.8 comparisons are complete. These are exploratory development results, with 600 scheduling attempts per model; model eligibility and actual human review remain separate course-delivery items.
+Use the [current generation-first report](../docs/submission-report.md), [balanced charts](../results/figures/balanced-comparison-20261017/) and [rehearsal guide](rehearsal.md). The latest Qwen3.6/GLM study has 96 scheduling attempts/model over 48 balanced generation cases. Lead with this focused comparison; keep the 200-attempt difficulty study, repair/wording extensions and 600-attempt historical pair separately labelled. A deck, recording and actual rehearsal remain unfinished.
 
-## Current archived examples
+## Current small office illustration
+
+```sh
+PYTHONPATH=src .venv/bin/python evaluation/ta_scope_examples.py runs/NEW-presentation-office.json
+```
+
+This offline command verifies loose/tight generation, a room-capacity contradiction and a one-move repair with seven unchanged activities. It makes zero model calls; label it an illustration rather than an additional benchmark. See [the feedback alignment](../docs/ta-feedback-alignment.md) for the single-day/30-minute scope, formal details and metric distinction. For live-model failure examples, use the exact trace paths in [the balanced audit](../docs/balanced-comparison-audit.md) or the separately labelled [difficulty audit](../docs/difficulty-comparison-audit.md); retain original outputs and labels.
+
+## Preserved historical Qwen examples
+
+The commands below use the earlier Qwen3.6/Qwen3.8 **600-attempt** study, not the current Qwen3.6/GLM comparison. Identify that dataset/model pair explicitly when showing these optional examples.
 
 Run from the repository root after the README installation steps. Verify and extract the committed evidence into a **new** directory; these commands make no model calls:
 
@@ -14,7 +24,7 @@ python3.12 scripts/verify_evidence.py --extract-to runs/presentation-evidence
   --case-id family-178d62b21632eb32c9dcb923-repair --approach direct --format json
 ```
 
-The first example shows Qwen3.6 changing A1's deadline from slot 3 to slot 7 during extraction. The compiled specification permits a schedule, but independent gold validation rejects it. The second shows a gold-valid Qwen3.8 direct repair that moves two activities while the reference needs only one. It illustrates why acceptance and optimal repair are separate measures. Claims R11 and R10 in the [claim index](../docs/claim-evidence.md) bind these examples to saved evidence.
+The first example shows Qwen3.6 changing A1's deadline from slot 3 to slot 7 during extraction. The compiled specification permits a schedule, but independent gold validation rejects it. The second shows a gold-valid Qwen3.8 direct repair that moves two activities while the reference needs only one. It illustrates why acceptance and optimal repair are separate measures. Claims R11 and R10 in the [historical claim index](../docs/claim-evidence-20261002.md) bind these examples to saved evidence.
 
 Use the current CLI to inspect saved records. To reproduce the original analysis, follow [the exact-source replay instructions](../docs/evidence.md); do not silently rescore archived results with a changed implementation. Never correct a failed extraction and present it as the original model answer. A saved-record demonstration can supplement the presentation; a deck, recording and timed human rehearsal still need to be completed.
 

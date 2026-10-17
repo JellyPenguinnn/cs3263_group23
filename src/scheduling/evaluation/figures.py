@@ -123,10 +123,13 @@ def export_figures(rows, directory: Path, *, evidence):
         fig.savefig(path, dpi=160)
         figures.append(str(path))
     plt.close(fig)
-    sweeps = ("activity_count", "slack", "interaction_density", "resource_contention")
+    from scheduling.evaluation.difficulty_suite import MECHANISMS, TIERS
+
+    tiered = any(row["level"] in TIERS for row in difficulty)
+    sweeps = MECHANISMS if tiered else ("activity_count", "slack", "interaction_density", "resource_contention")
     if any(row["sweep"] in sweeps for row in difficulty):
         fig, axes = plt.subplots(
-            2, 4, figsize=(13, 6), layout="constrained", sharey=True
+            2, len(sweeps), figsize=(13, 6), layout="constrained", sharey=True
         )
         fig.suptitle(
             f"{phase} difficulty sweeps — {evidence}\n95% family bootstrap when ≥10 groups; smaller cells descriptive (n shown)",
@@ -144,12 +147,12 @@ def export_figures(rows, directory: Path, *, evidence):
                             and r["sweep"] == sweep
                             and r["approach"] == approach
                         ),
-                        key=lambda r: r["level"],
+                        key=lambda r: TIERS.index(r["level"]) if tiered else int(r["level"]),
                     )
                     values = [
                         r for r in values if r["sat_validity"]["rate"] is not None
                     ]
-                    xs = [int(r["level"]) for r in values]
+                    xs = [TIERS.index(r["level"]) if tiered else int(r["level"]) for r in values]
                     ys = [r["sat_validity"]["rate"] for r in values]
                     ax.plot(
                         xs,
@@ -180,9 +183,11 @@ def export_figures(rows, directory: Path, *, evidence):
                 ax.set(
                     title=task + " / " + sweep.replace("_", " "),
                     ylim=(-0.15, 1.2),
-                    xticks=[0, 1, 2],
-                    xlabel="Recorded level",
+                    xticks=list(range(5)) if tiered else [0, 1, 2],
+                    xlabel="Construction tier" if tiered else "Recorded level",
                 )
+                if tiered:
+                    ax.set_xticklabels([t.replace("_", " ") for t in TIERS], rotation=25, ha="right")
                 ax.legend(fontsize=7)
                 if col == 0:
                     ax.set_ylabel("Gold-SAT validity")
@@ -194,3 +199,59 @@ def export_figures(rows, directory: Path, *, evidence):
             figures.append(str(path))
         plt.close(fig)
     return figures
+
+
+def export_tier_figures(rows, resources, directory: Path, *, evidence):
+    """Paired-method bars for the five-tier study; missing time stays unavailable."""
+    from scheduling.evaluation.difficulty_suite import TIERS
+
+    if not rows or not all(r["level"] in TIERS for r in rows):
+        return []
+    import matplotlib
+    matplotlib.use("Agg")
+    import matplotlib.pyplot as plt
+    from matplotlib.ticker import PercentFormatter
+
+    blocks = [b for b in ("controlled", "realistic", "language") if any(r["study_block"] == b for r in rows)]
+    fig, axes = plt.subplots(2, len(blocks), figsize=(5 * len(blocks), 8), squeeze=False, layout="constrained")
+    fig.suptitle(f"Difficulty study — {evidence}\nDescriptive tier aggregates; methods receive matched conditions; related cases are not independent", fontsize=12)
+    lookup = {(r["study_block"], r["level"], r["approach"]): r for r in resources}
+    for col, block in enumerate(blocks):
+        for approach, offset, color, label in (("direct", -.19, "#326da8", "A · Direct LLM"),
+                                               ("solver_augmented", .19, "#c66a22", "B · LLM + CP-SAT")):
+            for i, tier in enumerate(TIERS):
+                items = [r for r in rows if (r["study_block"], r["level"], r["approach"]) == (block, tier, approach)]
+                n = len(items)
+                accepted = sum(r["accepted"] is True for r in items)
+                valid_rate = n > 0 and all(r["accepted"] is not None for r in items)
+                rate = accepted / n if valid_rate else float("nan")
+                axes[0, col].bar(i + offset, rate, .36, color=color, label=label if i == 0 else None)
+                axes[0, col].text(i + offset, rate + .025 if valid_rate else .02,
+                                  f"{rate:.0%}\n{accepted}/{n}" if valid_rate else "n/a", ha="center", fontsize=7)
+                stats = lookup.get((block, tier, approach), {}).get("distributions", {}).get("total_seconds", {})
+                mean = stats.get("mean")
+                axes[1, col].bar(i + offset, mean if mean is not None else float("nan"), .36, color=color)
+                axes[1, col].annotate(f"{stats.get('reported', 0)}/{n}" if mean is not None else "n/a",
+                                     (i + offset, mean or 0), xytext=(0, 4), textcoords="offset points", ha="center", fontsize=7)
+        axes[0, col].set(title=block.title(), ylim=(0, 1.24), ylabel="Accepted / all attempts")
+        axes[0, col].yaxis.set_major_formatter(PercentFormatter(1))
+        axes[0, col].set_yticks([0, .25, .5, .75, 1])
+        axes[1, col].set(ylabel="Mean full-pipeline seconds", title="Recorded time; n = reported / attempts")
+        axes[1, col].margins(y=.22)
+        for ax in axes[:, col]:
+            ax.set_xticks(range(5), [t.replace("_", " ") for t in TIERS], rotation=25, ha="right")
+            # Empty tiers have no finite bars to contribute to autoscaling.
+            ax.set_xlim(-.6, len(TIERS) - .4)
+            ax.grid(axis="y", alpha=.2)
+            ax.set_axisbelow(True)
+    fig.legend(*axes[0, 0].get_legend_handles_labels(), loc="outside lower center", ncol=2, fontsize=10)
+    paths = []
+    for suffix in ("png", "pdf"):
+        path = directory / f"tier-comparison.{suffix}"
+        if path.exists():
+            plt.close(fig)
+            raise FileExistsError(path)
+        fig.savefig(path, dpi=160)
+        paths.append(str(path))
+    plt.close(fig)
+    return paths

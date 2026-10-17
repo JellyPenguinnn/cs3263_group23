@@ -1,0 +1,15 @@
+{
+  "automated_checks_passed": true,
+  "body_pages": 10,
+  "figure_images": 4,
+  "margin_inches": 1,
+  "math_expressions_verified": 4,
+  "minimum_text_font_pt": 10.999999999999886,
+  "pdf_sha256": "3bcfee1c535dcacbb3403df8bf8e5fd3e8254d091cce00971ebd998d52a89ab6",
+  "reference_pages": 1,
+  "source_sha256": "b52d1a204f936929640eb0d9c1c4e275c670175e2d7bc60b2b2ce5b71bdfd9bb",
+  "title_pages": 1,
+  "total_pages": 12,
+  "visible_text_chunks_verified": 99,
+  "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+}

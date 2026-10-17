@@ -1,6 +1,8 @@
 # Usage and experiment operations
 
-Run commands from the repository root after the [locked installation](../README.md#quick-start). These examples describe supported workflows; only offline commands are authorized by reading them. Both completed full campaigns are preserved. A new live run needs its own agreed allowance.
+Run commands from the repository root after the [locked installation](../README.md#quick-start). These examples describe supported workflows; only offline commands are authorized by reading them. All completed balanced, difficulty and historical campaigns are preserved. A new live run needs its own agreed allowance.
+
+The [balanced generation protocol](balanced-generation.md) documents the completed D5 confirmation for Qwen3.6 and GLM: 96 scheduling attempts per model, using the same supervisor, analysis/archive and dashboard pipeline. It is separate from the completed difficulty and historical studies. All live allowances are consumed; use [the evidence guide](evidence.md) to inspect or replay saved results without inference.
 
 ## Run offline
 
@@ -32,7 +34,7 @@ These workflows exercise generation/repair, both pipelines, reference checks, ac
 .venv/bin/scheduling dashboard --runs-dir runs --port 8876
 ```
 
-Open [the local dashboard](http://127.0.0.1:8876). Select a saved run to inspect progress, results and before/after schedules. The dashboard is read-only and binds to localhost; live runs start through the CLI. For a nested qualification run, add `--run-dir runs/quickstart-authored/run`. A full campaign has separate `controlled`, `realistic` and `language` runs; select each block to inspect its own 480/24/96 counter.
+Open [the local dashboard](http://127.0.0.1:8876). Select a saved run to inspect progress, results and before/after schedules. The dashboard is read-only and binds to localhost; live runs start through the CLI. For a nested qualification run, add `--run-dir runs/quickstart-authored/run`. Historical campaigns have separate `controlled`, `realistic` and `language` runs with 480/24/96 counters; the difficulty design uses 120/40/40. A balanced campaign has only `controlled`, with a 96-attempt counter. Select the intended study and block; a completed attempt can be a preserved failure.
 
 ```sh
 .venv/bin/scheduling explain --run-dir runs/quickstart-authored/run \
@@ -43,7 +45,7 @@ Explanations distinguish the extracted problem's proof from gold acceptance and 
 
 ## SoCLaaS and bounded live runs
 
-SoCLaaS is the implemented provider for both completed comparisons. Confirm the
+SoCLaaS is the implemented provider for all completed comparisons. Confirm the
 selected model's course eligibility and the team's final-study decision before any
 additional experiment. A different provider needs explicit authorization and a
 qualified adapter; neither a commercial API nor a third model is an automatic
@@ -67,7 +69,9 @@ The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. 
 
 ### Full development campaign workflow
 
-The completed campaigns selected **`qwen3.6:35b`** and **`qwen3.8:27b`** explicitly through `--model`, with unchanged revision-3 prompts, **32,768 requested output tokens per completion**, **30/1,800-second connect/read timeouts** and no retries. This timeout is configured by our client, not a documented SoCLaaS service limit. Both arms receive the same limits. B uses a 30-second solve; references use 60 seconds, one worker and seed 0. Sampling/reasoning options remain server defaults. The earlier published checkpoint passed **684 tests on both macOS and network-disabled Linux ARM64** and an exact-input **600-attempt mocked rehearsal**, as recorded in the [integration audit](../docs/main-integration-audit-20261001.md).
+For a GLM run through SoCLaaS route `x-test-1`, the required returned model ID is `glm-5.3-flash`. This is an explicit identity requirement, not a guarantee that the service always routes correctly. A difficulty campaign retained a response reporting `qwen3.8:27b` and stopped; allowing backend fingerprint variation must not allow a different model. The [routing investigation](glm-routing-investigation.md) records the evidence and rerun conditions. Preserve the requested alias and actual response ID separately; never rewrite a returned ID, accept any model under a testing alias, or discard and silently retry a mismatch. This mapping does not establish a fixed weight revision or improved benchmark performance.
+
+The historical 600-attempt campaigns selected **`qwen3.6:35b`** and **`qwen3.8:27b`** explicitly through `--model`, with unchanged revision-3 prompts, **32,768 requested output tokens per completion**, **30/1,800-second connect/read timeouts** and no retries. This timeout is configured by our client, not a documented SoCLaaS service limit. Both arms receive the same limits. B uses a 30-second solve; references use 60 seconds, one worker and seed 0. Sampling/reasoning options remain server defaults. The earlier published checkpoint passed **684 tests on both macOS and network-disabled Linux ARM64** and an exact-input **600-attempt mocked rehearsal**, as recorded in the [integration audit](../docs/main-integration-audit-20261001.md).
 
 The preserved run `campaign-600-live-qwen38-20261001-01` used 900 seconds and the old stop-on-error policy. It stopped after **56 scheduling attempts: 55 returned responses and one timeout**, before the realistic and language blocks. It reserved 59 HTTP requests including metadata/capabilities, took 3,542 seconds, and reported 283,850 tokens with usage available for 57 of 58 completion attempts. Missing timeout usage is unknown, not zero. These partial records are not a completed comparison; their configuration and evidence remain unchanged.
 
@@ -118,7 +122,6 @@ Campaign policy `development-campaign-2` selects `provider_failure_policy: conti
 
 Exact model checks span both capability responses and every block. The explicitly authorized `strict_model_observe_backend_v1` policy records backend variation, including missing metadata, without stopping. Capability hashes and all capability fingerprints are embedded in each runtime configuration; analysis reports backend coverage and descriptive outcome/pair breakdowns. These are shared-service development results, not a pinned-backend or causal comparison across backend versions. Authentication/permission/quota errors, TLS failures, malformed provider envelopes, missing/wrong returned models, capability failures and exhausted budgets still stop dispatch. The default `strict_model_backend_v1` policy and frozen evaluation continue to reject fingerprint changes. Old packets retain their original behavior and cannot run under changed source/settings; prepare a new packet and use a new authorized run ID. Completed timeout records are not reissued on block resume. Pending/interrupted reservations still require reconciliation, and the whole-campaign directory remains write-once.
 
-The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. A completed campaign remains development evidence, with final eligibility, independent human authorship/review, fresh data and frozen authorization still pending.
+The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. A completed campaign remains development evidence. Course eligibility, actual contributions and human interpretation/review remain open. Fresh data or a frozen follow-up are conditional scientific choices, not automatic submission requirements.
 
-#
 See [evidence and replay](evidence.md) for the completed runs, and [the historical guide](development-guide.md) for prior handoffs and checkpoint-specific measurements.

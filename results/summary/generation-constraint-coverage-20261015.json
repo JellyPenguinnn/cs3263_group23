@@ -1,0 +1,601 @@
+{
+  "finding": "All 15 SAT cases omit deadline/fixed_start; every one of the 15 UNSAT cases includes at least one of those constraint types.",
+  "format_version": "1.0",
+  "interpretation": "Potential construction shortcut, not evidence that either model used it and not a change to recorded scores.",
+  "models": {
+    "glm53flash": {
+      "archive": "results/archives/difficulty-200-glm53flash-20261014.tar.gz",
+      "archive_sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "case_bundle_sha256": "b3d39fef3de12b34cac2cb6afb71d78a58f7f0aa250fc30e8c92f96c2538840c",
+      "cases": [
+        {
+          "case_id": "difficulty-0b7187410c3abe24d822d691-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ecdd584a599de7b78799f3dc-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-f4ec232764614cb7d78b6925-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-faab3611349cada081c8e0b0-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-390ed27e0d18a5fcd3245800-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-8fc172d742942ec004e74ec9-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-2b5714bda3039e8302b8309a-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-bfa06007795e9eb38210a6e2-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-b2b00bb2823346f5b73abe5a-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ead7eeab45febddec0232b30-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-3d94df09f26bfb5af5f06691-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-77c181646cc1eed03a3422b2-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-a29114c9c66571386fb90095-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-81df31c2af1d216b78dd1e91-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-89b1e300bfbadfa2a68b697d-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-2db29861b6da01ed900d90ee-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-6b7b49b44db771d64af31ce3-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ec93292bc8716510a294e869-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-577887286f301f7a8d330457-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-9f3f12974d9fac7e2670d796-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-9fa7b12430c5191bd2fb930e-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-0020c5ec0fe4660f50b9020b-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-763051de490e2a84f3946b4d-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-00eaf3055a3435619e8c32fc-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        }
+      ],
+      "counts": {
+        "SAT": {
+          "blocked": 15,
+          "cases": 15,
+          "deadline_or_fixed_start": 0,
+          "precedence": 10,
+          "preferred_start": 15
+        },
+        "UNSAT": {
+          "blocked": 11,
+          "cases": 15,
+          "deadline": 10,
+          "deadline_or_fixed_start": 15,
+          "fixed_start": 5,
+          "precedence": 10,
+          "preferred_start": 15
+        }
+      }
+    },
+    "qwen36": {
+      "archive": "results/archives/difficulty-200-qwen36-20261014.tar.gz",
+      "archive_sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "case_bundle_sha256": "b3d39fef3de12b34cac2cb6afb71d78a58f7f0aa250fc30e8c92f96c2538840c",
+      "cases": [
+        {
+          "case_id": "difficulty-0b7187410c3abe24d822d691-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ecdd584a599de7b78799f3dc-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-f4ec232764614cb7d78b6925-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-faab3611349cada081c8e0b0-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-390ed27e0d18a5fcd3245800-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-8fc172d742942ec004e74ec9-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-2b5714bda3039e8302b8309a-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-bfa06007795e9eb38210a6e2-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-b2b00bb2823346f5b73abe5a-generation",
+          "label": "UNSAT",
+          "types": [
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ead7eeab45febddec0232b30-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-3d94df09f26bfb5af5f06691-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-fb1c2a0fe6f25c97d65238c2-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-77c181646cc1eed03a3422b2-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-a29114c9c66571386fb90095-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-81df31c2af1d216b78dd1e91-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-89b1e300bfbadfa2a68b697d-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-2db29861b6da01ed900d90ee-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-6b7b49b44db771d64af31ce3-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-ec93292bc8716510a294e869-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-577887286f301f7a8d330457-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-9f3f12974d9fac7e2670d796-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-9fa7b12430c5191bd2fb930e-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-0020c5ec0fe4660f50b9020b-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "deadline",
+            "precedence",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-763051de490e2a84f3946b4d-generation",
+          "label": "SAT",
+          "types": [
+            "blocked",
+            "preferred_start"
+          ]
+        },
+        {
+          "case_id": "difficulty-00eaf3055a3435619e8c32fc-generation",
+          "label": "UNSAT",
+          "types": [
+            "blocked",
+            "fixed_start",
+            "preferred_start"
+          ]
+        }
+      ],
+      "counts": {
+        "SAT": {
+          "blocked": 15,
+          "cases": 15,
+          "deadline_or_fixed_start": 0,
+          "precedence": 10,
+          "preferred_start": 15
+        },
+        "UNSAT": {
+          "blocked": 11,
+          "cases": 15,
+          "deadline": 10,
+          "deadline_or_fixed_start": 15,
+          "fixed_start": 5,
+          "precedence": 10,
+          "preferred_start": 15
+        }
+      }
+    }
+  },
+  "new_model_calls": 0,
+  "scope": "Post-run audit of the unchanged controlled generation cases"
+}

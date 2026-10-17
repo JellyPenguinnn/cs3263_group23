@@ -1,0 +1,111 @@
+{
+  "archives": [
+    {
+      "path": "results/archives/benchmark-qwen36-20261001-02.tar.gz",
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+      "verified": true
+    },
+    {
+      "path": "results/archives/benchmark-qwen38-20261001-04.tar.gz",
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+      "verified": true
+    },
+    {
+      "path": "results/archives/difficulty-200-qwen36-20261014.tar.gz",
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "verified": true
+    },
+    {
+      "path": "results/archives/difficulty-200-glm53flash-20261014.tar.gz",
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "verified": true
+    },
+    {
+      "path": "results/archives/balanced-96-qwen36-20261015.tar.gz",
+      "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+      "verified": true
+    },
+    {
+      "path": "results/archives/balanced-96-glm53flash-20261015.tar.gz",
+      "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+      "verified": true
+    }
+  ],
+  "balanced_exact_archived_source_replay": {
+    "glm53flash": true,
+    "qwen36": true
+  },
+  "format_version": "1.0",
+  "human_review": "pending",
+  "new_model_calls": 0,
+  "preservation": {
+    "balanced_original_files_unchanged": 483,
+    "existing_scientific_files_unchanged": 149,
+    "previous_report_source_pdf_receipt": "docs/history/20261017-before-balanced/",
+    "private_backup_members_verified": 483,
+    "private_backup_sha256": "cf0baa9a297716065227ecfd8400aa378b6ae7d3e86e6691deb1eebac729554d"
+  },
+  "publication": "User-authorized non-force publication to main; Git history records final commit",
+  "recorded_date": "2026-10-17",
+  "verification": {
+    "credential_private_key_and_matriculation_patterns": {
+      "archive_members_scanned": 3038,
+      "matches": 0,
+      "repository_files_scanned": 428
+    },
+    "dependency_check": "passed",
+    "derived_assets_deterministic_rebuild": "11 identical hashes: summary and both figure sets including receipts",
+    "document_checks": "Current local paths and anchors resolve; historical evidence path strings retained",
+    "documents_local_links_checked": 275,
+    "figure_exports_verified": [
+      "docs/figures/balanced-comparison-20261017/balanced-acceptance.pdf",
+      "docs/figures/balanced-comparison-20261017/balanced-acceptance.png",
+      "docs/figures/balanced-comparison-20261017/balanced-failures.pdf",
+      "docs/figures/balanced-comparison-20261017/balanced-failures.png",
+      "results/figures/balanced-comparison-20261017/balanced-acceptance.pdf",
+      "results/figures/balanced-comparison-20261017/balanced-acceptance.png",
+      "results/figures/balanced-comparison-20261017/balanced-failures.pdf",
+      "results/figures/balanced-comparison-20261017/balanced-failures.png"
+    ],
+    "frontend_tests_passed": 9,
+    "implementation_files_unchanged_this_publication": 156,
+    "installed_assets": "passed",
+    "prior_full_regression": {
+      "change_class": "One final blank line removed from the integration test after the 69-test run; Python AST verified unchanged. Other six qualification source files match exactly.",
+      "changed_paths": [
+        "tests/integration/test_balanced_campaign.py"
+      ],
+      "fresh_full_suite_this_publication": false,
+      "passed": 900,
+      "receipt": "results/summary/balanced-generation-verification-20261015.json",
+      "source_entries_checked": 7
+    },
+    "report": {
+      "all_pages_visually_reviewed": true,
+      "automated_checks_passed": true,
+      "body_pages": 9,
+      "figure_images": 2,
+      "margin_inches": 1,
+      "math_expressions_verified": 4,
+      "minimum_text_font_pt": 10.999999999999886,
+      "pdf_sha256": "5837e17acbe00e6204539ab634f82a58ce432cf9da607174a853255e0ec1048f",
+      "reference_pages": 1,
+      "revised_pages_reviewed": [
+        8,
+        9
+      ],
+      "source_sha256": "ba8d1198dd5dc2c9e376e92a30631012904aa63bdaeff733e0d23f45fd04e9b0",
+      "title_pages": 1,
+      "total_pages": 11,
+      "visible_text_chunks_verified": 117,
+      "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+    },
+    "targeted_python_tests_passed": 69,
+    "test_formatting_only": {
+      "after_sha256": "565786c94c961258c1d786c942bb9c044d248616e4aa59711b50735b8104a7e1",
+      "before_sha256": "b0c5144f716583c9ba698956b68c97b9a80b51dcbd36e8a3a08a750ea70d4be4",
+      "path": "tests/integration/test_balanced_campaign.py",
+      "python_ast_unchanged": true
+    }
+  }
+}

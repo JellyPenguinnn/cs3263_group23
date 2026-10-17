@@ -1,0 +1,196 @@
+{
+  "archives_verified_outer_membership_and_inner_hashes": [
+    {
+      "checksummed_members": 941,
+      "path": "results/archives/benchmark-qwen36-20261001-02.tar.gz",
+      "scheduling_attempts": 600,
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b"
+    },
+    {
+      "checksummed_members": 941,
+      "path": "results/archives/benchmark-qwen38-20261001-04.tar.gz",
+      "scheduling_attempts": 600,
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12"
+    },
+    {
+      "checksummed_members": 364,
+      "path": "results/archives/difficulty-200-qwen36-20261014.tar.gz",
+      "scheduling_attempts": 200,
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42"
+    },
+    {
+      "checksummed_members": 364,
+      "path": "results/archives/difficulty-200-glm53flash-20261014.tar.gz",
+      "scheduling_attempts": 200,
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e"
+    }
+  ],
+  "base_commit": "2fcd43295c121f6f28a8463bc303c3ec84fad5fa",
+  "committed_or_pushed": false,
+  "dashboard": {
+    "frontend_tests_passed": 9,
+    "syntax_check_passed": true
+  },
+  "evidence_scope": "Current-source offline audit of an uncommitted local worktree; not a new model study, human review or submission approval.",
+  "finding_evidence": {
+    "path": "results/summary/generation-constraint-coverage-20261015.json",
+    "sha256": "c1186c7de2428437c4626a95e9a66518c61eaa2ed32939ccc8c7dd5c075cf419"
+  },
+  "formal_enumeration_probe": {
+    "SAT": 24,
+    "UNSAT": 136,
+    "execution_provenance": "Records the earlier successful inline execution in this audit turn. The script body and stdout were saved afterward; no fresh execution was performed while saving this receipt.",
+    "full_cartesian_assignments_per_solve": 216,
+    "generation_and_repair_solves": 160,
+    "limitation": "Bounded randomized small cases, not a proof for every input.",
+    "randomized_cases": 80,
+    "script_sha256": "6ed57c1ed2b1e4bb96f3be50cc1f14a97d43517bdb5db61cfd748e4e12d44ec5",
+    "seed": 326315,
+    "status": "pass"
+  },
+  "format_version": "1.0",
+  "fresh_full_saved_analysis_replay_this_audit": false,
+  "new_model_calls": 0,
+  "offline_demo": {
+    "accepted": 174,
+    "completed": 180,
+    "deliberate_failures": 6,
+    "live_requests": 0,
+    "log_sha256": "d8fd81eecfca332a20653b480fa1cda1680b685398ac53750b7b739d0fd7ec1b",
+    "pending": 0,
+    "replay_matches": true
+  },
+  "preservation": [
+    {
+      "changed_path": "results/summary/submission-report-format.json",
+      "files": 139,
+      "inventory": "current_audit",
+      "inventory_sha256": "83fea8ff0ada2f3576333aef9887741e59e5856820b50572da5927ecadc0048d",
+      "missing": 0,
+      "prior_receipt_preserved_at": "docs/history/20261015-generation-focus/format-verification.json",
+      "unchanged_in_place": 138
+    },
+    {
+      "changed_path": "results/summary/submission-report-format.json",
+      "files": 1145,
+      "inventory": "prior_scope_update",
+      "inventory_sha256": "c5f161f0a1b63694b72102ee67e480184a216a8b12f6f613099fec1160a541fe",
+      "missing": 0,
+      "prior_receipt_preserved_at": "docs/history/20261014-report/format-verification.json",
+      "unchanged_in_place": 1144
+    }
+  ],
+  "previous_report_source_pdf_preserved": true,
+  "prior_report_figure_files_preserved": 16,
+  "python_tests": {
+    "collected": 853,
+    "failure": "native macOS truststore TLS OSStatus -26276 under sandbox",
+    "full_run_failed": 1,
+    "full_run_passed": 852,
+    "logs_sha256": {
+      "python-tests.log": "961d1bfbbdf34bd2be2ee7b85e641097c7b103d949b2c38a9f18fe3941733314",
+      "test-collection.txt": "3241294ee32b8bc0e9d98fec081c03820001c3860eb311ef1562fc98285d26f4",
+      "tls-tests-unsandboxed.log": "0699f27a57117a61856dac022656af0fc9d7e745c5c8f8af3ea444beaf9036c6"
+    },
+    "single_uninterrupted_all_pass_run": false,
+    "tls_module_followup_outside_sandbox_passed": 8
+  },
+  "recorded_at_utc": "2026-10-15T13:03:59.690764+00:00",
+  "report": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 4,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pages_pixel_identical_to_preceding_visually_checked_report": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ],
+    "pages_visually_checked_after_edit": [
+      10,
+      11
+    ],
+    "pdf_sha256": "532d106077db7c194601f89cb8356b6c568cf21363b322bfd9ea3bb561e72d2a",
+    "reference_pages": 1,
+    "source_sha256": "023792cdb8b4b0c609675bddcc1320fec24a141161ac801f81eb184d2e6f2366",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 99,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "runtime": {
+    "archived_runtime_source_and_prompt_files_matching_current_per_difficulty_archive": 47,
+    "fresh_remote_ci_observed": false,
+    "noneditable_installed_assets_passed": true,
+    "pip_check_passed": true,
+    "platform": "macOS ARM64"
+  },
+  "scientific_source_sha256": {
+    "prompts/direct/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/direct/generation.txt": "aa1e9bad2a55c31080715e40de0f021aa524a412ab380ae403f162def4950c25",
+    "prompts/direct/repair.txt": "d85ed72e8f26df83e1a5fd3f86433bd5c60f14df452eaf13be031542772cc6f8",
+    "prompts/extraction/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "prompts/extraction/specification.txt": "075f554a4bd9e7bc54ebc1fd0805ede018ed9193707f90157d064a7ac14bbebd",
+    "src/cs3263_scheduling.egg-info/PKG-INFO": "e295c2ab612784e1080a1ccd3452eccc607c96209e68a57c96669de3b0ba2dd1",
+    "src/cs3263_scheduling.egg-info/SOURCES.txt": "163547647ce8f4caa263476cd560997bf6cc9e7cb9a5266f9253d0ddcaf7a691",
+    "src/cs3263_scheduling.egg-info/dependency_links.txt": "01ba4719c80b6fe911b091a7c05124b64eeece964e09c058ef8f9805daca546b",
+    "src/cs3263_scheduling.egg-info/entry_points.txt": "87352bdf52e315f3e586282f35c4f25769b7cad208aab36b5ef0b283147060fc",
+    "src/cs3263_scheduling.egg-info/requires.txt": "3894848b5fd6b017ffccd3a5bce218686bfa11540f9f06fffb067ef09e78348b",
+    "src/cs3263_scheduling.egg-info/top_level.txt": "7017c7789adb47d2d59ceee02c4c0f47399de5877eeaf3786a1a8ee0ca2d9d3a",
+    "src/scheduling/__init__.py": "f536cf75c54ec3ff11f69bd7a26827155c1820b5eacd04ca8b6fcc623b588057",
+    "src/scheduling/cli.py": "ee516fd64855692317d1714fb20234897abe7692c904e5f06c5677bcc4c26a91",
+    "src/scheduling/dashboard/__init__.py": "6b0f95873da6ba567b2dba9675c1a61573e2eef17105106ea67758057f3e5b57",
+    "src/scheduling/dashboard/server.py": "2c015e60701acceaff693ed69ccb5f129e2e5839cbedbb901af8b5d94f1c2441",
+    "src/scheduling/dashboard/service.py": "348349c9577e8f03822c404432af50bfcb43d2f1bb1159faf1f6ba660e373cf1",
+    "src/scheduling/dashboard/static/app.js": "1d568be304ecfc1a6580343cd64f311cb6ade6fb91303153777256aca1f82f1e",
+    "src/scheduling/dashboard/static/index.html": "138418aa5f06d194c8d7905f1529d1ecf65d4116e170a8102e48949be7e992ed",
+    "src/scheduling/dashboard/static/style.css": "ed1ea3dc4e4e8ab1817004eb3df8d0ed8b4f960833cab3e134f1941033e71d3d",
+    "src/scheduling/domain_analysis.py": "5afc4bdb0d30e93b8d6b863e8166edad64fd3d84adad8f72f6d5f685a8bbb62b",
+    "src/scheduling/evaluation/__init__.py": "eedbdba39b10d084015fd9ade706803c86c69a4ddb8ec9a75e17462a506202a5",
+    "src/scheduling/evaluation/benchmark.py": "0a36ebdbabd2f321ad29877a30c498a21d8560ed8b1642902f223a8bbc475989",
+    "src/scheduling/evaluation/cases.py": "486f51eb0030692e9481b702f665a4421618df3dff921421d6595f1f312cdc0b",
+    "src/scheduling/evaluation/cli.py": "06f0e87d12a6db19d21b2c87c31e8ff8f21ff58357a2cb0c1da54e0e9823bcab",
+    "src/scheduling/evaluation/difficulty_suite.py": "229c6acffd7d8a76d228b64fc826fd3f7adcece6adcac301e4e14d50aace4669",
+    "src/scheduling/evaluation/failure_policy.py": "8b4a44cf64078dbe35da12f26f124fa546f1f8e511f4331c03b88c8049f9bb74",
+    "src/scheduling/evaluation/figures.py": "8cbb3174f3e6254bd4bc928f806ef65f721ceb7dc7dc4de2e54ca2c3582feaee",
+    "src/scheduling/evaluation/frozen.py": "04deca2685719ba1e4179ab68e3dbec5cf3f01af28e5a92cb9e9793fa1c4e54a",
+    "src/scheduling/evaluation/interpretation.py": "e0ea99eefb172f839971f91a967688a4ebf4f4b61d15876a6822d5db269b9aa2",
+    "src/scheduling/evaluation/liveness.py": "e2547337a1a9fa98efa358d33f70ca4bf216e5529c977bbe28458b6bc5bfb3b5",
+    "src/scheduling/evaluation/manifests.py": "cf9ecb0ba938f7eb93aa6695beb0b4843001f75c52420b01a31090afbf0e62c5",
+    "src/scheduling/evaluation/metrics.py": "4d337779a0c9708ab13ded8b6e4dfeaededec218b6ff0e8e1b80d31cb64fd30b",
+    "src/scheduling/evaluation/preparation.py": "86aae534786891d910eac46f2b4a307347e67611027727fec862e667ac7ad921",
+    "src/scheduling/evaluation/qualification.py": "b95a0fe1338c975e536acc7e0ca5142cc2e02f5b512fabdf30661e6566e38e64",
+    "src/scheduling/evaluation/runner.py": "ff07eec37a4037698aea4a1e81687a39d5c95678b067d46b0ae83f5d123c2a88",
+    "src/scheduling/evaluation/scoring.py": "099de47be4d0db6f0ee09f15a4c42beb91ed40269cbf3d587c97b9f125c55d11",
+    "src/scheduling/evaluation/study.py": "df95024aba260696e1d07c02d82c704eedae94dfaf39f31ecb4840dab04762c4",
+    "src/scheduling/evaluation/supervision.py": "588067970822af5adedfd934f825fc3a8f3af9544dbd5325d2fd55b3a297a423",
+    "src/scheduling/explanation_cli.py": "853a201d55f60f92c3b93322e36151cbe3f920daa175edd82f0d127189c8afbc",
+    "src/scheduling/explanations.py": "fedbf08b47a2475daea2242d5ce5eafcb0f8bf66e2055d56705dcbfed73e2b40",
+    "src/scheduling/extraction_diagnostics.py": "aae1b557fa89ef812470a8f47a4c210ddb9b08de7992689ce82a7d6c912df869",
+    "src/scheduling/formal_cli.py": "acff3c1e1fc49dba98ea32bb4bf9f17a9c1e13e4a6559339ce33d2e3d80b74c9",
+    "src/scheduling/objectives.py": "735b86ba1fba016e1f0948e39253d8298c21d1edec7bc32e0859d4d99fc6da7e",
+    "src/scheduling/pipelines/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/pipelines/__init__.py": "c58fa330b61fd27ee6026d340a111469ec70747c0a31beeafa839b94b7e28e29",
+    "src/scheduling/pipelines/direct.py": "36c610512278b6c35c7bfe72140f53fa210d969854938e40877313cb3ffb8dbb",
+    "src/scheduling/pipelines/solver_augmented.py": "69353b1f5eaca0b8939ac0b4290f025fdbcc3d527f58742c06b3ebbe75dfe089",
+    "src/scheduling/providers/.gitkeep": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "src/scheduling/providers/__init__.py": "1a0681d7a28129defe1326e63003face90d0bbada0eef82363d64c8d547e6468",
+    "src/scheduling/providers/execution.py": "0b32ff475267fc50f1cdc9a9aa602f14545e19c48c2cae52fd28af327f105600",
+    "src/scheduling/providers/issuer-chain.crt": "539848d4940ce0f670abf650456d3f68606728da65b20ec8fc2cad247461ce2e",
+    "src/scheduling/providers/soclaas.py": "07ea0a1967dc1a8d2944e89a7e08cf16c4f372b1e8de54da40634d86161c4bd7",
+    "src/scheduling/providers/tls.py": "5dafd099fb19114f9503a6a8f670cf137032915db72f4b42f23ea301341a50ea",
+    "src/scheduling/providers/types.py": "bcaf4b33e291f1a619165d7792cc82035054b2c8d8e2c4ced738b0f12ceee9e8",
+    "src/scheduling/schema.py": "59bd500c1f3777ba77ce52442c5bc5e9c612062abb86cba306fbcbf7d7702b6d",
+    "src/scheduling/solver.py": "41eabaae42fd6a6751652c1bdb533a2202006aa288d3e057ddcd0eaafd8e2bfd",
+    "src/scheduling/validation.py": "43d88d415b1f9c4a95a2fcce098e6432bc78d4c24ead726c893d2ad73ff49557"
+  }
+}

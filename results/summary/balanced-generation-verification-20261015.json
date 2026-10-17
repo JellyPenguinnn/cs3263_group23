@@ -1,0 +1,219 @@
+{
+  "construction_families": 3,
+  "coverage": {
+    "SAT": 24,
+    "UNSAT": 24,
+    "all_unary_domains_nonempty": true,
+    "calendar_date_in_every_rendering": true,
+    "canonical_scheduling_attempts_per_model": 96,
+    "construction_families": 3,
+    "independently_checked_certificates": 48,
+    "layout_label_counts": {
+      "loose": {
+        "SAT": 12,
+        "UNSAT": 12
+      },
+      "tight": {
+        "SAT": 12,
+        "UNSAT": 12
+      }
+    },
+    "matched_label_pairs": 24,
+    "mechanism_label_counts": {
+      "participant_capacity": {
+        "SAT": 8,
+        "UNSAT": 8
+      },
+      "precedence_interaction": {
+        "SAT": 8,
+        "UNSAT": 8
+      },
+      "resource_capacity": {
+        "SAT": 8,
+        "UNSAT": 8
+      }
+    },
+    "operative_deadline_examples": 12,
+    "operative_fixed_start_examples": 12,
+    "paired_constraint_types_and_counts_equal": true,
+    "profile_label_counts": {
+      "both": {
+        "SAT": 6,
+        "UNSAT": 6
+      },
+      "deadline": {
+        "SAT": 6,
+        "UNSAT": 6
+      },
+      "fixed_start": {
+        "SAT": 6,
+        "UNSAT": 6
+      },
+      "neither": {
+        "SAT": 6,
+        "UNSAT": 6
+      }
+    },
+    "unique_cases": 48
+  },
+  "dataset_files_sha256": {
+    "benchmarks/fixtures/balanced-generation-v1/cases.json": "f105d00df886240862d976b8cdeb896d1a24631263c0b85d7f120319f626622f",
+    "benchmarks/fixtures/balanced-generation-v1/manifest.json": "ca651024ef0a2f5205f86354bf05c0899b9eeb623771f4db57295ec8c0d6928e",
+    "benchmarks/fixtures/balanced-generation-v1/proofs.json": "384acf70b74fb104a6e9f091a20af6c30d01e8fc560db559091d7386bc45ba9d",
+    "benchmarks/fixtures/balanced-generation-v1/review.json": "f2df0d0d7bffcdadb1aa4bb2e866612960d7bcb3220076d0cfd5b68519e456a7"
+  },
+  "dataset_version": "balanced-generation-v1",
+  "evidence_class": "offline construction and engineering qualification; not model-performance evidence",
+  "format_version": "1.0",
+  "full_regression": {
+    "duration_seconds": 478.81,
+    "failed": 0,
+    "log_sha256": "3a6796f76c124ff81786ab95f315064fb998bd61a227c765532bebc87607ec2d",
+    "native_macos_trust_access": true,
+    "passed": 900
+  },
+  "git_publication": "not committed or pushed",
+  "human_wording_gold_review": "pending",
+  "new_model_calls": 0,
+  "new_targeted_tests": {
+    "campaign_integration_tests": 24,
+    "dataset_unit_tests": 23,
+    "included_in_full_900": true,
+    "integration_log_sha256": "a040176b0fd2bbe6da0f19388f1ee00636d08e16448d884f27c753a71efc8678"
+  },
+  "noneditable_package": {
+    "build_install_assets_dependency_check_passed": true,
+    "installed_dataset_and_packet_preflight": "ready",
+    "qualification_log_sha256": "0823079661d76c19f60875e4d7ce81bb0cf070f2452e1ce24edb322025e51e0b",
+    "uses_existing_pinned_dependencies_without_network_downloads": true,
+    "wheel_sha256": "8a996120edc59ea874cf1f9f445d8b196c553fd6c763bab24070478837eaf308"
+  },
+  "offline_end_to_end": {
+    "accepted_in_clean_canned_campaign": 96,
+    "accepted_with_two_injected_provider_failures": 94,
+    "archive_checksums_and_exact_extracted_source_replay_passed": true,
+    "changed_packet_rejected_before_provider": true,
+    "clean_campaigns_completed": 2,
+    "dashboard_reads_passed": true,
+    "exact_model_mismatch_stops": true,
+    "injected_timeout_and_502_campaigns_completed": 2,
+    "mock_transport_only": true,
+    "models": [
+      "qwen3.6:35b",
+      "x-test-1"
+    ],
+    "note": "These live-shaped mock records are test fixtures, not provider measurements.",
+    "requests_including_capabilities_metadata": 99,
+    "scheduling_attempts_per_campaign": 96,
+    "supervisor_analysis_export_passed_for_both_models": true
+  },
+  "preceding_report_source_pdf_receipt_figures_preserved_at": "docs/history/20261015-course-audit/",
+  "prepared_pair": {
+    "all_96_paired_prompt_hashes_equal": true,
+    "new_live_requests": 0,
+    "packets": {
+      "glm53flash": {
+        "campaign_file_sha256": "43265ac975f2a0853a314a59b4babaf3e91c00f8c02c495ebfa10bff387260ef",
+        "packet": "runs/balanced-generation-v1-20261015/packets/glm53flash",
+        "planned_requests": 96,
+        "prompt_pairs": 96,
+        "reference_labels": {
+          "SAT": 24,
+          "UNSAT": 24
+        },
+        "reference_state": "ready",
+        "requested_model": "x-test-1",
+        "requests_including_qualification": 99,
+        "required_returned_model": "glm-5.3-flash",
+        "reserved_output_tokens": 3211264,
+        "source_file_count": 42
+      },
+      "qwen36": {
+        "campaign_file_sha256": "4a0593fd4a6c31b0fc36491020a189b7f31223a91100577b26a000bfcafce564",
+        "packet": "runs/balanced-generation-v1-20261015/packets/qwen36",
+        "planned_requests": 96,
+        "prompt_pairs": 96,
+        "reference_labels": {
+          "SAT": 24,
+          "UNSAT": 24
+        },
+        "reference_state": "ready",
+        "requested_model": "qwen3.6:35b",
+        "requests_including_qualification": 99,
+        "required_returned_model": "qwen3.6:35b",
+        "reserved_output_tokens": 3211264,
+        "source_file_count": 42
+      }
+    },
+    "same_cases": true,
+    "same_non_model_configs": true
+  },
+  "preservation": [
+    {
+      "changed": [
+        "results/summary/submission-report-format.json"
+      ],
+      "file_count": 126,
+      "inventory": "preservation-before.json",
+      "inventory_sha256": "50a7b3129fa0cf3375f3104f78b9a588ede68c9f333f0b5ba60050a1ffbdb73d",
+      "missing": [],
+      "unchanged_in_place": 125
+    },
+    {
+      "changed": [],
+      "file_count": 1075,
+      "inventory": "raw-run-preservation-before.json",
+      "inventory_sha256": "5a7a8ad3b594155ee43f2ece893f04e23554fe9d22e8b12321ff5f63b5b1f471",
+      "missing": [],
+      "unchanged_in_place": 1075
+    }
+  ],
+  "provider_availability_verified": false,
+  "recorded_at_utc": "2026-10-15T13:40:18.084602+00:00",
+  "remaining": [
+    "Actual human wording/gold review and scientific interpretation",
+    "Explicit authorization and execution for live confirmation",
+    "Preserve existing historical limitations and separate future results"
+  ],
+  "report": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 4,
+    "minimum_text_font_pt": 10.999999999999886,
+    "other_pages_pixel_identical_to_preceding_visual_audit": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      12
+    ],
+    "pdf_sha256": "3bcfee1c535dcacbb3403df8bf8e5fd3e8254d091cce00971ebd998d52a89ab6",
+    "reference_pages": 1,
+    "source_sha256": "b52d1a204f936929640eb0d9c1c4e275c670175e2d7bc60b2b2ce5b71bdfd9bb",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 99,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script",
+    "visually_reviewed_changed_pages": [
+      10,
+      11
+    ]
+  },
+  "seed_scope": "Identifier permutations only; new seeds do not create independent geometries.",
+  "source_sha256": {
+    "evaluation/prepare_balanced_generation.py": "7c8df3e0f5b818624372cd248551cb44db5adbdf23905d4cc020c29c48540450",
+    "evaluation/prepare_development_campaign.py": "2cf6700bbe220eb5e80b0cb6746859221d15d937bc35f96f6cdd31143538f654",
+    "evaluation/run_development_campaign.py": "8abade7309eff04284912e6389ece47e4fa6e6ce165e13814dee0ee0859b3a0a",
+    "evaluation/supervise_development_campaign.py": "f45e537a79c6306aefc57a4b142124573b50b0db975276c111bf964bd8c6eeca",
+    "src/scheduling/evaluation/balanced_generation.py": "864be089b261bc187d9d331ea3f984592e63fcaf6eab1a7a1e36bd7a3699cb61",
+    "tests/integration/test_balanced_campaign.py": "b0c5144f716583c9ba698956b68c97b9a80b51dcbd36e8a3a08a750ea70d4be4",
+    "tests/unit/test_balanced_generation.py": "8c23bccc5e925dde91f37f65451c609ab29cf2016a9fd94848199a29b09ae29d"
+  }
+}

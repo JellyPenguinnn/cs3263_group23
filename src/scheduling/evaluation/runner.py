@@ -24,7 +24,7 @@ from scheduling.pipelines.solver_augmented import (
     run_solver_augmented,
 )
 from scheduling.providers import ModelConfig, ModelResponse
-from scheduling.providers.execution import execution_contract
+from scheduling.providers.execution import execution_contract, expected_response_model
 from scheduling.schema import load_json, to_data
 from scheduling.solver import SolverLimits
 from scheduling.evaluation.frozen import (
@@ -307,7 +307,7 @@ def _stop_reason(response, expected_model=None, fingerprints=None, *, allow_back
         return error
     if isinstance(error, str) and error.startswith("http_"):
         return error
-    if expected_model is not None and response.get("returned_model") != expected_model:
+    if expected_model is not None and response.get("returned_model") != expected_response_model(expected_model):
         return "returned_model_mismatch"
     if expected_model is not None and fingerprints is not None:
         # Unknown is an identity observation too; a newly appearing/disappearing

@@ -36,12 +36,12 @@ BLOCKS = {
 }
 
 
-def plot_data(summary: dict) -> dict:
+def plot_data(summary: dict, *, models=MODELS, blocks=BLOCKS) -> dict:
     """Keep exact denominators and fail if categories no longer explain the totals."""
     data = {}
-    for block in BLOCKS:
+    for block in blocks:
         data[block] = {}
-        for key in MODELS:
+        for key in models:
             model = summary["models"][key]
             rows = model["accepted_by_block"][block]
             data[block][key] = {"model": model["model"], "approaches": {}}
@@ -60,8 +60,8 @@ def plot_data(summary: dict) -> dict:
     return data
 
 
-def render_block(block: str, data: dict, *, report: bool = False):
-    title, subtitle, note = BLOCKS[block]
+def render_block(block: str, data: dict, *, report: bool = False, models=MODELS, blocks=BLOCKS):
+    title, subtitle, note = blocks[block]
     if report:
         # At 6.2 inches this fits the report body without shrinking 11-point labels.
         fig, ax = plt.subplots(figsize=(6.2, 3.2))
@@ -78,7 +78,7 @@ def render_block(block: str, data: dict, *, report: bool = False):
         fig.legend(handles=[Patch(color=COLORS[a], label=LABELS[a]) for a in APPROACHES],
                    loc="upper left", bbox_to_anchor=(0.067, 0.859), ncol=2, frameon=False)
     for j, approach in enumerate(APPROACHES):
-        rows = [data[key]["approaches"][approach] for key in MODELS]
+        rows = [data[key]["approaches"][approach] for key in models]
         bars = ax.bar([x + (j - 0.5) * 0.32 for x in range(2)],
                       [r["percent"] for r in rows], width=0.29, color=COLORS[approach])
         labels = [f'{r["percent"]:.1f}%' +
@@ -93,7 +93,7 @@ def render_block(block: str, data: dict, *, report: bool = False):
             x = bar.get_x()+bar.get_width()/2
             ax.text(x, row["percent"]/2, f'{row["accepted"]}/{row["attempts"]}',
                     ha="center", va="center", color="white", fontsize=11)
-    ax.set_xticks(range(2), [data[key]["model"] for key in MODELS], fontsize=12)
+    ax.set_xticks(range(2), [data[key]["model"] for key in models], fontsize=12)
     ax.set_xlim(-0.55, 1.55)
     ax.set_ylim(0, 118)
     ax.set_yticks(range(0, 101, 20))

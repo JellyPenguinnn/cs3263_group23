@@ -1,0 +1,131 @@
+{
+  "evidence": "live_pipeline_smoke_not_full_benchmark",
+  "pipeline": "completed_and_replayed",
+  "scheduling_attempts": 24,
+  "http_requests": 27,
+  "model_ids": {
+    "qwen3.6:35b": 24
+  },
+  "blocks": {
+    "controlled": {
+      "direct": {
+        "attempts": 8,
+        "accepted": 3,
+        "categories": {
+          "gold_invalid_schedule": 3,
+          "false_unsat": 1,
+          "accepted": 3,
+          "invalid_output": 1
+        }
+      },
+      "solver_augmented": {
+        "attempts": 8,
+        "accepted": 8,
+        "categories": {
+          "accepted": 8
+        }
+      }
+    },
+    "realistic": {
+      "direct": {
+        "attempts": 2,
+        "accepted": 1,
+        "categories": {
+          "gold_invalid_schedule": 1,
+          "accepted": 1
+        }
+      },
+      "solver_augmented": {
+        "attempts": 2,
+        "accepted": 2,
+        "categories": {
+          "accepted": 2
+        }
+      }
+    },
+    "language": {
+      "direct": {
+        "attempts": 2,
+        "accepted": 0,
+        "categories": {
+          "invalid_output": 1,
+          "false_unsat": 1
+        }
+      },
+      "solver_augmented": {
+        "attempts": 2,
+        "accepted": 2,
+        "categories": {
+          "accepted": 2
+        }
+      }
+    }
+  },
+  "tokens_including_capability": {
+    "completion_tokens": {
+      "all_provider_attempts": 26,
+      "reported_attempts": 26,
+      "reported_sum": 59760
+    },
+    "prompt_tokens": {
+      "all_provider_attempts": 26,
+      "reported_attempts": 26,
+      "reported_sum": 59125
+    },
+    "total_tokens": {
+      "all_provider_attempts": 26,
+      "reported_attempts": 26,
+      "reported_sum": 118885
+    }
+  },
+  "provider_failure_counts": {},
+  "wall_seconds": 656.0420574583113,
+  "archive": {
+    "files": 109,
+    "sha256": "03a7b6872ceb22b6ba4ca29a75adb858240e8a24879884e070ff944c684e6f41"
+  },
+  "casebook_examples": 23,
+  "paired_conditions": 12,
+  "backend_observations": [
+    {
+      "successful_provider_attempts": 18,
+      "system_fingerprint": "vllm-0.23.0-7cd694fa"
+    },
+    {
+      "successful_provider_attempts": 8,
+      "system_fingerprint": "vllm-0.28.0-f8aad13e"
+    }
+  ],
+  "verification": {
+    "noneditable_install": true,
+    "source_and_asset_files_matched": 44,
+    "dependency_pins_matched": 30,
+    "targeted_tests_passed": 28,
+    "dashboard_tests_passed": 9,
+    "archive_source_replay_identical": true,
+    "dashboard_http_completed_attempts": 24,
+    "post_run_change": "Chart legend and axis limits only; original evidence preserved, corrected derivative rendered and inspected; fresh full-study packets required."
+  },
+  "protocol": {
+    "model": "qwen3.6:35b",
+    "max_output_tokens_per_completion": 32768,
+    "total_reserved_output_tokens": 851968,
+    "input_tokens": "additional",
+    "connect_timeout_seconds": 30,
+    "read_timeout_seconds": 1800,
+    "max_attempts_per_request": 1,
+    "solver_seconds": 30,
+    "reference_seconds": 60,
+    "backend_policy": "strict_model_observe_backend_v1",
+    "dataset": "difficulty-v1",
+    "unique_cases": 10,
+    "paired_conditions": 12,
+    "selection": "Fixed before inference for coverage of all tiers, task types, labels and three blocks; not representative sampling"
+  },
+  "source": {
+    "base_commit": "2fcd43295c121f6f28a8463bc303c3ec84fad5fa",
+    "uncommitted_extension": true,
+    "exact_source": "Preserved in the checksum-verified reproduction archive",
+    "historical_qwen_archives": "unchanged"
+  }
+}

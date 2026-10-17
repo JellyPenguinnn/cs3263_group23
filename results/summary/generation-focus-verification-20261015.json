@@ -1,0 +1,24 @@
+{
+  "changed_original_path": "results/summary/submission-report-format.json",
+  "format_version": "1.0",
+  "missing_files": 0,
+  "models": {
+    "glm53flash": {
+      "original_observations_retained": 200,
+      "scoped_counts_categories_resources_checked": true,
+      "size_based_selection_checked": true
+    },
+    "qwen36": {
+      "original_observations_retained": 200,
+      "scoped_counts_categories_resources_checked": true,
+      "size_based_selection_checked": true
+    }
+  },
+  "new_figure_exports_hash_checked": 12,
+  "new_model_calls": 0,
+  "original_files_checked": 1145,
+  "previous_report_source_pdf_and_figures_preserved": true,
+  "prior_format_receipt_preserved_at": "docs/history/20261014-report/format-verification.json",
+  "scope_partition_and_counts_checked": true,
+  "unchanged_in_place": 1144
+}

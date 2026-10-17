@@ -1,0 +1,28 @@
+{
+  "format_version": "1.0",
+  "archives": [
+    {
+      "id": "qwen36",
+      "run_id": "difficulty-200-qwen36-20261014",
+      "path": "results/archives/difficulty-200-qwen36-20261014.tar.gz",
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "bytes": 3220580,
+      "checksummed_members": 364,
+      "scheduling_attempts": 200,
+      "required_returned_model": "qwen3.6:35b",
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    },
+    {
+      "id": "glm53flash",
+      "run_id": "difficulty-200-glm53flash-20261014",
+      "path": "results/archives/difficulty-200-glm53flash-20261014.tar.gz",
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "bytes": 1998959,
+      "checksummed_members": 364,
+      "scheduling_attempts": 200,
+      "required_returned_model": "glm-5.3-flash",
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    }
+  ],
+  "policy": "Original reproduction archives copied byte-for-byte. Prior studies and the stopped GLM run are preserved separately and excluded from this comparison."
+}

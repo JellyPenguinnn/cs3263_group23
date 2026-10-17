@@ -17,6 +17,7 @@ from scheduling.evaluation.cases import load_cases
 from scheduling.evaluation.frozen import ANALYSIS_SETTINGS, check_frozen, check_frozen_reference
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.metrics import summarize, analysis_details, export_tables
+from scheduling.evaluation.interpretation import interpret, export_interpretation, semantic_witness_check, unit
 from scheduling.evaluation.runner import (
     OBSERVE_BACKEND_POLICY, STRICT_QUALIFICATION_POLICY, RunConfig, _contract,
     _stop_reason, baseline_fingerprints, read, replay, write_new,
@@ -26,6 +27,7 @@ from scheduling.pipelines.direct import build_messages
 from scheduling.pipelines.solver_augmented import build_extraction_messages
 from scheduling.providers import ModelConfig
 from scheduling.solver import SolverLimits
+from scheduling.schema import to_data
 
 ROLES = {"controlled", "realistic", "language"}
 
@@ -74,13 +76,13 @@ def _settings(contract):
     }
 
 
-def resource_statistics(rows):
+def resource_statistics(rows, *, group_by=("study_block", "approach")):
     """Observed per-pipeline and per-provider distributions; missing is not zero."""
     buckets = defaultdict(list)
     for row in rows:
-        buckets[(row["study_block"], row["approach"])].append(row)
+        buckets[tuple(row[k] for k in group_by)].append(row)
     output = []
-    for (block, approach), items in sorted(buckets.items()):
+    for key, items in sorted(buckets.items(), key=str):
         measurements = {}
         for field in ("total_seconds", "extraction_seconds", "solver_seconds"):
             measurements[field] = [dict(r["timings"]).get(field) for r in items]
@@ -106,8 +108,7 @@ def resource_statistics(rows):
             }
         output.append(
             {
-                "study_block": block,
-                "approach": approach,
+                **dict(zip(group_by, key)),
                 "pipeline_attempts": len(items),
                 "without_provider_records": sum(not r["usage"] for r in items),
                 "distributions": distributions,
@@ -229,6 +230,7 @@ def analyze_blocks(blocks, *, development=False):
         {},
         set(),
     )
+    case_evidence = {}
     for role, path in sorted(paths.items()):
         contract = read(path / "manifest.json")["contract"]
         cfg = _config(contract["config"])
@@ -275,11 +277,13 @@ def analyze_blocks(blocks, *, development=False):
                 "Incompatible source, runtime, model, provider, solver or analysis settings"
             )
         cases_by_role[role] = {c.case_id: c for c in cases}
+        gold_references = {}
         for c in cases:
             record = read(path / "references" / (digest(c.case_id) + ".json"))
             if digest(record["reference"]) != record["sha256"]:
                 raise ValueError("Reference checksum mismatch")
             check_frozen_reference(c, record["reference"])
+            gold_references[c.case_id] = record["reference"]
         rows, progress = replay(path)
         if (
             progress["pending_attempt_ids"]
@@ -316,6 +320,32 @@ def analyze_blocks(blocks, *, development=False):
             ]
             row["model_seconds"] = response.get("elapsed_seconds")
             row["provider_attempts"] = response.get("attempts", [])
+            case = cases_by_role[role][row["case_id"]]
+            row["semantic_witness_check"] = semantic_witness_check(case, result, gold_references[case.case_id])
+            view = render(case, row["variant_id"], cfg.rendering_seed)
+            messages = (build_extraction_messages(view) if row["approach"] == "solver_augmented" else
+                        build_messages(view.text, task_type=view.task_type, required_activity_ids=view.activity_ids,
+                                       original_schedule=view.original_schedule.to_list() if view.original_schedule else None))
+            case_evidence[unit(row)] = {
+                "trace": {
+                    "attempt_member": f"runs/{role}/{path.name}/attempts/{file.name}",
+                    "attempt_sha256": hashlib.sha256(file.read_bytes()).hexdigest(),
+                    "reference_member": f"runs/{role}/{path.name}/references/{digest(case.case_id)}.json",
+                    "case_bundle_member": f"runs/{role}/{path.name}/cases.json",
+                },
+                "public_request": to_data(view),
+                "request_messages": to_data(messages),
+                "gold_specification": to_data(case.problem),
+                "original_problem": to_data(case.original_problem),
+                "original_schedule": to_data(case.original_schedule),
+                "model_output": response.get("content"),
+                "extracted_specification": result.get("extracted_spec"),
+                "candidate_schedule": result.get("schedule"),
+                "pipeline_diagnostics": result.get("diagnostics", []),
+                "schema_diagnostics": result.get("schema_diagnostics", []),
+                "solver_result": result.get("solve_result"),
+                "provider_errors": [a.get("error") for a in response.get("attempts", []) if a.get("error")],
+            }
             if cfg.evidence in ("live_frozen", "live_development"):
                 if not response.get("attempts"):
                     raise ValueError("Missing live provider attempt metadata")
@@ -393,6 +423,8 @@ def analyze_blocks(blocks, *, development=False):
         "language": summarize(language_rows),
         "diagnostics": analysis_details(all_rows),
         "resources": resource_statistics(all_rows),
+        "tier_resources": resource_statistics(all_rows, group_by=("study_block", "level", "approach")),
+        "interpretation": interpret(all_rows, case_evidence),
         "rows": all_rows,
         "counts": {
             "primary_attempts": len(canonical),
@@ -494,6 +526,7 @@ def export_study(blocks, directory, *, project_root, figures=False, development=
     directory.mkdir(parents=True, exist_ok=False)
     write_new(directory / "analysis.json", result)
     export_tables(result["rows"], directory / "tables")
+    export_interpretation(result, directory / "tables")
     fields = [
         "study_block",
         "raw_run",
@@ -537,11 +570,12 @@ def export_study(blocks, directory, *, project_root, figures=False, development=
                     writer.writerow({k: json.dumps(v, sort_keys=True) if isinstance(v, dict)
                                      else v for k, v in value.items()})
     if figures:
-        from scheduling.evaluation.figures import export_figures
+        from scheduling.evaluation.figures import export_figures, export_tier_figures
 
         export_figures(
             result["rows"], directory / "tables", evidence=result["evidence"]
         )
+        export_tier_figures(result["rows"], result["tier_resources"], directory / "tables", evidence=result["evidence"])
     entries["analysis.json"] = (directory / "analysis.json").read_bytes()
     for p in sorted((directory / "tables").iterdir()):
         entries["tables/" + p.name] = p.read_bytes()

@@ -1,0 +1,137 @@
+{
+  "qwen36": {
+    "archive_replay_exact_analysis_match": true,
+    "replayed_attempts": 200,
+    "supervisor_exit_code": 0,
+    "analysis_exported": true,
+    "completed_utc": "2026-10-13T09:54:19.974486+00:00",
+    "required_model": "qwen3.6:35b",
+    "two_capabilities_passed": true,
+    "campaign_summary": {
+      "backend_note": "Shared-service development evidence; backend variation is recorded, not pinned. Counts cover capability and scheduling responses; failed requests retain unknown backend.",
+      "backend_observations": [
+        {
+          "successful_provider_attempts": 116,
+          "system_fingerprint": "vllm-0.23.0-7cd694fa"
+        },
+        {
+          "successful_provider_attempts": 80,
+          "system_fingerprint": "vllm-0.28.0-f8aad13e"
+        }
+      ],
+      "backend_policy": "strict_model_observe_backend_v1",
+      "blocks": {
+        "controlled": {
+          "completed": 120,
+          "reserved_output_tokens": 3932160,
+          "reserved_requests": 120,
+          "state": "completed"
+        },
+        "language": {
+          "completed": 40,
+          "reserved_output_tokens": 1310720,
+          "reserved_requests": 40,
+          "state": "completed"
+        },
+        "realistic": {
+          "completed": 40,
+          "reserved_output_tokens": 1310720,
+          "reserved_requests": 40,
+          "state": "completed"
+        }
+      },
+      "provider_failure_counts": {
+        "http_502": 4,
+        "transport_error": 2
+      },
+      "requested_output_tokens_reserved": 6619136,
+      "requests_reserved": 203,
+      "state": "completed",
+      "stop_reason": null,
+      "tokens": {
+        "completion_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 196,
+          "reported_sum": 422608
+        },
+        "prompt_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 196,
+          "reported_sum": 546557
+        },
+        "total_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 196,
+          "reported_sum": 969165
+        }
+      },
+      "total_wall_seconds": 5711.818163041957,
+      "usage_scope": "Recorded capability and scheduling provider attempts; metadata request has no token usage record"
+    }
+  },
+  "glm53flash": {
+    "archive_replay_exact_analysis_match": true,
+    "replayed_attempts": 200,
+    "supervisor_exit_code": 0,
+    "analysis_exported": true,
+    "completed_utc": "2026-10-14T05:35:00.221948+00:00",
+    "required_model": "glm-5.3-flash",
+    "two_capabilities_passed": true,
+    "campaign_summary": {
+      "backend_note": "Shared-service development evidence; backend variation is recorded, not pinned. Counts cover capability and scheduling responses; failed requests retain unknown backend.",
+      "backend_observations": [
+        {
+          "successful_provider_attempts": 193,
+          "system_fingerprint": "vllm-0.31.0-tp2-64d866e2"
+        }
+      ],
+      "backend_policy": "strict_model_observe_backend_v1",
+      "blocks": {
+        "controlled": {
+          "completed": 120,
+          "reserved_output_tokens": 3932160,
+          "reserved_requests": 120,
+          "state": "completed"
+        },
+        "language": {
+          "completed": 40,
+          "reserved_output_tokens": 1310720,
+          "reserved_requests": 40,
+          "state": "completed"
+        },
+        "realistic": {
+          "completed": 40,
+          "reserved_output_tokens": 1310720,
+          "reserved_requests": 40,
+          "state": "completed"
+        }
+      },
+      "provider_failure_counts": {
+        "http_502": 9
+      },
+      "requested_output_tokens_reserved": 6619136,
+      "requests_reserved": 203,
+      "state": "completed",
+      "stop_reason": null,
+      "tokens": {
+        "completion_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 193,
+          "reported_sum": 1012920
+        },
+        "prompt_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 193,
+          "reported_sum": 484123
+        },
+        "total_tokens": {
+          "all_provider_attempts": 202,
+          "reported_attempts": 193,
+          "reported_sum": 1497043
+        }
+      },
+      "total_wall_seconds": 13746.422124874778,
+      "usage_scope": "Recorded capability and scheduling provider attempts; metadata request has no token usage record"
+    }
+  }
+}

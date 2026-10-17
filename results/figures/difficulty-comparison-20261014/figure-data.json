@@ -1,0 +1,518 @@
+{
+  "controlled_tiers": {
+    "glm53flash": {
+      "easy": {
+        "direct": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 5,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "extreme": {
+        "direct": {
+          "accepted": 9,
+          "attempts": 12,
+          "categories": {
+            "accepted": 9,
+            "provider_error": 3
+          },
+          "correct_unsat": 5,
+          "objective_comparable": 4,
+          "objective_matches": 4,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 4,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "hard": {
+        "direct": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "moderate": {
+        "direct": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "very_hard": {
+        "direct": {
+          "accepted": 10,
+          "attempts": 12,
+          "categories": {
+            "accepted": 10,
+            "provider_error": 2
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 4,
+          "objective_matches": 4,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 4,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      }
+    },
+    "qwen36": {
+      "easy": {
+        "direct": {
+          "accepted": 6,
+          "attempts": 12,
+          "categories": {
+            "accepted": 6,
+            "false_unsat": 1,
+            "gold_invalid_schedule": 3,
+            "invalid_output": 1,
+            "provider_error": 1
+          },
+          "correct_unsat": 3,
+          "objective_comparable": 3,
+          "objective_matches": 1,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 2,
+          "sat_attempts": 6,
+          "sat_valid": 3,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "extreme": {
+        "direct": {
+          "accepted": 4,
+          "attempts": 12,
+          "categories": {
+            "accepted": 4,
+            "false_unsat": 3,
+            "gold_invalid_schedule": 5
+          },
+          "correct_unsat": 4,
+          "objective_comparable": 0,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 0,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "hard": {
+        "direct": {
+          "accepted": 3,
+          "attempts": 12,
+          "categories": {
+            "accepted": 3,
+            "false_unsat": 2,
+            "gold_invalid_schedule": 5,
+            "invalid_output": 2
+          },
+          "correct_unsat": 3,
+          "objective_comparable": 0,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 0,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 11,
+          "attempts": 12,
+          "categories": {
+            "accepted": 11,
+            "invalid_output": 1
+          },
+          "correct_unsat": 5,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "moderate": {
+        "direct": {
+          "accepted": 4,
+          "attempts": 12,
+          "categories": {
+            "accepted": 4,
+            "false_unsat": 3,
+            "gold_invalid_schedule": 3,
+            "invalid_output": 2
+          },
+          "correct_unsat": 3,
+          "objective_comparable": 1,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 6,
+          "sat_valid": 1,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 12,
+          "attempts": 12,
+          "categories": {
+            "accepted": 12
+          },
+          "correct_unsat": 6,
+          "objective_comparable": 6,
+          "objective_matches": 6,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 6,
+          "unsat_attempts": 6
+        }
+      },
+      "very_hard": {
+        "direct": {
+          "accepted": 0,
+          "attempts": 12,
+          "categories": {
+            "false_unsat": 3,
+            "gold_invalid_schedule": 4,
+            "invalid_output": 4,
+            "provider_error": 1
+          },
+          "correct_unsat": 0,
+          "objective_comparable": 0,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 0,
+          "unsat_attempts": 6
+        },
+        "solver_augmented": {
+          "accepted": 10,
+          "attempts": 12,
+          "categories": {
+            "accepted": 10,
+            "provider_error": 2
+          },
+          "correct_unsat": 5,
+          "objective_comparable": 5,
+          "objective_matches": 5,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 6,
+          "sat_valid": 5,
+          "unsat_attempts": 6
+        }
+      }
+    }
+  },
+  "layout": "standalone",
+  "matplotlib_version": "3.10.8",
+  "new_model_calls": 0,
+  "output_sha256": {
+    "controlled-accepted.pdf": "d26250683c838fdbe26e3e68decd07629fe7533340ce7cff3d03b026f7a58b03",
+    "controlled-accepted.png": "5ffe842c45e9765bcb1207cb8bae1d3d4cabc4ab85fe4290e2923b4329bb26d6",
+    "controlled-tiers.pdf": "d1c0a7bb5da8b8d2f7d6ae1df0ccac8374567538ee57f6107ac31ae1a378cb93",
+    "controlled-tiers.png": "6ffebc64cd0ff1ba83c7154fb83e175985e58efedf3bb4887e2d6a09c63e4e9c",
+    "language-accepted.pdf": "6e86ec81f2484fdc8a0b7082c6a9d647900bcfbd1309ea2841c8ed078ddc044d",
+    "language-accepted.png": "39ea7632465700831186c96c4c0da9ac08f4ff230f4615af6ba24ca3b18182d2",
+    "realistic-accepted.pdf": "d93dfbc1f457b279a4107480a33de727b46b4d67c104fd83027b1a1550b57289",
+    "realistic-accepted.png": "f4a8eb414585c875b1fdd06663a6752778bcda058a8bb042aa64b0b9b604ea3e",
+    "resources.pdf": "6fcafa86ba04a942d8d261cbc25b233cfc803633b612fff9a5ec6bccb8030f32",
+    "resources.png": "c0466fdaea45db94e8e6611997139788faf32ef7311e8ab32a9c5d7c75c76dce"
+  },
+  "plotted_data": {
+    "controlled": {
+      "glm53flash": {
+        "approaches": {
+          "direct": {
+            "accepted": 55,
+            "attempts": 60,
+            "categories": {
+              "accepted": 55,
+              "provider_error": 5
+            },
+            "percent": 91.66666666666667
+          },
+          "solver_augmented": {
+            "accepted": 60,
+            "attempts": 60,
+            "categories": {
+              "accepted": 60
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "glm-5.3-flash"
+      },
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 17,
+            "attempts": 60,
+            "categories": {
+              "accepted": 17,
+              "false_unsat": 12,
+              "gold_invalid_schedule": 20,
+              "invalid_output": 9,
+              "provider_error": 2
+            },
+            "percent": 28.333333333333332
+          },
+          "solver_augmented": {
+            "accepted": 57,
+            "attempts": 60,
+            "categories": {
+              "accepted": 57,
+              "invalid_output": 1,
+              "provider_error": 2
+            },
+            "percent": 95.0
+          }
+        },
+        "model": "qwen3.6:35b"
+      }
+    },
+    "language": {
+      "glm53flash": {
+        "approaches": {
+          "direct": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "provider_error": 2
+            },
+            "percent": 90.0
+          },
+          "solver_augmented": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "gold_invalid_schedule": 2
+            },
+            "percent": 90.0
+          }
+        },
+        "model": "glm-5.3-flash"
+      },
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 20,
+            "categories": {
+              "accepted": 4,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 6,
+              "invalid_output": 7
+            },
+            "percent": 20.0
+          },
+          "solver_augmented": {
+            "accepted": 19,
+            "attempts": 20,
+            "categories": {
+              "accepted": 19,
+              "false_unsat": 1
+            },
+            "percent": 95.0
+          }
+        },
+        "model": "qwen3.6:35b"
+      }
+    },
+    "realistic": {
+      "glm53flash": {
+        "approaches": {
+          "direct": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "provider_error": 2
+            },
+            "percent": 90.0
+          },
+          "solver_augmented": {
+            "accepted": 20,
+            "attempts": 20,
+            "categories": {
+              "accepted": 20
+            },
+            "percent": 100.0
+          }
+        },
+        "model": "glm-5.3-flash"
+      },
+      "qwen36": {
+        "approaches": {
+          "direct": {
+            "accepted": 5,
+            "attempts": 20,
+            "categories": {
+              "accepted": 5,
+              "false_unsat": 5,
+              "gold_invalid_schedule": 6,
+              "invalid_output": 2,
+              "provider_error": 2
+            },
+            "percent": 25.0
+          },
+          "solver_augmented": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "invalid_output": 2
+            },
+            "percent": 90.0
+          }
+        },
+        "model": "qwen3.6:35b"
+      }
+    }
+  },
+  "renderer_sha256": "84f8bbc06557982c050f7c4c4ce298793d26efb4915cc3d02bea62811e9a2198",
+  "shared_renderer_sha256": "418444ca00eaee17cf2a81e71e5e65d5868c69c9db93c468dbae9d77297a1be6",
+  "source_sha256": "75b20f863b32b52724cebb3edacd994421396decb3af8f0d8bffe5918894d49b"
+}

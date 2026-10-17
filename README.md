@@ -2,9 +2,11 @@
 
 **CS3263 Foundations of Artificial Intelligence · Group 23 · NUS AY2026/27**
 
-A research system for generating schedules and repairing them when requirements change. It compares a language model that proposes a schedule directly with the same model translating a request into a specification for **OR-Tools CP-SAT**. An independent validator checks both against the original requirements.
+A research system whose core task is **schedule generation**. Minimum-disruption repair is a completed, bounded extension. It compares a language model that proposes a schedule directly with the same model translating a request into a specification for **OR-Tools CP-SAT**. An independent validator checks both against the original requirements.
 
-The implementation works end to end. Two complete SoCLaaS development benchmarks contain **600 scheduling attempts each**. Results, figures and replayable evidence are included. The report is prepared for member review; course model eligibility, genuine contributions/review and final submission arrangements remain open.
+The generation pipeline, independent validator and repair extension work end to end. The latest SoCLaaS comparison completed **96 scheduling attempts each for Qwen3.6 and GLM5.3 Flash** on 48 balanced generation cases: 24 feasible and 24 infeasible. It tests deadlines and fixed appointments in both labels after an audit found a constraint-presence confound in the earlier dataset. The separate 200-attempt difficulty studies and 600-attempt historical Qwen studies remain preserved.
+
+The report is prepared for member review. Course model eligibility, genuine human contributions and interpretation, presentation and submission arrangements remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
 
 [Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Development plan](planning.md) · [Agent instructions](AGENTS.md)
 
@@ -12,9 +14,11 @@ The implementation works end to end. Two complete SoCLaaS development benchmarks
 
 - Generates single-day schedules with fixed durations, participants and resources on a 30-minute grid.
 - Enforces availability, release times, deadlines, appointments, precedence and non-overlap.
-- Repairs schedules by minimizing moved activities, then total time shift, then preference penalties.
+- As an extension, repairs schedules by minimizing moved activities, then total start-time shift, then preference penalties.
 - Separately records extraction fidelity, solver proof status, gold validity, objective quality, failures, time and tokens.
 - Provides offline replay, a read-only dashboard and explanations grounded in recorded results.
+
+The [TA-feedback alignment](docs/ta-feedback-alignment.md) defines the generation-first scope, its stopping point and executable small office examples. The current schema supports preferred start windows; weekly calendars, consecutive-meeting penalties and same-day clustering are not implemented.
 
 Inputs are synthetic or AI-assisted fictional scenarios. The system does not connect to real calendars or change commitments. Multi-day scheduling, participant assignment and model training are outside scope.
 
@@ -22,7 +26,7 @@ Inputs are synthetic or AI-assisted fictional scenarios. The system does not con
 
 ```mermaid
 flowchart LR
-  R[Public request and<br/>original schedule] --> A[Direct LLM]
+  R[Public request<br/>Original schedule<br/>for repair only] --> A[Direct LLM]
   R --> B[LLM specification<br/>extraction]
   B --> S[Fixed CP-SAT<br/>compiler]
   A --> V[Independent<br/>gold validator]
@@ -59,29 +63,32 @@ Open [the local dashboard](http://127.0.0.1:8876). Use an unused output director
 
 ## Results
 
-Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every failure remains in the denominator; acceptance does not imply optimality.** Each model used the same cases, request prompts, source snapshot, runtime and configured budgets.
+Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every failure remains in the denominator; acceptance does not imply optimality.** Both models used the same 48 cases, prompts, runtime and configured budgets, with one call per method/case and no retries.
 
-| Evaluation block | Qwen3.6 Direct / CP-SAT | Qwen3.8 Direct / CP-SAT |
+| Model | Direct LLM | LLM + CP-SAT |
 | --- | ---: | ---: |
-| Controlled | 95/240 / 229/240 | 239/240 / 240/240 |
-| Realistic scenarios | 6/12 / 12/12 | 11/12 / 11/12 |
-| Additional wording | 8/48 / 47/48 | 46/48 / 44/48 |
+| Qwen3.6 `qwen3.6:35b` | 12.5% (6/48) | 100.0% (48/48) |
+| GLM5.3 Flash `glm-5.3-flash` | 97.9% (47/48) | 100.0% (48/48) |
 
-![Controlled scheduling acceptance](results/figures/two-model-development-20261002/controlled-accepted.png)
+![Balanced generation acceptance](results/figures/balanced-comparison-20261017/balanced-acceptance.png)
 
-Solver assistance substantially improves Qwen3.6's validity and optimization quality. Qwen3.8 nearly saturates validity; CP-SAT still matches the reference optimum on all 60 controlled repairs, compared with 59/60 for Direct. All nine Qwen3.8 rejected attempts are provider failures. Model-call time and token use are higher for the solver-assisted pipeline.
+Qwen direct produced 23 constraint violations, nine false UNSAT answers and ten strict JSON-format failures. Format noncompliance is distinct from scheduling reasoning. GLM direct's only failure was a transport error; all 47 returned direct answers were accepted. Its 47/48 primary result retains that failure, so the one-case gap does not demonstrate a solver reasoning advantage. All returned GLM responses matched the required model identity.
 
-See the [realistic](results/figures/two-model-development-20261002/realistic-accepted.png) and [wording](results/figures/two-model-development-20261002/language-accepted.png) charts, [complete analysis](docs/two-model-development-audit.md) and [machine-readable summary](results/summary/two-model-development-20261002.json). These are exploratory results on known development inputs. Wording reuses 24 controlled bases; the realistic set has only 12 AI-assisted scenarios. Hosted backend versions and hidden defaults prevent a causal comparison of model weights or hardware speed.
+The [balanced audit](docs/balanced-comparison-audit.md) and [protocol](docs/balanced-generation.md) give SAT/UNSAT, constraint-profile, objective-quality, time/token and trace-level details. The 48 synthetic/AI-assisted cases belong to **three construction families**; they are not 48 independent samples or a held-out test. Balancing removes the identified presence/label shortcut, not all template bias. Shared serving conditions limit causal model comparisons; human prose/gold review remains pending.
+
+The [200-attempt difficulty comparison](docs/difficulty-comparison-audit.md) retains repair, fictional and wording extensions, including concrete extraction omissions and valid but suboptimal direct answers. Its constraint-presence confound remains disclosed in the [course/code audit](docs/course-code-audit.md). The [600-attempt Qwen3.6/Qwen3.8 studies](docs/two-model-development-audit.md) remain historical evidence. **These different designs are not pooled.**
 
 ## Reproduce the evidence
 
-The [evidence guide](docs/evidence.md) identifies the two immutable reproduction archives, their checksums, exact-source replay commands and preservation of earlier/operational evidence. Offline replay requires no credentials or new model calls. Historical experiments retain their original configurations and are not pooled with the two-model study.
-
-Regenerate the three grouped bar charts from the checked-in summary:
+The [evidence guide](docs/evidence.md) identifies the immutable archives, checksums and exact-source offline replay. No credentials or new model calls are needed. Verify and regenerate the latest summary and charts:
 
 ```sh
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_benchmark_results.py
+.venv/bin/python scripts/verify_evidence.py --manifest results/balanced-evidence-manifest.json
+.venv/bin/python scripts/build_balanced_comparison.py
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py
 ```
+
+The evidence guide also covers the separate difficulty and historical archives. Regeneration and replay are offline; use fresh extraction directories and preserve every original record.
 
 ## Verify changes
 

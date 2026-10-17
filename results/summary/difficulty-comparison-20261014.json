@@ -1,0 +1,5355 @@
+{
+  "comparison_checks": {
+    "all_200_paired_prompt_hashes_and_public_views_match": true,
+    "all_returned_identities_match": true,
+    "all_three_case_bundles_match": true,
+    "allowed_differences": [
+      "requested/required model identity",
+      "observed capability and backend metadata"
+    ],
+    "no_pending_requests_or_retries": true,
+    "shared_settings": {
+      "analysis_settings": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 3263,
+        "minimum_groups_for_interval": 10,
+        "primary_repeat": 0,
+        "primary_variant": "canonical",
+        "separate_kind_task_and_gold_strata": true
+      },
+      "development_registry": null,
+      "evidence": "live_development",
+      "model": {
+        "connect_timeout": 30,
+        "max_attempts": 1,
+        "max_tokens": 32768,
+        "read_timeout": 1800,
+        "retry_delay": 1.0
+      },
+      "provider_execution": {
+        "configured_body": {
+          "max_tokens": 32768,
+          "stream": false
+        },
+        "effective_omitted_values": "server_defaults_unavailable",
+        "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+        "final_content_field": "choices[0].message.content",
+        "format_version": "1.0",
+        "max_attempts": 1,
+        "omitted_controls": [
+          "temperature",
+          "top_p",
+          "seed",
+          "reasoning_effort",
+          "response_format"
+        ],
+        "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+        "provider": "soclaas",
+        "retry_delay": 1.0,
+        "timeouts": {
+          "connect": 30,
+          "pool": 1800,
+          "read": 1800,
+          "write": 1800
+        },
+        "weight_revision": null
+      },
+      "provider_failure_policy": "continue_transient_v1",
+      "qualification_policy": "strict_model_observe_backend_v1",
+      "reference_solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 60
+      },
+      "rendering_seed": 3263,
+      "runtime": {
+        "certifi": "2026.7.22",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "numpy": "2.5.3",
+        "ortools": "9.14.6206",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "protobuf": "6.31.1",
+        "python": "3.12.2",
+        "truststore": "0.10.4"
+      },
+      "solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 30
+      },
+      "source": {
+        "__init__.py": "81ec81da4a406da6a5634c102e630fd2ce2fd7ec59954ca14865ce6e9c6fd240",
+        "cli.py": "94add62a6ef633f99801aa7a241e9c060c62f1adee420303b412baff31d3d15e",
+        "dashboard/__init__.py": "ffecf6c48753d374d028d5aea4bb76c9c3258b1e8fe06578321dd30516713386",
+        "dashboard/server.py": "af366362698d252bdbcebdca4cfadabcef49af7b7ea8554004255098532dd498",
+        "dashboard/service.py": "ff8e23dfd4f030e628314dc235e49c7e7fd0882d772b5738651d56ce1d9f1d86",
+        "domain_analysis.py": "55732ed94091ea2824e0669e94d52d3a5aabed3f4974780b5fcffacbc7cae7d4",
+        "evaluation/__init__.py": "2d765174de8a343ed94bf846a3a5db8e9b0ab18baf4e4a66b3a98d385d8ebb71",
+        "evaluation/benchmark.py": "b9d8b903a3a64edc516575bd73db619cde3536c282740a429a0bc54b76d7fd2e",
+        "evaluation/cases.py": "8d6a836af6a697b7a7ebec057c91bbe9b0f831423e85a8ff7fb04245c5497566",
+        "evaluation/cli.py": "cdc60d5227f95117e5aa8373e9a7b98408a82e88b95b8c9687e89eb5583371be",
+        "evaluation/difficulty_suite.py": "fc60218f5c8d42273ad2e489a5e0fcbef5d3c45f2fa833c335c941a54f9d7971",
+        "evaluation/failure_policy.py": "89ac0cdd2d7b92e4911802d35e594f0a401d0799f32b853edda16c5d6828a95a",
+        "evaluation/figures.py": "5892016ee0f1caa8871c3b7e9b9610beaa411a75003de37738f41b1294b58e21",
+        "evaluation/frozen.py": "bd5bbbf64db47283d7c3d91c22cf2eba92548bf4bf4584982653cbf1b2dea4c3",
+        "evaluation/interpretation.py": "17005de8eb7981541628cf4e12d971f8782a4180322a3a44e45c32300bc76f58",
+        "evaluation/liveness.py": "48f4d3ea49f61e770052713d6de396add59dcde4ddec516059866aea4c724ac1",
+        "evaluation/manifests.py": "a47ff2b2d4f392297d9b7518cd2c83a48fa86238b889fb92f6beb3e6afdbabf1",
+        "evaluation/metrics.py": "6f97720db6353d65a404c604a60fe882d7c27ddb9b7b411c1ca2b211b6866912",
+        "evaluation/preparation.py": "1651ece0349eb800133a42028ed28b2c7b645502894d3df2e4600cb61ebf81f0",
+        "evaluation/qualification.py": "8638f4f60bc1db15c5aca5f4fa5e8e5a200c362dbb74120c4fa159824ce86a56",
+        "evaluation/runner.py": "a27fd52fd9890a62aab0f2a9aee250c0d273a1b446f187d432a5e13c8fc17062",
+        "evaluation/scoring.py": "c2184b54495679d226f0c3244fe6782f99f9b4114fbfc3c5495cf90d887627af",
+        "evaluation/study.py": "75c216e370d0fdb4f9dfa5f9ada94b751bb6bcc29752a7c8bfc3062707ab1463",
+        "evaluation/supervision.py": "c5b4d30756da0f2aab02512b22ffcd22258e12055c8e5e266cc6dd1377fa2e0e",
+        "explanation_cli.py": "f1f1482052320cf1daa481f048cc359c49b9a05d63fd09d45fde20f06e4e72fa",
+        "explanations.py": "4c0482c0a6a4e73c20bbe25c14edd18891d0340a2571ac5f3c671b38caef1288",
+        "extraction_diagnostics.py": "0999a1f095038796fb9e2c581dc38c21b98a59165f6a73a77dd39aee990b0db4",
+        "formal_cli.py": "95ad25b1f75c08cf6e4fbadb4588d6a04e4793e335f86231e0af30ed7e628d2d",
+        "objectives.py": "30143c0a9df14857bdcd525244da52b3a539aa871206c0af370f9100c01cac28",
+        "pipelines/__init__.py": "3a4057e048f6f96b0a960d663768c6c7896829ee3978390788be87d4da7f54ef",
+        "pipelines/direct.py": "d0cc3a6e3b27af6989b2b40092c004277b78ecdc8bf477d602858d58d9cb0237",
+        "pipelines/solver_augmented.py": "f75926c1a3a169b1044f758007ccc77c3595ffad01b41445ed94f2ed76fd6b62",
+        "providers/__init__.py": "4cf7b2ab27d5525e350c363466d80fd98be84b3d2b4005e06f718053bf3b593d",
+        "providers/execution.py": "8051c52fe1d144db84b1d9b69dd7d6e7b0b89e2395f6e7fcf181017471943cc6",
+        "providers/issuer-chain.crt": "4ac93344924ddd3a6e79b287c37148668b272dab68e15d5cae68bb7766d04db8",
+        "providers/soclaas.py": "d0f643a934bcba4d23cc012b6226c4c8c52f05c2826a1b4bae3d1f93fb11b59d",
+        "providers/tls.py": "a89efb96743c0275259cd5210dc4f0902627edfb6672906404dc82aa91de56a1",
+        "providers/types.py": "f22a943c157fff55d4faed6514d2494b6e6ff4255cfa1d2e6cc7472f4c063c50",
+        "schema.py": "c5cb618ae14b9308512d2136abee20346fa97dffaec2ab4661e79f21dc6310d0",
+        "solver.py": "c6d3f5459b736de74ac43cd6520566815919e5fec2677c90d05cd01065026898",
+        "validation.py": "dbdc06a44ac2a90f37eb68dd130cb57f81e031f714b68f4e7de18636b4781400"
+      }
+    },
+    "source_runtime_and_non_model_settings_match": true
+  },
+  "format_version": "1.0",
+  "limitations": [
+    "Failures remain in every primary denominator.",
+    "Wording conditions reuse controlled cases; do not pool blocks as independent samples.",
+    "Objective matching is conditional on valid gold-SAT schedules and proven references.",
+    "Structural extraction differences alone do not demonstrate semantic error.",
+    "Hosted defaults, backend selection and sequential runs prevent causal model-speed claims."
+  ],
+  "models": {
+    "glm53flash": {
+      "accepted_by_block": {
+        "controlled": {
+          "direct": {
+            "accepted": 55,
+            "attempts": 60,
+            "categories": {
+              "accepted": 55,
+              "provider_error": 5
+            },
+            "correct_unsat": 29,
+            "objective_comparable": 26,
+            "objective_matches": 25,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 30,
+            "sat_valid": 26,
+            "unsat_attempts": 30
+          },
+          "solver_augmented": {
+            "accepted": 60,
+            "attempts": 60,
+            "categories": {
+              "accepted": 60
+            },
+            "correct_unsat": 30,
+            "objective_comparable": 30,
+            "objective_matches": 30,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 30,
+            "sat_valid": 30,
+            "unsat_attempts": 30
+          }
+        },
+        "language": {
+          "direct": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "provider_error": 2
+            },
+            "correct_unsat": 10,
+            "objective_comparable": 8,
+            "objective_matches": 8,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 8,
+            "unsat_attempts": 10
+          },
+          "solver_augmented": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "gold_invalid_schedule": 2
+            },
+            "correct_unsat": 9,
+            "objective_comparable": 9,
+            "objective_matches": 9,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 9,
+            "unsat_attempts": 10
+          }
+        },
+        "realistic": {
+          "direct": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "provider_error": 2
+            },
+            "correct_unsat": 10,
+            "objective_comparable": 8,
+            "objective_matches": 8,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 8,
+            "unsat_attempts": 10
+          },
+          "solver_augmented": {
+            "accepted": 20,
+            "attempts": 20,
+            "categories": {
+              "accepted": 20
+            },
+            "correct_unsat": 10,
+            "objective_comparable": 10,
+            "objective_matches": 10,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 10,
+            "unsat_attempts": 10
+          }
+        }
+      },
+      "analysis_sha256": "50721e975114f9cdac36c0dbd3fae259915c0e14179b8ed361e162a3a1dd0750",
+      "archive": "results/archives/difficulty-200-glm53flash-20261014.tar.gz",
+      "archive_sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "backend_fingerprints": [
+        "vllm-0.31.0-tp2-64d866e2"
+      ],
+      "conditions": 100,
+      "controlled_paired": [
+        {
+          "B_minus_A_percentage_points": 16.666666666666668,
+          "cluster_bootstrap_95": [
+            3.4482758620689653,
+            31.03448275862069
+          ],
+          "counts": {
+            "both": 25,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 5
+          },
+          "group_count": 29,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 30,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        },
+        {
+          "B_minus_A_percentage_points": 0.0,
+          "cluster_bootstrap_95": [
+            0.0,
+            0.0
+          ],
+          "counts": {
+            "both": 30,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 0
+          },
+          "group_count": 29,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 30,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "repair",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "controlled_task_labels": [
+        {
+          "accepted": 25,
+          "approach": "direct",
+          "attempts": 30,
+          "categories": {
+            "accepted": 25,
+            "provider_error": 5
+          },
+          "correct_unsat": 14,
+          "objective_comparable": 11,
+          "objective_matches": 10,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 15,
+          "sat_valid": 11,
+          "task": "generation",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 30,
+          "approach": "direct",
+          "attempts": 30,
+          "categories": {
+            "accepted": 30
+          },
+          "correct_unsat": 15,
+          "objective_comparable": 15,
+          "objective_matches": 15,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 15,
+          "sat_valid": 15,
+          "task": "repair",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 30,
+          "approach": "solver_augmented",
+          "attempts": 30,
+          "categories": {
+            "accepted": 30
+          },
+          "correct_unsat": 15,
+          "objective_comparable": 15,
+          "objective_matches": 15,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 15,
+          "sat_valid": 15,
+          "task": "generation",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 30,
+          "approach": "solver_augmented",
+          "attempts": 30,
+          "categories": {
+            "accepted": 30
+          },
+          "correct_unsat": 15,
+          "objective_comparable": 15,
+          "objective_matches": 15,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 15,
+          "sat_valid": 15,
+          "task": "repair",
+          "unsat_attempts": 15
+        }
+      ],
+      "controlled_tiers": {
+        "easy": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 5,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "extreme": {
+          "direct": {
+            "accepted": 9,
+            "attempts": 12,
+            "categories": {
+              "accepted": 9,
+              "provider_error": 3
+            },
+            "correct_unsat": 5,
+            "objective_comparable": 4,
+            "objective_matches": 4,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 4,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "hard": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "moderate": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "very_hard": {
+          "direct": {
+            "accepted": 10,
+            "attempts": 12,
+            "categories": {
+              "accepted": 10,
+              "provider_error": 2
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 4,
+            "objective_matches": 4,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 4,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        }
+      },
+      "failure_catalogue": [
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/1fd32a48844a8ddc37845ab440f0150da8cb5fae51df07d9d4114e3d57f21901.json",
+            "attempt_sha256": "39bbf139bdb19e9dc9024518e54cdcd526f1364cef8828adc3bbfaef22e3abd4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/afaf5a20e688e38b3ef0614147fcd18d4e9fe2f3bc23b84cf33c319968a11e1f.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/32a483cb858632896dc403ce0ecc9509c0b54b6203f59900178a7796fd9d6aeb.json",
+            "attempt_sha256": "cb6d26b00d88c289f5a71ed7a91f3a7700171264a3295f17f3a3719e67cd4285",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/be7896034349deea500595f9335d7bc7441d74226c5e02ad59d3257a4fbfe023.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/456205450ccbb91d8751cbc3c9c52cd89e08954f9d87bd5be937468647ecf890.json",
+            "attempt_sha256": "dc45b2cede30db8cc52b2bcbc4128b2e6d2b2d6b72d54a48fb293e04ff0d4bf7",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/183ec614fb3d71cf83dc3378a4d5d76c4838b8a273c0396092f608a536901d54.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-9fa7b12430c5191bd2fb930e-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/56c5277535d60e581f7ea716b865277d58f30d8cbb515c92e1aa3e73d6e27ad6.json",
+            "attempt_sha256": "a48dbf067daad1200bb868a5b40838e750fa4ca9455641fa7816f79a5f52befc",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/8ddff8252078f1d57cb96d250f78bc998e2fcce9e0a9ecb40cd8747182db5fb5.json",
+            "attempt_sha256": "8872e4d0ade11e16640a4f0a1b46a5bb0f7edcfae1014254fcfceaa9e480a61d",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/24fdd11ec5ba57b8302bb8b2ecfe0977d4f52b8406b2f258679bf0cecf26d656.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            7
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            15
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/d30ef6153be61d0221f94652f73416fc7e12d5d4ad8224dfc85f1d2031e51e56.json",
+            "attempt_sha256": "346d11846b961ebd9940bae7f6b5d2f48bfebc5fb09af851650aef320a7d4914",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/afea63196ce63b509a742caba879331996a0bc43509d33e7d9d2910d03bc1e9e.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/391cdbda100410948b1fd8bda92baa22cb55c99d68d6a5b51086382b9330773e.json",
+            "attempt_sha256": "3e9a83097915653860227e644f339137e7b1e776981b9934bd6515315fe1f049",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: precedence.",
+            "The extracted specification differs structurally from gold. This alone does not prove semantic error or causation.",
+            "Independent validation found a concrete schedule accepted by one specification and rejected by the other, demonstrating a hard-feasibility difference on that witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/ab98756664b5b57369a8fff136117c3ecd222d8ff7952683906b40cc70fc8096.json",
+            "attempt_sha256": "0e7bb5c377423c1725aa5ba90bdd8fb1fb104fa914befbd0895378f79c516623",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "reordered",
+            0,
+            "solver_augmented"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A21",
+                "A14"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-3"
+            },
+            {
+              "activity_ids": [
+                "A16",
+                "A15"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-1-4"
+            },
+            {
+              "activity_ids": [
+                "A28",
+                "A10"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-2-0"
+            },
+            {
+              "activity_ids": [
+                "A13",
+                "A9"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-3-1"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: precedence.",
+            "The extracted specification differs structurally from gold. This alone does not prove semantic error or causation.",
+            "Independent validation found a concrete schedule accepted by one specification and rejected by the other, demonstrating a hard-feasibility difference on that witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/c9702e2384c1eb570f6f2ed7c4919e4a3170abc3a339a0621327885627c9c65f.json",
+            "attempt_sha256": "f4036bd1bb6ac317fc21d2ef2f29cdf0311c62265ec75ae6fd89d3123ac6ca9a",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/c586d23d19715808bcc904467fd16dee29a7c40b3e1db2529f8da20805879e0e.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0020c5ec0fe4660f50b9020b-repair",
+            "reordered",
+            0,
+            "solver_augmented"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A21",
+                "A11"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-1"
+            }
+          ]
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/d84a9c08c8d5c5eef9720d735d60a0491e21b93ee486710f0fc3d994c457c8b1.json",
+            "attempt_sha256": "3f5f5946845fa4e9460c92da459b58bd78dabc7706232e596367fceaa7a4886f",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/00161d2304539fece2189e774de6ab898cfc58d822d5e0652f0e628b74969427.json",
+            "attempt_sha256": "7ce5e760862fd56dfb55b1428a1a3e5440a22611e83c84020be2e3874db67673",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/271341972093db6ff1d2a63064f898e1fbac36da5ad27f2db2cd37c28f35d1a9.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6a05feedb643dd0d66ed41ae-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/57c43b66099216fbdeaf289985c61fd9fcb44ec73afeeb6685295faa6c871b74.json",
+            "attempt_sha256": "489e6e3cd3b28b58e5ba584d39f0c7e29fb0b50196624e9a2fd962a06ae30867",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/fe8ee9d5168c9b8c9f91582070f788e08680318fc5b13ff4ae7ebd3ef9f00fad.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6dd38a35a807f5693336f267-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        }
+      ],
+      "model": "glm-5.3-flash",
+      "normalized_source_families": 39,
+      "overall_by_method": {
+        "direct": {
+          "accepted": 91,
+          "attempts": 100,
+          "categories": {
+            "accepted": 91,
+            "provider_error": 9
+          },
+          "correct_unsat": 49,
+          "objective_comparable": 42,
+          "objective_matches": 41,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 50,
+          "sat_valid": 42,
+          "unsat_attempts": 50
+        },
+        "solver_augmented": {
+          "accepted": 98,
+          "attempts": 100,
+          "categories": {
+            "accepted": 98,
+            "gold_invalid_schedule": 2
+          },
+          "correct_unsat": 49,
+          "objective_comparable": 49,
+          "objective_matches": 49,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 50,
+          "sat_valid": 49,
+          "unsat_attempts": 50
+        }
+      },
+      "requested_model": "x-test-1",
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 100,
+            "mean": 78.9990179283917,
+            "median": 36.15306635433808,
+            "missing": 0,
+            "reported": 100
+          },
+          "solver_seconds": {
+            "attempts": 100,
+            "mean": null,
+            "median": null,
+            "missing": 100,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 100,
+            "mean": 7325.824175824176,
+            "median": 5175,
+            "missing": 9,
+            "reported": 91
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 100,
+            "mean": 55.593614669982344,
+            "median": 39.43215495860204,
+            "missing": 0,
+            "reported": 100
+          },
+          "solver_seconds": {
+            "attempts": 100,
+            "mean": 0.06264866040088236,
+            "median": 0.02307935431599617,
+            "missing": 0,
+            "reported": 100
+          },
+          "total_tokens": {
+            "attempts": 100,
+            "mean": 8302.71,
+            "median": 6567.5,
+            "missing": 0,
+            "reported": 100
+          }
+        }
+      },
+      "unique_cases": 80
+    },
+    "qwen36": {
+      "accepted_by_block": {
+        "controlled": {
+          "direct": {
+            "accepted": 17,
+            "attempts": 60,
+            "categories": {
+              "accepted": 17,
+              "false_unsat": 12,
+              "gold_invalid_schedule": 20,
+              "invalid_output": 9,
+              "provider_error": 2
+            },
+            "correct_unsat": 13,
+            "objective_comparable": 4,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 3,
+            "sat_attempts": 30,
+            "sat_valid": 4,
+            "unsat_attempts": 30
+          },
+          "solver_augmented": {
+            "accepted": 57,
+            "attempts": 60,
+            "categories": {
+              "accepted": 57,
+              "invalid_output": 1,
+              "provider_error": 2
+            },
+            "correct_unsat": 28,
+            "objective_comparable": 29,
+            "objective_matches": 29,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 30,
+            "sat_valid": 29,
+            "unsat_attempts": 30
+          }
+        },
+        "language": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 20,
+            "categories": {
+              "accepted": 4,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 6,
+              "invalid_output": 7
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 1,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 10,
+            "sat_valid": 1,
+            "unsat_attempts": 10
+          },
+          "solver_augmented": {
+            "accepted": 19,
+            "attempts": 20,
+            "categories": {
+              "accepted": 19,
+              "false_unsat": 1
+            },
+            "correct_unsat": 10,
+            "objective_comparable": 9,
+            "objective_matches": 9,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 9,
+            "unsat_attempts": 10
+          }
+        },
+        "realistic": {
+          "direct": {
+            "accepted": 5,
+            "attempts": 20,
+            "categories": {
+              "accepted": 5,
+              "false_unsat": 5,
+              "gold_invalid_schedule": 6,
+              "invalid_output": 2,
+              "provider_error": 2
+            },
+            "correct_unsat": 5,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 0,
+            "unsat_attempts": 10
+          },
+          "solver_augmented": {
+            "accepted": 18,
+            "attempts": 20,
+            "categories": {
+              "accepted": 18,
+              "invalid_output": 2
+            },
+            "correct_unsat": 8,
+            "objective_comparable": 10,
+            "objective_matches": 10,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 10,
+            "sat_valid": 10,
+            "unsat_attempts": 10
+          }
+        }
+      },
+      "analysis_sha256": "dbc8d8643fd945f24c6a46fa078f4b32cc4562a2ad80119b75413fce07dcf513",
+      "archive": "results/archives/difficulty-200-qwen36-20261014.tar.gz",
+      "archive_sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "backend_fingerprints": [
+        "vllm-0.23.0-7cd694fa",
+        "vllm-0.28.0-f8aad13e"
+      ],
+      "conditions": 100,
+      "controlled_paired": [
+        {
+          "B_minus_A_percentage_points": 56.666666666666664,
+          "cluster_bootstrap_95": [
+            36.666666666666664,
+            75.86206896551724
+          ],
+          "counts": {
+            "both": 10,
+            "neither": 1,
+            "only_A": 1,
+            "only_B": 18
+          },
+          "group_count": 29,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 30,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        },
+        {
+          "B_minus_A_percentage_points": 76.66666666666667,
+          "cluster_bootstrap_95": [
+            60.0,
+            90.3225806451613
+          ],
+          "counts": {
+            "both": 6,
+            "neither": 1,
+            "only_A": 0,
+            "only_B": 23
+          },
+          "group_count": 29,
+          "incomplete_pairs": 0,
+          "interval_note": "paired_group_resampling",
+          "pair_count": 30,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "repair",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "controlled_task_labels": [
+        {
+          "accepted": 11,
+          "approach": "direct",
+          "attempts": 30,
+          "categories": {
+            "accepted": 11,
+            "false_unsat": 7,
+            "gold_invalid_schedule": 9,
+            "invalid_output": 2,
+            "provider_error": 1
+          },
+          "correct_unsat": 9,
+          "objective_comparable": 2,
+          "objective_matches": 1,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 15,
+          "sat_valid": 2,
+          "task": "generation",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 6,
+          "approach": "direct",
+          "attempts": 30,
+          "categories": {
+            "accepted": 6,
+            "false_unsat": 5,
+            "gold_invalid_schedule": 11,
+            "invalid_output": 7,
+            "provider_error": 1
+          },
+          "correct_unsat": 4,
+          "objective_comparable": 2,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 2,
+          "sat_attempts": 15,
+          "sat_valid": 2,
+          "task": "repair",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 28,
+          "approach": "solver_augmented",
+          "attempts": 30,
+          "categories": {
+            "accepted": 28,
+            "invalid_output": 1,
+            "provider_error": 1
+          },
+          "correct_unsat": 13,
+          "objective_comparable": 15,
+          "objective_matches": 15,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 15,
+          "sat_valid": 15,
+          "task": "generation",
+          "unsat_attempts": 15
+        },
+        {
+          "accepted": 29,
+          "approach": "solver_augmented",
+          "attempts": 30,
+          "categories": {
+            "accepted": 29,
+            "provider_error": 1
+          },
+          "correct_unsat": 15,
+          "objective_comparable": 14,
+          "objective_matches": 14,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 15,
+          "sat_valid": 14,
+          "task": "repair",
+          "unsat_attempts": 15
+        }
+      ],
+      "controlled_tiers": {
+        "easy": {
+          "direct": {
+            "accepted": 6,
+            "attempts": 12,
+            "categories": {
+              "accepted": 6,
+              "false_unsat": 1,
+              "gold_invalid_schedule": 3,
+              "invalid_output": 1,
+              "provider_error": 1
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 3,
+            "objective_matches": 1,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 2,
+            "sat_attempts": 6,
+            "sat_valid": 3,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "extreme": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 12,
+            "categories": {
+              "accepted": 4,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 5
+            },
+            "correct_unsat": 4,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "hard": {
+          "direct": {
+            "accepted": 3,
+            "attempts": 12,
+            "categories": {
+              "accepted": 3,
+              "false_unsat": 2,
+              "gold_invalid_schedule": 5,
+              "invalid_output": 2
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "invalid_output": 1
+            },
+            "correct_unsat": 5,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "moderate": {
+          "direct": {
+            "accepted": 4,
+            "attempts": 12,
+            "categories": {
+              "accepted": 4,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 3,
+              "invalid_output": 2
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 1,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 6,
+            "sat_valid": 1,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "very_hard": {
+          "direct": {
+            "accepted": 0,
+            "attempts": 12,
+            "categories": {
+              "false_unsat": 3,
+              "gold_invalid_schedule": 4,
+              "invalid_output": 4,
+              "provider_error": 1
+            },
+            "correct_unsat": 0,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 10,
+            "attempts": 12,
+            "categories": {
+              "accepted": 10,
+              "provider_error": 2
+            },
+            "correct_unsat": 5,
+            "objective_comparable": 5,
+            "objective_matches": 5,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 5,
+            "unsat_attempts": 6
+          }
+        }
+      },
+      "failure_catalogue": [
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_overlap, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/0fcf815d5346279fb166fd5c292e3299f6b6f1513cc3453107d75bf02d3c734c.json",
+            "attempt_sha256": "2d8e08d351a82174f62402ea79c9a46d1e6b9fe733dc9934974e6861219bff1d",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/9dcf23e320cf7c49934f146db44713e3ce5429775315f1a8f0afa1a4486e75b0.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0020c5ec0fe4660f50b9020b-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A24",
+                "A27"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A24",
+                "A16"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A4",
+                "A14"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A12",
+                "A29"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A12",
+                "A28"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A28"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A20"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A23",
+                "A20"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A28",
+                "A14"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A18",
+                "A30"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-3-2"
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A14"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-5"
+            },
+            {
+              "activity_ids": [
+                "A23",
+                "A14"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-7"
+            },
+            {
+              "activity_ids": [
+                "A12"
+              ],
+              "category": "deadline",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/15f80474ba81cb7cc88582576a11a2fb432f10dd9efb3a513507e139b9001244.json",
+            "attempt_sha256": "f3392b6e260f1180dd997cfe14f4b2cb4cf5fb0480e55942dd2014f8ed979d31",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/97dc15d192dbc1cea6f24d72318b092ef75b54e5d7e3dbe8ad5a79d3cc9044d9.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A0",
+                "A4"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/186c1086c5c88384c53431f4be115d2b52665bf9e0eec1dfcb90877bad03a131.json",
+            "attempt_sha256": "f74dc069345be867ffc22abe2bb2dd570111901dd4e556fe70f4838017ae9d4c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/a8a85b3a6ec8ee773ef7b191d7270f157a6829c4feb8adb8e71efb20a0d8501f.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-9f3f12974d9fac7e2670d796-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/1b95ceb5b12c8fc954225cc99a734fef386584ea8db4cf43c0a2ad4c8b65d68a.json",
+            "attempt_sha256": "1e26a0a68237606183e35cd1f6ff67a2b5b79fc97555de5938faefe53597eb14",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/6c06fc67e32015c8af77637f1f84895d0c294242f98b37d80ad2e21433d41440.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-390ed27e0d18a5fcd3245800-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/1c1bb0ad8851d35ab0ce40b722b04bc18d4b60c959608e03aa8b890d005b58a0.json",
+            "attempt_sha256": "d70894c4252122cf8aff98f1b16369287f545f437b2dabb762530e69dc7c76b9",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/62c2406156214a41163bf38ee7ff399db13a341ddcabdd02ca2fe75642dc5cb2.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A2",
+                "A3"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/1eeecbe68595a301e7b41efd41fcc4bafcfd227ded30de2a0fc55e69b6be79af.json",
+            "attempt_sha256": "e2622a373dfe1fd1718ea3af97b2503bad5ff011277dd9f59656dcc5a6533ed4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/51dc1ef4198380fd4eaa1a380d61019c0ff94b7d8635ff4a9388a2f409034464.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/217f39424cbbd6b2c5e969e336850ff65d80d85b7f48b7c2f32201aaadbec880.json",
+            "attempt_sha256": "a98cb72219423ce40ccb6c0556d86bd029547092b3d57ea2ed83dd7d0de44587",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/24fdd11ec5ba57b8302bb8b2ecfe0977d4f52b8406b2f258679bf0cecf26d656.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/2529b90a12d3796063ca06a77ee1004ab96f4d3f8555492ec882c57c16a2826b.json",
+            "attempt_sha256": "21278479493a9f37e0fba3d0cea9ccfed2d80830bb45061ffd9f29658d3bd92b",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/5a5023cf2907cbab086bcbd35ce53f7e94636089841a3473727d82d558cbc14c.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/2776b196b3f6cdc9448a31150929e448eb58aab7c620138a738128fc7fcc03e8.json",
+            "attempt_sha256": "841c37b7d7db61990e8a0e71929e3285f29a4c51fa79e57336ce9ebcfe616e4c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/afaf5a20e688e38b3ef0614147fcd18d4e9fe2f3bc23b84cf33c319968a11e1f.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/2a3e94b035b80a34f0878cc4a18b025aad9fe2fcd867caf45545ded0a4af37d3.json",
+            "attempt_sha256": "05816c26b6cdd59f16755efb814d12cc541d781881f6fae1c95fc98cd1294843",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/212d63bbb0a449b8e59d39fe2616b22b9c1c959828ffb94293c4d9f58246293a.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/30cbb50e77a90f3942efd6d04a39f7318b51de5e370cc57ed0ef51c4822436c6.json",
+            "attempt_sha256": "d705319cf70e8d067ea9cb9af59327ad2caa9494b61b394d98943b3ba808abcb",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/7323176f1c2a63b2e5f38bdc1b148de2ed8dedd42ba90ca0441d7552bec8a5ae.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/3ae67ca59f59c21ab27736effbecca78b1277174bbd3ad8242ad149a7d50b577.json",
+            "attempt_sha256": "2b55cd75adc75df285106bfbaa4da3e987cc21d46cd7afe6df550c8fa7c18db4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/2c8b955128becbb360356276608fdea4c410bcba32a572a80a0a0de655b4a4c0.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-faab3611349cada081c8e0b0-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/3ccaef11e4fad189d23170af7910341e5ab324cf7538b0f95839dc5f52b03797.json",
+            "attempt_sha256": "789b008742918f123e427e8f2d5de4cc892c700c31e6f286280340c7b58a7c48",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/5e004f71e251085bf875cd5f8923d5841b99be44311f7ca836c63c94156400d9.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5",
+                "A9"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A5"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A5"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A11"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-2"
+            },
+            {
+              "activity_ids": [
+                "A10",
+                "A9"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-3"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/3da36e94539aa5460e5142b06232c7c2b71d0d739fbc862d27d04eb015b47ab8.json",
+            "attempt_sha256": "52a7d9c92137083e7fc4dde6a70af2ccf01dc5923754c30d9c1c836a2aac26ec",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/bbb41f17297e688442a662965730c1fdff699caf389780ab7060311de4d70e05.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/3ef4a863de23c2a877088577a3b0a699923ab61e6909c8b6ed862b7731e4f54b.json",
+            "attempt_sha256": "07be5a5fa689cf90bb5d07d30f396ff96f6718bf06744a29e7ad81d180fb0ee2",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/9f415d24fbbc8d622700db8324b8b1dafc0892df4e738a10b8c792fe90196ec7.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A2",
+                "A4"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, precedence."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/45ac9d32a5a12f3399ce3c33b7744185774db4ee80fb1e837c892b89fef8faf5.json",
+            "attempt_sha256": "4cb7400a15ca9cd89338a11f227d7e9d25f4a828c36a49232ee9f4778db29c37",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c10db37e681b0a42a57a71e1b1d47f42a3e939b1904779c78cb62a6d62eefec8.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-3d94df09f26bfb5af5f06691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A1",
+                "A11"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A9"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A10"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R0"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4d40414f9c6ac8c9779c0acaee2e8c08cce4d95965735d99ad36c599037788e2.json",
+            "attempt_sha256": "a49ea5f78f73077eba26973f16788f2516040c1a1dce9a8f4ea77674b80cf6fd",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/be7896034349deea500595f9335d7bc7441d74226c5e02ad59d3257a4fbfe023.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A15",
+                "A20"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A17",
+                "A19"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A9"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A9"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-3"
+            },
+            {
+              "activity_ids": [
+                "A27",
+                "A25"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-4"
+            },
+            {
+              "activity_ids": [
+                "A17",
+                "A18"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-7"
+            },
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/572ddc9bfe0b8d3728a548521e1502fc6528fb392cfd8455de7b17d5038884bc.json",
+            "attempt_sha256": "f7b621d53e1f4a74d2781ea3162091fd3b0956320d8c7985c345566e6774db70",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/92d72fed548bb76300651ef956fadd888bca4d21d5f39e9007242ef433134b80.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-77c181646cc1eed03a3422b2-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/59374a1ac40c5181b63d461bb81992362b745546e70ecb7d07bccbb9ef086a39.json",
+            "attempt_sha256": "e47230b5383b5f794e880b46ba773e0c03474268262ab8765250ccd490b96abd",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/10081da54f48f00b5eeda82dceef953cfc71204fd437bbf3c7acad9bed02d4d2.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            5,
+            null,
+            null
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            8,
+            69,
+            74
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/5f1ef37525ef49c19db6f5272e0761054a8b33da2d6369524adc8baa33c52d82.json",
+            "attempt_sha256": "ff2720d01087d5bcabec8f5507c91af23858a8aae7037076a61307aa70b023cb",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/7bf128c3bfc0c4448c231869c46c06b9b7d26572f2a4c5ec1499a3cd3735006a.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/60d2b30579120c779009278137ea0f6a83b0f23cb783a80fcbe32058a8d995c9.json",
+            "attempt_sha256": "4fb86fa21de85bc8b2009943d4c4b6367af73a917d4c62d125e941df4ce2178d",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/89e90de44a91e3e59d5758b14df09d9cadb6184645215841a098122a933a46a7.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "transport_error"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/69f7af1902c15f67c396d73537dbcf66682246e7765afe3def6142249a6537d1.json",
+            "attempt_sha256": "4e800bfa16a7c9289325938ac2fef098919690092efe10accd531df246b9fd28",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/bbb41f17297e688442a662965730c1fdff699caf389780ab7060311de4d70e05.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-6b7b49b44db771d64af31ce3-repair",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/6c34bfb231b95714f61d01bda9227145daa2b5d14ad9d6db8232fc5f5ace44c6.json",
+            "attempt_sha256": "46e2d05254a7c573f5ab6406270cbd32b88a6f04bff612cd88ed51eac18e6ae2",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/f6082389445071096196ee2f52c9ba2cdc5bfc203b964a85e32683c5463c371a.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-577887286f301f7a8d330457-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A12"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, participant_overlap, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/73ce86691223b2c67415e9e8f94f696139f47ef89ef1f563f2fffa6de2567a8f.json",
+            "attempt_sha256": "3cc2abe82c2cd261393536369514e6ffdd3ac2eafda3c42ac7005cd1137ade27",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/e4091be21e2a3a643252581f99feb823768a69b26c3894727e3af81bc8f6f08f.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-cdf1f6441e4a0d266084a8c8-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A25",
+                "A15"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A10",
+                "A26"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A10",
+                "A24"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A15",
+                "A1"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8",
+                "A29"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8",
+                "A29"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A4"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A12",
+                "A24"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A20",
+                "A9"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A9",
+                "A4"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A16"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A30"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A30"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A16",
+                "A30"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A16",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A16",
+                "A2"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A30",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A3"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-0"
+            },
+            {
+              "activity_ids": [
+                "A25",
+                "A10"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-4"
+            },
+            {
+              "activity_ids": [
+                "A10",
+                "A18"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-5"
+            },
+            {
+              "activity_ids": [
+                "A15",
+                "A8"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-1-1"
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A17"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-1-3"
+            },
+            {
+              "activity_ids": [
+                "A17",
+                "A14"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-1-4"
+            },
+            {
+              "activity_ids": [
+                "A27",
+                "A7"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-2-0"
+            },
+            {
+              "activity_ids": [
+                "A20",
+                "A24"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-2-3"
+            },
+            {
+              "activity_ids": [
+                "A19",
+                "A13"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-2-5"
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A16"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-3-1"
+            },
+            {
+              "activity_ids": [
+                "A31",
+                "A11"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-3-3"
+            },
+            {
+              "activity_ids": [
+                "A30",
+                "A23"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-3-5"
+            },
+            {
+              "activity_ids": [
+                "A4",
+                "A24"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A9"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-3"
+            },
+            {
+              "activity_ids": [
+                "A17",
+                "A18"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-7"
+            },
+            {
+              "activity_ids": [
+                "A20"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R0"
+            },
+            {
+              "activity_ids": [
+                "A31"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R2"
+            },
+            {
+              "activity_ids": [
+                "A18"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/748ed82d4b0c65d73f16d75ef13aa3ccd19a75b2fc0953bcbe605f6b88b4af78.json",
+            "attempt_sha256": "758391a0fdb4301f88af4ac32e2682d2d120b27c08e995082e2685262c224fc3",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c74e8898fd99dda9f9a10e0506cafb06b9727d525caec78b8aa36723d95cf2b5.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A11",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A11",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A13",
+                "A12"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A13",
+                "A3"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A17"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A12",
+                "A3"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A2"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A18"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A12",
+                "A0"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-2"
+            },
+            {
+              "activity_ids": [
+                "A15"
+              ],
+              "category": "deadline",
+              "constraint_id": "change-A15"
+            },
+            {
+              "activity_ids": [
+                "A10"
+              ],
+              "category": "deadline",
+              "constraint_id": "change-A10"
+            }
+          ]
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/8f72defe7ab40dd8a5995e9df4e15817e5ca5b66cc1b49fbabfc8cd82c2e57e9.json",
+            "attempt_sha256": "e8bd44e49509bd088289b5ae483d0581c9fc3af827d9c5a4798f423050e92eb6",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/51dc1ef4198380fd4eaa1a380d61019c0ff94b7d8635ff4a9388a2f409034464.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/9e4ee7ef77be58751a1694ae7968ee62c59a18da135b83df36f9570c4fe1f673.json",
+            "attempt_sha256": "ecd064a5390837a72386d1b41c88708c9efe8425290a03e2bacbc73b18ae6118",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/f2a9c27f5670e8b918c27be2c7262e3da8c362698f800294a4bc7ed893a35601.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-2db29861b6da01ed900d90ee-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/a1c717d59e7fb69f9e4a687a8d60903b98ca4a0c0bb272d181bc46445f7b807b.json",
+            "attempt_sha256": "e9afa4c338022e7b38fa7ea02a7304d5c2d7e76ab6c2988d2b90b6858dde3890",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/9de9f6a0dd3124d0103e06b614bd42f7b7cf022a70c72d2a9c206767020c4e23.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0fd2c91a8d9ebf63959d5309-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b08f09d28122b509880bef998ee1c5ab11a277e91ba349683d310c23ee273478.json",
+            "attempt_sha256": "096bf2cce33817b7b4c96b1e0746cc194dfe3184933eea63e92851ae62b04901",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c57e53b99f6bf5e1d464b390395dfdf991e887c161749fb8bc235eebc56b4fd8.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-ead7eeab45febddec0232b30-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b106c6761a3abc866d299948d610315699c8e5342369bc6c5c282cf26a25e607.json",
+            "attempt_sha256": "52e47f04170637b94b57bedd4fdfd7b393c0ec1aa3628370a9f8a2f7490bda3c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/bdd1fa6206a8b3b6118446d632acdec678583b8a890a97b018fb09845a14abe5.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-89b1e300bfbadfa2a68b697d-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b3b1d42987f3ae325cefb50d856be73ae66a7427f1154ce8392d1edf3eac40bb.json",
+            "attempt_sha256": "245d8718eca0bec3153a3984c8540e94da977405d65060e859eb008c425d633c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/6f9ad1c0450011cfd46085efc0e6546d05f9628955ee41bddff744221f3f1c86.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A0"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/ba7f3cf500bc441af066a07cd2ca3c080acbf5b044dd135d02f1e2bc29678fa9.json",
+            "attempt_sha256": "ab4d4e7015d2ce98bf554794464a9c2de115b376db50a8294d14f659c0632944",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/fde97f5110d70268ac0572849122ca9fa3791cb16908a991f99a19617d416a58.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/bae32c9a042596284945dbdcd7f2441d27d610e879335216a1064e2b50118707.json",
+            "attempt_sha256": "8cfa6370e6a5f967d8bda401d74123269f3a74bbdc38584b1eb8e8ea9835ee80",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/62b27e39a798f8681c257c6a790182a3e2b20d10c2d3b99b7c42ea60ff2cd135.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-763051de490e2a84f3946b4d-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/bb67626f455f00a7a9deaae6c57693747f2e369a5c5f1b2b48d752cc351f32ce.json",
+            "attempt_sha256": "9b178844afa9f833ed6aee1d663b204ecf5a7e09d2aeeb6cbb0c75f7382aedd9",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/3073f2bc2276fe8942e0d0af6c4195d8b1b65388d21afc8b15edd7e031bc7728.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A1"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/bdef732e7db23eecc3939c5f224e5e1b584cc7ddc78e7d701d5f933d9a46e240.json",
+            "attempt_sha256": "4224256dea7da0cfb3231f25efe42c2f55815c4dcbeb0baf6b8da5e959930b36",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/b84b4d9ccb153e220f9065143995a4cd11af8dd6ee51daad8d6c5db31062b520.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-b2b00bb2823346f5b73abe5a-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            12
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            29
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/bfa995d0c33041109f51d26229de9f63c9544e15a1b6ebcf9c2c47af4478463f.json",
+            "attempt_sha256": "2e26676fda62d5812827bb9ec961c6498bb032875b98f7632dc53d8c7de79021",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/a16efd8b84cd92ebc1128963ab7b39dff94a0d71b3c17b47b8c8adf60025f6f7.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-f4ec232764614cb7d78b6925-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            2,
+            null,
+            null
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            4,
+            100,
+            24
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c3ad26d0d491017280c4b50b1b1721640a429b87afce7f844109f24fe23d24b1.json",
+            "attempt_sha256": "935e0142cb17cf8f8457ed15b8afc19d2c58fec48841b9753f358f4f09c62511",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/4b0aa3e69284c125198b40f1566bff481fca238801ba601599bf7932e269f8c3.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c4bf4d10f55c100b5d5431aea2405a6690f7e17eeb2ab0d1c45e95948ad7cc13.json",
+            "attempt_sha256": "7c98f8ae1a893a7f122d6f1bea3b6bd3b9354ba1ce7a68dbcf1616457440c275",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/fb26faa63bd3eb7415583a8e81142a623a0ad8e41c78be1233d92c8b0c80b9f0.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-fb1c2a0fe6f25c97d65238c2-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c57a67a26dd86af0f67b49cddf3e522cfbeb34e8c2f0425307731ebf35533af6.json",
+            "attempt_sha256": "423097e16aa93730fad342848a84923da2ad2b6b46016e1e3991f5e540ab76a3",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c476abe5bf41b4365d09cc0ba5d6f4e4d48119d14a16d7f856b8b166d41b854e.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-00eaf3055a3435619e8c32fc-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A11",
+                "A18"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c6e58bbcc53cc8bcddd69070499f165e982c8695bfdf6d9fd4f06957c3f73ec3.json",
+            "attempt_sha256": "77c01d820d1e7090dfb30aea754dc637d6bf2c5bd1c66fb199bc148ae8605a55",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/59f5d8e65990acaa7a0e533e5d6cfc656b70fede26ae04f70d5e6a55a3f9faaa.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-2b5714bda3039e8302b8309a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, fixed_start."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c8f5392e5fbd81c88a34ee22850cc512cdc62f0ab22eb24e68ac0df0414050b1.json",
+            "attempt_sha256": "579a9f1c3c4b4987fdb0f7fb2a889219b031339897be281fe72ba6780dc4e500",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/f334bd4dd8d9f2649f3f3146e4469d80eee594a2e3a36a46527e6d8ba4c3643a.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-81df31c2af1d216b78dd1e91-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A0"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0"
+              ],
+              "category": "fixed_start",
+              "constraint_id": "retained-appointment"
+            }
+          ]
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c913e2c8d0b88a4d20bcc973f0cd46266a7b9a6096b52cc709ced1a56b93ee1d.json",
+            "attempt_sha256": "943653c1c2f1bddc7d99b95c76c4fa526e53ed82315454202bb4349c22046d6f",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/afea63196ce63b509a742caba879331996a0bc43509d33e7d9d2910d03bc1e9e.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/d08b0e854cfb053176e801b68dfb0e22da762b92a7dba348e40fb43cba589da7.json",
+            "attempt_sha256": "fdb12c3f4387aa10fe074226dd1ea89f621a86c77be9539dab67bd55103e6a8c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/911dc634219b2fc274baff7fdab3655e2f7013ebac7ad2f4ec029bad9f8628d4.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-4862d8ff6665c89ca99a1c8a-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/d3f794ad5985f0a6cc5074fd9076f22a47f499d553052da52815b3bc5dc99639.json",
+            "attempt_sha256": "1344906cd4b5ee5a852b6b1ae9283794b87ab7e893e679b10776e796f32bd8ea",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/bba45e2f9bfb5bb45df62ee66e160cc4b5fd98c93d647253d105e404bc6c7c99.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-ec93292bc8716510a294e869-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/dad7d58c9a1ee2233d6305cd6f17649118fd143dc73cedc22021fa40ceccc22c.json",
+            "attempt_sha256": "071b08d728341d7b2bd258f4be40c0b41a7c728a96acd3278e14b79991fc60e6",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/f088c1a6505117a489f8b91fc1daf8b612dd27a57a705633b4b931b7a5a8ab40.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-generation",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/e310a0a6a36427e63ff381e32fb5244222fbecb7297dd1475262ac1b1e84c1f8.json",
+            "attempt_sha256": "674596bd365b9c0625bcedd69db1031a6c7938f43980b5569d75784e92ad3fc4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A23",
+                "A1"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A24",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A3"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A13",
+                "A23"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A8",
+                "A1"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-3"
+            },
+            {
+              "activity_ids": [
+                "A16",
+                "A6"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-6"
+            },
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R0"
+            },
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R1"
+            },
+            {
+              "activity_ids": [
+                "A15"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R2"
+            },
+            {
+              "activity_ids": [
+                "A25"
+              ],
+              "category": "blocked",
+              "constraint_id": "break-R3"
+            },
+            {
+              "activity_ids": [
+                "A28"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/e84a383b7f7e108d0d1c2566ef8e74801e86f394a24dbc030b48bcb073852f38.json",
+            "attempt_sha256": "ec363d1a1be04b7bda76f2585f3221a9d1a1d006313ba37096bcece9bf368376",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/94c75613575f71c4bc29ea151e250a425075852c87e6c0e2a41494bef7cbb857.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-7ce0aa639c2c3bc8657f38aa-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A1",
+                "A10"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A3"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A1"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "deadline",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/edd7f54459e1c66812bc8b3eb40c2b39af6ba1561b3607eef2545913153842a1.json",
+            "attempt_sha256": "84e71f01a38d619af8ad8998f979326a71bcb39c234627c438861c56be97aa91",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/5a9fec38d6fff9e73671f296997109610556e0407f60756173b2ad5d460d155e.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-a29114c9c66571386fb90095-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/f1a916028e7a72e965ef5a7ad26ec78e04be0104e78411bbe1ac3ff6c1a5bb0d.json",
+            "attempt_sha256": "3bd9832283e7200c5e9a6d4a7f8d0b7856347f843ef62efcc54176a21a2575ad",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/b316e3612ebd4a195b7834f7aa24841968e9ab44ef34a2dbf4b22263e126f726.json"
+          },
+          "unit": [
+            "controlled",
+            "difficulty-8fc172d742942ec004e74ec9-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A1"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            15
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            23
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/17a9cbb854c9a41dad727c58c097024db54786092d996a2436b94f8f2f676c2d.json",
+            "attempt_sha256": "b40ea649e54249dfd5ab360c987c2caa21d3e748565d3680341781b7938e8f5a",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/afea63196ce63b509a742caba879331996a0bc43509d33e7d9d2910d03bc1e9e.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/3bcfb347cc5e4449596522a2f892d03c164474100b74b0f47a1b07d37184726e.json",
+            "attempt_sha256": "1e0378425d4ac4deb89f9a6e7b37014ffe16c836500d5e797ec6caec3feef052",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/7bf128c3bfc0c4448c231869c46c06b9b7d26572f2a4c5ec1499a3cd3735006a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0fd2c91a8d9ebf63959d5309-repair",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_overlap, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/4319293d4b09ad6f05a6344dda6e4da9379911ffdb56920b130eb70ddac09a76.json",
+            "attempt_sha256": "90aa3185e8a78e57b3eccb01e857dc7d96ee1bc3873b8572d057e7fdc86c47cc",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/212d63bbb0a449b8e59d39fe2616b22b9c1c959828ffb94293c4d9f58246293a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-b2b00bb2823346f5b73abe5a-generation",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A0"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A0"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-0"
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A4"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A5"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-1"
+            },
+            {
+              "activity_ids": [
+                "A4"
+              ],
+              "category": "deadline",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/62ac84d0b424f570ffb4a862ec6d538efeb0c395356fef35dce5bbebba413c99.json",
+            "attempt_sha256": "693817643212e06aa013886b50becb52383df594f4435d3750d089eea7e34862",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/f334bd4dd8d9f2649f3f3146e4469d80eee594a2e3a36a46527e6d8ba4c3643a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-81df31c2af1d216b78dd1e91-repair",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/76d3182cbd3ced86cac2d17705f66d9aa9d744aa05b182b07c055032b9737a4a.json",
+            "attempt_sha256": "afb74763f6ec9c679bd2454742473447c880874838e0e50edd5c548272cb9c23",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": "UNSAT",
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/9cb06f475b50a0d52b214100a5be328cd64c41bb4fc5529e751da7e722790c44.json",
+            "attempt_sha256": "9ee4f3d8447092db3a836d39ccf3606faa5ae319c1cacd15c7efd6715a1b019b",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/b7e2f1280dff06b7bfdeab1732f2084b28c35703439259ce4be2c843a7fc3687.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-ecdd584a599de7b78799f3dc-repair",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/a1034a68753a345dff0c527504bc6eae88925a8b6642d378b1430cb94379aee2.json",
+            "attempt_sha256": "52682a4495b79c3b3aa72c87399d78652ea7a1f52e58abe3d54156b2651fca14",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/c586d23d19715808bcc904467fd16dee29a7c40b3e1db2529f8da20805879e0e.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0020c5ec0fe4660f50b9020b-repair",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/a8330451905019c498fffa6116c6add934ba13469e35a6fa2480a17569090069.json",
+            "attempt_sha256": "621a164d3b8b51f1bb8c62d44fa83f30e29792152951f1964437e2030275a234",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/9f415d24fbbc8d622700db8324b8b1dafc0892df4e738a10b8c792fe90196ec7.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A4"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/b063cbfce35276a44f4b178acbdf31c0ab91c12e35ccb136bca88e3ff0766a87.json",
+            "attempt_sha256": "f493e32d41eda0ddcde168684ce438d3f9754ee4914ffad485a41c66eeddecd4",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/bdd1fa6206a8b3b6118446d632acdec678583b8a890a97b018fb09845a14abe5.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-89b1e300bfbadfa2a68b697d-repair",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness.",
+            "The extracted specification differs structurally from gold. This alone does not prove semantic error or causation.",
+            "Independent validation found a concrete schedule accepted by one specification and rejected by the other, demonstrating a hard-feasibility difference on that witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/ba71aafaedb38c993c860e06f5e478e93a2a6004c46b9f7c29c7bce3be6aa595.json",
+            "attempt_sha256": "513e1eac081857b8d888dbc42c3861ae50c3af3dc626279bc2a79f1b2d8253b7",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/7bf128c3bfc0c4448c231869c46c06b9b7d26572f2a4c5ec1499a3cd3735006a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0fd2c91a8d9ebf63959d5309-repair",
+            "reordered",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/c2e45a93e9f9e0fcdca4e7912ef7dad11c100d9de0388e8d1f19289d83fc2b96.json",
+            "attempt_sha256": "132b4b5cbc308223aa8f9e53e3667d11630c09f043f8f599c000d0bfd95f810b",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/7bf128c3bfc0c4448c231869c46c06b9b7d26572f2a4c5ec1499a3cd3735006a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0fd2c91a8d9ebf63959d5309-repair",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/c418e4b2a2e75c35dc7851789384a540aebb1f6c23b7c13b7567f736653d09f2.json",
+            "attempt_sha256": "1e1cf38d64ad532cfe7d059a61493750509a9fdb6a2f63ca7938700f37a8492e",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/afea63196ce63b509a742caba879331996a0bc43509d33e7d9d2910d03bc1e9e.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0b7187410c3abe24d822d691-generation",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A0",
+                "A1"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/c657cb037a517d72de4967101e9a5dbda653b0c7e02ef6412e457ae6973f1eae.json",
+            "attempt_sha256": "51f4848165fe59feedaf9d491ef633853e6ee5158de49ba28176b7edb5289f32",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/c586d23d19715808bcc904467fd16dee29a7c40b3e1db2529f8da20805879e0e.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-0020c5ec0fe4660f50b9020b-repair",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/cc6fef38184f48a097410087d1c59b73855c5feaa381aab35c424d0eec1d1c93.json",
+            "attempt_sha256": "10bb851e79ade3ea5a51570e7b0d0aa75ca89fa04661ee46d27370c81de672cc",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/fa40d342f76e966bed87e72e4f52d54acb4f63e49cf24c690af9e7f6126fc120.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a3c657c260a8d9be7aaf0f9f-generation",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/d70cc18706ecfe15b866576b2ee4bc5f25731f62153b2d9eac41a273201ba52e.json",
+            "attempt_sha256": "c4761ca14ea563a708a52a1c83849c8a489893450099ba05b21b1fb510509c27",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/9f415d24fbbc8d622700db8324b8b1dafc0892df4e738a10b8c792fe90196ec7.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-a29114c9c66571386fb90095-generation",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/d9b3cfff04fbbea34f861dc2da21c9117c41d2140ef4d75cdf726c01b26661b6.json",
+            "attempt_sha256": "8eade446f99b9534da9c87384733586eab12d4a0cf8ba39ab2bc191574bf3ecc",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/f334bd4dd8d9f2649f3f3146e4469d80eee594a2e3a36a46527e6d8ba4c3643a.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-81df31c2af1d216b78dd1e91-repair",
+            "reordered",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/f823543d7fcbbdd7156ce17839f165784252b16892aea33256a7797331a7bc49.json",
+            "attempt_sha256": "910196f3ea0d4564d677f3f0efee492e5756735c16306a2356b37129a7d0acfb",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/bdd1fa6206a8b3b6118446d632acdec678583b8a890a97b018fb09845a14abe5.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-89b1e300bfbadfa2a68b697d-repair",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/language/language/attempts/fc02e2d145d2e34277f5d07272e6c6a71ef7c8cf7eb566761ac6a37192a7102c.json",
+            "attempt_sha256": "46f5e84fb7d968ce7a6d823803fc3927c52ff5f84317b9dc8ba40ab7b55faeff",
+            "case_bundle_member": "runs/language/language/cases.json",
+            "reference_member": "runs/language/language/references/b7e2f1280dff06b7bfdeab1732f2084b28c35703439259ce4be2c843a7fc3687.json"
+          },
+          "unit": [
+            "language",
+            "difficulty-ecdd584a599de7b78799f3dc-repair",
+            "paraphrase",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/1c60edae9787c71c07ef0aa22d84ea0265f4575841684764c8f68caec66a82d5.json",
+            "attempt_sha256": "b3c1f191a19e20a084eae136022dd37532816f80d54ba77d5fbc7099cf1b4723",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/271341972093db6ff1d2a63064f898e1fbac36da5ad27f2db2cd37c28f35d1a9.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6a05feedb643dd0d66ed41ae-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/2b8b7a96e76e1f57211c92025c3dc0b805f584c94dbb96970a7e708f745a26ed.json",
+            "attempt_sha256": "84b67d5a9f0d03109c69d1177ea0552cf08d31b9f86d63ae38223c91c0ac2e67",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/d5c2ecbb260ef8b47003ef64bb2c3accd0daa19b45086653defb42e9332830b4.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6dd38a35a807f5693336f267-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "transport_error"
+          ],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/2fdc12631afa37a0a1dead847c0cd1a9cb0e6ecf4be4778799ae5a0c6896d649.json",
+            "attempt_sha256": "9a0930996c57320a5be4c1b8310282207b4868850fbbf5d7c6d5cb311cc3a32d",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/e8b5401cfeda5ec1a8c8b89aa30880fdfe583f54619c3bfa7076b3833bdc4c16.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-72ac5a2069011da65b217c82-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "provider_errors": [
+            "http_502"
+          ],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/3a61ec47c92a1e96e8d0fd55a2d15097ecfbbb6d3f52b9f0dc3ea9aa5f799758.json",
+            "attempt_sha256": "71b174e5977f4b74d305327b23c5a76e3e17d79635a61f6813c1d441e1d3ce3f",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/078880f93cab07a0a41f48b82a1e6442874091f90a9e8bdbd37b1bbfd8bdc7dd.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-3c3c60bd2407f1828a3e048e-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, horizon, participant_availability, resource_availability."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/41714020df96e2b9fb9b203e4a0526d76d3bda20a777da7cb8a7f85e541767ea.json",
+            "attempt_sha256": "1b9d97d8125b55b885657393a0245366dbd3ec22cf5ca4a3cfcb4c31e4856443",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/52319da41c2dc917c1abb38c2d53be5ab228006d68ee7be4718d3c05699b2ab8.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-1eeecc1c31e18b501ee559c6-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "horizon",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "horizon",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "easy",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/5aab7ba5cd2d38d421faa4281b3c60484434756e970809541da5055689e75802.json",
+            "attempt_sha256": "a5104e044e1d9000b5e7477f25d9a6a97c548b614835f4d46fb5b10f31a98692",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/dd67164c5a6f1cab1fb9ed2a016da0b0caf1ce1e2b95d59acb6b53e7cf5a3d6b.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-5d519fe98da0884fdc03f3fa-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/6143e8e4b4c6f13db1d9c5a0842ae471ee1689eb122571d97e6d5cca4dddffbf.json",
+            "attempt_sha256": "e1edf56008a980c94779572872e9c738d0426e33a6886d3267d019623e10fec8",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/49f5497986b99d3e11ae11a0f99285b024bbec134cd5bb1d9c3d8a4949d61445.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-dbfbed7cd7af66cf37a53817-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A11"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked, participant_overlap, precedence, resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/7f02b745c5f602dff824bbdba5e6c2bc3276307104c81b1f875a2acaa08c9f4a.json",
+            "attempt_sha256": "149ca8688981158a1bd42f6696a2b32e45767f71340efbd2d7ce124bd6d8e3fd",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/43870f858e9135d1f427f95afec6c3c2b27c1ac74892cf0f2d94c7a54314bb72.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-64036ef2c2a26def2f56786b-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A0",
+                "A6"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A6"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A3"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A3"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A2"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A6"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-1"
+            },
+            {
+              "activity_ids": [
+                "A6",
+                "A3"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-0-2"
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A2"
+              ],
+              "category": "precedence",
+              "constraint_id": "chain-1-2"
+            },
+            {
+              "activity_ids": [
+                "A7"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "level": "easy",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/85995db67c2eca0f42c8981e5527f508833e44705046d948eace64d66be4cfe7.json",
+            "attempt_sha256": "ee3639f195b41375567400291b7b0245f587971cb74b18be643ba880b4e95981",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/d7240c0f13f8cab4fbf9315b39f5ff68a0aeab3d976d83ba445b19189306f25e.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-1eeecc1c31e18b501ee559c6-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "level": "moderate",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, blocked, horizon, participant_availability, precedence, resource_availability."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/8dc715888972e151bd8ba13b89a884df09f72875d8dc11904fd39b3a6e9fcadc.json",
+            "attempt_sha256": "784a37e8ade8568138d1d4765f0c3c9f162dfeed56ddf39e04fa7d7b494b0e79",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/fe2f58798b6cb623d8347a11b85930c34dfcefef0d5f2ea99cac3de0abb57f32.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-64036ef2c2a26def2f56786b-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "horizon",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "horizon",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A0",
+                "A1"
+              ],
+              "category": "precedence",
+              "constraint_id": "cross-0"
+            },
+            {
+              "activity_ids": [
+                "A7"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/94280e9e778e4b0f5517e5fa6a0b1d4e6850b2ca61a6bb0b300cf9bc298df6a5.json",
+            "attempt_sha256": "61a397cb178b85ceb8f58a1d0d7d9712a7c660066d3750ddc20a72cf340a0757",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/e8b5401cfeda5ec1a8c8b89aa30880fdfe583f54619c3bfa7076b3833bdc4c16.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-72ac5a2069011da65b217c82-repair",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/b770df4f403f4fb6de7043b1df706e1a6f6a9b21c497e983a35115d217088b0b.json",
+            "attempt_sha256": "8a217ab0d964b67612bd7b81ecc16ba37bbcf19d1aafbcb2ec87ee578c643e76",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/e2a04771f569dd5488f1764dcdde7ea4118d088d7c49bd46ccbeca1616d16e40.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-eca2aa698b8215bc8ffccd74-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A0",
+                "A1"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: blocked."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/c220d86d4cdea02ab2b05917b2c6e7567af842146baa199af178e300445ed4c8.json",
+            "attempt_sha256": "e636bc75c8a4a82f855bddf619df6ae28212433f3f8181ce000cc92d546c84b6",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/70076a64f0f165150b7cfb8598ade8eddadd94e4e1d39a3a3bfb14b74f5cf301.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-eca2aa698b8215bc8ffccd74-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "blocked",
+              "constraint_id": "change"
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/cef47957a720c804ce2e5a9ccacdcdc53796a8dd4fc9e771e4fba589c6078440.json",
+            "attempt_sha256": "088976708e5248debb85cd13f91724606a7c8d6b9517c000ebe4e4ac437dfbb5",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/6cfa485ff07a1af2fe67646c140413226b113bbee77bc381f9d8f81e2f326a95.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-dbfbed7cd7af66cf37a53817-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "very_hard",
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/e07198333a59a92af56cabebefd930758a951b5b1e4c93d5a823e3f210fc0bc5.json",
+            "attempt_sha256": "037207eca10ca3171735a6cffe418052275e2e6afa7e631be24b96be597453ae",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/fe8ee9d5168c9b8c9f91582070f788e08680318fc5b13ff4ae7ebd3ef9f00fad.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6dd38a35a807f5693336f267-generation",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "level": "hard",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/ed384b4fc4835263ce44b46bf7e2aaf249d283ce1930522419807562d8d24ed4.json",
+            "attempt_sha256": "80c6e93359c0e0cae9948c1f5cf962dc4db3ffdc237756e5b4f6e9e83f510a15",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/e2a04771f569dd5488f1764dcdde7ea4118d088d7c49bd46ccbeca1616d16e40.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-eca2aa698b8215bc8ffccd74-repair",
+            "canonical",
+            0,
+            "solver_augmented"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "level": "extreme",
+          "objective_gaps": [
+            null,
+            null,
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "provider_errors": [],
+          "trace": {
+            "attempt_member": "runs/realistic/realistic/attempts/ef6651457ff483f8c80c89ce5c25b24f32df48fc1b84c854ad05ba306e4c121a.json",
+            "attempt_sha256": "dc9135a2f58913f719b61b207434963ae3e15612ded0da6c646eb0d597f3481e",
+            "case_bundle_member": "runs/realistic/realistic/cases.json",
+            "reference_member": "runs/realistic/realistic/references/f4e61f1e0559acbf66b0110888cefa4b41119a251cf04039dfad4549b25e726e.json"
+          },
+          "unit": [
+            "realistic",
+            "difficulty-6a05feedb643dd0d66ed41ae-repair",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        }
+      ],
+      "model": "qwen3.6:35b",
+      "normalized_source_families": 39,
+      "overall_by_method": {
+        "direct": {
+          "accepted": 26,
+          "attempts": 100,
+          "categories": {
+            "accepted": 26,
+            "false_unsat": 20,
+            "gold_invalid_schedule": 32,
+            "invalid_output": 18,
+            "provider_error": 4
+          },
+          "correct_unsat": 21,
+          "objective_comparable": 5,
+          "objective_matches": 1,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 4,
+          "sat_attempts": 50,
+          "sat_valid": 5,
+          "unsat_attempts": 50
+        },
+        "solver_augmented": {
+          "accepted": 94,
+          "attempts": 100,
+          "categories": {
+            "accepted": 94,
+            "false_unsat": 1,
+            "invalid_output": 3,
+            "provider_error": 2
+          },
+          "correct_unsat": 46,
+          "objective_comparable": 48,
+          "objective_matches": 48,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 50,
+          "sat_valid": 48,
+          "unsat_attempts": 50
+        }
+      },
+      "requested_model": "qwen3.6:35b",
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 100,
+            "mean": 17.283127672495322,
+            "median": 2.003500166349113,
+            "missing": 0,
+            "reported": 100
+          },
+          "solver_seconds": {
+            "attempts": 100,
+            "mean": null,
+            "median": null,
+            "missing": 100,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 100,
+            "mean": 3417.8645833333335,
+            "median": 2348.0,
+            "missing": 4,
+            "reported": 96
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 100,
+            "mean": 37.873976174173876,
+            "median": 33.01534414617345,
+            "missing": 0,
+            "reported": 100
+          },
+          "solver_seconds": {
+            "attempts": 100,
+            "mean": 0.06183166753892836,
+            "median": 0.012629791162908077,
+            "missing": 5,
+            "reported": 95
+          },
+          "total_tokens": {
+            "attempts": 100,
+            "mean": 6540.469387755102,
+            "median": 5328.5,
+            "missing": 2,
+            "reported": 98
+          }
+        }
+      },
+      "unique_cases": 80
+    }
+  },
+  "new_model_calls": 0,
+  "scope": "Descriptive, shared-service development comparison; not held out"
+}

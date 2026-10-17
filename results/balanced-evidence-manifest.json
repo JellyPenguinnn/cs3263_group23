@@ -1,0 +1,35 @@
+{
+  "format_version": "1.0",
+  "archives": [
+    {
+      "id": "qwen36",
+      "run_id": "balanced-96-qwen36-20261015",
+      "path": "results/archives/balanced-96-qwen36-20261015.tar.gz",
+      "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+      "bytes": 642903,
+      "checksummed_members": 211,
+      "scheduling_attempts": 96,
+      "required_returned_model": "qwen3.6:35b",
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    },
+    {
+      "id": "glm53flash",
+      "run_id": "balanced-96-glm53flash-20261015",
+      "path": "results/archives/balanced-96-glm53flash-20261015.tar.gz",
+      "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+      "bytes": 476451,
+      "checksummed_members": 211,
+      "scheduling_attempts": 96,
+      "required_returned_model": "glm-5.3-flash",
+      "evidence_scope": "shared-service synthetic/AI-assisted development; not held out"
+    }
+  ],
+  "policy": {
+    "original_bytes": true,
+    "overwrite_originals": false,
+    "new_model_calls": 0,
+    "dataset": "balanced-generation-v1",
+    "earlier_studies": "Separate immutable archives and scores; no pooling",
+    "limitations": "48 cases in three construction families; actual human review remains pending"
+  }
+}

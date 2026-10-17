@@ -1,0 +1,74 @@
+{
+  "layout": "report",
+  "matplotlib_version": "3.10.8",
+  "minimum_text_points": 11,
+  "new_model_calls": 0,
+  "notes": [
+    "Counts include all failures; primary denominator is 48 for every bar.",
+    "Failure categories are mutually exclusive; accepted but suboptimal schedules are not failures here.",
+    "Render at native width or larger to preserve the 11-point text minimum."
+  ],
+  "output_sha256": {
+    "balanced-acceptance.pdf": "a24a037f73f77d618cc94dc408e05d1956ad877c23daf4d637c8c12777aba305",
+    "balanced-acceptance.png": "82332881ae5a6032194bb3e27b33d216238f0f91045c089d17b6c8ddcef3c393",
+    "balanced-failures.pdf": "d9938ac04cf4abb04755b98ba5e49b01bda457149fa9fcf321cf7f69f122e230",
+    "balanced-failures.png": "0a342d3915f95fab2e86331148c96b660a192e637714a179ed0bcd9a3ebb37b2"
+  },
+  "plotted_data": {
+    "glm53flash": {
+      "direct": {
+        "accepted": 47,
+        "attempts": 48,
+        "failures": {
+          "false_unsat": 0,
+          "gold_invalid_schedule": 0,
+          "invalid_output": 0,
+          "provider_error": 1
+        },
+        "percent": 97.91666666666667
+      },
+      "solver_augmented": {
+        "accepted": 48,
+        "attempts": 48,
+        "failures": {
+          "false_unsat": 0,
+          "gold_invalid_schedule": 0,
+          "invalid_output": 0,
+          "provider_error": 0
+        },
+        "percent": 100.0
+      }
+    },
+    "qwen36": {
+      "direct": {
+        "accepted": 6,
+        "attempts": 48,
+        "failures": {
+          "false_unsat": 9,
+          "gold_invalid_schedule": 23,
+          "invalid_output": 10,
+          "provider_error": 0
+        },
+        "percent": 12.5
+      },
+      "solver_augmented": {
+        "accepted": 48,
+        "attempts": 48,
+        "failures": {
+          "false_unsat": 0,
+          "gold_invalid_schedule": 0,
+          "invalid_output": 0,
+          "provider_error": 0
+        },
+        "percent": 100.0
+      }
+    }
+  },
+  "renderer_sha256": "93f2565d35fd77dad47162478da855edb2ae6272fc99bb5fe41015533ad3f6d1",
+  "shared_renderer_sha256": {
+    "render_benchmark_results.py": "418444ca00eaee17cf2a81e71e5e65d5868c69c9db93c468dbae9d77297a1be6",
+    "render_difficulty_results.py": "84f8bbc06557982c050f7c4c4ce298793d26efb4915cc3d02bea62811e9a2198"
+  },
+  "source_sha256": "7c13804f73552da95054c57be7e22abc61b793ef04bf7291917d3efecc8d201e",
+  "width_inches": 6.2
+}

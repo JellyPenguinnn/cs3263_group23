@@ -1,0 +1,4977 @@
+{
+  "builder_sha256": "4e1709f935302a21e5492f539a893581cf7a8c465bf7d006f2f218804e4b0531",
+  "comparison_checks": {
+    "all_96_paired_prompt_hashes_and_public_views_match": true,
+    "all_returned_identities_match": true,
+    "allowed_differences": [
+      "requested/required model identity",
+      "observed capability and backend metadata"
+    ],
+    "case_bundles_match": true,
+    "four_profiles_each_6_sat_6_unsat": true,
+    "no_pending_requests_or_retries": true,
+    "shared_settings": {
+      "analysis_settings": {
+        "bootstrap_resamples": 10000,
+        "bootstrap_seed": 3263,
+        "minimum_groups_for_interval": 10,
+        "primary_repeat": 0,
+        "primary_variant": "canonical",
+        "separate_kind_task_and_gold_strata": true
+      },
+      "development_registry": null,
+      "evidence": "live_development",
+      "model": {
+        "connect_timeout": 30,
+        "max_attempts": 1,
+        "max_tokens": 32768,
+        "read_timeout": 1800,
+        "retry_delay": 1.0
+      },
+      "provider_execution": {
+        "configured_body": {
+          "max_tokens": 32768,
+          "stream": false
+        },
+        "effective_omitted_values": "server_defaults_unavailable",
+        "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+        "final_content_field": "choices[0].message.content",
+        "format_version": "1.0",
+        "max_attempts": 1,
+        "omitted_controls": [
+          "temperature",
+          "top_p",
+          "seed",
+          "reasoning_effort",
+          "response_format"
+        ],
+        "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+        "provider": "soclaas",
+        "retry_delay": 1.0,
+        "timeouts": {
+          "connect": 30,
+          "pool": 1800,
+          "read": 1800,
+          "write": 1800
+        },
+        "weight_revision": null
+      },
+      "provider_failure_policy": "continue_transient_v1",
+      "qualification_policy": "strict_model_observe_backend_v1",
+      "reference_solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 60
+      },
+      "rendering_seed": 3263,
+      "runtime": {
+        "certifi": "2026.7.22",
+        "httpcore": "1.0.9",
+        "httpx": "0.28.1",
+        "numpy": "2.5.3",
+        "ortools": "9.14.6206",
+        "platform": "macOS-26.5.2-arm64-arm-64bit",
+        "protobuf": "6.31.1",
+        "python": "3.12.2",
+        "truststore": "0.10.4"
+      },
+      "solver": {
+        "num_workers": 1,
+        "random_seed": 0,
+        "time_limit_seconds": 30
+      },
+      "source": {
+        "__init__.py": "81ec81da4a406da6a5634c102e630fd2ce2fd7ec59954ca14865ce6e9c6fd240",
+        "cli.py": "94add62a6ef633f99801aa7a241e9c060c62f1adee420303b412baff31d3d15e",
+        "dashboard/__init__.py": "ffecf6c48753d374d028d5aea4bb76c9c3258b1e8fe06578321dd30516713386",
+        "dashboard/server.py": "af366362698d252bdbcebdca4cfadabcef49af7b7ea8554004255098532dd498",
+        "dashboard/service.py": "ff8e23dfd4f030e628314dc235e49c7e7fd0882d772b5738651d56ce1d9f1d86",
+        "domain_analysis.py": "55732ed94091ea2824e0669e94d52d3a5aabed3f4974780b5fcffacbc7cae7d4",
+        "evaluation/__init__.py": "2d765174de8a343ed94bf846a3a5db8e9b0ab18baf4e4a66b3a98d385d8ebb71",
+        "evaluation/balanced_generation.py": "022d8349bf8c0f2e2cb9e805f328077e6f6d8473538a5711684215d27f497b1b",
+        "evaluation/benchmark.py": "b9d8b903a3a64edc516575bd73db619cde3536c282740a429a0bc54b76d7fd2e",
+        "evaluation/cases.py": "8d6a836af6a697b7a7ebec057c91bbe9b0f831423e85a8ff7fb04245c5497566",
+        "evaluation/cli.py": "cdc60d5227f95117e5aa8373e9a7b98408a82e88b95b8c9687e89eb5583371be",
+        "evaluation/difficulty_suite.py": "fc60218f5c8d42273ad2e489a5e0fcbef5d3c45f2fa833c335c941a54f9d7971",
+        "evaluation/failure_policy.py": "89ac0cdd2d7b92e4911802d35e594f0a401d0799f32b853edda16c5d6828a95a",
+        "evaluation/figures.py": "5892016ee0f1caa8871c3b7e9b9610beaa411a75003de37738f41b1294b58e21",
+        "evaluation/frozen.py": "bd5bbbf64db47283d7c3d91c22cf2eba92548bf4bf4584982653cbf1b2dea4c3",
+        "evaluation/interpretation.py": "17005de8eb7981541628cf4e12d971f8782a4180322a3a44e45c32300bc76f58",
+        "evaluation/liveness.py": "48f4d3ea49f61e770052713d6de396add59dcde4ddec516059866aea4c724ac1",
+        "evaluation/manifests.py": "a47ff2b2d4f392297d9b7518cd2c83a48fa86238b889fb92f6beb3e6afdbabf1",
+        "evaluation/metrics.py": "6f97720db6353d65a404c604a60fe882d7c27ddb9b7b411c1ca2b211b6866912",
+        "evaluation/preparation.py": "1651ece0349eb800133a42028ed28b2c7b645502894d3df2e4600cb61ebf81f0",
+        "evaluation/qualification.py": "8638f4f60bc1db15c5aca5f4fa5e8e5a200c362dbb74120c4fa159824ce86a56",
+        "evaluation/runner.py": "a27fd52fd9890a62aab0f2a9aee250c0d273a1b446f187d432a5e13c8fc17062",
+        "evaluation/scoring.py": "c2184b54495679d226f0c3244fe6782f99f9b4114fbfc3c5495cf90d887627af",
+        "evaluation/study.py": "75c216e370d0fdb4f9dfa5f9ada94b751bb6bcc29752a7c8bfc3062707ab1463",
+        "evaluation/supervision.py": "c5b4d30756da0f2aab02512b22ffcd22258e12055c8e5e266cc6dd1377fa2e0e",
+        "explanation_cli.py": "f1f1482052320cf1daa481f048cc359c49b9a05d63fd09d45fde20f06e4e72fa",
+        "explanations.py": "4c0482c0a6a4e73c20bbe25c14edd18891d0340a2571ac5f3c671b38caef1288",
+        "extraction_diagnostics.py": "0999a1f095038796fb9e2c581dc38c21b98a59165f6a73a77dd39aee990b0db4",
+        "formal_cli.py": "95ad25b1f75c08cf6e4fbadb4588d6a04e4793e335f86231e0af30ed7e628d2d",
+        "objectives.py": "30143c0a9df14857bdcd525244da52b3a539aa871206c0af370f9100c01cac28",
+        "pipelines/__init__.py": "3a4057e048f6f96b0a960d663768c6c7896829ee3978390788be87d4da7f54ef",
+        "pipelines/direct.py": "d0cc3a6e3b27af6989b2b40092c004277b78ecdc8bf477d602858d58d9cb0237",
+        "pipelines/solver_augmented.py": "f75926c1a3a169b1044f758007ccc77c3595ffad01b41445ed94f2ed76fd6b62",
+        "providers/__init__.py": "4cf7b2ab27d5525e350c363466d80fd98be84b3d2b4005e06f718053bf3b593d",
+        "providers/execution.py": "8051c52fe1d144db84b1d9b69dd7d6e7b0b89e2395f6e7fcf181017471943cc6",
+        "providers/issuer-chain.crt": "4ac93344924ddd3a6e79b287c37148668b272dab68e15d5cae68bb7766d04db8",
+        "providers/soclaas.py": "d0f643a934bcba4d23cc012b6226c4c8c52f05c2826a1b4bae3d1f93fb11b59d",
+        "providers/tls.py": "a89efb96743c0275259cd5210dc4f0902627edfb6672906404dc82aa91de56a1",
+        "providers/types.py": "f22a943c157fff55d4faed6514d2494b6e6ff4255cfa1d2e6cc7472f4c063c50",
+        "schema.py": "c5cb618ae14b9308512d2136abee20346fa97dffaec2ab4661e79f21dc6310d0",
+        "solver.py": "c6d3f5459b736de74ac43cd6520566815919e5fec2677c90d05cd01065026898",
+        "validation.py": "dbdc06a44ac2a90f37eb68dd130cb57f81e031f714b68f4e7de18636b4781400"
+      }
+    },
+    "source_runtime_and_non_model_settings_match": true
+  },
+  "dataset": "balanced-generation-v1",
+  "format_version": "1.0",
+  "helper_sha256": "b204e0d70d8784d11ede31bead4fb6f68676c03a0a260ff1e44098de075895b9",
+  "limitations": [
+    "All scheduling failures remain in the primary 48-attempt method denominator.",
+    "48 cases are related constructions from three families, not 48 independent samples.",
+    "Only canonical wording was measured; human prose/gold review remains pending.",
+    "Balanced deadline/fixed-start presence removes that specific label shortcut, not all benchmark biases.",
+    "Objective matching is conditional on valid gold-SAT schedules and proven reference objectives.",
+    "Format noncompliance is not automatically a scheduling reasoning failure.",
+    "The GLM transport failure has no model response or reported tokens; missing usage is unknown.",
+    "Shared-service timings include failures and do not isolate model speed or hardware effects."
+  ],
+  "models": {
+    "glm53flash": {
+      "analysis_sha256": "81304281c001ee120188781914da7daec96fa0dccc0aee3be550990d75e16067",
+      "archive": "results/archives/balanced-96-glm53flash-20261015.tar.gz",
+      "archive_sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+      "backend_coverage": {
+        "direct": {
+          "counts": {
+            "vllm-0.31.0-tp2-64d866e2": 47
+          },
+          "missing": 1,
+          "reported": 47,
+          "requests": 48
+        },
+        "solver_augmented": {
+          "counts": {
+            "vllm-0.31.0-tp2-64d866e2": 48
+          },
+          "missing": 0,
+          "reported": 48,
+          "requests": 48
+        }
+      },
+      "backend_fingerprints": [
+        "vllm-0.31.0-tp2-64d866e2"
+      ],
+      "case_bundle_sha256": "259d366768a9b15afa6a08ee4e6d11afa3f5ff19bee43e84771556e0c9a283dc",
+      "construction_families": 3,
+      "controlled_paired": [
+        {
+          "B_minus_A_percentage_points": 2.0833333333333335,
+          "cluster_bootstrap_95": null,
+          "counts": {
+            "both": 47,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 1
+          },
+          "group_count": 3,
+          "incomplete_pairs": 0,
+          "interval_note": "descriptive_only_fewer_than_10_groups",
+          "pair_count": 48,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "failure_catalogue": [
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 116.75697870831937,
+          "objective_gaps": [
+            1
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            4
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 116.75690479204059,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "x-test-1",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "model_identity": {
+                    "policy": "explicit_alias_pin_v1",
+                    "requested_alias": "x-test-1",
+                    "required_returned_model": "glm-5.3-flash"
+                  },
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 9205,
+                "system_fingerprint": "vllm-0.31.0-tp2-64d866e2",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "glm-5.3-flash",
+              "usage": {
+                "completion_tokens": 9303,
+                "prompt_tokens": 849,
+                "total_tokens": 10152
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/9e3353122938995bd9b73445e8a0aa2f0e3619c07d28f71b373af8f6db9c5b46.json",
+            "attempt_sha256": "b1401ff97046ff574a8326147340b36fa670260219cc66bd376d04389bfddf6f",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/3f88d08d756a44a2b2d65bedd185ae0ec768dc0c0f6bc853e19f337d6804d5b2.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-12b4e9cdefec3402d2b9c0fe",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "provider_error",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 34.17709449958056,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The provider attempt failed; this is not evidence of a reasoning failure."
+          ],
+          "pipeline_diagnostics": [
+            "transport_error"
+          ],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 34.177065124735236,
+              "error": "transport_error",
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "x-test-1",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "model_identity": {
+                    "policy": "explicit_alias_pin_v1",
+                    "requested_alias": "x-test-1",
+                    "required_returned_model": "glm-5.3-flash"
+                  },
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": null,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": null,
+                "transport_error_kind": "remote_protocol_error"
+              },
+              "finish_reason": null,
+              "http_status": null,
+              "number": 1,
+              "outcome_uncertain": true,
+              "returned_model": null,
+              "usage": {
+                "completion_tokens": null,
+                "prompt_tokens": null,
+                "total_tokens": null
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/59c4e2f919930a45f56e0d21ec9140c75f5f008448a9270cf79639fbebe5d23b.json",
+            "attempt_sha256": "1afabcaeab8845895ce988b4e48dd8cda81037b6154389b975e3a2b7bcd55a21",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/d6418fda81f71eb4b1bb0b7b9cb95212c89a9a433ae18cf027a083806a5a3f75.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-9ff6d130d56449866109a902",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        }
+      ],
+      "model": "glm-5.3-flash",
+      "overall_by_method": {
+        "direct": {
+          "accepted": 47,
+          "attempts": 48,
+          "categories": {
+            "accepted": 47,
+            "provider_error": 1
+          },
+          "correct_unsat": 24,
+          "extractions_compared": 0,
+          "objective_comparable": 23,
+          "objective_matches": 22,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 24,
+          "sat_valid": 23,
+          "secondary_returned_answer_acceptance": {
+            "accepted": 47,
+            "note": "Secondary only; the primary denominator retains provider failures.",
+            "returned_answers": 47
+          },
+          "structurally_equivalent_extractions": 0,
+          "unsat_attempts": 24
+        },
+        "solver_augmented": {
+          "accepted": 48,
+          "attempts": 48,
+          "categories": {
+            "accepted": 48
+          },
+          "correct_unsat": 24,
+          "extractions_compared": 48,
+          "objective_comparable": 24,
+          "objective_matches": 24,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 24,
+          "sat_valid": 24,
+          "secondary_returned_answer_acceptance": {
+            "accepted": 48,
+            "note": "Secondary only; the primary denominator retains provider failures.",
+            "returned_answers": 48
+          },
+          "structurally_equivalent_extractions": 48,
+          "unsat_attempts": 24
+        }
+      },
+      "profile_labels": {
+        "both": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "deadline_only": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "fixed_start_only": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "neither": {
+          "SAT": 6,
+          "UNSAT": 6
+        }
+      },
+      "profiles": {
+        "both": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "deadline_only": {
+          "direct": {
+            "accepted": 11,
+            "attempts": 12,
+            "categories": {
+              "accepted": 11,
+              "provider_error": 1
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 5,
+            "objective_matches": 5,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 5,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "fixed_start_only": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 5,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "neither": {
+          "direct": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        }
+      },
+      "requested_model": "x-test-1",
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 48,
+            "mean": 33.182164837645054,
+            "median": 27.688559167087078,
+            "missing": 0,
+            "reported": 48
+          },
+          "pipeline_seconds": {
+            "attempts": 48,
+            "mean": 33.18415145413019,
+            "median": 27.692149041686207,
+            "missing": 0,
+            "reported": 48
+          },
+          "solver_seconds": {
+            "attempts": 48,
+            "mean": null,
+            "median": null,
+            "missing": 48,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 48,
+            "mean": 3248.6170212765956,
+            "median": 2633,
+            "missing": 1,
+            "reported": 47
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 48,
+            "mean": 23.262506577322103,
+            "median": 22.151993374805897,
+            "missing": 0,
+            "reported": 48
+          },
+          "pipeline_seconds": {
+            "attempts": 48,
+            "mean": 23.289900278691977,
+            "median": 22.163669396191835,
+            "missing": 0,
+            "reported": 48
+          },
+          "solver_seconds": {
+            "attempts": 48,
+            "mean": 0.022101304629662383,
+            "median": 0.013365270104259253,
+            "missing": 0,
+            "reported": 48
+          },
+          "total_tokens": {
+            "attempts": 48,
+            "mean": 3582.1041666666665,
+            "median": 3399.0,
+            "missing": 0,
+            "reported": 48
+          }
+        }
+      },
+      "unique_cases": 48
+    },
+    "qwen36": {
+      "analysis_sha256": "8c6283bd4e045217d6387f3988e5dc63371410f8c07f47de22044725b5abc39e",
+      "archive": "results/archives/balanced-96-qwen36-20261015.tar.gz",
+      "archive_sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+      "backend_coverage": {
+        "direct": {
+          "counts": {
+            "vllm-0.23.0-7cd694fa": 26,
+            "vllm-0.28.0-f8aad13e": 22
+          },
+          "missing": 0,
+          "reported": 48,
+          "requests": 48
+        },
+        "solver_augmented": {
+          "counts": {
+            "vllm-0.23.0-7cd694fa": 34,
+            "vllm-0.28.0-f8aad13e": 14
+          },
+          "missing": 0,
+          "reported": 48,
+          "requests": 48
+        }
+      },
+      "backend_fingerprints": [
+        "vllm-0.23.0-7cd694fa",
+        "vllm-0.28.0-f8aad13e"
+      ],
+      "case_bundle_sha256": "259d366768a9b15afa6a08ee4e6d11afa3f5ff19bee43e84771556e0c9a283dc",
+      "construction_families": 3,
+      "controlled_paired": [
+        {
+          "B_minus_A_percentage_points": 87.5,
+          "cluster_bootstrap_95": null,
+          "counts": {
+            "both": 6,
+            "neither": 0,
+            "only_A": 0,
+            "only_B": 42
+          },
+          "group_count": 3,
+          "incomplete_pairs": 0,
+          "interval_note": "descriptive_only_fewer_than_10_groups",
+          "pair_count": 48,
+          "resamples": 10000,
+          "seed": 3263,
+          "subset": [
+            "controlled",
+            "generation",
+            "canonical",
+            0
+          ],
+          "unresolved_pairs": 0
+        }
+      ],
+      "failure_catalogue": [
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.8047099579125643,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, participant_overlap, precedence."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.804691250436008,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 900,
+                "total_tokens": 1116
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/6b140c7b827a9c46aec3c62137c640779968de3b27b5738c36861e6dcc254c29.json",
+            "attempt_sha256": "98ee188f063d5b945387600e35a30efb41735f3a79317d8b4a71af18a940d57e",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/ce33583e96ce8c379a45e2ad4032204e54e434942befa7047d584208688da10f.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-071dcc04607137c07c53df2a",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A2"
+              ],
+              "category": "precedence",
+              "constraint_id": "C2"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7517160000279546,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap, resource_availability."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.751688708551228,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 213,
+                "prompt_tokens": 840,
+                "total_tokens": 1053
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b9b4a71f0a4fea538dffa365100de4ec73689dd3d79df14a9e1aad574da4dae4.json",
+            "attempt_sha256": "fa2471d48349a1a18bfe70a64b48f2b96f75b7a103e844fbbd3372e096c06e94",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/8f810aab27590cb847f96a670aeab0cda388cca1a1239457e20dd46d609374d9.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-0824ae608cf81588286f221a",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A6"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A8"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 52.51149908453226,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 52.511422417126596,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 7017,
+                "prompt_tokens": 840,
+                "total_tokens": 7857
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c1cd329c90976b852cb810e23a0f92e2b40286c746fd97d2429fa8d6c2e10e67.json",
+            "attempt_sha256": "c794eafd99e000d16d636b90967014ac933d0ca849a6c2159dde964b450cf0bd",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/5fc727e5707548c60b5d5a8ba297a9ef2f6d5ee4aa24bd1d3de7951b21f82df3.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-10477314983bea4e48016514",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7216450413689017,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, resource_availability, resource_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7216264167800546,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 161,
+                "prompt_tokens": 865,
+                "total_tokens": 1026
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/fddb857ffd39f2ac9ad291d7f194f68b0fe04f64ad1e49673921720dc4adb6eb.json",
+            "attempt_sha256": "efd6ef72cf315fc3681d8b611a696b1c7f21e63a15f73d05de72d23394849bc9",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/32c5951f16bf5c407fd066e04475fb05d8f91ecd71dadaae80632460ed737c4e.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-108156c83e77add94a2b787b",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A4"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7838418325409293,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7838165825232863,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 887,
+                "total_tokens": 1103
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/fa3e291aa7991d255ea5a07a4ea0f382548e484f2f141ff04d907588563090fa.json",
+            "attempt_sha256": "8c46656931819eed8c6a3ce8e8ef0e447290ea867ef44accbf42cec9689832b6",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/bf07e2bb7dad81dd75e4041b2f0dd14c06be01a34931fb292f5fdf4905f00b9c.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-128cfd1b3270276c03271cf2",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A7"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.4988488322123885,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.4988312916830182,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 19,
+                "prompt_tokens": 887,
+                "total_tokens": 906
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/e602e2e6e6f381bee416de12063d8e0e2981829ee7bc71354218dd706b2a842f.json",
+            "attempt_sha256": "a6534fd09c38c4d3672d5cc0141ec7ccfc3d82843cca4057229704dedadc061b",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/3f88d08d756a44a2b2d65bedd185ae0ec768dc0c0f6bc853e19f337d6804d5b2.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-12b4e9cdefec3402d2b9c0fe",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7451387904584408,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_availability."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7451212080195546,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 181,
+                "prompt_tokens": 840,
+                "total_tokens": 1021
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4c5be6c8b1403339434f94933c942779f61a1e48f55c71c9afdf6cd1d9055bdb.json",
+            "attempt_sha256": "f5f1803cf55b2fad6e2bdeaf9934906d4ec7dc0311e3ad280e29f7a481246ae1",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/10bd555e5e8adcb2354b37c5c79acf8d1e1c729505b4ebd4aaa694e1c7d8cae6.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-16c5eae861dd22f2242844c5",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.8016089173033834,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.8015902498736978,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 217,
+                "prompt_tokens": 875,
+                "total_tokens": 1092
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4af02b4353ff9c7af6f91de353d518c1fd6ef47182a88b92326c4cf75c1e8d13.json",
+            "attempt_sha256": "926a3678b4d01522b3d69faf078980c6b47f542dc4a85dce7a35439bb3b98227",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/55509cc592b193540a5d8af3f94799deaae14bc692b54e5ae88d9ba8b1c33b31.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-1fe3b420bf72f3415f88e257",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A7"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.7634908743202686,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7634657081216574,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 217,
+                "prompt_tokens": 888,
+                "total_tokens": 1105
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/c7e0fa0a8f768b88cc3661b0490caf487012640b9c04502bf4ea846b8ae7105a.json",
+            "attempt_sha256": "47164ec268e3a39ae529358002c2ded03e0c3c4657f22d5b9f40aa2e1127eeea",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c967987f15223020d01b1b861f46bdfb714f41ec8dd445b2b623029884266acd.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-2140243dce583289146f193b",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A7",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 0.9395290408283472,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.9395106667652726,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 101,
+                "prompt_tokens": 840,
+                "total_tokens": 941
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/3467335db2b25137882f377016f1d5af72a5a51b286df6c5e759c8655c0e3168.json",
+            "attempt_sha256": "8ba0a4736c19aee6884d22d37a5a9dd9858a4695ef52cf3227cb774f71431eca",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/d54d5510ab896abd10b7b201f025f4140177893d413f8e7d358460839c26edb9.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-23c3fc647d9f0639547d5890",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A2",
+                "A6"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.9421513332054019,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.9421330001205206,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 99,
+                "prompt_tokens": 887,
+                "total_tokens": 986
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/647d92807ebe750c875b44c0e5ab879f7b6acd6739e0ed41ad7f435c4f7fd18a.json",
+            "attempt_sha256": "a63de165707530675e81e8aaa48995626052a455ed3455c3477d7bbfe34a63ce",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/0c67be15250e7bbf795ac0407633c26d8c167ca16920d46058aad21afc602789.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-24224451a9e67d3fb5a7244f",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A4",
+                "A1"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.23804591689258814,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.2380287917330861,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 865,
+                "total_tokens": 876
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/93c2128d54b5ecb90f6675851978f5fa23913db81cf8e18c14683a09174e2429.json",
+            "attempt_sha256": "99eebc063b860f217b3d088119982f343f83f0720dbc50e76895b7f7a24581a8",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/b3466c20bff932c656cf8605eb5c58e1ffa0f40164faceb42a4fa71d52353591.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-27ce2a35b93fd474e882d853",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7601190004497766,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, deadline, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.760096582584083,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 900,
+                "total_tokens": 1116
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4a10a07c278765f2421d6f3476ec1c1360b10348c60a68ee5e7d7eb2ae2fb701.json",
+            "attempt_sha256": "f92c067338b5e5c14dd09976707ca748b4a8bcb3d6e11c90f977593cdda64c22",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/36a356b188f6e7e945495b1d36827944a9a14e75f527a8e77c0e9e95d5447765.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-29795705c03252b4bde9b1c4",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.781641500070691,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, deadline, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7816237919032574,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 888,
+                "total_tokens": 1104
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b3adf1db71660f0c3aa785ee31d65ca2c81fdefa3da473d7869d017055fd8a77.json",
+            "attempt_sha256": "a1c665287ffb9412935f03626310a838486678a0662ee77adba5c6c79a41a2c9",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/555c247af1072f40d5a4f898afe5b156385dacf35e5bd2fe02fcd6d2473ee058.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-34ad8e4b6d4fe8f0cc1c284c",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "model_seconds": 18.41962824948132,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 18.419610500335693,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 2349,
+                "prompt_tokens": 888,
+                "total_tokens": 3237
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/a27cf99f93baaefee441b733af2f0d670751fa367a7222a6a57599ba1af05c44.json",
+            "attempt_sha256": "8e648b0d538a456fcc798d908e3e0f4f44f6fcb1ff62d772bba82af6e5ec5457",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/ca46169f5581c8bff1701509f40cfc4237354d7188856bd8d27b53156e8d2448.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-3ea5d3c02d448221be33ea45",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "accepted",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.448593957349658,
+          "objective_gaps": [
+            4
+          ],
+          "objective_status": "proven_suboptimal",
+          "objective_values": [
+            6
+          ],
+          "observations": [
+            "The answer met the primary gold acceptance criterion.",
+            "The valid schedule is worse at a proven comparable objective stage; primary acceptance is unchanged."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.4485754994675517,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 169,
+                "prompt_tokens": 875,
+                "total_tokens": 1044
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/9f0aedc8ee0008e052dfeafa2f98d43ee4974b5c66e62a476246d308fb34ad67.json",
+            "attempt_sha256": "ff01ea6ce8db48437566fa6d456b2b602d9bdf3c2d4f1f4267f6e0dbab6ceb80",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/742bd67294de4783528b498f3897cf32c5a7017e3653d3a1eefedca066ff428a.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-4820d9a82a894a3384266377",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.8739231675863266,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.8739056251943111,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 875,
+                "total_tokens": 1091
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/93ce23a6909ad994ea9e15606750f748cb6ca285ad2c8ee27d723102c35e680d.json",
+            "attempt_sha256": "d48b4824adf16f937447528819303c7c16713d521a66cf66f558b32a1f7dffdd",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/70ee3cd3945a446ff6432f274c9117774abf580efe3becca4df602fb53f7ccae.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-4948a92cae2f9a3b5671cc17",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.9788457080721855,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.9788282504305243,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 217,
+                "prompt_tokens": 865,
+                "total_tokens": 1082
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/26057f625026e356c0cdcfd4bd08c31b784973622d433a266226bfb3b6bf03df.json",
+            "attempt_sha256": "0d53873f6060b600787f6f1b31cac899c154cb62e97fde6e0084b5d399a9e8e1",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/4ee54ffe3a9b6843fb26995ca86ce6e55f76de94a77af4456781502cc937e00e.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-4f0912309f2e645f7f5cd0d5",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A8"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.5051692500710487,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.5051510836929083,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 853,
+                "total_tokens": 864
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4aeb39ed613772165e65fd85387e57e795c2ebfb8a5566989833ba6d95bae255.json",
+            "attempt_sha256": "26ff6f6c5a9d3749a355e1c88ed8618d113253943017b9ef126a2acc9457ccd7",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/1ec65cf9f8aa4896267bced654b2bc83aa43bc8fbe0d197f01accb75acc9e2a0.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-53760a071a5cd58eb564d0a9",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "model_seconds": 21.863334625028074,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 21.86330599989742,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 2833,
+                "prompt_tokens": 853,
+                "total_tokens": 3686
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/1680a1902c09952e0f6ff448182b7944665a994afe3f7ffdcf39481270b5bb74.json",
+            "attempt_sha256": "2332f7c7111fac16b83882c2f0b1c9c752756233d120e21a52e3c13a544457de",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c17f168c741c5fd89311e2fcf54fcce05aaaeba3b42e358d71bbc8d7c624029d.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-5578dfa785c7e6f8e2164909",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 80.67023708298802,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 80.67017916683108,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 10689,
+                "prompt_tokens": 852,
+                "total_tokens": 11541
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/5a7fed237316db0d05bb48ee46343ca445327a616d1be77754b02ae8dcf857a6.json",
+            "attempt_sha256": "c3ac5a7297e0dd3e7f3a83f53e4b13d532e1a738521d7a9ae7172a5abc9b88c6",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/32121e5a2258d7984a71fd7fc8f2349b3dcda08d7743ed3ea951dae02680ac9f.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-6fd590ba9ee4c020a69b9fd9",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "model_seconds": 13.905976915732026,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 13.90595000050962,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 1890,
+                "prompt_tokens": 887,
+                "total_tokens": 2777
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4f7c15012d2c057b68d03c4033e812f133ed718525c9515864abea7c1309f42c.json",
+            "attempt_sha256": "e9a07c19e924214f8d9f26b3e428093965aba20ce812bffb8218e9e0a5a7968c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/10994403324143bee4aad07583b852ea71d7255286b28af808dd66791e011827.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-84478435d7ce4063d58df31d",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 38.28676987532526,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 38.286751667037606,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 5199,
+                "prompt_tokens": 865,
+                "total_tokens": 6064
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/60ad6651830d1a18640a91953854403e42b023acdd78651290276be614ab13bd.json",
+            "attempt_sha256": "f06e92015cd2546b54f12db323aefcfb165094b62eb64892f6d69e58ab834b65",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/08b08806c91ddc5c18dcdc0d46867b27bae358bd3cb840a1b13f1b4f372c4c64.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-84784c784ab8bd0152efbff8",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "model_seconds": 6.948865250684321,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 6.948783041909337,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 936,
+                "prompt_tokens": 840,
+                "total_tokens": 1776
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/9bff945047ad90cc93f91ec1f0b292c7e3141d3039ac6d6c0135a84acfbbe664.json",
+            "attempt_sha256": "445ca963e72d3809f86e65165f9e3d091bd11d9397e85b9c81753b91ea7706cd",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/445f2d444d5e9fa15677a128eff532ede588303a1b710dcfb0f0bd9aa3a314f9.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-89136cf520f1b9d22e2adf5c",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 1.8033134583383799,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: resource_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.8032950414344668,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 214,
+                "prompt_tokens": 840,
+                "total_tokens": 1054
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/8c83ec778662bdbe7f99231fd334be56c70760e35c990f56dfa54e3bf08794b8.json",
+            "attempt_sha256": "b28039c9ff72ea5534e013e5826cd7a557f933435c32e1dbedefbe2665f2fbb1",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/c21227bf560324bdae1ffb014b3e08d22aebda851bf0cb57943cb69f988ad7d9.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-95559b011241ecc5fa480d29",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A4",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.8795360829681158,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.8795151244848967,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 181,
+                "prompt_tokens": 865,
+                "total_tokens": 1046
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/811fb32aadd0dba2c1fdeef5889e05e762e92a2b815d953674eefd3f3758731b.json",
+            "attempt_sha256": "482d7876e3f8b2b3f03ad87c4709900a79e25c2b437fcc1798906a3b6032093f",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/cf9133af2b604d3b0149e3dc21899b5b28779f222f0815c72ca52abd79a789b4.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-9bb03b7e102b9e3403fde39a",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A6"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.9609374171122909,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.9609191678464413,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 101,
+                "prompt_tokens": 853,
+                "total_tokens": 954
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/41f33aa021c8faebfc8713981c9a91468a789145be228d36ae9fecd5dc4c7ace.json",
+            "attempt_sha256": "25bc48936c34dc80d0b91af798c2dbd22da553981fd87c2da4f724364ca799b2",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/d6418fda81f71eb4b1bb0b7b9cb95212c89a9a433ae18cf027a083806a5a3f75.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-9ff6d130d56449866109a902",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A3",
+                "A8"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.4659804170951247,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap, resource_availability, resource_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.4659601245075464,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 149,
+                "prompt_tokens": 853,
+                "total_tokens": 1002
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/4112509310801872c61b7ad85b400f196a0030860ed3609329f85e5e0d1b5402.json",
+            "attempt_sha256": "c69dbed82f55252e959488c40169f272409f5611cc0ab7eeaee57df8f2c2b22d",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/054e36f18301e0d58c87d00d11885d28f619d69a45f6743da022b1af5ec85089.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-a23589fb7f9b474554fd8e04",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A2"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A5"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.5695056244730949,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.5694725001230836,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 840,
+                "total_tokens": 851
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/7ed32586eee4ce6bfaa91dfc3c001d385a00f3eaa45b7e5e07bad8ffbe2b86ed.json",
+            "attempt_sha256": "98b2443e01d87903e4fb052a5ad58b9058de9265a5d78010caec28198a9e049c",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/848a5140ad915b7379148169ba01e01cd47e3a9295700581f93439080f2a4360.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-a853e9188bf38152c6594daa",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.36158733256161213,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.3615694157779217,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 19,
+                "prompt_tokens": 900,
+                "total_tokens": 919
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/53d4cc0876f3a056a39eb39febfb77ff1099de60838c0d496641b21f97d19536.json",
+            "attempt_sha256": "e2a41f7dc83dc7df089d64c32921d2c5d563018001745f41d8548c829c9d9195",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/87106c876de9edf57d0b6d8691378945a8c7e8e990f93533e17b36677730fbca.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-ab0d778a76c98f1988bf1309",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 2.62311074975878,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_availability."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 2.623091833665967,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 865,
+                "total_tokens": 1081
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/26c354731196a130583a9134d90f06fb6c76d69be8292559ec1ffef7bc4f6952.json",
+            "attempt_sha256": "f81c859a10c98009740c82710027f7c9cb6e714476c4a2471c8f59f64fa8f8a7",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/41fa18bbc9f83a902826a1cb9f87dded1ef8ebc4361706bc77e098cfe3b7738f.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-b281c248d68c03daea061ae8",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A6"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "SAT",
+          "model_seconds": 2.036300625652075,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 2.036282790824771,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 217,
+                "prompt_tokens": 888,
+                "total_tokens": 1105
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/61f7a2e9b9dfcdb5e80864a134f48ba58d014b838cd58ab64b3d2cb4302a234e.json",
+            "attempt_sha256": "274ccbaf92e0300b6da64c2324ae477be3193cdf934d4f0becedd4ffaffab695",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/00fdee0b0ba5a69d910a067f835a9fe2cebd646ebdcfe9b7a7486f4af424941f.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-b6eb9a5bee2b24636d9ee2ae",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A1"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A4",
+                "A1"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 57.37514525000006,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 57.37503950018436,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 7675,
+                "prompt_tokens": 852,
+                "total_tokens": 8527
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/7ee7aa49f1445e7e4e0e4eb67f45fcf8fbb28424a848dfffe16c2ff5eea09d44.json",
+            "attempt_sha256": "b582a9b3ebe513f6dfbc3509b4704398df34fc653281a3c5dc676ba121a1023e",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/dcc5d55513449bfd9f7ada38fba88cbfa2d08dd441887c58a82d46324fba5717.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-c1a3f3a9c2b04f1314b15b75",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7745303325355053,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: activity_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7745116660371423,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 216,
+                "prompt_tokens": 875,
+                "total_tokens": 1091
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/ebdae0164dad787001da45cc5c5f517b0af7b7e374858c1c040ce1ff9ad09a00.json",
+            "attempt_sha256": "e512a6d875c7be3bc8feee1613b0ae61390411f0bb2e4abaffbcdad5989ebc51",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/7b03e275f23ffb584fdef0e39f27687abd060ab9dad730b7e7c14557074f3234.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-c2672be102cdd7b8c07d76a0",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "activity_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A4"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.5137708755210042,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_availability, participant_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.5137432916089892,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 181,
+                "prompt_tokens": 853,
+                "total_tokens": 1034
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/19245b72a87dd20b8c1562c3879a4f39e3e23f922e1ea614aba5f9452b62d3fa.json",
+            "attempt_sha256": "a9eadbdb1c5146e1fa744e39a8528cd4b7993fe5d252f880e4065b476ecee8e4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/831b8829b35393faf991f5037ee69ce8a4efba8c6b720a44175cac39041ae876.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-c90eebd9a63f7c434a84c70c",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A2"
+              ],
+              "category": "participant_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A1",
+                "A5"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A8"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "UNSAT",
+          "model_seconds": 30.044078207574785,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 30.043995082378387,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 789,
+                "prompt_tokens": 852,
+                "total_tokens": 1641
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/5956440a9d224331fb4c6585a0bd6b79fe9acb7286b27f28c002f2edd0c1c809.json",
+            "attempt_sha256": "92942f583c355ff20d8f8c4c4762fa82118c482fd6836627b470210caef76486",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/7f0dae727f512e9236a1e4e2b2415e07c339c3b28dadd9c816188d9c0f71bccd.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-cfa091b20ee13c21f814eb29",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.4030494997277856,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.4030396658927202,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 853,
+                "total_tokens": 864
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/db6f22d341e2c6c4df6fbe149a609ac1f33bbfdfe07ca27ce7405438cf1bba86.json",
+            "attempt_sha256": "66719722792a802c37ff5c7afb771e179f38c0bf2faf22cd6b35e34d5cce88c7",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/76dbfe4d062a478edee929a19695f296f6455506001bac13ae1197fcf74b754d.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-d4461dc2d88bceb66bc06162",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.559399082325399,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: deadline, participant_overlap, resource_availability."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "both",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.5585054168477654,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 182,
+                "prompt_tokens": 865,
+                "total_tokens": 1047
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/0f83a1d9e7e59f8d029d23f5581c09ae472167f23a81acb16ac78c9bdfb5e651.json",
+            "attempt_sha256": "640453773a5a0923e3986353f5fd1d8d05e932539eebeeac5f1ebd7114599dc0",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/b637bed5244de9893a1bd43d484dd52e387976e8a410259147803f9a5d058b41.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-d7cd00e14d4a86bfabfb58eb",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A5"
+              ],
+              "category": "resource_availability",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A3"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8"
+              ],
+              "category": "deadline",
+              "constraint_id": "C20"
+            }
+          ]
+        },
+        {
+          "category": "invalid_output",
+          "declared_status": null,
+          "gold_label": "SAT",
+          "model_seconds": 56.88255612459034,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The answer failed the required output/schema contract."
+          ],
+          "pipeline_diagnostics": [
+            "invalid_json"
+          ],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 56.88252899982035,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 7901,
+                "prompt_tokens": 853,
+                "total_tokens": 8754
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/a93aeb3bf4ddf306377ea7cd8da5473d2a375022e7c7af427a1b09db1fa27a9d.json",
+            "attempt_sha256": "9ec2a04395db990a7c9aef96dd7006cd7107b43e4f447227ae69b94e906b36b4",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/5c8a5bae131200b842873b180084202a3bbb8d1ac60dce05aed2027f53ca3f95.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-db4548a1c4755adf86ef7fd7",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.3309703329578042,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "neither",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.3309534592553973,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 840,
+                "total_tokens": 851
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/683aff1f415475de5e5280c4b9539b340f8dd29f4f74b9c5b002122bf9ca2ef1.json",
+            "attempt_sha256": "bc11ab21e43ed6ce23c40e69787c60c2c5fe32044fa3d9cef7fb361e17fefc72",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/e87ebfc406585ec9924156c912b4ecf58f080f2e5e7e6f4f849ed29cdbdc4cf4.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-eeed3761aafff4a64d7b8d4f",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "gold_invalid_schedule",
+          "declared_status": "SAT",
+          "gold_label": "UNSAT",
+          "model_seconds": 1.7416497906669974,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "The returned schedule violates the evaluator's gold requirements.",
+            "Gold validation found: participant_overlap, resource_overlap."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "deadline_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 1.7416312908753753,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": 0,
+                "system_fingerprint": "vllm-0.28.0-f8aad13e",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 213,
+                "prompt_tokens": 853,
+                "total_tokens": 1066
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/2a92d5b64bf6dc463dea5f6c3f476d65a566e2494335a0e034a3e1385bbecfd7.json",
+            "attempt_sha256": "63cc79f27c2c04af9270382355949a33a73b343388827ad1539d38533e5d3d10",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/8ea50b9783c0a9f6734e09928037c310b94e365babb88357c3997bd6e6d16b75.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-faa2464aefa6e9c5de3b771a",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": [
+            {
+              "activity_ids": [
+                "A4",
+                "A5"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A4",
+                "A5"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A3",
+                "A1"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A5",
+                "A7"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A8"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A7",
+                "A8"
+              ],
+              "category": "resource_overlap",
+              "constraint_id": null
+            },
+            {
+              "activity_ids": [
+                "A8",
+                "A2"
+              ],
+              "category": "participant_overlap",
+              "constraint_id": null
+            }
+          ]
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.2298640003427863,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.22985458374023438,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 11,
+                "prompt_tokens": 852,
+                "total_tokens": 863
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/0c5b41bb729a6e552b7fa637eeacea0b4942c79083452f6320d469be2d4cb837.json",
+            "attempt_sha256": "fd4bb0d6e33a897e10455cd00a7e3be34abc09f0d48d1f826149296ddcceaad8",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/f28d21cdcc336a7d0dd4469cb7e08a24f6e4f335cce6a21dbbb67c7405ec50a9.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-fd277b06955143dcc9adeb49",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        },
+        {
+          "category": "false_unsat",
+          "declared_status": "UNSAT",
+          "gold_label": "SAT",
+          "model_seconds": 0.3088997909799218,
+          "objective_gaps": [
+            null
+          ],
+          "objective_status": "not_comparable",
+          "objective_values": null,
+          "observations": [
+            "UNSAT was returned for a gold problem with a validated feasible witness."
+          ],
+          "pipeline_diagnostics": [],
+          "profile": "fixed_start_only",
+          "provider_attempts": [
+            {
+              "elapsed_seconds": 0.3088020412251353,
+              "error": null,
+              "execution": {
+                "contract": {
+                  "configured_body": {
+                    "max_tokens": 32768,
+                    "model": "qwen3.6:35b",
+                    "stream": false
+                  },
+                  "effective_omitted_values": "server_defaults_unavailable",
+                  "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                  "final_content_field": "choices[0].message.content",
+                  "format_version": "1.0",
+                  "max_attempts": 1,
+                  "omitted_controls": [
+                    "temperature",
+                    "top_p",
+                    "seed",
+                    "reasoning_effort",
+                    "response_format"
+                  ],
+                  "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                  "provider": "soclaas",
+                  "retry_delay": 1.0,
+                  "timeouts": {
+                    "connect": 30,
+                    "pool": 1800,
+                    "read": 1800,
+                    "write": 1800
+                  },
+                  "weight_revision": null
+                },
+                "reasoning_field_present": true,
+                "reported_reasoning_tokens": null,
+                "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                "transport_error_kind": null
+              },
+              "finish_reason": "stop",
+              "http_status": 200,
+              "number": 1,
+              "outcome_uncertain": false,
+              "returned_model": "qwen3.6:35b",
+              "usage": {
+                "completion_tokens": 19,
+                "prompt_tokens": 852,
+                "total_tokens": 871
+              }
+            }
+          ],
+          "trace": {
+            "attempt_member": "runs/controlled/controlled/attempts/b7573b981316a14108fbb3892779836026503932ae8a9281698e3c11e057ffa4.json",
+            "attempt_sha256": "e63d988566ffdcedd5bb2d14427f71a0158b8b7b61ccdb15d062661b6b3b612b",
+            "case_bundle_member": "runs/controlled/controlled/cases.json",
+            "reference_member": "runs/controlled/controlled/references/acdaaa98fb0da0bd50fbbb33e5e5415beec6df6726301ceac95474f3c696b726.json"
+          },
+          "unit": [
+            "controlled",
+            "bg-fd978e6bc0f7000ba042ab8f",
+            "canonical",
+            0,
+            "direct"
+          ],
+          "violations": []
+        }
+      ],
+      "model": "qwen3.6:35b",
+      "overall_by_method": {
+        "direct": {
+          "accepted": 6,
+          "attempts": 48,
+          "categories": {
+            "accepted": 6,
+            "false_unsat": 9,
+            "gold_invalid_schedule": 23,
+            "invalid_output": 10
+          },
+          "correct_unsat": 5,
+          "extractions_compared": 0,
+          "objective_comparable": 1,
+          "objective_matches": 0,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 1,
+          "sat_attempts": 24,
+          "sat_valid": 1,
+          "secondary_returned_answer_acceptance": {
+            "accepted": 6,
+            "note": "Secondary only; the primary denominator retains provider failures.",
+            "returned_answers": 48
+          },
+          "structurally_equivalent_extractions": 0,
+          "unsat_attempts": 24
+        },
+        "solver_augmented": {
+          "accepted": 48,
+          "attempts": 48,
+          "categories": {
+            "accepted": 48
+          },
+          "correct_unsat": 24,
+          "extractions_compared": 48,
+          "objective_comparable": 24,
+          "objective_matches": 24,
+          "objective_partially_proven": 0,
+          "objective_suboptimal": 0,
+          "sat_attempts": 24,
+          "sat_valid": 24,
+          "secondary_returned_answer_acceptance": {
+            "accepted": 48,
+            "note": "Secondary only; the primary denominator retains provider failures.",
+            "returned_answers": 48
+          },
+          "structurally_equivalent_extractions": 48,
+          "unsat_attempts": 24
+        }
+      },
+      "profile_labels": {
+        "both": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "deadline_only": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "fixed_start_only": {
+          "SAT": 6,
+          "UNSAT": 6
+        },
+        "neither": {
+          "SAT": 6,
+          "UNSAT": 6
+        }
+      },
+      "profiles": {
+        "both": {
+          "direct": {
+            "accepted": 2,
+            "attempts": 12,
+            "categories": {
+              "accepted": 2,
+              "false_unsat": 2,
+              "gold_invalid_schedule": 7,
+              "invalid_output": 1
+            },
+            "correct_unsat": 2,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "deadline_only": {
+          "direct": {
+            "accepted": 0,
+            "attempts": 12,
+            "categories": {
+              "false_unsat": 2,
+              "gold_invalid_schedule": 7,
+              "invalid_output": 3
+            },
+            "correct_unsat": 0,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "fixed_start_only": {
+          "direct": {
+            "accepted": 3,
+            "attempts": 12,
+            "categories": {
+              "accepted": 3,
+              "false_unsat": 3,
+              "gold_invalid_schedule": 2,
+              "invalid_output": 4
+            },
+            "correct_unsat": 3,
+            "objective_comparable": 0,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 0,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        },
+        "neither": {
+          "direct": {
+            "accepted": 1,
+            "attempts": 12,
+            "categories": {
+              "accepted": 1,
+              "false_unsat": 2,
+              "gold_invalid_schedule": 7,
+              "invalid_output": 2
+            },
+            "correct_unsat": 0,
+            "objective_comparable": 1,
+            "objective_matches": 0,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 1,
+            "sat_attempts": 6,
+            "sat_valid": 1,
+            "unsat_attempts": 6
+          },
+          "solver_augmented": {
+            "accepted": 12,
+            "attempts": 12,
+            "categories": {
+              "accepted": 12
+            },
+            "correct_unsat": 6,
+            "objective_comparable": 6,
+            "objective_matches": 6,
+            "objective_partially_proven": 0,
+            "objective_suboptimal": 0,
+            "sat_attempts": 6,
+            "sat_valid": 6,
+            "unsat_attempts": 6
+          }
+        }
+      },
+      "requested_model": "qwen3.6:35b",
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 48,
+            "mean": 8.814911735923184,
+            "median": 1.7484273952431977,
+            "missing": 0,
+            "reported": 48
+          },
+          "pipeline_seconds": {
+            "attempts": 48,
+            "mean": 8.815929422659488,
+            "median": 1.749326791614294,
+            "missing": 0,
+            "reported": 48
+          },
+          "solver_seconds": {
+            "attempts": 48,
+            "mean": null,
+            "median": null,
+            "missing": 48,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 48,
+            "mean": 1947.6041666666667,
+            "median": 1050.0,
+            "missing": 0,
+            "reported": 48
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 48,
+            "mean": 11.85805338898596,
+            "median": 9.767612687777728,
+            "missing": 0,
+            "reported": 48
+          },
+          "pipeline_seconds": {
+            "attempts": 48,
+            "mean": 11.881639125058427,
+            "median": 9.789329770952463,
+            "missing": 0,
+            "reported": 48
+          },
+          "solver_seconds": {
+            "attempts": 48,
+            "mean": 0.017568179697263986,
+            "median": 0.017294791527092457,
+            "missing": 0,
+            "reported": 48
+          },
+          "total_tokens": {
+            "attempts": 48,
+            "mean": 3112.8541666666665,
+            "median": 3138.0,
+            "missing": 0,
+            "reported": 48
+          }
+        }
+      },
+      "unique_cases": 48
+    }
+  },
+  "new_model_calls": 0,
+  "scope": "Shared-service synthetic/AI-assisted development; generation only; not held out"
+}

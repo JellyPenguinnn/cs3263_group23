@@ -1,8 +1,57 @@
 # Evidence preservation and offline replay
 
-The two complete comparisons are preserved as **original, byte-for-byte reproduction archives in Git**. They contain recorded final model content, public inputs/prompts, extracted specifications and schedules, solver/reference results, failure/usage metadata, exact replay source and analysis. They are not complete raw HTTP captures or hidden reasoning traces.
+The completed [balanced generation comparison](balanced-comparison-audit.md) has **96 scheduling attempts per model**, preserved separately from the 200-attempt difficulty study and historical 600-attempt Qwen pair. The source/proof/review fixture is `benchmarks/fixtures/balanced-generation-v1/`; actual human wording/gold review remains pending. The preceding report and format receipt remain in `docs/history/20261017-before-balanced/`.
 
-## Checked-in complete-run evidence
+The current and historical complete comparisons are preserved as **original, byte-for-byte reproduction archives in the repository checkout**. They contain recorded final model content, public inputs/prompts, extracted specifications and schedules, solver/reference results, failure/usage metadata, exact replay source and analysis. They are not complete raw HTTP captures or hidden reasoning traces.
+
+## Balanced 96-attempt evidence
+
+Each archive contains **96 scheduling records and 211 checksum-covered files plus `CHECKSUMS.json`**. These are the original completed-run archives, copied byte for byte. [The manifest](../results/balanced-evidence-manifest.json) records exact SHA-256 values and sizes. No failures were removed, corrected or rerun. The summary and chart source is [balanced-comparison-20261017.json](../results/summary/balanced-comparison-20261017.json).
+
+```sh
+python3.12 scripts/verify_evidence.py --manifest results/balanced-evidence-manifest.json \
+  --extract-to runs/NEW-balanced-replay
+.venv/bin/python scripts/build_balanced_comparison.py
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py
+```
+
+For exact-source replay, follow the installation/replay procedure below in each newly extracted `qwen36` and `glm53flash` directory, rather than the historical `qwen38` directory. Use its `blocks.json`, archived `source/` and `analysis.json`. The scientific replay makes zero model calls. Fresh replay of both balanced archives reproduced the complete saved analyses exactly after JSON serialization; tuples in in-memory Python values serialize as JSON arrays.
+
+The complete balanced operational evidence is retained in a separate private same-device backup containing **483 regular files**, including capabilities, request accounting, supervisor receipts, packets, source snapshot and the built wheel. Its SHA-256 is `cf0baa9a297716065227ecfd8400aa378b6ae7d3e86e6691deb1eebac729554d`. The Python environment is retained at the original run location rather than duplicated in that backup. Local paths and credential-file locations remain private. This is preservation, not proof of off-device backup or human review.
+
+## Earlier 200-attempt difficulty evidence
+
+
+The new pair is preserved separately from the historical archives below. Each original archive contains **200 scheduling records and 364 checksum-covered files plus `CHECKSUMS.json`**. Both fresh exact-source replays reproduced every saved analysis field. The [comparison audit](difficulty-comparison-audit.md) explains the protocol and failures; [validation](../results/summary/difficulty-run-validation-20261014.json) records completion and request accounting.
+
+| Archive | Bytes | SHA-256 |
+| --- | ---: | --- |
+| [Qwen3.6](../results/archives/difficulty-200-qwen36-20261014.tar.gz) | 3,220,580 | `dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42` |
+| [GLM5.3 Flash](../results/archives/difficulty-200-glm53flash-20261014.tar.gz) | 1,998,959 | `f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e` |
+
+Verify or extract into a new directory with the separate [difficulty manifest](../results/difficulty-evidence-manifest.json):
+
+```sh
+python3.12 scripts/verify_evidence.py --manifest results/difficulty-evidence-manifest.json
+python3.12 scripts/verify_evidence.py --manifest results/difficulty-evidence-manifest.json \
+  --extract-to runs/NEW-difficulty-replay
+```
+
+Inside each extracted `qwen36/` and `glm53flash/` directory, create a Python 3.12 environment, install that archive's `source/requirements.lock` and source, then replay exactly as in the historical example below (`source/evaluation/analyze_study.py blocks.json replayed-analysis --development --no-archive`). Compare the entire saved and new `analysis.json`. These are offline scoring operations; do not invoke the live runner. Do not install a later checkout in place of archived source.
+
+Rebuild the current derived summary with `scripts/build_difficulty_comparison.py` and charts with `scripts/render_difficulty_results.py`. [Standalone](../results/figures/difficulty-comparison-20261014/figure-data.json) and [report](figures/difficulty-comparison-20261014/figure-data.json) receipts bind figure bytes and source data. The [previous report](history/20261002-report/submission-report.md), PDF, embedded figures and format receipt remain in `docs/history/20261002-report/`.
+
+The completed Qwen campaign, completed GLM rerun, stopped 22-attempt GLM campaign, packets and full frozen source remain untouched in the custodian's original local run directory. A separate private comparison-audit directory records their preservation hashes and replay outputs, with a [portable preservation receipt](../results/summary/difficulty-preservation-verification-20261014.json); no operational paths or credentials are published. The stopped campaign is not mixed into the successful rerun. Portable archives preserve the scientific records; original operational receipts remain separate. Same-device copies do not protect against device loss.
+
+## Generation-first reporting and offline illustration
+
+The [generation summary](../results/summary/generation-focus-20261015.json) derives scoped views from the same verified archives: all 30 controlled generation cases per model, its 12-case small subset and the completed extensions. Every view records exact observation IDs. This post-run hierarchy changes neither the experiment nor its scoring; overlapping views must not be summed. Rebuild with `scripts/build_generation_focus.py`; generate new charts using `scripts/render_generation_focus.py` (add `--report --output docs/figures/generation-focus-20261015` for the report layout). Each layout saves a source/renderer/output hash receipt.
+
+The previous combined-scope report, PDF, figures and format receipt are preserved in [history/20261014-report](history/20261014-report/submission-report.md). Earlier result summaries, figures, fixtures, prompts and live-run evidence remain unchanged. The current report format receipt is refreshed for the new PDF.
+
+The [office illustration](../results/summary/ta-scope-examples-20261015.json) is separately generated by `evaluation/ta_scope_examples.py`; it contains three generation examples and one repair, all offline with zero model calls. It is not included in any model-performance denominator. See [the alignment](ta-feedback-alignment.md) for exact scope differences and independent checks.
+
+## Historical 600-attempt Qwen evidence
 
 | Archive | Size | SHA-256 |
 | --- | ---: | --- |
@@ -42,7 +91,7 @@ PY
 
 Repeat in `qwen38/`. These commands make **zero model calls**; dependency installation may require package-index access or a local wheel cache. The scientific replay itself is offline. Install the archived source rather than assume an arbitrary future checkout has identical scoring behavior. Never rewrite original records to make replay pass.
 
-The report additionally uses the [two-model summary](../results/summary/two-model-development-20261002.json), [supplemental task/label and difficulty tables](../results/summary/two-model-report-tables-20261002.json), and [claim index](claim-evidence.md). Rebuild the supplemental tables with `python3 scripts/build_report_tables.py`; regenerate charts with `scripts/render_benchmark_results.py`. The original aggregate retains its original audit time/status even after repository publication.
+The historical report uses the [two-model summary](../results/summary/two-model-development-20261002.json), [supplemental task/label and difficulty tables](../results/summary/two-model-report-tables-20261002.json), and [historical claim index](claim-evidence-20261002.md). Rebuild the supplemental tables with `python3 scripts/build_report_tables.py`; regenerate charts with `scripts/render_benchmark_results.py`. The original aggregate retains its original audit time/status even after repository publication.
 
 ## Full historical and operational preservation
 
@@ -65,4 +114,4 @@ The inventory excluded only environments, Python/pytest caches and `.DS_Store`. 
 
 Do not overwrite archives, prune failed attempts, reuse their live allowance or change their original source/configuration metadata. Any corrected interpretation belongs in a new analysis/receipt with an explicit reference to the original. Any redacted shareable derivative needs its own hash and redaction note. Paths inside historical records may use the former `report/` spelling; this is source history, not an instruction to modify archived bytes.
 
-The current repository includes documentation/rendering improvements made after the experiments. Both experiments used the same archived implementation based on Git `2f0562b` plus the then-uncommitted resilience changes. Publication does not retroactively change that recorded source identity.
+The current repository includes documentation/rendering improvements made after the historical experiments. Both historical experiments used the same archived implementation based on Git `2f0562b` plus the then-uncommitted resilience changes. Publication does not retroactively change that recorded source identity.

@@ -56,7 +56,7 @@ def worker(args):
     try:
         for sig in (signal.SIGTERM, signal.SIGINT, signal.SIGHUP):
             old_handlers[sig] = signal.signal(sig, stop)
-        load_packet(args.packet)
+        blocks, _ = load_packet(args.packet)
         values = load_credentials(args.env_file)
         os.environ.update(values)
         phase = "campaign"
@@ -72,7 +72,7 @@ def worker(args):
             return 2
         phase = "offline_analysis"
         analysis = export_study(
-            {role: args.directory / "run" / role for role in ("controlled", "realistic", "language")},
+            {role: args.directory / "run" / role for role in blocks},
             args.directory / "analysis", project_root=Path(__file__).resolve().parents[1],
             figures=True, development=True,
         )

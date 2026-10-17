@@ -5,19 +5,22 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 ## Prepared and verified
 
 - [x] Both generation and minimum-disruption repair, direct and solver-assisted paths, independent validation and end-to-end evaluation are implemented.
-- [x] Both full 600-attempt comparisons are complete; all failed attempts remain scored and both archived analyses reproduce offline.
-- [x] Current report replaces the older 200-call results with two-model acceptance, SAT/UNSAT, difficulty, paired uncertainty, optimality, extraction, wording and resource analysis.
-- [x] Three grouped bar charts derive from the saved summary, with exact denominators and consistent scales.
+- [x] Both balanced 96-attempt and difficulty 200-attempt Qwen3.6/GLM campaigns, and the historical 600-attempt Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
+- [x] Current report leads with 48 balanced generation cases/model and distinguishes strict-format, reasoning and provider failures. The earlier difficulty-generation views, repair/fictional/wording extensions and historical reports remain preserved separately.
+- [x] Balanced charts derive from verified archives and exact observation IDs; previous generation/block/tier/resource figures remain unchanged. Four offline office examples demonstrate the supported scope separately from model results.
 - [x] Report covers formulation, design, related work, limitations, responsible AI, reproducibility and disclosed AI assistance.
-- [x] Two original replay archives are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
-- [x] Public report rendered and all eleven pages visually inspected: title page 1, nine body pages 2-10, references page 11. Text, mathematical subscripts and compact figure labels are at least 11 pt, with one-inch margins and a single column. The [format receipt](../results/summary/submission-report-format.json) binds this check to exact bytes.
+- [x] Six original replay archives are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
+- [x] Public report rebuilt and all pages visually checked after the balanced-results update: one title, nine body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The later private submission copy still needs its own check.
 
 The previous report and format check are historical. Every substantive revision, new figure or private-title edit requires an appropriate fresh render/check; do not reuse a previous page count for a changed document.
 
 ## Genuine actions still required before submission
 
-- [ ] Check actual proposal receipt/feedback and current Canvas arrangements; the proposal was mandatory for a project grade (Guidelines P37/P43).
-- [ ] Confirm the teaching team's interpretation of the hosted Qwen models against the frontier-model wording (Project p5 / Guidelines P25; SoCLaaS/open weights suggested in Project p6 / P33). No automatic approval or rejection is inferred.
+- [ ] Written TA feedback is received and addressed in [the alignment](ta-feedback-alignment.md). Verify its original Canvas record/receipt and current arrangements; confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
+- [ ] Confirm the teaching team's interpretation of the hosted Qwen and GLM models against the frontier-model wording (Project p5 / Guidelines P25; SoCLaaS/open weights suggested in Project p6 / P33). No automatic approval or rejection is inferred.
+- [x] Implement the separate D5 balanced generation dataset, independent proofs and matching Qwen3.6/GLM preparation; preserve the old results and limitation.
+- [x] Complete and preserve both authorized D5 campaigns: 96 attempts/model, no retries, all failures retained, exact GLM identity observed, separate reproducible analyses/archives.
+- [ ] Review the balanced public/gold pairs, certificates, strict-output contract and failure examples; record genuine findings and interpret the three-family/generalization limitation. Completed execution does not establish human review.
 - [ ] Members review the natural-language/gold meaning, reference assumptions and failure examples, and record actual findings in [contributions.md](contributions.md) and the [claim index](claim-evidence.md).
 - [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Replace the interim contribution paragraph only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
 - [ ] Add each member's name, matriculation number and email to the **private** submitted title page (P51); do not put private identifiers in public Git.
@@ -49,8 +52,12 @@ Discuss concrete unequal inconvenience, lexicographic objective trade-offs, priv
 The Markdown source is canonical. From the repository root, regenerate compact figures using the locked experiment environment:
 
 ```sh
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_benchmark_results.py \
-  --report --output docs/figures/submission
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py \
+  --report --output docs/figures/balanced-comparison-20261017
+
+# Retain separately labelled figures for the earlier difficulty study.
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_difficulty_results.py \
+  --report --output docs/figures/difficulty-comparison-20261014
 ```
 
 Report tooling is separate from the scheduling runtime:

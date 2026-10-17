@@ -1,6 +1,8 @@
-"""Execute one explicitly authorized 600-attempt SoCLaaS development campaign."""
+"""Execute one explicitly authorized, versioned SoCLaaS development campaign."""
 
 import argparse
+from collections import Counter
+from dataclasses import replace
 import json
 from pathlib import Path
 
@@ -13,6 +15,8 @@ from scheduling.evaluation.runner import (
     DEVELOPMENT_QUALIFICATION_POLICIES, STRICT_QUALIFICATION_POLICY, plan_run, read,
 )
 from scheduling.evaluation.scoring import digest
+from scheduling.evaluation.difficulty_suite import CAMPAIGN_POLICY, CALLS, check_design, select_language
+from scheduling.evaluation import balanced_generation
 from scheduling.providers import ModelConfig
 from scheduling.schema import to_data
 from scheduling.solver import SolverLimits
@@ -25,17 +29,23 @@ def load_packet(packet):
     packet = Path(packet)
     manifest = read(packet / "campaign.json")
     model = manifest.get("model")
-    if (manifest.get("policy_version") != "development-campaign-2"
+    compact = manifest.get("policy_version") == CAMPAIGN_POLICY
+    balanced = manifest.get("policy_version") == balanced_generation.CAMPAIGN_POLICY
+    expected_calls = balanced_generation.CALLS if balanced else CALLS if compact else EXPECTED_CALLS
+    roles = tuple(expected_calls)
+    if (manifest.get("policy_version") not in ("development-campaign-2", CAMPAIGN_POLICY, balanced_generation.CAMPAIGN_POLICY)
             or manifest.get("evidence") != "development_only"
             or not isinstance(model, str) or not model or model == "default"
             or any(c.isspace() for c in model)):
         raise ValueError("Unsupported development campaign packet")
+    if set(manifest.get("blocks", {})) != set(roles) or set(manifest.get("configs", {})) != set(roles):
+        raise ValueError("Campaign block roles changed")
     expected_model = ModelConfig(model, 32768, connect_timeout=30, read_timeout=1800)
     policy = manifest.get("qualification_policy", STRICT_QUALIFICATION_POLICY)
     if policy not in DEVELOPMENT_QUALIFICATION_POLICIES:
         raise ValueError("Unsupported development qualification policy")
     blocks = {}
-    for role in ROLES:
+    for role in roles:
         cases = load_cases(packet / f"{role}-cases.json")
         cfg = load_config(packet / f"{role}-config.json")
         variants = ("paraphrase", "reordered") if role == "language" else ("canonical",)
@@ -49,8 +59,8 @@ def load_packet(packet):
             or cfg.model != expected_model
             or cfg.solver != SolverLimits(30) or cfg.reference_solver != SolverLimits(60)
             or cfg.rendering_seed != 3263
-            or cfg.max_requests != EXPECTED_CALLS[role]
-            or cfg.max_requested_output_tokens != EXPECTED_CALLS[role] * 32768
+            or cfg.max_requests != expected_calls[role]
+            or cfg.max_requested_output_tokens != expected_calls[role] * 32768
             or cfg.variants != variants or cfg.repeats != 1
             or any(c.split != "development" or c.kind != ("realistic" if role == "realistic" else "controlled") for c in cases)
         ):
@@ -58,12 +68,49 @@ def load_packet(packet):
         current = plan_run(cases, cfg)
         prepared = read(packet / f"{role}-preflight.json")
         if (current["contract"] != prepared.get("contract") or current["state"] != "ready"
-                or not current["within_cap"] or current["planned_requests"] != EXPECTED_CALLS[role]):
+                or not current["within_cap"] or current["planned_requests"] != expected_calls[role]):
             raise ValueError("Campaign preflight changed; prepare a new packet")
         blocks[role] = (cases, cfg, current)
+    if balanced:
+        source = read(packet / "dataset-manifest.json")
+        original = load_cases(packet / "dataset-cases.json")
+        proofs = read(packet / "dataset-proofs.json")
+        balanced_generation.validate_manifest(original, proofs, source)
+        families = structural_audit(original)["family_for_group"]
+        normalized = tuple(replace(c, group_id=families[c.group_id]) for c in original)
+        expected_details = {
+            "case_count": len(normalized), "case_bundle_sha256": digest(case_bundle(normalized)),
+            "case_ids": [c.case_id for c in normalized],
+            "source_families": len({c.group_id for c in normalized}),
+            "task_label_counts": dict(Counter(f"generation/{c.expected_label}" for c in normalized)),
+            "planned_requests": 96, "variants": ["canonical"],
+        }
+        if (model not in balanced_generation.MODELS
+                or digest(source) != manifest.get("dataset_manifest_sha256")
+                or manifest.get("family_mapping") != families
+                or manifest["blocks"]["controlled"] != expected_details
+                or blocks["controlled"][0] != normalized
+                or manifest.get("planned_scheduling_completions") != 96
+                or manifest.get("total_requests") != 99
+                or manifest.get("capability_completions") != 2
+                or manifest.get("metadata_requests") != 1
+                or manifest.get("requested_output_tokens") != 98 * 32768):
+            raise ValueError("Balanced campaign dataset/proofs/budget changed")
+        balanced_generation.verify_suite(normalized, proofs)
+        return blocks, manifest
     controlled = {c.case_id: c for c in blocks["controlled"][0]}
     if any(c.case_id not in controlled or digest(c) != digest(controlled[c.case_id]) for c in blocks["language"][0]):
         raise ValueError("Language block must retain exact controlled partners")
+    if compact:
+        check_design(blocks["controlled"][0], blocks["realistic"][0])
+        if blocks["language"][0] != select_language(blocks["controlled"][0]):
+            raise ValueError("Difficulty language selection changed")
+        if (manifest.get("planned_scheduling_completions") != 200
+                or manifest.get("total_requests") != 203
+                or manifest.get("capability_completions") != 2
+                or manifest.get("metadata_requests") != 1
+                or manifest.get("requested_output_tokens") != 202 * 32768):
+            raise ValueError("Difficulty campaign budget metadata changed")
     families = structural_audit(blocks["controlled"][0] + blocks["realistic"][0])["family_for_group"]
     if any(group != family for group, family in families.items()):
         raise ValueError("Campaign source families must be normalized together")

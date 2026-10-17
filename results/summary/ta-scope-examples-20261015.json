@@ -1,0 +1,1062 @@
+{
+  "evidence_class": "offline illustrative qualification; no LLM evaluation",
+  "examples": [
+    {
+      "gold_valid": true,
+      "id": "office-loose",
+      "objective": {
+        "moved_count": null,
+        "preference_penalty": 0,
+        "total_shift_slots": null
+      },
+      "schedule": {
+        "A1": 12,
+        "A2": 6,
+        "A3": 10,
+        "B1": 6,
+        "B2": 10,
+        "M1": 2,
+        "M2": 0,
+        "M3": 4
+      },
+      "specification": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M1",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M2",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M3",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A1",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "A2",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A3",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "B1",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B2",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "M1",
+            "id": "appointment",
+            "slot": 2,
+            "type": "fixed_start"
+          },
+          {
+            "activity_id": "M1",
+            "id": "end-M1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "id": "end-M2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M3",
+            "id": "end-M3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A1",
+            "id": "end-A1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A2",
+            "id": "end-A2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A3",
+            "id": "end-A3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B1",
+            "id": "end-B1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B2",
+            "id": "end-B2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "end": 6,
+            "id": "morning-M2",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "M3",
+            "end": 6,
+            "id": "morning-M3",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          }
+        ],
+        "horizon_slots": 16,
+        "horizon_start": "2026-10-26T09:00:00+08:00",
+        "instance_id": "office-loose",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Alice"
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Bob"
+          }
+        ],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Room"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "status": "OPTIMAL"
+    },
+    {
+      "gold_valid": true,
+      "id": "office-tight",
+      "objective": {
+        "moved_count": null,
+        "preference_penalty": 1,
+        "total_shift_slots": null
+      },
+      "schedule": {
+        "A1": 12,
+        "A2": 8,
+        "A3": 0,
+        "B1": 8,
+        "B2": 0,
+        "M1": 2,
+        "M2": 4,
+        "M3": 6
+      },
+      "specification": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M1",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 8,
+                "start": 4
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M2",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 8,
+                "start": 4
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M3",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A1",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "A2",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A3",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "B1",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B2",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "M1",
+            "id": "appointment",
+            "slot": 2,
+            "type": "fixed_start"
+          },
+          {
+            "activity_id": "M1",
+            "id": "end-M1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "id": "end-M2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M3",
+            "id": "end-M3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A1",
+            "id": "end-A1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A2",
+            "id": "end-A2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A3",
+            "id": "end-A3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B1",
+            "id": "end-B1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B2",
+            "id": "end-B2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "end": 6,
+            "id": "morning-M2",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "M3",
+            "end": 6,
+            "id": "morning-M3",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          }
+        ],
+        "horizon_slots": 16,
+        "horizon_start": "2026-10-26T09:00:00+08:00",
+        "instance_id": "office-tight",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Alice"
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Bob"
+          }
+        ],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Room"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "status": "OPTIMAL"
+    },
+    {
+      "gold_valid": null,
+      "id": "office-impossible",
+      "objective": null,
+      "schedule": null,
+      "specification": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M1",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 6,
+                "start": 4
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M2",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 6,
+                "start": 4
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M3",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A1",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "A2",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A3",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "B1",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B2",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "M1",
+            "id": "appointment",
+            "slot": 2,
+            "type": "fixed_start"
+          },
+          {
+            "activity_id": "M1",
+            "id": "end-M1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "id": "end-M2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M3",
+            "id": "end-M3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A1",
+            "id": "end-A1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A2",
+            "id": "end-A2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A3",
+            "id": "end-A3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B1",
+            "id": "end-B1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B2",
+            "id": "end-B2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "end": 6,
+            "id": "morning-M2",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "M3",
+            "end": 6,
+            "id": "morning-M3",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          }
+        ],
+        "horizon_slots": 16,
+        "horizon_start": "2026-10-26T09:00:00+08:00",
+        "instance_id": "office-impossible",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Alice"
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Bob"
+          }
+        ],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Room"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "status": "INFEASIBLE"
+    },
+    {
+      "gold_valid": true,
+      "id": "office-repair",
+      "objective": {
+        "moved_count": 1,
+        "preference_penalty": 1,
+        "total_shift_slots": 2
+      },
+      "schedule": {
+        "A1": 0,
+        "A2": 8,
+        "A3": 14,
+        "B1": 8,
+        "B2": 12,
+        "M1": 2,
+        "M2": 4,
+        "M3": 6
+      },
+      "specification": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M1",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M2",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "M3",
+            "participant_ids": [
+              "Alice",
+              "Bob"
+            ],
+            "resource_ids": [
+              "Room"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A1",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "A2",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A3",
+            "participant_ids": [
+              "Alice"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 4,
+            "id": "B1",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "duration_slots": 2,
+            "id": "B2",
+            "participant_ids": [
+              "Bob"
+            ],
+            "resource_ids": []
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "M1",
+            "id": "appointment",
+            "slot": 2,
+            "type": "fixed_start"
+          },
+          {
+            "activity_id": "M1",
+            "id": "end-M1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "id": "end-M2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M3",
+            "id": "end-M3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A1",
+            "id": "end-A1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A2",
+            "id": "end-A2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "A3",
+            "id": "end-A3",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B1",
+            "id": "end-B1",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "B2",
+            "id": "end-B2",
+            "slot": 16,
+            "type": "deadline"
+          },
+          {
+            "activity_id": "M2",
+            "end": 6,
+            "id": "morning-M2",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "M3",
+            "end": 6,
+            "id": "morning-M3",
+            "start": 0,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "end": 14,
+            "id": "change",
+            "start": 12,
+            "target_id": "Alice",
+            "target_kind": "participant",
+            "type": "blocked"
+          }
+        ],
+        "horizon_slots": 16,
+        "horizon_start": "2026-10-26T09:00:00+08:00",
+        "instance_id": "office-repair",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Alice"
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Bob"
+          }
+        ],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "Room"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "repair",
+        "timezone": "+08:00"
+      },
+      "status": "OPTIMAL"
+    }
+  ],
+  "format_version": "1.0",
+  "independent_checks": {
+    "only_A3_repair_start_with_others_fixed": [
+      14
+    ],
+    "original_and_tight_witnesses_valid": true,
+    "repair_forced_moved_lower_bound": 1,
+    "unsat_room_capacity_slots": 2,
+    "unsat_room_workload_slots": 4
+  },
+  "new_model_calls": 0,
+  "original_schedule": {
+    "A1": 0,
+    "A2": 8,
+    "A3": 12,
+    "B1": 8,
+    "B2": 12,
+    "M1": 2,
+    "M2": 4,
+    "M3": 6
+  },
+  "repair_summary": {
+    "changed_activities": [
+      "A3"
+    ],
+    "changed_activity_occupancy_cells": 4,
+    "moved_count": 1,
+    "note": "Two start-shift slots differ from four changed occupancy cells (two vacated plus two occupied). Bob's B2 remains at 15:00 while Alice's A3 moves to 16:00.",
+    "total_shift_minutes": 60,
+    "total_shift_slots": 2,
+    "unchanged_activities": [
+      "A1",
+      "A2",
+      "B1",
+      "B2",
+      "M1",
+      "M2",
+      "M3"
+    ]
+  },
+  "scope": "One Monday 09:00-17:00, two participants, one room, eight activities lasting 1-2 hours. Not a five-day/hourly implementation.",
+  "slot_minutes": 30
+}

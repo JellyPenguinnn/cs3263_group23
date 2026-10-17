@@ -19,7 +19,7 @@ prepare = load_script("prepare_development_campaign")
 execute = load_script("run_development_campaign")
 
 
-@pytest.fixture(scope="module", params=("qwen3.8:27b", "qwen3.6:35b"))
+@pytest.fixture(scope="module", params=("qwen3.8:27b", "qwen3.6:35b", "x-test-1"))
 def campaign_packet(tmp_path_factory, request):
     directory = tmp_path_factory.mktemp("campaign-packet")
     # Reuse existing inspected development generators; no fresh held-out families.
@@ -58,8 +58,12 @@ def mock_factory(packet, change=None):
         fp = "different" if change == "realistic_drift" and index == 482 else "stable"
         if change == "mixed_backends":
             fp = ("backend-a", "backend-b", None)[index % 3]
+        returned_model = "glm-5.3-flash" if model == "x-test-1" else model
+        if change == "model_drift" and index == 3:
+            returned_model, fp = "qwen3.8:27b", "different-backend"
         return httpx.Response(200, json={
-            "model": model, "system_fingerprint": fp,
+            "model": returned_model,
+            "system_fingerprint": fp,
             "choices": [{"message": {"content": content}, "finish_reason": "stop"}],
             "usage": {"prompt_tokens": 2, "completion_tokens": 3, "total_tokens": 5},
         })
@@ -191,6 +195,38 @@ def test_explicit_observation_campaign_completes_all_blocks_and_records_variatio
         cfg = load_config(directory / f"{role}-runtime-config.json")
         assert cfg.qualification_baseline["system_fingerprints"] == ["backend-a", "backend-b"]
         assert replay(directory / role)[1]["completed"] == expected
+
+
+@pytest.mark.parametrize("campaign_packet", ["x-test-1"], indirect=True)
+def test_alias_model_drift_stops_despite_backend_observation(campaign_packet, tmp_path):
+    from scheduling.evaluation.runner import run_batch
+
+    packet = tmp_path / "observed-packet"
+    prepare.prepare(campaign_packet / "controlled-cases.json",
+                    campaign_packet / "realistic-cases.json", packet, model="x-test-1",
+                    qualification_policy=OBSERVE_BACKEND_POLICY)
+    factory, calls, budgets = mock_factory(packet, "model_drift")
+    directory = tmp_path / "campaign"
+    result = invoke(packet, directory, factory)
+    assert result["state"] == "stopped_campaign"
+    assert result["stop_reason"] == "returned_model_mismatch"
+    assert result["requests_reserved"] == len(calls) == budgets[0].requests_used == 5
+    assert result["blocks"]["controlled"]["completed"] == 2
+    assert not (directory / "realistic").exists()
+    assert not (directory / "language").exists()
+
+    records = [read(p) for p in (directory / "controlled/attempts").glob("*.json")]
+    assert all(r["state"] == "completed" for r in records)
+    responses = [r["payload"]["pipeline_result"]["model_response"] for r in records]
+    assert {r["returned_model"] for r in responses} == {"glm-5.3-flash", "qwen3.8:27b"}
+    assert all(r["attempts"][0]["execution"]["contract"]["configured_body"]["model"]
+               == "x-test-1" for r in responses)
+    resumed = run_batch(
+        load_cases(directory / "controlled/cases.json"), directory / "controlled",
+        load_config(directory / "controlled-runtime-config.json"),
+        provider_complete=lambda *_: pytest.fail("A saved identity failure must not issue another call"),
+    )
+    assert resumed["stop_reason"] == "returned_model_mismatch"
 
 
 @pytest.mark.parametrize("change", ["config", "cases", "preflight", "model", "retries"])
