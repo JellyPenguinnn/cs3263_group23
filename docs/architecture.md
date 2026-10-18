@@ -51,4 +51,4 @@ Independent workers, heartbeats and OS locks distinguish active execution from s
 
 The [repository audit](repository-audit.md) records detailed source review, regression coverage and installed end-to-end checks. The scientific runtime uses `requirements.lock`; report tooling uses the separate `requirements-docs.txt`. Reinstall after source changes before checking the noneditable package. Future campaigns require newly prepared source-bound packets; old results retain their archived implementation and configuration.
 
-Weekly scheduling, participant allocation, dynamic tool selection, feedback correction and live calendar integration are outside the implemented scope. Human interpretation, factual contributions and course-model/scope clarification are tracked in the [submission checklist](submission-checklist.md). Automated tests do not establish those human actions or teaching-team approval.
+Weekly scheduling, participant allocation, dynamic tool selection, feedback correction and live calendar integration are outside the implemented scope. The [submission checklist](submission-checklist.md) covers human review and course delivery.

@@ -8,7 +8,7 @@ The core task is **schedule generation**: find activity start times that respect
 
 The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
 
-**Status:** the implementation, replayable results and scientific report draft are prepared for substantive member review. Final submission still requires factual contribution accounts, human case/result review, scope/model clarification, the final private report and presentation/upload checks. The [submission checklist](docs/submission-checklist.md) tracks these tasks. Evaluation uses known synthetic/AI-assisted development cases, not a held-out real-calendar benchmark.
+The [submission checklist](docs/submission-checklist.md) tracks the remaining review and course-delivery tasks.
 
 [Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md)
 
@@ -80,7 +80,7 @@ Qwen direct produces only **1/500 valid feasible schedules**, versus 467/500 wit
 
 Infrastructure accounts for **51 Qwen failures and 68 GLM failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
 
-The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. Human prose/gold review and course model clarification remain pending.
+The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. The prose-to-gold mapping has automated validation; independent human semantic assessment is not included in the reported evidence.
 
 The [48-case balanced study](docs/studies/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/studies/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/studies/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
 

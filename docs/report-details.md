@@ -1,6 +1,6 @@
 # Resource distributions and worked-case evidence
 
-This supplement accompanies the compact report. It preserves operational detail without making OS versions or request concurrency the research focus. All values derive offline from immutable recorded attempts; no model calls or scores change.
+This supplement provides resource distributions, complete worked examples and reproduction instructions for the report. All values derive from the preserved attempt records.
 
 ## Definitions and reproduction
 
@@ -162,7 +162,7 @@ MPLCONFIGDIR=.cache/matplotlib .venv-docs/bin/python scripts/render_worked_timet
 .venv-docs/bin/python scripts/check_report.py --pdf runs/report-review/submission-report.pdf --receipt runs/report-review/format.json
 ```
 
-The report build embeds the existing reviewed assets; freshly reproduced comparison figures and timetables above are for verification. Replacing a published asset is a separate reviewed edit. Inspect all rendered pages; source/text bounds checks alone do not establish visual quality. Private title copies use `--source docs/private/submission-report.md` and output/receipt paths inside ignored `docs/private/`.
+The report build embeds the reviewed assets. The current timetable is in `docs/figures/report-timetable-20261018/`, with PNG, vector PDF/SVG and a source/renderer/data receipt; its earlier rendering remains preserved. Freshly reproduced comparison figures and timetables above are for verification. Replacing a published asset is a separate reviewed edit. Inspect all rendered pages; source/text bounds checks alone do not establish visual quality. Private title copies use `--source docs/private/submission-report.md` and output/receipt paths inside ignored `docs/private/`.
 
 The architecture source is `docs/figures/report-compact-20261018/architecture.mmd`, also included in the report's Mermaid fence. Keep the two sources identical. An intentional architecture edit uses Mermaid CLI 11.12.0 in a separate Node document-tool environment: `python3 scripts/render_report_mermaid.py --mmdc /path/to/mmdc --puppeteer-config /path/to/chrome-config.json`. That command updates the architecture asset/receipt in place and therefore requires a reviewed diff and fresh report checks. Normal report builds reuse the committed vector asset and need no browser. No document command calls the model provider.
 
@@ -170,7 +170,7 @@ The architecture source is `docs/figures/report-compact-20261018/architecture.mm
 
 Use this worked example as a first exercise, then check contrasting SAT/UNSAT cases and an extraction failure from the claim index. Each member should read the natural-language input before consulting gold, independently list the durations, windows, shared entities, hard constraints and preferences, and compare that interpretation with the formal specification. On the timetable, check complete-window containment, resource/participant non-overlap, precedence and the penalty calculation. For rejected answers, identify the exact violated rule or missing/invented constraint rather than merely repeating the validator label. Review why the selected example does not establish a frequency, and why infrastructure failures cannot be presented as reasoning errors.
 
-Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations. AI-generated instructions and automated validation do not complete this human review. See the [submission checklist](submission-checklist.md) for the remaining course-delivery gates.
+Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations. See the [submission checklist](submission-checklist.md) for the remaining submission tasks.
 
 ## Example trace index
 
@@ -183,13 +183,13 @@ The main report uses descriptive example names to keep the scientific explanatio
 | Dropped constraints — GLM B | `dg-93645cd68c645d31d613fa2b` | Saved extraction and evaluation in the [diverse comparison audit](diverse-comparison-audit.md) and immutable GLM archive |
 | Valid but suboptimal schedule — GLM A | `dg-a7542bcaf35f7024ab973f3c` | Preference penalty 33 versus proven optimum 30; [diverse comparison audit](diverse-comparison-audit.md) and immutable GLM archive |
 
-Detailed extraction examples, retained from the preceding main-report text:
+The extraction errors are detailed below:
 
 In Qwen B case `dg-901f5127b3f63880cc499f19`, extraction invents eight deadlines. A1 must run for two slots inside [4,6), but the invented deadline requires completion by 4. The resulting empty domain makes the extracted specification infeasible even though the original is feasible. In GLM B case `dg-93645cd68c645d31d613fa2b`, extraction drops an A2 deadline and the A29-before-A10 relation. CP-SAT then places A29 at 4 for two slots and A10 at 4, violating the omitted precedence. These failures demonstrate the distinction between correct solving and faithful formalization.
 
 ## Detailed formulation and original scope notes
 
-The following preserves the full repair-extension formulation and scope notes moved out of the main narrative. The measured primary comparison is generation.
+The following defines the repair extension in detail. The primary comparison evaluates generation.
 
 ### Generation model and repair extension
 

@@ -1,0 +1,113 @@
+{
+  "blocks": [
+    {
+      "activity": "A1",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 7
+    },
+    {
+      "activity": "A1",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 7
+    },
+    {
+      "activity": "A2",
+      "duration_slots": 2,
+      "entity": "P2",
+      "start_slot": 8
+    },
+    {
+      "activity": "A2",
+      "duration_slots": 2,
+      "entity": "R1",
+      "start_slot": 8
+    },
+    {
+      "activity": "A3",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 1
+    },
+    {
+      "activity": "A3",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 1
+    },
+    {
+      "activity": "A4",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 2
+    },
+    {
+      "activity": "A4",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 2
+    },
+    {
+      "activity": "A5",
+      "duration_slots": 1,
+      "entity": "P2",
+      "start_slot": 3
+    },
+    {
+      "activity": "A5",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 3
+    },
+    {
+      "activity": "A6",
+      "duration_slots": 2,
+      "entity": "P1",
+      "start_slot": 4
+    },
+    {
+      "activity": "A6",
+      "duration_slots": 2,
+      "entity": "R1",
+      "start_slot": 4
+    },
+    {
+      "activity": "A7",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 6
+    },
+    {
+      "activity": "A7",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 6
+    },
+    {
+      "activity": "A8",
+      "duration_slots": 1,
+      "entity": "P2",
+      "start_slot": 0
+    },
+    {
+      "activity": "A8",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 0
+    }
+  ],
+  "case_id": "dg-3fd5174321284caacab1f4a9",
+  "exports": {
+    "worked-timetable.pdf": "3f5d7d14c09128f63279af730358dddf4a25c239f1aab55c5b3472685e47d279",
+    "worked-timetable.png": "8db829de11dadf1441bce9093928dd554ae1c27c785a64cb8001af0c403b689d",
+    "worked-timetable.svg": "0dee29554fad0b3ce0a746135dc7c652a8225abada0275778ce1e4121549c0b1"
+  },
+  "figure_sha256": "8db829de11dadf1441bce9093928dd554ae1c27c785a64cb8001af0c403b689d",
+  "font_size_pt_at_native_width": 11,
+  "native_width_inches": 6.2,
+  "new_model_calls": 0,
+  "recorded_schedules_equal": true,
+  "renderer_sha256": "2e67980a591238c83800a1bdbeed4147876fbc763aa397026c0e9ebcaed9c236",
+  "source_sha256": "2ba3b60f9a1674a6b8c3365007fc44b197aa3dda43bd59f1435f08d53eb27b63"
+}

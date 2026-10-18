@@ -12,7 +12,7 @@ Start with the report and use the supporting documents only as needed. The curre
 | [Usage](usage.md) | Installation-related operations, offline demonstrations, replay and dashboard commands |
 | [Evidence and replay](evidence.md) | Immutable archives, checksums and exact-source reproduction |
 | [Claim-to-evidence index](claim-evidence.md) | Links between report claims and saved observations |
-| [Submission checklist](submission-checklist.md) | Remaining human review, contribution accounts, model/scope clarification and delivery |
+| [Submission checklist](submission-checklist.md) | Remaining human review, contribution accounts, scope clarification and delivery |
 | [Division of work](contributions.md) | Responsibilities of each member and shared work |
 | [TA-feedback alignment](ta-feedback-alignment.md) | Generation-first scope, implemented feedback and explicit simplifications |
 | [Repository audit](repository-audit.md) | Detailed implementation/path review and regression results |
@@ -26,4 +26,4 @@ Start with the report and use the supporting documents only as needed. The curre
 - [`history/`](history/README.md): superseded reports, plans and development handoffs. Read only for historical context; their pending statements and instructions are not current.
 - `private/`: ignored local submission copies containing private identity details; not part of the public repository.
 
-Root-level `AGENTS.md` and `planning.md` have been retired. The architecture reference and submission checklist retain the useful technical context and remaining delivery work. Earlier source snapshots and immutable evidence retain their original filenames and paths.
+Earlier source snapshots and immutable evidence retain their original filenames and paths.

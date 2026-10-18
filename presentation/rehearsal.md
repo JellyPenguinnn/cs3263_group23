@@ -1,6 +1,6 @@
 # Fifteen-minute presentation — working rehearsal guide
 
-Use the [current report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [demonstration guide](README.md). This AI-assisted storyboard is preparation, not a finished deck or evidence of a human rehearsal. Lead with the completed 4,000-attempt diverse generation comparison. Earlier balanced, difficulty and historical studies remain separate development evidence. Every member should understand both methods and their limitations.
+Use the [current report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [demonstration guide](README.md). This AI-assisted guide proposes a nine-slide structure and questions for rehearsal. Lead with the completed 4,000-attempt diverse generation comparison. Earlier balanced, difficulty and historical studies remain separate development evidence. Every member should understand both methods and their limitations.
 
 ## Suggested storyboard
 
@@ -28,11 +28,11 @@ Use at most one short saved-record demonstration; static annotated results are s
 - There are ten related construction families and 200 cases per activity-count stratum (8, 12, 16, 24, 32). Distinct fingerprints are not independent samples or proof of extreme computational hardness. The 24 optional reordered conditions were not executed.
 - Token statistics exclude missing usage; time statistics retain failures. OS/concurrency and hosted-service conditions varied; no fully matched cross-model timing subset exists.
 - Earlier studies remain separate: 48 balanced cases/96 attempts per model; difficulty 200 attempts/model; historical Qwen 600 attempts/model. Do not pool their denominators or transfer wording-robustness conclusions to the current dataset.
-- The office demo is offline illustration. Implemented single-day/30-minute semantics differ from the TA's suggested weekly/hourly scenario; scope/model clarification remains open.
+- The office demo is offline illustration. Implemented single-day/30-minute semantics differ from the TA's suggested weekly/hourly scenario; scope clarification remains open.
 
 ## Q&A preparation
 
-These are evidence boundaries to explain in your own words, not a record of completed rehearsal.
+Use the following questions to check each member’s understanding.
 
 | Question | Answer boundary |
 | --- | --- |
@@ -45,8 +45,8 @@ These are evidence boundaries to explain in your own words, not a record of comp
 | When might direct reasoning be useful? | GLM constructs 404 valid schedules directly and can propose schedules when no compatible solver/schema is available. Answers still need validation; no universal speed advantage follows from these runs. |
 | Why sequential repair objectives? | Fixing each proven optimum preserves priority; a weighted sum may trade it away. UNKNOWN is not UNSAT, and FEASIBLE is not OPTIMAL. Repair is a separately evaluated extension. |
 | How is responsible AI addressed? | Explain privacy, unequal inconvenience, objective choices, ambiguity and user control. Formal validity does not establish fairness or live adversarial robustness. |
-| Are the models and scope course-approved? | Actual teaching feedback must resolve the hosted-model interpretation and scope differences. Neither approval nor rejection follows from API access. |
+| Are the models and scope course-approved? | The TA accepts Qwen/GLM, as reported in the team’s consultation follow-up. The single-day calendar and preferred-start-only objective remain separate scope clarifications. |
 
-## Human rehearsal record — pending
+## Rehearsal record
 
-Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. Members must verify their own contributions and understand every part, including AI-supported work. Follow [remaining submission tasks](../docs/submission-checklist.md#genuine-actions-still-required-before-submission) and the [submission checklist](../docs/submission-checklist.md).
+Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. Members must verify their own contributions and understand every part, including AI-supported work. Follow [remaining submission tasks](../docs/submission-checklist.md#remaining-submission-tasks).

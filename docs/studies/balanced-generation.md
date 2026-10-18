@@ -41,7 +41,7 @@ The immutable prepared version is under [`benchmarks/fixtures/balanced-generatio
 | `cases.json` | Versioned formal cases, witnesses and canonical/reordered public requests |
 | `proofs.json` | Input-bound feasibility certificates and operative-constraint counterexamples |
 | `manifest.json` | Generator and content hashes, balance, groups, scope, proposed model settings and limitations |
-| `review.json` | Evaluator-only public-text/gold/proof pairs with genuine human review fields left pending |
+| `review.json` | Evaluator-only public-text/gold/proof pairs; human review fields are unfilled |
 
 Do not send `review.json`, proof records or gold specifications to either measured model. Member review should check every public request against its gold facts, review the feasibility arguments and preference interpretation, and record actual findings. A revised dataset belongs in a new directory/version and requires fresh packets.
 

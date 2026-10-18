@@ -220,38 +220,8 @@ and output checksums. The [controlled PDF](../../results/figures/two-model-devel
 and [wording PDF](../../results/figures/two-model-development-20261002/language-accepted.pdf)
 can be placed into the report or presentation without raster enlargement.
 
-## Course, proposal and remaining delivery
+## Course and proposal context
 
-Original references are the supplied *Project.pdf*, *CS3263-Project-Guidelines
-2627.docx*, *ResponsibleAI.pptx* and Group 23 proposal. DOCX paragraph numbers refer
-to the original extraction used by the existing submission checklist.
+The supplied *Project.pdf*, *CS3263 Project Guidelines AY2026/27*, *ResponsibleAI.pptx* and Group 23 proposal motivate the CSP/COP formulation, direct-versus-tool comparison, constructed instances, failure analysis and responsible-AI discussion. This historical Qwen study includes generation, minimum-disruption repair and wording tests. Its results remain separate from the current generation study.
 
-| Authority | Verified fit and remaining work |
-| --- | --- |
-| Course topic: Project p5 / Guidelines P25 | Formal scheduling CSP/COP and direct-versus-translation/solver comparison fit. Constructed or downloaded instances are explicitly allowed. The frontier-model wording remains an unresolved eligibility interpretation for these hosted Qwen aliases |
-| SoCLaaS option: Project p6 / Guidelines P33 | Open-weight SoC models are suggested. This neither bans SoCLaaS nor explicitly resolves every hosted model's frontier eligibility; ask the teaching team if existing feedback does not resolve it |
-| Proposal p2 | Both generation and minimum-disruption repair, difficulty variation, realistic scenarios, wording, formalization/quality metrics and resources are covered. UI and verifier feedback are optional; no new solver/product feature is required merely to finish |
-| Rubric: Guidelines P84 | Develop analysis of why methods differ, the strong-model ceiling, conditional optimality, extraction mistakes, operational failures, generator assumptions and realism. A higher score or predetermined B win is not the rubric |
-| Responsible AI: Project p7 / Guidelines P35, P62 | Existing report discussion addresses privacy, unequal disruption, explanation limits, objective trade-offs and user control. Fixed assignments do not establish fair workload allocation; human interpretation and bounded claims still need review |
-| Human contribution: Guidelines P56–60, P87–88 | All members must understand the whole project and accurately describe their work, consulted sources and AI assistance. Existing contribution and claim-review records remain pending; an agent cannot supply these sign-offs |
-| Report: Guidelines P49/P92 | The [current report](../submission-report.md) incorporates both models and a fresh render audit; member revision and the private final copy still require review: at most ten single-column, single-spaced body pages, at least 11-point font and one-inch margins; title/references excluded |
-| Presentation: Guidelines P47 | Produce the actual deck/recording and rehearse 15 minutes plus 5 minutes Q&A. `presentation/rehearsal.md` is a storyboard, not a completed presentation |
-| Course delivery: Project p8 / Guidelines P11–14, P37 | Verify actual proposal receipt/feedback and Canvas arrangements; presentation is in the week of 9 November, report due 13 November. October 18/30 are team targets |
-
-The course does **not** prescribe 600 calls, an external benchmark, a fresh
-holdout, exclusively human-written realistic prose, a pinned backend, a commercial
-API, a third model or a minimum accuracy. The team's present frozen-study plan is
-stricter. Two legitimate next decisions are:
-
-1. Retain that plan and complete its fresh-data, review, eligibility and freeze
-   prerequisites before a separately authorized final study.
-2. Explicitly revise the planned scope to an exploratory report using these
-   completed comparisons, if consistent with teaching-team feedback/model
-   eligibility. Review the data and findings now, keep their development origin
-   and post-run review dates honest, and finish the report/presentation.
-
-This audit does not make that scientific scope decision for the team or silently
-retag a run as held out. It establishes that existing results are usable and
-there is no reason to repeat them just because the stronger direct model did well.
-The [submission checklist](../submission-checklist.md), actual member review and
-final artifact checks still govern a submission-ready claim; no grade is promised.
+The course requires analysis of assumptions, representation, practical limitations and observed outcomes; it does not prescribe a particular sample count or a solver advantage. The current report and remaining scope clarifications are documented in the [TA-feedback alignment](../ta-feedback-alignment.md) and [submission checklist](../submission-checklist.md). These replace the earlier fresh-study planning while preserving this study’s development provenance and scores.

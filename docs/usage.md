@@ -52,11 +52,7 @@ Explanations distinguish the extracted problem's proof from gold acceptance and 
 
 ## SoCLaaS and bounded live runs
 
-SoCLaaS is the implemented provider for all completed comparisons. Confirm the
-selected model's course eligibility and the team's final-study decision before any
-additional experiment. A different provider needs explicit authorization and a
-qualified adapter; neither a commercial API nor a third model is an automatic
-course requirement. No additional-provider adapter is currently implemented.
+SoCLaaS supplies the models used in all completed comparisons. Other providers require a qualified adapter. Agree the model, protocol and budget before starting a new experiment; completed campaigns retain their original settings and request records.
 
 ```sh
 [ -e .env ] || cp .env.example .env
@@ -72,7 +68,7 @@ set -a
 set +a
 ```
 
-The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. Live configuration selects an explicit model; `default` is only a bootstrap alias. Verify current availability/capabilities and agree the request/token budget before each new run or session. **Previous pilot allowances are consumed.** A saved configuration or key grants no new spending permission. TLS certificate and hostname verification remain enabled. Current requests explicitly configure the model and output limit but leave sampling/reasoning controls to server defaults. Qualification must record those defaults or add verified options; do not assume temperature zero, JSON mode or an arbitrary compatible endpoint is supported.
+The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. Live configuration selects an explicit model; `default` is only a bootstrap alias. Verify current availability/capabilities and agree the request/token budget before each new run or session. Completed campaign budgets do not carry over to new runs. TLS certificate and hostname verification remain enabled. Current requests explicitly configure the model and output limit but leave sampling/reasoning controls to server defaults. Qualification must record those defaults or add verified options; do not assume temperature zero, JSON mode or an arbitrary compatible endpoint is supported.
 
 ### Model identity and campaign history
 
@@ -133,6 +129,6 @@ Campaign policy `development-campaign-2` selects `provider_failure_policy: conti
 
 Exact model checks span both capability responses and every block. The explicitly authorized `strict_model_observe_backend_v1` policy records backend variation, including missing metadata, without stopping. Capability hashes and all capability fingerprints are embedded in each runtime configuration; analysis reports backend coverage and descriptive outcome/pair breakdowns. These are shared-service development results, not a pinned-backend or causal comparison across backend versions. Authentication/permission/quota errors, TLS failures, malformed provider envelopes, missing/wrong returned models, capability failures and exhausted budgets still stop dispatch. The default `strict_model_backend_v1` policy and frozen evaluation continue to reject fingerprint changes. Old packets retain their original behavior and cannot run under changed source/settings; prepare a new packet and use a new authorized run ID. Completed timeout records are not reissued on block resume. Pending/interrupted reservations still require reconciliation, and the whole-campaign directory remains write-once.
 
-The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. A completed campaign remains development evidence. Course eligibility, actual contributions and human interpretation/review remain open. Fresh data or a frozen follow-up are conditional scientific choices, not automatic submission requirements.
+The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. Completed campaigns retain their development-data provenance. The [submission checklist](submission-checklist.md) tracks the remaining review and delivery tasks.
 
 See [evidence and replay](evidence.md) for the completed runs, and [the historical guide](history/development-notes/development-guide.md) for prior handoffs and checkpoint-specific measurements.

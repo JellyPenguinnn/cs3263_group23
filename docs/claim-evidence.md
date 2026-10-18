@@ -19,7 +19,7 @@ The revised report leads with the **completed 4,000-attempt comparison**. Earlie
 
 
 
-The following balanced and difficulty indexes preserve earlier studies and shared-system evidence. They do not supply the latest primary denominators. Automated evidence checks do not establish human review or course approval.
+The following balanced and difficulty indexes preserve earlier studies and shared-system evidence. They do not supply the latest primary denominators. Human review requirements are tracked in the [submission checklist](submission-checklist.md).
 
 ## Earlier balanced generation claims
 
@@ -63,7 +63,7 @@ Use the [difficulty manifest](../results/difficulty-evidence-manifest.json) to v
 | R17 / 7 | Fixed compiler and prompt boundary | [Direct tests](../tests/unit/test_direct.py); no empirical live adversarial-robustness claim |
 | R18 / 8 | 364 hashes and exact 200-attempt replay per archive | Difficulty manifest, `scripts/verify_evidence.py`, archive checksums, execution/replay receipt and [verification log](publication-verification.md) |
 | R19 / 5, 8 | Earlier results and stopped run preserved separately | [Evidence guide](evidence.md), original historical archives/manifest, preserved old report, private original run/preservation ledger |
-| R20 / throughout | Course fit, sources, actual contribution limits | [Submission checklist](submission-checklist.md), original course documents, report references and [contributions](contributions.md); no inferred eligibility, authorship or grade |
+| R20 / throughout | Course fit, sources, actual contribution limits | [Submission checklist](submission-checklist.md), original course documents, report references and [contributions](contributions.md); confirmed role allocation and outstanding individual accounts |
 | R21 / 5-6 | Generation-first post-run view, 30 full / 12 small cases and preserved extensions | [Generation summary](../results/summary/generation-focus-20261015.json), [builder](../scripts/build_generation_focus.py), [report chart receipt](figures/generation-focus-20261015/figure-data.json); exact observation IDs, original archive hashes, no new inference or preregistration claim |
 | R22 / 1, 3, 5 | TA scope response and unsupported weekly/preference features | [Alignment](ta-feedback-alignment.md), user-supplied written feedback, `schema.py`; single-day/30-minute simplification remains an explicit course-scope clarification |
 | R23 / 7 | Deadline/fixed-start presence separates all 30 generation labels | [Coverage audit](../results/summary/generation-constraint-coverage-20261015.json), archived controlled case bundles and `difficulty_suite.py` label-dependent branches; possible shortcut, no claim of observed model exploitation |

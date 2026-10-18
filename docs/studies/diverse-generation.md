@@ -1,6 +1,7 @@
 # Diverse generation study
 
-**Status: both full studies completed and audited.** Qwen3.6 and GLM5.3 Flash each completed all 2,000 scheduling attempts on the same 1,000 cases. [The comparison audit](../diverse-comparison-audit.md), [summary](../../results/summary/diverse-comparison-20261018.json) and revised report retain every outcome and distinguish infrastructure and execution phases. All existing results remain preserved. Human review is still unconfirmed. The preparation and authorization sections below describe the frozen protocol and its recorded transitions, not permission to launch another run. The TA's priorities remain generation, feasible scope, independent validation and failure analysis; the sample size is a team choice.
+Qwen3.6 and GLM5.3 Flash each completed 2,000 scheduling attempts on the same 1,000 generation cases. The [comparison audit](../diverse-comparison-audit.md) and [summary](../../results/summary/diverse-comparison-20261018.json) retain every outcome and distinguish infrastructure failures and execution phases. This document specifies the frozen protocol and recorded operational changes. The dataset size is a team research choice; generation, independent validation and failure analysis remain the focus. Human semantic assessment is not included in the reported evidence.
+
 ## Questions and denominators
 
 Does performance change with scheduling interactions and larger descriptions? When a method fails, is the cause output format, extraction, scheduling, local solver limits or the provider? When both methods succeed, what is the difference in objective quality, time and token usage?
@@ -122,12 +123,12 @@ Freeze these analyses before live inference:
 - All-attempt acceptance, SAT validity and correct UNSAT, with exact numerators/denominators and paired method differences.
 - Separate mechanism and size views; the eight-activity core and larger stress cases remain distinguishable. Do not select favourable cells after seeing results.
 - Failure taxonomy with trace-backed examples: strict format, missing/wrong extracted constraints, invalid schedules, false UNSAT, local solver timeout/unknown, provider failure and identity rejection.
-- Conditional preference optimum/gap only for valid gold-SAT outputs with proven reference objectives; invalid outputs receive no fabricated zero gap.
+- Conditional preference optimum/gap only for valid gold-SAT outputs with proven reference objectives; objective gaps are undefined for invalid outputs.
 - Model-call, local solver and end-to-end time; token totals and missing-usage coverage. Summarize distributions rather than only means when tails are material.
 - Family-grouped descriptive uncertainty; do not treat 500 paired constructions or 1,000 cases as independent families. Compare models under the same configured conditions while disclosing uncontrolled hosted backends.
 - Optional order robustness only on its preselected paired bases, with additional attempts and denominators separately reported.
 
-Keep all previous studies separate. The current report now incorporates the completed and audited pair; previous reports remain historical evidence. Inference and automated analysis finished ahead of the original 22/25/27 October preparation/run/analysis targets. The 30 October target now concerns substantive member review and delivery preparation. No further model, size, feedback-loop, repair or schema expansion is part of this phase. Human interpretation/contribution, model clarification, report review and presentation remain in the submission checklist.
+Keep all previous studies separate. The current report now incorporates the completed and audited pair; previous reports remain historical evidence. Inference and automated analysis finished ahead of the original 22/25/27 October preparation/run/analysis targets. The 30 October target now concerns substantive member review and delivery preparation. No further model, size, feedback-loop, repair or schema expansion is part of this phase. Human interpretation/contribution, scope clarification, report review and presentation remain in the submission checklist. The team subsequently confirmed TA acceptance of Qwen/GLM for this project; earlier execution records retain their original context.
 
 ## Authorized parallel continuation
 

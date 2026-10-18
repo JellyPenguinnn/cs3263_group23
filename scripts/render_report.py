@@ -266,22 +266,23 @@ def table(lines: list[str]):
     if columns == 2:
         widths = [WIDTH*.28, WIDTH*.72]
     elif columns == 3:
-        ratios = (.20, .43, .37) if rows[0][0] == 'Model' else (.54, .23, .23)
+        ratios = (.18, .26, .56) if rows[0][1] == 'Method' else ((.20, .43, .37) if rows[0][0] == 'Model' else (.54, .23, .23))
         widths = [WIDTH*r for r in ratios]
     elif columns == 7:
         widths = [WIDTH*.16]+[WIDTH*.14]*6
     elif columns == 5:
-        widths = [WIDTH*.28]+[WIDTH*.18]*4
+        ratios = (.18, .26, .18, .18, .20) if rows[0][1] == 'Method' else (.28, .18, .18, .18, .18)
+        widths = [WIDTH*ratio for ratio in ratios]
     elif columns == 4 and rows[0][1] == 'Method':
         ratios = (.23,.23,.26,.28) if rows[0][0] == 'Model / task' else (.18,.26,.26,.30)
         widths = [WIDTH*ratio for ratio in ratios]
     else:
         widths = [WIDTH/columns]*columns
-    method_table = columns == 4 and rows[0][1] == 'Method'
+    method_table = columns in (3, 4, 5) and rows[0][1] == 'Method'
     metric_alignment = TA_CENTER if rows[0][0] == 'Model / task' else TA_RIGHT
     metric = ParagraphStyle('Metric', parent=CELL, alignment=metric_alignment)
     cells = [[Paragraph(('<b>'+inline(x)+'</b>') if i==0 else inline(x),
-                        metric if method_table and j>=2 else CELL)
+                        metric if method_table and columns >= 4 and j>=2 else CELL)
               for j,x in enumerate(row)] for i,row in enumerate(rows)]
     result = Table(cells,colWidths=widths,repeatRows=1,hAlign='LEFT')
     result.setStyle(TableStyle([

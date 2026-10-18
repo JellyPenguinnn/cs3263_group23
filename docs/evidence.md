@@ -32,7 +32,7 @@ MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.
 
 For exact-source replay, follow the installation/replay procedure below in each newly extracted `qwen36` and `glm53flash` directory, rather than the historical `qwen38` directory. Use its `blocks.json`, archived `source/` and `analysis.json`. The scientific replay makes zero model calls. Fresh replay of both balanced archives reproduced the complete saved analyses exactly after JSON serialization; tuples in in-memory Python values serialize as JSON arrays.
 
-The complete balanced operational evidence is retained in a separate private same-device backup containing **483 regular files**, including capabilities, request accounting, supervisor receipts, packets, source snapshot and the built wheel. Its SHA-256 is `cf0baa9a297716065227ecfd8400aa378b6ae7d3e86e6691deb1eebac729554d`. The Python environment is retained at the original run location rather than duplicated in that backup. Local paths and credential-file locations remain private. This is preservation, not proof of off-device backup or human review.
+The complete balanced operational evidence is retained in a separate private same-device backup containing **483 regular files**, including capabilities, request accounting, supervisor receipts, packets, source snapshot and the built wheel. Its SHA-256 is `cf0baa9a297716065227ecfd8400aa378b6ae7d3e86e6691deb1eebac729554d`. The Python environment is retained at the original run location rather than duplicated in that backup. Local paths and credential-file locations remain private. The backup is stored on the same device as the originals.
 
 ## Earlier 200-attempt difficulty evidence
 

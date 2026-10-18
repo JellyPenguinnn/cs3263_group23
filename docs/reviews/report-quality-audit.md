@@ -2,6 +2,8 @@
 
 Reviewed 18 October 2026 against the supplied Project brief, CS3263 Project Guidelines AY2026/27, Responsible AI slides, original proposal, consultation notes and written TA feedback. The [report source](../submission-report.md), every table row, formula, caption and reference were reviewed against implementation and saved evidence. The [verification receipt](../../results/summary/report-scientific-review-20261018.json) binds the reviewed source and PDF; later edits require renewed checks. This review does not replace member contributions, independent interpretation or teaching-team approval.
 
+The walkthrough below records the source version bound by the original review receipt. Subsequent model-selection clarification and remaining individual contribution accounts are tracked in the [submission checklist](../submission-checklist.md). The current [format receipt](../../results/summary/submission-report-format.json) identifies the latest report source and PDF.
+
 ## Report walkthrough
 
 Line ranges refer to this reviewed Markdown version; PDF page numbers include the cover.
@@ -38,7 +40,7 @@ Line ranges refer to this reviewed Markdown version; PDF page numbers include th
 | Requirement / criterion | Coverage and remaining action |
 | --- | --- |
 | Guidelines P25/P62/P81: course-related formal problem and direct-versus-tool comparison | Sections 1, 3–6 cover CSP/COP, both pipelines, evaluation and limitations. |
-| P62/P70–84: motivation, technical depth, achievement, methodology, analysis and insights | Report links formal structure to observed outcomes, separates failure mechanisms, examines conditional quality/resources and discusses constructed-data assumptions. Novelty and difficulty are bounded rather than exaggerated. No audit can guarantee a grade. |
+| P62/P70–84: motivation, technical depth, achievement, methodology, analysis and insights | Report links formal structure to observed outcomes, separates failure mechanisms, examines conditional quality/resources and discusses constructed-data assumptions. Novelty and difficulty are bounded rather than exaggerated. |
 | P25/P84: practical conditions, tool limits and realistic assumptions | Section 8 discusses solver/schema availability, unsupported requirements, template dependence, uncertainty and validation. Artificial construction is explicit. |
 | P34–35/P74: responsible AI | Section 8 applies privacy, fairness, transparency, oversight and misuse concerns to scheduling, with concrete objective trade-offs. |
 | P49/P53/P90–93: technical audience, concise academic report, format | End-to-end scientific structure and a worked example are present. Both PDFs pass ten body pages, single column, at least 11-point text and one-inch margins. All discussions/figures/tables remain in the body; references and title are separate. |
@@ -48,11 +50,11 @@ Line ranges refer to this reviewed Markdown version; PDF page numbers include th
 | TA: feasibility, generation core, repair minor, feedback/UI bonus | Current report keeps generation central, describes completed repair as an extension and does not claim feedback correction. Larger study is a completed bounded team choice, not a TA requirement. |
 | TA: varied cases, small first, failure analysis, strong-model ceilings | Earlier small benchmark motivates the separate diverse study. Main results analyse mechanisms, size, failures, extraction and resources rather than only aggregate success. Historical fictional/wording evidence remains separate. |
 | TA: suggested weekly/hourly office scenario and soft preferences | **Clarification remains.** Implemented single-day/30-minute scope and preferred-start penalties differ from weekly/hourly, consecutive-meeting and day-clustering suggestions. Report discloses these differences. |
-| P25/P27/P33: hosted models and frontier-model wording | **Clarification remains.** Sources mention open-weight SoCLaaS access, but this audit cannot approve the exact models for the course. |
+| P25/P27/P33: hosted models and frontier-model wording | **Resolved by subsequent feedback.** The team reports TA acceptance of Qwen and GLM; see the submission checklist. |
 | P47/P51/P57: presentation, understanding and delivery | **Human tasks remain.** Complete actual review/contributions, confirm Canvas instructions, prepare/rehearse the presentation or requested recording, verify the final private PDF and retain submission receipts. |
 
 ## Changes and verification
 
 Only report wording/references and review records changed: clarified central 95% bootstrap coverage, practical solver availability and extracted-specification guarantees, and added the versioned evidence citation. No statistical values, figures, experiment inputs, traces, scientific runtime or scoring were changed. No inference was requested.
 
-An independent read-only numerical review checked claims against the saved resource/comparison JSON, archived analyses and relevant traces. Format checks passed for both PDFs; all pages were reviewed visually, with identical private/public body and reference pages. The verification receipt records archive preservation and the reviewed source/PDF hashes. This is a scientific draft ready for substantive member review, not confirmation that all submission obligations are complete.
+An independent read-only numerical review checked claims against the saved resource/comparison JSON, archived analyses and relevant traces. Format checks passed for both PDFs; all pages were reviewed visually, with identical private/public body and reference pages. The verification receipt records archive preservation and the reviewed source/PDF hashes. The submission checklist tracks the remaining member review and delivery tasks.
