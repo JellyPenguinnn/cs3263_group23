@@ -13,7 +13,7 @@ Start with the report and use the supporting documents only as needed. The curre
 | [Evidence and replay](evidence.md) | Immutable archives, checksums and exact-source reproduction |
 | [Claim-to-evidence index](claim-evidence.md) | Links between report claims and saved observations |
 | [Submission checklist](submission-checklist.md) | Remaining human review, contribution accounts, model/scope clarification and delivery |
-| [Contributions and AI assistance](contributions.md) | Agreed responsibilities, recorded assistance and factual member accounts still needed |
+| [Division of work](contributions.md) | Responsibilities of each member and shared work |
 | [TA-feedback alignment](ta-feedback-alignment.md) | Generation-first scope, implemented feedback and explicit simplifications |
 | [Repository audit](repository-audit.md) | Detailed implementation/path review and regression results |
 | [Publication verification](publication-verification.md) | Verification checkpoints and publication history |
