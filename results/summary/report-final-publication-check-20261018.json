@@ -1,0 +1,75 @@
+{
+  "archive_verification": [
+    {
+      "archive": "balanced-96-qwen36-20261015.tar.gz",
+      "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+      "verified_files": 211
+    },
+    {
+      "archive": "balanced-96-glm53flash-20261015.tar.gz",
+      "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+      "verified_files": 211
+    },
+    {
+      "archive": "difficulty-200-qwen36-20261014.tar.gz",
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "verified_files": 364
+    },
+    {
+      "archive": "difficulty-200-glm53flash-20261014.tar.gz",
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "verified_files": 364
+    },
+    {
+      "archive": "diverse-2000-qwen36-20261018-portable.tar.gz",
+      "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+      "verified_files": 3077
+    },
+    {
+      "archive": "diverse-2000-glm53flash-20261018-portable.tar.gz",
+      "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+      "verified_files": 3077
+    },
+    {
+      "archive": "benchmark-qwen36-20261001-02.tar.gz",
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+      "verified_files": 941
+    },
+    {
+      "archive": "benchmark-qwen38-20261001-04.tar.gz",
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+      "verified_files": 941
+    }
+  ],
+  "checks": {
+    "credential_and_private_identifier_scan": "passed",
+    "format": "10 body pages plus title and references; >=11pt; one-inch margins; 161 source-text chunks and 2 equations",
+    "git_diff_check": "passed",
+    "local_links": "passed",
+    "runtime_prompts_data_archives": "no changed paths",
+    "script_syntax": "5 report scripts parsed",
+    "test_diverse_figures": "1 passed"
+  },
+  "compact_charts": "plotted data identical to previous charts",
+  "course_sources": "Original Project.pdf pages 4-7, Guidelines P49/P53/P56-64/P79-88, proposal, supplied consultation notes and written TA feedback.",
+  "focused_fact_review": "Primary/conditional denominators, paired differences, failure cases, objective comparisons, and all resource statistics match preserved summaries; whole-request timing is not attributed solely to network waiting.",
+  "git_publication": "Authorized for GitHub main; the commit containing this receipt is the publication identity.",
+  "historical_snapshot": "all original snapshot hashes match",
+  "new_model_calls": 0,
+  "report_pdf_sha256": "4c9e2d43dc3adae558a8bc0dcd88e95d50e847fc42f11c348dc3977fdfcb49f2",
+  "report_source_sha256": "17cc452e833d9d4ebc5a6f0a1ed52a74ec5dc2592ed4bd5bf817b8d8b7a7509b",
+  "report_token_and_time_tables": "all four arms match source derivative",
+  "resource_derivative_sha256": "2ba3b60f9a1674a6b8c3365007fc44b197aa3dda43bd59f1435f08d53eb27b63",
+  "reviewed_document_sha256": {
+    "AGENTS.md": "5ca2cd9593fa820c0c3b5c3fe04049b4d2b14a318503df7383d8d502c756bfd3",
+    "README.md": "8fbd4fda42886c4d669d0408938fefb5c5dfe42fe32bfb403da7079c64322f83",
+    "docs/claim-evidence.md": "19c9c2072c00c2c0176aa92dbe119106df7b4b13a304c558337c487d7d034719",
+    "docs/report-details.md": "35f2214960b2d47aa10e2a40123f1f80934163348f681c53ec2c8d21c4ab2faf",
+    "docs/submission-checklist.md": "16f951f964526f340ceaf5f282850e01e21f70077cd4e3aad891edae8c83d85f",
+    "docs/submission-report.md": "17cc452e833d9d4ebc5a6f0a1ed52a74ec5dc2592ed4bd5bf817b8d8b7a7509b",
+    "planning.md": "db5a10e91d3c508f58f154573c23405376dbf3d973cbd69d4897fb5019b0237d"
+  },
+  "source_bound_resource_reproduction": "byte-identical",
+  "visual_review": "All twelve final rendered PDF pages visually inspected after the analysis-focused rewrite.",
+  "worked_example": "saved schedules and claimed hard-constraint failures independently checked"
+}

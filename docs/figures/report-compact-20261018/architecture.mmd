@@ -1,0 +1,11 @@
+flowchart TD
+  G[Gold specification<br/>evaluation only] --> V[Public request<br/>same for A and B]
+  V --> A[A: Direct LLM<br/>schedule parser]
+  V --> B[B: LLM extraction<br/>schema parser]
+  B --> S[Fixed CP-SAT<br/>compiler]
+  A --> I[Independent<br/>gold validator]
+  S --> I
+  G -.-> I
+  G -.-> O[Gold reference<br/>solver]
+  I --> E[Scoring and<br/>saved evidence]
+  O --> E

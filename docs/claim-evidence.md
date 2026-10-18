@@ -12,14 +12,16 @@ The revised report leads with the **completed 4,000-attempt comparison**. Earlie
 | 51 Qwen and 68 GLM infrastructure failures | Audit provider table; failures are HTTP/transport/read-timeout observations, not model reasoning verdicts |
 | Size/interaction behavior | Summary `by_size` and `by_mechanism`; 200 cases/size, 100/mechanism, ten related families |
 | Timing differences and usage coverage | Summary `execution_segments`; no matched cross-model concurrency/OS subset; sleep-overlapping timeout records preserved |
-| Graphs reproduce exact counts | [Figure receipt](figures/diverse-comparison-20261018/figure-data.json) binds summary, renderer and plotted values |
+| Graphs reproduce exact counts | [Compact report figure receipt](figures/report-compact-20261018/figure-data.json) binds summary, renderer and plotted values |
+| Worked timetable and descriptive failure examples | [Example trace index](report-details.md#example-trace-index) links readable example labels to exact saved case identifiers; timetable uses both recorded B schedules |
+| Mean, median and p95 resource statistics | [Source-bound derivative](../results/summary/report-details-20261018.json), [definitions and phase breakdowns](report-details.md); missing usage is unknown, timing descriptive |
 | Report format | [Current format receipt](../results/summary/submission-report-format.json); visual review recorded in publication verification |
 
 
 
-Applies to the current [report](submission-report.md) and PDF, led by the completed Qwen3.6/GLM balanced generation comparison, with the earlier difficulty study reported separately. The [historical index](claim-evidence-20261002.md) remains separate. Automated evidence checks do not establish human review or course approval.
+The following balanced and difficulty indexes preserve earlier studies and shared-system evidence. They do not supply the latest primary denominators. Automated evidence checks do not establish human review or course approval.
 
-## Current balanced generation claims
+## Earlier balanced generation claims
 
 Use the [balanced manifest](../results/balanced-evidence-manifest.json), [summary](../results/summary/balanced-comparison-20261017.json) and [audit with exact trace locators](balanced-comparison-audit.md). The builder validates controls against original records; fresh archive-source analysis reproduces both saved analyses exactly. Figure receipts bind plotted values and exported files to this summary.
 

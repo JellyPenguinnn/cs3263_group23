@@ -19,7 +19,7 @@ The [24-attempt Qwen3.6 smoke](docs/difficulty-smoke-verification.md) completed 
 - `README.md`: concise overview, working installation/quick start, headline results and navigation.
 - `planning.md`: current delivery work, maintained architecture/formal semantics, scientific decisions and acceptance gates.
 - `AGENTS.md`: contributor behavior, evidence preservation, clarification and verification rules.
-- `docs/submission-report.md`: canonical scientific report; `scripts/render_report.py` creates its PDF.
+- `docs/submission-report.md`: canonical scientific report; `scripts/render_report.py` creates its PDF. Keep its narrative focused on formulation, evaluation, failure mechanisms and implications. Exact case IDs, detailed execution phases and additional repair equations belong in `docs/report-details.md`; keep main-report claims independently understandable. The report uses preserved Mermaid vector artwork, a saved-schedule timetable and source-bound resource distributions. Follow the supplement rebuild instructions and refresh format/visual verification after edits.
 - `docs/claim-evidence.md`, `docs/evidence.md`, `docs/submission-checklist.md`: result traceability, preservation/replay and actual delivery gates.
 
 The former `report/` directory is now `docs/`. Update active navigation and tooling when paths change; do not rewrite paths inside immutable historical archive contents or checksum receipts. The archived development plan, previous report draft and dated handoffs are historical references.

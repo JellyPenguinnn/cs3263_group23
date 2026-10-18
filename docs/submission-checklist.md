@@ -5,12 +5,12 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 ## Prepared and verified
 
 - [x] Both generation and minimum-disruption repair, direct and solver-assisted paths, independent validation and end-to-end evaluation are implemented.
-- [x] Both balanced 96-attempt and difficulty 200-attempt Qwen3.6/GLM campaigns, and the historical 600-attempt Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
-- [x] Current report leads with 48 balanced generation cases/model and distinguishes strict-format, reasoning and provider failures. The earlier difficulty-generation views, repair/fictional/wording extensions and historical reports remain preserved separately.
-- [x] Balanced charts derive from verified archives and exact observation IDs; previous generation/block/tier/resource figures remain unchanged. Four offline office examples demonstrate the supported scope separately from model results.
+- [x] The diverse 2,000-attempt/model, balanced 96-attempt/model and difficulty 200-attempt/model Qwen3.6/GLM campaigns, and historical 600-attempt/model Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
+- [x] Current report leads with 1,000 diverse generation cases and 2,000 attempts/model and distinguishes strict-format, reasoning and provider failures. The earlier difficulty-generation views, repair/fictional/wording extensions and historical reports remain preserved separately.
+- [x] Current diverse charts and the worked timetable derive from verified archives and saved observations; previous generation/block/tier/resource figures remain unchanged. Four offline office examples demonstrate the supported scope separately from model results.
 - [x] Report covers formulation, design, related work, limitations, responsible AI, reproducibility and disclosed AI assistance.
-- [x] Six original replay archives are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
-- [x] Public report rebuilt and all pages visually checked after the balanced-results update: one title, nine body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The later private submission copy still needs its own check.
+- [x] Eight replay archives (six original packages and two explicitly labelled portable derivatives) are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
+- [x] Public report rebuilt and all pages visually checked after the analysis-focused revision: one title, ten body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The later private submission copy still needs its own check.
 
 The previous report and format check are historical. Every substantive revision, new figure or private-title edit requires an appropriate fresh render/check; do not reuse a previous page count for a changed document.
 
@@ -20,7 +20,7 @@ The previous report and format check are historical. Every substantive revision,
 - [ ] Confirm the teaching team's interpretation of the hosted Qwen and GLM models against the frontier-model wording (Project p5 / Guidelines P25; SoCLaaS/open weights suggested in Project p6 / P33). No automatic approval or rejection is inferred.
 - [x] Implement the separate D5 balanced generation dataset, independent proofs and matching Qwen3.6/GLM preparation; preserve the old results and limitation.
 - [x] Complete and preserve both authorized D5 campaigns: 96 attempts/model, no retries, all failures retained, exact GLM identity observed, separate reproducible analyses/archives.
-- [ ] Review the balanced public/gold pairs, certificates, strict-output contract and failure examples; record genuine findings and interpret the three-family/generalization limitation. Completed execution does not establish human review.
+- [ ] Review diverse-study public/gold pairs, certificates and failure examples across its ten related families; record genuine findings and interpret their generalization limits. Keep the earlier three-family balanced study separate. Completed execution does not establish human review.
 - [ ] Members review the natural-language/gold meaning, reference assumptions and failure examples, and record actual findings in [contributions.md](contributions.md) and the [claim index](claim-evidence.md).
 - [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Replace the interim contribution paragraph only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
 - [ ] Add each member's name, matriculation number and email to the **private** submitted title page (P51); do not put private identifiers in public Git.
@@ -49,22 +49,23 @@ Discuss concrete unequal inconvenience, lexicographic objective trade-offs, priv
 
 ## Rebuild the report
 
-The Markdown source is canonical. From the repository root, regenerate compact figures using the locked experiment environment:
+The Markdown source is canonical. Rebuild source-bound resources and current report figures from the repository root:
 
 ```sh
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py \
-  --report --output docs/figures/balanced-comparison-20261017
-
-# Retain separately labelled figures for the earlier difficulty study.
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_difficulty_results.py \
-  --report --output docs/figures/difficulty-comparison-20261014
+.venv/bin/python scripts/build_report_details.py --output runs/report-details-review.json
+cmp runs/report-details-review.json results/summary/report-details-20261018.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py \
+  --compact --output docs/figures/report-compact-20261018
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_worked_timetable.py
 ```
+
+The committed Mermaid vector asset is reused during normal PDF builds. Changing its source requires the separate [Mermaid reproduction procedure](report-details.md#reproducing-the-report-visuals). Preserve historical figures and archives.
 
 Report tooling is separate from the scheduling runtime:
 
 ```sh
 python3.12 -m venv .venv-docs
-.venv-docs/bin/python -m pip install reportlab==4.4.9 pdfplumber==0.11.9 matplotlib==3.10.8
+.venv-docs/bin/python -m pip install reportlab==4.4.9 pdfplumber==0.11.9 matplotlib==3.10.8 pypdf==6.10.0
 .venv-docs/bin/python scripts/render_report.py
 .venv-docs/bin/python scripts/check_report.py
 ```

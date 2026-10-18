@@ -1,0 +1,10 @@
+{
+  "config_sha256": "e598111c7ee001e341aa63ce021bc051c3ad0eea24525c27794440a84489aa2e",
+  "css_sha256": "4cad82fe7d9ab8e354a941abec3f064208c7480472df4111502ab8233c0f850b",
+  "layout": "Mermaid automatic flowchart layout",
+  "mermaid_source_sha256": "ad6504789738c383f541dfed4345ba439a1b0a6bfb1a93c6dc1d2e590d20fcee",
+  "pdf_sha256": "baea9122e1da0afc80fdf0f417d4c552ce7d09d828b2f72dd9cb0c04edd6756a",
+  "renderer": "Mermaid CLI",
+  "renderer_version": "11.12.0",
+  "report_width_pt": 340
+}

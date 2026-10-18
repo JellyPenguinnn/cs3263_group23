@@ -190,7 +190,7 @@ All members need whole-system understanding even when they review different deta
 
 ### S4. Prepare the final report copy
 
-Use [submission-report.md](docs/submission-report.md) as the source. Incorporate S1-S3 findings and actual contributions; remove pending-review/title reminders only when the corresponding work is complete. Check citations and distinguish measured findings from hypotheses.
+Use [submission-report.md](docs/submission-report.md) as the source. Incorporate S1-S3 findings and actual contributions; remove pending-review/title reminders only when the corresponding work is complete. Check citations and distinguish measured findings from hypotheses. The current report emphasizes generation, constructive versus classification performance, extraction failures, provider sensitivity and practical method trade-offs. Preserve the worked timetable and mean/median/p95 resource tables. Keep opaque case IDs, full execution history and detailed repair equations in the [report supplement](docs/report-details.md), with clear evidence links; do not move essential analysis out of the counted body.
 
 Create the submitted copy under ignored `docs/private/`, with names, matriculation numbers and email addresses on its title page. Follow [the rebuild instructions](docs/submission-checklist.md#rebuild-the-report), using `--source`/`--output` for the private copy and `scripts/check_report.py --source ... --pdf ... --receipt ...` with a private receipt path. Inspect every page. Each changed copy must independently meet the ten-body-page, single-column/single-spacing, 11-point and one-inch-margin requirements.
 

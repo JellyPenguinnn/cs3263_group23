@@ -1,0 +1,107 @@
+{
+  "blocks": [
+    {
+      "activity": "A1",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 7
+    },
+    {
+      "activity": "A1",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 7
+    },
+    {
+      "activity": "A2",
+      "duration_slots": 2,
+      "entity": "P2",
+      "start_slot": 8
+    },
+    {
+      "activity": "A2",
+      "duration_slots": 2,
+      "entity": "R1",
+      "start_slot": 8
+    },
+    {
+      "activity": "A3",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 1
+    },
+    {
+      "activity": "A3",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 1
+    },
+    {
+      "activity": "A4",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 2
+    },
+    {
+      "activity": "A4",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 2
+    },
+    {
+      "activity": "A5",
+      "duration_slots": 1,
+      "entity": "P2",
+      "start_slot": 3
+    },
+    {
+      "activity": "A5",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 3
+    },
+    {
+      "activity": "A6",
+      "duration_slots": 2,
+      "entity": "P1",
+      "start_slot": 4
+    },
+    {
+      "activity": "A6",
+      "duration_slots": 2,
+      "entity": "R1",
+      "start_slot": 4
+    },
+    {
+      "activity": "A7",
+      "duration_slots": 1,
+      "entity": "P1",
+      "start_slot": 6
+    },
+    {
+      "activity": "A7",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 6
+    },
+    {
+      "activity": "A8",
+      "duration_slots": 1,
+      "entity": "P2",
+      "start_slot": 0
+    },
+    {
+      "activity": "A8",
+      "duration_slots": 1,
+      "entity": "R1",
+      "start_slot": 0
+    }
+  ],
+  "case_id": "dg-3fd5174321284caacab1f4a9",
+  "figure_sha256": "62b1948d78dd4cf6d6e80543ec84ca491136c7bce5cade7e929426e3efbe14d9",
+  "font_size_pt_at_native_width": 11,
+  "native_width_inches": 6.2,
+  "new_model_calls": 0,
+  "recorded_schedules_equal": true,
+  "source_sha256": "2ba3b60f9a1674a6b8c3365007fc44b197aa3dda43bd59f1435f08d53eb27b63"
+}

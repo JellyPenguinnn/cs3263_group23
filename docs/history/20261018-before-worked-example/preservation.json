@@ -1,0 +1,22 @@
+{
+  "docs/submission-report.md": {
+    "snapshot": "submission-report.md",
+    "sha256": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626"
+  },
+  "docs/submission-report.pdf": {
+    "snapshot": "submission-report.pdf",
+    "sha256": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1"
+  },
+  "results/summary/submission-report-format.json": {
+    "snapshot": "submission-report-format.json",
+    "sha256": "f78aeb395d8d27d33a99d543a95367646fb660764d8dcfe8ed0d24c4d7be7adc"
+  },
+  "scripts/render_report.py": {
+    "snapshot": "render_report.py",
+    "sha256": "8607eff197dc03efc5893f6b154c25e63e703d740061c9075b9694f79bc56cad"
+  },
+  "scripts/render_diverse_results.py": {
+    "snapshot": "render_diverse_results.py",
+    "sha256": "b82f336bd4a6ae6e76bfb1255a590484ea71d0fb271a1fdd0cffa3f620fd60d7"
+  }
+}

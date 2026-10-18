@@ -46,11 +46,13 @@ def legend(fig, y):
                loc="upper left", bbox_to_anchor=(.13, y), ncol=2, frameon=False, fontsize=11)
 
 
-def acceptance(data):
-    fig, ax = plt.subplots(figsize=(6.2, 3.45))
-    fig.subplots_adjust(left=.15, right=.98, bottom=.17, top=.72)
-    fig.text(.15, .95, "Diverse schedule generation", fontsize=13, weight="bold")
-    legend(fig, .91)
+def acceptance(data, compact=False):
+    fig, ax = plt.subplots(figsize=(6.2, 2.6 if compact else 3.45))
+    fig.subplots_adjust(left=.15, right=.98, bottom=.20 if compact else .17,
+                        top=.78 if compact else .72)
+    if not compact:
+        fig.text(.15, .95, "Diverse schedule generation", fontsize=13, weight="bold")
+    legend(fig, 1.0 if compact else .91)
     for j, arm in enumerate(ARMS):
         rows = [data[m][arm] for m in MODELS]
         bars = ax.bar([i + (j - .5) * .36 for i in range(2)],
@@ -69,11 +71,13 @@ def acceptance(data):
     return fig
 
 
-def failures(data):
-    fig, axes = plt.subplots(2, 1, figsize=(6.2, 4.9))
-    fig.subplots_adjust(left=.15, right=.98, bottom=.11, top=.79, hspace=.83)
-    fig.text(.15, .96, "Failures by observed category", fontsize=13, weight="bold")
-    legend(fig, .93)
+def failures(data, compact=False):
+    fig, axes = plt.subplots(2, 1, figsize=(6.2, 3.9 if compact else 4.9))
+    fig.subplots_adjust(left=.15, right=.98, bottom=.14 if compact else .11,
+                        top=.82 if compact else .79, hspace=1.0 if compact else .83)
+    if not compact:
+        fig.text(.15, .96, "Failures by observed category", fontsize=13, weight="bold")
+    legend(fig, 1.0 if compact else .93)
     for ax, model in zip(axes, MODELS):
         ax.set_title(NAMES[model], loc="left", fontsize=11, pad=6)
         maximum = max(v for arm in ARMS for v in data[model][arm]["failures"].values())
@@ -116,6 +120,7 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--source", type=Path, default=ROOT / "results/summary/diverse-comparison-20261018.json")
     parser.add_argument("--output", type=Path, default=ROOT / "docs/figures/diverse-comparison-20261018")
+    parser.add_argument("--compact", action="store_true", help="Reduce whitespace while retaining 11-point labels")
     args = parser.parse_args()
     raw = args.source.read_bytes()
     data = plot_data(json.loads(raw))
@@ -124,7 +129,7 @@ def main():
                         "figure.facecolor": "white"})
     args.output.mkdir(parents=True, exist_ok=True)
     outputs = {}
-    for name, fig in {"diverse-acceptance": acceptance(data), "diverse-failures": failures(data),
+    for name, fig in {"diverse-acceptance": acceptance(data, args.compact), "diverse-failures": failures(data, args.compact),
                       "diverse-size": sizes(data)}.items():
         target = args.output / f"{name}.png"
         fig.savefig(target, dpi=180, metadata={"Software": "CS3263 diverse comparison"})
@@ -134,7 +139,7 @@ def main():
         "renderer_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
         "shared_renderer_sha256": {p: hashlib.sha256((ROOT / "scripts" / p).read_bytes()).hexdigest()
                                    for p in ("render_benchmark_results.py", "render_difficulty_results.py")},
-        "matplotlib_version": matplotlib.__version__, "width_inches": 6.2, "minimum_text_points": 11,
+        "compact": args.compact, "matplotlib_version": matplotlib.__version__, "width_inches": 6.2, "minimum_text_points": 11,
         "plotted_data": data, "output_sha256": outputs,
         "notes": ["All failures retained; 1,000 attempts per main bar and 200 per size bar.",
                   "Failure categories are mutually exclusive; accepted suboptimal answers are not counted as failures here.",

@@ -1,15 +1,15 @@
 {
   "automated_checks_passed": true,
   "body_pages": 10,
-  "figure_images": 2,
+  "figure_images": 3,
   "margin_inches": 1,
-  "math_expressions_verified": 4,
+  "math_expressions_verified": 2,
   "minimum_text_font_pt": 10.999999999999886,
-  "pdf_sha256": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1",
+  "pdf_sha256": "4c9e2d43dc3adae558a8bc0dcd88e95d50e847fc42f11c348dc3977fdfcb49f2",
   "reference_pages": 1,
-  "source_sha256": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626",
+  "source_sha256": "17cc452e833d9d4ebc5a6f0a1ed52a74ec5dc2592ed4bd5bf817b8d8b7a7509b",
   "title_pages": 1,
   "total_pages": 12,
-  "visible_text_chunks_verified": 148,
+  "visible_text_chunks_verified": 161,
   "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
 }

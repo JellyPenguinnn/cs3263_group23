@@ -1,0 +1,3033 @@
+{
+  "builder_sha256": "0fdb243c70d83fe51ce411ab16903eb351ca2928e29951b21f9d5f552de1ef70",
+  "dataset": "diverse-generation-v1",
+  "definitions": {
+    "median": "Middle observed value, or arithmetic mean of the two middle values for even n.",
+    "model_seconds": "Saved model-response elapsed time on the local monotonic clock, including failed requests. Not server-only inference time.",
+    "p95": "Nearest-rank empirical percentile: sorted nonmissing observations at one-based rank ceil(0.95*n). No interpolation.",
+    "pipeline_seconds": "Saved local total_seconds for each method execution, including provider, parsing/extraction and applicable solver work. Excludes evaluator/reference solving and campaign downtime; not campaign wall time.",
+    "solver_seconds": "Local solve invocation elapsed time for B, conditional on reaching the solver. Includes local preprocessing; not CP-SAT search time alone. A has no solver observations.",
+    "timing_comparability": "Aggregate times mix recorded OS/concurrency phases; zero cases have all four model/method observations under matching OS/concurrency. Descriptive operational observations, not a controlled speed ranking.",
+    "total_tokens": "Provider-reported prompt plus completion tokens per scheduling attempt; missing usage remains unknown. Capability calls excluded; observed failures with usage would be included.",
+    "worked_case": "Selected explanatory case, not a representative sample. Saved provider content is final output, not hidden reasoning. Clock labels are deterministic conversions of original slots."
+  },
+  "format_version": "1.0",
+  "manifest_sha256": "5d92d69ba67d97369c16ccd14ad98a4b9ec4c1995832d4920579b7485ce9abae",
+  "models": {
+    "glm53flash": {
+      "analysis_sha256": "92fd2b53c5af4ca509a92374869d8b570b5d51979b6480949b9e46d3e02c70f0",
+      "archive": "results/archives/diverse-2000-glm53flash-20261018-portable.tar.gz",
+      "cases_sha256": "a85a8b615730c0c47398c5ea8104ff4cabf3fee4094ac26208e3758371256ba1",
+      "execution_segments": [
+        {
+          "approach": "direct",
+          "categories": {
+            "accepted": 848,
+            "false_unsat": 17,
+            "gold_invalid_schedule": 25,
+            "provider_error": 64
+          },
+          "concurrency": 4,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 954,
+              "mean": 108.1193607015723,
+              "median": 69.27722924999762,
+              "missing": 0,
+              "p95": 300.0526402089963,
+              "reported": 954
+            },
+            "pipeline_seconds": {
+              "attempts": 954,
+              "mean": 108.12153240254813,
+              "median": 69.27890583350381,
+              "missing": 0,
+              "p95": 300.0537624170029,
+              "reported": 954
+            },
+            "solver_seconds": {
+              "attempts": 954,
+              "mean": null,
+              "median": null,
+              "missing": 954,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 954,
+              "mean": 7674.398876404494,
+              "median": 5793.5,
+              "missing": 64,
+              "p95": 19296,
+              "reported": 890,
+              "reported_sum": 6830215
+            }
+          },
+          "segment": "parallel4"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 943,
+            "false_unsat": 3,
+            "gold_invalid_schedule": 1,
+            "invalid_output": 5,
+            "provider_error": 2
+          },
+          "concurrency": 4,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 954,
+              "mean": 65.47468316191609,
+              "median": 53.25310908350002,
+              "missing": 0,
+              "p95": 137.67342637499678,
+              "reported": 954
+            },
+            "pipeline_seconds": {
+              "attempts": 954,
+              "mean": 65.4939879725367,
+              "median": 53.265833604502404,
+              "missing": 0,
+              "p95": 137.72591679199832,
+              "reported": 954
+            },
+            "solver_seconds": {
+              "attempts": 954,
+              "mean": 0.014065729156364087,
+              "median": 0.01143837500421796,
+              "missing": 7,
+              "p95": 0.03452125000330852,
+              "reported": 947
+            },
+            "total_tokens": {
+              "attempts": 954,
+              "mean": 7187.355042016807,
+              "median": 6420.5,
+              "missing": 2,
+              "p95": 12872,
+              "reported": 952,
+              "reported_sum": 6842362
+            }
+          },
+          "segment": "parallel4"
+        },
+        {
+          "approach": "direct",
+          "categories": {
+            "accepted": 43,
+            "gold_invalid_schedule": 2,
+            "provider_error": 1
+          },
+          "concurrency": 8,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 46,
+              "mean": 120.16272528254345,
+              "median": 96.90130135399886,
+              "missing": 0,
+              "p95": 256.00245274999907,
+              "reported": 46
+            },
+            "pipeline_seconds": {
+              "attempts": 46,
+              "mean": 120.16473432791281,
+              "median": 96.9032978130017,
+              "missing": 0,
+              "p95": 256.0046455410011,
+              "reported": 46
+            },
+            "solver_seconds": {
+              "attempts": 46,
+              "mean": null,
+              "median": null,
+              "missing": 46,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 46,
+              "mean": 4135.777777777777,
+              "median": 3168,
+              "missing": 1,
+              "p95": 10554,
+              "reported": 45,
+              "reported_sum": 186110
+            }
+          },
+          "segment": "parallel8"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 45,
+            "provider_error": 1
+          },
+          "concurrency": 8,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 46,
+              "mean": 99.84554039586969,
+              "median": 98.59030879200145,
+              "missing": 0,
+              "p95": 149.21536362500046,
+              "reported": 46
+            },
+            "pipeline_seconds": {
+              "attempts": 46,
+              "mean": 99.86171358058662,
+              "median": 98.59973222900044,
+              "missing": 0,
+              "p95": 149.23065558300004,
+              "reported": 46
+            },
+            "solver_seconds": {
+              "attempts": 46,
+              "mean": 0.01197677873335326,
+              "median": 0.011093042001448339,
+              "missing": 1,
+              "p95": 0.02719749999960186,
+              "reported": 45
+            },
+            "total_tokens": {
+              "attempts": 46,
+              "mean": 4245.222222222223,
+              "median": 4085,
+              "missing": 1,
+              "p95": 5762,
+              "reported": 45,
+              "reported_sum": 191035
+            }
+          },
+          "segment": "parallel8"
+        }
+      ],
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 1000,
+            "mean": 108.67335547229698,
+            "median": 71.45649166650037,
+            "missing": 0,
+            "p95": 300.0486109589983,
+            "reported": 1000
+          },
+          "pipeline_seconds": {
+            "attempts": 1000,
+            "mean": 108.6755196911149,
+            "median": 71.45750572949873,
+            "missing": 0,
+            "p95": 300.04956062499696,
+            "reported": 1000
+          },
+          "solver_seconds": {
+            "attempts": 1000,
+            "mean": null,
+            "median": null,
+            "missing": 1000,
+            "p95": null,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 1000,
+            "mean": 7504.090909090909,
+            "median": 5592,
+            "missing": 65,
+            "p95": 19191,
+            "reported": 935,
+            "reported_sum": 7016325
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 1000,
+            "mean": 67.05574259467795,
+            "median": 55.21943312550138,
+            "missing": 0,
+            "p95": 141.8864202500008,
+            "reported": 1000
+          },
+          "pipeline_seconds": {
+            "attempts": 1000,
+            "mean": 67.07490335050699,
+            "median": 55.238658249501896,
+            "missing": 0,
+            "p95": 141.9131427079992,
+            "reported": 1000
+          },
+          "solver_seconds": {
+            "attempts": 1000,
+            "mean": 0.013970968300481541,
+            "median": 0.01139285349927377,
+            "missing": 8,
+            "p95": 0.03301412499786238,
+            "reported": 992
+          },
+          "total_tokens": {
+            "attempts": 1000,
+            "mean": 7054.560682046138,
+            "median": 6159,
+            "missing": 3,
+            "p95": 12750,
+            "reported": 997,
+            "reported_sum": 7033397
+          }
+        }
+      },
+      "verification": {
+        "archive": "diverse-2000-glm53flash-20261018-portable.tar.gz",
+        "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+        "verified_files": 3077
+      }
+    },
+    "qwen36": {
+      "analysis_sha256": "c8ff03c0e317fa194400065fc726a0eba03c51347240d175415be3b5d1a571f6",
+      "archive": "results/archives/diverse-2000-qwen36-20261018-portable.tar.gz",
+      "cases_sha256": "a85a8b615730c0c47398c5ea8104ff4cabf3fee4094ac26208e3758371256ba1",
+      "execution_segments": [
+        {
+          "approach": "direct",
+          "categories": {
+            "false_unsat": 1,
+            "invalid_output": 2,
+            "provider_error": 5
+          },
+          "concurrency": 16,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 8,
+              "mean": 43.580062088500085,
+              "median": 12.997245270999883,
+              "missing": 0,
+              "p95": 131.44466525000007,
+              "reported": 8
+            },
+            "pipeline_seconds": {
+              "attempts": 8,
+              "mean": 43.601763369625246,
+              "median": 13.00859422900021,
+              "missing": 0,
+              "p95": 131.51531333300045,
+              "reported": 8
+            },
+            "solver_seconds": {
+              "attempts": 8,
+              "mean": null,
+              "median": null,
+              "missing": 8,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 8,
+              "mean": 6272.666666666667,
+              "median": 2882,
+              "missing": 5,
+              "p95": 15072,
+              "reported": 3,
+              "reported_sum": 18818
+            }
+          },
+          "segment": "parallel16"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 8
+          },
+          "concurrency": 16,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 8,
+              "mean": 49.512986723999916,
+              "median": 44.98168368750021,
+              "missing": 0,
+              "p95": 92.97060712499933,
+              "reported": 8
+            },
+            "pipeline_seconds": {
+              "attempts": 8,
+              "mean": 49.56503644775012,
+              "median": 45.01374914600001,
+              "missing": 0,
+              "p95": 93.0306115000003,
+              "reported": 8
+            },
+            "solver_seconds": {
+              "attempts": 8,
+              "mean": 0.023035354499938876,
+              "median": 0.014927812999758316,
+              "missing": 0,
+              "p95": 0.06129574999977194,
+              "reported": 8
+            },
+            "total_tokens": {
+              "attempts": 8,
+              "mean": 5492,
+              "median": 5838.5,
+              "missing": 0,
+              "p95": 8785,
+              "reported": 8,
+              "reported_sum": 43936
+            }
+          },
+          "segment": "parallel16"
+        },
+        {
+          "approach": "direct",
+          "categories": {
+            "accepted": 253,
+            "false_unsat": 247,
+            "gold_invalid_schedule": 108,
+            "invalid_output": 147,
+            "provider_error": 41
+          },
+          "concurrency": 8,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 796,
+              "mean": 39.5215288615364,
+              "median": 23.93052245850049,
+              "missing": 0,
+              "p95": 136.35407033299998,
+              "reported": 796
+            },
+            "pipeline_seconds": {
+              "attempts": 796,
+              "mean": 39.52326015877515,
+              "median": 23.931862041000386,
+              "missing": 0,
+              "p95": 136.3545083329991,
+              "reported": 796
+            },
+            "solver_seconds": {
+              "attempts": 796,
+              "mean": null,
+              "median": null,
+              "missing": 796,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 796,
+              "mean": 2999.071523178808,
+              "median": 1981,
+              "missing": 41,
+              "p95": 11339,
+              "reported": 755,
+              "reported_sum": 2264299
+            }
+          },
+          "segment": "parallel8"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 757,
+            "false_unsat": 11,
+            "gold_invalid_schedule": 6,
+            "invalid_output": 22,
+            "provider_error": 1
+          },
+          "concurrency": 8,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 797,
+              "mean": 47.028418228204444,
+              "median": 43.43472429199937,
+              "missing": 0,
+              "p95": 89.2247024999997,
+              "reported": 797
+            },
+            "pipeline_seconds": {
+              "attempts": 797,
+              "mean": 47.04475771039524,
+              "median": 43.44233616699967,
+              "missing": 0,
+              "p95": 89.2491287089997,
+              "reported": 797
+            },
+            "solver_seconds": {
+              "attempts": 797,
+              "mean": 0.011184727838511653,
+              "median": 0.009414229500180227,
+              "missing": 23,
+              "p95": 0.023556833000839106,
+              "reported": 774
+            },
+            "total_tokens": {
+              "attempts": 797,
+              "mean": 5367.854271356784,
+              "median": 4938.0,
+              "missing": 1,
+              "p95": 8592,
+              "reported": 796,
+              "reported_sum": 4272812
+            }
+          },
+          "segment": "parallel8"
+        },
+        {
+          "approach": "direct",
+          "categories": {
+            "accepted": 41,
+            "false_unsat": 28,
+            "gold_invalid_schedule": 32,
+            "invalid_output": 45,
+            "provider_error": 2
+          },
+          "concurrency": 1,
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 148,
+              "mean": 23.985794900847296,
+              "median": 1.4548600623384118,
+              "missing": 0,
+              "p95": 100.51047625020146,
+              "reported": 148
+            },
+            "pipeline_seconds": {
+              "attempts": 148,
+              "mean": 23.990336322685,
+              "median": 1.4559746459126472,
+              "missing": 0,
+              "p95": 100.52472258452326,
+              "reported": 148
+            },
+            "solver_seconds": {
+              "attempts": 148,
+              "mean": null,
+              "median": null,
+              "missing": 148,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 148,
+              "mean": 4243.7945205479455,
+              "median": 1720.5,
+              "missing": 2,
+              "p95": 14398,
+              "reported": 146,
+              "reported_sum": 619594
+            }
+          },
+          "segment": "serial_before_parallel"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 143,
+            "false_unsat": 2,
+            "invalid_output": 1,
+            "provider_error": 1
+          },
+          "concurrency": 1,
+          "platform": "macOS-26.5.2-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 147,
+              "mean": 15.94312643759637,
+              "median": 14.169183834455907,
+              "missing": 0,
+              "p95": 28.64377100020647,
+              "reported": 147
+            },
+            "pipeline_seconds": {
+              "attempts": 147,
+              "mean": 15.989898638818794,
+              "median": 14.188628166913986,
+              "missing": 0,
+              "p95": 28.682275124825537,
+              "reported": 147
+            },
+            "solver_seconds": {
+              "attempts": 147,
+              "mean": 0.03811441153801721,
+              "median": 0.015746500343084335,
+              "missing": 2,
+              "p95": 0.07110099960118532,
+              "reported": 145
+            },
+            "total_tokens": {
+              "attempts": 147,
+              "mean": 4273.8835616438355,
+              "median": 3853.5,
+              "missing": 1,
+              "p95": 6695,
+              "reported": 146,
+              "reported_sum": 623987
+            }
+          },
+          "segment": "serial_before_parallel"
+        },
+        {
+          "approach": "direct",
+          "categories": {
+            "accepted": 14,
+            "false_unsat": 15,
+            "gold_invalid_schedule": 4,
+            "invalid_output": 14,
+            "provider_error": 1
+          },
+          "concurrency": 1,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 48,
+              "mean": 24.343357794291723,
+              "median": 0.4956695420003143,
+              "missing": 0,
+              "p95": 109.89043479200063,
+              "reported": 48
+            },
+            "pipeline_seconds": {
+              "attempts": 48,
+              "mean": 24.346169457458227,
+              "median": 0.4988686870001402,
+              "missing": 0,
+              "p95": 109.89222895799958,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "attempts": 48,
+              "mean": null,
+              "median": null,
+              "missing": 48,
+              "p95": null,
+              "reported": 0
+            },
+            "total_tokens": {
+              "attempts": 48,
+              "mean": 4760.276595744681,
+              "median": 2250,
+              "missing": 1,
+              "p95": 16043,
+              "reported": 47,
+              "reported_sum": 223733
+            }
+          },
+          "segment": "serial_before_parallel"
+        },
+        {
+          "approach": "solver_augmented",
+          "categories": {
+            "accepted": 45,
+            "false_unsat": 1,
+            "invalid_output": 2
+          },
+          "concurrency": 1,
+          "platform": "macOS-27.0.1-arm64-arm-64bit",
+          "resources": {
+            "model_seconds": {
+              "attempts": 48,
+              "mean": 21.230550795187508,
+              "median": 21.391527937500086,
+              "missing": 0,
+              "p95": 33.18078441699981,
+              "reported": 48
+            },
+            "pipeline_seconds": {
+              "attempts": 48,
+              "mean": 21.269089532062406,
+              "median": 21.430072707999898,
+              "missing": 0,
+              "p95": 33.23761795900009,
+              "reported": 48
+            },
+            "solver_seconds": {
+              "attempts": 48,
+              "mean": 0.030086305260837158,
+              "median": 0.01865599999996448,
+              "missing": 2,
+              "p95": 0.06773824999982025,
+              "reported": 46
+            },
+            "total_tokens": {
+              "attempts": 48,
+              "mean": 5609.291666666667,
+              "median": 5693.0,
+              "missing": 0,
+              "p95": 7738,
+              "reported": 48,
+              "reported_sum": 269246
+            }
+          },
+          "segment": "serial_before_parallel"
+        }
+      ],
+      "resources": {
+        "direct": {
+          "model_seconds": {
+            "attempts": 1000,
+            "mean": 36.526156289942385,
+            "median": 21.552433916500377,
+            "missing": 0,
+            "p95": 132.4921920830002,
+            "reported": 1000
+          },
+          "pipeline_seconds": {
+            "attempts": 1000,
+            "mean": 36.5285151030574,
+            "median": 21.55340079149937,
+            "missing": 0,
+            "p95": 132.492666791999,
+            "reported": 1000
+          },
+          "solver_seconds": {
+            "attempts": 1000,
+            "mean": null,
+            "median": null,
+            "missing": 1000,
+            "p95": null,
+            "reported": 0
+          },
+          "total_tokens": {
+            "attempts": 1000,
+            "mean": 3287.533123028391,
+            "median": 1977,
+            "missing": 49,
+            "p95": 12751,
+            "reported": 951,
+            "reported_sum": 3126444
+          }
+        },
+        "solver_augmented": {
+          "model_seconds": {
+            "attempts": 1000,
+            "mean": 41.24045924616661,
+            "median": 37.37496374999955,
+            "missing": 0,
+            "p95": 87.39974079199965,
+            "reported": 1000
+          },
+          "pipeline_seconds": {
+            "attempts": 1000,
+            "mean": 41.26262358421236,
+            "median": 37.383448978999695,
+            "missing": 0,
+            "p95": 87.42448762500135,
+            "reported": 1000
+          },
+          "solver_seconds": {
+            "attempts": 1000,
+            "mean": 0.016188922813996438,
+            "median": 0.01025491700056591,
+            "missing": 27,
+            "p95": 0.03651862498372793,
+            "reported": 973
+          },
+          "total_tokens": {
+            "attempts": 1000,
+            "mean": 5220.421843687374,
+            "median": 4737.5,
+            "missing": 2,
+            "p95": 8490,
+            "reported": 998,
+            "reported_sum": 5209981
+          }
+        }
+      },
+      "verification": {
+        "archive": "diverse-2000-qwen36-20261018-portable.tar.gz",
+        "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+        "verified_files": 3077
+      }
+    }
+  },
+  "new_model_calls": 0,
+  "worked_case": {
+    "case_id": "dg-3fd5174321284caacab1f4a9",
+    "gold_case": {
+      "authored_renderings": [
+        {
+          "author_reference": "diverse-generation-v1",
+          "creation_method": "llm_assisted",
+          "rationale": "Complete deterministic templates; independent human meaning review pending.",
+          "review_reference": null,
+          "review_status": "pending",
+          "text": "Schedule every activity exactly once. Slot zero is 2026-10-26T09:00:00+08:00, timezone +08:00. There are 16 slots of 30 minutes. All intervals are half-open, ending at start plus duration. Each activity must fit completely within one availability window for itself and every required entity. Activities sharing a participant or resource must not overlap. Only listed entities and constraints apply.\nParticipant P1 is available in [0,16) and has capacity one.\nParticipant P2 is available in [0,16) and has capacity one.\nResource R1 is available in [0,10) and has capacity one.\nActivity A6 lasts 2 slots; participants: P1; resources: R1; availability: [2,11).\nActivity A7 lasts 1 slots; participants: P1; resources: R1; availability: [3,11).\nActivity A5 lasts 1 slots; participants: P2; resources: R1; availability: [0,5).\nActivity A3 lasts 1 slots; participants: P1; resources: R1; availability: [1,8).\nActivity A1 lasts 1 slots; participants: P1; resources: R1; availability: [2,9).\nActivity A8 lasts 1 slots; participants: P2; resources: R1; availability: [0,3).\nActivity A2 lasts 2 slots; participants: P2; resources: R1; availability: [6,12).\nActivity A4 lasts 1 slots; participants: P1; resources: R1; availability: [0,4).\nStarting A8 outside [10,16) incurs penalty 3; starting inside incurs zero.\nA8 must finish before or when A3 starts.\nA5 must finish before or when A7 starts.\nA3 must finish before or when A6 starts.\nA7 must finish before or when A2 starts.\nA8 must start exactly at slot 0.\nStarting A4 outside [10,16) incurs penalty 1; starting inside incurs zero.\nStarting A1 outside [11,15) incurs penalty 2; starting inside incurs zero.\nStarting A7 outside [6,10) incurs penalty 1; starting inside incurs zero.\nMinimize the total preference penalty subject to all hard requirements.",
+          "variant_id": "canonical"
+        },
+        {
+          "author_reference": "diverse-generation-v1",
+          "creation_method": "llm_assisted",
+          "rationale": "Complete deterministic templates; independent human meaning review pending.",
+          "review_reference": null,
+          "review_status": "pending",
+          "text": "Schedule every activity exactly once. Slot zero is 2026-10-26T09:00:00+08:00, timezone +08:00. There are 16 slots of 30 minutes. All intervals are half-open, ending at start plus duration. Each activity must fit completely within one availability window for itself and every required entity. Activities sharing a participant or resource must not overlap. Only listed entities and constraints apply.\nStarting A4 outside [10,16) incurs penalty 1; starting inside incurs zero.\nActivity A2 lasts 2 slots; participants: P2; resources: R1; availability: [6,12).\nA8 must finish before or when A3 starts.\nA8 must start exactly at slot 0.\nParticipant P1 is available in [0,16) and has capacity one.\nActivity A7 lasts 1 slots; participants: P1; resources: R1; availability: [3,11).\nActivity A3 lasts 1 slots; participants: P1; resources: R1; availability: [1,8).\nActivity A4 lasts 1 slots; participants: P1; resources: R1; availability: [0,4).\nA7 must finish before or when A2 starts.\nStarting A1 outside [11,15) incurs penalty 2; starting inside incurs zero.\nParticipant P2 is available in [0,16) and has capacity one.\nResource R1 is available in [0,10) and has capacity one.\nActivity A5 lasts 1 slots; participants: P2; resources: R1; availability: [0,5).\nStarting A7 outside [6,10) incurs penalty 1; starting inside incurs zero.\nA5 must finish before or when A7 starts.\nActivity A6 lasts 2 slots; participants: P1; resources: R1; availability: [2,11).\nA3 must finish before or when A6 starts.\nActivity A1 lasts 1 slots; participants: P1; resources: R1; availability: [2,9).\nActivity A8 lasts 1 slots; participants: P2; resources: R1; availability: [0,3).\nStarting A8 outside [10,16) incurs penalty 3; starting inside incurs zero.\nMinimize the total preference penalty subject to all hard requirements.",
+          "variant_id": "reordered"
+        }
+      ],
+      "case_id": "dg-3fd5174321284caacab1f4a9",
+      "event": null,
+      "expected_label": "SAT",
+      "expected_objective": [
+        6
+      ],
+      "gold_author_reference": "diverse-generation-v1",
+      "gold_review_reference": null,
+      "group_id": "diverse-family-room-contention",
+      "justification": "Whole-instance shared-capacity pair with independent arithmetic certificate; human review pending.",
+      "kind": "controlled",
+      "level": "easy",
+      "original_problem": null,
+      "original_schedule": null,
+      "problem": {
+        "activities": [
+          {
+            "availability": [
+              {
+                "end": 11,
+                "start": 2
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A6",
+            "participant_ids": [
+              "P1"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 11,
+                "start": 3
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A7",
+            "participant_ids": [
+              "P1"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 5,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A5",
+            "participant_ids": [
+              "P2"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 8,
+                "start": 1
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A3",
+            "participant_ids": [
+              "P1"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 9,
+                "start": 2
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A1",
+            "participant_ids": [
+              "P1"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 3,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A8",
+            "participant_ids": [
+              "P2"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 12,
+                "start": 6
+              }
+            ],
+            "duration_slots": 2,
+            "id": "A2",
+            "participant_ids": [
+              "P2"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          },
+          {
+            "availability": [
+              {
+                "end": 4,
+                "start": 0
+              }
+            ],
+            "duration_slots": 1,
+            "id": "A4",
+            "participant_ids": [
+              "P1"
+            ],
+            "resource_ids": [
+              "R1"
+            ]
+          }
+        ],
+        "constraints": [
+          {
+            "activity_id": "A8",
+            "end": 16,
+            "id": "PREF0",
+            "start": 10,
+            "type": "preferred_start",
+            "weight": 3
+          },
+          {
+            "after": "A3",
+            "before": "A8",
+            "id": "C_edge3",
+            "type": "precedence"
+          },
+          {
+            "after": "A7",
+            "before": "A5",
+            "id": "C_edge6",
+            "type": "precedence"
+          },
+          {
+            "after": "A6",
+            "before": "A3",
+            "id": "C_edge5",
+            "type": "precedence"
+          },
+          {
+            "after": "A2",
+            "before": "A7",
+            "id": "C_edge7",
+            "type": "precedence"
+          },
+          {
+            "activity_id": "A8",
+            "id": "C_profile_fixed",
+            "slot": 0,
+            "type": "fixed_start"
+          },
+          {
+            "activity_id": "A4",
+            "end": 16,
+            "id": "PREF2",
+            "start": 10,
+            "type": "preferred_start",
+            "weight": 1
+          },
+          {
+            "activity_id": "A1",
+            "end": 15,
+            "id": "PREF4",
+            "start": 11,
+            "type": "preferred_start",
+            "weight": 2
+          },
+          {
+            "activity_id": "A7",
+            "end": 10,
+            "id": "PREF6",
+            "start": 6,
+            "type": "preferred_start",
+            "weight": 1
+          }
+        ],
+        "horizon_slots": 16,
+        "horizon_start": "2026-10-26T09:00:00+08:00",
+        "instance_id": "dg-3fd5174321284caacab1f4a9",
+        "participants": [
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "P1"
+          },
+          {
+            "availability": [
+              {
+                "end": 16,
+                "start": 0
+              }
+            ],
+            "id": "P2"
+          }
+        ],
+        "resources": [
+          {
+            "availability": [
+              {
+                "end": 10,
+                "start": 0
+              }
+            ],
+            "id": "R1"
+          }
+        ],
+        "schema_version": "1.0",
+        "slot_minutes": 30,
+        "task_type": "generation",
+        "timezone": "+08:00"
+      },
+      "split": "development",
+      "sweep": "room_contention",
+      "witness": [
+        {
+          "activity_id": "A1",
+          "start_slot": 7
+        },
+        {
+          "activity_id": "A2",
+          "start_slot": 8
+        },
+        {
+          "activity_id": "A3",
+          "start_slot": 1
+        },
+        {
+          "activity_id": "A4",
+          "start_slot": 2
+        },
+        {
+          "activity_id": "A5",
+          "start_slot": 3
+        },
+        {
+          "activity_id": "A6",
+          "start_slot": 4
+        },
+        {
+          "activity_id": "A7",
+          "start_slot": 6
+        },
+        {
+          "activity_id": "A8",
+          "start_slot": 0
+        }
+      ]
+    },
+    "gold_witness_with_clock": [
+      {
+        "activity_id": "A8",
+        "end_clock": "09:30",
+        "start_clock": "09:00",
+        "start_slot": 0
+      },
+      {
+        "activity_id": "A3",
+        "end_clock": "10:00",
+        "start_clock": "09:30",
+        "start_slot": 1
+      },
+      {
+        "activity_id": "A4",
+        "end_clock": "10:30",
+        "start_clock": "10:00",
+        "start_slot": 2
+      },
+      {
+        "activity_id": "A5",
+        "end_clock": "11:00",
+        "start_clock": "10:30",
+        "start_slot": 3
+      },
+      {
+        "activity_id": "A6",
+        "end_clock": "12:00",
+        "start_clock": "11:00",
+        "start_slot": 4
+      },
+      {
+        "activity_id": "A7",
+        "end_clock": "12:30",
+        "start_clock": "12:00",
+        "start_slot": 6
+      },
+      {
+        "activity_id": "A1",
+        "end_clock": "13:00",
+        "start_clock": "12:30",
+        "start_slot": 7
+      },
+      {
+        "activity_id": "A2",
+        "end_clock": "14:00",
+        "start_clock": "13:00",
+        "start_slot": 8
+      }
+    ],
+    "outputs": {
+      "glm53flash": {
+        "direct": {
+          "accepted": false,
+          "archive_member": "runs/controlled/controlled/attempts/c6e8938fded99db88efdc7a833a65b7046c188ec85891a287681a291f4a9df13.json",
+          "attempt_sha256": "8357b8111c8ca6e7442c6a6eb31837fafe1f4bca0fb335b6fe3f7417071e8969",
+          "category": "gold_invalid_schedule",
+          "extraction_comparison": null,
+          "objective_values": null,
+          "pipeline_result": {
+            "approach": "direct",
+            "config_sha256": "ca0b8f1b1570a720b414676d0705c7d3111379a65e4c7a2d30c953b1b09f4939",
+            "declared_status": "SAT",
+            "diagnostics": [],
+            "extracted_spec": null,
+            "instance_id": "dg-3fd5174321284caacab1f4a9",
+            "model_response": {
+              "attempts": [
+                {
+                  "elapsed_seconds": 69.04364691699811,
+                  "error": null,
+                  "execution": {
+                    "contract": {
+                      "configured_body": {
+                        "max_tokens": 32768,
+                        "model": "x-test-1",
+                        "stream": false
+                      },
+                      "effective_omitted_values": "server_defaults_unavailable",
+                      "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                      "final_content_field": "choices[0].message.content",
+                      "format_version": "1.0",
+                      "max_attempts": 1,
+                      "model_identity": {
+                        "policy": "explicit_alias_pin_v1",
+                        "requested_alias": "x-test-1",
+                        "required_returned_model": "glm-5.3-flash"
+                      },
+                      "omitted_controls": [
+                        "temperature",
+                        "top_p",
+                        "seed",
+                        "reasoning_effort",
+                        "response_format"
+                      ],
+                      "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                      "provider": "soclaas",
+                      "retry_delay": 1.0,
+                      "timeouts": {
+                        "connect": 30,
+                        "pool": 1800,
+                        "read": 1800,
+                        "write": 1800
+                      },
+                      "weight_revision": null
+                    },
+                    "reasoning_field_present": true,
+                    "reported_reasoning_tokens": 1300,
+                    "system_fingerprint": "vllm-0.31.0-tp2-64d866e2",
+                    "transport_error_kind": null
+                  },
+                  "finish_reason": "stop",
+                  "http_status": 200,
+                  "number": 1,
+                  "outcome_uncertain": false,
+                  "returned_model": "glm-5.3-flash",
+                  "usage": {
+                    "completion_tokens": 1398,
+                    "prompt_tokens": 778,
+                    "total_tokens": 2176
+                  }
+                }
+              ],
+              "content": "{\"status\":\"SAT\",\"schedule\":[{\"activity_id\":\"A6\",\"start_slot\":2},{\"activity_id\":\"A7\",\"start_slot\":6},{\"activity_id\":\"A5\",\"start_slot\":4},{\"activity_id\":\"A3\",\"start_slot\":1},{\"activity_id\":\"A1\",\"start_slot\":5},{\"activity_id\":\"A8\",\"start_slot\":0},{\"activity_id\":\"A2\",\"start_slot\":7},{\"activity_id\":\"A4\",\"start_slot\":4}]}",
+              "elapsed_seconds": 69.043801333999,
+              "error": null,
+              "finish_reason": "stop",
+              "returned_model": "glm-5.3-flash"
+            },
+            "prompt_sha256": "96608a5a7ed80463411f0fd0313f3e5e11a647ad985344a4af74188f109801af",
+            "schedule": [
+              {
+                "activity_id": "A1",
+                "start_slot": 5
+              },
+              {
+                "activity_id": "A2",
+                "start_slot": 7
+              },
+              {
+                "activity_id": "A3",
+                "start_slot": 1
+              },
+              {
+                "activity_id": "A4",
+                "start_slot": 4
+              },
+              {
+                "activity_id": "A5",
+                "start_slot": 4
+              },
+              {
+                "activity_id": "A6",
+                "start_slot": 2
+              },
+              {
+                "activity_id": "A7",
+                "start_slot": 6
+              },
+              {
+                "activity_id": "A8",
+                "start_slot": 0
+              }
+            ],
+            "schema_diagnostics": [],
+            "solve_result": null,
+            "status": "SAT",
+            "timings": [
+              [
+                "total_seconds",
+                69.04763187500066
+              ]
+            ],
+            "usage": [
+              {
+                "completion_tokens": 1398,
+                "prompt_tokens": 778,
+                "total_tokens": 2176
+              }
+            ],
+            "variant_id": "canonical"
+          },
+          "schedule_with_clock": [
+            {
+              "activity_id": "A8",
+              "end_clock": "09:30",
+              "start_clock": "09:00",
+              "start_slot": 0
+            },
+            {
+              "activity_id": "A3",
+              "end_clock": "10:00",
+              "start_clock": "09:30",
+              "start_slot": 1
+            },
+            {
+              "activity_id": "A6",
+              "end_clock": "11:00",
+              "start_clock": "10:00",
+              "start_slot": 2
+            },
+            {
+              "activity_id": "A4",
+              "end_clock": "11:30",
+              "start_clock": "11:00",
+              "start_slot": 4
+            },
+            {
+              "activity_id": "A5",
+              "end_clock": "11:30",
+              "start_clock": "11:00",
+              "start_slot": 4
+            },
+            {
+              "activity_id": "A1",
+              "end_clock": "12:00",
+              "start_clock": "11:30",
+              "start_slot": 5
+            },
+            {
+              "activity_id": "A7",
+              "end_clock": "12:30",
+              "start_clock": "12:00",
+              "start_slot": 6
+            },
+            {
+              "activity_id": "A2",
+              "end_clock": "13:30",
+              "start_clock": "12:30",
+              "start_slot": 7
+            }
+          ],
+          "validation": {
+            "hard_feasible": false,
+            "objectives": {
+              "moved_count": null,
+              "preference_penalty": 6,
+              "total_shift_slots": null
+            },
+            "structural_valid": true,
+            "violations": [
+              {
+                "activity_ids": [
+                  "A4"
+                ],
+                "category": "activity_availability",
+                "constraint_id": null
+              },
+              {
+                "activity_ids": [
+                  "A5",
+                  "A4"
+                ],
+                "category": "resource_overlap",
+                "constraint_id": null
+              }
+            ]
+          }
+        },
+        "solver_augmented": {
+          "accepted": true,
+          "archive_member": "runs/controlled/controlled/attempts/cb0fad0d24ffd7db5993c4052ccc0166c6b538bad335ea36f7b347aa1dc6f3f0.json",
+          "attempt_sha256": "79b640ebe20a7ac99b902b4fb589663ad08db9e414dbe3cab87989271fce4ee5",
+          "category": "accepted",
+          "extraction_comparison": {
+            "constraint_differences": [],
+            "differences": [],
+            "format_version": "2.0",
+            "invented_constraints": 0,
+            "mismatches": [],
+            "omitted_constraints": 0,
+            "structurally_equivalent": true
+          },
+          "objective_values": [
+            6
+          ],
+          "pipeline_result": {
+            "approach": "solver_augmented",
+            "config_sha256": "6f1550af59791bb5411eba4bc15fcafe7d7c0cf7eec8fc268a7e8416e080da89",
+            "declared_status": null,
+            "diagnostics": [],
+            "extracted_spec": {
+              "activities": [
+                {
+                  "availability": [
+                    {
+                      "end": 11,
+                      "start": 2
+                    }
+                  ],
+                  "duration_slots": 2,
+                  "id": "A6",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 11,
+                      "start": 3
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A7",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 5,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A5",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 8,
+                      "start": 1
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A3",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 9,
+                      "start": 2
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A1",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 3,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A8",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 12,
+                      "start": 6
+                    }
+                  ],
+                  "duration_slots": 2,
+                  "id": "A2",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 4,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A4",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                }
+              ],
+              "constraints": [
+                {
+                  "activity_id": "A8",
+                  "end": 16,
+                  "id": "c1",
+                  "start": 10,
+                  "type": "preferred_start",
+                  "weight": 3
+                },
+                {
+                  "after": "A3",
+                  "before": "A8",
+                  "id": "c2",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A7",
+                  "before": "A5",
+                  "id": "c3",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A6",
+                  "before": "A3",
+                  "id": "c4",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A2",
+                  "before": "A7",
+                  "id": "c5",
+                  "type": "precedence"
+                },
+                {
+                  "activity_id": "A8",
+                  "id": "c6",
+                  "slot": 0,
+                  "type": "fixed_start"
+                },
+                {
+                  "activity_id": "A4",
+                  "end": 16,
+                  "id": "c7",
+                  "start": 10,
+                  "type": "preferred_start",
+                  "weight": 1
+                },
+                {
+                  "activity_id": "A1",
+                  "end": 15,
+                  "id": "c8",
+                  "start": 11,
+                  "type": "preferred_start",
+                  "weight": 2
+                },
+                {
+                  "activity_id": "A7",
+                  "end": 10,
+                  "id": "c9",
+                  "start": 6,
+                  "type": "preferred_start",
+                  "weight": 1
+                }
+              ],
+              "horizon_slots": 16,
+              "horizon_start": "2026-10-26T09:00:00+08:00",
+              "instance_id": "dg-3fd5174321284caacab1f4a9",
+              "participants": [
+                {
+                  "availability": [
+                    {
+                      "end": 16,
+                      "start": 0
+                    }
+                  ],
+                  "id": "P1"
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 16,
+                      "start": 0
+                    }
+                  ],
+                  "id": "P2"
+                }
+              ],
+              "resources": [
+                {
+                  "availability": [
+                    {
+                      "end": 10,
+                      "start": 0
+                    }
+                  ],
+                  "id": "R1"
+                }
+              ],
+              "schema_version": "1.0",
+              "slot_minutes": 30,
+              "task_type": "generation",
+              "timezone": "+08:00"
+            },
+            "instance_id": "dg-3fd5174321284caacab1f4a9",
+            "model_response": {
+              "attempts": [
+                {
+                  "elapsed_seconds": 76.02197408400025,
+                  "error": null,
+                  "execution": {
+                    "contract": {
+                      "configured_body": {
+                        "max_tokens": 32768,
+                        "model": "x-test-1",
+                        "stream": false
+                      },
+                      "effective_omitted_values": "server_defaults_unavailable",
+                      "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                      "final_content_field": "choices[0].message.content",
+                      "format_version": "1.0",
+                      "max_attempts": 1,
+                      "model_identity": {
+                        "policy": "explicit_alias_pin_v1",
+                        "requested_alias": "x-test-1",
+                        "required_returned_model": "glm-5.3-flash"
+                      },
+                      "omitted_controls": [
+                        "temperature",
+                        "top_p",
+                        "seed",
+                        "reasoning_effort",
+                        "response_format"
+                      ],
+                      "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                      "provider": "soclaas",
+                      "retry_delay": 1.0,
+                      "timeouts": {
+                        "connect": 30,
+                        "pool": 1800,
+                        "read": 1800,
+                        "write": 1800
+                      },
+                      "weight_revision": null
+                    },
+                    "reasoning_field_present": true,
+                    "reported_reasoning_tokens": 1317,
+                    "system_fingerprint": "vllm-0.31.0-tp2-64d866e2",
+                    "transport_error_kind": null
+                  },
+                  "finish_reason": "stop",
+                  "http_status": 200,
+                  "number": 1,
+                  "outcome_uncertain": false,
+                  "returned_model": "glm-5.3-flash",
+                  "usage": {
+                    "completion_tokens": 1911,
+                    "prompt_tokens": 1710,
+                    "total_tokens": 3621
+                  }
+                }
+              ],
+              "content": "{\"schema_version\":\"1.0\",\"instance_id\":\"request\",\"task_type\":\"generation\",\"horizon_slots\":16,\"slot_minutes\":30,\"horizon_start\":\"2026-10-26T09:00:00+08:00\",\"timezone\":\"+08:00\",\"participants\":[{\"id\":\"P1\",\"availability\":[{\"start\":0,\"end\":16}]},{\"id\":\"P2\",\"availability\":[{\"start\":0,\"end\":16}]}],\"resources\":[{\"id\":\"R1\",\"availability\":[{\"start\":0,\"end\":10}]}],\"activities\":[{\"id\":\"A6\",\"duration_slots\":2,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":2,\"end\":11}]},{\"id\":\"A7\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":3,\"end\":11}]},{\"id\":\"A5\",\"duration_slots\":1,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":5}]},{\"id\":\"A3\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":1,\"end\":8}]},{\"id\":\"A1\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":2,\"end\":9}]},{\"id\":\"A8\",\"duration_slots\":1,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":3}]},{\"id\":\"A2\",\"duration_slots\":2,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":6,\"end\":12}]},{\"id\":\"A4\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":4}]}],\"constraints\":[{\"type\":\"preferred_start\",\"id\":\"c1\",\"activity_id\":\"A8\",\"start\":10,\"end\":16,\"weight\":3},{\"type\":\"precedence\",\"id\":\"c2\",\"before\":\"A8\",\"after\":\"A3\"},{\"type\":\"precedence\",\"id\":\"c3\",\"before\":\"A5\",\"after\":\"A7\"},{\"type\":\"precedence\",\"id\":\"c4\",\"before\":\"A3\",\"after\":\"A6\"},{\"type\":\"precedence\",\"id\":\"c5\",\"before\":\"A7\",\"after\":\"A2\"},{\"type\":\"fixed_start\",\"id\":\"c6\",\"activity_id\":\"A8\",\"slot\":0},{\"type\":\"preferred_start\",\"id\":\"c7\",\"activity_id\":\"A4\",\"start\":10,\"end\":16,\"weight\":1},{\"type\":\"preferred_start\",\"id\":\"c8\",\"activity_id\":\"A1\",\"start\":11,\"end\":15,\"weight\":2},{\"type\":\"preferred_start\",\"id\":\"c9\",\"activity_id\":\"A7\",\"start\":6,\"end\":10,\"weight\":1}]}",
+              "elapsed_seconds": 76.02201745800267,
+              "error": null,
+              "finish_reason": "stop",
+              "returned_model": "glm-5.3-flash"
+            },
+            "prompt_sha256": "ae0a29d20e4714befd026ab2eb2e04be26132ae8b2e441b709a2456485757699",
+            "schedule": [
+              {
+                "activity_id": "A1",
+                "start_slot": 7
+              },
+              {
+                "activity_id": "A2",
+                "start_slot": 8
+              },
+              {
+                "activity_id": "A3",
+                "start_slot": 1
+              },
+              {
+                "activity_id": "A4",
+                "start_slot": 2
+              },
+              {
+                "activity_id": "A5",
+                "start_slot": 3
+              },
+              {
+                "activity_id": "A6",
+                "start_slot": 4
+              },
+              {
+                "activity_id": "A7",
+                "start_slot": 6
+              },
+              {
+                "activity_id": "A8",
+                "start_slot": 0
+              }
+            ],
+            "schema_diagnostics": [],
+            "solve_result": {
+              "diagnostics": [],
+              "domain_analysis": {
+                "contradictions": [],
+                "domains": [
+                  {
+                    "activity_id": "A6",
+                    "duration_slots": 2,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[0].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14
+                        ]
+                      },
+                      {
+                        "code": "horizon_fit",
+                        "constraint_id": null,
+                        "path": "$.horizon_slots",
+                        "rejected_starts": [
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          9
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A7",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[1].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          2,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          10
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  {
+                    "activity_id": "A5",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[2].availability",
+                        "rejected_starts": [
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  {
+                    "activity_id": "A3",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[3].availability",
+                        "rejected_starts": [
+                          0,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ]
+                  },
+                  {
+                    "activity_id": "A1",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[4].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A8",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[5].availability",
+                        "rejected_starts": [
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      },
+                      {
+                        "code": "fixed_start",
+                        "constraint_id": "c6",
+                        "path": "$.constraints[5]",
+                        "rejected_starts": [
+                          1,
+                          2
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0
+                    ]
+                  },
+                  {
+                    "activity_id": "A2",
+                    "duration_slots": 2,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[6].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          11,
+                          12,
+                          13,
+                          14
+                        ]
+                      },
+                      {
+                        "code": "horizon_fit",
+                        "constraint_id": null,
+                        "path": "$.horizon_slots",
+                        "rejected_starts": [
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          9,
+                          10
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A4",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[7].availability",
+                        "rejected_starts": [
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0,
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ],
+                "format_version": "1.0",
+                "reasoning": "unary_exclusions_and_sufficient_contradictions_not_minimum_conflicts",
+                "scope": "supplied_specification_only",
+                "search_space_upper_bound": 144060
+              },
+              "elapsed_seconds": 0.01040412500151433,
+              "input_binding": {
+                "format_version": "1.0",
+                "repair_context_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+                "specification_sha256": "5ac2b05c7ca009550896af41406c7d7f80718a9ad96dcd712892b785b882690d"
+              },
+              "last_solver_status": "OPTIMAL",
+              "objectives": {
+                "moved_count": null,
+                "preference_penalty": 6,
+                "total_shift_slots": null
+              },
+              "optimality_proven": true,
+              "schedule": [
+                {
+                  "activity_id": "A1",
+                  "start_slot": 7
+                },
+                {
+                  "activity_id": "A2",
+                  "start_slot": 8
+                },
+                {
+                  "activity_id": "A3",
+                  "start_slot": 1
+                },
+                {
+                  "activity_id": "A4",
+                  "start_slot": 2
+                },
+                {
+                  "activity_id": "A5",
+                  "start_slot": 3
+                },
+                {
+                  "activity_id": "A6",
+                  "start_slot": 4
+                },
+                {
+                  "activity_id": "A7",
+                  "start_slot": 6
+                },
+                {
+                  "activity_id": "A8",
+                  "start_slot": 0
+                }
+              ],
+              "stages": [
+                {
+                  "best_bound": 6.0,
+                  "elapsed_seconds": 0.003325833000417333,
+                  "integer_lower_bound": 6,
+                  "objective": "preference_penalty",
+                  "proven_optimal": true,
+                  "solver_status": "OPTIMAL",
+                  "time_limit_seconds": 29.99517299999934,
+                  "value": 6
+                }
+              ],
+              "status": "OPTIMAL"
+            },
+            "status": "SAT",
+            "timings": [
+              [
+                "extraction_seconds",
+                76.02611808399888
+              ],
+              [
+                "solver_seconds",
+                0.01040412500151433
+              ],
+              [
+                "total_seconds",
+                76.03660474999924
+              ]
+            ],
+            "usage": [
+              {
+                "completion_tokens": 1911,
+                "prompt_tokens": 1710,
+                "total_tokens": 3621
+              }
+            ],
+            "variant_id": "canonical"
+          },
+          "schedule_with_clock": [
+            {
+              "activity_id": "A8",
+              "end_clock": "09:30",
+              "start_clock": "09:00",
+              "start_slot": 0
+            },
+            {
+              "activity_id": "A3",
+              "end_clock": "10:00",
+              "start_clock": "09:30",
+              "start_slot": 1
+            },
+            {
+              "activity_id": "A4",
+              "end_clock": "10:30",
+              "start_clock": "10:00",
+              "start_slot": 2
+            },
+            {
+              "activity_id": "A5",
+              "end_clock": "11:00",
+              "start_clock": "10:30",
+              "start_slot": 3
+            },
+            {
+              "activity_id": "A6",
+              "end_clock": "12:00",
+              "start_clock": "11:00",
+              "start_slot": 4
+            },
+            {
+              "activity_id": "A7",
+              "end_clock": "12:30",
+              "start_clock": "12:00",
+              "start_slot": 6
+            },
+            {
+              "activity_id": "A1",
+              "end_clock": "13:00",
+              "start_clock": "12:30",
+              "start_slot": 7
+            },
+            {
+              "activity_id": "A2",
+              "end_clock": "14:00",
+              "start_clock": "13:00",
+              "start_slot": 8
+            }
+          ],
+          "validation": {
+            "hard_feasible": true,
+            "objectives": {
+              "moved_count": null,
+              "preference_penalty": 6,
+              "total_shift_slots": null
+            },
+            "structural_valid": true,
+            "violations": []
+          }
+        }
+      },
+      "qwen36": {
+        "direct": {
+          "accepted": false,
+          "archive_member": "runs/controlled/controlled/attempts/1eb9b8bce0381b67e305f03f5335ae96b8edef2fd8119449fc6022244c6dc116.json",
+          "attempt_sha256": "deede02cb589235eaf70364f39086bf79ec875921fc9b80cb440cb56c3029572",
+          "category": "false_unsat",
+          "extraction_comparison": null,
+          "objective_values": null,
+          "pipeline_result": {
+            "approach": "direct",
+            "config_sha256": "8716f16f49db5bc9f5231e5f6bfb25f222a382884e16929f4f5efc26e341e5da",
+            "declared_status": "UNSAT",
+            "diagnostics": [],
+            "extracted_spec": null,
+            "instance_id": "dg-3fd5174321284caacab1f4a9",
+            "model_response": {
+              "attempts": [
+                {
+                  "elapsed_seconds": 0.20978516712784767,
+                  "error": null,
+                  "execution": {
+                    "contract": {
+                      "configured_body": {
+                        "max_tokens": 32768,
+                        "model": "qwen3.6:35b",
+                        "stream": false
+                      },
+                      "effective_omitted_values": "server_defaults_unavailable",
+                      "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                      "final_content_field": "choices[0].message.content",
+                      "format_version": "1.0",
+                      "max_attempts": 1,
+                      "omitted_controls": [
+                        "temperature",
+                        "top_p",
+                        "seed",
+                        "reasoning_effort",
+                        "response_format"
+                      ],
+                      "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                      "provider": "soclaas",
+                      "retry_delay": 1.0,
+                      "timeouts": {
+                        "connect": 30,
+                        "pool": 1800,
+                        "read": 1800,
+                        "write": 1800
+                      },
+                      "weight_revision": null
+                    },
+                    "reasoning_field_present": true,
+                    "reported_reasoning_tokens": null,
+                    "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                    "transport_error_kind": null
+                  },
+                  "finish_reason": "stop",
+                  "http_status": 200,
+                  "number": 1,
+                  "outcome_uncertain": false,
+                  "returned_model": "qwen3.6:35b",
+                  "usage": {
+                    "completion_tokens": 11,
+                    "prompt_tokens": 817,
+                    "total_tokens": 828
+                  }
+                }
+              ],
+              "content": "{\"status\":\"UNSAT\",\"schedule\":null}",
+              "elapsed_seconds": 0.2098032496869564,
+              "error": null,
+              "finish_reason": "stop",
+              "returned_model": "qwen3.6:35b"
+            },
+            "prompt_sha256": "96608a5a7ed80463411f0fd0313f3e5e11a647ad985344a4af74188f109801af",
+            "schedule": null,
+            "schema_diagnostics": [],
+            "solve_result": null,
+            "status": "UNSAT",
+            "timings": [
+              [
+                "total_seconds",
+                0.2106329994276166
+              ]
+            ],
+            "usage": [
+              {
+                "completion_tokens": 11,
+                "prompt_tokens": 817,
+                "total_tokens": 828
+              }
+            ],
+            "variant_id": "canonical"
+          },
+          "schedule_with_clock": null,
+          "validation": null
+        },
+        "solver_augmented": {
+          "accepted": true,
+          "archive_member": "runs/controlled/controlled/attempts/e81f581d8980a870ce86bfd9e5d80284fd789ea8ea18e4f40d23fba948d69b72.json",
+          "attempt_sha256": "2b16f5de765f7a3669aa39a7256db9fb4658042d8b28f61e0201d0d549433ca9",
+          "category": "accepted",
+          "extraction_comparison": {
+            "constraint_differences": [],
+            "differences": [],
+            "format_version": "2.0",
+            "invented_constraints": 0,
+            "mismatches": [],
+            "omitted_constraints": 0,
+            "structurally_equivalent": true
+          },
+          "objective_values": [
+            6
+          ],
+          "pipeline_result": {
+            "approach": "solver_augmented",
+            "config_sha256": "e4e4098212f810e87c5942814e0afe86eb0a14e448f20f7e9e449939d23123c1",
+            "declared_status": null,
+            "diagnostics": [],
+            "extracted_spec": {
+              "activities": [
+                {
+                  "availability": [
+                    {
+                      "end": 11,
+                      "start": 2
+                    }
+                  ],
+                  "duration_slots": 2,
+                  "id": "A6",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 11,
+                      "start": 3
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A7",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 5,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A5",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 8,
+                      "start": 1
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A3",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 9,
+                      "start": 2
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A1",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 3,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A8",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 12,
+                      "start": 6
+                    }
+                  ],
+                  "duration_slots": 2,
+                  "id": "A2",
+                  "participant_ids": [
+                    "P2"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 4,
+                      "start": 0
+                    }
+                  ],
+                  "duration_slots": 1,
+                  "id": "A4",
+                  "participant_ids": [
+                    "P1"
+                  ],
+                  "resource_ids": [
+                    "R1"
+                  ]
+                }
+              ],
+              "constraints": [
+                {
+                  "activity_id": "A8",
+                  "id": "c1",
+                  "slot": 0,
+                  "type": "fixed_start"
+                },
+                {
+                  "after": "A3",
+                  "before": "A8",
+                  "id": "c2",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A7",
+                  "before": "A5",
+                  "id": "c3",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A6",
+                  "before": "A3",
+                  "id": "c4",
+                  "type": "precedence"
+                },
+                {
+                  "after": "A2",
+                  "before": "A7",
+                  "id": "c5",
+                  "type": "precedence"
+                },
+                {
+                  "activity_id": "A8",
+                  "end": 16,
+                  "id": "c6",
+                  "start": 10,
+                  "type": "preferred_start",
+                  "weight": 3
+                },
+                {
+                  "activity_id": "A4",
+                  "end": 16,
+                  "id": "c7",
+                  "start": 10,
+                  "type": "preferred_start",
+                  "weight": 1
+                },
+                {
+                  "activity_id": "A1",
+                  "end": 15,
+                  "id": "c8",
+                  "start": 11,
+                  "type": "preferred_start",
+                  "weight": 2
+                },
+                {
+                  "activity_id": "A7",
+                  "end": 10,
+                  "id": "c9",
+                  "start": 6,
+                  "type": "preferred_start",
+                  "weight": 1
+                }
+              ],
+              "horizon_slots": 16,
+              "horizon_start": "2026-10-26T09:00:00+08:00",
+              "instance_id": "dg-3fd5174321284caacab1f4a9",
+              "participants": [
+                {
+                  "availability": [
+                    {
+                      "end": 16,
+                      "start": 0
+                    }
+                  ],
+                  "id": "P1"
+                },
+                {
+                  "availability": [
+                    {
+                      "end": 16,
+                      "start": 0
+                    }
+                  ],
+                  "id": "P2"
+                }
+              ],
+              "resources": [
+                {
+                  "availability": [
+                    {
+                      "end": 10,
+                      "start": 0
+                    }
+                  ],
+                  "id": "R1"
+                }
+              ],
+              "schema_version": "1.0",
+              "slot_minutes": 30,
+              "task_type": "generation",
+              "timezone": "+08:00"
+            },
+            "instance_id": "dg-3fd5174321284caacab1f4a9",
+            "model_response": {
+              "attempts": [
+                {
+                  "elapsed_seconds": 4.969207709655166,
+                  "error": null,
+                  "execution": {
+                    "contract": {
+                      "configured_body": {
+                        "max_tokens": 32768,
+                        "model": "qwen3.6:35b",
+                        "stream": false
+                      },
+                      "effective_omitted_values": "server_defaults_unavailable",
+                      "endpoint": "https://soclaas-api.comp.nus.edu.sg/v1/chat/completions",
+                      "final_content_field": "choices[0].message.content",
+                      "format_version": "1.0",
+                      "max_attempts": 1,
+                      "omitted_controls": [
+                        "temperature",
+                        "top_p",
+                        "seed",
+                        "reasoning_effort",
+                        "response_format"
+                      ],
+                      "output_limit_semantics": "max_tokens_requested; hosted_reasoning_budget_semantics_unverified",
+                      "provider": "soclaas",
+                      "retry_delay": 1.0,
+                      "timeouts": {
+                        "connect": 30,
+                        "pool": 1800,
+                        "read": 1800,
+                        "write": 1800
+                      },
+                      "weight_revision": null
+                    },
+                    "reasoning_field_present": true,
+                    "reported_reasoning_tokens": null,
+                    "system_fingerprint": "vllm-0.23.0-7cd694fa",
+                    "transport_error_kind": null
+                  },
+                  "finish_reason": "stop",
+                  "http_status": 200,
+                  "number": 1,
+                  "outcome_uncertain": false,
+                  "returned_model": "qwen3.6:35b",
+                  "usage": {
+                    "completion_tokens": 619,
+                    "prompt_tokens": 1807,
+                    "total_tokens": 2426
+                  }
+                }
+              ],
+              "content": "{\"schema_version\":\"1.0\",\"instance_id\":\"request\",\"task_type\":\"generation\",\"horizon_slots\":16,\"slot_minutes\":30,\"horizon_start\":\"2026-10-26T09:00:00+08:00\",\"timezone\":\"+08:00\",\"participants\":[{\"id\":\"P1\",\"availability\":[{\"start\":0,\"end\":16}]},{\"id\":\"P2\",\"availability\":[{\"start\":0,\"end\":16}]}],\"resources\":[{\"id\":\"R1\",\"availability\":[{\"start\":0,\"end\":10}]}],\"activities\":[{\"id\":\"A6\",\"duration_slots\":2,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":2,\"end\":11}]},{\"id\":\"A7\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":3,\"end\":11}]},{\"id\":\"A5\",\"duration_slots\":1,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":5}]},{\"id\":\"A3\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":1,\"end\":8}]},{\"id\":\"A1\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":2,\"end\":9}]},{\"id\":\"A8\",\"duration_slots\":1,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":3}]},{\"id\":\"A2\",\"duration_slots\":2,\"participant_ids\":[\"P2\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":6,\"end\":12}]},{\"id\":\"A4\",\"duration_slots\":1,\"participant_ids\":[\"P1\"],\"resource_ids\":[\"R1\"],\"availability\":[{\"start\":0,\"end\":4}]}],\"constraints\":[{\"type\":\"fixed_start\",\"id\":\"c1\",\"activity_id\":\"A8\",\"slot\":0},{\"type\":\"precedence\",\"id\":\"c2\",\"before\":\"A8\",\"after\":\"A3\"},{\"type\":\"precedence\",\"id\":\"c3\",\"before\":\"A5\",\"after\":\"A7\"},{\"type\":\"precedence\",\"id\":\"c4\",\"before\":\"A3\",\"after\":\"A6\"},{\"type\":\"precedence\",\"id\":\"c5\",\"before\":\"A7\",\"after\":\"A2\"},{\"type\":\"preferred_start\",\"id\":\"c6\",\"activity_id\":\"A8\",\"start\":10,\"end\":16,\"weight\":3},{\"type\":\"preferred_start\",\"id\":\"c7\",\"activity_id\":\"A4\",\"start\":10,\"end\":16,\"weight\":1},{\"type\":\"preferred_start\",\"id\":\"c8\",\"activity_id\":\"A1\",\"start\":11,\"end\":15,\"weight\":2},{\"type\":\"preferred_start\",\"id\":\"c9\",\"activity_id\":\"A7\",\"start\":6,\"end\":10,\"weight\":1}]}",
+              "elapsed_seconds": 4.969297915697098,
+              "error": null,
+              "finish_reason": "stop",
+              "returned_model": "qwen3.6:35b"
+            },
+            "prompt_sha256": "ae0a29d20e4714befd026ab2eb2e04be26132ae8b2e441b709a2456485757699",
+            "schedule": [
+              {
+                "activity_id": "A1",
+                "start_slot": 7
+              },
+              {
+                "activity_id": "A2",
+                "start_slot": 8
+              },
+              {
+                "activity_id": "A3",
+                "start_slot": 1
+              },
+              {
+                "activity_id": "A4",
+                "start_slot": 2
+              },
+              {
+                "activity_id": "A5",
+                "start_slot": 3
+              },
+              {
+                "activity_id": "A6",
+                "start_slot": 4
+              },
+              {
+                "activity_id": "A7",
+                "start_slot": 6
+              },
+              {
+                "activity_id": "A8",
+                "start_slot": 0
+              }
+            ],
+            "schema_diagnostics": [],
+            "solve_result": {
+              "diagnostics": [],
+              "domain_analysis": {
+                "contradictions": [],
+                "domains": [
+                  {
+                    "activity_id": "A6",
+                    "duration_slots": 2,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[0].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14
+                        ]
+                      },
+                      {
+                        "code": "horizon_fit",
+                        "constraint_id": null,
+                        "path": "$.horizon_slots",
+                        "rejected_starts": [
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          9
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A7",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[1].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          2,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          10
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8,
+                      9
+                    ]
+                  },
+                  {
+                    "activity_id": "A5",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[2].availability",
+                        "rejected_starts": [
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0,
+                      1,
+                      2,
+                      3,
+                      4
+                    ]
+                  },
+                  {
+                    "activity_id": "A3",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[3].availability",
+                        "rejected_starts": [
+                          0,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      1,
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7
+                    ]
+                  },
+                  {
+                    "activity_id": "A1",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[4].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      2,
+                      3,
+                      4,
+                      5,
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A8",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[5].availability",
+                        "rejected_starts": [
+                          3,
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      },
+                      {
+                        "code": "fixed_start",
+                        "constraint_id": "c1",
+                        "path": "$.constraints[0]",
+                        "rejected_starts": [
+                          1,
+                          2
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0
+                    ]
+                  },
+                  {
+                    "activity_id": "A2",
+                    "duration_slots": 2,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[6].availability",
+                        "rejected_starts": [
+                          0,
+                          1,
+                          2,
+                          3,
+                          4,
+                          5,
+                          11,
+                          12,
+                          13,
+                          14
+                        ]
+                      },
+                      {
+                        "code": "horizon_fit",
+                        "constraint_id": null,
+                        "path": "$.horizon_slots",
+                        "rejected_starts": [
+                          15
+                        ]
+                      },
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.resources[0].availability",
+                        "rejected_starts": [
+                          9,
+                          10
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      6,
+                      7,
+                      8
+                    ]
+                  },
+                  {
+                    "activity_id": "A4",
+                    "duration_slots": 1,
+                    "exclusions": [
+                      {
+                        "code": "availability",
+                        "constraint_id": null,
+                        "path": "$.activities[7].availability",
+                        "rejected_starts": [
+                          4,
+                          5,
+                          6,
+                          7,
+                          8,
+                          9,
+                          10,
+                          11,
+                          12,
+                          13,
+                          14,
+                          15
+                        ]
+                      }
+                    ],
+                    "legal_starts": [
+                      0,
+                      1,
+                      2,
+                      3
+                    ]
+                  }
+                ],
+                "format_version": "1.0",
+                "reasoning": "unary_exclusions_and_sufficient_contradictions_not_minimum_conflicts",
+                "scope": "supplied_specification_only",
+                "search_space_upper_bound": 144060
+              },
+              "elapsed_seconds": 0.0028343750163912773,
+              "input_binding": {
+                "format_version": "1.0",
+                "repair_context_sha256": "74234e98afe7498fb5daf1f36ac2d78acc339464f950703b8c019892f982b90b",
+                "specification_sha256": "f6a28ac9947edbf323907eb3dfc04c137913c53aff3726ec8a500760534c9b36"
+              },
+              "last_solver_status": "OPTIMAL",
+              "objectives": {
+                "moved_count": null,
+                "preference_penalty": 6,
+                "total_shift_slots": null
+              },
+              "optimality_proven": true,
+              "schedule": [
+                {
+                  "activity_id": "A1",
+                  "start_slot": 7
+                },
+                {
+                  "activity_id": "A2",
+                  "start_slot": 8
+                },
+                {
+                  "activity_id": "A3",
+                  "start_slot": 1
+                },
+                {
+                  "activity_id": "A4",
+                  "start_slot": 2
+                },
+                {
+                  "activity_id": "A5",
+                  "start_slot": 3
+                },
+                {
+                  "activity_id": "A6",
+                  "start_slot": 4
+                },
+                {
+                  "activity_id": "A7",
+                  "start_slot": 6
+                },
+                {
+                  "activity_id": "A8",
+                  "start_slot": 0
+                }
+              ],
+              "stages": [
+                {
+                  "best_bound": 6.0,
+                  "elapsed_seconds": 0.0013362504541873932,
+                  "integer_lower_bound": 6,
+                  "objective": "preference_penalty",
+                  "proven_optimal": true,
+                  "solver_status": "OPTIMAL",
+                  "time_limit_seconds": 29.9986804574728,
+                  "value": 6
+                }
+              ],
+              "status": "OPTIMAL"
+            },
+            "status": "SAT",
+            "timings": [
+              [
+                "extraction_seconds",
+                4.9736692095175385
+              ],
+              [
+                "solver_seconds",
+                0.0028343750163912773
+              ],
+              [
+                "total_seconds",
+                4.976694875396788
+              ]
+            ],
+            "usage": [
+              {
+                "completion_tokens": 619,
+                "prompt_tokens": 1807,
+                "total_tokens": 2426
+              }
+            ],
+            "variant_id": "canonical"
+          },
+          "schedule_with_clock": [
+            {
+              "activity_id": "A8",
+              "end_clock": "09:30",
+              "start_clock": "09:00",
+              "start_slot": 0
+            },
+            {
+              "activity_id": "A3",
+              "end_clock": "10:00",
+              "start_clock": "09:30",
+              "start_slot": 1
+            },
+            {
+              "activity_id": "A4",
+              "end_clock": "10:30",
+              "start_clock": "10:00",
+              "start_slot": 2
+            },
+            {
+              "activity_id": "A5",
+              "end_clock": "11:00",
+              "start_clock": "10:30",
+              "start_slot": 3
+            },
+            {
+              "activity_id": "A6",
+              "end_clock": "12:00",
+              "start_clock": "11:00",
+              "start_slot": 4
+            },
+            {
+              "activity_id": "A7",
+              "end_clock": "12:30",
+              "start_clock": "12:00",
+              "start_slot": 6
+            },
+            {
+              "activity_id": "A1",
+              "end_clock": "13:00",
+              "start_clock": "12:30",
+              "start_slot": 7
+            },
+            {
+              "activity_id": "A2",
+              "end_clock": "14:00",
+              "start_clock": "13:00",
+              "start_slot": 8
+            }
+          ],
+          "validation": {
+            "hard_feasible": true,
+            "objectives": {
+              "moved_count": null,
+              "preference_penalty": 6,
+              "total_shift_slots": null
+            },
+            "structural_valid": true,
+            "violations": []
+          }
+        }
+      }
+    },
+    "public_view": {
+      "activity_ids": [
+        "A6",
+        "A7",
+        "A5",
+        "A3",
+        "A1",
+        "A8",
+        "A2",
+        "A4"
+      ],
+      "instance_id": "dg-3fd5174321284caacab1f4a9",
+      "original_schedule": null,
+      "task_type": "generation",
+      "text": "Schedule every activity exactly once. Slot zero is 2026-10-26T09:00:00+08:00, timezone +08:00. There are 16 slots of 30 minutes. All intervals are half-open, ending at start plus duration. Each activity must fit completely within one availability window for itself and every required entity. Activities sharing a participant or resource must not overlap. Only listed entities and constraints apply.\nParticipant P1 is available in [0,16) and has capacity one.\nParticipant P2 is available in [0,16) and has capacity one.\nResource R1 is available in [0,10) and has capacity one.\nActivity A6 lasts 2 slots; participants: P1; resources: R1; availability: [2,11).\nActivity A7 lasts 1 slots; participants: P1; resources: R1; availability: [3,11).\nActivity A5 lasts 1 slots; participants: P2; resources: R1; availability: [0,5).\nActivity A3 lasts 1 slots; participants: P1; resources: R1; availability: [1,8).\nActivity A1 lasts 1 slots; participants: P1; resources: R1; availability: [2,9).\nActivity A8 lasts 1 slots; participants: P2; resources: R1; availability: [0,3).\nActivity A2 lasts 2 slots; participants: P2; resources: R1; availability: [6,12).\nActivity A4 lasts 1 slots; participants: P1; resources: R1; availability: [0,4).\nStarting A8 outside [10,16) incurs penalty 3; starting inside incurs zero.\nA8 must finish before or when A3 starts.\nA5 must finish before or when A7 starts.\nA3 must finish before or when A6 starts.\nA7 must finish before or when A2 starts.\nA8 must start exactly at slot 0.\nStarting A4 outside [10,16) incurs penalty 1; starting inside incurs zero.\nStarting A1 outside [11,15) incurs penalty 2; starting inside incurs zero.\nStarting A7 outside [6,10) incurs penalty 1; starting inside incurs zero.\nMinimize the total preference penalty subject to all hard requirements.",
+      "variant_id": "canonical"
+    }
+  }
+}

@@ -9,6 +9,9 @@ final submission readiness. PDF QA uses pdfplumber/pypdf and rendered page revie
 from __future__ import annotations
 
 import argparse
+import hashlib
+import io
+import json
 from html import escape
 import math
 from pathlib import Path
@@ -60,7 +63,7 @@ def inline(text: str) -> str:
 
 
 BODY = ParagraphStyle('Body', fontName='Times-Roman', fontSize=11, leading=12.5,
-                      textColor=INK, spaceAfter=6, splitLongWords=True)
+                      textColor=INK, spaceAfter=6, splitLongWords=True, allowWidows=0, allowOrphans=0)
 CELL = ParagraphStyle('Cell', parent=BODY, spaceAfter=0)
 HEAD = ParagraphStyle('Heading', parent=BODY, fontName='Times-Bold', fontSize=13,
                       leading=15, spaceBefore=10, spaceAfter=7, keepWithNext=True)
@@ -101,6 +104,47 @@ class Equation(Flowable):
         for x, y, width, height in self.layout.rects:
             c.rect(x, y, width, height, fill=1, stroke=0)
         c.restoreState()
+
+
+class MermaidFigure(Flowable):
+    """Place the checked Mermaid-produced vector PDF without redrawing its layout."""
+    def __init__(self, source: list[str], placements: list):
+        from pypdf import PdfReader
+        super().__init__()
+        directory = ROOT / 'docs/figures/report-compact-20261018'
+        self.path = directory / 'architecture.pdf'
+        receipt = json.loads((directory / 'architecture-receipt.json').read_text())
+        raw = ('\n'.join(source).strip()+'\n').encode()
+        if hashlib.sha256(raw).hexdigest() != receipt['mermaid_source_sha256']:
+            raise ValueError('Mermaid source changed: regenerate the diagram and receipt')
+        if hashlib.sha256(self.path.read_bytes()).hexdigest() != receipt['pdf_sha256']:
+            raise ValueError('Mermaid PDF does not match its rendering receipt')
+        page = PdfReader(self.path).pages[0]
+        self.width = 340
+        self.height = float(page.mediabox.height)*self.width/float(page.mediabox.width)
+        self.placements = placements
+        self.hAlign = 'CENTER'
+
+    def draw(self):
+        x, y = self.canv.absolutePosition(0, 0)
+        self.placements.append((self.canv.getPageNumber()-1, x, y, self.width, self.path))
+
+
+def overlay_mermaid(output: Path, placements: list):
+    """Merge vector artwork after pagination; retain selectable text and arrows."""
+    from pypdf import PdfReader, PdfWriter, Transformation
+    if not placements:
+        return
+    document = PdfReader(io.BytesIO(output.read_bytes()))
+    writer = PdfWriter()
+    writer.clone_document_from_reader(document)
+    for page_number, x, y, width, asset in placements:
+        page = PdfReader(asset).pages[0]
+        scale = width/float(page.mediabox.width)
+        writer.pages[page_number].merge_transformed_page(
+            page, Transformation().scale(scale).translate(x, y))
+    with output.open('wb') as stream:
+        writer.write(stream)
 
 
 class Architecture(Flowable):
@@ -222,7 +266,8 @@ def table(lines: list[str]):
     if columns == 2:
         widths = [WIDTH*.28, WIDTH*.72]
     elif columns == 3:
-        widths = [WIDTH*.54,WIDTH*.23,WIDTH*.23]
+        ratios = (.20, .43, .37) if rows[0][0] == 'Model' else (.54, .23, .23)
+        widths = [WIDTH*r for r in ratios]
     elif columns == 7:
         widths = [WIDTH*.16]+[WIDTH*.14]*6
     elif columns == 5:
@@ -267,6 +312,7 @@ def render(source: Path, output: Path):
     story = []
     i = 0
     phase = 'Title'
+    mermaid_placements = []
     while i < len(lines):
         line = lines[i]
         if not line.strip():
@@ -296,7 +342,9 @@ def render(source: Path, output: Path):
             if end == len(lines):
                 raise ValueError('Unclosed fence')
             if kind == 'mermaid':
-                story.append(Architecture(lines[i+1:end]))
+                story.append(MermaidFigure(lines[i+1:end], mermaid_placements)
+                             if lines[i+1].strip() == 'flowchart TD'
+                             else Architecture(lines[i+1:end]))
                 story.append(Spacer(1,8))
             elif kind == 'text':
                 for item in lines[i+1:end]:
@@ -334,12 +382,13 @@ def render(source: Path, output: Path):
         while end < len(lines) and lines[end].strip() and not lines[end].startswith(('#','```','|','![')) and not re.match(r'^\d+\. ', lines[end]):
             end += 1
         text = ' '.join(lines[i:end])
-        style = CENTER if phase=='Title' else CAPTION if text.startswith('**Table ') else BODY
+        style = CENTER if phase=='Title' else CAPTION if text.startswith(('**Table ', '**Worked example:')) else BODY
         story.append(Paragraph(inline(text),style))
         i = end
     output.parent.mkdir(parents=True,exist_ok=True)
     document = Report(output)
     document.build(story)
+    overlay_mermaid(output, mermaid_placements)
     for page, phase in document.phase_pages:
         print(f'page {page}: {phase}')
     print(f'output: {output}')

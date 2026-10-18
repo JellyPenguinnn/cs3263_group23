@@ -1,5 +1,27 @@
 # Repository publication verification
 
+## Analysis-focused report review and authorized publication — 18 October 2026
+
+The report was reviewed line by line against the original project brief, report guidelines, proposal, supplied TA feedback and saved results. The revision prioritizes generation, construction versus infeasibility prediction, extraction errors, returned-response sensitivity, optimization, resource distributions and practical limitations. Detailed repair equations, opaque case identifiers and operational history remain in the supplement. The complete worked example, timetable, Mermaid architecture and compact result charts remain in the counted body.
+
+The independent factual review confirmed all reported counts and distributions. Two overstatements were corrected: timers identify the model-request stage, not network waiting alone; method B supplies solver statuses, not exported independently checkable UNSAT proof certificates. Domain definitions explicitly include activity availability. The comparison is explicitly between complete pipelines, not a solver-only ablation. The checklist and claim index now consistently identify the diverse study as primary, with historical studies separate.
+
+Validation: twelve final PDF pages visually inspected; ten body pages, one title and one reference page; at least 11-point text and one-inch margins; 161 source-text chunks and two mathematical expressions verified. Source-bound resource regeneration is byte-identical; all four mean/median/p95 tables and the worked schedule match saved evidence. The targeted figure regression passed (one test), report-script syntax checks passed, active local links and credential/private-identifier scans passed, and the final diff has no whitespace errors. All eight archives and 9,186 checksum-covered files verified. Runtime source, prompts, case data and original results are unchanged; no new model calls were made.
+
+The [final report-publication receipt](../results/summary/report-final-publication-check-20261018.json) binds the checked documents and results. The user authorized commit and push to GitHub main; the commit containing this entry is the publication identity. Actual human review, member contribution statements, scope/model clarification and course delivery remain open. Earlier entries below retain their checkpoint-specific status and checks.
+
+## Local report revision — 18 October 2026
+
+This presentation-only revision adds a trace-backed shared-room example, a timetable for the identical saved solver-assisted schedules, and mean/median/nearest-rank p95 for tokens and per-attempt time. Mermaid now lays out the architecture and is embedded as vector PDF; the detailed OS/concurrency distributions remain in the [supplement](report-details.md). Scheduling code, prompts, datasets, all original traces and results are unchanged. No model calls, commit or push were made for this revision.
+
+- The resource derivative was rebuilt independently and was byte-identical; all four report token/time rows match the source-bound derivative. Missing usage remains unknown.
+- The example's recorded starts, availability containment, precedence, room occupancy and direct-answer failures were independently checked. The timetable matches both recorded B schedules. It is a selected illustration, not a representative sample or completed human review.
+- The PDF passes source-text, equation, 11-point minimum-font, one-inch margin and page-limit checks: **one title page, ten body pages and one reference page**. All twelve rendered pages were visually inspected after layout changes. After replacing opaque case identifiers with descriptive labels, all six visually changed pages were rechecked; the other six were pixel-identical. Exact identifiers and original detailed failure descriptions remain in the supplement.
+- Compact charts retain identical plotted data; the targeted figure regression passed (**1 test**). Five edited/new report scripts passed Python syntax checks, and `git diff --check` passed.
+- All **eight archives / 9,186 checksum-covered files** verified. The previous report source, PDF, format receipt and renderer scripts are preserved under `history/20261018-before-worked-example/`; snapshot hashes match.
+
+The [revision receipt](../results/summary/report-revision-verification-20261018.json) and [current format receipt](../results/summary/submission-report-format.json) bind this local version. Publication receipts below describe earlier checkpoints and retain their original hashes. Remaining substantive human review, contribution statements, model/scope clarification and submission tasks are unchanged.
+
 ## Final consistency check and authorized publication — 18 October 2026
 
 README, the report, planning and AGENTS agree on the completed D6 study and its limitations. The final review corrected stale references to the balanced study in the active plan, updated the substantive human-review/replay queue, distinguished HTTP concurrency from CP-SAT workers, and marked D6 complete in the TA-alignment notes. Generation remains the core and repair an extension. Model eligibility, scope clarification, actual member contributions/review, the private submitted copy, presentation and submission are still open.

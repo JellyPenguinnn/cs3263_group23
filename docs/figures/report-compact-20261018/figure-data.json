@@ -1,0 +1,163 @@
+{
+  "compact": true,
+  "matplotlib_version": "3.10.0",
+  "minimum_text_points": 11,
+  "new_model_calls": 0,
+  "notes": [
+    "All failures retained; 1,000 attempts per main bar and 200 per size bar.",
+    "Failure categories are mutually exclusive; accepted suboptimal answers are not counted as failures here.",
+    "Failure chart panels have different vertical ranges; compare counts.",
+    "Size annotations are exact accepted counts out of 200; vertical axis shows percentages.",
+    "Render at native width or larger to preserve 11-point text."
+  ],
+  "output_sha256": {
+    "diverse-acceptance.png": "e93c5640e7cbcb283c8ec6169cc3640050614ecbcb9cbc641d010e1603aafcad",
+    "diverse-failures.png": "95aa5b93f9b5f0fc90a6b9297c39c7baf6c540346e26834ab5a07b89f10b8b68",
+    "diverse-size.png": "86070153238b67b3fc90ff0a24f3784e9d498d77e70cd2f2a1a4a8af359aa779"
+  },
+  "plotted_data": {
+    "glm53flash": {
+      "direct": {
+        "accepted": 891,
+        "attempts": 1000,
+        "by_size": {
+          "12": {
+            "accepted": 192,
+            "attempts": 200
+          },
+          "16": {
+            "accepted": 190,
+            "attempts": 200
+          },
+          "24": {
+            "accepted": 169,
+            "attempts": 200
+          },
+          "32": {
+            "accepted": 148,
+            "attempts": 200
+          },
+          "8": {
+            "accepted": 192,
+            "attempts": 200
+          }
+        },
+        "failures": {
+          "false_unsat": 17,
+          "gold_invalid_schedule": 27,
+          "invalid_output": 0,
+          "provider_error": 65
+        },
+        "percent": 89.1
+      },
+      "solver_augmented": {
+        "accepted": 988,
+        "attempts": 1000,
+        "by_size": {
+          "12": {
+            "accepted": 199,
+            "attempts": 200
+          },
+          "16": {
+            "accepted": 197,
+            "attempts": 200
+          },
+          "24": {
+            "accepted": 198,
+            "attempts": 200
+          },
+          "32": {
+            "accepted": 194,
+            "attempts": 200
+          },
+          "8": {
+            "accepted": 200,
+            "attempts": 200
+          }
+        },
+        "failures": {
+          "false_unsat": 3,
+          "gold_invalid_schedule": 1,
+          "invalid_output": 5,
+          "provider_error": 3
+        },
+        "percent": 98.8
+      }
+    },
+    "qwen36": {
+      "direct": {
+        "accepted": 308,
+        "attempts": 1000,
+        "by_size": {
+          "12": {
+            "accepted": 47,
+            "attempts": 200
+          },
+          "16": {
+            "accepted": 66,
+            "attempts": 200
+          },
+          "24": {
+            "accepted": 64,
+            "attempts": 200
+          },
+          "32": {
+            "accepted": 74,
+            "attempts": 200
+          },
+          "8": {
+            "accepted": 57,
+            "attempts": 200
+          }
+        },
+        "failures": {
+          "false_unsat": 291,
+          "gold_invalid_schedule": 144,
+          "invalid_output": 208,
+          "provider_error": 49
+        },
+        "percent": 30.8
+      },
+      "solver_augmented": {
+        "accepted": 953,
+        "attempts": 1000,
+        "by_size": {
+          "12": {
+            "accepted": 196,
+            "attempts": 200
+          },
+          "16": {
+            "accepted": 189,
+            "attempts": 200
+          },
+          "24": {
+            "accepted": 191,
+            "attempts": 200
+          },
+          "32": {
+            "accepted": 180,
+            "attempts": 200
+          },
+          "8": {
+            "accepted": 197,
+            "attempts": 200
+          }
+        },
+        "failures": {
+          "false_unsat": 14,
+          "gold_invalid_schedule": 6,
+          "invalid_output": 25,
+          "provider_error": 2
+        },
+        "percent": 95.3
+      }
+    }
+  },
+  "renderer_sha256": "ab26be27436f25d7328c0be3e16c88f35298ec112794a5f94ec7e5f0afa5db05",
+  "shared_renderer_sha256": {
+    "render_benchmark_results.py": "418444ca00eaee17cf2a81e71e5e65d5868c69c9db93c468dbae9d77297a1be6",
+    "render_difficulty_results.py": "84f8bbc06557982c050f7c4c4ce298793d26efb4915cc3d02bea62811e9a2198"
+  },
+  "source_sha256": "c0713697d7ea8f29fb0dd55a2888443d8e160b94ff8f74af831c05d513f59501",
+  "width_inches": 6.2
+}
