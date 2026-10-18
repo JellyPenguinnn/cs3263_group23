@@ -1,0 +1,67 @@
+{
+  "revision": "Local cover and Section 7 table presentation update",
+  "format": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 2,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "596ff707fea38345897eb8f9711b6d4ce99ed7718610e5b369d8ebb7ef3605f4",
+    "reference_pages": 1,
+    "source_sha256": "199790c243bdc6d1810f449402324d24c0d9b4cdbc260602bb772286ba0955d2",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 155,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "private_format_checks_passed": true,
+  "private_body_reference_pages_pixel_identical": true,
+  "resource_metric_cells_unchanged": true,
+  "archive_sha256_preservation": [
+    {
+      "archive": "balanced-96-qwen36-20261015.tar.gz",
+      "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+      "verified_files": 211
+    },
+    {
+      "archive": "balanced-96-glm53flash-20261015.tar.gz",
+      "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+      "verified_files": 211
+    },
+    {
+      "archive": "difficulty-200-qwen36-20261014.tar.gz",
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+      "verified_files": 364
+    },
+    {
+      "archive": "difficulty-200-glm53flash-20261014.tar.gz",
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+      "verified_files": 364
+    },
+    {
+      "archive": "diverse-2000-qwen36-20261018-portable.tar.gz",
+      "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+      "verified_files": 3077
+    },
+    {
+      "archive": "diverse-2000-glm53flash-20261018-portable.tar.gz",
+      "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+      "verified_files": 3077
+    },
+    {
+      "archive": "benchmark-qwen36-20261001-02.tar.gz",
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+      "verified_files": 941
+    },
+    {
+      "archive": "benchmark-qwen38-20261001-04.tar.gz",
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+      "verified_files": 941
+    }
+  ],
+  "logo_source": "Extracted unchanged from the supplied Group 23 proposal PDF, page 1",
+  "logo_sha256": "a26d83b22f76b92121ef061dcd31e05c8a93c060764fa7290454b37e430d2033",
+  "model_calls": 0,
+  "publication_status": "Local changes; not committed or pushed"
+}

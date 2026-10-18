@@ -1,0 +1,34 @@
+{
+  "revision": "Worked-example clarity",
+  "format": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 2,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "ce4363fa78fd4c20cd9f22eb9ceb36d96942dc7d5aecf87a8adfe652165b1ed3",
+    "reference_pages": 1,
+    "source_sha256": "54f77eb045ceba0e563b92c674f5c79ed871c24dd313d8d2aff4e5832a8211f9",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 156,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "worked_evidence_rederived_byte_identical": true,
+  "evidence_sha256": "2ba3b60f9a1674a6b8c3365007fc44b197aa3dda43bd59f1435f08d53eb27b63",
+  "changed_pages_visually_reviewed": [
+    5,
+    6,
+    7,
+    8,
+    9,
+    10,
+    11
+  ],
+  "unchanged_pages_match_preceding_review": true,
+  "private_body_reference_pages_pixel_identical": true,
+  "private_format_checks_passed": true,
+  "model_calls": 0,
+  "publication_status": "Local; not committed or pushed"
+}

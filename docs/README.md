@@ -4,7 +4,7 @@ The repository contains a working scheduling implementation, the completed 2,000
 
 | Start here | Purpose |
 | --- | --- |
-| [Submission report](submission-report.md) / [PDF](submission-report.pdf) | Complete scientific narrative based on both models; member review and private submission details still required |
+| [Submission report](submission-report.md) / [PDF](submission-report.pdf) | Complete scientific narrative based on both models; member review still required; a local private cover is prepared for identity confirmation |
 | [Report resource and example supplement](report-details.md) | Mean/median/p95, execution-phase breakdowns, complete worked-case inputs and figure reproduction |
 | [Submission checklist](submission-checklist.md) | Course obligations, genuine human review, contribution records and delivery gates |
 | [Claim-to-evidence index](claim-evidence.md) | Trace each substantive result and example to preserved source artifacts |

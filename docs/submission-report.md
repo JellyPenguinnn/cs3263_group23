@@ -1,14 +1,18 @@
-# Direct LLM Reasoning versus Constraint-Solver-Augmented Scheduling
+# AI Assistant for Dynamic Constraint-Aware Scheduling
 
-CS3263 Foundations of Artificial Intelligence - Group 23
+School of Computing
 
-Tea Li Hao, Tham Yao Xiang, Woo Yong Qing
+CS3263 Foundations of Artificial Intelligence<br/>Semester 1, AY2026/27
 
-NUS AY2026/27 Semester 1 - 18 October 2026
+PROJECT REPORT
 
-Controlled schedule generation, with minimum-disruption repair as an extension.
+*Direct LLM Reasoning versus Constraint-Solver-Augmented Scheduling*
 
-Public report copy. Matriculation numbers and email addresses belong on the private submission title page. Model eligibility and actual member review/contributions must be confirmed before course submission; see the accompanying submission checklist.
+**Group 23**
+
+**Team Members**
+
+Tham Yao Xiang | Team Leader<br/>Tea Li Hao<br/>Woo Yong Qing
 
 ## Abstract
 
@@ -72,20 +76,24 @@ The independent validator checks every hard constraint and recomputes objectives
 
 Each method makes one attempt without retries or validator-feedback correction. All returned answers and failures are retained and can be replayed offline. The experiment compares complete pipelines: method B changes the model's output task as well as adding a solver, so it is not an ablation isolating the solver algorithm alone.
 
-**Worked example: a shared-room schedule.** This selected eight-activity example illustrates the measured methods; it does not estimate how often each outcome occurs. The following is a human-readable summary of the saved canonical request; the original prompt and all four outputs remain in the evidence package. On 26 October, P1 and P2 are available 09:00-17:00; room R1 is available 09:00-14:00. Every activity requires R1 and the named person, must fit entirely inside its availability window, and must not overlap another activity using either entity. Slots last 30 minutes. The complete activity windows and durations are retained in the report supplement.
+**Worked example: can eight activities share one room?** This selected case illustrates the comparison, not success frequency. Each model received the same requirements once for direct solving (A) and once for extraction plus CP-SAT (B). All four calls returned answers.
 
-![Example timetable. Both solver-assisted methods returned this schedule. Each column spans 30 minutes; a two-column block lasts one hour. Blank participant cells are free; the room row shows exclusive occupancy.](figures/report-compact-20261018/worked-timetable.png)
+**The request.** Schedule eight 30- or 60-minute activities for two people, P1 and P2, available 09:00-17:00 on 26 October. Their shared room R1 is available 09:00-14:00. Each activity must fit within its own availability window and occupy both its assigned person and the room. Even activities involving different people cannot overlap in R1. A8 starts at 09:00; A4 must finish by 11:00 and A1 by 13:30. Required ordering is A8 before A3, A3 before A6, A5 before A7, and A7 before A2. Preferred start times are soft: missing them incurs a penalty but does not invalidate a schedule. Full windows, weights and original inputs remain in the supplement.
 
-A8 is fixed at 09:00. Precedence requires A8 before A3, A3 before A6, A5 before A7, and A7 before A2. Preferred start windows are 14:00-17:00 for A8 and A4 (weights 3 and 1), 14:30-16:30 for A1 (weight 2), and 12:00-14:00 for A7 (weight 1). Violating a preference adds its weight but never makes a schedule infeasible. A8 is fixed at 09:00, A4 must finish by 11:00 and A1 by 13:30. Their preferred starts are therefore impossible, giving every feasible solution a penalty of at least 6.
-
-**Table 1. Four measured outcomes on the same input; all four calls returned answers. A is direct; B is extraction plus CP-SAT.**
+**Table 1. What each method returned for the same request.**
 
 | Model | Direct LLM (A) | LLM + CP-SAT (B) |
 | --- | --- | --- |
-| Qwen3.6 | Incorrect UNSAT prediction | Valid schedule; penalty 6 |
-| GLM5.3 Flash | Availability violation and room overlap | Valid schedule; penalty 6 |
+| Qwen3.6 | Predicts no feasible schedule (UNSAT); incorrect | Valid schedule; optimal penalty 6 |
+| GLM5.3 Flash | Returns a schedule; violates room and activity availability | Valid schedule; optimal penalty 6 |
 
-GLM A places both A4 and A5 at 11:00-11:30. This double-books R1, and A4 finishes after its 11:00 availability boundary. Both B extractions match the gold specification and return the illustrated schedule: A8, A3, A4, A5, A6, A7, A1, A2 occupy the room consecutively from 09:00 to 14:00. It satisfies every hard constraint and A7's preference, attaining the lower bound of 6. This witness also refutes Qwen A's UNSAT prediction. The example shows different direct-answer failures and successful formal solving; Section 6 retains contrasting cases where incorrect extraction makes B fail.
+![Example timetable. Both solver-assisted methods returned this same schedule. P1/P2 rows show each person's activities; R1 shows the shared room. Each column is 30 minutes; a two-column block lasts one hour. Blank participant cells are free.](figures/report-compact-20261018/worked-timetable.png)
+
+**Why the direct answers fail.** Read the room row from left to right: all eight activities fit without overlap from 09:00 to 14:00. This valid schedule disproves Qwen's UNSAT prediction. GLM instead places A4 and A5 together at 11:00-11:30, double-booking R1; A4 also finishes after its 11:00 availability boundary. These are returned-answer errors, not service failures.
+
+**Why the tool-assisted answers pass.** Both models extract the gold constraints correctly, and CP-SAT produces the timetable above. The independent validator confirms every hard constraint. A penalty of 6 is still optimal: A8 and A4 prefer starts from 14:00, and A1 from 14:30, which their hard restrictions rule out. Their unavoidable penalties sum to 3 + 1 + 2 = 6. A7 starts at 12:00, satisfying its 12:00-14:00 preference with no additional penalty. Thus the schedule is both feasible and as preference-satisfying as this request permits.
+
+The example separates two questions: can a valid schedule be found, and how well can it satisfy preferences? It illustrates the value of correct extraction plus formal solving; Section 6 also examines failures where incorrect extraction makes B solve the wrong problem.
 
 ## 5. Dataset and experimental protocol
 
@@ -140,25 +148,27 @@ Qwen has 873 structurally matching extractions and 100 differing ones among 973 
 
 **Token usage.** Table 3 reports provider-supplied prompt-plus-completion tokens. Missing usage on 119 infrastructure failures is unknown, not zero; statistics use reported observations only. The p95 is the nearest-rank 95th percentile, describing the observed upper tail rather than a worst-case bound. Full definitions and execution-phase distributions are in the supplement.
 
-**Table 3. Total tokens per scheduling call. A = direct LLM; B = LLM + CP-SAT. Coverage is reported / attempted.**
+**Table 3. Total tokens per scheduling call. A = direct LLM; B = LLM + CP-SAT. Statistics use calls with reported usage.**
 
-| Model / method | Mean | Median | p95 | Coverage |
-| --- | ---: | ---: | ---: | ---: |
-| Qwen A | 3,287.5 | 1,977 | 12,751 | 951/1,000 |
-| Qwen B | 5,220.4 | 4,737.5 | 8,490 | 998/1,000 |
-| GLM A | 7,504.1 | 5,592 | 19,191 | 935/1,000 |
-| GLM B | 7,054.6 | 6,159 | 12,750 | 997/1,000 |
+| Model / method | Mean | Median | p95 |
+| --- | ---: | ---: | ---: |
+| Qwen A | 3,287.5 | 1,977 | 12,751 |
+| Qwen B | 5,220.4 | 4,737.5 | 8,490 |
+| GLM A | 7,504.1 | 5,592 | 19,191 |
+| GLM B | 7,054.6 | 6,159 | 12,750 |
+
+Usage reported: Qwen A 951; Qwen B 998; GLM A 935; GLM B 997 (of 1,000 each).
 
 Qwen B has a higher mean token count but a lower p95 than A; GLM B has a lower mean and p95 but a higher median than A. Thus a mean alone hides the shape of these distributions. Qwen A's low median also accompanies many short UNSAT answers, including incorrect ones; low usage is not evidence of successful efficiency. Provider tokenization and hidden serving behavior differ, so token counts are neither a common currency cost nor an independently measured reasoning budget.
 
-**Table 4. Recorded per-attempt pipeline duration in seconds, including failures. These pooled values describe the observed deployment, not a controlled comparison of model speed.**
+**Table 4. Pipeline duration per attempt (seconds; 1,000 attempts per row, including failures). Pooled deployment timings, not a controlled model-speed comparison.**
 
-| Model / method | Mean | Median | p95 | Timed attempts |
-| --- | ---: | ---: | ---: | ---: |
-| Qwen A | 36.53 | 21.55 | 132.49 | 1,000/1,000 |
-| Qwen B | 41.26 | 37.38 | 87.42 | 1,000/1,000 |
-| GLM A | 108.68 | 71.46 | 300.05 | 1,000/1,000 |
-| GLM B | 67.07 | 55.24 | 141.91 | 1,000/1,000 |
+| Model / method | Mean | Median | p95 |
+| --- | ---: | ---: | ---: |
+| Qwen A | 36.53 | 21.55 | 132.49 |
+| Qwen B | 41.26 | 37.38 | 87.42 |
+| GLM A | 108.68 | 71.46 | 300.05 |
+| GLM B | 67.07 | 55.24 | 141.91 |
 
 Pipeline time includes the model request and local parsing/solving within an attempt, excluding pre-dispatch waiting and campaign downtime. The model-request stage dominates measured pipeline time. Local B solver mean/median/p95 is **16.19/10.25/36.52 ms** for Qwen (973 invocations) and **13.97/11.39/33.01 ms** for GLM (992). Thus local solving adds little time in these bounded cases; generation of the formal specification remains part of B's model-call cost. The timers cannot separate provider inference from queueing or networking.
 

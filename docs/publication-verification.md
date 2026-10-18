@@ -1,5 +1,26 @@
 # Repository publication verification
 
+## Final cover and worked-example publication — 18 October 2026
+
+This authorized publication includes the NUS cover, removal of the date/running header, clearer resource tables and the one-page worked explanation. Both public and local private reports passed fresh format checks: one cover, ten body pages, one reference page, at least 11-point text and one-inch margins. The final source/PDF hashes match the visually reviewed worked-example revision. Private student IDs, emails and report files remain local under ignored `docs/private/` and are excluded from this commit.
+
+All eight existing archives and 9,186 checksum-covered members verified unchanged. No scientific runtime, dataset, prompt, result or trace was modified, and no model calls were made. Public identifier/credential checks, renderer syntax and whitespace checks passed. The [publication receipt](../results/summary/report-cover-worked-publication-check-20261018.json) records this verification; the Git commit containing this entry identifies the published version. Earlier local-checkpoint entries below retain their historical status. Actual member review, contributions, identity confirmation, scope/model clarification and course submission remain outstanding.
+
+
+## Worked-example clarity revision — 18 October 2026 (local)
+
+The worked example now occupies one coherent page: a plain-language request, the four measured outcomes, the saved shared-room timetable, and separate explanations of direct-answer failures and solver-assisted success. It explicitly distinguishes hard feasibility from the unavoidable preference penalty of 6 and retains the selected-example limitation. The timing-table sample count is in its caption to avoid a detached note after pagination.
+
+The resource/example derivation was rebuilt offline from both manifest-bound archives and matched the preserved JSON byte-for-byte. No inputs, schedules, outcomes, charts or traces changed. Both public and private PDFs pass fresh text, margin, font and ten-body-page checks; every changed page was visually inspected, and unchanged pages match the preceding reviewed rendering. Private body/reference pages remain pixel-identical to the public copy. The [worked-example verification](../results/summary/report-worked-clarity-verification-20261018.json) binds the current files. These changes remain local and uncommitted; earlier receipts retain their original hashes.
+
+
+## Cover and resource-table revision — 18 October 2026 (local)
+
+The report now uses the NUS logo extracted unchanged from the supplied proposal, a course/group title page without a date, and page numbers without the running study header. The public cover lists names; the separately checked local copy under ignored `docs/private/` includes the supplied student IDs and emails. Members must confirm these details before submission.
+
+Section 7 retains all mean, median and p95 values. Reported-token counts and the 1,000 timed attempts per row are now table notes; missing token usage remains unknown rather than zero. No benchmark inputs, traces, results or analysis values changed. Both copies have one title page, ten body pages and one references page, with at least 11-point text and one-inch margins. All pages were visually reviewed; the private body/reference pages are pixel-identical to the public version. The [cover revision receipt](../results/summary/report-cover-verification-20261018.json) and [current format receipt](../results/summary/submission-report-format.json) identify this revision. Earlier publication receipts below retain their historical hashes. This revision has not been committed or pushed.
+
+
 ## Analysis-focused report review and authorized publication — 18 October 2026
 
 The report was reviewed line by line against the original project brief, report guidelines, proposal, supplied TA feedback and saved results. The revision prioritizes generation, construction versus infeasibility prediction, extraction errors, returned-response sensitivity, optimization, resource distributions and practical limitations. Detailed repair equations, opaque case identifiers and operational history remain in the supplement. The complete worked example, timetable, Mermaid architecture and compact result charts remain in the counted body.

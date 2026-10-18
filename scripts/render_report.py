@@ -245,8 +245,8 @@ class Report(BaseDocTemplate):
     def footer(self, canvas, doc):
         canvas.setFillColor(MUTED)
         canvas.setFont('Times-Roman',11)
-        canvas.drawString(MARGIN,PAGE_H-82,'CS3263 Group 23 | Scheduling study')
-        canvas.drawRightString(PAGE_W-MARGIN,78,str(doc.page))
+        if doc.page > 1:
+            canvas.drawRightString(PAGE_W-MARGIN,78,str(doc.page))
 
     def afterFlowable(self, flowable):
         if getattr(flowable,'report_phase',None):
@@ -307,10 +307,40 @@ def table(lines: list[str]):
     return result
 
 
+def cover_page(lines: list[str]):
+    """Lay out the report title fields; keep private member details in the source."""
+    blocks = re.split(r'\n\s*\n', '\n'.join(lines).strip())
+    if (len(blocks) != 8 or not blocks[0].startswith('# ')
+            or blocks[3] != 'PROJECT REPORT'):
+        raise ValueError('Expected title, school, course, report label, subtitle, group, member heading and members')
+    title, school, course, label, subtitle, group, member_heading, members = blocks
+    styles = {
+        'school': ParagraphStyle('CoverSchool', parent=CENTER, fontName='Helvetica-Bold', fontSize=15, leading=18, spaceAfter=12),
+        'course': ParagraphStyle('CoverCourse', parent=CENTER, fontName='Helvetica-Bold', fontSize=11, leading=14, spaceAfter=0),
+        'label': ParagraphStyle('CoverLabel', parent=CENTER, fontName='Helvetica-Bold', fontSize=13, leading=16, spaceAfter=14),
+        'title': ParagraphStyle('CoverTitle', parent=CENTER, fontName='Helvetica-Bold', fontSize=20, leading=24, spaceAfter=18),
+        'subtitle': ParagraphStyle('CoverSubtitle', parent=CENTER, fontName='Helvetica-Oblique', fontSize=11, leading=15, spaceAfter=0),
+        'group': ParagraphStyle('CoverGroup', parent=CENTER, fontName='Helvetica-Bold', fontSize=14, leading=18, spaceAfter=10),
+        'members': ParagraphStyle('CoverMembers', parent=CENTER, fontName='Helvetica', fontSize=11, leading=17, spaceAfter=0),
+    }
+    logo = Image(str(ROOT/'docs/figures/nus-logo.png'))
+    logo.drawHeight *= 340/logo.drawWidth
+    logo.drawWidth = 340
+    logo.hAlign = 'CENTER'
+    return [logo, Spacer(1, 8), Paragraph(inline(school), styles['school']),
+            Paragraph(inline(course), styles['course']), Spacer(1, 45),
+            Paragraph(inline(label), styles['label']),
+            Paragraph(inline(title[2:]), styles['title']),
+            Paragraph(inline(subtitle), styles['subtitle']), Spacer(1, 45),
+            Paragraph(inline(group), styles['group']),
+            Paragraph(inline(member_heading), styles['members']), Spacer(1, 6),
+            Paragraph(inline(members), styles['members'])]
+
+
 def render(source: Path, output: Path):
     lines = source.read_text().splitlines()
-    story = []
-    i = 0
+    i = next(i for i, line in enumerate(lines) if line.startswith('## '))
+    story = cover_page(lines[:i])
     phase = 'Title'
     mermaid_placements = []
     while i < len(lines):
