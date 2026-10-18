@@ -1,0 +1,34 @@
+{
+  "scope": "User-confirmed contribution responsibility allocation",
+  "allocation": {
+    "Tham Yao Xiang": "formulation, extraction semantics, CP-SAT, repair objectives",
+    "Woo Yong Qing": "evaluation design, independent validation, metrics, failure analysis and interpretation",
+    "Tea Li Hao": "LLM/provider integration, system wiring, experiments, reproducibility and quality assurance"
+  },
+  "human_review_completed": false,
+  "personal_work_accounts_completed": false,
+  "format": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 2,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "1947341ce6835ca885d41fc089af636f2fe473ae9d0a88d72f61165bba49d2af",
+    "reference_pages": 1,
+    "source_sha256": "c67493772e92e1dc0c39fc2c374b404cdd3eec3e2c0f407f6a560ece41cc990c",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 157,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "visual": {
+    "changed_pages": [
+      11
+    ],
+    "public_private_body_identical": true
+  },
+  "visual_review": "Changed page 11 inspected; all other pages pixel-identical to preceding reviewed version. Private body/reference pages identical to public.",
+  "new_model_calls": 0,
+  "publication_status": "Local, uncommitted"
+}

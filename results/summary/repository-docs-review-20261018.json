@@ -1,0 +1,77 @@
+{
+  "scope": "Repository organization and current documentation consistency",
+  "base_commit": "91ad71bffd85f0ced5ea7bcd2bdd844fe77daa06",
+  "validation": {
+    "links": {
+      "files": 14,
+      "local_links": 282,
+      "missing": []
+    },
+    "heading_anchors_checked": 16,
+    "heading_anchor_errors": 0,
+    "archives": [
+      {
+        "archive": "benchmark-qwen36-20261001-02.tar.gz",
+        "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b",
+        "verified_files": 941
+      },
+      {
+        "archive": "benchmark-qwen38-20261001-04.tar.gz",
+        "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12",
+        "verified_files": 941
+      },
+      {
+        "archive": "difficulty-200-qwen36-20261014.tar.gz",
+        "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42",
+        "verified_files": 364
+      },
+      {
+        "archive": "difficulty-200-glm53flash-20261014.tar.gz",
+        "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e",
+        "verified_files": 364
+      },
+      {
+        "archive": "balanced-96-qwen36-20261015.tar.gz",
+        "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b",
+        "verified_files": 211
+      },
+      {
+        "archive": "balanced-96-glm53flash-20261015.tar.gz",
+        "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071",
+        "verified_files": 211
+      },
+      {
+        "archive": "diverse-2000-qwen36-20261018-portable.tar.gz",
+        "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+        "verified_files": 3077
+      },
+      {
+        "archive": "diverse-2000-glm53flash-20261018-portable.tar.gz",
+        "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+        "verified_files": 3077
+      }
+    ],
+    "checksum_verified_members": 9186,
+    "comparison_summary_byte_identical": true,
+    "both_current_chart_pngs_byte_identical": true,
+    "targeted_figure_tests_passed": 1,
+    "offline_canned_demo": {
+      "completed": 180,
+      "replayed": 180,
+      "accepted": 174,
+      "intentional_failures": 6,
+      "live_requests": 0
+    },
+    "protected_files_unchanged": 332,
+    "private_and_cache_paths_untracked": true,
+    "full_test_suite_rerun": false,
+    "environment_note": "Nonfatal Matplotlib/Fontconfig default cache warnings during the successful demo; temporary Matplotlib cache used."
+  },
+  "new_model_calls": 0,
+  "publication_status": "Local and uncommitted; no push",
+  "remaining_tasks": [
+    "Personal contribution accounts and substantive human review",
+    "Scope/model clarification",
+    "Private title confirmation, presentation and course submission"
+  ]
+}

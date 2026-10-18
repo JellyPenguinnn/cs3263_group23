@@ -6,7 +6,7 @@ A research system whose core task is **schedule generation**. Minimum-disruption
 
 The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
 
-The report is prepared for member review. Course model eligibility, genuine human contributions and interpretation, presentation and submission arrangements remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
+The report and agreed responsibility allocation are prepared for member review. Personal contribution accounts, human interpretation, scope/model clarification, presentation and final submission remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
 
 [Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Development plan](planning.md) · [Agent instructions](AGENTS.md)
 
@@ -70,7 +70,7 @@ Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every
 | Qwen3.6 `qwen3.6:35b` | 30.8% (308/1,000) | 95.3% (953/1,000) |
 | GLM5.3 Flash `glm-5.3-flash` | 89.1% (891/1,000) | 98.8% (988/1,000) |
 
-![Generation acceptance with all failures retained](docs/figures/diverse-comparison-20261018/diverse-acceptance.png)
+![Generation acceptance with all failures retained](docs/figures/report-polished-20261018/diverse-acceptance.png)
 
 Qwen direct produces only **1/500 valid feasible schedules**, versus 467/500 with CP-SAT; most direct successes are correct infeasibility predictions. GLM produces 404/500 versus 492/500. Solver assistance improves this measured comparison, but extraction can still invent or omit constraints even when the solver is correct.
 
@@ -85,12 +85,16 @@ The [48-case balanced study](docs/balanced-comparison-audit.md), [200-attempt di
 The [evidence guide](docs/evidence.md) distinguishes original private operational archives from portable replay packages. New portable archives redact only local campaign paths and update their derived checksums; **all 4,000 attempt records, public inputs, references and scientific source remain byte-identical**. Original archives remain preserved. No credentials or new model calls are needed:
 
 ```sh
+# Choose a fresh local directory; do not overwrite the preserved summaries.
+mkdir -p runs
+mkdir runs/reproduce-diverse
 .venv/bin/python scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json
-.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py
+.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json --output runs/reproduce-diverse/comparison.json
+cmp results/summary/diverse-comparison-20261018.json runs/reproduce-diverse/comparison.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_report_comparison.py --source runs/reproduce-diverse/comparison.json --output runs/reproduce-diverse/figures
 ```
 
-Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
+`cmp` exits successfully without output when the regenerated summary is byte-identical. These commands verify and reconstruct the saved comparison; rerunning the evaluator against each archive's scientific source is a separate replay step described in the evidence guide. Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
 
 ## Verify changes
 
@@ -111,9 +115,11 @@ Reinstall after source changes before checking a noneditable installation. Check
 | `evaluation/` | Offline demos, campaign preparation, execution and analysis entry points |
 | `benchmarks/`, `configs/`, `prompts/` | Versioned synthetic fixtures, manifests and experiment settings |
 | `tests/` | Independent mathematical fixtures, unit/integration and frontend checks |
-| `results/` | Audited summaries, figures and immutable reproduction archives |
+| `results/` | [Evidence map](results/README.md), audited summaries, figures and immutable reproduction archives |
+| `scripts/` | Evidence verification, offline comparison builders and report/figure rendering |
 | `docs/` | Report, methods, usage, evidence, review checklist and historical handoffs |
 | `presentation/` | Demonstration inputs and presentation/rehearsal preparation |
+| `runs/`, `docs/private/` | Ignored local experiment outputs and private submission copies; never public evidence by default |
 
 ## Contributing and course delivery
 
@@ -123,4 +129,4 @@ A useful agent prompt is:
 
 > Read README.md, AGENTS.md and planning.md. Inspect the current checkout and Section 5, confirm only consequential missing details, and complete my agreed next deliverable. Preserve recorded experiments, test relevant changes, update evidence and documentation, and ask before scientific scope changes or live spending.
 
-The [submission checklist](docs/submission-checklist.md) records genuine human review, model eligibility, private title-page details, report/presentation checks and course deadlines. Publication of this repository is not submission to Canvas or teaching-team approval.
+The [contribution record](docs/contributions.md) records the agreed responsibilities and AI assistance; each member still confirms their actual work and review. The [submission checklist](docs/submission-checklist.md) records genuine human review, model eligibility, private title-page details, report/presentation checks and course deadlines. Publication of this repository is not submission to Canvas or teaching-team approval.

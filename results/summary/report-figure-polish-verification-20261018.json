@@ -1,0 +1,70 @@
+{
+  "scope": "Presentation-only polish of acceptance and failure comparison figures",
+  "format": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 4,
+    "margin_inches": 1,
+    "math_expressions_verified": 2,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "14635bb8328628aac34b62d40a9c572990616849e11d70f5dbfbf9d104983895",
+    "reference_pages": 1,
+    "source_sha256": "0b5187c39995d0eb2bbd29cb4caf6b5a47c9ba472f0389fc85f781cc9c28b655",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 156,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "figure_receipt_sha256": "50b68b28fddf015ca180fd41650a2e77826bebe42b44a78a9bbead28c9787765",
+  "comparison": {
+    "changed_pages": [
+      7,
+      8,
+      9,
+      10,
+      11
+    ],
+    "public_private_body_pixel_identical": true,
+    "plotted_data_unchanged": true
+  },
+  "visual_review": "Changed PDF pages 7-11 inspected; remaining pages pixel-identical to the preceding reviewed report. Both full-size charts inspected; no clipped or overlapping labels.",
+  "archive_outer_hashes_verified": [
+    {
+      "archive": "benchmark-qwen36-20261001-02.tar.gz",
+      "sha256": "1aa196817f7c78f55e59a68e73650df4da6f6748d55e532d2f456411b08ffb5b"
+    },
+    {
+      "archive": "benchmark-qwen38-20261001-04.tar.gz",
+      "sha256": "a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12"
+    },
+    {
+      "archive": "difficulty-200-qwen36-20261014.tar.gz",
+      "sha256": "dfd5c3dfaa8693f8265663dc8692a38984233c649dd478addc2ef87d54539a42"
+    },
+    {
+      "archive": "difficulty-200-glm53flash-20261014.tar.gz",
+      "sha256": "f35edfd47ddb4fd90c6715780cc38b208d392fd5b304d8a6d0174a2b95c8ae1e"
+    },
+    {
+      "archive": "balanced-96-qwen36-20261015.tar.gz",
+      "sha256": "0bd2f8cd51dcc983609d143b39a1997b5e1f6e27ee99ffaab64f006b752d1f6b"
+    },
+    {
+      "archive": "balanced-96-glm53flash-20261015.tar.gz",
+      "sha256": "ef5e571c5133d508bfbd4ea0e51934f69e28cd724c7da39b84a6fe79421b1071"
+    },
+    {
+      "archive": "diverse-2000-qwen36-20261018-portable.tar.gz",
+      "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431"
+    },
+    {
+      "archive": "diverse-2000-glm53flash-20261018-portable.tar.gz",
+      "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478"
+    }
+  ],
+  "archive_members_rechecked": false,
+  "historical_figures_and_scientific_inputs_unchanged": true,
+  "private_identifiers_excluded_from_public_report": true,
+  "new_model_calls": 0,
+  "publication_status": "Local revision; not committed or pushed"
+}

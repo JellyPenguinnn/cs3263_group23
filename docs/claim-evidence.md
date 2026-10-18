@@ -12,7 +12,7 @@ The revised report leads with the **completed 4,000-attempt comparison**. Earlie
 | 51 Qwen and 68 GLM infrastructure failures | Audit provider table; failures are HTTP/transport/read-timeout observations, not model reasoning verdicts |
 | Size/interaction behavior | Summary `by_size` and `by_mechanism`; 200 cases/size, 100/mechanism, ten related families |
 | Timing differences and usage coverage | Summary `execution_segments`; no matched cross-model concurrency/OS subset; sleep-overlapping timeout records preserved |
-| Graphs reproduce exact counts | [Compact report figure receipt](figures/report-compact-20261018/figure-data.json) binds summary, renderer and plotted values |
+| Graphs reproduce exact counts | [Current report figure receipt](figures/report-polished-20261018/figure-data.json) binds summary, renderer and plotted values |
 | Worked timetable and descriptive failure examples | [Example trace index](report-details.md#example-trace-index) links readable example labels to exact saved case identifiers; timetable uses both recorded B schedules |
 | Mean, median and p95 resource statistics | [Source-bound derivative](../results/summary/report-details-20261018.json), [definitions and phase breakdowns](report-details.md); missing usage is unknown, timing descriptive |
 | Report format | [Current format receipt](../results/summary/submission-report-format.json); visual review recorded in publication verification |

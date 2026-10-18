@@ -4,6 +4,8 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 
 ## Prepared and verified
 
+- [x] [Line-by-line scientific and course-requirement review](report-quality-audit.md) completed against supplied source documents, TA feedback and saved evidence. The audit distinguishes verified content from unresolved human/course obligations.
+
 - [x] Both generation and minimum-disruption repair, direct and solver-assisted paths, independent validation and end-to-end evaluation are implemented.
 - [x] The diverse 2,000-attempt/model, balanced 96-attempt/model and difficulty 200-attempt/model Qwen3.6/GLM campaigns, and historical 600-attempt/model Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
 - [x] Current report leads with 1,000 diverse generation cases and 2,000 attempts/model and distinguishes strict-format, reasoning and provider failures. The earlier difficulty-generation views, repair/fictional/wording extensions and historical reports remain preserved separately.
@@ -22,7 +24,8 @@ The previous report and format check are historical. Every substantive revision,
 - [x] Complete and preserve both authorized D5 campaigns: 96 attempts/model, no retries, all failures retained, exact GLM identity observed, separate reproducible analyses/archives.
 - [ ] Review diverse-study public/gold pairs, certificates and failure examples across its ten related families; record genuine findings and interpret their generalization limits. Keep the earlier three-family balanced study separate. Completed execution does not establish human review.
 - [ ] Members review the natural-language/gold meaning, reference assumptions and failure examples, and record actual findings in [contributions.md](contributions.md) and the [claim index](claim-evidence.md).
-- [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Replace the interim contribution paragraph only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
+- [x] User-confirmed responsibility allocation recorded in the report and contribution log: Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
+- [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Refine the responsibility allocation into personal-work statements only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
 - [ ] Confirm each member's name, matriculation number and email on the prepared **private** title page (P51). The local `docs/private/submission-report.md` and PDF contain the supplied details and are excluded from Git. Refresh this copy after substantive report edits; never put private identifiers in public Git.
 - [ ] Produce the actual presentation/deck or requested recording and rehearse **15 minutes plus five-minute Q&A** (P47). All members understand the whole system (P57); a storyboard is not a completed presentation.
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).

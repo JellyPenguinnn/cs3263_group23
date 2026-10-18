@@ -1,5 +1,38 @@
 # Repository publication verification
 
+## Report and repository finalization — authorized publication, 18 October 2026
+
+This publication includes the scientific-report refinements, clearer comparison charts, user-confirmed contribution responsibilities, current README/documentation navigation and presentation guidance aligned with the 4,000-attempt study. The private report remains ignored and untracked locally. Personal contribution accounts, substantive human review, scope/model clarification and course delivery remain open.
+
+The final public/private report hashes match their successful format checks and visually reviewed versions: one title page, ten body pages and one references page, at least 11-point text and one-inch margins. Current figure/renderer hashes match their receipt. All eight archive hashes remain unchanged after the preceding full 9,186-member verification; scientific source, tests, prompts, fixtures and historical evidence are unchanged. Current local links, heading anchors, sensitive-data scans and whitespace checks pass. The preceding byte-identical comparison/chart reconstruction, targeted figure test and 180-attempt offline demo/replay still apply because their inputs and implementation are unchanged. No new inference was performed.
+
+The [finalization receipt](../results/summary/report-repository-publication-check-20261018.json) records the checked artifacts. The user authorized a normal commit and push to GitHub main; the commit containing this entry identifies the publication. Earlier entries describing local/uncommitted revisions retain their historical checkpoint status. Remote success must be verified after pushing; repository publication is not course submission.
+
+## Repository organization and documentation review — 18 October 2026 (local)
+
+README now uses the current report chart, identifies the confirmed responsibility allocation and remaining human tasks, and directs reconstruction into fresh ignored output paths. The documentation index separates reading, current-study verification and older protocols. A results index maps the four preserved study designs. The presentation guide now leads with the 1,000-case/4,000-attempt diverse study instead of describing the earlier 48-case balanced study as current. The claim index and agent rendering guidance point to the current figure receipt/workflow.
+
+Validation: 282 relative links across 14 active entry documents and 16 heading anchors resolved; eight archives and all 9,186 checksum-covered members verified. The diverse comparison summary and both current chart PNGs reproduced byte-for-byte into temporary paths. The targeted figure regression passed (one test). A fresh current-source offline canned demo completed and replayed all 180 attempts: 174 accepted and six intentional failures, with zero live calls. Matplotlib/Fontconfig cache warnings were nonfatal; the demo completed. No full test-suite rerun was needed for these documentation-only edits.
+
+The report, scientific implementation, tests, fixtures, configuration, dependency lock, earlier figures and historical records are unchanged from the start of this review. Private reports, credentials, caches and local runs remain excluded from tracked files. The [repository-review receipt](../results/summary/repository-docs-review-20261018.json) records these checks. Existing report revisions were preserved. All latest edits remain local and uncommitted; no GitHub publication or course submission is claimed.
+
+## Contribution allocation — 18 October 2026 (local)
+
+The user confirmed Yao Xiang's formal-method responsibilities, Yong Qing's evaluation responsibilities and Li Hao's integration/LLM/experiment/quality responsibilities. Both report copies, the contribution log, planning, checklist and agent instructions now record that allocation. AI assistance remains explicit; personal-work accounts and final human review remain open.
+
+Both PDFs pass fresh format checks with ten body pages, at least 11-point text and one-inch margins. Page 11 was visually inspected; every other page is pixel-identical to the preceding reviewed version. Public/private body and reference pages match. No scientific results, charts or traces changed. The [allocation verification](../results/summary/report-contribution-allocation-verification-20261018.json) records this local revision; earlier receipts retain their original identities. No commit or push was made.
+
+## Comparison-figure polish — 18 October 2026 (local)
+
+The report now uses grouped horizontal comparison bars. Acceptance percentages and exact counts are aligned beside the bars; failure categories use full labels and one common linear count scale across models. The new renderer and exports live separately from earlier figures. Every plotted value and the analysis source hash match the preceding charts exactly.
+
+Both public and local private PDFs passed fresh format checks: one cover, ten body pages, one reference page, at least 11-point text and one-inch margins. Changed pages 7–11 were visually inspected; other pages are pixel-identical to the preceding reviewed report. Private body/reference pages are pixel-identical to the public report, and private identifiers remain ignored and untracked. All eight archive outer hashes were verified unchanged; this presentation check did not repeat inner-member replay. The [figure-polish receipt](../results/summary/report-figure-polish-verification-20261018.json) binds the latest report and figure source. Earlier scientific-review receipts retain their original hashes. No model calls were made. These edits remain local and uncommitted; factual member contribution statements still require confirmation.
+
+## Scientific and course-requirement review — 18 October 2026 (local)
+
+The [line-by-line audit](report-quality-audit.md) maps the complete report to the original guidelines, proposal, Responsible AI materials and TA feedback. Independent numerical review found no score, denominator or worked-example errors. The local revision clarifies bootstrap coverage, solver availability and the scope of solver guarantees, and adds a versioned code/evidence reference. Both PDFs pass fresh format checks and visual review; private identifiers remain local. The [verification receipt](../results/summary/report-scientific-review-20261018.json) binds this source/PDF. Earlier publication receipts retain their hashes; these latest review edits are not committed or pushed. Contribution confirmation, substantive human review, model/scope clarification and course delivery remain open.
+
+
 ## Final cover and worked-example publication — 18 October 2026
 
 This authorized publication includes the NUS cover, removal of the date/running header, clearer resource tables and the one-page worked explanation. Both public and local private reports passed fresh format checks: one cover, ten body pages, one reference page, at least 11-point text and one-inch margins. The final source/PDF hashes match the visually reviewed worked-example revision. Private student IDs, emails and report files remain local under ignored `docs/private/` and are excluded from this commit.

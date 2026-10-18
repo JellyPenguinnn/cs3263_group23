@@ -1,6 +1,6 @@
 # Evidence-based scheduling demonstration
 
-Use the [current generation-first report](../docs/submission-report.md), [balanced charts](../results/figures/balanced-comparison-20261017/) and [rehearsal guide](rehearsal.md). The latest Qwen3.6/GLM study has 96 scheduling attempts/model over 48 balanced generation cases. Lead with this focused comparison; keep the 200-attempt difficulty study, repair/wording extensions and 600-attempt historical pair separately labelled. A deck, recording and actual rehearsal remain unfinished.
+Use the [current generation-first report](../docs/submission-report.md), [current charts](../docs/figures/report-polished-20261018/) and [rehearsal guide](rehearsal.md). The latest Qwen3.6/GLM study has **2,000 scheduling attempts per model over the same 1,000 generation cases**. Lead with its formulation, worked example and failure analysis. Keep the 96-attempt balanced study, 200-attempt difficulty study and 600-attempt historical studies separately labelled. A deck, recording and actual rehearsal remain unfinished.
 
 ## Current small office illustration
 
@@ -8,7 +8,7 @@ Use the [current generation-first report](../docs/submission-report.md), [balanc
 PYTHONPATH=src .venv/bin/python evaluation/ta_scope_examples.py runs/NEW-presentation-office.json
 ```
 
-This offline command verifies loose/tight generation, a room-capacity contradiction and a one-move repair with seven unchanged activities. It makes zero model calls; label it an illustration rather than an additional benchmark. See [the feedback alignment](../docs/ta-feedback-alignment.md) for the single-day/30-minute scope, formal details and metric distinction. For live-model failure examples, use the exact trace paths in [the balanced audit](../docs/balanced-comparison-audit.md) or the separately labelled [difficulty audit](../docs/difficulty-comparison-audit.md); retain original outputs and labels.
+This offline command verifies loose/tight generation, a room-capacity contradiction and a one-move repair with seven unchanged activities. It makes zero model calls; label it an illustration rather than an additional benchmark. See [the feedback alignment](../docs/ta-feedback-alignment.md) for the single-day/30-minute scope, formal details and metric distinction. For live-model failure examples, use the [current report example and trace index](../docs/report-details.md#example-trace-index) and [diverse audit](../docs/diverse-comparison-audit.md). The earlier [balanced](../docs/balanced-comparison-audit.md) and [difficulty](../docs/difficulty-comparison-audit.md) examples remain separately labelled; retain original outputs and labels.
 
 ## Preserved historical Qwen examples
 

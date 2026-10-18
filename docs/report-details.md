@@ -149,7 +149,8 @@ The resource builder requires a new output path and refuses to overwrite an exis
 The scientific runtime and dependency lock are unchanged. Document rendering uses ReportLab, Matplotlib, pypdf and pdfplumber; Mermaid is needed only when changing the architecture asset.
 
 - Rebuild source-bound resource/example data: `python3 scripts/build_report_details.py --output runs/report-details-review.json`.
-- Rebuild compact charts: `python3 scripts/render_diverse_results.py --compact --output docs/figures/report-compact-20261018`.
+- Rebuild the current report's acceptance and failure comparisons: `python3 scripts/render_report_comparison.py`. These grouped horizontal charts use aligned acceptance labels and a common failure-count scale; their source values are unchanged.
+- Earlier compact charts and the supplementary size chart: `python3 scripts/render_diverse_results.py --compact --output docs/figures/report-compact-20261018`. Earlier exports remain preserved.
 - Rebuild the timetable from both saved B schedules: `python3 scripts/render_worked_timetable.py`.
 - The architecture source is `docs/figures/report-compact-20261018/architecture.mmd`, also included in the report's Mermaid fence. Keep the two sources identical. Install Mermaid CLI 11.12.0 in a separate document-tool environment; run `python3 scripts/render_report_mermaid.py --mmdc /path/to/mmdc --puppeteer-config /path/to/chrome-config.json`. The optional Puppeteer config selects a compatible locally installed Chrome. The script records source/config/CSS/PDF hashes. It never calls the model provider.
 - Build and check the report with `python3 scripts/render_report.py` and `python3 scripts/check_report.py`. The normal build embeds the preserved Mermaid vector PDF and needs no browser. Source/asset hashes must match; the format check verifies diagram text, mathematical glyphs, font size, margins and the ten-body-page limit. Inspect rendered pages after layout changes.

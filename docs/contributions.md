@@ -4,6 +4,21 @@ This is an evidence log, not an attribution inferred from branch names. The
 planned division of work in planning Section 4 is not a completed-hours record.
 Each member must confirm their own human work and another member's review.
 
+## Agreed responsibility allocation
+
+The user confirmed this division on 18 October 2026. It records responsibility, not hours, equal effort, unaided authorship or completed member review.
+
+| Member | Responsibility |
+| --- | --- |
+| Tham Yao Xiang | Mathematical formulation, constraint extraction semantics, CP-SAT compilation and repair objectives |
+| Woo Yong Qing | Benchmark and evaluation design, independent validation, metrics, failure analysis and result interpretation |
+| Tea Li Hao | LLM/provider integration, end-to-end system wiring, experiment operations, reproducibility and quality assurance |
+| All members | Report review, responsible-AI discussion, whole-system understanding and presentation preparation |
+
+Codex assistance remains recorded below. Each member should add their actual decisions, checks, findings and revisions within these areas, and identify the AI-supported parts. This allocation does not mark those personal accounts or final review complete.
+
+## Observed work and assistance
+
 | Date / scope | Observed human direction | Recorded assistance / artifact | Human review status |
 | --- | --- | --- | --- |
 | 30 Sep 2026, current Li Hao session | User identified as Li Hao, requested latest-main integration and next F1–F6 work on his branch | Codex fast-forwarded `lihao-llm-baseline` to `8f3ff1b`; prepared the fixed F2 development packet and offline tests | Code/scientific review pending; no hours claimed |
