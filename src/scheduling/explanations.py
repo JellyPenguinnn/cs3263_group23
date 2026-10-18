@@ -8,6 +8,8 @@ from collections.abc import Mapping
 from datetime import datetime, timedelta
 import math
 
+from scheduling.proof_bounds import integer_bound_proves_value
+
 from scheduling.schema import (
     PipelineResult,
     PreferredStart,
@@ -229,7 +231,10 @@ def explain_solver(
             and name == names[index]
             and stage["solver_status"] == "OPTIMAL"
             and stage["proven_optimal"] is True
-            and stage["value"] == stage["best_bound"] == values[name]
+            and stage["value"] == values[name]
+            and integer_bound_proves_value(
+                stage["value"], stage["best_bound"], stage.get("integer_lower_bound")
+            )
         )
         if exact:
             proven.append(name)

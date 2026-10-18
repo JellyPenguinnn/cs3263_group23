@@ -4,6 +4,7 @@ import hashlib
 import json
 from scheduling.evaluation.benchmark import difficulty
 from scheduling.extraction_diagnostics import compare_specifications
+from scheduling.proof_bounds import integer_bound_proves_value
 from scheduling.schema import ProblemSpec, Schedule, SchemaError, load_json, to_data
 from scheduling.validation import validate_schedule, participant_disruption
 
@@ -79,7 +80,10 @@ def check_reference(case, reference):
             exact = (
                 stage["solver_status"] == "OPTIMAL"
                 and stage["proven_optimal"] is True
-                and stage["value"] == stage["best_bound"] == values[i]
+                and stage["value"] == values[i]
+                and integer_bound_proves_value(
+                    stage["value"], stage["best_bound"], stage.get("integer_lower_bound")
+                )
             )
             if exact and len(proven) == i:
                 proven.append(i)

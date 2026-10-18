@@ -1,0 +1,61 @@
+{
+  "archive_verification": {
+    "all_passed": true,
+    "archives": 8,
+    "checksummed_members": 9186
+  },
+  "base_commit": "9eefb39fbf8ed11cd30af842b31e8d5e9a5cd4d3",
+  "broken_active_relative_links": 0,
+  "changed_python_ast_parse": "passed",
+  "comparison_rebuild_byte_identical": true,
+  "credential_patterns_found": 0,
+  "date": "2026-10-18",
+  "document_review": {
+    "corrections": [
+      "Removed stale balanced-study priority from active plan",
+      "Updated human review and independent replay queue for D6",
+      "Distinguished HTTP concurrency from one CP-SAT worker",
+      "Updated TA-alignment completion status and derivative-archive provenance"
+    ],
+    "human_gates_remain_open": true,
+    "primary_study": "D6: 1000 cases, 2000 attempts per model, 4000 total",
+    "ta_scope": "Generation core; repair extension; weekly calendar and other preference types explicitly unsupported"
+  },
+  "document_sha256": {
+    "AGENTS.md": "c13ff2ff36a7cf8e8317373ddae3c381aaf95ebdce39a692f27740c78e8fa4cf",
+    "README.md": "e629517ff46ba0b02c933f19e8dfc6361b163b58462bb946bc63a99358c92f99",
+    "docs/submission-report.md": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626",
+    "docs/submission-report.pdf": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1",
+    "docs/ta-feedback-alignment.md": "c926b124c762e92d8afc26e32fd978c7b69592178b913f13f2eba423b0919c1f",
+    "planning.md": "8e704d38fbee4653db2678230f483777e49fb47f50d31945729d6a8c21c77c6a"
+  },
+  "frontend_tests_passed": 9,
+  "git_diff_check": "passed",
+  "new_archive_members_credential_scanned": 6156,
+  "new_model_calls": 0,
+  "prior_document_snapshot_hashes_verified": 7,
+  "publication_identity": "The Git commit containing this receipt identifies this publication. Remote main verification is performed after the commit; this receipt does not pre-attest the push.",
+  "report_check": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 2,
+    "margin_inches": 1,
+    "math_expressions_verified": 4,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1",
+    "reference_pages": 1,
+    "source_sha256": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 148,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "scope": "Final document consistency and authorized GitHub main publication",
+  "source_files_in_prior_engineering_qualification_changed": [],
+  "targeted_python_tests": {
+    "command": "PYTHONPATH=src python -m pytest -q -p no:cacheprovider tests/unit/test_proof_bounds.py tests/unit/test_diverse_generation.py tests/unit/test_diverse_figures.py tests/unit/test_solver.py tests/integration/test_campaign_resume.py tests/integration/test_expanded_campaign.py tests/integration/test_glm_four_continuation.py tests/integration/test_parallel_campaign.py tests/integration/test_parallel_continuation.py",
+    "failed": 0,
+    "live_provider_calls": 0,
+    "passed": 200
+  }
+}

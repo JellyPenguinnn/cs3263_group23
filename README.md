@@ -4,7 +4,7 @@
 
 A research system whose core task is **schedule generation**. Minimum-disruption repair is a completed, bounded extension. It compares a language model that proposes a schedule directly with the same model translating a request into a specification for **OR-Tools CP-SAT**. An independent validator checks both against the original requirements.
 
-The generation pipeline, independent validator and repair extension work end to end. The latest SoCLaaS comparison completed **96 scheduling attempts each for Qwen3.6 and GLM5.3 Flash** on 48 balanced generation cases: 24 feasible and 24 infeasible. It tests deadlines and fixed appointments in both labels after an audit found a constraint-presence confound in the earlier dataset. The separate 200-attempt difficulty studies and 600-attempt historical Qwen studies remain preserved.
+The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
 
 The report is prepared for member review. Course model eligibility, genuine human contributions and interpretation, presentation and submission arrangements remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
 
@@ -63,32 +63,34 @@ Open [the local dashboard](http://127.0.0.1:8876). Use an unused output director
 
 ## Results
 
-Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every failure remains in the denominator; acceptance does not imply optimality.** Both models used the same 48 cases, prompts, runtime and configured budgets, with one call per method/case and no retries.
+Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every failure remains in the denominator; acceptance does not imply optimality.** Cases, prompts, scientific source and configured model/solver limits match across models, with one call per method/case and no retries. Execution concurrency and OS changed during the study and are disclosed separately.
 
 | Model | Direct LLM | LLM + CP-SAT |
 | --- | ---: | ---: |
-| Qwen3.6 `qwen3.6:35b` | 12.5% (6/48) | 100.0% (48/48) |
-| GLM5.3 Flash `glm-5.3-flash` | 97.9% (47/48) | 100.0% (48/48) |
+| Qwen3.6 `qwen3.6:35b` | 30.8% (308/1,000) | 95.3% (953/1,000) |
+| GLM5.3 Flash `glm-5.3-flash` | 89.1% (891/1,000) | 98.8% (988/1,000) |
 
-![Balanced generation acceptance](results/figures/balanced-comparison-20261017/balanced-acceptance.png)
+![Generation acceptance with all failures retained](docs/figures/diverse-comparison-20261018/diverse-acceptance.png)
 
-Qwen direct produced 23 constraint violations, nine false UNSAT answers and ten strict JSON-format failures. Format noncompliance is distinct from scheduling reasoning. GLM direct's only failure was a transport error; all 47 returned direct answers were accepted. Its 47/48 primary result retains that failure, so the one-case gap does not demonstrate a solver reasoning advantage. All returned GLM responses matched the required model identity.
+Qwen direct produces only **1/500 valid feasible schedules**, versus 467/500 with CP-SAT; most direct successes are correct infeasibility predictions. GLM produces 404/500 versus 492/500. Solver assistance improves this measured comparison, but extraction can still invent or omit constraints even when the solver is correct.
 
-The [balanced audit](docs/balanced-comparison-audit.md) and [protocol](docs/balanced-generation.md) give SAT/UNSAT, constraint-profile, objective-quality, time/token and trace-level details. The 48 synthetic/AI-assisted cases belong to **three construction families**; they are not 48 independent samples or a held-out test. Balancing removes the identified presence/label shortcut, not all template bias. Shared serving conditions limit causal model comparisons; human prose/gold review remains pending.
+Infrastructure accounts for **51 Qwen failures and 68 GLM failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
 
-The [200-attempt difficulty comparison](docs/difficulty-comparison-audit.md) retains repair, fictional and wording extensions, including concrete extraction omissions and valid but suboptimal direct answers. Its constraint-presence confound remains disclosed in the [course/code audit](docs/course-code-audit.md). The [600-attempt Qwen3.6/Qwen3.8 studies](docs/two-model-development-audit.md) remain historical evidence. **These different designs are not pooled.**
+The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. Human prose/gold review and course model clarification remain pending.
+
+The [48-case balanced study](docs/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
 
 ## Reproduce the evidence
 
-The [evidence guide](docs/evidence.md) identifies the immutable archives, checksums and exact-source offline replay. No credentials or new model calls are needed. Verify and regenerate the latest summary and charts:
+The [evidence guide](docs/evidence.md) distinguishes original private operational archives from portable replay packages. New portable archives redact only local campaign paths and update their derived checksums; **all 4,000 attempt records, public inputs, references and scientific source remain byte-identical**. Original archives remain preserved. No credentials or new model calls are needed:
 
 ```sh
-.venv/bin/python scripts/verify_evidence.py --manifest results/balanced-evidence-manifest.json
-.venv/bin/python scripts/build_balanced_comparison.py
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py
+.venv/bin/python scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json
+.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py
 ```
 
-The evidence guide also covers the separate difficulty and historical archives. Regeneration and replay are offline; use fresh extraction directories and preserve every original record.
+Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
 
 ## Verify changes
 

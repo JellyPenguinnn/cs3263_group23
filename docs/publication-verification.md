@@ -1,5 +1,37 @@
 # Repository publication verification
 
+## Final consistency check and authorized publication — 18 October 2026
+
+README, the report, planning and AGENTS agree on the completed D6 study and its limitations. The final review corrected stale references to the balanced study in the active plan, updated the substantive human-review/replay queue, distinguished HTTP concurrency from CP-SAT workers, and marked D6 complete in the TA-alignment notes. Generation remains the core and repair an extension. Model eligibility, scope clarification, actual member contributions/review, the private submitted copy, presentation and submission are still open.
+
+The refreshed checks verified all eight evidence archives and their member checksums, reproduced the full comparison summary byte-for-byte, and confirmed all seven prior document snapshots unchanged. The unchanged report passed its source/PDF checks again: one title page, ten body pages, one references page, 11-point minimum text and one-inch margins. Its earlier complete visual review remains applicable because the source and PDF hashes are unchanged.
+
+The targeted current-source Python run passed **200 tests**, including full offline mock campaigns, immutable continuation, concurrency transitions, model identity, proof bounds and generator checks. All nine frontend tests passed. This is a targeted run, not a new claim of a complete repository-suite pass. Source files covered by the preceding engineering qualification still match its recorded hashes. Active relative links, Python syntax, staged/working file equality, archive credential patterns and whitespace checks passed. No provider requests were made and no previous evidence was replaced.
+
+The [final audit receipt](../results/summary/diverse-final-publication-check-20261018.json) records exact checks and document hashes. The user authorized publication to GitHub main; the commit containing this section is the publication identity. The earlier preparation receipt below deliberately retains its original pre-publication status. GitHub publication does not establish course submission or human approval.
+
+
+## Diverse 2,000-attempt comparison and report — 18 October 2026
+
+This local update validates the two completed studies and adds derived analysis, graphs, portable evidence and report changes. It makes **zero new model calls**, does not change scientific runtime behavior, and does not commit or push. Earlier uncommitted implementation work remains preserved.
+
+| Check | Observed result |
+| --- | --- |
+| Completion and identity | 2,000 completed unique records/model, one provider attempt each; no pending records or successful-response identity mismatch |
+| Full offline reconstruction | Each portable archive's own frozen source with matching runtime dependencies reproduces its entire `analysis.json` exactly after JSON normalization; all 4,000 saved evaluations agree |
+| Scientific controls | Identical 1,000-case bundle, all 2,000 paired prompts/public views and scientific source/dependency versions; OS/concurrency/backend differences remain disclosed |
+| Evidence preservation | Original numerical/operational archive hashes match; 3,039 completed Qwen files and 1,105 original GLM-phase files unchanged; 407/92 copied continuation attempts byte-identical |
+| Portable derivatives | 3,077 verified checksum members/model, including 3,054 unchanged scientific members; local-path transformations explicitly recorded; original archives unchanged |
+| Earlier evidence | All six historical/balanced/difficulty repository archives pass their original manifests; prior report/PDF, seven active-document snapshots and balanced figures retained and hash-verified |
+| Summary and plots | Independent portable rebuild byte-identical; all figure input/output hashes verified, counts reconciled and inconsistent chart input rejected; three PNGs visually checked |
+| PDF | Twelve pages: one title, ten body, one reference; at least 11-point text and one-inch margins; 148 source chunks, four mathematical expressions and two figures verified |
+| Visual review | Every page inspected; final changes on pages 8–10 re-rendered/rechecked, other pages pixel-identical. No clipping or overlapping labels found. PDFium used after a local Poppler font-configuration failure |
+| Targeted tooling | Three new Python scripts compile; active relative links resolve, credential-pattern scan and whitespace diff check pass. An unchanged full runtime suite was not rerun |
+
+The [verification receipt](../results/summary/diverse-publication-verification-20261018.json), [comparison audit](diverse-comparison-audit.md), [portable manifest](../results/diverse-evidence-manifest.json) and [format receipt](../results/summary/submission-report-format.json) bind these checks. Scientific replay uses Python 3.12.2 and archived source; document rendering uses local Python 3.12 and its presentation libraries. The report remains for substantive member review, not a claim of completed human contributions, model eligibility or course submission.
+
+
+
 ## Balanced results publication — 17 October 2026
 
 This checkpoint integrates both completed 96-attempt balanced campaigns and the previously prepared difficulty/balanced implementation into the user-authorized publication to GitHub `main`. It updates the README, agent guidance, active plan, report, evidence navigation and remaining human tasks. Original experiment outputs, prompts, fixtures, scoring and archives remain unchanged. No new model calls were made. Earlier sections below are dated historical checkpoints; their pending/publication statements do not describe this release.

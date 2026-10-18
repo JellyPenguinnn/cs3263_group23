@@ -127,6 +127,9 @@ def test_later_unknown_retains_feasible_incumbent(monkeypatch):
         def value(self, expr):
             return self.inner.value(expr)
         @property
+        def response_proto(self):
+            return self.inner.response_proto
+        @property
         def best_objective_bound(self):
             return self.inner.best_objective_bound if len(solvers) == 1 else 0.0
     monkeypatch.setattr(cp_model, "CpSolver", Limited)

@@ -126,6 +126,11 @@ def export_figures(rows, directory: Path, *, evidence):
     from scheduling.evaluation.difficulty_suite import MECHANISMS, TIERS
 
     tiered = any(row["level"] in TIERS for row in difficulty)
+    observed_sweeps = sorted({row["sweep"] for row in difficulty})
+    if tiered and set(observed_sweeps) - set(MECHANISMS):
+        return figures + _export_mechanism_sweeps(
+            difficulty, uncertainty, directory, phase=phase, evidence=evidence, tiers=TIERS
+        )
     sweeps = MECHANISMS if tiered else ("activity_count", "slack", "interaction_density", "resource_contention")
     if any(row["sweep"] in sweeps for row in difficulty):
         fig, axes = plt.subplots(
@@ -199,6 +204,58 @@ def export_figures(rows, directory: Path, *, evidence):
             figures.append(str(path))
         plt.close(fig)
     return figures
+
+
+def _export_mechanism_sweeps(difficulty, uncertainty, directory, *, phase, evidence, tiers):
+    """Include every observed mechanism without squeezing ten columns into one row."""
+    import matplotlib.pyplot as plt
+
+    panels = sorted({(row["task_type"], row["sweep"]) for row in difficulty})
+    fig, axes = plt.subplots(
+        (len(panels) + 1) // 2, 2, figsize=(12, 3.3 * ((len(panels) + 1) // 2)),
+        squeeze=False, layout="constrained", sharey=True,
+    )
+    fig.suptitle(
+        f"{phase} mechanism coverage — {evidence}\n"
+        "Construction strata, not measured hardness; related cases remain grouped",
+        fontsize=12,
+    )
+    for ax, (task, sweep) in zip(axes.flat, panels):
+        for approach, style in (("direct", "o-"), ("solver_augmented", "s--")):
+            values = sorted(
+                (row for row in difficulty if row["task_type"] == task
+                 and row["sweep"] == sweep and row["approach"] == approach
+                 and row["level"] in tiers and row["sat_validity"]["rate"] is not None),
+                key=lambda row: tiers.index(row["level"]),
+            )
+            xs = [tiers.index(row["level"]) for row in values]
+            ys = [row["sat_validity"]["rate"] for row in values]
+            ax.plot(xs, ys, style, label="A · Direct" if approach == "direct" else "B · CP-SAT")
+            for x, y, row in zip(xs, ys, values):
+                interval = uncertainty[(task, sweep, row["level"], approach)]["cluster_bootstrap_95"]
+                if interval is not None:
+                    ax.vlines(x, *interval, color="C0" if approach == "direct" else "C1", alpha=.6)
+                ax.annotate(f"n={row['sat_validity']['denominator']}", (x, y),
+                            xytext=(0, 8 if approach == "direct" else -14),
+                            textcoords="offset points", ha="center", fontsize=8)
+        ax.set(title=task + " / " + sweep.replace("_", " "),
+               ylim=(-.15, 1.2), ylabel="Gold-SAT validity", xlabel="Construction stratum")
+        ax.set_xticks(range(len(tiers)), [tier.replace("_", " ") for tier in tiers],
+                      rotation=20, ha="right")
+        ax.legend(fontsize=8)
+    for ax in list(axes.flat)[len(panels):]:
+        ax.set_visible(False)
+    paths = []
+    try:
+        for suffix in ("png", "pdf"):
+            path = directory / f"difficulty.{suffix}"
+            if path.exists():
+                raise FileExistsError(path)
+            fig.savefig(path, dpi=160)
+            paths.append(str(path))
+    finally:
+        plt.close(fig)
+    return paths
 
 
 def export_tier_figures(rows, resources, directory: Path, *, evidence):

@@ -1,5 +1,22 @@
 # Report claim-to-evidence index
 
+## Current diverse generation study
+
+The revised report leads with the **completed 4,000-attempt comparison**. Earlier sections below remain evidence indexes for their named studies, not the latest primary result.
+
+| Claim | Source and interpretation |
+| --- | --- |
+| 2,000 unique completed attempts/model; no retry or model mismatch | [Portable manifest](../results/diverse-evidence-manifest.json), immutable attempt records and [audit](diverse-comparison-audit.md); all 4,000 evaluations replay exactly |
+| Qwen A/B 308/953; GLM A/B 891/988, each /1,000 | [Derived summary](../results/summary/diverse-comparison-20261018.json), `overall_by_method`; failures retained |
+| Feasibility, conditional optimum, extraction and concrete failure cases | Audit scientific sections; summary `failure_catalogue` links original record hashes and evaluator references |
+| 51 Qwen and 68 GLM infrastructure failures | Audit provider table; failures are HTTP/transport/read-timeout observations, not model reasoning verdicts |
+| Size/interaction behavior | Summary `by_size` and `by_mechanism`; 200 cases/size, 100/mechanism, ten related families |
+| Timing differences and usage coverage | Summary `execution_segments`; no matched cross-model concurrency/OS subset; sleep-overlapping timeout records preserved |
+| Graphs reproduce exact counts | [Figure receipt](figures/diverse-comparison-20261018/figure-data.json) binds summary, renderer and plotted values |
+| Report format | [Current format receipt](../results/summary/submission-report-format.json); visual review recorded in publication verification |
+
+
+
 Applies to the current [report](submission-report.md) and PDF, led by the completed Qwen3.6/GLM balanced generation comparison, with the earlier difficulty study reported separately. The [historical index](claim-evidence-20261002.md) remains separate. Automated evidence checks do not establish human review or course approval.
 
 ## Current balanced generation claims

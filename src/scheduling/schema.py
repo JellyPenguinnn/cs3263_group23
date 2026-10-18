@@ -510,6 +510,7 @@ class OptimizationStage:
     time_limit_seconds: float
     elapsed_seconds: float
     proven_optimal: bool
+    integer_lower_bound: int | None = None
 
 
 @dataclass(frozen=True)

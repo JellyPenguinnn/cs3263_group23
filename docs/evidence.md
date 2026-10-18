@@ -1,8 +1,21 @@
 # Evidence preservation and offline replay
 
-The completed [balanced generation comparison](balanced-comparison-audit.md) has **96 scheduling attempts per model**, preserved separately from the 200-attempt difficulty study and historical 600-attempt Qwen pair. The source/proof/review fixture is `benchmarks/fixtures/balanced-generation-v1/`; actual human wording/gold review remains pending. The preceding report and format receipt remain in `docs/history/20261017-before-balanced/`.
+The latest [diverse comparison](diverse-comparison-audit.md) has **2,000 attempts per model**, with every one of the 4,000 saved evaluations reproduced offline. Original numerical and operational archives remain unchanged. Two explicitly labelled **portable derivatives** in this checkout redact only local campaign paths and update dependent metadata checksums; all attempts, cases, references and scientific source remain byte-identical. They contain final outputs and available metadata, not complete HTTP traffic or hidden reasoning.
 
-The current and historical complete comparisons are preserved as **original, byte-for-byte reproduction archives in the repository checkout**. They contain recorded final model content, public inputs/prompts, extracted specifications and schedules, solver/reference results, failure/usage metadata, exact replay source and analysis. They are not complete raw HTTP captures or hidden reasoning traces.
+## Diverse 2,000-attempt evidence
+
+[The manifest](../results/diverse-evidence-manifest.json) binds both portable archives, each with 3,077 checksummed files and 3,054 unchanged scientific members. The internal `PORTABLE-DERIVATIVE.json` lists every local-path transformation, original archive digests and preserved historical hash semantics. `analysis-with-execution-provenance.json`, `timing-by-execution-segment.json` and `timing-comparability.json` retain the OS/concurrency differences. Original same-device operational archives remain private; this is not an off-device backup claim.
+
+```sh
+python3.12 scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json \
+  --extract-to runs/NEW-diverse-replay
+.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py
+```
+
+For exact-source replay use each archive's `REPRODUCE.txt`, frozen `source/`, `blocks.json` and `analysis.json` in a new directory. Follow the installation procedure below, substituting the extracted `qwen36` and `glm53flash` directories. Replay uses no API key or inference. Its scientific scores match the saved records exactly; portable analysis metadata intentionally refers to the redacted manifest hash rather than the original manifest hash.
+
+The previous balanced report/PDF, active documentation and format receipt are preserved in [report history](history/20261018-before-diverse/). Earlier balanced, difficulty and historical studies retain original byte-for-byte archives and separate scores; they are not pooled into the diverse dataset.
 
 ## Balanced 96-attempt evidence
 

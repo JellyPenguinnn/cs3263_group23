@@ -1,0 +1,105 @@
+{
+  "all_figure_hashes_verified": true,
+  "commit_or_push": false,
+  "complete_analysis_replay": {
+    "glm53flash": {
+      "archive_sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+      "checksummed_files": 3077,
+      "exact_complete_analysis_match": true,
+      "pending": 0,
+      "scheduling_records": 2000
+    },
+    "qwen36": {
+      "archive_sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+      "checksummed_files": 3077,
+      "exact_complete_analysis_match": true,
+      "pending": 0,
+      "scheduling_records": 2000
+    }
+  },
+  "date": "2026-10-18",
+  "derived_summary_independent_rebuild_byte_identical": true,
+  "full_runtime_suite_note": "No runtime/solver/provider changes in this publication update; earlier uncommitted implementation changes retained. Validation exercises full saved evidence and new derived tools.",
+  "full_runtime_suite_rerun": false,
+  "new_model_calls": 0,
+  "original_preservation": {
+    "glm_initial_phase_files_verified": 1105,
+    "glm_reused_attempts_byte_identical": 92,
+    "historical_six_archives_verified": true,
+    "original_numerical_and_operational_archive_hashes_match": true,
+    "qwen_files_verified": 3039,
+    "qwen_reused_attempts_byte_identical": 407
+  },
+  "output_sha256": {
+    "README.md": "e629517ff46ba0b02c933f19e8dfc6361b163b58462bb946bc63a99358c92f99",
+    "docs/diverse-comparison-audit.md": "13b0cebb172562dd61c77901d24a057cbffba7be041ef53772225957d54a4082",
+    "docs/figures/diverse-comparison-20261018/figure-data.json": "3e60a7dc79603ce749439602b56ccbf772c37a97f6c87aeafc0462d3b9139576",
+    "docs/submission-report.md": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626",
+    "docs/submission-report.pdf": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1",
+    "results/diverse-evidence-manifest.json": "5d92d69ba67d97369c16ccd14ad98a4b9ec4c1995832d4920579b7485ce9abae",
+    "results/summary/diverse-comparison-20261018.json": "c0713697d7ea8f29fb0dd55a2888443d8e160b94ff8f74af831c05d513f59501"
+  },
+  "pdf_format": {
+    "automated_checks_passed": true,
+    "body_pages": 10,
+    "figure_images": 2,
+    "margin_inches": 1,
+    "math_expressions_verified": 4,
+    "minimum_text_font_pt": 10.999999999999886,
+    "pdf_sha256": "0780ba48475aa397f774f7d1c0313f4b507cb5ba3a86efedaf39c08484a57bd1",
+    "reference_pages": 1,
+    "source_sha256": "3a47fca2ef9b8f438f50e7127a07e0ac4e8fc8418d2e139f2533368d974b7626",
+    "title_pages": 1,
+    "total_pages": 12,
+    "visible_text_chunks_verified": 148,
+    "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  },
+  "pdf_visual_review": {
+    "all_pages_reviewed": 12,
+    "clipping_or_overlap_found": false,
+    "final_changed_pages_rechecked": [
+      8,
+      9,
+      10
+    ],
+    "other_pages_pixel_identical_to_reviewed": true,
+    "page_sha256": {
+      "page-01.png": "f5ee8ef40885a5cb27dd83ec2148d0eee9d759a0e1909409a1d09ba2d9e477ba",
+      "page-02.png": "6128ef2f9a8f7a2439fe6772144c449d89ed8b903295406d63d6c8b8714e4182",
+      "page-03.png": "2b9a987493e47da399fbde0b52bc49f6331d7a8ba2e4ff12e06677eabd05d8f8",
+      "page-04.png": "1648bffd170778517433c4ebe138b2afe69c5e7d4d42cc9e912973f7d2ff842d",
+      "page-05.png": "e81d7597f2172934229833cef10836b048d3b06ec9675d9d0fa3f61150583716",
+      "page-06.png": "6d9f92be43f4a45708d4bddd641433f1e1860f2fbf76ed8e62cd1d33dc03ed48",
+      "page-07.png": "c263c73915fd01af1333f8e69fe0e411eb922b832be9c4e6cf9be3a1c4873d2a",
+      "page-08.png": "209e10768e45fa7bdfb34fd7ff447be0b2fc8fbe5c5527dd36b29dc63bfccdf9",
+      "page-09.png": "3d0bef69338b2757c7964a124d84ffefa9df3126bfa3d1f8bc4564c75c66d0de",
+      "page-10.png": "30ed2cbda3470f8feeff2af76b59fc199d9f3faf045930b6076c263900a8234e",
+      "page-11.png": "f6f33fb89e7803c2d3c479d38b09c01038a3f349b3d70c8af5b05220dbe8431e",
+      "page-12.png": "93e0ccc413e861bba9d4587bb408657675d29701b4094bf2515570508fb22589"
+    },
+    "renderer": "PDFium; bundled Poppler failed due to local font configuration"
+  },
+  "prior_documents": {
+    "AGENTS.md": "bce35e5f56ee7fdb2fd8348b6d23579e72c271a9d387d1ad3fe8eb7dd8f9acaf",
+    "README.md": "ea25ae37eeeacf0a154b894f018bdefa246e530daebf6f5b0d1fb07b9e61f7fd",
+    "docs/README.md": "115b5dac3022bec804e1d0b979939ea887abf9e7833cc5496807bb840c3a3373",
+    "docs/submission-report.md": "ba8d1198dd5dc2c9e376e92a30631012904aa63bdaeff733e0d23f45fd04e9b0",
+    "docs/submission-report.pdf": "5837e17acbe00e6204539ab634f82a58ce432cf9da607174a853255e0ec1048f",
+    "planning.md": "6eb96ffd2a748c2920a0afa9be8b339580167343cba51ce20f08ec493e1fbce3",
+    "results/summary/submission-report-format.json": "5616c16ce53f80594dbb933edfdc320ba10377d13879ad6caee38fd308018b3c"
+  },
+  "python_compile_passed": [
+    "scripts/build_diverse_comparison.py",
+    "scripts/package_diverse_evidence.py",
+    "scripts/render_diverse_results.py"
+  ],
+  "remaining_human_gates": [
+    "prose/gold review and own scientific interpretation",
+    "factual member contributions and AI disclosure",
+    "hosted-model/scope clarification",
+    "private title details and final report review",
+    "presentation and actual Canvas submission"
+  ],
+  "scientific_controls": "1,000 identical cases; all 2,000 paired prompt hashes and public views match; scientific source and non-model configured limits match; execution conditions differ",
+  "scope": "Completed diverse generation evidence, offline comparison, documentation and PDF; no scientific runtime changes in this update"
+}

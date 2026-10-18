@@ -1,0 +1,46 @@
+{
+  "archives": [
+    {
+      "bytes": 25492866,
+      "checksummed_members": 3077,
+      "evidence_scope": "Shared-service synthetic/AI-assisted development; not held out",
+      "id": "qwen36",
+      "original_operational_archive_sha256": "6ea0613ab5a4d96cbeaa90f4324d4c4c59766009491088e5dfb59ddebc1d2e5e",
+      "original_reproduction_archive_sha256": "6c1f899a54707aa8517c711d9ec7e84e758d39245b7cfdb8ab79c42e93595d63",
+      "path": "results/archives/diverse-2000-qwen36-20261018-portable.tar.gz",
+      "redacted_manifest_paths": 5,
+      "required_returned_model": "qwen3.6:35b",
+      "run_id": "diverse-2000-qwen36-20261018",
+      "scheduling_attempts": 2000,
+      "sha256": "40edb296771178d1833f8918972d6f7ce239949483054f5a824d7c6398851431",
+      "unchanged_scientific_members": 3054
+    },
+    {
+      "bytes": 12287845,
+      "checksummed_members": 3077,
+      "evidence_scope": "Shared-service synthetic/AI-assisted development; not held out",
+      "id": "glm53flash",
+      "original_operational_archive_sha256": "9bf7e0af57f1b4d4b9d37c030164a61f4b826bd5a6a9d6024769d3d72862b3bd",
+      "original_reproduction_archive_sha256": "3c47b2b790a27414d1b6a5494744b920a0740c6989c563b0a45077c26b4401c2",
+      "path": "results/archives/diverse-2000-glm53flash-20261018-portable.tar.gz",
+      "redacted_manifest_paths": 1,
+      "required_returned_model": "glm-5.3-flash",
+      "run_id": "diverse-2000-glm53flash-20261018",
+      "scheduling_attempts": 2000,
+      "sha256": "c57d138d081ac9ddc4350e80daacb6f398b1e41a2844f6cc815b283d45423478",
+      "unchanged_scientific_members": 3054
+    }
+  ],
+  "format_version": "1.0",
+  "policy": {
+    "dataset": "diverse-generation-v1",
+    "earlier_studies": "Separate immutable archives and scores; no pooling",
+    "limitations": "Ten conservative construction families; actual human review pending; differing OS/concurrency phases.",
+    "new_model_calls": 0,
+    "original_bytes": false,
+    "overwrite_originals": false,
+    "portable_redacted_derivative": true,
+    "raw_attempt_case_reference_source_bytes_unchanged": true,
+    "redactions": "Only absolute original_campaign provenance paths; corresponding manifest/checksum digests updated. Exact transformation receipts are inside each archive."
+  }
+}

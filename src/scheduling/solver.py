@@ -126,8 +126,15 @@ def solve(spec: ProblemSpec, limits: SolverLimits,
         proven = code == cp_model.OPTIMAL
         value = int(solver.value(objective)) if feasible else None
         bound = float(solver.best_objective_bound) if code != cp_model.MODEL_INVALID else None
+        # This compiler minimizes an unscaled integer expression with no offset.
+        # Keep both native integer evidence and the raw double display bound.
+        integer_bound = (
+            int(solver.response_proto.inner_objective_lower_bound)
+            if feasible and model.proto.objective.offset == 0
+            and model.proto.objective.scaling_factor == 1 else None
+        )
         stages.append(OptimizationStage(name, last_status, value, bound, remaining,
-                                        time.monotonic() - tick, proven))
+                                        time.monotonic() - tick, proven, integer_bound))
         if feasible:
             candidate = Schedule(tuple(ScheduledActivity(key, int(solver.value(var))) for key, var in starts.items()))
             candidate_values = measure_objectives(spec, candidate, repair_context)

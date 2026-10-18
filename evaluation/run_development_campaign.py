@@ -4,6 +4,7 @@ import argparse
 from collections import Counter
 from dataclasses import replace
 import json
+import hashlib
 from pathlib import Path
 
 from scheduling.evaluation.cases import case_bundle, load_cases
@@ -12,11 +13,11 @@ from scheduling.evaluation.failure_policy import CONTINUE_TRANSIENT_POLICY
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.qualification import execute_blocks
 from scheduling.evaluation.runner import (
-    DEVELOPMENT_QUALIFICATION_POLICIES, STRICT_QUALIFICATION_POLICY, plan_run, read,
+    DEVELOPMENT_QUALIFICATION_POLICIES, OBSERVE_BACKEND_POLICY, STRICT_QUALIFICATION_POLICY, plan_run, read,
 )
 from scheduling.evaluation.scoring import digest
 from scheduling.evaluation.difficulty_suite import CAMPAIGN_POLICY, CALLS, check_design, select_language
-from scheduling.evaluation import balanced_generation
+from scheduling.evaluation import balanced_generation, diverse_generation
 from scheduling.providers import ModelConfig
 from scheduling.schema import to_data
 from scheduling.solver import SolverLimits
@@ -28,6 +29,8 @@ EXPECTED_CALLS = {"controlled": 480, "realistic": 24, "language": 96}
 def load_packet(packet):
     packet = Path(packet)
     manifest = read(packet / "campaign.json")
+    if manifest.get("policy_version") == diverse_generation.CAMPAIGN_POLICY:
+        return _load_diverse_packet(packet, manifest)
     model = manifest.get("model")
     compact = manifest.get("policy_version") == CAMPAIGN_POLICY
     balanced = manifest.get("policy_version") == balanced_generation.CAMPAIGN_POLICY
@@ -117,6 +120,69 @@ def load_packet(packet):
     if {c.group_id for c in blocks["controlled"][0]} & {c.group_id for c in blocks["realistic"][0]}:
         raise ValueError("Controlled and realistic blocks share source families")
     return blocks, manifest
+
+
+def _load_diverse_packet(packet, manifest):
+    """Revalidate the large design before creating a provider or reserving calls."""
+    model = manifest.get("model")
+    count = diverse_generation.CALLS["controlled"]
+    if (manifest.get("format_version") != "1.0"
+            or manifest.get("status") != "prepared_offline_not_live_authorization"
+            or manifest.get("evidence") != "development_only"
+            or model not in diverse_generation.MODELS
+            or manifest.get("qualification_policy") != OBSERVE_BACKEND_POLICY
+            or set(manifest.get("blocks", {})) != {"controlled"}
+            or set(manifest.get("configs", {})) != {"controlled"}
+            or manifest.get("planned_scheduling_completions") != count
+            or manifest.get("total_requests") != count + 3
+            or manifest.get("capability_completions") != 2
+            or manifest.get("metadata_requests") != 1
+            or manifest.get("requested_output_tokens") != (count + 2) * 32768):
+        raise ValueError("Diverse campaign identity, policy, roles or budget changed")
+    for field, path in (
+        ("preparation_source_sha256", Path(__file__).with_name("prepare_development_campaign.py")),
+        ("execution_source_sha256", Path(__file__)),
+    ):
+        if manifest.get(field) != hashlib.sha256(path.read_bytes()).hexdigest():
+            raise ValueError("Diverse campaign orchestration source changed; prepare a new packet")
+    source = read(packet / "dataset-manifest.json")
+    original = load_cases(packet / "dataset-cases.json")
+    proofs = read(packet / "dataset-proofs.json")
+    diverse_generation.validate_manifest(original, proofs, source)
+    families = source["structural_audit"]["family_for_group"]
+    normalized = tuple(replace(c, group_id=families[c.group_id]) for c in original)
+    expected_details = {
+        "case_count": len(normalized), "case_bundle_sha256": digest(case_bundle(normalized)),
+        "case_ids": [c.case_id for c in normalized],
+        "source_families": len({c.group_id for c in normalized}),
+        "task_label_counts": dict(Counter(f"generation/{c.expected_label}" for c in normalized)),
+        "planned_requests": count, "variants": ["canonical"],
+    }
+    cases = load_cases(packet / "controlled-cases.json")
+    cfg = load_config(packet / "controlled-config.json")
+    if (digest(source) != manifest.get("dataset_manifest_sha256")
+            or manifest.get("family_mapping") != families
+            or manifest["blocks"]["controlled"] != expected_details
+            or cases != normalized
+            or to_data(cfg) != manifest["configs"]["controlled"]
+            or cfg.evidence != "live_development"
+            or cfg.qualification_policy != OBSERVE_BACKEND_POLICY
+            or cfg.provider_failure_policy != CONTINUE_TRANSIENT_POLICY
+            or cfg.qualification_baseline is not None
+            or cfg.model != ModelConfig(model, 32768, connect_timeout=30, read_timeout=1800)
+            or cfg.solver != SolverLimits(30) or cfg.reference_solver != SolverLimits(60)
+            or cfg.rendering_seed != 3263
+            or cfg.max_requests != count or cfg.max_requested_output_tokens != count * 32768
+            or cfg.variants != ("canonical",) or cfg.repeats != 1
+            or any(c.split != "development" or c.kind != "controlled"
+                   or c.problem.task_type != "generation" for c in cases)):
+        raise ValueError("Diverse campaign dataset/proofs/configuration changed")
+    current = plan_run(cases, cfg)
+    prepared = read(packet / "controlled-preflight.json")
+    if (current["contract"] != prepared.get("contract") or current["state"] != "ready"
+            or not current["within_cap"] or current["planned_requests"] != count):
+        raise ValueError("Diverse campaign preflight changed; prepare a new packet")
+    return {"controlled": (cases, cfg, current)}, manifest
 
 
 def run_campaign(packet, directory, *, allow_live=False, authorization_reference=None, provider_factory=None):

@@ -1,7 +1,8 @@
 """Prepare a versioned development campaign without model calls.
 
 The legacy and difficulty designs retain their three separate blocks. The
-balanced design has 48 generation cases in one block. None are held-out data.
+balanced design has 48 generation cases; the diverse design has 1,000 distinct
+generation cases. Both have one controlled block. None are held-out data.
 """
 
 import argparse
@@ -14,13 +15,13 @@ from scheduling.evaluation.cases import AuthoredBenchmarkCase, case_bundle, load
 from scheduling.evaluation.failure_policy import CONTINUE_TRANSIENT_POLICY
 from scheduling.evaluation.manifests import structural_audit
 from scheduling.evaluation.runner import (
-    DEVELOPMENT_QUALIFICATION_POLICIES, STRICT_QUALIFICATION_POLICY, RunConfig, plan_run, write_new,
+    DEVELOPMENT_QUALIFICATION_POLICIES, OBSERVE_BACKEND_POLICY, STRICT_QUALIFICATION_POLICY, RunConfig, plan_run, write_new,
 )
 from scheduling.evaluation.scoring import digest
 from scheduling.evaluation.difficulty_suite import (
     CAMPAIGN_POLICY, CALLS, check_design, select_language as select_difficulty_language,
 )
-from scheduling.evaluation import balanced_generation
+from scheduling.evaluation import balanced_generation, diverse_generation
 from scheduling.evaluation.runner import read
 from scheduling.providers import ModelConfig
 from scheduling.schema import to_data
@@ -54,6 +55,9 @@ def prepare(controlled_path, realistic_path, directory, *, model="qwen3.8:27b",
         raise ValueError("Select an explicit provider model ID, not the default alias")
     if qualification_policy not in DEVELOPMENT_QUALIFICATION_POLICIES:
         raise ValueError("Select a supported development qualification policy")
+    if design == "diverse-generation-2000":
+        return prepare_diverse(controlled_path, directory, model=model,
+                               qualification_policy=qualification_policy)
     if design == "balanced-generation-96":
         return prepare_balanced(controlled_path, directory, model=model,
                                 qualification_policy=qualification_policy)
@@ -195,13 +199,80 @@ def prepare_balanced(cases_path, directory, *, model, qualification_policy):
     return manifest
 
 
+def prepare_diverse(cases_path, directory, *, model, qualification_policy):
+    """Prepare 2,000 canonical attempts without adding optional wording requests."""
+    if model not in diverse_generation.MODELS:
+        raise ValueError("Diverse campaign supports explicit Qwen3.6 and GLM identities")
+    if qualification_policy != OBSERVE_BACKEND_POLICY:
+        raise ValueError("Diverse campaign requires the declared model-strict backend-observation policy")
+    directory = Path(directory)
+    if directory.exists():
+        raise FileExistsError(directory)
+    cases_path = Path(cases_path)
+    cases = load_cases(cases_path)
+    source = read(cases_path.parent / "manifest.json")
+    proofs = read(cases_path.parent / "proofs.json")
+    # Manifest validation independently recomputes certificates and structure.
+    diverse_generation.validate_manifest(cases, proofs, source)
+    families = source["structural_audit"]["family_for_group"]
+    normalized = tuple(replace(c, group_id=families[c.group_id]) for c in cases)
+    count = diverse_generation.CALLS["controlled"]
+    cfg = RunConfig(
+        ModelConfig(model, 32768, connect_timeout=30, read_timeout=1800),
+        SolverLimits(30), SolverLimits(60), count, count * 32768,
+        evidence="live_development", variants=("canonical",),
+        qualification_policy=qualification_policy,
+        provider_failure_policy=CONTINUE_TRANSIENT_POLICY,
+    )
+    preflight = plan_run(normalized, cfg)
+    if (preflight["state"] != "ready" or not preflight["within_cap"]
+            or preflight["planned_requests"] != count):
+        raise ValueError("Diverse campaign reference preflight failed")
+    directory.mkdir(parents=True, exist_ok=False)
+    for name, value in (("dataset-cases.json", case_bundle(cases)),
+                        ("dataset-proofs.json", proofs), ("dataset-manifest.json", source),
+                        ("controlled-cases.json", case_bundle(normalized)),
+                        ("controlled-config.json", cfg), ("controlled-preflight.json", preflight)):
+        write_new(directory / name, value)
+    manifest = {
+        "format_version": "1.0", "policy_version": diverse_generation.CAMPAIGN_POLICY,
+        "status": "prepared_offline_not_live_authorization", "evidence": "development_only",
+        "model": model, "qualification_policy": qualification_policy,
+        "dataset_manifest_sha256": digest(source), "family_mapping": families,
+        "preparation_source_sha256": hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),
+        "execution_source_sha256": hashlib.sha256(
+            Path(__file__).with_name("run_development_campaign.py").read_bytes()).hexdigest(),
+        "configs": {"controlled": to_data(cfg)},
+        "blocks": {"controlled": {
+            "case_count": len(normalized), "case_bundle_sha256": digest(case_bundle(normalized)),
+            "case_ids": [c.case_id for c in normalized],
+            "source_families": len({c.group_id for c in normalized}),
+            "task_label_counts": dict(Counter(f"generation/{c.expected_label}" for c in normalized)),
+            "planned_requests": count, "variants": ["canonical"],
+        }},
+        "planned_scheduling_completions": count, "capability_completions": 2,
+        "metadata_requests": 1, "total_requests": count + 3,
+        "requested_output_tokens": (count + 2) * 32768,
+        "limitations": [
+            "AI-assisted constructed development data; human wording review pending.",
+            "Distinct hard structures are not independent real-world samples; preserve family grouping.",
+            "Difficulty tiers are construction targets, not measured model difficulty.",
+            "Optional wording variants are excluded from this canonical-only campaign.",
+            "Output reservation excludes input tokens and is not a currency cap.",
+            "Preparation does not authorize live inference or supply model results.",
+        ],
+    }
+    write_new(directory / "campaign.json", manifest)
+    return manifest
+
+
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("controlled", type=Path)
     parser.add_argument("directory", type=Path)
     parser.add_argument("--realistic", type=Path, default=Path("benchmarks/fixtures/realistic-drafts-v1.json"))
     parser.add_argument("--model", default="qwen3.8:27b", help="Exact authorized SoCLaaS model ID; no fallback")
-    parser.add_argument("--design", choices=("legacy-600", "difficulty-200", "balanced-generation-96"), default="legacy-600")
+    parser.add_argument("--design", choices=("legacy-600", "difficulty-200", "balanced-generation-96", "diverse-generation-2000"), default="legacy-600")
     parser.add_argument("--qualification-policy", choices=DEVELOPMENT_QUALIFICATION_POLICIES,
                         default=STRICT_QUALIFICATION_POLICY,
                         help="Backend observation requires separate explicit development authorization")
