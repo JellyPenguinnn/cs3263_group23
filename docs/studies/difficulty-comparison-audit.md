@@ -1,5 +1,7 @@
 # Qwen3.6 and GLM difficulty-study audit
 
+**Earlier completed study.** The primary report now uses the separate [diverse generation comparison](../diverse-comparison-audit.md). This audit retains the difficulty study’s three blocks and original results; they are not pooled into the primary benchmark.
+
 Both **200-attempt campaigns completed**, with all three blocks exported and every saved analysis field reproduced by fresh offline replay. This is a valid, comparable **shared-service development study**, with the interpretation limits below. Provider failures are completed failed observations, not missing experiments. This audit uses no new inference.
 
 The [report](../submission-report.md) presents the scientific narrative. The [summary](../../results/summary/difficulty-comparison-20261014.json) contains block/tier/task counts, paired intervals, resources and the failure catalogue. The [execution/replay receipt](../../results/summary/difficulty-run-validation-20261014.json) records campaign completion, capabilities, usage coverage and exact replay. The [manifest](../../results/difficulty-evidence-manifest.json) binds the two original reproduction archives.

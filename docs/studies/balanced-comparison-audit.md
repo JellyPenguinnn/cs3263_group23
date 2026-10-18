@@ -1,6 +1,8 @@
 # Balanced generation comparison audit
 
-The current generation study contains **96 scheduling attempts per model**: the same 48 cases attempted once by direct LLM (A) and once by LLM + CP-SAT (B). Both campaigns completed. This is shared-service synthetic/AI-assisted development evidence, with actual human prose/gold review still pending. Earlier studies retain their own datasets, denominators and results.
+**Earlier completed study.** The primary report now uses the separate [1,000-case diverse study](../diverse-comparison-audit.md). This audit retains the balanced study’s original results and denominators.
+
+The balanced generation study contains **96 scheduling attempts per model**: the same 48 cases attempted once by direct LLM (A) and once by LLM + CP-SAT (B). Both campaigns completed. This is shared-service synthetic/AI-assisted development evidence, with actual human prose/gold review still pending. Earlier studies retain their own datasets, denominators and results.
 
 ## Evidence and comparison controls
 

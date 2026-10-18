@@ -4,7 +4,7 @@ Audit date: 15 October 2026. Target: the local `publication-worktree` on `final-
 
 **Conclusion:** the implemented comparison fits the course's CSP/COP direction and the proposal, and the generation-first scope responds to the TA's feasibility concern. The engineering pipeline is working. A material dataset-design limitation was found and disclosed below. Submission readiness also still depends on actual member analysis/contributions, scope/model clarification and delivery. Automated code checks cannot establish those facts or guarantee a grade.
 
-The subsequent [D5 implementation](../studies/balanced-generation.md) prepares a separate 48-case balanced generation dataset and controlled-only campaign support. This audit records the preceding source checkpoint; its runtime-source equality and test counts are historical, not claims that the modified checkout is byte-identical to the completed runs. The new dataset does not change those runs or their limitation.
+**Checkpoint status:** the recommended D5 follow-up was subsequently implemented and both [balanced campaigns](../studies/balanced-comparison-audit.md) completed. The separately authorized [diverse study](../diverse-comparison-audit.md) is now the primary report evidence. The findings, next-step recommendations, source equality and test counts below describe this earlier checkpoint; they are not current unfinished tasks. Original runs and their limitations remain unchanged. See the [latest repository audit](../repository-audit.md) and [submission checklist](../submission-checklist.md) for current verification and remaining work.
 
 ## Sources checked directly
 

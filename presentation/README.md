@@ -110,7 +110,7 @@ the model's answer. The common old repair schedule remains A=0, B=2 regardless
 of a model's generated schedule.
 
 For a future, separately authorized live check, load credentials as documented in
-README, create an ignored output directory, and use `scheduling direct-live` with
+[provider configuration](../docs/usage.md#soclaas-and-bounded-live-runs), create an ignored output directory, and use `scheduling direct-live` with
 an explicit model, output-token limit and new output filename. Each invocation
 makes at most one completion call. The two-call authorization of 29 September
 has been consumed; these demo commands remain entirely offline.

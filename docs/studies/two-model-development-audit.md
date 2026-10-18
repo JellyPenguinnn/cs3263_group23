@@ -1,5 +1,7 @@
 # Two-model benchmark results and submission readiness
 
+**Historical checkpoint: Qwen3.6/Qwen3.8, 600 attempts per model.** The findings and unfinished-work statements below describe the 2 October checkpoint. For the latest Qwen3.6/GLM results and remaining tasks, use the [diverse audit](../diverse-comparison-audit.md) and [submission checklist](../submission-checklist.md).
+
 Audited 2 October 2026. Both full development campaigns completed and their saved
 results reproduced through fresh scoring and independent archive replay. These
 results are suitable for the README and an exploratory empirical report. The

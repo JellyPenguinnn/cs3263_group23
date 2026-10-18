@@ -2,13 +2,17 @@
 
 **CS3263 Foundations of Artificial Intelligence · Group 23 · NUS AY2026/27**
 
-A research system whose core task is **schedule generation**. Minimum-disruption repair is a completed, bounded extension. It compares a language model that proposes a schedule directly with the same model translating a request into a specification for **OR-Tools CP-SAT**. An independent validator checks both against the original requirements.
+A research prototype for personal and shared-resource scheduling. It asks: **when does translating a natural-language request into constraints improve scheduling over asking the same language model to solve it directly?**
+
+The core task is **schedule generation**: find activity start times that respect availability, appointments, deadlines and shared resources, or identify infeasibility. The two methods are direct LLM solving and LLM extraction followed by **OR-Tools CP-SAT**. An independent validator checks both against evaluator-only gold requirements. Minimum-disruption schedule repair is an implemented, separately evaluated extension.
 
 The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
 
-The report and agreed responsibility allocation are prepared for member review. Personal contribution accounts, human interpretation, scope/model clarification, presentation and final submission remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
+**Status:** the implementation, replayable results and scientific report draft are prepared for substantive member review. Final submission still requires factual contribution accounts, human case/result review, scope/model clarification, the final private report and presentation/upload checks. The [submission checklist](docs/submission-checklist.md) tracks these tasks. Evaluation uses known synthetic/AI-assisted development cases, not a held-out real-calendar benchmark.
 
 [Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md)
+
+**On this page:** [Capabilities](#what-it-does) · [Pipeline](#how-it-works) · [Quick start](#quick-start) · [Results](#results) · [Reproduction](#reproduce-the-evidence) · [Checks](#verify-changes) · [Layout](#repository-layout)
 
 ## What it does
 
@@ -59,7 +63,7 @@ python3.12 -m venv .venv
 .venv/bin/scheduling dashboard --runs-dir runs --port 8876
 ```
 
-Open [the local dashboard](http://127.0.0.1:8876). Use an unused output directory for each new experiment. The offline demo deliberately includes invalid answers to exercise failure handling; its results are integration checks, not model-performance measurements. [Usage and operations](docs/usage.md) covers further demos, explanations, live configuration and durable campaigns.
+Open [the local dashboard](http://127.0.0.1:8876). Use an unused output directory for each new experiment. The offline demo deliberately includes invalid answers to exercise failure handling; its results are integration checks, not model-performance measurements. [Usage and operations](docs/usage.md) covers further demos, explanations and durable campaigns. Live inference requires a locally configured SoCLaaS credential and an explicitly selected model; see [provider configuration](docs/usage.md#soclaas-and-bounded-live-runs). Saved-run replay and the dashboard need no API key.
 
 ## Results
 

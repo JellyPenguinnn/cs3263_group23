@@ -2,7 +2,7 @@
 
 The **200-scheduling-attempt campaigns for Qwen3.6 and GLM5.3 Flash are complete**. Their [comparison audit](difficulty-comparison-audit.md), replay archives, graphs and updated report are available. The earlier 600-attempt Qwen studies and original report are preserved separately. The [24-attempt smoke](../history/development-notes/difficulty-smoke-verification.md) remains an integration checkpoint, not part of the full comparison. Tier names describe construction targets; the measured results are not monotone with size.
 
-The written TA follow-up makes **controlled generation the reporting core**, with repair a completed bounded extension. [The alignment](../ta-feedback-alignment.md) defines the 30-case core, twelve-case small view, separate office illustration and stopping point. The executed 200-attempt protocol below is preserved unchanged; it is not an instruction to run more experiments.
+The written TA follow-up makes **controlled generation the reporting core**, with repair a completed bounded extension. [The alignment](../ta-feedback-alignment.md) records that study’s 30-case generation core, twelve-case small view and separate office illustration. The primary report now leads with the separately completed [diverse generation study](diverse-generation.md). The executed 200-attempt protocol below is preserved unchanged; it is not an instruction to run more experiments.
 
 ## Design and counts
 

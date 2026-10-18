@@ -1,8 +1,15 @@
 # Usage and experiment operations
 
-Run commands from the repository root after the [locked installation](../README.md#quick-start). These examples describe supported workflows; only offline commands are authorized by reading them. All completed balanced, difficulty and historical campaigns are preserved. A new live run needs its own agreed allowance.
+Run commands from the repository root after the [locked installation](../README.md#quick-start). The latest completed study is **diverse generation: 2,000 scheduling attempts per model, 4,000 total**, using Qwen3.6 and GLM. Start with [the evidence guide](evidence.md) to verify or replay its saved results without inference. Earlier studies remain separate.
 
-The [balanced generation protocol](studies/balanced-generation.md) documents the completed D5 confirmation for Qwen3.6 and GLM: 96 scheduling attempts per model, using the same supervisor, analysis/archive and dashboard pipeline. It is separate from the completed difficulty and historical studies. All live allowances are consumed; use [the evidence guide](evidence.md) to inspect or replay saved results without inference.
+| Design selector | Scheduling attempts per model | Protocol |
+| --- | ---: | --- |
+| `diverse-generation-2000` | 2,000 | [Current diverse generation](studies/diverse-generation.md) |
+| `balanced-generation-96` | 96 | [Earlier balanced confirmation](studies/balanced-generation.md) |
+| `difficulty-200` | 200 | [Earlier difficulty and wording study](studies/difficulty-study.md) |
+| `legacy-600` | 600 | [Historical Qwen comparison](studies/two-model-development-audit.md) |
+
+The preparation CLI defaults to `legacy-600`; specify `--design` explicitly for another protocol. Prepared packets bind the exact dataset, source and settings. These examples describe supported workflows, not new live authorization. All completed campaign allowances are consumed; a new live run needs its own agreed model, protocol and budget.
 
 ## Run offline
 
@@ -34,7 +41,7 @@ These workflows exercise generation/repair, both pipelines, reference checks, ac
 .venv/bin/scheduling dashboard --runs-dir runs --port 8876
 ```
 
-Open [the local dashboard](http://127.0.0.1:8876). Select a saved run to inspect progress, results and before/after schedules. The dashboard is read-only and binds to localhost; live runs start through the CLI. For a nested qualification run, add `--run-dir runs/quickstart-authored/run`. Historical campaigns have separate `controlled`, `realistic` and `language` runs with 480/24/96 counters; the difficulty design uses 120/40/40. A balanced campaign has only `controlled`, with a 96-attempt counter. Select the intended study and block; a completed attempt can be a preserved failure.
+Open [the local dashboard](http://127.0.0.1:8876). Select a saved run to inspect progress, results and before/after schedules. The dashboard is read-only and binds to localhost; live runs start through the CLI. For a nested qualification run, add `--run-dir runs/quickstart-authored/run`. Historical campaigns have separate `controlled`, `realistic` and `language` runs with 480/24/96 counters; the difficulty design uses 120/40/40. Balanced and diverse campaigns have only `controlled`, with 96 and 2,000 attempts per model respectively. Select the intended study and block; a completed attempt can be a preserved failure.
 
 ```sh
 .venv/bin/scheduling explain --run-dir runs/quickstart-authored/run \
@@ -67,9 +74,13 @@ set +a
 
 The environment uses `SOCLAAS_BASE_URL`, `SOCLAAS_API_KEY` and `SOCLAAS_MODEL`. Live configuration selects an explicit model; `default` is only a bootstrap alias. Verify current availability/capabilities and agree the request/token budget before each new run or session. **Previous pilot allowances are consumed.** A saved configuration or key grants no new spending permission. TLS certificate and hostname verification remain enabled. Current requests explicitly configure the model and output limit but leave sampling/reasoning controls to server defaults. Qualification must record those defaults or add verified options; do not assume temperature zero, JSON mode or an arbitrary compatible endpoint is supported.
 
-### Full development campaign workflow
+### Model identity and campaign history
 
 For a GLM run through SoCLaaS route `x-test-1`, the required returned model ID is `glm-5.3-flash`. This is an explicit identity requirement, not a guarantee that the service always routes correctly. A difficulty campaign retained a response reporting `qwen3.8:27b` and stopped; allowing backend fingerprint variation must not allow a different model. The [routing investigation](history/development-notes/glm-routing-investigation.md) records the evidence and rerun conditions. Preserve the requested alias and actual response ID separately; never rewrite a returned ID, accept any model under a testing alias, or discard and silently retry a mismatch. This mapping does not establish a fixed weight revision or improved benchmark performance.
+
+### Historical 600-attempt workflow
+
+This section preserves the original three-block workflow and its engineering checkpoints. Its budgets and test counts are historical, not the latest study or verification totals. Use the [current diverse protocol](studies/diverse-generation.md) for the 2,000-attempt design and the [repository audit](repository-audit.md) for current implementation checks.
 
 The historical 600-attempt campaigns selected **`qwen3.6:35b`** and **`qwen3.8:27b`** explicitly through `--model`, with unchanged revision-3 prompts, **32,768 requested output tokens per completion**, **30/1,800-second connect/read timeouts** and no retries. This timeout is configured by our client, not a documented SoCLaaS service limit. Both arms receive the same limits. B uses a 30-second solve; references use 60 seconds, one worker and seed 0. Sampling/reasoning options remain server defaults. The earlier published checkpoint passed **684 tests on both macOS and network-disabled Linux ARM64** and an exact-input **600-attempt mocked rehearsal**, as recorded in the [integration audit](history/development-notes/main-integration-audit-20261001.md).
 
@@ -94,7 +105,7 @@ The following sequence documents preparation, authorized execution and completed
 ```sh
 .venv/bin/python evaluation/prepare_development_campaign.py \
   runs/IMPORTED-target-pilot/cases.json runs/NEW-campaign-input \
-  --model qwen3.6:35b \
+  --design legacy-600 --model qwen3.6:35b \
   --qualification-policy strict_model_observe_backend_v1
 
 # macOS: launch once, independently of the coding app. Output root must be new.
@@ -116,7 +127,7 @@ The launcher prints its `gui/<uid>/<label>` service identifier. Inspect it with 
 
 For projects under Documents, macOS may require **Documents Folder access for the Python executable itself** in Privacy & Security → Files & Folders. The independent service does not inherit the coding app's permission. A successful `launchctl bootstrap` only confirms registration: verify a fresh supervisor heartbeat and worker PID before declaring the run started. If Python is denied access before startup, inspect the adjacent `*-service.stderr.log`, grant the required folder permission and confirm that no provider request was reserved before launching again.
 
-The helper shares a cap of **603 HTTP requests**: one model-list request, two tiny JSON capability completions at the configured ceiling, then 600 scheduling completions. The **19,726,336-token output reservation** covers all 602 completions; input tokens are additional, so it is not a total-token or currency cap. Each block has its own 480/24/96 cap under the shared budget.
+For this `legacy-600` design, the helper shares a cap of **603 HTTP requests**: one model-list request, two tiny JSON capability completions at the configured ceiling, then 600 scheduling completions. The **19,726,336-token output reservation** covers all 602 completions; input tokens are additional, so it is not a total-token or currency cap. Each block has its own 480/24/96 cap under the shared budget.
 
 Campaign policy `development-campaign-2` selects `provider_failure_policy: continue_transient_v1`. A scheduling timeout, transport error or HTTP 408/500/502/503/504 is saved as a failed attempt, followed by a 30-second cooldown before the **next distinct request**. This also applies to consecutive failures and block boundaries. Failed attempts are never retried, removed from denominators or labelled UNSAT; reservations and actual elapsed time remain recorded. New transport records include a sanitized subtype such as `read_timeout`. A completed campaign means every planned attempt has a record, not that every attempt succeeded.
 

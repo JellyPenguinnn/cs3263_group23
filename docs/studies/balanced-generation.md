@@ -1,5 +1,7 @@
 # Balanced generation confirmation
 
+**Status: completed earlier study, 96 attempts per model.** Its [comparison audit](balanced-comparison-audit.md) records the outcomes. The primary report now uses the separately preserved [diverse generation study](diverse-generation.md); preparation commands below describe this balanced protocol only.
+
 This separately versioned dataset addresses the constraint-type/feasibility-label confound found in the completed difficulty study. It is a focused generation confirmation, not a replacement or corrected score for that study. Existing cases, model responses, scores, figures and archives remain unchanged.
 
 ## Question and design
