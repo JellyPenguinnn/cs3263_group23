@@ -1,8 +1,8 @@
 # Easy-to-extreme scheduling study
 
-The **200-scheduling-attempt campaigns for Qwen3.6 and GLM5.3 Flash are complete**. Their [comparison audit](difficulty-comparison-audit.md), replay archives, graphs and updated report are available. The earlier 600-attempt Qwen studies and original report are preserved separately. The [24-attempt smoke](difficulty-smoke-verification.md) remains an integration checkpoint, not part of the full comparison. Tier names describe construction targets; the measured results are not monotone with size.
+The **200-scheduling-attempt campaigns for Qwen3.6 and GLM5.3 Flash are complete**. Their [comparison audit](difficulty-comparison-audit.md), replay archives, graphs and updated report are available. The earlier 600-attempt Qwen studies and original report are preserved separately. The [24-attempt smoke](../history/development-notes/difficulty-smoke-verification.md) remains an integration checkpoint, not part of the full comparison. Tier names describe construction targets; the measured results are not monotone with size.
 
-The written TA follow-up makes **controlled generation the reporting core**, with repair a completed bounded extension. [The alignment](ta-feedback-alignment.md) defines the 30-case core, twelve-case small view, separate office illustration and stopping point. The executed 200-attempt protocol below is preserved unchanged; it is not an instruction to run more experiments.
+The written TA follow-up makes **controlled generation the reporting core**, with repair a completed bounded extension. [The alignment](../ta-feedback-alignment.md) defines the 30-case core, twelve-case small view, separate office illustration and stopping point. The executed 200-attempt protocol below is preserved unchanged; it is not an instruction to run more experiments.
 
 ## Design and counts
 
@@ -31,7 +31,7 @@ Canonical blocks are balanced by tier/task/SAT label. Wording selection has five
 
 ## Verification and provenance
 
-The versioned inputs are [controlled.json](../benchmarks/fixtures/difficulty-v1/controlled.json), [realistic.json](../benchmarks/fixtures/difficulty-v1/realistic.json) and [manifest.json](../benchmarks/fixtures/difficulty-v1/manifest.json). The manifest binds case hashes, seed `32661013`, generator source, construction rejections, structural audit, difficulty descriptors and proof metadata. Gold/proof/review information remains evaluator-only.
+The versioned inputs are [controlled.json](../../benchmarks/fixtures/difficulty-v1/controlled.json), [realistic.json](../../benchmarks/fixtures/difficulty-v1/realistic.json) and [manifest.json](../../benchmarks/fixtures/difficulty-v1/manifest.json). The manifest binds case hashes, seed `32661013`, generator source, construction rejections, structural audit, difficulty descriptors and proof metadata. Gold/proof/review information remains evaluator-only.
 
 Every original repair schedule and SAT witness passes the independent arithmetic validator. UNSAT certificates are checked without invoking CP-SAT. Every activity has a nonempty individual start domain, including UNSAT instances. Reference solving must prove each SAT objective and each UNSAT label before preparation succeeds; unresolved references stop preparation. The reference compiler is shared with method B, so independent certificates and small exhaustive checks reduce, but do not eliminate, shared-assumption risks. They do not certify natural-language meaning.
 

@@ -4,7 +4,7 @@ The current generation study contains **96 scheduling attempts per model**: the 
 
 ## Evidence and comparison controls
 
-The [manifest](../results/balanced-evidence-manifest.json) binds two original replay archives, each containing 211 checksummed files. The [derived summary](../results/summary/balanced-comparison-20261017.json) is reproducible with [the comparison builder](../scripts/build_balanced_comparison.py). Its checks establish equal case bundles, source/runtime, non-model settings and all 96 paired prompt hashes/public views across models. Each method has exactly one completed record per case, including failures; no attempt was retried or removed. Fresh analysis using each archive's own source reproduces every saved analysis field.
+The [manifest](../../results/balanced-evidence-manifest.json) binds two original replay archives, each containing 211 checksummed files. The [derived summary](../../results/summary/balanced-comparison-20261017.json) is reproducible with [the comparison builder](../../scripts/build_balanced_comparison.py). Its checks establish equal case bundles, source/runtime, non-model settings and all 96 paired prompt hashes/public views across models. Each method has exactly one completed record per case, including failures; no attempt was retried or removed. Fresh analysis using each archive's own source reproduces every saved analysis field.
 
 Qwen requests and returned answers identify `qwen3.6:35b`. GLM requests use the service alias `x-test-1`; every returned answer identifies the required `glm-5.3-flash`. Identity means provider-reported identity, not independent attestation of weights. Each campaign used 96 scheduling requests, two successful capability requests and one metadata request: **99 HTTP requests**, of which only 96 enter evaluation. Both allowances are consumed. This publication made zero model calls.
 
@@ -12,7 +12,7 @@ Settings were one call per case/method, no retries, 32,768 maximum output tokens
 
 ## What the balanced design corrects
 
-The [protocol](balanced-generation.md) and [offline construction receipt](../results/summary/balanced-generation-verification-20261015.json) describe 24 SAT and 24 UNSAT cases with independent SAT witnesses and arithmetic UNSAT certificates. Every case has eight activities lasting one or two hours, two participants and one shared room, on a single 09:00–17:00 day with 30-minute slots. Public prose includes its date. Three interaction mechanisms, two numeric layouts and four constraint-presence profiles give 48 cases.
+The [protocol](balanced-generation.md) and [offline construction receipt](../../results/summary/balanced-generation-verification-20261015.json) describe 24 SAT and 24 UNSAT cases with independent SAT witnesses and arithmetic UNSAT certificates. Every case has eight activities lasting one or two hours, two participants and one shared room, on a single 09:00–17:00 day with 30-minute slots. Public prose includes its date. Three interaction mechanisms, two numeric layouts and four constraint-presence profiles give 48 cases.
 
 Each profile—neither deadline nor fixed start, deadline only, fixed start only, both—contains six SAT and six UNSAT cases. Twelve deadline and twelve fixed-start counterexamples verify that these constraints can affect feasibility. This removes the earlier difficulty set's perfect association between constraint presence and label. It neither proves that a model exploited the old shortcut nor removes all construction bias. The cases belong to **three conservative construction families**, not 48 independent samples; seeds rename activities rather than create independent scheduling geometries. Do not pool the new scores with earlier studies or present this as a same-dataset before/after experiment.
 
@@ -29,7 +29,7 @@ Accepted means a schedule valid against gold hard constraints or a correct UNSAT
 
 Both B paths have 48/48 structurally equivalent extractions in the recorded comparison. This is a finite-case finding, not a general semantic-equivalence guarantee. The independent validator checks concrete schedules without calling CP-SAT; the reference and B solver share a compiler, a limitation supplemented by independent arithmetic certificates and formal regression tests.
 
-![Accepted answers with exact denominators](figures/balanced-comparison-20261017/balanced-acceptance.png)
+![Accepted answers with exact denominators](../figures/balanced-comparison-20261017/balanced-acceptance.png)
 
 ## Failure mechanisms and concrete traces
 
@@ -50,7 +50,7 @@ After extracting the matching model archive, records are under `runs/controlled/
 
 The summary's `failure_catalogue` gives all rejected and proven-suboptimal observation identities, diagnostics, violations and resources; archived `cases.json` and `analysis.json` supply gold and reference comparisons. Reviewer-only information must stay out of measured prompts.
 
-![Failure categories remain distinct](figures/balanced-comparison-20261017/balanced-failures.png)
+![Failure categories remain distinct](../figures/balanced-comparison-20261017/balanced-failures.png)
 
 ## Time, tokens and serving conditions
 
@@ -67,6 +67,6 @@ Qwen reports two backends: `vllm-0.23.0-7cd694fa` for 26 A / 34 B calls and `vll
 
 ## Preservation and delivery boundary
 
-All earlier archives, scores and figures remain unchanged. The previous report source, PDF and format receipt are preserved under [report history](history/20261017-before-balanced/). The original balanced run trees remain in place, with a separate verified private full-run backup covering 483 files; [evidence.md](evidence.md) explains its contents and same-device limitation. The public replay packages preserve recorded outputs, not hidden reasoning or unavailable HTTP traffic.
+All earlier archives, scores and figures remain unchanged. The previous report source, PDF and format receipt are preserved under [report history](../history/20261017-before-balanced/). The original balanced run trees remain in place, with a separate verified private full-run backup covering 483 files; [evidence.md](../evidence.md) explains its contents and same-device limitation. The public replay packages preserve recorded outputs, not hidden reasoning or unavailable HTTP traffic.
 
-The reproducible code/evidence checkpoint does not complete human authorship, review, model eligibility or course submission. Follow [planning S1–S7](../planning.md#5-current-task-queue-and-acceptance-evidence) and the [submission checklist](submission-checklist.md): confirm course scope/model interpretation; record actual member contributions and AI assistance; review prose/gold and the results; finalize the private report title and PDF; build/rehearse the presentation; perform the recommended independent replay; verify Canvas dates and submit. No additional model run or feature is required solely to force a solver win.
+The reproducible code/evidence checkpoint does not complete human authorship, review, model eligibility or course submission. Follow [the submission checklist](../submission-checklist.md#genuine-actions-still-required-before-submission) and the [submission checklist](../submission-checklist.md): confirm course scope/model interpretation; record actual member contributions and AI assistance; review prose/gold and the results; finalize the private report title and PDF; build/rehearse the presentation; perform the recommended independent replay; verify Canvas dates and submit. No additional model run or feature is required solely to force a solver win.

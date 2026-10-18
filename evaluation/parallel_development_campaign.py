@@ -293,6 +293,18 @@ def _historical_429(original):
     return sorted(ids), saved
 
 
+def _phase_relocations(original, concurrency):
+    # Retain the first-transition layout for existing evidence. Later reductions
+    # have strictly decreasing concurrency, so each preserved phase gets a unique
+    # subdirectory without overwriting summaries from an earlier reduction.
+    parent = Path('prior-phase')
+    if (original / parent).exists():
+        parent /= f'concurrency-{concurrency}'
+    if (original / parent).exists():
+        raise ValueError('Continuation phase destination already exists')
+    return {name: str(parent / name) for name in ('summary.json', 'parallel-start.json')}
+
+
 def _validate_continuation(manifest, original):
     t = manifest['execution_transition']; previous = t['original_run_manifest']['execution_protocol']
     current = manifest['execution_protocol']; ids, saved = _historical_429(original)
@@ -304,8 +316,7 @@ def _validate_continuation(manifest, original):
     if (type(current['concurrency']) is not int or not 1 <= current['concurrency'] < previous['concurrency']
             or t.get('reconciled_http_429_attempt_ids') != ids
             or current != protocol(planned, set(saved), current['concurrency'], prior)
-            or t.get('relocated_files') != {'summary.json': 'prior-phase/summary.json',
-                                           'parallel-start.json': 'prior-phase/parallel-start.json'}):
+            or t.get('relocated_files') != _phase_relocations(original, previous['concurrency'])):
         raise ValueError('Continuation changed historical segments or reconciliation')
 
 
@@ -349,13 +360,12 @@ def prepare_parallel_continuation(original, destination, packet, *, authorizatio
          'original_campaign_manifest': read(original / 'manifest.json'),
          'completed_attempts_reused': len(saved), 'qualification_requests_repeated': 0,
          'reconciled_http_429_attempt_ids': ids,
-         'relocated_files': {'summary.json': 'prior-phase/summary.json',
-                             'parallel-start.json': 'prior-phase/parallel-start.json'}}
+         'relocated_files': _phase_relocations(original, previous['concurrency'])}
     updated = {**manifest, 'execution_transition': t,
                'execution_protocol': protocol(keys, set(saved), concurrency, prior)}
     _validate_continuation(updated, original)
     shutil.copytree(original, destination)
-    (destination / 'prior-phase').mkdir(exist_ok=False)
+    (destination / Path(t['relocated_files']['summary.json']).parent).mkdir(exist_ok=False)
     for name, relocated in t['relocated_files'].items():
         (destination / name).rename(destination / relocated)
     for name, value in [('controlled/manifest.json', updated),

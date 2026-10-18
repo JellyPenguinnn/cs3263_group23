@@ -8,7 +8,7 @@ The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwe
 
 The report and agreed responsibility allocation are prepared for member review. Personal contribution accounts, human interpretation, scope/model clarification, presentation and final submission remain open. This is a research prototype evaluated on known synthetic/AI-assisted development cases.
 
-[Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Development plan](planning.md) · [Agent instructions](AGENTS.md)
+[Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md)
 
 ## What it does
 
@@ -35,7 +35,7 @@ flowchart LR
   V --> E[Saved evidence,<br/>analysis and dashboard]
 ```
 
-Both approaches receive equivalent task information and one model call. Gold specifications and labels remain evaluator-only. Solver success establishes a property of the **extracted problem**; it does not establish that extraction preserved the request. [The plan](planning.md#6-system-architecture-and-contract) documents the interfaces and mathematical semantics.
+Both approaches receive equivalent task information and one model call. Gold specifications and labels remain evaluator-only. Solver success establishes a property of the **extracted problem**; it does not establish that extraction preserved the request. [The architecture reference](docs/architecture.md) documents the interfaces and mathematical semantics.
 
 ## Quick start
 
@@ -76,9 +76,9 @@ Qwen direct produces only **1/500 valid feasible schedules**, versus 467/500 wit
 
 Infrastructure accounts for **51 Qwen failures and 68 GLM failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
 
-The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. Human prose/gold review and course model clarification remain pending.
+The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. Human prose/gold review and course model clarification remain pending.
 
-The [48-case balanced study](docs/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
+The [48-case balanced study](docs/studies/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/studies/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/studies/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
 
 ## Reproduce the evidence
 
@@ -91,12 +91,14 @@ mkdir runs/reproduce-diverse
 .venv/bin/python scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json
 .venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json --output runs/reproduce-diverse/comparison.json
 cmp results/summary/diverse-comparison-20261018.json runs/reproduce-diverse/comparison.json
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_report_comparison.py --source runs/reproduce-diverse/comparison.json --output runs/reproduce-diverse/figures
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py --source runs/reproduce-diverse/comparison.json --output runs/reproduce-diverse/figures
 ```
 
-`cmp` exits successfully without output when the regenerated summary is byte-identical. These commands verify and reconstruct the saved comparison; rerunning the evaluator against each archive's scientific source is a separate replay step described in the evidence guide. Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
+`cmp` exits successfully without output when the regenerated summary is byte-identical. The scientific environment renders standalone study figures; rebuilding the exact report layout uses the separate [document environment](docs/submission-checklist.md#rebuild-the-report). These commands verify and reconstruct the saved comparison; rerunning the evaluator against each archive's scientific source is a separate replay step described in the evidence guide. Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
 
 ## Verify changes
+
+The [detailed repository audit](docs/repository-audit.md) records implementation coverage, fixed edge cases, installed-package checks and evidence preservation.
 
 ```sh
 .venv/bin/python -m pytest -q
@@ -117,16 +119,6 @@ Reinstall after source changes before checking a noneditable installation. Check
 | `tests/` | Independent mathematical fixtures, unit/integration and frontend checks |
 | `results/` | [Evidence map](results/README.md), audited summaries, figures and immutable reproduction archives |
 | `scripts/` | Evidence verification, offline comparison builders and report/figure rendering |
-| `docs/` | Report, methods, usage, evidence, review checklist and historical handoffs |
+| `docs/` | Current report, architecture, usage and evidence; separate studies, reviews and history |
 | `presentation/` | Demonstration inputs and presentation/rehearsal preparation |
 | `runs/`, `docs/private/` | Ignored local experiment outputs and private submission copies; never public evidence by default |
-
-## Contributing and course delivery
-
-Read [AGENTS.md](AGENTS.md) and [planning.md](planning.md) before edits. Preserve raw evidence, equivalent comparison conditions and explicit proof/status distinctions. New live runs require a separate agreed model and budget. Never commit API keys; configure credentials locally using `.env.example` and the usage guide.
-
-A useful agent prompt is:
-
-> Read README.md, AGENTS.md and planning.md. Inspect the current checkout and Section 5, confirm only consequential missing details, and complete my agreed next deliverable. Preserve recorded experiments, test relevant changes, update evidence and documentation, and ask before scientific scope changes or live spending.
-
-The [contribution record](docs/contributions.md) records the agreed responsibilities and AI assistance; each member still confirms their actual work and review. The [submission checklist](docs/submission-checklist.md) records genuine human review, model eligibility, private title-page details, report/presentation checks and course deadlines. Publication of this repository is not submission to Canvas or teaching-team approval.

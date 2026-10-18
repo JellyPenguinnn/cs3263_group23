@@ -1,5 +1,17 @@
 # Repository publication verification
 
+## Audit fixes and documentation cleanup — authorized publication, 18 October 2026
+
+This publication includes the tested implementation fixes from the [repository audit](repository-audit.md) and a smaller current documentation set. Root `AGENTS.md`, `planning.md` and the obsolete `docs/study-draft.md` redirect are removed. The root README no longer contains “Contributing and course delivery.” Useful implementation contracts now live in [architecture.md](architecture.md), while the existing [submission checklist](submission-checklist.md) retains the remaining human and delivery work.
+
+Six study documents and two review documents are grouped separately. Thirty-three superseded development notes are moved byte-for-byte under `docs/history/development-notes/`; existing snapshots, figures, results and traces remain preserved. Active links are updated; historical source links and saved receipts retain their original checkpoint paths. The [cleanup receipt](../results/summary/documentation-cleanup-20261018.json) records relocation hashes, retired paths and validation.
+
+The preceding single full-suite pass (1,031 Python tests), ten frontend tests, installed 180-attempt offline demo, archive verification and report rebuild apply to the included runtime fixes. This subsequent cleanup changes documentation only; runtime, tests, prompts, datasets and scientific settings match that tested snapshot. Public report source/PDF and all evidence archives remain unchanged. The private report stays ignored and local. No new model calls were made. The user authorized a normal push to GitHub main; the containing commit is the publication record, and remote success is checked after the push. Earlier entries retain their checkpoint status.
+
+## Detailed implementation audit — 18 October 2026 (local)
+
+The [repository audit](repository-audit.md) supersedes the scope of the preceding documentation-only check. It records the full path inventory, implementation review, operational edge-case fixes and fresh installed/offline verification. The final single full-suite run passed all 1,031 tests; ten frontend tests, the 180-attempt installed offline demo, all eight evidence archives and the report rebuild also passed. The 4,000-attempt summary reconstructs byte-for-byte. Historical publication entries and evidence retain their original meaning. These follow-up fixes remain local until explicitly published; the preceding public report and all experiment archives remain unchanged.
+
 ## Report and repository finalization — authorized publication, 18 October 2026
 
 This publication includes the scientific-report refinements, clearer comparison charts, user-confirmed contribution responsibilities, current README/documentation navigation and presentation guidance aligned with the 4,000-attempt study. The private report remains ignored and untracked locally. Personal contribution accounts, substantive human review, scope/model clarification and course delivery remain open.
@@ -30,7 +42,7 @@ Both public and local private PDFs passed fresh format checks: one cover, ten bo
 
 ## Scientific and course-requirement review — 18 October 2026 (local)
 
-The [line-by-line audit](report-quality-audit.md) maps the complete report to the original guidelines, proposal, Responsible AI materials and TA feedback. Independent numerical review found no score, denominator or worked-example errors. The local revision clarifies bootstrap coverage, solver availability and the scope of solver guarantees, and adds a versioned code/evidence reference. Both PDFs pass fresh format checks and visual review; private identifiers remain local. The [verification receipt](../results/summary/report-scientific-review-20261018.json) binds this source/PDF. Earlier publication receipts retain their hashes; these latest review edits are not committed or pushed. Contribution confirmation, substantive human review, model/scope clarification and course delivery remain open.
+The [line-by-line audit](reviews/report-quality-audit.md) maps the complete report to the original guidelines, proposal, Responsible AI materials and TA feedback. Independent numerical review found no score, denominator or worked-example errors. The local revision clarifies bootstrap coverage, solver availability and the scope of solver guarantees, and adds a versioned code/evidence reference. Both PDFs pass fresh format checks and visual review; private identifiers remain local. The [verification receipt](../results/summary/report-scientific-review-20261018.json) binds this source/PDF. Earlier publication receipts retain their hashes; these latest review edits are not committed or pushed. Contribution confirmation, substantive human review, model/scope clarification and course delivery remain open.
 
 
 ## Final cover and worked-example publication — 18 October 2026
@@ -125,13 +137,13 @@ This checkpoint integrates both completed 96-attempt balanced campaigns and the 
 | Format | 117 visible source chunks, four mathematical expressions and two chart images checked; at least 11-point text/figure labels and one-inch margins. No clipping, overlap or missing table/figure text observed |
 | Preservation | All 149 preceding scientific fixture/result/figure/history files inventoried for this publication remain unchanged, excluding only the refreshed canonical format receipt. Its previous bytes and the preceding report source/PDF are preserved in `docs/history/20261017-before-balanced/`. All 483 original balanced run files and all 483 corresponding private backup members match their original hashes |
 
-The [publication receipt](../results/summary/balanced-publication-verification-20261017.json), [format receipt](../results/summary/submission-report-format.json), [balanced comparison audit](balanced-comparison-audit.md) and [evidence guide](evidence.md) provide reproducible checks and trace locators. Report tooling used Python 3.12.14, ReportLab 4.4.9, Matplotlib 3.10.8 and pdfplumber 0.11.9; the preserved experiment/test runtime is Python 3.12.2. Local checks ran on macOS ARM64; remote CI is a separate observation.
+The [publication receipt](../results/summary/balanced-publication-verification-20261017.json), [format receipt](../results/summary/submission-report-format.json), [balanced comparison audit](studies/balanced-comparison-audit.md) and [evidence guide](evidence.md) provide reproducible checks and trace locators. Report tooling used Python 3.12.14, ReportLab 4.4.9, Matplotlib 3.10.8 and pdfplumber 0.11.9; the preserved experiment/test runtime is Python 3.12.2. Local checks ran on macOS ARM64; remote CI is a separate observation.
 
 The current report is prepared for substantive member review. Actual contributions, understanding, prose/gold review, scope/model clarification, the private submitted title, presentation and Canvas submission remain open as detailed in planning S1–S7. Public rendering and automated validation do not establish any of those human actions. Publication uses the authorized non-force push; the Git commit containing this update is the release identity, while archived experimental source identities remain unchanged.
 
 ## D5 balanced generation implementation — 15 October 2026
 
-Implemented a new 48-case generation confirmation and controlled-only campaign routing. The [protocol](balanced-generation.md) and [verification receipt](../results/summary/balanced-generation-verification-20261015.json) bind the scope, source, fixtures, model packets and checks. No provider requests, commit or push were performed. Offline mock outputs are engineering evidence, not new Qwen or GLM measurements.
+Implemented a new 48-case generation confirmation and controlled-only campaign routing. The [protocol](studies/balanced-generation.md) and [verification receipt](../results/summary/balanced-generation-verification-20261015.json) bind the scope, source, fixtures, model packets and checks. No provider requests, commit or push were performed. Offline mock outputs are engineering evidence, not new Qwen or GLM measurements.
 
 | Check | Observed result |
 | --- | --- |
@@ -152,7 +164,7 @@ The implementation is ready for the bounded pair of live runs after actual wordi
 
 This preceding audit applies to the source/report checkpoint preserved in [course-audit history](history/20261015-course-audit/submission-report.md). D5 implementation and current-source tests are recorded above.
 
-The [detailed audit](course-code-audit.md) checks the original brief, guidelines, proposal, responsible-AI slides and supplied TA feedback against current source and archived evidence. It identifies a material constraint-type/feasibility-label confound in the executed dataset. The report now discloses it, and planning D5 defines a focused confirmation decision. This audit changed documentation and derived audit evidence only; it made no model calls or Git publication.
+The [detailed audit](reviews/course-code-audit.md) checks the original brief, guidelines, proposal, responsible-AI slides and supplied TA feedback against current source and archived evidence. It identifies a material constraint-type/feasibility-label confound in the executed dataset. The report now discloses it, and planning D5 defines a focused confirmation decision. This audit changed documentation and derived audit evidence only; it made no model calls or Git publication.
 
 | Check | Observed result |
 | --- | --- |
@@ -211,7 +223,7 @@ This local update validates the completed Qwen3.6/GLM 200-attempt pair, adds der
 | Preservation | 1,107 original files inventoried: 1,106 unchanged in place; the refreshed format receipt's previous bytes are preserved in report history; no missing files; original report source/PDF preserved byte-for-byte |
 | Documentation | Current local links and five cited archive trace paths verified; archive/document credential/private-key scans passed; whitespace diff check passed |
 
-The [format receipt](../results/summary/submission-report-format.json), [execution/replay receipt](../results/summary/difficulty-run-validation-20261014.json), [preservation receipt](../results/summary/difficulty-preservation-verification-20261014.json) and [comparison audit](difficulty-comparison-audit.md) bind these checks to the evidence. Report tooling used Python 3.12.14, ReportLab 4.4.9, Matplotlib 3.10.8 and pdfplumber 0.11.9; this is separate from the archived experiment runtime (Python 3.12.2).
+The [format receipt](../results/summary/submission-report-format.json), [execution/replay receipt](../results/summary/difficulty-run-validation-20261014.json), [preservation receipt](../results/summary/difficulty-preservation-verification-20261014.json) and [comparison audit](studies/difficulty-comparison-audit.md) bind these checks to the evidence. Report tooling used Python 3.12.14, ReportLab 4.4.9, Matplotlib 3.10.8 and pdfplumber 0.11.9; this is separate from the archived experiment runtime (Python 3.12.2).
 
 The report distinguishes service errors, genuine extraction omissions and valid-but-suboptimal schedules. It explicitly discloses that clock paraphrases omit calendar dates, limiting frame-based extraction comparisons; relative-slot validity remains interpretable. It also retains the 39 normalized-family grouping and the original failure-inclusive denominators. Human contributions, natural-language/gold review, members' own interpretation and course-model eligibility remain open.
 

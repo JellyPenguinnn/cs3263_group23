@@ -7,7 +7,7 @@ project is not yet a completed course submission: the report/presentation and
 human review remain unfinished, and interpretation of the course's frontier-model
 requirement remains unresolved.
 
-The [machine-readable summary](../results/summary/two-model-development-20261002.json)
+The [machine-readable summary](../../results/summary/two-model-development-20261002.json)
 contains counts, conditional objective results, paired intervals, resource
 distributions, execution settings, failures, pause intervals and archive hashes.
 No inference was performed for this audit. Earlier runs and all original failures
@@ -63,11 +63,11 @@ does not require an optimal objective. All failures remain in the denominators.
 | Qwen3.8 | Realistic | 11/12 (91.7%) | 11/12 (91.7%) |
 | Qwen3.8 | Additional wording | 46/48 (95.8%) | 44/48 (91.7%) |
 
-![Controlled scheduling acceptance by model and method](../results/figures/two-model-development-20261002/controlled-accepted.png)
+![Controlled scheduling acceptance by model and method](../../results/figures/two-model-development-20261002/controlled-accepted.png)
 
-![Realistic scenario acceptance by model and method](../results/figures/two-model-development-20261002/realistic-accepted.png)
+![Realistic scenario acceptance by model and method](../../results/figures/two-model-development-20261002/realistic-accepted.png)
 
-![Additional wording acceptance by model and method](../results/figures/two-model-development-20261002/language-accepted.png)
+![Additional wording acceptance by model and method](../../results/figures/two-model-development-20261002/language-accepted.png)
 
 The nine Qwen3.8 rejections are operational: one timeout, five transport errors,
 one HTTP 502 and two HTTP 503s. They are distributed across A/B as 1/0 controlled,
@@ -169,7 +169,7 @@ teammate has reviewed or reproduced the study.
 | Qwen3.8 `reproduction.tar.gz` | `a1a70ac7566781fc6360048e5c0a10eeb9cd764d7d7fd0cd1186851284d1aa12` |
 
 Both matching original synthetic replay archives are now included in
-[results/archives](../results/archives/). See [evidence.md](evidence.md) for verification
+[results/archives](../../results/archives/). See [evidence.md](../evidence.md) for verification
 and extraction from a clone. Verify its hash and internal `CHECKSUMS.json`, extract
 it into a new directory, and install its own `source/` with Python 3.12 and the
 hashed lockfile as documented in the README. From that extracted `source/`:
@@ -190,7 +190,7 @@ The source snapshot is based on Git `2f0562b` **with uncommitted implementation
 changes**. GitHub `main` was still exactly `2f0562b` when checked on 2 October.
 The archives retain the executed scoring source. The subsequent repository
 finalization publishes the resilience/backend implementation, documentation and
-original replay packages; [publication verification](publication-verification.md)
+original replay packages; [publication verification](../publication-verification.md)
 records its checks. This does not change the experiment's original source identity.
 
 ### Regenerate the charts
@@ -208,14 +208,14 @@ From the repository root, after the locked installation (which includes
 MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_benchmark_results.py
 ```
 
-The script reads only the [portable audited summary](../results/summary/two-model-development-20261002.json),
+The script reads only the [portable audited summary](../../results/summary/two-model-development-20261002.json),
 validates the outcome totals and writes PNG plus vector PDF versions to
 `results/figures/two-model-development-20261002/`. It needs no credentials, raw
-response archive or new model calls. The [figure receipt](../results/figures/two-model-development-20261002/figure-data.json)
+response archive or new model calls. The [figure receipt](../../results/figures/two-model-development-20261002/figure-data.json)
 records every plotted count/rate, source and renderer hashes, Matplotlib version,
-and output checksums. The [controlled PDF](../results/figures/two-model-development-20261002/controlled-accepted.pdf),
-[realistic PDF](../results/figures/two-model-development-20261002/realistic-accepted.pdf)
-and [wording PDF](../results/figures/two-model-development-20261002/language-accepted.pdf)
+and output checksums. The [controlled PDF](../../results/figures/two-model-development-20261002/controlled-accepted.pdf),
+[realistic PDF](../../results/figures/two-model-development-20261002/realistic-accepted.pdf)
+and [wording PDF](../../results/figures/two-model-development-20261002/language-accepted.pdf)
 can be placed into the report or presentation without raster enlargement.
 
 ## Course, proposal and remaining delivery
@@ -232,7 +232,7 @@ to the original extraction used by the existing submission checklist.
 | Rubric: Guidelines P84 | Develop analysis of why methods differ, the strong-model ceiling, conditional optimality, extraction mistakes, operational failures, generator assumptions and realism. A higher score or predetermined B win is not the rubric |
 | Responsible AI: Project p7 / Guidelines P35, P62 | Existing report discussion addresses privacy, unequal disruption, explanation limits, objective trade-offs and user control. Fixed assignments do not establish fair workload allocation; human interpretation and bounded claims still need review |
 | Human contribution: Guidelines P56–60, P87–88 | All members must understand the whole project and accurately describe their work, consulted sources and AI assistance. Existing contribution and claim-review records remain pending; an agent cannot supply these sign-offs |
-| Report: Guidelines P49/P92 | The [current report](submission-report.md) incorporates both models and a fresh render audit; member revision and the private final copy still require review: at most ten single-column, single-spaced body pages, at least 11-point font and one-inch margins; title/references excluded |
+| Report: Guidelines P49/P92 | The [current report](../submission-report.md) incorporates both models and a fresh render audit; member revision and the private final copy still require review: at most ten single-column, single-spaced body pages, at least 11-point font and one-inch margins; title/references excluded |
 | Presentation: Guidelines P47 | Produce the actual deck/recording and rehearse 15 minutes plus 5 minutes Q&A. `presentation/rehearsal.md` is a storyboard, not a completed presentation |
 | Course delivery: Project p8 / Guidelines P11–14, P37 | Verify actual proposal receipt/feedback and Canvas arrangements; presentation is in the week of 9 November, report due 13 November. October 18/30 are team targets |
 
@@ -251,5 +251,5 @@ stricter. Two legitimate next decisions are:
 This audit does not make that scientific scope decision for the team or silently
 retag a run as held out. It establishes that existing results are usable and
 there is no reason to repeat them just because the stronger direct model did well.
-The [submission checklist](submission-checklist.md), actual member review and
+The [submission checklist](../submission-checklist.md), actual member review and
 final artifact checks still govern a submission-ready claim; no grade is promised.

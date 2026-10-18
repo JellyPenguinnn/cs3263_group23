@@ -228,3 +228,19 @@ test("shared-service runs disclose their evidence scope without changing strict 
   await ui.call("refresh()");
   assert.doesNotMatch(ui.element("#evidence-label").textContent, /Shared-service/);
 });
+
+
+test("monitor does not infer request concurrency from reserved attempts", async () => {
+  const ui = await dashboard();
+  for (const count of [1, 4, 8]) {
+    ui.call(`run.active=true; run.liveness="active";
+      run.progress={completed:12, planned:2000,
+        pending_attempt_ids:Array.from({length:${count}}, (_, i) => "pending-"+i),
+        not_started:2000-12-${count}}; renderMonitor()`);
+    const html = ui.element("#monitor-content").innerHTML;
+    assert.match(html, /Recorded attempts · read-only/);
+    assert.doesNotMatch(html, /Sequential|Parallel|parallel requests/i);
+    assert.match(html, /12 of 2000 attempts complete/);
+    assert.match(html, /Requests reserved; awaiting results/);
+  }
+});

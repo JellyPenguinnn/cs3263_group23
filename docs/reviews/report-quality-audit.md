@@ -1,6 +1,6 @@
 # Report scientific-quality and course-requirement review
 
-Reviewed 18 October 2026 against the supplied Project brief, CS3263 Project Guidelines AY2026/27, Responsible AI slides, original proposal, consultation notes and written TA feedback. The [report source](submission-report.md), every table row, formula, caption and reference were reviewed against implementation and saved evidence. The [verification receipt](../results/summary/report-scientific-review-20261018.json) binds the reviewed source and PDF; later edits require renewed checks. This review does not replace member contributions, independent interpretation or teaching-team approval.
+Reviewed 18 October 2026 against the supplied Project brief, CS3263 Project Guidelines AY2026/27, Responsible AI slides, original proposal, consultation notes and written TA feedback. The [report source](../submission-report.md), every table row, formula, caption and reference were reviewed against implementation and saved evidence. The [verification receipt](../../results/summary/report-scientific-review-20261018.json) binds the reviewed source and PDF; later edits require renewed checks. This review does not replace member contributions, independent interpretation or teaching-team approval.
 
 ## Report walkthrough
 

@@ -13,7 +13,7 @@ Use the [current report](../docs/submission-report.md), [claim index](../docs/cl
 | 5 / 6–8:30 | Explain 1,000 cases, ten families, five sizes and balanced SAT/UNSAT labels. Show acceptance and separate valid schedule construction from correct UNSAT prediction. | Report Sections 5–6; current acceptance chart and feasibility table |
 | 6 / 8:30–10 | Explain constraint violations, false UNSAT, format rejection and infrastructure separately. Show invented Qwen deadlines and omitted GLM constraints. | Report Section 6; failure chart and original trace references |
 | 7 / 10–12 | Discuss conditional optimality, mean/median/p95 tokens and time. Explain why shared-service conditions prevent a controlled latency ranking. | Report Sections 6–7; resource tables and supplement |
-| 8 / 12–14 | Discuss synthetic-case limits, related families, unsupported weekly/preferences features, privacy, fairness and user oversight. | Report Section 8; scope clarification in planning S1 |
+| 8 / 12–14 | Discuss synthetic-case limits, related families, unsupported weekly/preferences features, privacy, fairness and user oversight. | Report Section 8; scope clarification in the submission checklist |
 | 9 / 14–15 | Give bounded conclusions, confirmed personal contributions and AI assistance. Identify generation as core and earlier repair/wording as extensions. | Report Section 9; factual contribution accounts |
 
 Use at most one short saved-record demonstration; static annotated results are sufficient. No live model request is needed. Label canned integration examples explicitly. Keep optional historical examples only if they add an insight without displacing the main analysis.
@@ -49,4 +49,4 @@ These are evidence boundaries to explain in your own words, not a record of comp
 
 ## Human rehearsal record — pending
 
-Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. Members must verify their own contributions and understand every part, including AI-supported work. Follow [planning Section 5](../planning.md#5-current-task-queue-and-acceptance-evidence) and the [submission checklist](../docs/submission-checklist.md).
+Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. Members must verify their own contributions and understand every part, including AI-supported work. Follow [remaining submission tasks](../docs/submission-checklist.md#genuine-actions-still-required-before-submission) and the [submission checklist](../docs/submission-checklist.md).

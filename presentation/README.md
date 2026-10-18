@@ -8,7 +8,7 @@ Use the [current generation-first report](../docs/submission-report.md), [curren
 PYTHONPATH=src .venv/bin/python evaluation/ta_scope_examples.py runs/NEW-presentation-office.json
 ```
 
-This offline command verifies loose/tight generation, a room-capacity contradiction and a one-move repair with seven unchanged activities. It makes zero model calls; label it an illustration rather than an additional benchmark. See [the feedback alignment](../docs/ta-feedback-alignment.md) for the single-day/30-minute scope, formal details and metric distinction. For live-model failure examples, use the [current report example and trace index](../docs/report-details.md#example-trace-index) and [diverse audit](../docs/diverse-comparison-audit.md). The earlier [balanced](../docs/balanced-comparison-audit.md) and [difficulty](../docs/difficulty-comparison-audit.md) examples remain separately labelled; retain original outputs and labels.
+This offline command verifies loose/tight generation, a room-capacity contradiction and a one-move repair with seven unchanged activities. It makes zero model calls; label it an illustration rather than an additional benchmark. See [the feedback alignment](../docs/ta-feedback-alignment.md) for the single-day/30-minute scope, formal details and metric distinction. For live-model failure examples, use the [current report example and trace index](../docs/report-details.md#example-trace-index) and [diverse audit](../docs/diverse-comparison-audit.md). The earlier [balanced](../docs/studies/balanced-comparison-audit.md) and [difficulty](../docs/studies/difficulty-comparison-audit.md) examples remain separately labelled; retain original outputs and labels.
 
 ## Preserved historical Qwen examples
 
@@ -24,7 +24,7 @@ python3.12 scripts/verify_evidence.py --extract-to runs/presentation-evidence
   --case-id family-178d62b21632eb32c9dcb923-repair --approach direct --format json
 ```
 
-The first example shows Qwen3.6 changing A1's deadline from slot 3 to slot 7 during extraction. The compiled specification permits a schedule, but independent gold validation rejects it. The second shows a gold-valid Qwen3.8 direct repair that moves two activities while the reference needs only one. It illustrates why acceptance and optimal repair are separate measures. Claims R11 and R10 in the [historical claim index](../docs/claim-evidence-20261002.md) bind these examples to saved evidence.
+The first example shows Qwen3.6 changing A1's deadline from slot 3 to slot 7 during extraction. The compiled specification permits a schedule, but independent gold validation rejects it. The second shows a gold-valid Qwen3.8 direct repair that moves two activities while the reference needs only one. It illustrates why acceptance and optimal repair are separate measures. Claims R11 and R10 in the [historical claim index](../docs/history/development-notes/claim-evidence-20261002.md) bind these examples to saved evidence.
 
 Use the current CLI to inspect saved records. To reproduce the original analysis, follow [the exact-source replay instructions](../docs/evidence.md); do not silently rescore archived results with a changed implementation. Never correct a failed extraction and present it as the original model answer. A saved-record demonstration can supplement the presentation; a deck, recording and timed human rehearsal still need to be completed.
 
@@ -54,7 +54,7 @@ makes zero model calls. With the preserved synthetic live archive available:
 5. Use the read-only dashboard for monitoring/results, and explain that these
    are 30 development cases, not frozen held-out findings or a superiority claim.
 
-The 30 September [integration qualification](../docs/lihao-integration-followup.md)
+The 30 September [integration qualification](../docs/history/development-notes/lihao-integration-followup.md)
 verified the three explanation commands above on installed macOS/Linux builds.
 The later v2 pilot can be replayed separately when its synthetic archive is available:
 

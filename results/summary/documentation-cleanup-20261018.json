@@ -1,0 +1,359 @@
+{
+  "base_commit": "a43747c549fe61623aadfb55307dec5f3beb022c",
+  "publication": "Authorized normal commit and push to main; the containing commit identifies this cleanup.",
+  "scope": "Documentation reorganization plus previously verified audit fixes. No new inference or scientific result changes.",
+  "docs_root_markdown_before": 54,
+  "docs_root_markdown_after": 13,
+  "relocations": [
+    {
+      "old_path": "docs/balanced-comparison-audit.md",
+      "new_path": "docs/studies/balanced-comparison-audit.md",
+      "before_sha256": "405ed286ebb490e2a30177a6ce209646dbefe272899b12a79a62e948df138f02",
+      "after_sha256": "ddbe71bf238530f7adb2542bc5c9327059796240eaf5dee5dad71af13312d8f5",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/balanced-generation.md",
+      "new_path": "docs/studies/balanced-generation.md",
+      "before_sha256": "a0b233978f0dbc123ed7954eb3f5ef50acd5a6cd0a9b8699cd4d0fb246639101",
+      "after_sha256": "b800fc0d9257c90310129f93ef7aca727a0775af712e0ac38bf1277767e04bd6",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/benchmark-process-recovery.md",
+      "new_path": "docs/history/development-notes/benchmark-process-recovery.md",
+      "before_sha256": "56ccb780d1a1f4cc9075879bf2a5565c6583507e594adc24abb5eeb8ba5d076b",
+      "after_sha256": "56ccb780d1a1f4cc9075879bf2a5565c6583507e594adc24abb5eeb8ba5d076b",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/checkpoint-readiness.md",
+      "new_path": "docs/history/development-notes/checkpoint-readiness.md",
+      "before_sha256": "f15d420c30ad0fb9fbe800175563d454e9c6391dd320cf9698b15ce09dd53175",
+      "after_sha256": "f15d420c30ad0fb9fbe800175563d454e9c6391dd320cf9698b15ce09dd53175",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/claim-evidence-20261001.md",
+      "new_path": "docs/history/development-notes/claim-evidence-20261001.md",
+      "before_sha256": "6b70228b5addd762165ac2e246984e09634e84d1d77c215c5c25bb287daa80dd",
+      "after_sha256": "6b70228b5addd762165ac2e246984e09634e84d1d77c215c5c25bb287daa80dd",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/claim-evidence-20261002.md",
+      "new_path": "docs/history/development-notes/claim-evidence-20261002.md",
+      "before_sha256": "b92bfc873523a195a5006fdfc84de6ef6a59da70cd52b31101163b19e57ca4d1",
+      "after_sha256": "b92bfc873523a195a5006fdfc84de6ef6a59da70cd52b31101163b19e57ca4d1",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/course-code-audit.md",
+      "new_path": "docs/reviews/course-code-audit.md",
+      "before_sha256": "600e76e0cb713009b3f81caa512d89c2f08f6773b338402377cf5c624106fb59",
+      "after_sha256": "dc9ac2b767821ef601f0dd8df55965fb9a8da7cc89c4a64d4f0633d54ec8e0cf",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/development-guide.md",
+      "new_path": "docs/history/development-notes/development-guide.md",
+      "before_sha256": "355d586bc0aa8db1eaf2f75b0bc7e75602e4d1e71d4d56f76b03d292479be849",
+      "after_sha256": "355d586bc0aa8db1eaf2f75b0bc7e75602e4d1e71d4d56f76b03d292479be849",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/development-plan-history.md",
+      "new_path": "docs/history/development-notes/development-plan-history.md",
+      "before_sha256": "e06ad2beac7485947243e4ab9a6677479616d2595c0c0ae3f4b87fc312df380f",
+      "after_sha256": "e06ad2beac7485947243e4ab9a6677479616d2595c0c0ae3f4b87fc312df380f",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/difficulty-comparison-audit.md",
+      "new_path": "docs/studies/difficulty-comparison-audit.md",
+      "before_sha256": "66a24b5ed61a954d1d132f9838df4a6c3909cac394adf10cee71596c80ba1fb5",
+      "after_sha256": "4b6adba42821bbd601fb32a9a436b1998498410fd5f81d1e1de72c1e2007397f",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/difficulty-smoke-verification.md",
+      "new_path": "docs/history/development-notes/difficulty-smoke-verification.md",
+      "before_sha256": "0ac5e2794a045e46da79ee9ed004e9fdf892e122e86cbae61d66afd94450e3b7",
+      "after_sha256": "0ac5e2794a045e46da79ee9ed004e9fdf892e122e86cbae61d66afd94450e3b7",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/difficulty-study.md",
+      "new_path": "docs/studies/difficulty-study.md",
+      "before_sha256": "1d5af0084b39574b93519a3e11ed2c18e2bb2e3c2545ba41f8da870387e1e72e",
+      "after_sha256": "4f89d6f709ff6b9c1568808101973eed94e4c04f941c6034e63ba8790904859c",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/diverse-generation.md",
+      "new_path": "docs/studies/diverse-generation.md",
+      "before_sha256": "0dbf085ec4e8cf992eaa4f28ba8731f4fbbe5a24de7b97dd2d63e2bec706bf6e",
+      "after_sha256": "bead768516648d1de16560a990ba2810af3a441d2594e3acb0f013b0a7a87d13",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/expanded-development-100.md",
+      "new_path": "docs/history/development-notes/expanded-development-100.md",
+      "before_sha256": "711163c0334801121ba7655d87dc17fbd4ee987d2ad80c329f913ca94720ddd2",
+      "after_sha256": "711163c0334801121ba7655d87dc17fbd4ee987d2ad80c329f913ca94720ddd2",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/final-data-preparation.md",
+      "new_path": "docs/history/development-notes/final-data-preparation.md",
+      "before_sha256": "8fc021158603d152640f804056cd968b802441389dc2fba449adf978d2c05a10",
+      "after_sha256": "8fc021158603d152640f804056cd968b802441389dc2fba449adf978d2c05a10",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/glm-routing-investigation.md",
+      "new_path": "docs/history/development-notes/glm-routing-investigation.md",
+      "before_sha256": "69d94975b0334512be35bc786555c62f5c0095129f8ed5e16a7f2cbc4a21a988",
+      "after_sha256": "69d94975b0334512be35bc786555c62f5c0095129f8ed5e16a7f2cbc4a21a988",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/integration-audit-20260930.md",
+      "new_path": "docs/history/development-notes/integration-audit-20260930.md",
+      "before_sha256": "8961159c2f535f0f7ce18f843ce5c903d9c48a72d769e4ed8e741db63b1374db",
+      "after_sha256": "8961159c2f535f0f7ce18f843ce5c903d9c48a72d769e4ed8e741db63b1374db",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/lihao-development-followup.md",
+      "new_path": "docs/history/development-notes/lihao-development-followup.md",
+      "before_sha256": "9073013e6e3499568e6ea4a3ac5100812ec72419777b1aa3c9cf1decda0fd451",
+      "after_sha256": "9073013e6e3499568e6ea4a3ac5100812ec72419777b1aa3c9cf1decda0fd451",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/lihao-f2-followup.md",
+      "new_path": "docs/history/development-notes/lihao-f2-followup.md",
+      "before_sha256": "0fd60db1fae97bfc6b3aa9383562e67ccbe309acc71e3a1e6affbd0f8f29808d",
+      "after_sha256": "0fd60db1fae97bfc6b3aa9383562e67ccbe309acc71e3a1e6affbd0f8f29808d",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/lihao-integration-followup.md",
+      "new_path": "docs/history/development-notes/lihao-integration-followup.md",
+      "before_sha256": "a9f7ea989ccd4b1f120ce7b324161f64fe2241bfc80b8b82aee38a1d258ef714",
+      "after_sha256": "a9f7ea989ccd4b1f120ce7b324161f64fe2241bfc80b8b82aee38a1d258ef714",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/lihao-method-notes.md",
+      "new_path": "docs/history/development-notes/lihao-method-notes.md",
+      "before_sha256": "faf6753fea8f03257b3e615455d27907b3d9697022802e6c3f6d5bb3c04f1e3b",
+      "after_sha256": "faf6753fea8f03257b3e615455d27907b3d9697022802e6c3f6d5bb3c04f1e3b",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/lihao-request-boundary.md",
+      "new_path": "docs/history/development-notes/lihao-request-boundary.md",
+      "before_sha256": "bd945ce1ee9e6d94bd92518c86c319a7a78c4b943f6536a39e761c46dbc482d3",
+      "after_sha256": "bd945ce1ee9e6d94bd92518c86c319a7a78c4b943f6536a39e761c46dbc482d3",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/main-baseline-validation.md",
+      "new_path": "docs/history/development-notes/main-baseline-validation.md",
+      "before_sha256": "b8ceef2a229d8a368e2c977fa3c8f4bd1197bbfad32a19e6ab8a6ac1e3cf46ee",
+      "after_sha256": "b8ceef2a229d8a368e2c977fa3c8f4bd1197bbfad32a19e6ab8a6ac1e3cf46ee",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/main-integration-audit-20261001.md",
+      "new_path": "docs/history/development-notes/main-integration-audit-20261001.md",
+      "before_sha256": "7743b9f7573cb518bf244f130279c5e14f2eb30fbb4093b5074f70de011f3eea",
+      "after_sha256": "7743b9f7573cb518bf244f130279c5e14f2eb30fbb4093b5074f70de011f3eea",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/realistic-drafts-review.md",
+      "new_path": "docs/history/development-notes/realistic-drafts-review.md",
+      "before_sha256": "d5dddda08a1d22aad71ef918b139ff2757832adc2b820b649add64bfc6f2ef77",
+      "after_sha256": "d5dddda08a1d22aad71ef918b139ff2757832adc2b820b649add64bfc6f2ef77",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/report-quality-audit.md",
+      "new_path": "docs/reviews/report-quality-audit.md",
+      "before_sha256": "638211e6ff968a4680a426bb5b209d7794c65159b0eb9786f098fcd2eebf4df6",
+      "after_sha256": "48ab0865f3490f52e79033ca09badef17c976c33ba43c9cf0ccd850c0a007df9",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/study-draft-20261001.md",
+      "new_path": "docs/history/development-notes/study-draft-20261001.md",
+      "before_sha256": "411deb443ddf25496e24cb3d34fa625f7dbd40442d6cea002466cfa08d7b2af6",
+      "after_sha256": "411deb443ddf25496e24cb3d34fa625f7dbd40442d6cea002466cfa08d7b2af6",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/two-model-development-audit.md",
+      "new_path": "docs/studies/two-model-development-audit.md",
+      "before_sha256": "b4cc57cd9cbf5ed17242f02505ed5f064ef8b3095a1c73be2879b6135b674822",
+      "after_sha256": "51a9f92cc9a7e7eba14f1fd495014bf098ded7f89d0b1ac8a6d06508dcf4084d",
+      "archived_original_bytes": false
+    },
+    {
+      "old_path": "docs/version-2-validation.md",
+      "new_path": "docs/history/development-notes/version-2-validation.md",
+      "before_sha256": "4f63588edffe583df3fde141a420ffb91cc7c0376eba0e3348a20f51b5ed07ad",
+      "after_sha256": "4f63588edffe583df3fde141a420ffb91cc7c0376eba0e3348a20f51b5ed07ad",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-availability-followup.md",
+      "new_path": "docs/history/development-notes/yaoxiang-availability-followup.md",
+      "before_sha256": "afb5d3a55ad93f4b57a65eb49df9d4012d2c9e1aaf09dbfb9b29421222b64b9e",
+      "after_sha256": "afb5d3a55ad93f4b57a65eb49df9d4012d2c9e1aaf09dbfb9b29421222b64b9e",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-f1-review.md",
+      "new_path": "docs/history/development-notes/yaoxiang-f1-review.md",
+      "before_sha256": "8fc06f4091e2a5a979561aaf8daa7c5beb3f2d6346fe274e3fb3bfc5c7321fe4",
+      "after_sha256": "8fc06f4091e2a5a979561aaf8daa7c5beb3f2d6346fe274e3fb3bfc5c7321fe4",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-f3-formal-review.md",
+      "new_path": "docs/history/development-notes/yaoxiang-f3-formal-review.md",
+      "before_sha256": "402c51b6dc190eeb47f33ac2c08ae97c92529592e874419b4a3947fc29ad6ff8",
+      "after_sha256": "402c51b6dc190eeb47f33ac2c08ae97c92529592e874419b4a3947fc29ad6ff8",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-formal-followup.md",
+      "new_path": "docs/history/development-notes/yaoxiang-formal-followup.md",
+      "before_sha256": "1a6bf910f45c3e89dd901c2fdcd4768a5a607ef01b2fe164a7c6e91d3b11cb91",
+      "after_sha256": "1a6bf910f45c3e89dd901c2fdcd4768a5a607ef01b2fe164a7c6e91d3b11cb91",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-method-notes.md",
+      "new_path": "docs/history/development-notes/yaoxiang-method-notes.md",
+      "before_sha256": "067119e4a1c0986e089cfbcf67b4258dfddfd500575b939fe514b951f148a90f",
+      "after_sha256": "067119e4a1c0986e089cfbcf67b4258dfddfd500575b939fe514b951f148a90f",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yaoxiang-reference-review.md",
+      "new_path": "docs/history/development-notes/yaoxiang-reference-review.md",
+      "before_sha256": "155cf54a19ed0a6fd9ce3786f58f90019fb1d4880e3cf310046d8de9b131a729",
+      "after_sha256": "155cf54a19ed0a6fd9ce3786f58f90019fb1d4880e3cf310046d8de9b131a729",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-archive-review.md",
+      "new_path": "docs/history/development-notes/yongqing-archive-review.md",
+      "before_sha256": "f66d9c4e4fb0183dfd900aef010e9eea61f0b695f4e99785a5af15c1a21d8554",
+      "after_sha256": "f66d9c4e4fb0183dfd900aef010e9eea61f0b695f4e99785a5af15c1a21d8554",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-authored-followup.md",
+      "new_path": "docs/history/development-notes/yongqing-authored-followup.md",
+      "before_sha256": "f081c6eaf95aaf870cdb7be3e86a104c9c1e002e490cc4d012a7f977df1ba341",
+      "after_sha256": "f081c6eaf95aaf870cdb7be3e86a104c9c1e002e490cc4d012a7f977df1ba341",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-evaluation-followup.md",
+      "new_path": "docs/history/development-notes/yongqing-evaluation-followup.md",
+      "before_sha256": "ec6ed31fff1beeb65318e55fa71b61e8ccd6f01a7e8055df49c7472c6a83d073",
+      "after_sha256": "ec6ed31fff1beeb65318e55fa71b61e8ccd6f01a7e8055df49c7472c6a83d073",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-method-notes.md",
+      "new_path": "docs/history/development-notes/yongqing-method-notes.md",
+      "before_sha256": "d46fff42cdad992013fe1662617c6019bc13d658c92ea9108b0f8836e13ad8cd",
+      "after_sha256": "d46fff42cdad992013fe1662617c6019bc13d658c92ea9108b0f8836e13ad8cd",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-study-preparation.md",
+      "new_path": "docs/history/development-notes/yongqing-study-preparation.md",
+      "before_sha256": "1776c329672c38187ceb6fc91b911943babd4bd365ce8f2bc3247093117ea887",
+      "after_sha256": "1776c329672c38187ceb6fc91b911943babd4bd365ce8f2bc3247093117ea887",
+      "archived_original_bytes": true
+    },
+    {
+      "old_path": "docs/yongqing-v3-development.md",
+      "new_path": "docs/history/development-notes/yongqing-v3-development.md",
+      "before_sha256": "29c0f8e422b10687f30a7d4eb54373b8af482251f4e47c69946d9ba063f7644f",
+      "after_sha256": "29c0f8e422b10687f30a7d4eb54373b8af482251f4e47c69946d9ba063f7644f",
+      "archived_original_bytes": true
+    }
+  ],
+  "retired_files": [
+    {
+      "path": "AGENTS.md",
+      "sha256_before_removal": "aef153ee8aef7e59cffdf26c37cd7bb8a74610b01c8833f1a195a6718cf86488"
+    },
+    {
+      "path": "planning.md",
+      "sha256_before_removal": "f45e6ec9bf62b8d4aeab357e121888f952a9825c5b0c92ad0f359144cbd431d6"
+    },
+    {
+      "path": "docs/study-draft.md",
+      "sha256_before_removal": "69088da8f10ee192bef554fdcdc38e43c13673a11b9491552b6e5bf9d546e7cb"
+    }
+  ],
+  "active_markdown_links_checked": 389,
+  "missing_active_paths": [],
+  "invalid_active_anchors": [],
+  "links_to_retired_root_files": [],
+  "sensitive_pattern_paths": [],
+  "protected_files_checked": 282,
+  "changed_protected_files": [],
+  "runtime_test_input_files_compared_with_tested_snapshot": 227,
+  "files_differing_from_tested_snapshot": [],
+  "private_report_tracked_paths": [],
+  "private_report_ignored": true,
+  "previous_verification": {
+    "receipt": "results/summary/repository-path-audit-20261018.json",
+    "sha256": "b0a6e6532bc3453ccae83f2d3eccf4b8d49d17454e9570e5e692a2f07d34cebc",
+    "python_tests_passed": 1031,
+    "frontend_tests_passed": 10,
+    "offline_demo_attempts": 180,
+    "verified_archives": 8,
+    "verified_archive_members": 9186
+  },
+  "new_model_calls": 0,
+  "current_document_sha256": {
+    "README.md": "ecb688d12d8315424fc61cbf5ac140341bf4f3f6838c7748efa40a9f2d0c091c",
+    "docs/README.md": "9512d0917f466e428562911bdda9bd5e58e9cad0c4e163350f8cebc7cac8c9e0",
+    "docs/architecture.md": "ed0ea6349a7c22183494f885e45f413575880db2e5a0ad216725c78562499856",
+    "docs/claim-evidence.md": "71f73c7244c8c90c1dafb22fe43382726739c151a1784d5810063503a392be14",
+    "docs/contributions.md": "fa4cfaa02a59d17a3a95541a6f1f8c983b319015793f0ebb120cbd80e6e68025",
+    "docs/diverse-comparison-audit.md": "d945ff2129acf2826f2281562e78f498192c4477a1883137393b90bba551fd47",
+    "docs/evidence.md": "9b422e08fe4bf253312dab96f54c3fd2f4dbe9474463d24df6bacbf6c3f31dd9",
+    "docs/publication-verification.md": "59a6453693e41e50b08d600daecc89a4f889c16b221db8546191bc94d43c5d95",
+    "docs/report-details.md": "6ed3b4fdc953dd27f0a7a6d41b2291bce7662419511d28634da08520cc968ec7",
+    "docs/repository-audit.md": "0fb26961bda01c64d4d40597c799af7ac2d92ebca40e0c04be5449b1bc2404f6",
+    "docs/reviews/course-code-audit.md": "dc9ac2b767821ef601f0dd8df55965fb9a8da7cc89c4a64d4f0633d54ec8e0cf",
+    "docs/reviews/report-quality-audit.md": "48ab0865f3490f52e79033ca09badef17c976c33ba43c9cf0ccd850c0a007df9",
+    "docs/studies/balanced-comparison-audit.md": "ddbe71bf238530f7adb2542bc5c9327059796240eaf5dee5dad71af13312d8f5",
+    "docs/studies/balanced-generation.md": "b800fc0d9257c90310129f93ef7aca727a0775af712e0ac38bf1277767e04bd6",
+    "docs/studies/difficulty-comparison-audit.md": "4b6adba42821bbd601fb32a9a436b1998498410fd5f81d1e1de72c1e2007397f",
+    "docs/studies/difficulty-study.md": "4f89d6f709ff6b9c1568808101973eed94e4c04f941c6034e63ba8790904859c",
+    "docs/studies/diverse-generation.md": "bead768516648d1de16560a990ba2810af3a441d2594e3acb0f013b0a7a87d13",
+    "docs/studies/two-model-development-audit.md": "51a9f92cc9a7e7eba14f1fd495014bf098ded7f89d0b1ac8a6d06508dcf4084d",
+    "docs/submission-checklist.md": "6c10b9a39c74e70b84f287c04969a077d0700a947e8f7d3f2bb9f41ced1765f4",
+    "docs/submission-report.md": "c67493772e92e1dc0c39fc2c374b404cdd3eec3e2c0f407f6a560ece41cc990c",
+    "docs/ta-feedback-alignment.md": "2a0c234008c2452e7f9a874b129d9e7dd8b1fb9c1696cfe46d7524d3d838d10b",
+    "docs/usage.md": "a3629213e81201a77feb5442bd83f027229b607969ef9200b81a70bd182c3558",
+    "presentation/README.md": "5ed3cfb139de0be7707af07c547649b46e91423a368c032f150b3a27c30801f7",
+    "presentation/rehearsal.md": "97bdc5b3c893d8f730bc3b887e6c05cc77fedf7c41771dbeb9eb4283fe6ad029",
+    "results/README.md": "ed76c51ec10c100593937082acdd727deff2c912e86d78706b8a656717f49dd9"
+  },
+  "historical_link_policy": "Preserved source snapshots and moved development notes retain original bytes and original-location links; docs/history/README.md explains their use."
+}

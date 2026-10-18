@@ -32,7 +32,7 @@ The 48 cases belong to **three conservative construction families**, grouping al
 
 ## Dataset and review artifacts
 
-The immutable prepared version is under [`benchmarks/fixtures/balanced-generation-v1/`](../benchmarks/fixtures/balanced-generation-v1/):
+The immutable prepared version is under [`benchmarks/fixtures/balanced-generation-v1/`](../../benchmarks/fixtures/balanced-generation-v1/):
 
 | Artifact | Purpose |
 | --- | --- |
@@ -92,11 +92,11 @@ PYTHONPATH=src .venv/bin/python evaluation/supervise_development_campaign.py \
   --env-file .env --authorization-reference 'actual approved run reference' --allow-live
 ```
 
-Use a private credential file and the established durable-process workflow in [usage.md](usage.md). The supervisor now derives its analysis/export blocks from the validated packet, so the generation-only campaign reaches analysis and archive export without expecting nonexistent repair/fictional/wording blocks. A local process still pauses when the Mac sleeps; terminal persistence does not prevent sleep.
+Use a private credential file and the established durable-process workflow in [usage.md](../usage.md). The supervisor now derives its analysis/export blocks from the validated packet, so the generation-only campaign reaches analysis and archive export without expecting nonexistent repair/fictional/wording blocks. A local process still pauses when the Mac sleeps; terminal persistence does not prevent sleep.
 
 ## Verification and reporting
 
-The [verification receipt](../results/summary/balanced-generation-verification-20261015.json) records **900 passing regression tests**, including 23 new dataset tests and 24 new integration tests. A fresh noneditable wheel installation also validates the dataset and prepares/loads a packet. All existing traces/results and the preceding report version are preserved.
+The [verification receipt](../../results/summary/balanced-generation-verification-20261015.json) records **900 passing regression tests**, including 23 new dataset tests and 24 new integration tests. A fresh noneditable wheel installation also validates the dataset and prepares/loads a packet. All existing traces/results and the preceding report version are preserved.
 
 The offline integration checks use `httpx.MockTransport`, real provider parsing and campaign orchestration, gold-derived canned responses, both method pipelines, scoring, replay, analysis, figures, archive extraction/replay and dashboard reads. Injected timeouts/HTTP 502s test continuation; a wrong response identity tests fatal stopping. These outputs are **engineering evidence only**, never new Qwen or GLM performance results.
 
@@ -118,4 +118,4 @@ Qwen direct's 42 rejections comprise 23 hard-constraint violations, nine false U
 
 Keep the GLM service failure in its primary 47/48 denominator. The secondary 47/47 acceptance among returned direct answers does not erase the failure, and its one-case gap against B does not demonstrate a reasoning advantage. No failure has been retried, excluded or replaced. The available transport record does not identify an exact network/server cause.
 
-[The comparison audit](balanced-comparison-audit.md), [machine-readable summary](../results/summary/balanced-comparison-20261017.json) and [evidence manifest](../results/balanced-evidence-manifest.json) retain SAT/UNSAT and profile strata, conditional objective quality, time/token coverage, identity checks and exact trace paths. Regenerate the new graphs with `scripts/render_balanced_results.py`; analyse this pair separately from the 200- and 600-attempt studies. Preserve the earlier confound disclosure, three-family limitation and unconfirmed human review even when all B answers are accepted.
+[The comparison audit](balanced-comparison-audit.md), [machine-readable summary](../../results/summary/balanced-comparison-20261017.json) and [evidence manifest](../../results/balanced-evidence-manifest.json) retain SAT/UNSAT and profile strata, conditional objective quality, time/token coverage, identity checks and exact trace paths. Regenerate the new graphs with `scripts/render_balanced_results.py`; analyse this pair separately from the 200- and 600-attempt studies. Preserve the earlier confound disclosure, three-family limitation and unconfirmed human review even when all B answers are accepted.

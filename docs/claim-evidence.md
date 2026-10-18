@@ -23,7 +23,7 @@ The following balanced and difficulty indexes preserve earlier studies and share
 
 ## Earlier balanced generation claims
 
-Use the [balanced manifest](../results/balanced-evidence-manifest.json), [summary](../results/summary/balanced-comparison-20261017.json) and [audit with exact trace locators](balanced-comparison-audit.md). The builder validates controls against original records; fresh archive-source analysis reproduces both saved analyses exactly. Figure receipts bind plotted values and exported files to this summary.
+Use the [balanced manifest](../results/balanced-evidence-manifest.json), [summary](../results/summary/balanced-comparison-20261017.json) and [audit with exact trace locators](studies/balanced-comparison-audit.md). The builder validates controls against original records; fresh archive-source analysis reproduces both saved analyses exactly. Figure receipts bind plotted values and exported files to this summary.
 
 | ID / report section | Claim | Evidence and boundary |
 | --- | --- | --- |
@@ -40,7 +40,7 @@ Use the [balanced manifest](../results/balanced-evidence-manifest.json), [summar
 
 The following IDs preserve the preceding study's traceability. They apply to its separate extension results or shared implementation; they must not replace balanced-study denominators.
 
-Use the [difficulty manifest](../results/difficulty-evidence-manifest.json) to verify/extract each original archive. Archive-relative paths below refer to that extraction. The [comparison summary](../results/summary/difficulty-comparison-20261014.json) is rebuilt by `scripts/build_difficulty_comparison.py`; [the audit](difficulty-comparison-audit.md) supplies concrete trace paths and interpretation. [Evidence instructions](evidence.md) describe exact-source replay.
+Use the [difficulty manifest](../results/difficulty-evidence-manifest.json) to verify/extract each original archive. Archive-relative paths below refer to that extraction. The [comparison summary](../results/summary/difficulty-comparison-20261014.json) is rebuilt by `scripts/build_difficulty_comparison.py`; [the audit](studies/difficulty-comparison-audit.md) supplies concrete trace paths and interpretation. [Evidence instructions](evidence.md) describe exact-source replay.
 
 | ID / report section | Claim | Evidence and boundary |
 | --- | --- | --- |
@@ -58,15 +58,15 @@ Use the [difficulty manifest](../results/difficulty-evidence-manifest.json) to v
 | R12 / 6 | Failure categories and bounded extraction checks | Summary `overall_by_method`, failure catalogue; archive `analysis.json.interpretation` and extraction diagnostics; structural differences are not semantic-error counts |
 | R13 / 6 | Wording/canonical comparisons and omitted dates | Matched case IDs/renderings in archive rows; public clock paraphrases omit calendar date, limiting frame checks; canonical GLM B counterparts accepted |
 | R14 / 6 | Core-generation resources, missing usage and provider errors | Generation summary `models.*.scopes.generation_core.approaches.*.resources`; full-study summary `models.*.resources`; [execution receipt](../results/summary/difficulty-run-validation-20261014.json); timing includes errors, token means cover reported usage only |
-| R15 / 7 | Historical concentration of participant burden | [Original discussion](lihao-development-followup.md#four-responsible-ai-cases-for-team-discussion), preserved private baseline evidence; no fairer-solution proof |
+| R15 / 7 | Historical concentration of participant burden | [Original discussion](history/development-notes/lihao-development-followup.md#four-responsible-ai-cases-for-team-discussion), preserved private baseline evidence; no fairer-solution proof |
 | R16 / 7 | Moved-count priority may increase total shift | `test_movement_priority_beats_smaller_total_shift` in formal qualification; declared priority, not universal desirability |
 | R17 / 7 | Fixed compiler and prompt boundary | [Direct tests](../tests/unit/test_direct.py); no empirical live adversarial-robustness claim |
 | R18 / 8 | 364 hashes and exact 200-attempt replay per archive | Difficulty manifest, `scripts/verify_evidence.py`, archive checksums, execution/replay receipt and [verification log](publication-verification.md) |
 | R19 / 5, 8 | Earlier results and stopped run preserved separately | [Evidence guide](evidence.md), original historical archives/manifest, preserved old report, private original run/preservation ledger |
 | R20 / throughout | Course fit, sources, actual contribution limits | [Submission checklist](submission-checklist.md), original course documents, report references and [contributions](contributions.md); no inferred eligibility, authorship or grade |
 | R21 / 5-6 | Generation-first post-run view, 30 full / 12 small cases and preserved extensions | [Generation summary](../results/summary/generation-focus-20261015.json), [builder](../scripts/build_generation_focus.py), [report chart receipt](figures/generation-focus-20261015/figure-data.json); exact observation IDs, original archive hashes, no new inference or preregistration claim |
-| R22 / 1, 3, 5 | TA scope response and unsupported weekly/preference features | [Alignment](ta-feedback-alignment.md), user-supplied written feedback, `schema.py`; single-day/30-minute simplification remains an explicit S1 clarification |
+| R22 / 1, 3, 5 | TA scope response and unsupported weekly/preference features | [Alignment](ta-feedback-alignment.md), user-supplied written feedback, `schema.py`; single-day/30-minute simplification remains an explicit course-scope clarification |
 | R23 / 7 | Deadline/fixed-start presence separates all 30 generation labels | [Coverage audit](../results/summary/generation-constraint-coverage-20261015.json), archived controlled case bundles and `difficulty_suite.py` label-dependent branches; possible shortcut, no claim of observed model exploitation |
-| R24 / 5–7 | Separate 48-case correction now completed and reported as B1–B8 | [Balanced protocol](balanced-generation.md), [`balanced-generation-v1` manifest](../benchmarks/fixtures/balanced-generation-v1/manifest.json), independent certificates, source-bound packets, offline integration checks and the balanced manifest; 24 SAT/24 UNSAT across four matched profiles, three conservative families |
+| R24 / 5–7 | Separate 48-case correction now completed and reported as B1–B8 | [Balanced protocol](studies/balanced-generation.md), [`balanced-generation-v1` manifest](../benchmarks/fixtures/balanced-generation-v1/manifest.json), independent certificates, source-bound packets, offline integration checks and the balanced manifest; 24 SAT/24 UNSAT across four matched profiles, three conservative families |
 
 A member checks model/block/task/label/rendering, denominator and archive identity, inspects the actual case where a mechanism is claimed, and records their own findings or corrections. Review the date-omitting paraphrases as an input limitation. Do not modify executed fixtures, failures or scores to improve the narrative. Any future scientific correction needs a separately versioned analysis or study.

@@ -2,7 +2,7 @@
 
 Both **200-attempt campaigns completed**, with all three blocks exported and every saved analysis field reproduced by fresh offline replay. This is a valid, comparable **shared-service development study**, with the interpretation limits below. Provider failures are completed failed observations, not missing experiments. This audit uses no new inference.
 
-The [report](submission-report.md) presents the scientific narrative. The [summary](../results/summary/difficulty-comparison-20261014.json) contains block/tier/task counts, paired intervals, resources and the failure catalogue. The [execution/replay receipt](../results/summary/difficulty-run-validation-20261014.json) records campaign completion, capabilities, usage coverage and exact replay. The [manifest](../results/difficulty-evidence-manifest.json) binds the two original reproduction archives.
+The [report](../submission-report.md) presents the scientific narrative. The [summary](../../results/summary/difficulty-comparison-20261014.json) contains block/tier/task counts, paired intervals, resources and the failure catalogue. The [execution/replay receipt](../../results/summary/difficulty-run-validation-20261014.json) records campaign completion, capabilities, usage coverage and exact replay. The [manifest](../../results/difficulty-evidence-manifest.json) binds the two original reproduction archives.
 
 ## Integrity and comparison controls
 
@@ -40,11 +40,11 @@ A = Direct LLM; B = LLM specification extraction + CP-SAT. Acceptance is a gold-
 | GLM5.3 Flash | Fictional | 90.0% (18/20) | 100.0% (20/20) |
 | GLM5.3 Flash | Wording | 90.0% (18/20) | 90.0% (18/20) |
 
-![Controlled acceptance](../results/figures/difficulty-comparison-20261014/controlled-accepted.png)
+![Controlled acceptance](../../results/figures/difficulty-comparison-20261014/controlled-accepted.png)
 
-![Fictional acceptance](../results/figures/difficulty-comparison-20261014/realistic-accepted.png)
+![Fictional acceptance](../../results/figures/difficulty-comparison-20261014/realistic-accepted.png)
 
-![Wording acceptance](../results/figures/difficulty-comparison-20261014/language-accepted.png)
+![Wording acceptance](../../results/figures/difficulty-comparison-20261014/language-accepted.png)
 
 | Model | Controlled task | A SAT valid | B SAT valid | A correct UNSAT | B correct UNSAT |
 | --- | --- | ---: | ---: | ---: | ---: |
@@ -55,7 +55,7 @@ A = Direct LLM; B = LLM specification extraction + CP-SAT. Acceptance is a gold-
 
 Controlled paired B-minus-A differences (percentage points; 95% grouped-bootstrap intervals, 10,000 resamples, seed 3263) are Qwen generation **+56.7 [36.7,75.9]**, repair **+76.7 [60.0,90.3]**; GLM generation **+16.7 [3.4,31.0]**, repair **0.0 [0.0,0.0]**. The GLM generation difference is caused by provider failures in A, not demonstrated reasoning superiority. The observed repair ceiling does not prove population equivalence.
 
-![Controlled tiers; bar labels count accepted out of twelve](../results/figures/difficulty-comparison-20261014/controlled-tiers.png)
+![Controlled tiers; bar labels count accepted out of twelve](../../results/figures/difficulty-comparison-20261014/controlled-tiers.png)
 
 Qwen A's tier counts are 6,4,3,0,4 out of twelve; B's are 12,12,11,10,12. The extreme-tier rebound rules out a simple monotone interpretation. GLM B accepts all twelve at every controlled tier; A's counts are 12,12,12,10,9, with all declines attributable to HTTP 502 failures. Its two extraction failures occur in the reordered extreme wording subset instead.
 
@@ -86,7 +86,7 @@ GLM B accepts the canonical counterparts of its two extraction failures. Reorder
 
 ## Resources and service effects
 
-![Mean model time and tokens with coverage](../results/figures/difficulty-comparison-20261014/resources.png)
+![Mean model time and tokens with coverage](../../results/figures/difficulty-comparison-20261014/resources.png)
 
 | Model/method | Mean model-call seconds | Mean reported tokens | Token coverage |
 | --- | ---: | ---: | ---: |
@@ -101,7 +101,7 @@ Campaign usage including capability calls is 969,165 reported tokens for Qwen (1
 
 ## Reproduction and interpretation
 
-Follow [evidence.md](evidence.md) for exact-source replay. The derived comparison and charts can be rebuilt offline:
+Follow [evidence.md](../evidence.md) for exact-source replay. The derived comparison and charts can be rebuilt offline:
 
 ```sh
 python3.12 scripts/verify_evidence.py --manifest results/difficulty-evidence-manifest.json
@@ -111,4 +111,4 @@ MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_difficulty_result
   --report --output docs/figures/difficulty-comparison-20261014
 ```
 
-The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. Human interpretation, course-model eligibility and submission work remain in [the checklist](submission-checklist.md).
+The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. Human interpretation, course-model eligibility and submission work remain in [the checklist](../submission-checklist.md).

@@ -281,3 +281,76 @@ def test_fresh_glm_uses_eight_requests_and_exact_canonical_model(setup, tmp_path
     assert progress["completed"] == 40 and all(row["accepted"] for row in rows)
     assert all(read(path)["payload"]["pipeline_result"]["model_response"]["returned_model"] == "glm-5.3-flash"
                for path in (tmp_path / "glm/controlled/attempts").glob("*.json"))
+
+
+def test_second_concurrency_reduction_preserves_every_phase(stopped_parallel, tmp_path):
+    parallel, packet, original, _, cfg, answers = stopped_parallel
+    intermediate = tmp_path / "parallel8"
+    parallel.prepare_parallel_continuation(original, intermediate, packet,
+        authorization_reference="test-only first reduction", concurrency=8)
+    full, lock = threading.Event(), threading.Lock()
+    seen = set()
+
+    class Provider:
+        fail = True
+
+        def __init__(self, *, budget):
+            self.budget = budget
+
+        def __enter__(self):
+            return self
+
+        def __exit__(self, *_):
+            pass
+
+        def list_models(self):
+            pytest.fail("Metadata qualification repeated")
+
+        def complete(self, messages, model):
+            assert self.budget.reserve(model.max_tokens)
+            prompt = digest(messages)
+            with lock:
+                assert prompt not in seen
+                index = len(seen)
+                seen.add(prompt)
+                if len(seen) == 8:
+                    full.set()
+            if self.fail:
+                assert full.wait(5)
+                if index == 0:
+                    failed = response(cfg, None, error="http_429")
+                    return replace(failed, attempts=(replace(failed.attempts[0],
+                        http_status=429, outcome_uncertain=False),))
+                time.sleep(0.1)
+            return response(cfg, answers[prompt])
+
+    stopped = parallel.execute_parallel_campaign(packet, intermediate,
+        authorization_reference="test-only eight", concurrency=8, resume=True, provider_factory=Provider)
+    assert stopped["stop_reason"] == "http_429" and len(seen) == 8
+    originals = {directory: {p.relative_to(directory): p.read_bytes()
+                            for p in directory.rglob("*") if p.is_file()}
+                 for directory in (original, intermediate)}
+    completed = {p.stem for p in (intermediate / "controlled/attempts").glob("*.json")}
+    prompts = read(intermediate / "controlled/manifest.json")["contract"]["request_prompt_sha256"]
+    seen.update(prompts[key] for key in completed)
+    final = tmp_path / "parallel4"
+    prepared = parallel.prepare_parallel_continuation(intermediate, final, packet,
+        authorization_reference="test-only second reduction", concurrency=4)
+    assert prepared["completed"] == 24 and prepared["remaining"] == 16
+    Provider.fail = False
+    result = parallel.execute_parallel_campaign(packet, final,
+        authorization_reference="test-only four", concurrency=4, resume=True, provider_factory=Provider)
+    assert result["state"] == "completed" and result["requests_reserved"] == 43
+    assert len(seen) == 40
+    parallel.verify_parallel_copy(final)
+    assert all((directory / name).read_bytes() == data
+               for directory, files in originals.items() for name, data in files.items())
+    for name in ("summary.json", "parallel-start.json"):
+        assert (final / "prior-phase" / name).read_bytes() == (original / name).read_bytes()
+        assert (final / "prior-phase/concurrency-8" / name).read_bytes() == (intermediate / name).read_bytes()
+    for key in completed:
+        assert (final / "controlled/attempts" / f"{key}.json").read_bytes() == (
+            intermediate / "controlled/attempts" / f"{key}.json").read_bytes()
+    rows, progress = replay(final / "controlled")
+    assert progress["completed"] == 40 and not progress["pending_attempt_ids"]
+    assert sum(row["category"] == "provider_error" for row in rows) == 5

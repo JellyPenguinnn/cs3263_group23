@@ -1,1 +1,1 @@
-"""Approach components; canonical pipeline assembly awaits the shared schema."""
+"""Direct and solver-assisted scheduling pipelines using the canonical schema."""

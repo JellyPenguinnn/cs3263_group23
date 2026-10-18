@@ -16,8 +16,11 @@ jobs:
       - name: Verify installed prompts and runtime assets
         run: python scripts/check_installed.py
       - run: python -m pytest -q
-      - name: Verify immutable benchmark evidence archives
-        run: python scripts/verify_evidence.py
+      - name: Verify every preserved benchmark study
+        run: |
+          for manifest in results/evidence-manifest.json results/difficulty-evidence-manifest.json results/balanced-evidence-manifest.json results/diverse-evidence-manifest.json; do
+            python scripts/verify_evidence.py --manifest "$manifest"
+          done
       - run: python -m pip check
       - uses: actions/setup-node@v4
         with:
@@ -36,3 +39,9 @@ jobs:
         run: python evaluation/v2_qualification.py artifacts/v3-qualification --version 3
       - name: Qualify authored development cases through both pipelines offline
         run: python evaluation/v2_qualification.py artifacts/authored-qualification --cases benchmarks/fixtures/realistic-drafts-v1.json
+      - name: Verify report build in its separate document environment
+        run: |
+          python -m venv .venv-docs
+          .venv-docs/bin/python -m pip install -r requirements-docs.txt
+          .venv-docs/bin/python scripts/render_report.py --output artifacts/report-check/report.pdf
+          .venv-docs/bin/python scripts/check_report.py --pdf artifacts/report-check/report.pdf --receipt artifacts/report-check/format.json

@@ -139,7 +139,12 @@ def _check_saved_solver(data):
             or type(stage["proven_optimal"]) is not bool
             or any(
                 value is not None
-                and (type(value) not in (int, float) or not math.isfinite(value))
+                and (
+                    type(value) not in (int, float)
+                    # Integers are finite without conversion to a double. The
+                    # proof check separately rejects unsupported magnitudes.
+                    or (type(value) is float and not math.isfinite(value))
+                )
                 for value in (stage["value"], stage["best_bound"])
             )
         ):

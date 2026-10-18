@@ -239,6 +239,19 @@ def test_malformed_saved_evidence_rejected(mutation):
         explain_solver(tiny(task_type="repair"), data, context())
 
 
+@pytest.mark.parametrize("field", ["value", "best_bound"])
+@pytest.mark.parametrize("value", [10**400, -(10**400)])
+def test_large_saved_integer_remains_inspectable_without_proof(field, value):
+    spec = tiny()
+    data = to_data(solve(spec, SolverLimits()))
+    data["stages"][0][field] = value
+    explained = explain_solver(spec, data)
+    assert explained["stages"][0][field] == value
+    assert not explained["optimality_proven"]
+    assert not explained["stages"][0]["usable_exact_proof"]
+    assert "unproven" in render_text({"solver": explained})
+
+
 @pytest.mark.parametrize("budget, status", [(5, "INFEASIBLE"), (0, "UNKNOWN")])
 def test_recorded_contradictions_preserve_native_status(budget, status, monkeypatch):
     spec = tiny(constraints=(Deadline("impossible", "A", 0),))

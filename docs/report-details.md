@@ -146,14 +146,25 @@ Availability constrains the whole activity, not only its start. The report timet
 
 The resource builder requires a new output path and refuses to overwrite an existing file. Compare the regenerated JSON with the committed derivative; choose a fresh ignored path on subsequent checks.
 
-The scientific runtime and dependency lock are unchanged. Document rendering uses ReportLab, Matplotlib, pypdf and pdfplumber; Mermaid is needed only when changing the architecture asset.
+The scientific runtime and dependency lock remain separate from document tooling. Follow the [report rebuild instructions](submission-checklist.md#rebuild-the-report) to create `.venv-docs` from `requirements-docs.txt`. This pins Matplotlib 3.10.0 used by the current report figure receipt; the scientific runtime retains 3.10.8. A different rendering-library version may change figure bytes without changing results. Mermaid is needed only when changing the architecture asset.
 
-- Rebuild source-bound resource/example data: `python3 scripts/build_report_details.py --output runs/report-details-review.json`.
-- Rebuild the current report's acceptance and failure comparisons: `python3 scripts/render_report_comparison.py`. These grouped horizontal charts use aligned acceptance labels and a common failure-count scale; their source values are unchanged.
-- Earlier compact charts and the supplementary size chart: `python3 scripts/render_diverse_results.py --compact --output docs/figures/report-compact-20261018`. Earlier exports remain preserved.
-- Rebuild the timetable from both saved B schedules: `python3 scripts/render_worked_timetable.py`.
-- The architecture source is `docs/figures/report-compact-20261018/architecture.mmd`, also included in the report's Mermaid fence. Keep the two sources identical. Install Mermaid CLI 11.12.0 in a separate document-tool environment; run `python3 scripts/render_report_mermaid.py --mmdc /path/to/mmdc --puppeteer-config /path/to/chrome-config.json`. The optional Puppeteer config selects a compatible locally installed Chrome. The script records source/config/CSS/PDF hashes. It never calls the model provider.
-- Build and check the report with `python3 scripts/render_report.py` and `python3 scripts/check_report.py`. The normal build embeds the preserved Mermaid vector PDF and needs no browser. Source/asset hashes must match; the format check verifies diagram text, mathematical glyphs, font size, margins and the ten-body-page limit. Inspect rendered pages after layout changes.
+Use a fresh ignored directory for reproduction so preserved figures and receipts are not overwritten:
+
+```sh
+mkdir -p runs
+mkdir runs/report-review
+.venv/bin/python scripts/build_report_details.py --output runs/report-review/details.json
+cmp runs/report-review/details.json results/summary/report-details-20261018.json
+MPLCONFIGDIR=.cache/matplotlib .venv-docs/bin/python scripts/render_report_comparison.py --output runs/report-review/comparison-figures
+MPLCONFIGDIR=.cache/matplotlib .venv-docs/bin/python scripts/render_diverse_results.py --compact --output runs/report-review/supplementary-figures
+MPLCONFIGDIR=.cache/matplotlib .venv-docs/bin/python scripts/render_worked_timetable.py --output runs/report-review/timetable
+.venv-docs/bin/python scripts/render_report.py --output runs/report-review/submission-report.pdf
+.venv-docs/bin/python scripts/check_report.py --pdf runs/report-review/submission-report.pdf --receipt runs/report-review/format.json
+```
+
+The report build embeds the existing reviewed assets; freshly reproduced comparison figures and timetables above are for verification. Replacing a published asset is a separate reviewed edit. Inspect all rendered pages; source/text bounds checks alone do not establish visual quality. Private title copies use `--source docs/private/submission-report.md` and output/receipt paths inside ignored `docs/private/`.
+
+The architecture source is `docs/figures/report-compact-20261018/architecture.mmd`, also included in the report's Mermaid fence. Keep the two sources identical. An intentional architecture edit uses Mermaid CLI 11.12.0 in a separate Node document-tool environment: `python3 scripts/render_report_mermaid.py --mmdc /path/to/mmdc --puppeteer-config /path/to/chrome-config.json`. That command updates the architecture asset/receipt in place and therefore requires a reviewed diff and fresh report checks. Normal report builds reuse the committed vector asset and need no browser. No document command calls the model provider.
 
 ## Conducting the human review
 

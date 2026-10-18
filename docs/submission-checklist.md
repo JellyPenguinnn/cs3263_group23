@@ -4,7 +4,7 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 
 ## Prepared and verified
 
-- [x] [Line-by-line scientific and course-requirement review](report-quality-audit.md) completed against supplied source documents, TA feedback and saved evidence. The audit distinguishes verified content from unresolved human/course obligations.
+- [x] [Line-by-line scientific and course-requirement review](reviews/report-quality-audit.md) completed against supplied source documents, TA feedback and saved evidence. The audit distinguishes verified content from unresolved human/course obligations.
 
 - [x] Both generation and minimum-disruption repair, direct and solver-assisted paths, independent validation and end-to-end evaluation are implemented.
 - [x] The diverse 2,000-attempt/model, balanced 96-attempt/model and difficulty 200-attempt/model Qwen3.6/GLM campaigns, and historical 600-attempt/model Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
@@ -25,11 +25,15 @@ The previous report and format check are historical. Every substantive revision,
 - [ ] Review diverse-study public/gold pairs, certificates and failure examples across its ten related families; record genuine findings and interpret their generalization limits. Keep the earlier three-family balanced study separate. Completed execution does not establish human review.
 - [ ] Members review the natural-language/gold meaning, reference assumptions and failure examples, and record actual findings in [contributions.md](contributions.md) and the [claim index](claim-evidence.md).
 - [x] User-confirmed responsibility allocation recorded in the report and contribution log: Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
-- [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Refine the responsibility allocation into personal-work statements only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; follow [planning S2-S3](../planning.md#5-current-task-queue-and-acceptance-evidence).
+- [ ] Each member supplies a factual account of their own work, decisions, findings and AI-supported parts, and interprets/reviews the complete report (Guidelines P56-60/P87-88). Refine the responsibility allocation into personal-work statements only with confirmed facts. Disclosure alone does not establish substantive human work or understanding; use the [human-review guidance](report-details.md#conducting-the-human-review).
 - [ ] Confirm each member's name, matriculation number and email on the prepared **private** title page (P51). The local `docs/private/submission-report.md` and PDF contain the supplied details and are excluded from Git. Refresh this copy after substantive report edits; never put private identifiers in public Git.
 - [ ] Produce the actual presentation/deck or requested recording and rehearse **15 minutes plus five-minute Q&A** (P47). All members understand the whole system (P57); a storyboard is not a completed presentation.
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).
 - [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14). **30 October** is the team's complete-draft target.
+
+## Suggested completion order
+
+Confirm scope/model interpretation and gather factual member accounts while reviewing the report and preparing the presentation. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](claim-evidence.md) and [review guidance](report-details.md#conducting-the-human-review). Then incorporate corrections and confirmed contributions, refresh the private report, check every page, rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
 
 ## Scientific scope and course distinctions
 
@@ -41,7 +45,7 @@ The appendix may contain relevant model printouts, screenshots or planning graph
 
 ## Recommended team verification
 
-These support a reliable handoff; the course does not prescribe these particular records or procedures. The detailed remaining-work queue is [planning Section 5](../planning.md#5-current-task-queue-and-acceptance-evidence).
+These support a reliable handoff; the course does not prescribe these particular records or procedures. The required remaining work is listed above; these additional checks are recommendations.
 
 - [ ] A teammate follows [evidence.md](evidence.md) from a clean compatible environment and records the actual replay/review. Existing automated replay does not establish that human action.
 - [ ] If the team wants protection against loss of this computer, copy the verified private historical bundle to approved private off-device storage and verify it there. The current same-device backup is not off-device protection.
@@ -52,26 +56,16 @@ Discuss concrete unequal inconvenience, lexicographic objective trade-offs, priv
 
 ## Rebuild the report
 
-The Markdown source is canonical. Rebuild source-bound resources and current report figures from the repository root:
-
-```sh
-.venv/bin/python scripts/build_report_details.py --output runs/report-details-review.json
-cmp runs/report-details-review.json results/summary/report-details-20261018.json
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py \
-  --compact --output docs/figures/report-compact-20261018
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_worked_timetable.py
-```
-
-The committed Mermaid vector asset is reused during normal PDF builds. Changing its source requires the separate [Mermaid reproduction procedure](report-details.md#reproducing-the-report-visuals). Preserve historical figures and archives.
-
-Report tooling is separate from the scheduling runtime:
+The Markdown source is canonical. Create a separate document environment from the repository root; the scientific installation alone does not include all PDF libraries:
 
 ```sh
 python3.12 -m venv .venv-docs
-.venv-docs/bin/python -m pip install reportlab==4.4.9 pdfplumber==0.11.9 matplotlib==3.10.8 pypdf==6.10.0
-.venv-docs/bin/python scripts/render_report.py
-.venv-docs/bin/python scripts/check_report.py
+.venv-docs/bin/python -m pip install -r requirements-docs.txt
 ```
+
+The current report figures were rendered with Matplotlib 3.10.0, while the scientific lock retains 3.10.8. The separate environment preserves that distinction. Follow the [fresh-output reproduction commands](report-details.md#reproducing-the-report-visuals) to reconstruct resources, figures and PDF without overwriting published artifacts. The normal PDF build reuses the preserved Mermaid vector asset; Mermaid CLI and Chrome are needed only for an intentional architecture change.
+
+After reviewing a deliberate report edit, regenerate the public report and its format receipt with `.venv-docs/bin/python scripts/render_report.py` and `.venv-docs/bin/python scripts/check_report.py`. Those defaults replace the current public derivative, so review the diff and rendered pages before publication. Keep prior evidence and dated snapshots unchanged.
 
 The Markdown uses TeX syntax in `math` fences. Matplotlib MathText parses the equations; ReportLab embeds them as selectable vector text, so no system TeX installation is required. The checker verifies mathematical operators as well as ordinary report text. Tables show each method in its own row and preserve counts, rates, units and missing-usage coverage.
 

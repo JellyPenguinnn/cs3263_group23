@@ -9,8 +9,9 @@ The latest [diverse comparison](diverse-comparison-audit.md) has **2,000 attempt
 ```sh
 python3.12 scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json \
   --extract-to runs/NEW-diverse-replay
-.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py
+.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json --output runs/NEW-diverse-replay/comparison.json
+cmp runs/NEW-diverse-replay/comparison.json results/summary/diverse-comparison-20261018.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py --source runs/NEW-diverse-replay/comparison.json --output runs/NEW-diverse-replay/figures
 ```
 
 For exact-source replay use each archive's `REPRODUCE.txt`, frozen `source/`, `blocks.json` and `analysis.json` in a new directory. Follow the installation procedure below, substituting the extracted `qwen36` and `glm53flash` directories. Replay uses no API key or inference. Its scientific scores match the saved records exactly; portable analysis metadata intentionally refers to the redacted manifest hash rather than the original manifest hash.
@@ -24,8 +25,9 @@ Each archive contains **96 scheduling records and 211 checksum-covered files plu
 ```sh
 python3.12 scripts/verify_evidence.py --manifest results/balanced-evidence-manifest.json \
   --extract-to runs/NEW-balanced-replay
-.venv/bin/python scripts/build_balanced_comparison.py
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py
+.venv/bin/python scripts/build_balanced_comparison.py --output runs/NEW-balanced-replay/comparison.json
+cmp runs/NEW-balanced-replay/comparison.json results/summary/balanced-comparison-20261017.json
+MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_balanced_results.py --source runs/NEW-balanced-replay/comparison.json --output runs/NEW-balanced-replay/figures
 ```
 
 For exact-source replay, follow the installation/replay procedure below in each newly extracted `qwen36` and `glm53flash` directory, rather than the historical `qwen38` directory. Use its `blocks.json`, archived `source/` and `analysis.json`. The scientific replay makes zero model calls. Fresh replay of both balanced archives reproduced the complete saved analyses exactly after JSON serialization; tuples in in-memory Python values serialize as JSON arrays.
@@ -35,7 +37,7 @@ The complete balanced operational evidence is retained in a separate private sam
 ## Earlier 200-attempt difficulty evidence
 
 
-The new pair is preserved separately from the historical archives below. Each original archive contains **200 scheduling records and 364 checksum-covered files plus `CHECKSUMS.json`**. Both fresh exact-source replays reproduced every saved analysis field. The [comparison audit](difficulty-comparison-audit.md) explains the protocol and failures; [validation](../results/summary/difficulty-run-validation-20261014.json) records completion and request accounting.
+The new pair is preserved separately from the historical archives below. Each original archive contains **200 scheduling records and 364 checksum-covered files plus `CHECKSUMS.json`**. Both fresh exact-source replays reproduced every saved analysis field. The [comparison audit](studies/difficulty-comparison-audit.md) explains the protocol and failures; [validation](../results/summary/difficulty-run-validation-20261014.json) records completion and request accounting.
 
 | Archive | Bytes | SHA-256 |
 | --- | ---: | --- |
@@ -104,7 +106,7 @@ PY
 
 Repeat in `qwen38/`. These commands make **zero model calls**; dependency installation may require package-index access or a local wheel cache. The scientific replay itself is offline. Install the archived source rather than assume an arbitrary future checkout has identical scoring behavior. Never rewrite original records to make replay pass.
 
-The historical report uses the [two-model summary](../results/summary/two-model-development-20261002.json), [supplemental task/label and difficulty tables](../results/summary/two-model-report-tables-20261002.json), and [historical claim index](claim-evidence-20261002.md). Rebuild the supplemental tables with `python3 scripts/build_report_tables.py`; regenerate charts with `scripts/render_benchmark_results.py`. The original aggregate retains its original audit time/status even after repository publication.
+The historical report uses the [two-model summary](../results/summary/two-model-development-20261002.json), [supplemental task/label and difficulty tables](../results/summary/two-model-report-tables-20261002.json), and [historical claim index](history/development-notes/claim-evidence-20261002.md). Rebuild the supplemental tables with `python3 scripts/build_report_tables.py`; regenerate charts with `scripts/render_benchmark_results.py`. The original aggregate retains its original audit time/status even after repository publication.
 
 ## Full historical and operational preservation
 

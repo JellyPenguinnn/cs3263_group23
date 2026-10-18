@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Plot the two identical saved solver-assisted schedules; no new solving."""
+import argparse
 import hashlib
 import json
 from pathlib import Path
@@ -15,6 +16,9 @@ OUT = ROOT / 'docs/figures/report-compact-20261018'
 
 
 def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--output', type=Path, default=OUT)
+    args = parser.parse_args()
     case = json.loads(SOURCE.read_text())['worked_case']
     outputs = [v['solver_augmented'] for v in case['outputs'].values()]
     schedules = [v['pipeline_result']['schedule'] for v in outputs]
@@ -51,8 +55,8 @@ def main():
     ax.grid(axis='x', which='both', color='#c9d3df', linewidth=.6, zorder=0)
     for edge in ax.spines.values():
         edge.set_visible(False)
-    OUT.mkdir(parents=True, exist_ok=True)
-    target = OUT / 'worked-timetable.png'
+    args.output.mkdir(parents=True, exist_ok=True)
+    target = args.output / 'worked-timetable.png'
     fig.savefig(target, facecolor='white')
     plt.close(fig)
     receipt = {'source_sha256': hashlib.sha256(SOURCE.read_bytes()).hexdigest(),
@@ -60,7 +64,7 @@ def main():
                'case_id': case['case_id'], 'font_size_pt_at_native_width': 11,
                'native_width_inches': 6.2, 'blocks': blocks,
                'recorded_schedules_equal': True, 'new_model_calls': 0}
-    (OUT / 'worked-timetable-data.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
+    (args.output / 'worked-timetable-data.json').write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
 
 
 if __name__ == '__main__':
