@@ -42,7 +42,7 @@ Precedence from i to j requires e_i <= s_j. Activities sharing a person or room 
 P(\mathbf{s}) = \sum_{k \in K} w_k\,\mathbf{1}[s_{a(k)} \notin W_k].
 ```
 
-Here, K indexes preferences. Preference k concerns activity a(k), preferred start window W_k and nonnegative weight w_k. The window includes its lower bound and excludes its upper bound; it applies to the start, not the whole duration. The indicator charges w_k once when the start lies outside the window. Missing a preference increases cost without making the schedule infeasible.
+Here, K indexes preferences. Preference k concerns activity a(k), preferred start window W_k and nonnegative weight w_k. The window includes its lower bound and excludes its upper bound; it applies to the start, not the whole duration. The indicator charges w_k once when the start lies outside the window. Missing a preference adds its weight without making the schedule infeasible.
 
 **Why a solver may help.** Before interactions are considered, n activities have up to the product of their domain sizes possible start assignments. Non-overlap and precedence couple these choices: a locally valid placement can block later activities. The compiler encodes interval/non-overlap, precedence and unary restrictions for CP-SAT, which searches the model and can prove infeasibility or optimality [4,5]. A feasible incumbent is not necessarily optimal, and a timeout does not prove infeasibility. This motivates the comparison without implying that every large constructed instance is computationally difficult.
 
@@ -144,7 +144,7 @@ For GLM5.3 Flash, infrastructure accounts for 65 of 109 direct rejections, versu
 
 **Response availability.** Restricting to cases where both methods receive responses gives direct/assisted acceptance of 307/949 versus 907/949 for Qwen3.6 and 891/935 versus 927/935 for GLM5.3 Flash. The latter gap decreases from 9.7 to 3.85 percentage points. Assistance retains an advantage, but part of the all-attempt gap is associated with response availability. Missing responses may be systematic, making this diagnostic context rather than corrected accuracy.
 
-**Task size and difficulty.** On the 200 eight-activity cases, direct versus assisted acceptance is 57 versus 197 for Qwen3.6 and 192 versus 200 for GLM5.3 Flash. On the 200 cases with 32 activities, the respective counts are 74 versus 180 and 148 versus 194. However, 40 of GLM direct's 52 largest-case failures are infrastructural: acceptance is 148/200 overall but 148/160 among returned answers. Its decline cannot be attributed entirely to reasoning difficulty. Qwen3.6's nonmonotonic scores mainly reflect infeasibility prediction. Larger cases also vary horizons and resources, so these trends do not isolate activity count.
+**Task size and difficulty.** On the 200 eight-activity cases, direct versus assisted acceptance is 57 versus 197 for Qwen3.6 and 192 versus 200 for GLM5.3 Flash. On the 200 cases with 32 activities, the respective counts are 74 versus 180 and 148 versus 194. However, 40 of GLM5.3 Flash direct's 52 largest-case failures are infrastructural: acceptance is 148/200 overall but 148/160 among returned answers. Its decline cannot be attributed entirely to reasoning difficulty. Qwen3.6's nonmonotonic scores mainly reflect infeasibility prediction. Larger cases also vary horizons and resources, so these trends do not isolate activity count.
 
 ## 7. Resource use and operational limitations
 
@@ -176,7 +176,7 @@ For Qwen3.6, assistance increases mean and median usage but reduces p95. For GLM
 
 Assistance has higher mean and median duration but lower p95 for Qwen3.6, and lower values throughout for GLM5.3 Flash. These describe observed deployment conditions, not controlled model-speed differences. No case has all four observations under matching OS and concurrency, and provider load is uncontrolled.
 
-**Local solving and service failures.** Solver mean/median/p95 is 16.19/10.25/36.52 ms for Qwen3.6 (973 invocations) and 13.97/11.39/33.01 ms for GLM5.3 Flash (992). Model requests dominate duration; local solving adds little time for these bounded cases, although generating the specification remains part of the model-call cost. Qwen3.6 and GLM5.3 Flash have 51 and 68 infrastructure failures, predominantly HTTP 502 responses. GLM direct's p95 near 300 seconds includes gateway failures; four timeouts overlapped laptop sleep. Timers cannot separate inference from queueing or networking. Execution-phase details remain in the supplement.
+**Local solving and service failures.** Solver mean/median/p95 is 16.19/10.25/36.52 ms for Qwen3.6 (973 invocations) and 13.97/11.39/33.01 ms for GLM5.3 Flash (992). Model requests dominate duration; local solving adds little time for these bounded cases, although generating the specification remains part of the model-call cost. Qwen3.6 and GLM5.3 Flash have 51 and 68 infrastructure failures, predominantly HTTP 502 responses. GLM5.3 Flash direct's p95 near 300 seconds includes gateway failures; four timeouts overlapped laptop sleep. Timers cannot separate inference from queueing or networking. Execution-phase details remain in the supplement.
 
 ## 8. Implications, limitations and responsible AI
 
