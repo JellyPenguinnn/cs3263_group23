@@ -12,6 +12,7 @@ Start with the report and use the supporting documents only as needed. The curre
 | [Usage](usage.md) | Installation-related operations, offline demonstrations, replay and dashboard commands |
 | [Evidence and replay](evidence.md) | Immutable archives, checksums and exact-source reproduction |
 | [Claim-to-evidence index](claim-evidence.md) | Links between report claims and saved observations |
+| [Human review worksheet](human-review-checklist.md) | Selected cases, fill-in findings and individual contribution templates |
 | [Submission checklist](submission-checklist.md) | Remaining human review, contribution accounts, scope clarification and delivery |
 | [Division of work](contributions.md) | Responsibilities of each member and shared work |
 | [TA-feedback alignment](ta-feedback-alignment.md) | Generation-first scope, implemented feedback and explicit simplifications |

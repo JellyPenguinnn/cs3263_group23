@@ -22,6 +22,8 @@ Earlier report snapshots and their format checks are historical. Every substanti
 
 ## Remaining submission tasks
 
+Use the [human review worksheet](human-review-checklist.md) for the selected cases, blank review records and individual contribution templates.
+
 - [ ] Verify the original Canvas feedback/receipt and current arrangements. The supplied written TA feedback has been addressed in [the alignment](ta-feedback-alignment.md); confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
 - [ ] Review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](report-details.md#conducting-the-human-review).
 - [ ] **Individual contribution accounts — outstanding.** Each member supplies two or three sentences describing their personal work, one concrete decision or finding, and what AI helped produce versus what they checked themselves (Guidelines P56-60/P87-88). Each member also reviews the complete report. See the [human-review guidance](report-details.md#conducting-the-human-review).
