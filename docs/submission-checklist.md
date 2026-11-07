@@ -14,7 +14,9 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 - [x] Eight replay archives (six original packages and two explicitly labelled portable derivatives) are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
 - [x] Public report rebuilt and all pages visually checked after the analysis-focused revision: one title, ten body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The local private copy also passes its own format check and has the same body/reference pages; its title details still require member confirmation.
 
-- [x] Work allocation recorded in the report and [division of work](contributions.md): Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
+- [x] Actual work allocation confirmed across the group and recorded in the report and [division of work](contributions.md): Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
+
+- [x] All members confirm that they have read and understood the project, report and slides. The report discloses both Codex and Claude Code. This confirmation is separate from the selected case-level checks below.
 
 - [x] Model selection: Qwen and GLM accepted by the TA, according to the team’s consultation follow-up.
 
@@ -26,15 +28,17 @@ Use the [human review worksheet](human-review-checklist.md) for the selected cas
 
 - [ ] Verify the original Canvas feedback/receipt and current arrangements. The supplied written TA feedback has been addressed in [the alignment](ta-feedback-alignment.md); confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
 - [ ] Review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](report-details.md#conducting-the-human-review).
-- [ ] **Individual contribution accounts — outstanding.** Each member supplies two or three sentences describing their personal work, one concrete decision or finding, and what AI helped produce versus what they checked themselves (Guidelines P56-60/P87-88). Each member also reviews the complete report. See the [human-review guidance](report-details.md#conducting-the-human-review).
+
+The confirmed division of work and AI-assistance disclosure address contribution reporting (Guidelines P56-60/P87-88). The worksheet's individual examples are optional aids for adding useful specifics; the course does not require a separate narrative or a fixed number of sentences per member. Do not claim independent authorship of AI-assisted work.
+
 - [ ] Confirm each member's name, matriculation number and email on the prepared **private** title page (P51). The local `docs/private/submission-report.md` and PDF contain the supplied details and are excluded from Git. Refresh this copy after substantive report edits; never put private identifiers in public Git.
-- [ ] Produce the actual presentation/deck or requested recording and rehearse **15 minutes plus five-minute Q&A** (P47). Each member should be prepared to explain the whole system (P57).
+- [ ] Rehearse the prepared presentation and script, or produce a recording if requested, for **15 minutes plus five-minute Q&A** (P47). Each member should be prepared to explain the whole system (P57).
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).
 - [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14). **30 October** is the team's complete-draft target.
 
 ## Suggested completion order
 
-Confirm the remaining scope interpretation and gather factual member accounts while reviewing the report and preparing the presentation. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](claim-evidence.md) and [review guidance](report-details.md#conducting-the-human-review). Then incorporate corrections and confirmed contributions, refresh the private report, check every page, rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
+Retain the confirmed work allocation and accurate AI disclosure while completing the selected evidence checks and presentation rehearsal. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](claim-evidence.md) and [review guidance](report-details.md#conducting-the-human-review). If the review identifies corrections, incorporate them and refresh the private report before the final format check. Rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
 
 ## Scientific scope and course distinctions
 

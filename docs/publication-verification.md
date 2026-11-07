@@ -1,5 +1,13 @@
 # Repository publication verification
 
+## Contribution confirmation and AI disclosure — authorized publication, 7 November 2026
+
+The group confirms the actual work allocation and that all members have read and understood the project, report and slides. The report now names Codex and Claude Code, distinguishes AI assistance from author direction and review, and uses the confirmed allocation. These confirmations do not establish completion of the selected case-level semantic checks. The worksheet's longer personal examples are optional guidance, not a prescribed course submission format.
+
+Both public and private reports pass fresh format checks: one cover, ten body pages and one references page, at least 11-point text and one-inch margins. Only page 11 changed; it was visually inspected, every other public page content stream is unchanged, and private body/reference streams match the public report. The private cover is unchanged and remains ignored by Git. Scientific results, figures and traces are unchanged.
+
+The local presentation update changes only contribution slide 14 and its speaker notes; all other slide, chart and embedded-workbook parts are byte-identical. All 15 spoken sections match the notes. The 1,814-word script retains ten pages; changed pages 1, 7 and 10 were visually inspected and the other seven rendered pages are pixel-identical. Presentation timing remains subject to rehearsal. The group authorized publication of these public report and documentation updates; the private report and presentation files remain local.
+
 ## Report revision verification — 3 November 2026
 
 The revised report combines the clearer explanatory prose of the supplied comparison copy with task-size analysis, extraction diagnostics, reproducibility details and explicit boundaries around the earlier repair and wording experiments. Its claims were checked against the saved study summaries, reference records, course guidelines and supplied TA feedback. Generation remains the core comparison; no additional experiments or scientific results are claimed.

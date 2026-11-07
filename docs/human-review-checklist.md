@@ -1,6 +1,6 @@
 # Human review and contribution worksheet
 
-Fill in this worksheet before submission. The selected evidence is already prepared; the review decisions, findings and contribution statements must come from the three team members. All boxes below are intentionally unchecked. No student IDs, email addresses or API keys are needed here.
+Use this worksheet for the selected case-level checks before submission. The group has confirmed its actual work allocation and that all members have read and understood the project, report and slides. Case-review decisions and findings still need to be recorded by the reviewers; reading the report alone does not complete those checks. No student IDs, email addresses or API keys are needed here.
 
 ## How to use this worksheet
 
@@ -8,7 +8,7 @@ Fill in this worksheet before submission. The selected evidence is already prepa
 2. Review your assigned cases below. Open the original request first, write your interpretation, then expand the gold specification and saved outputs. The expandable evidence is a convenience, not a blinded study.
 3. For each case, check durations, availability, shared entities, precedence, fixed starts/deadlines and preferences. If feasible, check a witness or saved valid schedule; if infeasible, explain a contradiction. Inspect the four recorded model/method outcomes and explain at least one meaningful acceptance or rejection.
 4. Record a concrete check or discrepancy in the finding column. Use **agree**, **issue**, or **uncertain**, followed by a specific reason. “The program says so” is not sufficient evidence. Leave a case unchecked if the review is incomplete.
-5. Resolve findings together, then complete your contribution statement and the shared final checks. If a request/gold mismatch affects results, assess and document its effect; preserve the original records rather than editing them in place.
+5. Resolve findings together, then complete the shared final checks. The optional contribution prompts can help add useful specifics. If a request/gold mismatch affects results, assess and document its effect; preserve the original records rather than editing them in place.
 
 This is a manageable retrospective review sample, not a course-mandated quota, a new benchmark, or a claim that every case was manually checked. C01–C20 cover ten mechanisms, both feasibility labels and all five sizes (four cases per size). E1–E4 are selected report examples. A coverage pair is not necessarily a matched construction pair. Case IDs and source hashes are in the companion packet; use the short labels here.
 
@@ -58,11 +58,11 @@ For longer findings, copy this entry:
 - [ ] Check start-slot domains, half-open intervals, precedence and shared-resource non-overlap against Section 3 and a selected case.
 - [ ] Explain the preferred-start penalty and the repair priority: moved activities, then absolute shift, then preference penalty. Explain why a timeout is not an infeasibility proof.
 - [ ] Review E2 and E3: identify the invented or omitted constraints and explain why correct CP-SAT solving can still produce an incorrect answer to the original request.
-- [ ] Read the whole report and explain both methods and their limitations.
+- [x] Read and understood the project and complete report, as confirmed by the group. Practise explaining both methods and their limitations aloud.
 
-**Personal contribution — replace every blank with verified facts:**
+**Optional contribution detail — use verified facts if adding an example:**
 
-> My responsibilities covered mathematical formulation, constraint-extraction semantics, CP-SAT compilation and repair objectives. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or another AI tool assisted with __________, and I personally checked __________.
+> My responsibilities covered mathematical formulation, constraint-extraction semantics and CP-SAT compilation. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or Claude Code assisted with __________, and I personally checked __________.
 
 **Name and review date:** __________
 
@@ -73,9 +73,9 @@ For longer findings, copy this entry:
 - [ ] Review E4 and explain why a valid schedule can be suboptimal. Check one extraction error and distinguish mathematical, output-format and infrastructure failures.
 - [ ] Explain the ten related generator families, synthetic development data and shared-reference-compiler limitations. Read the whole report.
 
-**Personal contribution — replace every blank with verified facts:**
+**Optional contribution detail — use verified facts if adding an example:**
 
-> My responsibilities covered benchmark design, independent validation, evaluation metrics, failure analysis and interpretation. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or another AI tool assisted with __________, and I personally checked __________.
+> My responsibilities covered benchmark design, independent validation, evaluation metrics, failure analysis and interpretation. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or Claude Code assisted with __________, and I personally checked __________.
 
 **Name and review date:** __________
 
@@ -86,13 +86,13 @@ For longer findings, copy this entry:
 - [ ] Check the token/time definitions and missing-usage counts. Explain why service failures and changing execution conditions prevent a controlled model-speed claim.
 - [ ] Check that the report tables/figures link to preserved evidence. Read the whole report; optionally perform the offline replay below.
 
-**Personal contribution — replace every blank with verified facts:**
+**Optional contribution detail — use verified facts if adding an example:**
 
-> My responsibilities covered LLM/provider integration, end-to-end wiring, experiment operations, reproducibility and quality assurance. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or another AI tool assisted with __________, and I personally checked __________.
+> My responsibilities covered LLM/provider integration, end-to-end wiring, experiment operations, reproducibility and quality assurance. I personally [designed / implemented / reviewed / checked] __________; one concrete decision or finding was __________, supported by __________. Codex or Claude Code assisted with __________, and I personally checked __________.
 
 **Name and review date:** __________
 
-The agreed responsibilities above are context, not proof of a particular implementation action. Describe actual work, including review or interpretation when that is what you personally did. Do not claim independent authorship of AI-generated material. Keep the report’s existing AI-assistance disclosure and incorporate the confirmed individual accounts concisely.
+The agreed responsibilities above are context, not proof of a particular implementation action. Describe actual work, including review or interpretation when that is what you personally did. Do not claim independent authorship of AI-generated material. The report already contains the group-confirmed allocation and AI-assistance disclosure. A longer per-person account is optional; add detail only where it clarifies actual human and AI contributions.
 
 ## Shared final review
 
@@ -100,11 +100,11 @@ The agreed responsibilities above are context, not proof of a particular impleme
 - [ ] Confirm generation is the main 4,000-attempt study; earlier repair/fictional/wording results are separate. The 24 optional reordered conditions in the latest design were not run.
 - [ ] Discuss privacy, unequal inconvenience, hard versus soft requirements and user control. Explain why optimality does not establish fairness or real-world reliability.
 - [ ] Review all findings and resolve or explicitly disclose remaining uncertainty. Do not mark unreviewed cases as complete.
-- [ ] Add the three factual contribution accounts to the final report and have each member approve the wording.
+- [x] Confirm the actual work distribution across the group and disclose Codex and Claude Code. Optional personal examples can clarify the allocation but are not a separate course-required form.
 - [ ] Confirm the remaining single-day/30-minute and preferred-start-only scope clarification against the TA feedback. Qwen/GLM model acceptance has already been reported by the team.
 - [ ] Confirm names, student IDs and emails in the **local private report only**; rebuild and inspect the final public/private PDFs after edits.
 - [ ] Check the final report format: at most ten body pages, single column, single spaced, at least 11-point text and one-inch margins; cover/references excluded.
-- [ ] Prepare the actual slides or requested recording, rehearse 15 minutes plus five-minute Q&A, and check current Canvas submission arrangements.
+- [ ] Rehearse the prepared slides and script, create a recording if requested, and check timing for 15 minutes plus five-minute Q&A, and check current Canvas submission arrangements.
 
 **Team review discussion date:** __________
 **Remaining actions, owner and due date:** __________
