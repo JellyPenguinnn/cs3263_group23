@@ -1,34 +1,51 @@
-# Fifteen-minute presentation — working rehearsal guide
+# Presentation rehearsal guide
 
-Use the [current report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [demonstration guide](README.md). This AI-assisted guide proposes a nine-slide structure and questions for rehearsal. Lead with the completed 4,000-attempt diverse generation comparison. Earlier balanced, difficulty and historical studies remain separate development evidence. Every member should understand both methods and their limitations.
+This guide matches the prepared **20-slide deck and 1,814-word script**: slides 1–15 form the main talk, and slides 16–20 support Q&A. The speaking checkpoints total **14 minutes 35 seconds**, leaving 25 seconds for handovers or pauses before the 15-minute limit. Q&A has a separate five-minute allowance. Timing is an estimate until rehearsed aloud.
 
-## Suggested storyboard
+Use the [report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [demonstration guide](README.md). The proposed speaker allocation is Yao Xiang for slides 1–5, Yong Qing for 6–10 and Li Hao for 11–15. Adjust handovers to the group's speaking pace while preserving the slide sequence.
 
-| Slide / elapsed time | Main message and visual | Evidence |
+## Main talk
+
+| Slide | Elapsed time | Main message |
 | --- | --- | --- |
-| 1 / 0–1:30 | Motivate shared schedule generation and state the direct-versus-tool research question. Repair is an extension. | Report Sections 1–2 |
-| 2 / 1:30–3 | Explain the worked request and saved timetable: same room, availability, precedence and preferences; direct failure versus valid tool-assisted schedules. | Report Section 4; supplement example trace index |
-| 3 / 3–4:30 | Define integer starts, finite domains, non-overlap and preference penalties. Explain why coupled constraints make local choices insufficient. | Report Section 3; compiler and independent validator |
-| 4 / 4:30–6 | Show the two pipelines, equivalent public facts, one call per method and evaluator-only gold. Explain why solver correctness does not imply faithful extraction. | Report Section 4 |
-| 5 / 6–8:30 | Explain 1,000 cases, ten families, five sizes and balanced SAT/UNSAT labels. Show acceptance and separate valid schedule construction from correct UNSAT prediction. | Report Sections 5–6; current acceptance chart and feasibility table |
-| 6 / 8:30–10 | Explain constraint violations, false UNSAT, format rejection and infrastructure separately. Show invented Qwen deadlines and omitted GLM constraints. | Report Section 6; failure chart and original trace references |
-| 7 / 10–12 | Discuss conditional optimality, mean/median/p95 tokens and time. Explain why shared-service conditions prevent a controlled latency ranking. | Report Sections 6–7; resource tables and supplement |
-| 8 / 12–14 | Discuss synthetic-case limits, related families, unsupported weekly/preferences features, privacy, fairness and user oversight. | Report Section 8; scope clarification in the submission checklist |
-| 9 / 14–15 | Give bounded conclusions, confirmed personal contributions and AI assistance. Identify generation as core and earlier repair/wording as extensions. | Report Section 9; factual contribution accounts |
+| 1 | 0:00–0:30 | Scheduling with language models |
+| 2 | 0:30–1:40 | Scheduling as a constraint problem |
+| 3 | 1:40–2:50 | Two methods, one independent evaluation |
+| 4 | 2:50–4:10 | One room, eight activities |
+| 5 | 4:10–5:10 | The experiment |
+| 6 | 5:10–6:05 | Solver assistance raises acceptance |
+| 7 | 6:05–7:05 | Overall scores hide construction failures |
+| 8 | 7:05–8:15 | Failure patterns explain the performance gap |
+| 9 | 8:15–9:30 | An exact solver can solve the wrong specification |
+| 10 | 9:30–10:30 | GLM5.3 Flash quality and delivery |
+| 11 | 10:30–11:35 | Preference quality after feasibility |
+| 12 | 11:35–12:40 | What the evidence supports |
+| 13 | 12:40–13:20 | What this comparison establishes |
+| 14 | 13:20–14:10 | Team contributions |
+| 15 | 14:10–14:35 | Discussion |
 
-Use at most one short saved-record demonstration; static annotated results are sufficient. No live model request is needed. Label canned integration examples explicitly. Keep optional historical examples only if they add an insight without displacing the main analysis.
+## Q&A reference slides
 
-## Quantities to state consistently
+| Slide | Purpose |
+| --- | --- |
+| 16 | Exact model identities, shared-service settings and request/solve limits |
+| 17 | Mean, median, p95 and coverage of token usage |
+| 18 | Observed pipeline durations and timing-comparison limitations |
+| 19 | Lexicographic repair as a separate extension |
+| 20 | Research foundations, full references in speaker notes and evidence sources |
 
-- Main study: **1,000 generation cases**, 500 SAT and 500 UNSAT; **2,000 scheduling attempts/model**, **4,000 total**. One call per method/case; all failed attempts retained. Capability and metadata checks are outside scoring.
-- Acceptance: Qwen A **308/1,000 (30.8%)**, B **953/1,000 (95.3%)**; GLM A **891/1,000 (89.1%)**, B **988/1,000 (98.8%)**.
-- Valid SAT construction: Qwen A/B **1/500 versus 467/500**; GLM **404/500 versus 492/500**. Correct UNSAT: Qwen **307/500 versus 486/500**; GLM **487/500 versus 496/500**. Aggregate acceptance alone hides Qwen's construction weakness.
-- Infrastructure failures: **51 Qwen, 68 GLM**. These remain in primary denominators but are not scheduling mistakes. Returned-response analysis is a secondary diagnostic, not corrected accuracy.
-- Conditional preference optimum: Qwen A **1/1**, B **467/467**; GLM A **403/404**, B **492/492**. These fractions include only valid gold-SAT schedules, not all attempts.
-- There are ten related construction families and 200 cases per activity-count stratum (8, 12, 16, 24, 32). Distinct fingerprints are not independent samples or proof of extreme computational hardness. The 24 optional reordered conditions were not executed.
-- Token statistics exclude missing usage; time statistics retain failures. OS/concurrency and hosted-service conditions varied; no fully matched cross-model timing subset exists.
-- Earlier studies remain separate: 48 balanced cases/96 attempts per model; difficulty 200 attempts/model; historical Qwen 600 attempts/model. Do not pool their denominators or transfer wording-robustness conclusions to the current dataset.
-- The office demo is offline illustration. Implemented single-day/30-minute semantics differ from the TA's suggested weekly/hourly scenario; scope clarification remains open.
+Use these only when relevant to a question. A saved-record demonstration is optional; the main talk already contains a measured worked example. Do not make a new model request during the talk or present canned answers as observed model results.
+
+## Quantities and interpretation
+
+- **Models:** Qwen3.6 35B A3B (Qwen3.6), request/response `qwen3.6:35b`; GLM5.3 Flash, request `x-test-1`, response `glm-5.3-flash`.
+- **Design:** 1,000 generation cases, 500 feasible and 500 infeasible; two methods and two models give 4,000 attempts. Ten related construction families and five sizes (8, 12, 16, 24, 32 activities) do not establish independent real-world sampling. The 24 optional reordered conditions were not executed.
+- **Acceptance, direct versus solver-assisted:** Qwen3.6 308/1,000 (30.8%) versus 953/1,000 (95.3%); GLM5.3 Flash 891/1,000 (89.1%) versus 988/1,000 (98.8%). Gains are **64.5 and 9.7 percentage points**, respectively. All failures remain in these denominators.
+- **Valid schedules:** Qwen3.6 1/500 versus 467/500; GLM5.3 Flash 404/500 versus 492/500. Correct infeasibility answers: Qwen3.6 307/500 versus 486/500; GLM5.3 Flash 487/500 versus 496/500. Overall acceptance hides the direct Qwen3.6 construction weakness.
+- **Conditional optimality:** Qwen3.6 direct 1/1 and assisted 467/467; GLM5.3 Flash direct 403/404 and assisted 492/492. These denominators include only valid schedules on feasible cases. Reference optima range from 0 to 37, with median 12; only two are zero. The reference optimizer shares compiler code.
+- **Failures:** 51 infrastructure failures for Qwen3.6 and 68 for GLM5.3 Flash. They are distinct from invalid schedules, false infeasibility and formatting errors. GLM5.3 Flash's paired returned-response subset has 891/935 direct versus 927/935 assisted acceptance; the 3.85-point gap is diagnostic, not corrected accuracy.
+- **Resources:** unknown token usage is excluded, not counted as zero. Duration statistics include failures. Changing OS, concurrency and backend conditions prevent a controlled intrinsic-speed ranking.
+- **Scope:** generation is the main study. Repair and wording checks belong to earlier studies with their original denominators. Single-day, 30-minute slots and preferred-start penalties are the implemented semantics; weekly scheduling and richer preferences are outside scope.
 
 ## Q&A preparation
 
@@ -41,12 +58,12 @@ Use the following questions to check each member’s understanding.
 | Does 98.8% mean deployment reliability? | No. It is finite synthetic development evidence, with related families and known service/extraction failures. Real-calendar generalization is untested. |
 | Why not treat 1,000 cases as independent? | Ten related construction families share mechanisms. The family bootstrap is descriptive design sensitivity, not a real-world population confidence claim. |
 | Does a structural mismatch prove an extraction error? | No. Structural equality and semantic equivalence differ. Use the concrete invented-deadline and dropped-constraint traces to demonstrate actual errors. |
-| Is B's optimization perfect? | Every valid B schedule matches its proven reference optimum here. This is conditional on validity, bounded constructed instances and a shared reference compiler, not a general guarantee about language interpretation. |
-| When might direct reasoning be useful? | GLM constructs 404 valid schedules directly and can propose schedules when no compatible solver/schema is available. Answers still need validation; no universal speed advantage follows from these runs. |
+| Is solver-assisted optimization perfect? | Every valid solver-assisted schedule matches its proven reference optimum here. This is conditional on validity, bounded constructed instances and a shared reference compiler, not a general guarantee about language interpretation. |
+| When might direct reasoning be useful? | GLM5.3 Flash constructs 404 valid schedules directly and can propose schedules when no compatible solver/schema is available. Answers still need validation; no universal speed advantage follows from these runs. |
 | Why sequential repair objectives? | Fixing each proven optimum preserves priority; a weighted sum may trade it away. UNKNOWN is not UNSAT, and FEASIBLE is not OPTIMAL. Repair is a separately evaluated extension. |
 | How is responsible AI addressed? | Explain privacy, unequal inconvenience, objective choices, ambiguity and user control. Formal validity does not establish fairness or live adversarial robustness. |
 | Are the models and scope course-approved? | The TA accepts Qwen/GLM, as reported in the team’s consultation follow-up. The single-day calendar and preferred-start-only objective remain separate scope clarifications. |
 
 ## Rehearsal record
 
-Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. Members must verify their own contributions and understand every part, including AI-supported work. Follow [remaining submission tasks](../docs/submission-checklist.md#remaining-submission-tasks).
+Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. The group has confirmed its contribution allocation and whole-project understanding. Practise explaining the findings and limitations without reading the script. Follow [remaining submission tasks](../docs/submission-checklist.md#remaining-submission-tasks).

@@ -19,3 +19,5 @@ Some Markdown relative links retain their original repository-root or `docs/` lo
 The superseded plans, member handoffs, intermediate qualification notes and early drafts are preserved byte-for-byte in [`development-notes/`](development-notes/). They were moved out of the main documentation directory to keep current guidance clear. Their links retain their original `docs/` location, and dates/test counts/pending statements describe those checkpoints. Root `AGENTS.md` and `planning.md` are retired; use the current [architecture](../architecture.md) and [submission checklist](../submission-checklist.md).
 
 The [cleanup receipt](../../results/summary/documentation-cleanup-20261018.json) records old/new paths and hashes. Existing report snapshots, figures and experiment archives have not been removed.
+
+The [earlier presentation examples](development-notes/presentation-examples-20261107.md) preserve the demonstration guide before alignment with the final deck. Use the current [presentation guide](../../presentation/README.md) and [rehearsal sequence](../../presentation/rehearsal.md) for delivery.

@@ -8,9 +8,7 @@ The core task is **schedule generation**: find activity start times that respect
 
 The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
 
-The [submission checklist](docs/submission-checklist.md) tracks the remaining review and course-delivery tasks.
-
-[Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md)
+[Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md) · [Presentation guide](presentation/README.md)
 
 **On this page:** [Capabilities](#what-it-does) · [Pipeline](#how-it-works) · [Quick start](#quick-start) · [Results](#results) · [Reproduction](#reproduce-the-evidence) · [Checks](#verify-changes) · [Layout](#repository-layout)
 
@@ -71,14 +69,14 @@ Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every
 
 | Model | Direct LLM | LLM + CP-SAT |
 | --- | ---: | ---: |
-| Qwen3.6 `qwen3.6:35b` | 30.8% (308/1,000) | 95.3% (953/1,000) |
+| Qwen3.6 35B A3B `qwen3.6:35b` | 30.8% (308/1,000) | 95.3% (953/1,000) |
 | GLM5.3 Flash `glm-5.3-flash` | 89.1% (891/1,000) | 98.8% (988/1,000) |
 
 ![Generation acceptance with all failures retained](docs/figures/report-polished-20261018/diverse-acceptance.png)
 
-Qwen direct produces only **1/500 valid feasible schedules**, versus 467/500 with CP-SAT; most direct successes are correct infeasibility predictions. GLM produces 404/500 versus 492/500. Solver assistance improves this measured comparison, but extraction can still invent or omit constraints even when the solver is correct.
+Qwen3.6 direct produces only **1/500 valid feasible schedules**, versus 467/500 with CP-SAT; most direct successes are correct infeasibility predictions. GLM5.3 Flash produces 404/500 versus 492/500. Solver assistance improves this measured comparison, but extraction can still invent or omit constraints even when the solver is correct.
 
-Infrastructure accounts for **51 Qwen failures and 68 GLM failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
+Infrastructure accounts for **51 Qwen3.6 failures and 68 GLM5.3 Flash failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM5.3 Flash accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM5.3 Flash timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
 
 The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. The prose-to-gold mapping has automated validation; independent human semantic assessment is not included in the reported evidence.
 
@@ -124,5 +122,5 @@ Reinstall after source changes before checking a noneditable installation. Check
 | `results/` | [Evidence map](results/README.md), audited summaries, figures and immutable reproduction archives |
 | `scripts/` | Evidence verification, offline comparison builders and report/figure rendering |
 | `docs/` | Current report, architecture, usage and evidence; separate studies, reviews and history |
-| `presentation/` | Demonstration inputs and presentation/rehearsal preparation |
+| `presentation/` | Demonstration inputs and rehearsal guide matching the final 20-slide presentation |
 | `runs/`, `docs/private/` | Ignored local experiment outputs and private submission copies; never public evidence by default |

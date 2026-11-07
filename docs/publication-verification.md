@@ -1,5 +1,23 @@
 # Repository publication verification
 
+## Repository delivery audit — 7 November 2026
+
+GitHub `main` was checked at `9e8f37d2753212d71c8c9cb78c7d17981ce79017` before preparing this revision. The repository now includes the finalized public report/reference updates, clearer reader navigation and presentation guidance matching the prepared 15-slide talk plus five Q&A reference slides. The earlier demonstration guide is preserved in history. The frozen final-delivery folder, both report sources/PDFs and the local PPTX/DOCX retain their pre-audit hashes; private identity details remain excluded from Git.
+
+Verification covered 527 repository paths, including parsing 149 Python, 141 JSON and one TOML file, reading all 60 PDFs and decoding all 59 PNGs. All 423 relative links and 51 heading links across 25 active Markdown files resolve. No path collision, tracked private-report/credential path or scanned credential/student-identity pattern was found. Historical snapshot links retain their original context as documented in the history guide.
+
+All eight evidence archives and their 9,186 checksummed members passed verification. Rebuilding the 4,000-attempt comparison produced a byte-identical summary. All ten dashboard frontend tests passed. The scientific runtime, tests, fixtures, prompts, configuration and dependency lock remain unchanged from the previously completed 1,031-test audit; the full Python suite was not rerun for this documentation-only revision. All 368 protected implementation/evidence paths and 13 frozen deliverable/source paths are unchanged. No model calls were made. The publication uses `[skip ci]` to avoid another documentation-only Actions run.
+
+Earlier entries record the state at each checkpoint. Their local/pending publication statements do not describe a later commit containing this revision.
+
+## Reference audit — local revision, 7 November 2026
+
+The report bibliography contains nine relevant research/software references, each cited in the body: task-information and constraint-faithfulness benchmarks, formal-tool planning and extraction analysis, CP-SAT/OR-Tools, paired/clustered evaluation, and the separate minimum-perturbation repair extension. Course slides, assignment documents, TA correspondence, the proposal and unused model/dataset candidates are excluded from the scientific bibliography. The versioned repository is linked separately under code and data availability. The [source-provenance table](report-details.md#source-provenance) explains each retained reference's application. Existing historical development records remain unchanged.
+
+Primary publication metadata and relevant documentation were checked during the audit. Both PDFs pass fresh format checks: one cover, ten body pages and one references page, at least 11-point text and one-inch margins. Changed pages 2, 3, 6, 11 and 12 were visually reviewed; the other pages and both covers are unchanged. Public and private body/reference pages render identically. All 257 files in the preserved evidence manifest retain their hashes. Numerical results, tables, equations, figures and experimental settings are unchanged; no model requests were made. The private report remains local and ignored.
+
+All 20 presentation slides and ten script pages were visually reviewed against the report. The five native charts agree with its results; all 15 spoken sections match the corresponding speaker notes. The presentation update changes only notes: source links are refreshed and the nine references are included in the final slide's notes. Visible slide, chart and embedded-workbook parts are unchanged. The script's source note is updated; its 1,814 spoken words are preserved. The verified PPTX and DOCX replace the latest copies in Downloads, with earlier copies retained locally. Package/layout checks and 90 relative documentation links pass. Native PowerPoint playback and a timed group rehearsal were not performed; the 14:35 speaking target remains an estimate. These revisions have not been committed or pushed.
+
 ## Contribution confirmation and AI disclosure — authorized publication, 7 November 2026
 
 The group confirms the actual work allocation and that all members have read and understood the project, report and slides. The report now names Codex and Claude Code, distinguishes AI assistance from author direction and review, and uses the confirmed allocation. These confirmations do not establish completion of the selected case-level semantic checks. The worksheet's longer personal examples are optional guidance, not a prescribed course submission format.

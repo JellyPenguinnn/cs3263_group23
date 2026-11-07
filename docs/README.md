@@ -7,17 +7,22 @@ Start with the report and use the supporting documents only as needed. The curre
 | Document | Purpose |
 | --- | --- |
 | [Report](submission-report.md) / [PDF](submission-report.pdf) | Scientific question, formulation, worked example, results, failure analysis and conclusions |
-| [Report supplement](report-details.md) | Resource distributions, exact example traces and figure/report reproduction |
+| [Report supplement](report-details.md) | Resource distributions, exact example traces, reproduction and source provenance |
 | [Architecture](architecture.md) | Components, data boundaries, formal semantics and execution contracts |
 | [Usage](usage.md) | Installation-related operations, offline demonstrations, replay and dashboard commands |
 | [Evidence and replay](evidence.md) | Immutable archives, checksums and exact-source reproduction |
 | [Claim-to-evidence index](claim-evidence.md) | Links between report claims and saved observations |
-| [Human review worksheet](human-review-checklist.md) | Selected cases, fill-in findings and individual contribution templates |
-| [Submission checklist](submission-checklist.md) | Remaining human review, contribution accounts, scope clarification and delivery |
-| [Division of work](contributions.md) | Responsibilities of each member and shared work |
+
+## Review and delivery
+
+| Document | Purpose |
+| --- | --- |
+| [Presentation guide](../presentation/README.md) / [rehearsal sequence](../presentation/rehearsal.md) | Final 15-slide talk, five Q&A reference slides and offline examples |
+| [Division of work](contributions.md) | Confirmed responsibilities and AI-assistance disclosure |
+| [Human review worksheet](human-review-checklist.md) | Selected evidence checks and optional contribution examples |
+| [Submission checklist](submission-checklist.md) | Case review, private-title verification, rehearsal and course delivery |
 | [TA-feedback alignment](ta-feedback-alignment.md) | Generation-first scope, implemented feedback and explicit simplifications |
-| [Repository audit](repository-audit.md) | Detailed implementation/path review and regression results |
-| [Publication verification](publication-verification.md) | Verification checkpoints and publication history |
+| [Repository audit](repository-audit.md) / [verification history](publication-verification.md) | Implementation review, test evidence and version-specific publication checks |
 
 ## Supporting folders
 

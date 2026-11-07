@@ -18,6 +18,8 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 
 - [x] All members confirm that they have read and understood the project, report and slides. The report discloses both Codex and Claude Code. This confirmation is separate from the selected case-level checks below.
 
+- [x] Final 20-slide presentation and 1,814-word script are prepared and checked against the report; the [rehearsal guide](../presentation/rehearsal.md) matches their 15-slide talk and five Q&A reference slides. Actual presentation timing still requires rehearsal.
+
 - [x] Model selection: Qwen and GLM accepted by the TA, according to the team’s consultation follow-up.
 
 Earlier report snapshots and their format checks are historical. Every substantive revision, new figure or private-title edit requires an appropriate fresh render/check; do not reuse a previous page count for a changed document.
@@ -34,7 +36,7 @@ The confirmed division of work and AI-assistance disclosure address contribution
 - [ ] Confirm each member's name, matriculation number and email on the prepared **private** title page (P51). The local `docs/private/submission-report.md` and PDF contain the supplied details and are excluded from Git. Refresh this copy after substantive report edits; never put private identifiers in public Git.
 - [ ] Rehearse the prepared presentation and script, or produce a recording if requested, for **15 minutes plus five-minute Q&A** (P47). Each member should be prepared to explain the whole system (P57).
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).
-- [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14). **30 October** is the team's complete-draft target.
+- [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14).
 
 ## Suggested completion order
 

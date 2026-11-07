@@ -122,15 +122,15 @@ The recorded scientific settings remain unchanged, but phases differ operational
 
 Case `dg-3fd5174321284caacab1f4a9` is selected to explain mechanisms, not estimate their frequency. The [derived record](../results/summary/report-details-20261018.json) contains its complete canonical public view, evaluator-only specification, four original pipeline outputs and clock schedules. Report clock notation is a deterministic conversion of slots; the original benchmark prompt was not rewritten or rerun.
 
-Qwen direct incorrectly reports UNSAT. GLM direct schedules A4 and A5 together at 11:00-11:30: a room overlap and an A4 availability violation. Both B extractions match gold and return the same optimal schedule. All four calls returned answers without provider errors. The three impossible preferred-start windows incur unavoidable soft penalties 3+1+2=6; these deliberately conflicting preferences do not make the hard problem infeasible. A7 meets its preference, so the valid B schedule achieves the lower bound.
+Qwen3.6 direct incorrectly reports UNSAT. GLM5.3 Flash direct schedules A4 and A5 together at 11:00-11:30: a room overlap and an A4 availability violation. Both solver-assisted extractions match gold and return the same optimal schedule. All four calls returned answers without provider errors. The three impossible preferred-start windows incur unavoidable soft penalties 3+1+2=6; these deliberately conflicting preferences do not make the hard problem infeasible. A7 meets its preference, so the valid solver-assisted schedule achieves the lower bound.
 
-The main report retains separate counterexamples of harmful extraction. A selected success of B does not prove universal benefit or perfect translation. Earlier traces and charts remain unchanged; compact report figures are new presentation derivatives.
+The main report retains separate counterexamples of harmful extraction. A selected solver-assisted success does not prove universal benefit or perfect translation. Earlier traces and charts remain unchanged; compact report figures are new presentation derivatives.
 
 ## Worked-case input table
 
-Availability constrains the whole activity, not only its start. The report timetable illustrates the same saved schedule. “Both B start” refers to the two solver-assisted outputs.
+Availability constrains the whole activity, not only its start. The report timetable illustrates the same saved schedule. Both solver-assisted runs returned the same start time for each activity.
 
-| Activity | Person | Minutes | Availability | Both B start |
+| Activity | Person | Minutes | Availability | Solver-assisted start (both models) |
 | --- | --- | ---: | --- | --- |
 | A1 | P1 | 30 | 10:00-13:30 | 12:30 |
 | A2 | P2 | 60 | 12:00-15:00 | 13:00 |
@@ -220,3 +220,17 @@ Here, *F* is the set of schedules satisfying all updated hard constraints; T sum
 CP-SAT proves the best moved count M, fixes it, proves the best shift T, and finally minimizes P. Stages share a 30-second solve budget with zero absolute and relative optimality gaps. A valid incumbent may survive a timeout, but unproved later priorities remain unproved. `UNKNOWN` is distinct from `INFEASIBLE`, and `FEASIBLE` from `OPTIMAL`. A secondary objective gap is reported only when earlier priorities equal their proven reference values.
 
 **Scope relative to feedback.** The TA recommends achievable generation, both approaches and independent validation as the core, with repair as an extension. Our offline office examples demonstrate eight 1–2-hour activities, two people and one room, including loose/tight feasibility and a one-move repair. The implemented calendar is one day on 30-minute slots, not the suggested five-day/hourly calendar. Morning preferences fit preferred-start windows; consecutive-meeting and day-clustering penalties are absent. These simplifications require explicit scope clarification rather than a claim that every suggestion is implemented.
+
+## Source provenance
+
+The report's [nine references](submission-report.md#references) support the methods and interpretation used in the project. Each is cited at the relevant point in the report. The project repository is linked separately under code and data availability; it supplies our empirical evidence rather than independent research findings.
+
+| Report references | Application in this project |
+| --- | --- |
+| 1-2: NATURAL PLAN and SCHEDBench | Equivalent public task information, explicit constraint faithfulness and evaluation design. Our primary cases are generated locally; no external benchmark instances or published scores are pooled with them. |
+| 3-4: formal-tool planning and planning formalization | The direct-versus-translation comparison and the distinction between parsing, extracted-specification fidelity and final answer validity. Our single-call fixed compiler does not reproduce an iterative verification framework. |
+| 5-7: CP-SAT research and OR-Tools documentation | Interval/non-overlap modeling, precedence, solver statuses and release-matched proof/bound semantics. |
+| 8: Miller | Paired and clustered evaluation principles. The ten-family bootstrap is an analysis of these constructed cases, not evidence of real-calendar representativeness. |
+| 9: minimal perturbation | The separately evaluated repair extension and its minimum-disruption objective; repair is not pooled with the primary generation study. |
+
+Course guidance, TA correspondence and references considered only for unused alternatives remain in the existing development and review records. They are not included in the final report's scientific bibliography. The [preserved development notes](history/development-notes/development-plan-history.md#research-basis-for-the-recommendations) retain that wider history without implying that every discussed method, model or dataset was used.
