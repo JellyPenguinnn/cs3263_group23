@@ -172,7 +172,7 @@ The team completed this review for the 24-case packet (eight cases per member) a
 
 Use this worked example as a first exercise, then check contrasting SAT/UNSAT cases and an extraction failure from the claim index. Each member should read the natural-language input before consulting gold, independently list the durations, windows, shared entities, hard constraints and preferences, and compare that interpretation with the formal specification. On the timetable, check complete-window containment, resource/participant non-overlap, precedence and the penalty calculation. For rejected answers, identify the exact violated rule or missing/invented constraint rather than merely repeating the validator label. Review why the selected example does not establish a frequency, and why infrastructure failures cannot be presented as reasoning errors.
 
-Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations. See the [submission checklist](process/submission-checklist.md) for the remaining submission tasks.
+Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations.
 
 ## Example trace index
 

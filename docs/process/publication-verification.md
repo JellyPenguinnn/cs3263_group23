@@ -1,5 +1,7 @@
 # Repository publication verification
 
+Newest entry first. Each dated entry records its own checkpoint; later entries supersede earlier status statements (for example, the 7 November 15-slide talk and nine references).
+
 ## Final submission revision — 9 November 2026
 
 This revision publishes the final report and the recorded-video presentation materials, tagged `final-submission`. Changes:
@@ -8,7 +10,7 @@ This revision publishes the final report and the recorded-video presentation mat
 - Team members manually reviewed the 24-case packet (`docs/reviews/human-review-packet.md`) against the gold specifications and reported no mismatches.
 - The presentation is now a 16-slide recorded video of at most 10 minutes; the deck and narration script are in `presentation/`.
 - The public report PDF passes `scripts/check_report.py`: 12 pages (title, 10 body pages, references), minimum 11 pt, one-inch margins. The full Python suite (1,031 tests) passed on a fresh locked install of the preceding commit; this revision changes documentation, presentation files and one offline summary script only.
-- The documentation is reorganized for public reading: study audits are in `docs/studies/`, internal working records (this log, the submission checklist, the human-review worksheet and the repository audit) in `docs/process/`, and review receipts in `docs/reviews/`. Relative links were rewritten and checked; `docs/history/` is unchanged. The root README was rewritten, and its quick-start and reproduction commands were re-run on a fresh locked install (offline demo 180 attempts; rebuilt 4,000-attempt summary byte-identical).
+- The documentation is reorganized for public reading: study audits are in `docs/studies/`, internal working records (this log, the submission checklist, the human-review worksheet and the repository audit) in `docs/process/`, and review receipts in `docs/reviews/`. Relative links were rewritten and checked; `docs/history/` is unchanged apart from two index links. The root README was rewritten, and its quick-start and reproduction commands were re-run on a fresh locked install (offline demo 180 attempts; rebuilt 4,000-attempt summary byte-identical).
 - The previous report is preserved in `docs/history/20261109-before-final/`. Older receipts, such as `results/summary/report-details-20261018.json`, keep their original "review pending" wording as historical records.
 
 ## Repository delivery audit — 7 November 2026
@@ -67,7 +69,7 @@ The [repository audit](repository-audit.md) supersedes the scope of the precedin
 
 ## Report and repository finalization — authorized publication, 18 October 2026
 
-This publication includes the scientific-report refinements, clearer comparison charts, user-confirmed contribution responsibilities, current README/documentation navigation and presentation guidance aligned with the 4,000-attempt study. The private report remains ignored and untracked locally. Personal contribution accounts, substantive human review, scope/model clarification and course delivery remain open.
+This publication includes the scientific-report refinements, clearer comparison charts, team-confirmed contribution responsibilities, current README/documentation navigation and presentation guidance aligned with the 4,000-attempt study. The private report remains ignored and untracked locally. Personal contribution accounts, substantive human review, scope/model clarification and course delivery remain open.
 
 The final public/private report hashes match their successful format checks and visually reviewed versions: one title page, ten body pages and one references page, at least 11-point text and one-inch margins. Current figure/renderer hashes match their receipt. All eight archive hashes remain unchanged after the preceding full 9,186-member verification; scientific source, tests, prompts, fixtures and historical evidence are unchanged. Current local links, heading anchors, sensitive-data scans and whitespace checks pass. The preceding byte-identical comparison/chart reconstruction, targeted figure test and 180-attempt offline demo/replay still apply because their inputs and implementation are unchanged. No new inference was performed.
 

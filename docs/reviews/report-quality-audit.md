@@ -1,6 +1,6 @@
 # Report scientific-quality and course-requirement review
 
-> Historical review of the 18 October report. Section and table numbers below refer to that version; the 9 November final revision is recorded in the [publication log](../process/publication-verification.md).
+> Historical review of the 18 October report. Section and table numbers below refer to that version; the 9 November final revision is recorded in the [publication log](../process/publication-verification.md). Rows marked “Not complete” or “Human tasks remain” were resolved in that revision (report Section 9 and the recorded video).
 
 Reviewed 18 October 2026 against the supplied Project brief, CS3263 Project Guidelines AY2026/27, Responsible AI slides, original proposal, consultation notes and written TA feedback. The [report source](../submission-report.md), every table row, formula, caption and reference were reviewed against implementation and saved evidence. The [verification receipt](../../results/summary/report-scientific-review-20261018.json) binds the reviewed source and PDF; later edits require renewed checks. This review does not replace member contributions, independent interpretation or teaching-team approval.
 

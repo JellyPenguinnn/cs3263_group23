@@ -1,11 +1,13 @@
 # Scheduling with Language Models: Direct Reasoning or Solver Assistance?
 
-**CS3263 Foundations of Artificial Intelligence · National University of Singapore · AY2026/27 Semester 1 · Group 23**
+**CS3263 Foundations of Artificial Intelligence · National University of Singapore · AY2026/27 Semester 1 · Group 23**<br>
 Tham Yao Xiang (team leader) · Woo Yong Qing · Tea Li Hao
 
 Should a language model build a schedule itself, or translate the request into constraints for a solver? We compare both routes on the same 1,000 synthetic scheduling requests with two models, check every answer with an independent validator, and analyse not only how often each route succeeds but why it fails.
 
-**[Final report (PDF)](docs/submission-report.pdf)** · [Report source](docs/submission-report.md) · [Supplement](docs/report-details.md) · [Video slides](presentation/CS3263_Group23_Presentation_Slides.pptx) · [Documentation index](docs/README.md)
+**[Final report (PDF)](docs/submission-report.pdf)** · [Report source](docs/submission-report.md) · [Supplement](docs/report-details.md) · [Slides (PPTX)](presentation/CS3263_Group23_Presentation_Slides.pptx) · [Narration script](presentation/CS3263_Group23_Script.docx) · [Documentation index](docs/README.md)
+
+The report is titled *AI Assistant for Dynamic Constraint-Aware Scheduling: Direct LLM Reasoning versus Solver-Assisted Scheduling*. The presentation is a recorded video of at most 10 minutes; its slides are in `presentation/`, with the full narration in the speaker notes and the script.
 
 ## The answer in brief
 
@@ -70,7 +72,7 @@ python3.12 -m venv .venv
 .venv/bin/scheduling dashboard --runs-dir runs --port 8876
 ```
 
-Use a new output directory for each run. Live model runs need a SoCLaaS credential; see [usage](docs/usage.md).
+Use a new output directory for each run. Live model runs need a credential for SoCLaaS, the NUS School of Computing service that hosted both models (NUS accounts only); another provider would need a new adapter. See [usage](docs/usage.md).
 
 ## Reproduce the results
 
@@ -91,7 +93,7 @@ cmp results/summary/diverse-comparison-20261018.json runs/reproduce-diverse/comp
 
 ```sh
 .venv/bin/python -m pytest -q          # 1,031 tests; network access is blocked during tests
-node --test tests/frontend/dashboard.test.cjs
+node --test tests/frontend/dashboard.test.cjs   # requires Node.js 20+
 ```
 
 The suite includes brute-force enumeration checks of the solver and validator on small instances. All 1,031 tests passed on a fresh install from `requirements.lock`.
@@ -115,6 +117,10 @@ The suite includes brute-force enumeration checks of the solver and validator on
 The division of work changed from the proposal. **Tham Yao Xiang** (team leader) led the formal model; **Woo Yong Qing** led the evaluation; **Tea Li Hao** led integration and operations. All three attended the TA consultation, made the research and scope decisions together, reviewed eight of the 24 manually checked cases each, and present the video.
 
 We used Codex and Claude Code throughout. Tea Li Hao operated Codex and committed the work for the team, so commit authorship does not reflect individual contributions. From our specifications, these tools wrote most of the code, tests and experiment scripts, and drafted or revised much of the report and slide text; the research question, formulation, evaluation design, model choice, scope and interpretation came from our discussions. See [contributions](docs/contributions.md) and Section 9 of the report.
+
+## License
+
+No open-source license has been chosen for this repository, so all rights are reserved by the authors. Please contact the team before reusing the code or data.
 
 ## References
 

@@ -54,7 +54,7 @@ The schema remains one explicitly dated day with 30-minute slots, mandatory acti
 
 The cases are deterministic, AI-assisted synthetic development inputs. They are not untouched held-out data. Ten generator families remain the conservative grouping even though 1,000 normalized hard fingerprints differ. Numerical variants within a mechanism remain related; topology diversity is reported separately from numeric fingerprints. A family bootstrap describes sensitivity to reweighting these ten designed classes, not a random population of scheduling problems.
 
-Before live execution, recommend human review of at least one matched pair from each of the 50 mechanism/size cells (100 cases), a disclosed random supplement, and all identified ambiguities. This is a proposed review target, not a course-mandated quota. Record reviewers and scope honestly; do not infer review from passing tests or declare all 1,000 manually reviewed. Fixes create a newly prepared version/packet before any calls, with no silent changes to old evidence.
+The protocol proposed a 100-case review before execution. In practice the team manually reviewed 24 cases after execution (C01–C20 and E1–E4 in the [human-review packet](../reviews/human-review-packet.md)) and found no mismatches; the remaining cases rely on the automated checks above.
 
 ## Verified construction facts
 
@@ -106,7 +106,7 @@ The optional wording selection and reordered descriptions are available in the d
 
 Across both models the envelope is **4,006 HTTP requests**, including qualification, and **131,203,072 reserved output tokens**. Reservations are not actual consumption, an input-token limit or a monetary cap. Record actual time/tokens and coverage; missing usage is unknown, not zero. Provider service time on larger cases is uncertain and can span days. Do not infer runtime by multiplying previous small-case averages without qualification.
 
-Preparation is not live authorization. Existing completed allowances are consumed. A later launch must refer to the exact prepared pair and its envelope. A durable supervisor/tmux session cannot keep a sleeping laptop computing; pause at a safe request boundary before sleep, retain pending reservations and never silently reissue uncertain calls. Existing [operations](../usage.md) remain applicable.
+Preparing packets makes no model calls, and this study's request allowances are used up. A supervisor process cannot keep a sleeping laptop computing, so runs were paused at request boundaries, pending reservations were kept, and uncertain calls were never reissued. See [usage](../usage.md) for operations.
 
 ## End-to-end qualification and analysis
 
@@ -128,7 +128,7 @@ Freeze these analyses before live inference:
 - Family-grouped descriptive uncertainty; do not treat 500 paired constructions or 1,000 cases as independent families. Compare models under the same configured conditions while disclosing uncontrolled hosted backends.
 - Optional order robustness only on its preselected paired bases, with additional attempts and denominators separately reported.
 
-Keep all previous studies separate. The current report now incorporates the completed and audited pair; previous reports remain historical evidence. Inference and automated analysis finished ahead of the original 22/25/27 October preparation/run/analysis targets. The 30 October target now concerns substantive member review and delivery preparation. No further model, size, feedback-loop, repair or schema expansion is part of this phase. Human interpretation/contribution, scope clarification, report review and presentation remain in the submission checklist. The team subsequently confirmed TA acceptance of Qwen/GLM for this project; earlier execution records retain their original context.
+Keep all previous studies separate. The current report now incorporates the completed and audited pair; previous reports remain historical evidence. Inference and automated analysis finished ahead of the original 22/25/27 October preparation/run/analysis targets. No further model, size, feedback-loop, repair or schema expansion is part of this phase. The team later manually reviewed 24 of these cases with no mismatches, and the TA agreed to both models.
 
 ## Authorized parallel continuation
 
@@ -168,4 +168,4 @@ The fresh GLM derivative preserves all 92 original records byte-for-byte and rec
 
 Qwen's serial/16/8 execution and GLM's 8/4 execution must not be presented as uniformly controlled resource comparisons. Use per-model OS/concurrency strata and per-case phase labels. The final `timing-comparability.json` reports any common cases for which both approaches in both models used equal concurrency and OS; if that set is empty, no matched-concurrency timing claim is supported. All cases and provider failures remain in the primary outcome analysis, with concurrency differences disclosed as a service-execution limitation.
 
-The initial live four-request check confirmed 93 total GLM records, four requests in flight and the first new response identifying `glm-5.3-flash`, with no new provider error at that checkpoint. All 92 prior GLM records and the complete Qwen campaign/export passed integrity checks. The focused offline GLM 8→4 recovery test passed, covering exact identity, no repeated calls, budget restoration and preserved timing segments. The frozen dashboard still has a static “Sequential · no retries” label; actual concurrency is established by the execution manifest, live worker and attempt records, not that legacy display text.
+The initial live four-request check confirmed 93 total GLM records, four requests in flight and the first new response identifying `glm-5.3-flash`, with no new provider error at that checkpoint. All 92 prior GLM records and the complete Qwen campaign/export passed integrity checks. The focused offline GLM 8→4 recovery test passed, covering exact identity, no repeated calls, budget restoration and preserved timing segments. The dashboard then showed a static “Sequential · no retries” label; it now reads “Recorded attempts · read-only”, and actual concurrency comes from the execution manifest and attempt records.

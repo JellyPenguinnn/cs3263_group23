@@ -9,7 +9,7 @@ Run commands from the repository root after the [locked installation](../README.
 | `difficulty-200` | 200 | [Earlier difficulty and wording study](studies/difficulty-study.md) |
 | `legacy-600` | 600 | [Historical Qwen comparison](studies/two-model-development-audit.md) |
 
-The preparation CLI defaults to `legacy-600`; specify `--design` explicitly for another protocol. Prepared packets bind the exact dataset, source and settings. These examples describe supported workflows, not new live authorization. All completed campaign allowances are consumed; a new live run needs its own agreed model, protocol and budget.
+The preparation CLI defaults to `legacy-600`; specify `--design` explicitly for another protocol. Prepared packets bind the exact dataset, source and settings. These examples describe supported workflows, not new live authorization. A new live run needs its own agreed model, protocol and budget.
 
 ## Run offline
 
@@ -59,7 +59,7 @@ SoCLaaS supplies the models used in all completed comparisons. Other providers r
 chmod 600 .env
 ```
 
-Configure your authorized credential locally. Never put keys in chat, source, issues or logs. The CLI reads process environment variables; it does not automatically load `.env`:
+Configure your authorized credential locally. Keep keys out of source files, issues and logs. The CLI reads process environment variables; it does not automatically load `.env`:
 
 ```sh
 set +x
@@ -94,7 +94,7 @@ The recovery and backend-observation implementation previously passed **785 Pyth
 | Realistic | The 12 AI-assisted fictional cases in [`realistic-drafts-v1.json`](../benchmarks/fixtures/realistic-drafts-v1.json); canonical wording | 24 |
 | Language | 24 selected controlled bases, six per task/label and from distinct families; paraphrase and reordered wording | 96 |
 
-Selection precedes model outcomes and balances sweep/event counts within each language stratum. Family normalization and exact source hashes are recorded; language cases retain their controlled partners. The [target-pilot receipt](../benchmarks/manifests/f3-target-development-readiness-20261001.json) identifies the actual controlled bundle and its local archive. Import that preserved bundle before running the preparation example; it is not shipped as raw data in a clone. Human gold/text review remains pending, and the authored drafts retain their AI-assisted provenance. These inspected cases cannot become fresh final evaluation data.
+Selection precedes model outcomes and balances sweep/event counts within each language stratum. Family normalization and exact source hashes are recorded; language cases retain their controlled partners. The [target-pilot receipt](../benchmarks/manifests/f3-target-development-readiness-20261001.json) identifies the actual controlled bundle and its local archive. Import that preserved bundle before running the preparation example; it is not shipped as raw data in a clone. These historical inputs were not manually reviewed, and the authored drafts retain their AI-assisted provenance. These inspected cases cannot become fresh final evaluation data.
 
 The following sequence documents preparation, authorized execution and completed-run analysis. `runs/IMPORTED-target-pilot/cases.json` denotes the imported receipt-matched input; `NEW-*` paths must be unused. It does not grant another campaign allowance.
 
@@ -104,7 +104,7 @@ The following sequence documents preparation, authorized execution and completed
   --design legacy-600 --model qwen3.6:35b \
   --qualification-policy strict_model_observe_backend_v1
 
-# macOS: launch once, independently of the coding app. Output root must be new.
+# macOS: launch once, independently of the terminal session. Output root must be new.
 # Only for an authorized run; credentials remain in the private local file.
 .venv/bin/python evaluation/launch_macos_campaign.py \
   runs/NEW-campaign-input runs/NEW-campaign-live \
@@ -121,7 +121,7 @@ The following sequence documents preparation, authorized execution and completed
 
 The launcher prints its `gui/<uid>/<label>` service identifier. Inspect it with `launchctl print SERVICE_IDENTIFIER`; `launchctl bootout SERVICE_IDENTIFIER` intentionally stops/removes it. Lifecycle evidence is under `supervisor/status.json` and `supervisor/exit.json`; `worker-exit.json` records campaign/export completion or interruption. The service has no automatic restart and is not installed for future logins. `evaluation/supervise_development_campaign.py` is the portable entry point for an equivalent one-shot Linux service. `evaluation/run_development_campaign.py` remains a foreground entry point for an intentionally attended terminal.
 
-For projects under Documents, macOS may require **Documents Folder access for the Python executable itself** in Privacy & Security → Files & Folders. The independent service does not inherit the coding app's permission. A successful `launchctl bootstrap` only confirms registration: verify a fresh supervisor heartbeat and worker PID before declaring the run started. If Python is denied access before startup, inspect the adjacent `*-service.stderr.log`, grant the required folder permission and confirm that no provider request was reserved before launching again.
+For projects under Documents, macOS may require **Documents Folder access for the Python executable itself** in Privacy & Security → Files & Folders. The independent service does not inherit the terminal session's permission. A successful `launchctl bootstrap` only confirms registration: verify a fresh supervisor heartbeat and worker PID before declaring the run started. If Python is denied access before startup, inspect the adjacent `*-service.stderr.log`, grant the required folder permission and confirm that no provider request was reserved before launching again.
 
 For this `legacy-600` design, the helper shares a cap of **603 HTTP requests**: one model-list request, two tiny JSON capability completions at the configured ceiling, then 600 scheduling completions. The **19,726,336-token output reservation** covers all 602 completions; input tokens are additional, so it is not a total-token or currency cap. Each block has its own 480/24/96 cap under the shared budget.
 
@@ -129,6 +129,6 @@ Campaign policy `development-campaign-2` selects `provider_failure_policy: conti
 
 Exact model checks span both capability responses and every block. The explicitly authorized `strict_model_observe_backend_v1` policy records backend variation, including missing metadata, without stopping. Capability hashes and all capability fingerprints are embedded in each runtime configuration; analysis reports backend coverage and descriptive outcome/pair breakdowns. These are shared-service development results, not a pinned-backend or causal comparison across backend versions. Authentication/permission/quota errors, TLS failures, malformed provider envelopes, missing/wrong returned models, capability failures and exhausted budgets still stop dispatch. The default `strict_model_backend_v1` policy and frozen evaluation continue to reject fingerprint changes. Old packets retain their original behavior and cannot run under changed source/settings; prepare a new packet and use a new authorized run ID. Completed timeout records are not reissued on block resume. Pending/interrupted reservations still require reconciliation, and the whole-campaign directory remains write-once.
 
-The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. Completed campaigns retain their development-data provenance. The [submission checklist](process/submission-checklist.md) tracks the remaining review and delivery tasks.
+The summary records actual request/output reservations, elapsed campaign time, provider failure counts and reported token sums with coverage. `--development` is an explicit analysis opt-in; the default analyzer still requires frozen blocks. Analysis retains all failures and reports controlled canonical, realistic and wording results separately. Stopped/incomplete campaigns do not yield a completed study export; inspect their preserved records without dropping failures. Completed campaigns retain their development-data provenance.
 
 See [evidence and replay](evidence.md) for the completed runs, and [the historical guide](history/development-notes/development-guide.md) for prior handoffs and checkpoint-specific measurements.

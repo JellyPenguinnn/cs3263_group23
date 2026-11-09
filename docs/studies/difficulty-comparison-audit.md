@@ -27,7 +27,7 @@ The earlier GLM campaign stopped after 22 scheduling attempts following a return
 
 Each model receives 100 paired conditions: 60 controlled cases, 20 fictional cases and two wording variants for each of ten controlled bases. These represent **80 unique cases**, not 100 independent problems. The 40 generated families normalize to **39 distinct hard-structure groups**, because families `763051de490e2a84f3946b4d` and `00eaf3055a3435619e8c32fc` share a normalized structure. Controlled generation and repair each have 30 pairs but 29 normalized groups. Preserve the original grouping rather than treating the duplicate structure as independent evidence.
 
-Five construction tiers use 4/8/12/20/32 activities. Each controlled tier has twelve cases per method, six per task and three per task/label cell. These small descriptive cells combine size and interaction changes. Tier names do not establish a complexity class, monotone empirical difficulty or a causal size effect. Fictional inputs are AI-assisted templates; natural-language/gold review remains a human task. All inputs are known development data, not a fresh holdout or real calendars.
+Five construction tiers use 4/8/12/20/32 activities. Each controlled tier has twelve cases per method, six per task and three per task/label cell. These small descriptive cells combine size and interaction changes. Tier names do not establish a complexity class, monotone empirical difficulty or a causal size effect. Fictional inputs are AI-assisted templates; wording and gold were not manually reviewed (the 24-case review covered the main study only). All inputs are known development data, not a fresh holdout or real calendars.
 
 ## Acceptance and feasibility
 
@@ -113,4 +113,4 @@ MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_difficulty_result
   --report --output docs/figures/difficulty-comparison-20261014
 ```
 
-The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. Human interpretation, scope clarification and submission tasks are tracked in [the checklist](../process/submission-checklist.md).
+The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. The final report summarizes this study in Table 3.

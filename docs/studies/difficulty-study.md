@@ -51,7 +51,7 @@ PYTHONPATH=src .venv/bin/python evaluation/prepare_case_review.py \
   --source-mode difficulty-v1
 ```
 
-The command rechecks all 80 construction certificates and reference solves, then produces `review-index.csv`, `review-packet.json` and one reviewer file per case. Each file places the original/updated gold specification, schedule, witness, proof and all three public renderings together. Gold interpretation and per-rendering fact checks remain **pending** until a member records actual findings. Review clock conversion, hard/soft rules, repair priorities, ambiguity and possible hints separately. Focus on all twenty fictional requests and examples spanning tiers, mechanisms, task types and labels. These evaluator-only files must not become model inputs. Automated checks establish mathematical consistency, not human review or naturalness.
+The command rechecks all 80 construction certificates and reference solves, then produces `review-index.csv`, `review-packet.json` and one reviewer file per case. Each file places the original/updated gold specification, schedule, witness, proof and all three public renderings together. No member review of these cases was recorded; the 24-case manual review covered the main study only. Review clock conversion, hard/soft rules, repair priorities, ambiguity and possible hints separately. Focus on all twenty fictional requests and examples spanning tiers, mechanisms, task types and labels. These evaluator-only files must not become model inputs. Automated checks establish mathematical consistency, not human review or naturalness.
 
 ## Optional preparation for future runs
 
@@ -92,7 +92,7 @@ Prepared packets bind source, prompts, environment and case bytes. Regenerate on
 
 The two models together reserve at most 406 HTTP requests and 13,238,272 output tokens. Reservations are ceilings, not actual token consumption or monetary caps. No new model calls are authorized by preparing or reading these files. Existing allowances from completed campaigns are not reused.
 
-After explicit live authorization, use the existing one-shot supervisor and private local credential file. For example, substituting the actual private file and authorization reference:
+To run a new campaign, use the existing one-shot supervisor and private local credential file. For example, substituting the actual private file and authorization reference:
 
 ```sh
 PYTHONPATH=src .venv/bin/python evaluation/launch_macos_campaign.py \
@@ -128,4 +128,4 @@ The casebook includes every rejected/unscored outcome, structural extraction mis
 
 For schema-valid extractions, analysis independently checks the recorded candidate and available gold-reference witness against both specifications on the same time grid. A schedule accepted by one specification and rejected by the other demonstrates a concrete hard-feasibility difference. Matching those witnesses does **not** establish global equivalence or equivalent preferences. Changed time frames/activity sets are reported without pretending their coordinates are comparable. These checks use the independent arithmetic validator, make no model calls and do not rerun the solver or feed gold corrections into either method.
 
-Before submission, complete real member interpretation of the cases and findings, honest contribution/AI-support statements, responsible-AI examples, report revision and presentation practice. More models and dynamic solver function-calling remain optional; they do not replace those tasks.
+The final report summarizes this study in Table 3.

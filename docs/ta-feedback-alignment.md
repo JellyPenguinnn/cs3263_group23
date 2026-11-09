@@ -1,6 +1,6 @@
 # TA feedback: generation core and bounded extensions
 
-The written feedback supplied by the team on 15 October praises the research question, CSP/CP-SAT connection, evaluation design and responsible AI. Its concern is breadth and timely completion. This document maps the feedback to the implemented scope, evaluation and remaining clarifications.
+The TA's written proposal feedback (received 15 October) praises the research question, CSP/CP-SAT connection, evaluation design and responsible AI. Its concern is breadth and timely completion. This document maps the feedback to the implemented scope and evaluation.
 
 ## Scope and stopping point
 
@@ -14,7 +14,7 @@ The written feedback supplied by the team on 15 October praises the research que
 | Wording robustness | Keep matched canonical/paraphrase/reordered observations and extraction counterexamples | One sample per wording and date omissions limit interpretation |
 | Feedback correction and UI as bonuses | Existing dashboard remains read-only supporting tooling; no verifier-feedback correction in either method | No UI expansion or dynamic tool-use study needed for delivery |
 
-The completed evaluation consists of a primary generation study and separate earlier studies. The balanced study has **96 scheduling attempts per model** over 48 eight-activity cases. The difficulty study has **200 attempts per model**, with repair, fictional scenarios and wording extensions. Further runtime features or new model runs are outside the delivery plan unless a defect or new research question warrants them. The [submission checklist](process/submission-checklist.md) covers the remaining review and delivery tasks.
+The completed evaluation consists of a primary generation study and separate earlier studies. The balanced study has **96 scheduling attempts per model** over 48 eight-activity cases. The difficulty study has **200 attempts per model**, with repair, fictional scenarios and wording extensions. Further runtime features or new model runs are outside the delivery plan unless a defect or new research question warrants them.
 
 ## Expanded generation evaluation
 
@@ -35,7 +35,7 @@ The earlier difficulty-generation data have no SAT case with an explicit deadlin
 | Minimize consecutive meetings / cluster on the same day | Not implemented. The current soft constraint is weighted preferred-start-window violation; general adjacency/clustering requires new semantics and validation |
 | Repair and unchanged unrelated activities | Both methods receive the same original schedule; minimize moved count, then total absolute start shift, then preference penalty. The objective minimizes disruption but cannot guarantee every indirectly affected activity remains fixed |
 
-The course permits simplified idealized sub-problems. The single-day calendar and preferred-start-only objective are deliberate simplifications; their acceptability remains a scope clarification in the [submission checklist](process/submission-checklist.md). Model selection is resolved: the team reports that the TA accepts Qwen and GLM for this project.
+The course permits simplified idealized sub-problems. The single-day calendar and preferred-start-only objective are deliberate simplifications; they are disclosed in the report (Section 3). The TA agreed to Qwen3.6 and GLM5.3 Flash for this project.
 
 ## Executable small office illustration
 
@@ -74,4 +74,4 @@ The [balanced audit](studies/balanced-comparison-audit.md), [summary](../results
 
 The small and larger views partition generation; they are not extra data. Generation and repair remain paired by construction family. All five direct GLM generation rejections are HTTP 502 errors. Its small-case feasibility ceiling still leaves one valid but suboptimal generation schedule (penalty 15 versus the reference 8). These distinctions separate scheduling quality from service reliability. Fictional/wording extensions and the [full comparison audit](studies/difficulty-comparison-audit.md) retain all 200 observations per model.
 
-The previous combined-scope [report source](history/20261014-report/submission-report.md), [PDF](history/20261014-report/submission-report.pdf), figures and format receipt are preserved. Remaining review and submission tasks are listed in the [checklist](process/submission-checklist.md).
+The previous combined-scope [report source](history/20261014-report/submission-report.md), [PDF](history/20261014-report/submission-report.pdf), figures and format receipt are preserved.

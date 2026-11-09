@@ -10,7 +10,7 @@
 | GLM5.3 Flash direct infrastructure failures 0/0/4/21/40 by size; 43 of 65 in fragmented packing, fork-join and precedence chain | Summary `by_size`, `by_mechanism` |
 | Repair optimality: valid solver-assisted repairs 14/14 (Qwen3.6) and 15/15 (GLM5.3 Flash), GLM5.3 Flash direct 15/15, Qwen3.6 direct 0/2 | [Difficulty summary](../results/summary/difficulty-comparison-20261014.json) `controlled_task_labels`, task repair, `objective_matches` |
 | Fictional requests: Qwen3.6 5→18/20, GLM5.3 Flash 18→20/20 | Difficulty summary `accepted_by_block` |
-| 24 cases manually reviewed with no mismatches | Team report; [worksheet status](process/human-review-checklist.md) |
+| 24 cases manually reviewed with no mismatches | Team review; [human-review packet](reviews/human-review-packet.md) |
 
 ## Current diverse generation study
 
@@ -31,7 +31,7 @@ The revised report leads with the **completed 4,000-attempt comparison**. Earlie
 
 
 
-The following balanced and difficulty indexes preserve earlier studies and shared-system evidence. They do not supply the latest primary denominators. Human review requirements are tracked in the [submission checklist](process/submission-checklist.md).
+The following balanced and difficulty indexes preserve earlier studies and shared-system evidence. They do not supply the latest primary denominators. The 24-case manual review is recorded in the [human-review packet](reviews/human-review-packet.md).
 
 ## Earlier balanced generation claims
 
@@ -39,7 +39,7 @@ Use the [balanced manifest](../results/balanced-evidence-manifest.json), [summar
 
 | ID / report section | Claim | Evidence and boundary |
 | --- | --- | --- |
-| B1 / 5 | 48 cases, 24 SAT/24 UNSAT, four balanced profiles, three construction families | [Fixture manifest](../benchmarks/fixtures/balanced-generation-v1/manifest.json), [independent proofs](../benchmarks/fixtures/balanced-generation-v1/proofs.json), [construction checks](../results/summary/balanced-generation-verification-20261015.json); finite constructed cases, actual human review pending |
+| B1 / 5 | 48 cases, 24 SAT/24 UNSAT, four balanced profiles, three construction families | [Fixture manifest](../benchmarks/fixtures/balanced-generation-v1/manifest.json), [independent proofs](../benchmarks/fixtures/balanced-generation-v1/proofs.json), [construction checks](../results/summary/balanced-generation-verification-20261015.json); finite constructed cases, not part of the 24-case manual review |
 | B2 / 5 | Matched source/runtime/settings, all 96 paired prompts/public views; no retries | Summary `comparison_checks`; archived manifests and completed records; capability/metadata requests are outside scoring |
 | B3 / 6 | Qwen A/B 6/48 vs 48/48; GLM 47/48 vs 48/48, SAT/UNSAT breakdown | Summary `models.*.overall_by_method`; original `analysis.json.rows`; all failures retained |
 | B4 / 6 | Qwen 23 invalid schedules, nine false UNSAT, ten format failures; GLM one transport failure | Summary `failure_catalogue` and exact record paths in balanced audit; format and transport rejection are not automatically reasoning failures |
@@ -75,9 +75,9 @@ Use the [difficulty manifest](../results/difficulty-evidence-manifest.json) to v
 | R17 / 7 | Fixed compiler and prompt boundary | [Direct tests](../tests/unit/test_direct.py); no empirical live adversarial-robustness claim |
 | R18 / 8 | 364 hashes and exact 200-attempt replay per archive | Difficulty manifest, `scripts/verify_evidence.py`, archive checksums, execution/replay receipt and [verification log](process/publication-verification.md) |
 | R19 / 5, 8 | Earlier results and stopped run preserved separately | [Evidence guide](evidence.md), original historical archives/manifest, preserved old report, private original run/preservation ledger |
-| R20 / throughout | Course fit, sources, actual contribution limits | [Submission checklist](process/submission-checklist.md), original course documents, report references and [contributions](contributions.md); group-confirmed work allocation, disclosed Codex/Claude Code assistance and remaining case-level review |
+| R20 / throughout | Course fit, sources, actual contribution limits | [Submission checklist](process/submission-checklist.md), original course documents, report references and [contributions](contributions.md); group-confirmed work allocation, disclosed Codex/Claude Code assistance and the completed 24-case review |
 | R21 / 5-6 | Generation-first post-run view, 30 full / 12 small cases and preserved extensions | [Generation summary](../results/summary/generation-focus-20261015.json), [builder](../scripts/build_generation_focus.py), [report chart receipt](figures/generation-focus-20261015/figure-data.json); exact observation IDs, original archive hashes, no new inference or preregistration claim |
-| R22 / 1, 3, 5 | TA scope response and unsupported weekly/preference features | [Alignment](ta-feedback-alignment.md), user-supplied written feedback, `schema.py`; single-day/30-minute simplification remains an explicit course-scope clarification |
+| R22 / 1, 3, 5 | TA scope response and unsupported weekly/preference features | [Alignment](ta-feedback-alignment.md), the TA's written feedback, `schema.py`; single-day/30-minute simplification remains an explicit course-scope clarification |
 | R23 / 7 | Deadline/fixed-start presence separates all 30 generation labels | [Coverage audit](../results/summary/generation-constraint-coverage-20261015.json), archived controlled case bundles and `difficulty_suite.py` label-dependent branches; possible shortcut, no claim of observed model exploitation |
 | R24 / 5–7 | Separate 48-case correction now completed and reported as B1–B8 | [Balanced protocol](studies/balanced-generation.md), [`balanced-generation-v1` manifest](../benchmarks/fixtures/balanced-generation-v1/manifest.json), independent certificates, source-bound packets, offline integration checks and the balanced manifest; 24 SAT/24 UNSAT across four matched profiles, three conservative families |
 

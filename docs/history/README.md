@@ -1,6 +1,6 @@
 # Preserved document snapshots
 
-These folders preserve earlier report/document bytes and their original source identities. They are historical evidence, not the active report or current operating instructions. Use the [current documentation index](../README.md), [report](../submission-report.md) and [publication log](../publication-verification.md) for the latest state.
+These folders preserve earlier report/document bytes and their original source identities. They are historical evidence, not the active report or current operating instructions. Use the [current documentation index](../README.md), [report](../submission-report.md) and [publication log](../process/publication-verification.md) for the latest state.
 
 | Snapshot | Contents |
 | --- | --- |
@@ -17,7 +17,7 @@ Some Markdown relative links retain their original repository-root or `docs/` lo
 
 ## Development notes
 
-The superseded plans, member handoffs, intermediate qualification notes and early drafts are preserved byte-for-byte in [`development-notes/`](development-notes/). They were moved out of the main documentation directory to keep current guidance clear. Their links retain their original `docs/` location, and dates/test counts/pending statements describe those checkpoints. Root `AGENTS.md` and `planning.md` are retired; use the current [architecture](../architecture.md) and [submission checklist](../submission-checklist.md).
+The superseded plans, member handoffs, intermediate qualification notes and early drafts are preserved byte-for-byte in [`development-notes/`](development-notes/). They were moved out of the main documentation directory to keep current guidance clear. Their links retain their original `docs/` location, and dates/test counts/pending statements describe those checkpoints. Root `AGENTS.md` and `planning.md` are retired; use the current [architecture](../architecture.md) and [submission checklist](../process/submission-checklist.md).
 
 The [cleanup receipt](../../results/summary/documentation-cleanup-20261018.json) records old/new paths and hashes. Existing report snapshots, figures and experiment archives have not been removed.
 

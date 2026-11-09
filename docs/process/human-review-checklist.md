@@ -2,7 +2,7 @@
 
 **Status (9 November 2026):** the team reports that all 24 cases in the packet (C01–C20 and E1–E4) were reviewed against their gold specifications and that no request/gold mismatches were found. The per-case tables below remain the original worksheet template.
 
-Use this worksheet for the selected case-level checks before submission. The group has confirmed its actual work allocation and that all members have read and understood the project, report and slides. Case-review decisions and findings still need to be recorded by the reviewers; reading the report alone does not complete those checks. No student IDs, email addresses or API keys are needed here.
+Use this worksheet for the selected case-level checks before submission. The group has confirmed its actual work allocation and that all members have read and understood the project, report and slides. The selected case checks were completed and found no request/gold mismatches. No student IDs, email addresses or API keys are needed here.
 
 ## How to use this worksheet
 
@@ -106,7 +106,7 @@ The agreed responsibilities above are context, not proof of a particular impleme
 - [ ] Confirm the remaining single-day/30-minute and preferred-start-only scope clarification against the TA feedback. Qwen/GLM model acceptance has already been reported by the team.
 - [ ] Confirm names, student IDs and emails in the **local private report only**; rebuild and inspect the final public/private PDFs after edits.
 - [ ] Check the final report format: at most ten body pages, single column, single spaced, at least 11-point text and one-inch margins; cover/references excluded.
-- [ ] Rehearse the prepared slides and script, create a recording if requested, and check timing for 15 minutes plus five-minute Q&A, and check current Canvas submission arrangements.
+- [ ] Rehearse with the 16-slide deck and script, record the video, check that it runs at most 10 minutes, and check current Canvas arrangements.
 
 **Team review discussion date:** __________
 **Remaining actions, owner and due date:** __________

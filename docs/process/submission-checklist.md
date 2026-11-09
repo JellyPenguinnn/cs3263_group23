@@ -1,6 +1,8 @@
 # Report and submission checklist
 
-Current source: [submission-report.md](../submission-report.md). Current PDF: [submission-report.pdf](../submission-report.pdf). This checklist separates verified artifacts from the remaining review and delivery tasks.
+> **Status (9 November 2026):** internal working record. The model choice (agreed by the TA), the 24-case review (no mismatches), the contribution and AI-use statements, and the 16-slide video format of at most 10 minutes are settled. Unticked items are delivery steps handled outside the repository.
+
+Current source: [submission-report.md](../submission-report.md). Current PDF: [submission-report.pdf](../submission-report.pdf). This checklist separates verified artifacts from the delivery steps.
 
 ## Prepared and verified
 
@@ -40,13 +42,13 @@ The confirmed division of work and AI-assistance disclosure address contribution
 
 ## Suggested completion order
 
-Retain the confirmed work allocation and accurate AI disclosure while completing the selected evidence checks and presentation rehearsal. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](../claim-evidence.md) and [review guidance](../report-details.md#conducting-the-human-review). If the review identifies corrections, incorporate them and refresh the private report before the final format check. Rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
+Remaining order: record the video, confirm the private title page, recheck the final PDF, and upload by the Canvas deadline.
 
 ## Scientific scope and course distinctions
 
 Constructed or downloaded instances are explicitly allowed (Project p5 / P25). The course values meaningful comparison and insight about assumptions, realism, representation and results (P84), not a prescribed accuracy, solver victory, external benchmark or extra feature count. The current report presents known synthetic/AI-assisted development evidence honestly. Sample counts, a proposed fresh holdout, independent-human prose and a fixed backend were experiment-design choices or earlier proposals, not additional course rules. The executed primary study has 4,000 attempts on known development cases with observed backend variation; none of those unperformed alternatives is claimed.
 
-An additional model or fresh study is conditional on actual teaching feedback or a separately agreed scientific need. If chosen, define the question, eligibility, exact protocol, new data/review and separate execution allowance first. Never relabel inspected cases as held out. The reported TA acceptance resolves the Qwen/GLM model choice; scope clarification and substantive human review remain separate.
+An additional model or fresh study is conditional on actual teaching feedback or a separately agreed scientific need. If chosen, define the question, eligibility, exact protocol, new data/review and separate execution allowance first. Never relabel inspected cases as held out. The reported TA acceptance resolves the Qwen/GLM model choice; the single-day scope simplification is disclosed in the report, and the 24-case review is complete.
 
 The appendix may contain relevant model printouts, screenshots or planning graphs (P49). These examples are optional; a probabilistic graphical model is not applicable to this CSP/COP formulation. The report already contains the actual system architecture and measured-result charts. Keep essential formulation, results and discussion in the counted body.
 
