@@ -24,7 +24,7 @@ The presentation is a recorded video of **at most 10 minutes**. The [deck](CS326
 ## Recording checklist
 
 - Speak at a steady pace; if the take runs long, shorten slides 12 or 13 first.
-- Keep the bottom and top-right areas clear if a webcam inset is used; each slide already shows the presenter's name at top right.
+- Keep the bottom and top-right areas clear if a webcam inset is used; slides 2–16 already show the presenter's name at top right.
 - Each member should be able to explain both methods, one extraction failure and the study's limitations in their own words.
 - Numbers on slides and in the narration match the [report](../docs/submission-report.md); do not present offline demo outputs as model results.
 
