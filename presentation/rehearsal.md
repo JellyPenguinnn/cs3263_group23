@@ -1,18 +1,18 @@
 # Video rehearsal guide
 
-The presentation is a recorded video of **at most 10 minutes**. The [deck](CS3263_Group23_Presentation_Slides.pptx) has 16 slides; its speaker notes and the [script](CS3263_Group23_Script.docx) contain the same narration (1,017 words, about 9:14 at a steady pace). Check the recorded length before uploading.
+The presentation is a recorded video of **at most 10 minutes**. The [deck](CS3263_Group23_Presentation_Slides.pptx) has 16 slides; its speaker notes and the [script](CS3263_Group23_Script.docx) contain the same narration (1,019 words, about 9:14 at a steady pace). Check the recorded length before uploading.
 
 | Slide | Presenter | Target | Title |
 | --- | --- | ---: | --- |
 | 1 | Tham Yao Xiang | 0:38 | Scheduling with language models |
-| 2 | Tham Yao Xiang | 0:45 | Scheduling is a coupled constraint problem |
+| 2 | Tham Yao Xiang | 0:53 | Scheduling is a coupled constraint problem |
 | 3 | Tham Yao Xiang | 0:31 | Same request, two routes, one validator |
-| 4 | Tham Yao Xiang | 0:33 | Both methods face the same certified cases |
-| 5 | Tham Yao Xiang | 0:35 | Can eight activities share one room? |
-| 6 | Woo Yong Qing | 0:29 | The same request exposes different errors |
+| 4 | Tham Yao Xiang | 0:38 | Both methods face the same certified cases |
+| 5 | Tham Yao Xiang | 0:33 | Can eight activities share one room? |
+| 6 | Woo Yong Qing | 0:25 | The same request exposes different errors |
 | 7 | Woo Yong Qing | 0:30 | Solver assistance increases acceptance |
-| 8 | Woo Yong Qing | 0:40 | The gap is in building schedules |
-| 9 | Woo Yong Qing | 0:25 | Failures have different causes |
+| 8 | Woo Yong Qing | 0:36 | The gap is in building schedules |
+| 9 | Woo Yong Qing | 0:22 | Failures have different causes |
 | 10 | Woo Yong Qing | 0:46 | A correct solver can solve the wrong problem |
 | 11 | Tea Li Hao | 0:41 | Infrastructure failures and cost |
 | 12 | Tea Li Hao | 0:46 | Earlier studies of the feedback scenarios |
