@@ -22,7 +22,7 @@ Scheduling requires activities to satisfy interacting constraints while accommod
 
 Personal and shared schedules must respect availability, deadlines and limited resources while accommodating preferences. An LLM can interpret requests and propose schedules, but may overlook requirements. A constraint solver searches a formal model systematically, but its answers depend on the requirements supplied. A double-booked room or a wrong "impossible" answer misleads users, so we examine whether combining them makes answers more reliable and checkable, and what limitations remain.
 
-We address three questions: does solver assistance improve valid schedule construction and infeasibility detection; which extraction and solving errors persist; and what resource demands and practical trade-offs accompany each approach? Generation is the core study. Minimum-disruption repair, a small office scenario and wording robustness were evaluated in earlier, separate studies summarized in Table 3; their scores are not pooled with the main results.
+We address three questions: (RQ1) does solver assistance improve valid schedule construction and infeasibility detection; (RQ2) which extraction and solving errors persist; and (RQ3) what resource demands and practical trade-offs accompany each approach? Generation is the core study. Minimum-disruption repair, a small office scenario and wording robustness were evaluated in earlier, separate studies summarized in Table 3; their scores are not pooled with the main results.
 
 The domain contains mandatory, non-preemptive activities with fixed durations and assigned participants or resources. Each problem spans one day in 30-minute slots; shared people and rooms have capacity one. Availability, release times, deadlines, fixed appointments and precedence are hard constraints. Preferred start times are soft constraints. Our contribution is an evaluation with certified infeasible cases that separates extraction, solving, preference and infrastructure failures, rather than a new solver.
 
@@ -52,7 +52,7 @@ Here, K indexes preferences. Preference k concerns activity a(k), preferred star
 
 An independent validator checks hard constraints and recalculates penalties arithmetically, without CP-SAT or compiler helpers. A gold reference solve establishes feasibility and preference optima; independent certificates and exhaustive checks on small cases provide additional verification. The reference solve and assisted method share the compiler, so optimality verification is not fully independent. A solver proof concerns the extracted specification; acceptance concerns the original requirements.
 
-There are no retries or feedback corrections; all outputs are replayable offline and viewable in a read-only local dashboard. This compares complete pipelines, changing both the LLM's task and solver access rather than isolating CP-SAT's effect.
+There are no retries or feedback corrections; all outputs are replayable offline and viewable in a read-only local dashboard. This compares complete pipelines (Figure 1), changing both the LLM's task and solver access rather than isolating CP-SAT's effect.
 
 ```mermaid
 flowchart TD
@@ -70,7 +70,7 @@ flowchart TD
 
 Figure 1. Both methods receive the same public facts. The gold specification and reference answers are reserved for evaluation.
 
-**Worked example: can eight activities share one room?** This recorded case illustrates behaviour, not overall success frequency. Each model receives the same requirements once per method, and all four calls return answers.
+**Worked example: can eight activities share one room?** This recorded case illustrates behaviour, not overall success frequency. Each model receives the same requirements once per method, and all four calls return answers (Table 1).
 
 **The request.** Schedule eight 30- or 60-minute activities for P1 and P2, available 09:00-17:00 on 26 October. Each activity requires its assigned person and room R1, available 09:00-14:00, and must fit within its own availability window. Since all use R1, none may overlap. A8 starts at 09:00, A4 finishes by 11:00 and A1 by 13:30. Required orderings are A8 before A3, A3 before A6, A5 before A7 and A7 before A2. Preferred starts are soft constraints. Full windows, weights and inputs are in the online supplement (Section 9).
 
@@ -172,7 +172,7 @@ In the office scenario, Qwen3.6's 42 direct rejections are 23 constraint violati
 
 Token usage is reported for 951 and 998 Qwen3.6 calls and 935 and 997 GLM5.3 Flash calls (direct and assisted), out of 1,000 each. Assistance raises median tokens for both models but lowers the p95 tail. It raises Qwen3.6's median duration while lowering its p95, and lowers both for GLM5.3 Flash. Qwen3.6's low direct median accompanies many short "no solution" answers, including incorrect ones, so low usage is not efficiency. Tokenization and hidden serving behaviour prevent treating counts as monetary costs or reasoning budgets, and no case has all four observations under matching OS and concurrency, so durations describe deployment conditions rather than model speed.
 
-**Local solving and infrastructure failures.** Solver mean/median/p95 is 16.19/10.25/36.52 ms for Qwen3.6 (973 invocations) and 13.97/11.39/33.01 ms for GLM5.3 Flash (992); the slowest solve took 1.06 s. Model requests dominate duration; local solving adds little time for these bounded cases, although generating the specification remains part of the model-call cost. Qwen3.6 and GLM5.3 Flash have 51 and 68 infrastructure failures, predominantly HTTP 502 responses. GLM5.3 Flash direct's p95 near 300 seconds includes gateway failures; four timeouts overlapped laptop sleep.
+**Local solving and infrastructure failures.** Solver mean/median/p95 is 16.19/10.25/36.52 ms for Qwen3.6 (973 invocations) and 13.97/11.39/33.01 ms for GLM5.3 Flash (992); the slowest solve took 1.06 s. Model requests dominate duration; local solving adds little time for these bounded cases, although generating the specification remains part of the model-call cost. Qwen3.6 and GLM5.3 Flash have 51 and 68 infrastructure failures, predominantly HTTP 502 responses. GLM5.3 Flash direct's p95 near 300 seconds includes gateway failures; four GLM5.3 Flash read timeouts (three direct, one assisted) overlapped laptop sleep.
 
 ## 8. Implications, limitations and responsible AI
 
@@ -208,5 +208,5 @@ Hard requirements must not silently become preferences. Explanations should dist
 6. Google OR-Tools. *CP-SAT Solver* and *The Job Shop Problem*. [Solver status documentation](https://developers.google.com/optimization/cp/cp_solver) and [interval/non-overlap scheduling example](https://developers.google.com/optimization/scheduling/job_shop). Implementation pinned to 9.14.6206.
 7. Google OR-Tools (v9.14). *CP-SAT model, response and parameter definitions*. [cp_model.proto](https://github.com/google/or-tools/blob/v9.14/ortools/sat/cp_model.proto) and [sat_parameters.proto](https://github.com/google/or-tools/blob/v9.14/ortools/sat/sat_parameters.proto).
 8. Miller, E. (2024). *Adding Error Bars to Evals: A Statistical Approach to Language Model Evaluations*. [arXiv:2411.00640](https://arxiv.org/abs/2411.00640).
-9. Bartak, R., Muller, T., and Rudova, H. (2003). *Minimal Perturbation Problem - A Formal View*. ERCIM Working Group on Constraints workshop. [Authors' paper](https://ktiml.mff.cuni.cz/~bartak/downloads/ERCIM2003mpp.pdf).
+9. Barták, R., Müller, T., and Rudová, H. (2003). *Minimal Perturbation Problem - A Formal View*. ERCIM Working Group on Constraints workshop. [Authors' paper](https://ktiml.mff.cuni.cz/~bartak/downloads/ERCIM2003mpp.pdf).
 10. Garey, M. R., and Johnson, D. S. (1979). *Computers and Intractability: A Guide to the Theory of NP-Completeness*. W. H. Freeman. Problem SS1, sequencing with release times and deadlines.
