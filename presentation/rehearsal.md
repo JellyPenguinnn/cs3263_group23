@@ -7,7 +7,7 @@ The presentation is a recorded video of **at most 10 minutes**. The [deck](CS326
 | 1 | Tham Yao Xiang | 0:38 | Scheduling with language models |
 | 2 | Tham Yao Xiang | 0:45 | Scheduling is a coupled constraint problem |
 | 3 | Tham Yao Xiang | 0:31 | Same request, two routes, one validator |
-| 4 | Tham Yao Xiang | 0:33 | 1,000 paired cases test both methods |
+| 4 | Tham Yao Xiang | 0:33 | Both methods face the same certified cases |
 | 5 | Tham Yao Xiang | 0:35 | Can eight activities share one room? |
 | 6 | Woo Yong Qing | 0:29 | The same request exposes different errors |
 | 7 | Woo Yong Qing | 0:30 | Solver assistance increases acceptance |
