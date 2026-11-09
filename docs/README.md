@@ -1,35 +1,46 @@
 # Documentation
 
-Start with the report and use the supporting documents only as needed. The current study compares both methods on the same 1,000 generation cases, with 2,000 attempts per model and 4,000 preserved observations. Earlier studies remain separate evidence.
+Start with the [report](submission-report.pdf). The documents below support it; earlier studies and superseded material are kept separately so their results are never pooled with the main study.
 
-## Current documents
-
-| Document | Purpose |
-| --- | --- |
-| [Report](submission-report.md) / [PDF](submission-report.pdf) | Scientific question, formulation, worked example, results, failure analysis and conclusions |
-| [Report supplement](report-details.md) | Resource distributions, exact example traces, reproduction and source provenance |
-| [Architecture](architecture.md) | Components, data boundaries, formal semantics and execution contracts |
-| [Usage](usage.md) | Installation-related operations, offline demonstrations, replay and dashboard commands |
-| [Evidence and replay](evidence.md) | Immutable archives, checksums and exact-source reproduction |
-| [Claim-to-evidence index](claim-evidence.md) | Links between report claims and saved observations |
-
-## Review and delivery
+## Report
 
 | Document | Purpose |
 | --- | --- |
-| [Presentation guide](../presentation/README.md) / [rehearsal sequence](../presentation/rehearsal.md) | Final 16-slide recorded video (≤10 minutes), script and offline examples |
-| [Division of work](contributions.md) | Confirmed responsibilities and AI-assistance disclosure |
-| [Human review worksheet](human-review-checklist.md) | Selected evidence checks and optional contribution examples |
-| [Submission checklist](submission-checklist.md) | Case review, private-title verification, rehearsal and course delivery |
-| [TA-feedback alignment](ta-feedback-alignment.md) | Generation-first scope, implemented feedback and explicit simplifications |
-| [Repository audit](repository-audit.md) / [verification history](publication-verification.md) | Implementation review, test evidence and version-specific publication checks |
+| [Report](submission-report.md) / [PDF](submission-report.pdf) | Question, formulation, design, results, failure analysis, limitations, responsible AI and conclusions |
+| [Report supplement](report-details.md) | Resource distributions, the worked example's full inputs and outputs, and reproduction of the report visuals |
+| [Claim-to-evidence index](claim-evidence.md) | Where each reported number comes from |
+| [Contributions](contributions.md) | Division of work and use of AI tools |
 
-## Supporting folders
+## System and evidence
 
-- [`studies/`](studies/): protocols and result audits. Start with the [current diverse protocol](studies/diverse-generation.md) and [comparison audit](diverse-comparison-audit.md); balanced, difficulty and historical Qwen studies are labelled separately.
-- [`reviews/`](reviews/): [report/course review](reviews/report-quality-audit.md) and [earlier code/course audit](reviews/course-code-audit.md).
-- [`figures/`](figures/): reviewed report artwork and preserved earlier exports. These are evidence assets, not unused documentation.
-- [`history/`](history/README.md): superseded reports, plans and development handoffs. Read only for historical context; their pending statements and instructions are not current.
-- `private/`: ignored local submission copies containing private identity details; not part of the public repository.
+| Document | Purpose |
+| --- | --- |
+| [Architecture](architecture.md) | Components, data boundaries, scheduling semantics and status meanings |
+| [Usage](usage.md) | Command-line tools, offline demos, dashboard, replay and live-run configuration |
+| [Evidence and replay](evidence.md) | Archives, checksums and exact-source reproduction for every study |
+| [TA-feedback alignment](ta-feedback-alignment.md) | How the proposal feedback shaped the scope, and what was simplified |
 
-Earlier source snapshots and immutable evidence retain their original filenames and paths.
+## Studies
+
+The main study is the 1,000-case generation comparison; the others are earlier, separate studies with their own cases and denominators.
+
+| Study | Protocol | Results audit |
+| --- | --- | --- |
+| Main study: 1,000 cases, Qwen3.6 and GLM5.3 Flash | [Protocol](studies/diverse-generation.md) | [Audit](studies/diverse-comparison-audit.md) |
+| Office scenario: 48 cases | [Protocol](studies/balanced-generation.md) | [Audit](studies/balanced-comparison-audit.md) |
+| Repair, wording and fictional requests: 80 cases | [Protocol](studies/difficulty-study.md) | [Audit](studies/difficulty-comparison-audit.md) |
+| Historical Qwen3.6 and Qwen3.8 comparison | — | [Audit](studies/two-model-development-audit.md) |
+
+## Reviews
+
+- [Human-review packet](reviews/human-review-packet.md): the 24 cases the team checked by hand against their gold specifications.
+- [Report quality review](reviews/report-quality-audit.md) and [course and code audit](reviews/course-code-audit.md): earlier internal reviews against the course guidelines.
+
+## Process records
+
+[`process/`](process/) holds the team's internal working records: the [submission checklist](process/submission-checklist.md), [human-review worksheet](process/human-review-checklist.md), [repository audit](process/repository-audit.md) and [publication log](process/publication-verification.md). They document how the work was checked; dated entries describe their own checkpoint.
+
+## Figures and history
+
+- [`figures/`](figures/): report artwork with data receipts, plus preserved exports from earlier studies.
+- [`history/`](history/README.md): superseded reports, plans and development notes, kept byte-for-byte as historical evidence. Their statements describe their own date, not the final state.

@@ -23,4 +23,4 @@ For original recorded model answers, follow the [evidence guide](../docs/evidenc
 
 ## Before presenting
 
-Rehearse with the final PPTX and script, check chart readability on the presentation computer, and time the handovers. Each member should be able to explain both methods, one extraction failure and the study's limitations. The [submission checklist](../docs/submission-checklist.md) tracks the remaining evidence review and delivery checks. A prepared script does not establish an actual timed rehearsal.
+Rehearse with the final PPTX and script, check chart readability on the presentation computer, and time the handovers. Each member should be able to explain both methods, one extraction failure and the study's limitations. The [submission checklist](../docs/process/submission-checklist.md) tracks the remaining evidence review and delivery checks. A prepared script does not establish an actual timed rehearsal.

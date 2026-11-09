@@ -6,7 +6,7 @@ Use this worksheet for the selected case-level checks before submission. The gro
 
 ## How to use this worksheet
 
-1. All three members start with [E1: the report worked example](reviews/human-review-packet.md#e1). Read the request, explain the room timetable and penalty calculation, and discuss why the direct answers fail.
+1. All three members start with [E1: the report worked example](../reviews/human-review-packet.md#e1). Read the request, explain the room timetable and penalty calculation, and discuss why the direct answers fail.
 2. Review your assigned cases below. Open the original request first, write your interpretation, then expand the gold specification and saved outputs. The expandable evidence is a convenience, not a blinded study.
 3. For each case, check durations, availability, shared entities, precedence, fixed starts/deadlines and preferences. If feasible, check a witness or saved valid schedule; if infeasible, explain a contradiction. Inspect the four recorded model/method outcomes and explain at least one meaningful acceptance or rejection.
 4. Record a concrete check or discrepancy in the finding column. Use **agree**, **issue**, or **uncertain**, followed by a specific reason. “The program says so” is not sufficient evidence. Leave a case unchecked if the review is incomplete.
@@ -18,30 +18,30 @@ This is a manageable retrospective review sample, not a course-mandated quota, a
 
 | Case | What to examine | Activities | Lead reviewer | Reviewed | Finding / concrete check |
 | --- | --- | ---: | --- | --- | --- |
-| [C01](reviews/human-review-packet.md#c01) | Appointment collision | 8 | Li Hao | ☐ | __________ |
-| [C02](reviews/human-review-packet.md#c02) | Appointment collision | 8 | Li Hao | ☐ | __________ |
-| [C03](reviews/human-review-packet.md#c03) | Fragmented packing | 12 | Yong Qing | ☐ | __________ |
-| [C04](reviews/human-review-packet.md#c04) | Fragmented packing | 12 | Yong Qing | ☐ | __________ |
-| [C05](reviews/human-review-packet.md#c05) | Mixed order resource | 16 | Yao Xiang | ☐ | __________ |
-| [C06](reviews/human-review-packet.md#c06) | Mixed order resource | 16 | Yao Xiang | ☐ | __________ |
-| [C07](reviews/human-review-packet.md#c07) | Participant contention | 24 | Li Hao | ☐ | __________ |
-| [C08](reviews/human-review-packet.md#c08) | Participant contention | 24 | Li Hao | ☐ | __________ |
-| [C09](reviews/human-review-packet.md#c09) | Participant crossing | 32 | Yong Qing | ☐ | __________ |
-| [C10](reviews/human-review-packet.md#c10) | Participant crossing | 32 | Yong Qing | ☐ | __________ |
-| [C11](reviews/human-review-packet.md#c11) | Precedence chain | 8 | Yao Xiang | ☐ | __________ |
-| [C12](reviews/human-review-packet.md#c12) | Precedence chain | 8 | Yao Xiang | ☐ | __________ |
-| [C13](reviews/human-review-packet.md#c13) | Precedence fork join | 12 | Li Hao | ☐ | __________ |
-| [C14](reviews/human-review-packet.md#c14) | Precedence fork join | 12 | Li Hao | ☐ | __________ |
-| [C15](reviews/human-review-packet.md#c15) | Release deadline chain | 16 | Yong Qing | ☐ | __________ |
-| [C16](reviews/human-review-packet.md#c16) | Release deadline chain | 16 | Yong Qing | ☐ | __________ |
-| [C17](reviews/human-review-packet.md#c17) | Resource person crossing | 24 | Yao Xiang | ☐ | __________ |
-| [C18](reviews/human-review-packet.md#c18) | Resource person crossing | 24 | Yao Xiang | ☐ | __________ |
-| [C19](reviews/human-review-packet.md#c19) | Room contention | 32 | Li Hao | ☐ | __________ |
-| [C20](reviews/human-review-packet.md#c20) | Room contention | 32 | Li Hao | ☐ | __________ |
-| [E1](reviews/human-review-packet.md#e1) | Report worked example | 8 | All three | ☐ | __________ |
-| [E2](reviews/human-review-packet.md#e2) | Invented-deadline example | 8 | Yao Xiang | ☐ | __________ |
-| [E3](reviews/human-review-packet.md#e3) | Omitted-constraint example | 32 | Yao Xiang | ☐ | __________ |
-| [E4](reviews/human-review-packet.md#e4) | Valid but suboptimal example | 24 | Yong Qing | ☐ | __________ |
+| [C01](../reviews/human-review-packet.md#c01) | Appointment collision | 8 | Li Hao | ☐ | __________ |
+| [C02](../reviews/human-review-packet.md#c02) | Appointment collision | 8 | Li Hao | ☐ | __________ |
+| [C03](../reviews/human-review-packet.md#c03) | Fragmented packing | 12 | Yong Qing | ☐ | __________ |
+| [C04](../reviews/human-review-packet.md#c04) | Fragmented packing | 12 | Yong Qing | ☐ | __________ |
+| [C05](../reviews/human-review-packet.md#c05) | Mixed order resource | 16 | Yao Xiang | ☐ | __________ |
+| [C06](../reviews/human-review-packet.md#c06) | Mixed order resource | 16 | Yao Xiang | ☐ | __________ |
+| [C07](../reviews/human-review-packet.md#c07) | Participant contention | 24 | Li Hao | ☐ | __________ |
+| [C08](../reviews/human-review-packet.md#c08) | Participant contention | 24 | Li Hao | ☐ | __________ |
+| [C09](../reviews/human-review-packet.md#c09) | Participant crossing | 32 | Yong Qing | ☐ | __________ |
+| [C10](../reviews/human-review-packet.md#c10) | Participant crossing | 32 | Yong Qing | ☐ | __________ |
+| [C11](../reviews/human-review-packet.md#c11) | Precedence chain | 8 | Yao Xiang | ☐ | __________ |
+| [C12](../reviews/human-review-packet.md#c12) | Precedence chain | 8 | Yao Xiang | ☐ | __________ |
+| [C13](../reviews/human-review-packet.md#c13) | Precedence fork join | 12 | Li Hao | ☐ | __________ |
+| [C14](../reviews/human-review-packet.md#c14) | Precedence fork join | 12 | Li Hao | ☐ | __________ |
+| [C15](../reviews/human-review-packet.md#c15) | Release deadline chain | 16 | Yong Qing | ☐ | __________ |
+| [C16](../reviews/human-review-packet.md#c16) | Release deadline chain | 16 | Yong Qing | ☐ | __________ |
+| [C17](../reviews/human-review-packet.md#c17) | Resource person crossing | 24 | Yao Xiang | ☐ | __________ |
+| [C18](../reviews/human-review-packet.md#c18) | Resource person crossing | 24 | Yao Xiang | ☐ | __________ |
+| [C19](../reviews/human-review-packet.md#c19) | Room contention | 32 | Li Hao | ☐ | __________ |
+| [C20](../reviews/human-review-packet.md#c20) | Room contention | 32 | Li Hao | ☐ | __________ |
+| [E1](../reviews/human-review-packet.md#e1) | Report worked example | 8 | All three | ☐ | __________ |
+| [E2](../reviews/human-review-packet.md#e2) | Invented-deadline example | 8 | Yao Xiang | ☐ | __________ |
+| [E3](../reviews/human-review-packet.md#e3) | Omitted-constraint example | 32 | Yao Xiang | ☐ | __________ |
+| [E4](../reviews/human-review-packet.md#e4) | Valid but suboptimal example | 24 | Yong Qing | ☐ | __________ |
 
 **Review date(s):** __________
 **Unresolved issues and who will follow up:** __________
@@ -113,14 +113,14 @@ The agreed responsibilities above are context, not proof of a particular impleme
 
 ## Optional reproducibility check
 
-- [ ] A teammate performs the [offline replay](evidence.md) in a clean compatible environment. Record the command, outcome and any discrepancy. No live model calls are required.
+- [ ] A teammate performs the [offline replay](../evidence.md) in a clean compatible environment. Record the command, outcome and any discrepancy. No live model calls are required.
 - [ ] Keep a verified private backup off this computer. Do not upload private identity details or credentials to the public repository.
 
 ## References for the review
 
-- [Current report](submission-report.md) and [claim-to-evidence index](claim-evidence.md).
-- [Selected original requests and saved evidence](reviews/human-review-packet.md).
-- [Resource definitions, worked example and human-review guidance](report-details.md).
-- [Full course-delivery checklist](submission-checklist.md) and [presentation guide](../presentation/rehearsal.md).
+- [Current report](../submission-report.md) and [claim-to-evidence index](../claim-evidence.md).
+- [Selected original requests and saved evidence](../reviews/human-review-packet.md).
+- [Resource definitions, worked example and human-review guidance](../report-details.md).
+- [Full course-delivery checklist](submission-checklist.md) and [presentation guide](../../presentation/rehearsal.md).
 
 The practical sample and role-specific checks are team review guidance. Course requirements concerning contributions, AI disclosure, report format and presentation are mapped to the supplied guidelines in the submission checklist. Completing this worksheet does not retroactively make the benchmark held out or establish full-dataset human review.

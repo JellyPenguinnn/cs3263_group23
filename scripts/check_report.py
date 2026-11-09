@@ -107,7 +107,7 @@ def main():
                    'visible_text_chunks_verified': len(chunks), 'figure_images': sum(len(p.images) for p in doc.pages),
                    'math_expressions_verified': len(formulas),
                    'automated_checks_passed': True,
-                   'visual_review': 'Separately recorded in docs/publication-verification.md; not implied by this script'}
+                   'visual_review': 'Separately recorded in docs/process/publication-verification.md; not implied by this script'}
     args.receipt.parent.mkdir(parents=True, exist_ok=True)
     args.receipt.write_text(json.dumps(receipt, indent=2, sort_keys=True)+'\n')
     print(json.dumps(receipt, indent=2))

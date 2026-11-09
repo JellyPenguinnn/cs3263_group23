@@ -1,8 +1,8 @@
 # Balanced generation comparison audit
 
-**Earlier completed study.** The primary report now uses the separate [1,000-case diverse study](../diverse-comparison-audit.md). This audit retains the balanced study’s original results and denominators.
+**Earlier completed study.** The primary report now uses the separate [1,000-case diverse study](diverse-comparison-audit.md). This audit retains the balanced study’s original results and denominators.
 
-The balanced generation study contains **96 scheduling attempts per model**: the same 48 cases attempted once by direct LLM (A) and once by LLM + CP-SAT (B). Both campaigns completed. This is shared-service synthetic/AI-assisted development evidence, with actual human prose/gold review still pending. Earlier studies retain their own datasets, denominators and results.
+The balanced generation study contains **96 scheduling attempts per model**: the same 48 cases attempted once by direct LLM (A) and once by LLM + CP-SAT (B). Both campaigns completed. This is shared-service synthetic/AI-assisted development evidence, outside the team's 24-case manual review, which covered the main study. Earlier studies retain their own datasets, denominators and results.
 
 ## Evidence and comparison controls
 
@@ -71,4 +71,4 @@ Qwen reports two backends: `vllm-0.23.0-7cd694fa` for 26 A / 34 B calls and `vll
 
 All earlier archives, scores and figures remain unchanged. The previous report source, PDF and format receipt are preserved under [report history](../history/20261017-before-balanced/). The original balanced run trees remain in place, with a separate verified private full-run backup covering 483 files; [evidence.md](../evidence.md) explains its contents and same-device limitation. The public replay packages preserve recorded outputs, not hidden reasoning or unavailable HTTP traffic.
 
-Current review and delivery requirements are maintained in the [submission checklist](../submission-checklist.md#remaining-submission-tasks). This earlier study retains its original data, results and limitations.
+Current review and delivery requirements are maintained in the [submission checklist](../process/submission-checklist.md#remaining-submission-tasks). This earlier study retains its original data, results and limitations.

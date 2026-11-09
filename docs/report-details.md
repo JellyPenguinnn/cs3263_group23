@@ -8,7 +8,7 @@ Use `python3 scripts/build_report_details.py --output /tmp/NEW-report-details.js
 
 Pipeline duration measures each method execution, including provider waiting, parsing/extraction and applicable local solver work. It excludes independent evaluation/reference solving and pre-dispatch waiting; it is not campaign wall time. Model-call time includes network/service waiting. Local solver duration includes preprocessing, not CP-SAT search alone. Monotonic clocks may differ from UTC elapsed time during sleep.
 
-Zero cases have all four model/method observations under matched OS and concurrency. Pooled distributions describe these runs, not intrinsic model speed. GLM direct p95 near 300 seconds includes gateway failures. See the [execution audit](diverse-comparison-audit.md#execution-phases-and-timing-comparability) for preserved phase transitions, sleep and infrastructure evidence.
+Zero cases have all four model/method observations under matched OS and concurrency. Pooled distributions describe these runs, not intrinsic model speed. GLM direct p95 near 300 seconds includes gateway failures. See the [execution audit](studies/diverse-comparison-audit.md#execution-phases-and-timing-comparability) for preserved phase transitions, sleep and infrastructure evidence.
 
 ## Total tokens per scheduling attempt
 
@@ -146,7 +146,7 @@ Availability constrains the whole activity, not only its start. The report timet
 
 The resource builder requires a new output path and refuses to overwrite an existing file. Compare the regenerated JSON with the committed derivative; choose a fresh ignored path on subsequent checks.
 
-The scientific runtime and dependency lock remain separate from document tooling. Follow the [report rebuild instructions](submission-checklist.md#rebuild-the-report) to create `.venv-docs` from `requirements-docs.txt`. This pins Matplotlib 3.10.0 used by the current report figure receipt; the scientific runtime retains 3.10.8. A different rendering-library version may change figure bytes without changing results. Mermaid is needed only when changing the architecture asset.
+The scientific runtime and dependency lock remain separate from document tooling. Follow the [report rebuild instructions](process/submission-checklist.md#rebuild-the-report) to create `.venv-docs` from `requirements-docs.txt`. This pins Matplotlib 3.10.0 used by the current report figure receipt; the scientific runtime retains 3.10.8. A different rendering-library version may change figure bytes without changing results. Mermaid is needed only when changing the architecture asset.
 
 Use a fresh ignored directory for reproduction so preserved figures and receipts are not overwritten:
 
@@ -168,9 +168,11 @@ The architecture source is `docs/figures/report-compact-20261018/architecture.mm
 
 ## Conducting the human review
 
+The team completed this review for the 24-case packet (eight cases per member) and found no request/gold mismatches. The procedure below is how it was carried out.
+
 Use this worked example as a first exercise, then check contrasting SAT/UNSAT cases and an extraction failure from the claim index. Each member should read the natural-language input before consulting gold, independently list the durations, windows, shared entities, hard constraints and preferences, and compare that interpretation with the formal specification. On the timetable, check complete-window containment, resource/participant non-overlap, precedence and the penalty calculation. For rejected answers, identify the exact violated rule or missing/invented constraint rather than merely repeating the validator label. Review why the selected example does not establish a frequency, and why infrastructure failures cannot be presented as reasoning errors.
 
-Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations. See the [submission checklist](submission-checklist.md) for the remaining submission tasks.
+Record actual case IDs, reviewer names, findings, disagreements and resolutions in the team review/contribution records. Every member should be able to explain both methods, the extraction/solving distinction and the principal limitations. See the [submission checklist](process/submission-checklist.md) for the remaining submission tasks.
 
 ## Example trace index
 
@@ -179,9 +181,9 @@ The main report uses descriptive example names to keep the scientific explanatio
 | Report example | Exact case identifier | Evidence |
 | --- | --- | --- |
 | Shared-room timetable and four outcomes | `dg-3fd5174321284caacab1f4a9` | Full public/gold inputs and four saved outputs in the [resource/example derivative](../results/summary/report-details-20261018.json) |
-| Invented deadlines — Qwen B | `dg-901f5127b3f63880cc499f19` | Saved extraction and evaluation in the [diverse comparison audit](diverse-comparison-audit.md) and immutable Qwen archive |
-| Dropped constraints — GLM B | `dg-93645cd68c645d31d613fa2b` | Saved extraction and evaluation in the [diverse comparison audit](diverse-comparison-audit.md) and immutable GLM archive |
-| Valid but suboptimal schedule — GLM A | `dg-a7542bcaf35f7024ab973f3c` | Preference penalty 33 versus proven optimum 30; [diverse comparison audit](diverse-comparison-audit.md) and immutable GLM archive |
+| Invented deadlines — Qwen B | `dg-901f5127b3f63880cc499f19` | Saved extraction and evaluation in the [diverse comparison audit](studies/diverse-comparison-audit.md) and immutable Qwen archive |
+| Dropped constraints — GLM B | `dg-93645cd68c645d31d613fa2b` | Saved extraction and evaluation in the [diverse comparison audit](studies/diverse-comparison-audit.md) and immutable GLM archive |
+| Valid but suboptimal schedule — GLM A | `dg-a7542bcaf35f7024ab973f3c` | Preference penalty 33 versus proven optimum 30; [diverse comparison audit](studies/diverse-comparison-audit.md) and immutable GLM archive |
 
 The extraction errors are detailed below:
 

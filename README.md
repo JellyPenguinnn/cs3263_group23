@@ -1,47 +1,55 @@
-# Dynamic Constraint-Aware Scheduling
+# Scheduling with Language Models: Direct Reasoning or Solver Assistance?
 
-**CS3263 Foundations of Artificial Intelligence · Group 23 · NUS AY2026/27**
+**CS3263 Foundations of Artificial Intelligence · National University of Singapore · AY2026/27 Semester 1 · Group 23**
+Tham Yao Xiang (team leader) · Woo Yong Qing · Tea Li Hao
 
-A research prototype for personal and shared-resource scheduling. It asks: **when does translating a natural-language request into constraints improve scheduling over asking the same language model to solve it directly?**
+Should a language model build a schedule itself, or translate the request into constraints for a solver? We compare both routes on the same 1,000 synthetic scheduling requests with two models, check every answer with an independent validator, and analyse not only how often each route succeeds but why it fails.
 
-The core task is **schedule generation**: find activity start times that respect availability, appointments, deadlines and shared resources, or identify infeasibility. The two methods are direct LLM solving and LLM extraction followed by **OR-Tools CP-SAT**. An independent validator checks both against evaluator-only gold requirements. Minimum-disruption schedule repair is an implemented, separately evaluated extension.
+**[Final report (PDF)](docs/submission-report.pdf)** · [Report source](docs/submission-report.md) · [Supplement](docs/report-details.md) · [Video slides](presentation/CS3263_Group23_Presentation_Slides.pptx) · [Documentation index](docs/README.md)
 
-The latest SoCLaaS comparison completed **2,000 scheduling attempts each for Qwen3.6 and GLM5.3 Flash**: the same 1,000 generation cases, two methods, 500 feasible and 500 infeasible cases. Ten construction families and five activity-count strata broaden the earlier balanced study. All **4,000 attempts**, including failures, are retained and replay-validated. The separate 96-, 200- and 600-attempt studies remain preserved.
+## The answer in brief
 
-[Report](docs/submission-report.md) · [PDF](docs/submission-report.pdf) · [Report supplement](docs/report-details.md) · [Documentation](docs/README.md) · [Evidence and replay](docs/evidence.md) · [Architecture](docs/architecture.md) · [Presentation guide](presentation/README.md)
+On these cases, **let the model extract the constraints and let the solver build the schedule.**
 
-**On this page:** [Capabilities](#what-it-does) · [Pipeline](#how-it-works) · [Quick start](#quick-start) · [Results](#results) · [Reproduction](#reproduce-the-evidence) · [Checks](#verify-changes) · [Layout](#repository-layout)
+| Model | Direct LLM | LLM + CP-SAT |
+| --- | ---: | ---: |
+| Qwen3.6 35B A3B | 30.8% (308/1,000) | 95.3% (953/1,000) |
+| GLM5.3 Flash | 89.1% (891/1,000) | 98.8% (988/1,000) |
 
-## What it does
+An answer is accepted if it is a valid schedule or correctly reports that none exists; every failure, including service errors, stays in the denominator.
 
-- Generates single-day schedules with fixed durations, participants and resources on a 30-minute grid.
-- Enforces availability, release times, deadlines, appointments, precedence and non-overlap.
-- As an extension, repairs schedules by minimizing moved activities, then total start-time shift, then preference penalties.
-- Separately records extraction fidelity, solver proof status, gold validity, objective quality, failures, time and tokens.
-- Provides offline replay, a read-only dashboard and explanations grounded in recorded results.
+![Acceptance by model and method](docs/figures/report-polished-20261018/diverse-acceptance.png)
 
-The [TA-feedback alignment](docs/ta-feedback-alignment.md) defines the generation-first scope, its stopping point and executable small office examples. The current schema supports preferred start windows; weekly calendars, consecutive-meeting penalties and same-day clustering are not implemented.
+- **The gap is in building schedules.** Qwen3.6 directly builds 1 valid schedule out of 500 feasible cases, versus 467 with CP-SAT. Its direct "no solution" answers barely discriminate: it gives them for 58% of feasible and 61% of infeasible cases.
+- **A correct solver can still solve the wrong problem.** Given the gold specifications, the same compiler labels all 1,000 cases correctly, so every wrong solver-assisted answer (20 for Qwen3.6, 4 for GLM5.3 Flash) comes from requirements invented, omitted or altered during extraction.
+- **Infrastructure failures shape the observed gap.** 65 of GLM5.3 Flash's 109 direct failures are infrastructure failures (service errors or timeouts, so no answer arrived); excluding cases without both responses shrinks its gain from 9.7 to 3.85 percentage points.
+- **Every valid solver-assisted schedule was also optimal**, and local CP-SAT solving took a median of about 10 ms.
+- **Earlier, separate studies point the same way**: a small office scenario (Qwen3.6 6 → 48 of 48), schedule repair (6 → 29 of 30) and reworded requests (4 → 19 of 20), with GLM5.3 Flash near ceiling either way.
 
-Inputs are synthetic or AI-assisted fictional scenarios. The system does not connect to real calendars or change commitments. Multi-day scheduling, participant assignment and model training are outside scope.
+These are synthetic, template-generated one-day cases from ten related case families, with one answer per condition. See the report's Section 8 for limitations.
 
 ## How it works
 
 ```mermaid
 flowchart LR
-  R[Public request<br/>Original schedule<br/>for repair only] --> A[Direct LLM]
-  R --> B[LLM specification<br/>extraction]
-  B --> S[Fixed CP-SAT<br/>compiler]
-  A --> V[Independent<br/>gold validator]
+  R[Public request<br/>same for both methods] --> A[A: Direct LLM<br/>returns a schedule]
+  R --> B[B: LLM extraction<br/>returns a JSON specification]
+  B --> S[Fixed compiler<br/>+ OR-Tools CP-SAT]
+  A --> V[Independent validator<br/>against hidden gold specification]
   S --> V
-  G[Evaluator-only gold<br/>and reference] --> V
-  V --> E[Saved evidence,<br/>analysis and dashboard]
+  V --> E[Scores, failure analysis<br/>and saved evidence]
 ```
 
-Both approaches receive equivalent task information and one model call. Gold specifications and labels remain evaluator-only. Solver success establishes a property of the **extracted problem**; it does not establish that extraction preserved the request. [The architecture reference](docs/architecture.md) documents the interfaces and mathematical semantics.
+- **Scheduling model.** Activities have fixed durations and assigned people or rooms, start on 30-minute slots within one day, and must respect availability, release times, deadlines, fixed appointments, precedence and no-overlap of shared people and rooms. Among valid schedules, a weighted penalty for missed preferred start windows is minimized (a constraint optimization problem).
+- **Method A (direct).** One model call returns a schedule or a "no solution" answer.
+- **Method B (solver-assisted).** One model call extracts a structured specification; a fixed compiler builds a CP-SAT model that returns an optimal schedule or proves infeasibility.
+- **Evaluation.** Gold specifications and labels never reach the models. An arithmetic validator, independent of the solver, checks every answer against the original requirements. Every feasible case has a checked witness schedule and every infeasible case a checked certificate.
+
+Details: [architecture](docs/architecture.md) · [study protocol](docs/studies/diverse-generation.md) · [comparison audit](docs/studies/diverse-comparison-audit.md).
 
 ## Quick start
 
-Requires **Python 3.12** and Git. Development checks also use Node.js and `openssl`. CPU-only macOS and Linux workflows are supported; native Windows has not been qualified.
+Requires **Python 3.12** and Git; tested on macOS (ARM64), and the CI targets macOS and Ubuntu. No API key is needed for anything in this section.
 
 ```sh
 git clone https://github.com/JellyPenguinnn/cs3263_group23.git
@@ -51,76 +59,63 @@ python3.12 -m venv .venv
 .venv/bin/python -m pip install --no-deps --no-build-isolation .
 .venv/bin/python scripts/check_installed.py
 
-# Solve a formal fixture with CP-SAT; no API key needed.
+# Solve a small formal specification with CP-SAT
 .venv/bin/scheduling solve --spec tests/examples/formal-generation.json
 
-# Exercise both pipelines, validation and replay with canned responses.
+# Run both pipelines, validation and replay with canned model responses
+# (180 attempts; six answers are deliberately invalid to exercise failure handling)
 .venv/bin/python evaluation/offline_demo.py runs/quickstart-offline
 
-# View saved results locally.
+# Browse saved runs in a read-only local dashboard, then open http://127.0.0.1:8876
 .venv/bin/scheduling dashboard --runs-dir runs --port 8876
 ```
 
-Open [the local dashboard](http://127.0.0.1:8876). Use an unused output directory for each new experiment. The offline demo deliberately includes invalid answers to exercise failure handling; its results are integration checks, not model-performance measurements. [Usage and operations](docs/usage.md) covers further demos, explanations and durable campaigns. Live inference requires a locally configured SoCLaaS credential and an explicitly selected model; see [provider configuration](docs/usage.md#soclaas-and-bounded-live-runs). Saved-run replay and the dashboard need no API key.
+Use a new output directory for each run. Live model runs need a SoCLaaS credential; see [usage](docs/usage.md).
 
-## Results
+## Reproduce the results
 
-Accepted means a gold-valid feasible schedule or a correct UNSAT answer. **Every failure remains in the denominator; acceptance does not imply optimality.** Cases, prompts, scientific source and configured model/solver limits match across models, with one call per method/case and no retries. Execution concurrency and OS changed during the study and are disclosed separately.
-
-| Model | Direct LLM | LLM + CP-SAT |
-| --- | ---: | ---: |
-| Qwen3.6 35B A3B `qwen3.6:35b` | 30.8% (308/1,000) | 95.3% (953/1,000) |
-| GLM5.3 Flash `glm-5.3-flash` | 89.1% (891/1,000) | 98.8% (988/1,000) |
-
-![Generation acceptance with all failures retained](docs/figures/report-polished-20261018/diverse-acceptance.png)
-
-Qwen3.6 direct produces only **1/500 valid feasible schedules**, versus 467/500 with CP-SAT; most direct successes are correct infeasibility predictions. GLM5.3 Flash produces 404/500 versus 492/500. Solver assistance improves this measured comparison, but extraction can still invent or omit constraints even when the solver is correct.
-
-Infrastructure accounts for **51 Qwen3.6 failures and 68 GLM5.3 Flash failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM5.3 Flash accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM5.3 Flash timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
-
-The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. The prose-to-gold mapping has automated validation, and team members manually reviewed 24 selected cases (both labels in every family, plus the four report examples) with no mismatches found.
-
-The [48-case balanced study](docs/studies/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/studies/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/studies/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
-
-## Reproduce the evidence
-
-The [evidence guide](docs/evidence.md) distinguishes original private operational archives from portable replay packages. New portable archives redact only local campaign paths and update their derived checksums; **all 4,000 attempt records, public inputs, references and scientific source remain byte-identical**. Original archives remain preserved. No credentials or new model calls are needed:
+All 4,000 attempts, with their inputs, gold references, outputs or failures, and settings, are stored in checksummed archives under `results/archives/`. Rebuilding the headline summary needs no credentials or model calls:
 
 ```sh
-# Choose a fresh local directory; do not overwrite the preserved summaries.
-mkdir -p runs
-mkdir runs/reproduce-diverse
+mkdir -p runs/reproduce-diverse
 .venv/bin/python scripts/verify_evidence.py --manifest results/diverse-evidence-manifest.json
-.venv/bin/python scripts/build_diverse_comparison.py --manifest results/diverse-evidence-manifest.json --output runs/reproduce-diverse/comparison.json
+.venv/bin/python scripts/build_diverse_comparison.py \
+  --manifest results/diverse-evidence-manifest.json \
+  --output runs/reproduce-diverse/comparison.json
 cmp results/summary/diverse-comparison-20261018.json runs/reproduce-diverse/comparison.json
-MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_diverse_results.py --source runs/reproduce-diverse/comparison.json --output runs/reproduce-diverse/figures
 ```
 
-`cmp` exits successfully without output when the regenerated summary is byte-identical. The scientific environment renders standalone study figures; rebuilding the exact report layout uses the separate [document environment](docs/submission-checklist.md#rebuild-the-report). These commands verify and reconstruct the saved comparison; rerunning the evaluator against each archive's scientific source is a separate replay step described in the evidence guide. Use fresh extraction/replay directories. [The audit](docs/diverse-comparison-audit.md) describes the validation, phase provenance and portability changes; earlier manifests remain unchanged.
+`cmp` prints nothing when the rebuilt summary is byte-identical to the committed one. The [evidence guide](docs/evidence.md) covers exact-source replay and the earlier studies; the [claim index](docs/claim-evidence.md) maps report claims to their sources. `scripts/search_space_summary.py` reproduces the search-space sizes quoted in the report.
 
-## Verify changes
-
-The [detailed repository audit](docs/repository-audit.md) records implementation coverage, fixed edge cases, installed-package checks and evidence preservation.
+## Tests
 
 ```sh
-.venv/bin/python -m pytest -q
+.venv/bin/python -m pytest -q          # 1,031 tests; network access is blocked during tests
 node --test tests/frontend/dashboard.test.cjs
-.venv/bin/python -m pip check
-.venv/bin/python scripts/check_installed.py
 ```
 
-Reinstall after source changes before checking a noneditable installation. Check the [publication verification](docs/publication-verification.md) for the exact tested version and platform limits.
+The suite includes brute-force enumeration checks of the solver and validator on small instances. All 1,031 tests passed on a fresh install from `requirements.lock`.
 
 ## Repository layout
 
 | Path | Contents |
 | --- | --- |
-| `src/scheduling/` | Schema, solver, pipelines, providers, validator, evaluation and dashboard |
-| `evaluation/` | Offline demos, campaign preparation, execution and analysis entry points |
-| `benchmarks/`, `configs/`, `prompts/` | Versioned synthetic fixtures, manifests and experiment settings |
-| `tests/` | Independent mathematical fixtures, unit/integration and frontend checks |
-| `results/` | [Evidence map](results/README.md), audited summaries, figures and immutable reproduction archives |
-| `scripts/` | Evidence verification, offline comparison builders and report/figure rendering |
-| `docs/` | Current report, architecture, usage and evidence; separate studies, reviews and history |
-| `presentation/` | Final 16-slide video deck (≤10 minutes), narration script, rehearsal guide and offline demonstration inputs |
-| `runs/`, `docs/private/` | Ignored local experiment outputs and private submission copies; never public evidence by default |
+| `src/scheduling/` | Problem schema, CP-SAT compiler, independent validator, both pipelines, model provider, evaluation runner and dashboard |
+| `prompts/` | Direct-scheduling and extraction prompts used in the experiments |
+| `benchmarks/` | Case fixtures and manifests; the main study is `fixtures/diverse-generation-v1/` |
+| `evaluation/` | Campaign preparation and execution, offline demos and analysis entry points |
+| `scripts/` | Evidence verification, comparison builders and report/figure rendering |
+| `results/` | Evidence manifests, replay archives, derived summaries and figures ([guide](results/README.md)) |
+| `docs/` | Report, supplement, architecture, usage, evidence, study audits, reviews and history ([index](docs/README.md)) |
+| `presentation/` | 16-slide video deck, narration script and rehearsal guide |
+| `tests/` | Unit, integration and frontend tests |
+
+## Team and AI use
+
+The division of work changed from the proposal. **Tham Yao Xiang** (team leader) led the formal model; **Woo Yong Qing** led the evaluation; **Tea Li Hao** led integration and operations. All three attended the TA consultation, made the research and scope decisions together, reviewed eight of the 24 manually checked cases each, and present the video.
+
+We used Codex and Claude Code throughout. Tea Li Hao operated Codex and committed the work for the team, so commit authorship does not reflect individual contributions. From our specifications, these tools wrote most of the code, tests and experiment scripts, and drafted or revised much of the report and slide text; the research question, formulation, evaluation design, model choice, scope and interpretation came from our discussions. See [contributions](docs/contributions.md) and Section 9 of the report.
+
+## References
+
+The report cites NATURAL PLAN, SCHEDBench, formal-verification planning (Hao et al.), planning formalization limits (Huang and Zhang), the CP-SAT solver and OR-Tools documentation, evaluation statistics (Miller), minimal-perturbation repair (Barták et al.) and NP-completeness of sequencing (Garey and Johnson); full citations are in the [report](docs/submission-report.md#references).

@@ -4,7 +4,7 @@ The completed study contains **2,000 scheduling attempts per model**: the same 1
 
 ## Evidence integrity and comparison controls
 
-The [portable evidence manifest](../results/diverse-evidence-manifest.json) identifies two explicitly redacted derivatives, each containing **3,077 checksummed files**. The original numerical and operational archives remain unchanged outside the repository. The derivatives remove only absolute local `original_campaign` provenance paths, update the affected manifest/analysis checksums, and add execution-provenance/timing evidence and a transformation receipt. Each preserves **3,054 scientific members byte for byte**, including every attempt, case bundle, reference and archived source file. Historical original hashes remain original hashes. The packaging script is [package_diverse_evidence.py](../scripts/package_diverse_evidence.py).
+The [portable evidence manifest](../../results/diverse-evidence-manifest.json) identifies two explicitly redacted derivatives, each containing **3,077 checksummed files**. The original numerical and operational archives remain unchanged outside the repository. The derivatives remove only absolute local `original_campaign` provenance paths, update the affected manifest/analysis checksums, and add execution-provenance/timing evidence and a transformation receipt. Each preserves **3,054 scientific members byte for byte**, including every attempt, case bundle, reference and archived source file. Historical original hashes remain original hashes. The packaging script is [package_diverse_evidence.py](../../scripts/package_diverse_evidence.py).
 
 The offline audit verified both original numerical archives (3,073 checksummed members each), both original operational archive digests, and both portable derivatives. Frozen-runtime replay of the portable archives reproduced **all 4,000 saved evaluation records exactly**, with no pending or unstarted attempt. Each model has exactly 2,000 unique case/method/variant/repeat identities and exactly one recorded provider attempt per identity. No retry or model call was made during this audit. These records establish no repeated client-side call; they cannot establish what a provider did internally after a failed connection.
 
@@ -60,9 +60,9 @@ The ten-family paired bootstrap gives descriptive ranges of 61.1–67.6 points a
 
 On **matched pairs with both responses delivered**, Qwen scores 307/949 versus 907/949, and GLM scores 891/935 versus 927/935. GLM's gap is then 36/935 = 3.85 points. This secondary comparison preserves pairing but still conditions on nonrandom response availability; primary scores retain all failures.
 
-![Primary acceptance](figures/diverse-comparison-20261018/diverse-acceptance.png)
+![Primary acceptance](../figures/diverse-comparison-20261018/diverse-acceptance.png)
 
-![Failure categories; model panels use different vertical ranges](figures/diverse-comparison-20261018/diverse-failures.png)
+![Failure categories; model panels use different vertical ranges](../figures/diverse-comparison-20261018/diverse-failures.png)
 
 ## Size and mechanism coverage
 
@@ -78,7 +78,7 @@ Each size row has 200 cases per method; each mechanism row has 100. These partit
 
 At 32 activities, 40 of GLM A's 52 failures are infrastructure outcomes: primary acceptance is 148/200, while returned-answer acceptance is 148/160. Do not describe the full decline as lost reasoning ability. Qwen's nonmonotonic counts are dominated by correct UNSAT predictions.
 
-![Accepted counts out of 200 at each size; axis shows percentage](figures/diverse-comparison-20261018/diverse-size.png)
+![Accepted counts out of 200 at each size; axis shows percentage](../figures/diverse-comparison-20261018/diverse-size.png)
 
 | Mechanism | Qwen A | Qwen B | GLM A | GLM B |
 | --- | ---: | ---: | ---: | ---: |

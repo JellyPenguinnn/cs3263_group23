@@ -5,11 +5,11 @@
   "margin_inches": 1,
   "math_expressions_verified": 1,
   "minimum_text_font_pt": 10.999999999999886,
-  "pdf_sha256": "2aec5b742a1fa4d7815804ae00ee7a4a34df4654bbc9210da69772806b684ebf",
+  "pdf_sha256": "9afb648735467e0124f00007eb47520d40c4750f5415174e6a1706c74488f041",
   "reference_pages": 1,
-  "source_sha256": "4af49c4d99d9c6220891f5586c4b1172ec040e82ea92db934873b65fb4023086",
+  "source_sha256": "d004ea4c5c0ed4a773fe85c9930af0e5d9903cdd058c9b30fae98eb9e5a56536",
   "title_pages": 1,
   "total_pages": 12,
   "visible_text_chunks_verified": 158,
-  "visual_review": "Separately recorded in docs/publication-verification.md; not implied by this script"
+  "visual_review": "Separately recorded in docs/process/publication-verification.md; not implied by this script"
 }

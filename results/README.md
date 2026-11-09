@@ -4,7 +4,7 @@ The primary study contains **1,000 generation cases × two methods × two models
 
 | Study | Scheduling attempts per model | Manifest | Comparison |
 | --- | ---: | --- | --- |
-| Diverse generation — primary | 2,000 | [Diverse](diverse-evidence-manifest.json) | [Summary](summary/diverse-comparison-20261018.json) · [Audit](../docs/diverse-comparison-audit.md) |
+| Diverse generation — primary | 2,000 | [Diverse](diverse-evidence-manifest.json) | [Summary](summary/diverse-comparison-20261018.json) · [Audit](../docs/studies/diverse-comparison-audit.md) |
 | Balanced generation — earlier | 96 | [Balanced](balanced-evidence-manifest.json) | [Summary](summary/balanced-comparison-20261017.json) · [Audit](../docs/studies/balanced-comparison-audit.md) |
 | Difficulty and wording — earlier | 200 | [Difficulty](difficulty-evidence-manifest.json) | [Summary](summary/difficulty-comparison-20261014.json) · [Audit](../docs/studies/difficulty-comparison-audit.md) |
 | Historical Qwen3.6/Qwen3.8 | 600 | [Historical](evidence-manifest.json) | [Audit](../docs/studies/two-model-development-audit.md) |

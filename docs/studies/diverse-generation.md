@@ -1,6 +1,6 @@
 # Diverse generation study
 
-Qwen3.6 and GLM5.3 Flash each completed 2,000 scheduling attempts on the same 1,000 generation cases. The [comparison audit](../diverse-comparison-audit.md) and [summary](../../results/summary/diverse-comparison-20261018.json) retain every outcome and distinguish infrastructure failures and execution phases. This document specifies the frozen protocol and recorded operational changes. The dataset size is a team research choice; generation, independent validation and failure analysis remain the focus. Team members later manually reviewed 24 selected cases against their gold specifications and found no mismatches; the remaining cases rely on automated checks.
+Qwen3.6 and GLM5.3 Flash each completed 2,000 scheduling attempts on the same 1,000 generation cases. The [comparison audit](diverse-comparison-audit.md) and [summary](../../results/summary/diverse-comparison-20261018.json) retain every outcome and distinguish infrastructure failures and execution phases. This document specifies the frozen protocol and recorded operational changes. The dataset size is a team research choice; generation, independent validation and failure analysis remain the focus. Team members later manually reviewed 24 selected cases against their gold specifications and found no mismatches; the remaining cases rely on automated checks.
 
 ## Questions and denominators
 

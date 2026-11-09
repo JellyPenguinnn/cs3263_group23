@@ -1,6 +1,6 @@
 # Two-model benchmark results and submission readiness
 
-**Historical checkpoint: Qwen3.6/Qwen3.8, 600 attempts per model.** The findings and unfinished-work statements below describe the 2 October checkpoint. For the latest Qwen3.6/GLM results and remaining tasks, use the [diverse audit](../diverse-comparison-audit.md) and [submission checklist](../submission-checklist.md).
+**Historical checkpoint: Qwen3.6/Qwen3.8, 600 attempts per model.** The findings and unfinished-work statements below describe the 2 October checkpoint. For the latest Qwen3.6/GLM results and remaining tasks, use the [diverse audit](diverse-comparison-audit.md) and [submission checklist](../process/submission-checklist.md).
 
 Audited 2 October 2026. Both full development campaigns completed and their saved
 results reproduced through fresh scoring and independent archive replay. These
@@ -192,7 +192,7 @@ The source snapshot is based on Git `2f0562b` **with uncommitted implementation
 changes**. GitHub `main` was still exactly `2f0562b` when checked on 2 October.
 The archives retain the executed scoring source. The subsequent repository
 finalization publishes the resilience/backend implementation, documentation and
-original replay packages; [publication verification](../publication-verification.md)
+original replay packages; [publication verification](../process/publication-verification.md)
 records its checks. This does not change the experiment's original source identity.
 
 ### Regenerate the charts
@@ -224,4 +224,4 @@ can be placed into the report or presentation without raster enlargement.
 
 The supplied *Project.pdf*, *CS3263 Project Guidelines AY2026/27*, *ResponsibleAI.pptx* and Group 23 proposal motivate the CSP/COP formulation, direct-versus-tool comparison, constructed instances, failure analysis and responsible-AI discussion. This historical Qwen study includes generation, minimum-disruption repair and wording tests. Its results remain separate from the current generation study.
 
-The course requires analysis of assumptions, representation, practical limitations and observed outcomes; it does not prescribe a particular sample count or a solver advantage. The current report and remaining scope clarifications are documented in the [TA-feedback alignment](../ta-feedback-alignment.md) and [submission checklist](../submission-checklist.md). These replace the earlier fresh-study planning while preserving this study’s development provenance and scores.
+The course requires analysis of assumptions, representation, practical limitations and observed outcomes; it does not prescribe a particular sample count or a solver advantage. The current report and remaining scope clarifications are documented in the [TA-feedback alignment](../ta-feedback-alignment.md) and [submission checklist](../process/submission-checklist.md). These replace the earlier fresh-study planning while preserving this study’s development provenance and scores.

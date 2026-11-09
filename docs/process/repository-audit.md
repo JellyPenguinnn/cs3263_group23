@@ -4,7 +4,7 @@ This review follows published commit `a43747c549fe61623aadfb55307dec5f3beb022c`.
 
 ## Coverage
 
-The [path inventory](../results/summary/repository-path-audit-20261018.json) records the pre-cleanup audit of the base revision's 517 tracked paths, their inspected hashes, structural checks and review categories. New audit/support files are listed separately. The later [documentation cleanup receipt](../results/summary/documentation-cleanup-20261018.json) maps retired and relocated paths; the earlier inventory is a point-in-time record, not a current-path manifest. Every production Python module and operational entry-point script was read across the formal-method, experiment-operation and documentation/tooling reviews. Relevant callers and regression tests were checked. Test execution covers contracts that cannot be established by reading alone.
+The [path inventory](../../results/summary/repository-path-audit-20261018.json) records the pre-cleanup audit of the base revision's 517 tracked paths, their inspected hashes, structural checks and review categories. New audit/support files are listed separately. The later [documentation cleanup receipt](../../results/summary/documentation-cleanup-20261018.json) maps retired and relocated paths; the earlier inventory is a point-in-time record, not a current-path manifest. Every production Python module and operational entry-point script was read across the formal-method, experiment-operation and documentation/tooling reviews. Relevant callers and regression tests were checked. Test execution covers contracts that cannot be established by reading alone.
 
 | Area | Concrete review |
 | --- | --- |
@@ -16,7 +16,7 @@ The [path inventory](../results/summary/repository-path-audit-20261018.json) rec
 | Dashboard and packaging | Read-only endpoints, frontend state, installed prompts/static/TLS assets, noneditable wheel, supported CLI and offline demonstration |
 | Documentation and delivery | Active relative paths, historical snapshots, report/figure tooling, scientific versus document dependencies, CI checks, private-report exclusion and evidence preservation |
 
-All tracked Python files parse; JSON and TOML files parse; all text files decode. No tracked symlinks or case/Unicode-normalized path collisions were found. All 58 PNG files decode, and all 59 PDF files have readable pages. Binary readability is not a claim that every historical page was visually reviewed. No missing nonhistorical Markdown path targets were found. The 111 unresolved links are original-location references inside preserved historical snapshots; the [history guide](history/README.md) explains how to use those records without rewriting their bytes.
+All tracked Python files parse; JSON and TOML files parse; all text files decode. No tracked symlinks or case/Unicode-normalized path collisions were found. All 58 PNG files decode, and all 59 PDF files have readable pages. Binary readability is not a claim that every historical page was visually reviewed. No missing nonhistorical Markdown path targets were found. The 111 unresolved links are original-location references inside preserved historical snapshots; the [history guide](../history/README.md) explains how to use those records without rewriting their bytes.
 
 ## Defects corrected
 

@@ -1,6 +1,6 @@
 # Qwen3.6 and GLM difficulty-study audit
 
-**Earlier completed study.** The primary report now uses the separate [diverse generation comparison](../diverse-comparison-audit.md). This audit retains the difficulty study’s three blocks and original results; they are not pooled into the primary benchmark.
+**Earlier completed study.** The primary report now uses the separate [diverse generation comparison](diverse-comparison-audit.md). This audit retains the difficulty study’s three blocks and original results; they are not pooled into the primary benchmark.
 
 Both **200-attempt campaigns completed**, with all three blocks exported and every saved analysis field reproduced by fresh offline replay. This is a valid, comparable **shared-service development study**, with the interpretation limits below. Provider failures are completed failed observations, not missing experiments. This audit uses no new inference.
 
@@ -113,4 +113,4 @@ MPLCONFIGDIR=.cache/matplotlib .venv/bin/python scripts/render_difficulty_result
   --report --output docs/figures/difficulty-comparison-20261014
 ```
 
-The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. Human interpretation, scope clarification and submission tasks are tracked in [the checklist](../submission-checklist.md).
+The evidence supports strong solver benefit for Qwen and a narrower GLM trade-off: direct answers can reach the feasibility ceiling on returned responses, yet objective quality and extraction robustness still matter. More difficulty does not guarantee a strong model will fail. These results answer the consultation's emphasis on varied cases, efficiency and failure mechanisms without requiring a solver victory. Human interpretation, scope clarification and submission tasks are tracked in [the checklist](../process/submission-checklist.md).

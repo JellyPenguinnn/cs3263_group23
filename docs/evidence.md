@@ -1,6 +1,6 @@
 # Evidence preservation and offline replay
 
-The latest [diverse comparison](diverse-comparison-audit.md) has **2,000 attempts per model**, with every one of the 4,000 saved evaluations reproduced offline. Original numerical and operational archives remain unchanged. Two explicitly labelled **portable derivatives** in this checkout redact only local campaign paths and update dependent metadata checksums; all attempts, cases, references and scientific source remain byte-identical. They contain final outputs and available metadata, not complete HTTP traffic or hidden reasoning.
+The latest [diverse comparison](studies/diverse-comparison-audit.md) has **2,000 attempts per model**, with every one of the 4,000 saved evaluations reproduced offline. Original numerical and operational archives remain unchanged. Two explicitly labelled **portable derivatives** in this checkout redact only local campaign paths and update dependent metadata checksums; all attempts, cases, references and scientific source remain byte-identical. They contain final outputs and available metadata, not complete HTTP traffic or hidden reasoning.
 
 ## Diverse 2,000-attempt evidence
 

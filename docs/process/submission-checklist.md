@@ -1,10 +1,10 @@
 # Report and submission checklist
 
-Current source: [submission-report.md](submission-report.md). Current PDF: [submission-report.pdf](submission-report.pdf). This checklist separates verified artifacts from the remaining review and delivery tasks.
+Current source: [submission-report.md](../submission-report.md). Current PDF: [submission-report.pdf](../submission-report.pdf). This checklist separates verified artifacts from the remaining review and delivery tasks.
 
 ## Prepared and verified
 
-- [x] [Line-by-line scientific and course-requirement review](reviews/report-quality-audit.md) completed against supplied source documents, TA feedback and saved evidence. The audit distinguishes verified content from unresolved human/course obligations.
+- [x] [Line-by-line scientific and course-requirement review](../reviews/report-quality-audit.md) completed against supplied source documents, TA feedback and saved evidence. The audit distinguishes verified content from unresolved human/course obligations.
 
 - [x] Both generation and minimum-disruption repair, direct and solver-assisted paths, independent validation and end-to-end evaluation are implemented.
 - [x] The diverse 2,000-attempt/model, balanced 96-attempt/model and difficulty 200-attempt/model Qwen3.6/GLM campaigns, and historical 600-attempt/model Qwen pair, are complete. Failures remain scored; all archived analyses have reproduced offline.
@@ -12,13 +12,13 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 - [x] Current diverse charts and the worked timetable derive from verified archives and saved observations; previous generation/block/tier/resource figures remain unchanged. Four offline office examples demonstrate the supported scope separately from model results.
 - [x] Report covers formulation, design, related work, limitations, responsible AI, reproducibility and disclosed AI assistance.
 - [x] Eight replay archives (six original packages and two explicitly labelled portable derivatives) are included in the repository and checksum-verified; fuller source/operational/historical evidence has a private verified backup.
-- [x] Public report rebuilt and all pages visually checked after the analysis-focused revision: one title, ten body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The local private copy also passes its own format check and has the same body/reference pages; its title details still require member confirmation.
+- [x] Public report rebuilt and all pages visually checked after the analysis-focused revision: one title, ten body and one reference page, at least 11-point text and compact figure labels, one-inch margins and single column. The [format receipt](../../results/summary/submission-report-format.json) and [publication verification](publication-verification.md) record the exact current source/PDF and checks. The local private copy also passes its own format check and has the same body/reference pages; its title details still require member confirmation.
 
-- [x] Actual work allocation confirmed across the group and recorded in the report and [division of work](contributions.md): Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
+- [x] Actual work allocation confirmed across the group and recorded in the report and [division of work](../contributions.md): Yao Xiang — formal methods; Yong Qing — evaluation; Li Hao — integration, experiments and quality assurance.
 
 - [x] All members confirm that they have read and understood the project, report and slides. The report discloses both Codex and Claude Code. This confirmation is separate from the selected case-level checks below.
 
-- [x] Final 16-slide video deck and narration script (about 1,000 words, at most 10 minutes) are prepared and checked against the report; the [rehearsal guide](../presentation/rehearsal.md) lists the slide sequence. Actual presentation timing still requires rehearsal.
+- [x] Final 16-slide video deck and narration script (about 1,000 words, at most 10 minutes) are prepared and checked against the report; the [rehearsal guide](../../presentation/rehearsal.md) lists the slide sequence. Actual presentation timing still requires rehearsal.
 
 - [x] Model selection: Qwen and GLM accepted by the TA, according to the team’s consultation follow-up.
 
@@ -28,8 +28,8 @@ Earlier report snapshots and their format checks are historical. Every substanti
 
 Use the [human review worksheet](human-review-checklist.md) for the selected cases, blank review records and individual contribution templates.
 
-- [ ] Verify the original Canvas feedback/receipt and current arrangements. The supplied written TA feedback has been addressed in [the alignment](ta-feedback-alignment.md); confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
-- [x] Team members manually reviewed the 24-case packet against the gold specifications and reported no mismatches. Original task: review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](report-details.md#conducting-the-human-review).
+- [ ] Verify the original Canvas feedback/receipt and current arrangements. The supplied written TA feedback has been addressed in [the alignment](../ta-feedback-alignment.md); confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
+- [x] Team members manually reviewed the 24-case packet against the gold specifications and reported no mismatches. Original task: review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](../claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](../report-details.md#conducting-the-human-review).
 
 The confirmed division of work and AI-assistance disclosure address contribution reporting (Guidelines P56-60/P87-88). The worksheet's individual examples are optional aids for adding useful specifics; the course does not require a separate narrative or a fixed number of sentences per member. Do not claim independent authorship of AI-assisted work.
 
@@ -40,7 +40,7 @@ The confirmed division of work and AI-assistance disclosure address contribution
 
 ## Suggested completion order
 
-Retain the confirmed work allocation and accurate AI disclosure while completing the selected evidence checks and presentation rehearsal. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](claim-evidence.md) and [review guidance](report-details.md#conducting-the-human-review). If the review identifies corrections, incorporate them and refresh the private report before the final format check. Rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
+Retain the confirmed work allocation and accurate AI disclosure while completing the selected evidence checks and presentation rehearsal. Review representative public/gold cases across the ten families, activity counts and both feasibility labels; inspect the saved failure examples, conditional optima and infrastructure/timing caveats. Record actual findings using the [claim index](../claim-evidence.md) and [review guidance](../report-details.md#conducting-the-human-review). If the review identifies corrections, incorporate them and refresh the private report before the final format check. Rehearse the presentation and submit under the actual Canvas instructions. Optional teammate replay can proceed in parallel.
 
 ## Scientific scope and course distinctions
 
@@ -54,7 +54,7 @@ The appendix may contain relevant model printouts, screenshots or planning graph
 
 The following checks are recommended for reproducibility and backup; they are not additional course requirements.
 
-- [ ] A teammate follows [evidence.md](evidence.md) from a clean compatible environment and records the actual replay/review.
+- [ ] A teammate follows [evidence.md](../evidence.md) from a clean compatible environment and records the actual replay/review.
 - [ ] If the team wants protection against loss of this computer, copy the verified private historical bundle to approved private off-device storage and verify it there. The current same-device backup is not off-device protection.
 
 ## Responsible-AI review
@@ -70,7 +70,7 @@ python3.12 -m venv .venv-docs
 .venv-docs/bin/python -m pip install -r requirements-docs.txt
 ```
 
-The current report figures were rendered with Matplotlib 3.10.0, while the scientific lock retains 3.10.8. The separate environment preserves that distinction. Follow the [fresh-output reproduction commands](report-details.md#reproducing-the-report-visuals) to reconstruct resources, figures and PDF without overwriting published artifacts. The normal PDF build reuses the preserved Mermaid vector asset; Mermaid CLI and Chrome are needed only for an intentional architecture change.
+The current report figures were rendered with Matplotlib 3.10.0, while the scientific lock retains 3.10.8. The separate environment preserves that distinction. Follow the [fresh-output reproduction commands](../report-details.md#reproducing-the-report-visuals) to reconstruct resources, figures and PDF without overwriting published artifacts. The normal PDF build reuses the preserved Mermaid vector asset; Mermaid CLI and Chrome are needed only for an intentional architecture change.
 
 After reviewing a deliberate report edit, regenerate the public report and its format receipt with `.venv-docs/bin/python scripts/render_report.py` and `.venv-docs/bin/python scripts/check_report.py`. Those defaults replace the current public derivative, so review the diff and rendered pages before publication. Keep prior evidence and dated snapshots unchanged.
 
