@@ -223,7 +223,7 @@ CP-SAT proves the best moved count M, fixes it, proves the best shift T, and fin
 
 ## Source provenance
 
-The report's [nine references](submission-report.md#references) support the methods and interpretation used in the project. Each is cited at the relevant point in the report. The project repository is linked separately under code and data availability; it supplies our empirical evidence rather than independent research findings.
+The report's [ten references](submission-report.md#references) support the methods and interpretation used in the project. Each is cited at the relevant point in the report. The project repository is linked separately under code and data availability; it supplies our empirical evidence rather than independent research findings.
 
 | Report references | Application in this project |
 | --- | --- |
@@ -231,6 +231,7 @@ The report's [nine references](submission-report.md#references) support the meth
 | 3-4: formal-tool planning and planning formalization | The direct-versus-translation comparison and the distinction between parsing, extracted-specification fidelity and final answer validity. Our single-call fixed compiler does not reproduce an iterative verification framework. |
 | 5-7: CP-SAT research and OR-Tools documentation | Interval/non-overlap modeling, precedence, solver statuses and release-matched proof/bound semantics. |
 | 8: Miller | Paired and clustered evaluation principles. The ten-family bootstrap is an analysis of these constructed cases, not evidence of real-calendar representativeness. |
+| 10: Garey and Johnson | NP-completeness of single-resource sequencing with release times and deadlines, used for the problem-difficulty discussion in Section 3. |
 | 9: minimal perturbation | The separately evaluated repair extension and its minimum-disruption objective; repair is not pooled with the primary generation study. |
 
 Course guidance, TA correspondence and references considered only for unused alternatives remain in the existing development and review records. They are not included in the final report's scientific bibliography. The [preserved development notes](history/development-notes/development-plan-history.md#research-basis-for-the-recommendations) retain that wider history without implying that every discussed method, model or dataset was used.

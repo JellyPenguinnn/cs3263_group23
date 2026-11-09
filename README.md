@@ -78,7 +78,7 @@ Qwen3.6 direct produces only **1/500 valid feasible schedules**, versus 467/500 
 
 Infrastructure accounts for **51 Qwen3.6 failures and 68 GLM5.3 Flash failures**, separate from format and scheduling errors. Among matched cases with both responses delivered, GLM5.3 Flash accepts 891/935 direct versus 927/935 solver-assisted; this is a secondary diagnostic, not a replacement score. Four GLM5.3 Flash timeouts overlapped laptop sleep. OS/concurrency phases have **no fully matched cross-model timing subset**, so aggregate latency is not a controlled speed comparison.
 
-The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. The prose-to-gold mapping has automated validation; independent human semantic assessment is not included in the reported evidence.
+The [comparison audit](docs/diverse-comparison-audit.md), [protocol](docs/studies/diverse-generation.md), [report](docs/submission-report.md) and [reproducible summary](results/summary/diverse-comparison-20261018.json) give failure traces, conditional optimality, mechanism/size views and phase-separated resources. These synthetic, AI-assisted development inputs have **ten related construction families**, not 1,000 independent real-world samples. The prose-to-gold mapping has automated validation, and team members manually reviewed 24 selected cases (both labels in every family, plus the four report examples) with no mismatches found.
 
 The [48-case balanced study](docs/studies/balanced-comparison-audit.md), [200-attempt difficulty comparison](docs/studies/difficulty-comparison-audit.md) and [600-attempt historical Qwen studies](docs/studies/two-model-development-audit.md) retain their original scores, repair/wording extensions and limitations. **Different designs are not pooled.**
 
@@ -122,5 +122,5 @@ Reinstall after source changes before checking a noneditable installation. Check
 | `results/` | [Evidence map](results/README.md), audited summaries, figures and immutable reproduction archives |
 | `scripts/` | Evidence verification, offline comparison builders and report/figure rendering |
 | `docs/` | Current report, architecture, usage and evidence; separate studies, reviews and history |
-| `presentation/` | Demonstration inputs and rehearsal guide matching the final 20-slide presentation |
+| `presentation/` | Final 16-slide video deck (≤10 minutes), narration script, rehearsal guide and offline demonstration inputs |
 | `runs/`, `docs/private/` | Ignored local experiment outputs and private submission copies; never public evidence by default |

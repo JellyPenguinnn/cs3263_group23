@@ -11,6 +11,7 @@ These folders preserve earlier report/document bytes and their original source i
 | [Before balanced integration](20261017-before-balanced/) | Report before the balanced comparison |
 | [Before diverse integration](20261018-before-diverse/) | Earlier report, plans and entry documents |
 | [Before worked-example revision](20261018-before-worked-example/) | Earlier diverse report and rendering tools |
+| [Before final submission](20261109-before-final/) | 7 November report before the final 9 November revision |
 
 Some Markdown relative links retain their original repository-root or `docs/` locations and therefore do not resolve from a snapshot subdirectory. This is intentional preservation of source bytes, not a self-contained documentation copy. Prefer a preserved PDF for reading, or use the original commit/source identity recorded in its accompanying receipt to reconstruct the original layout. Do not rewrite historical links, scores, pending statements or checksums to make an earlier checkpoint appear current. Active documentation links are checked separately.
 

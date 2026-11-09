@@ -1,69 +1,40 @@
-# Presentation rehearsal guide
+# Video rehearsal guide
 
-This guide matches the prepared **20-slide deck and 1,814-word script**: slides 1–15 form the main talk, and slides 16–20 support Q&A. The speaking checkpoints total **14 minutes 35 seconds**, leaving 25 seconds for handovers or pauses before the 15-minute limit. Q&A has a separate five-minute allowance. Timing is an estimate until rehearsed aloud.
+The presentation is a recorded video of **at most 10 minutes**. The [deck](CS3263_Group23_Presentation_Slides.pptx) has 16 slides; its speaker notes and the [script](CS3263_Group23_Script.docx) contain the same narration (1,017 words, about 9:14 at a steady pace). Check the recorded length before uploading.
 
-Use the [report](../docs/submission-report.md), [claim index](../docs/claim-evidence.md) and [demonstration guide](README.md). The proposed speaker allocation is Yao Xiang for slides 1–5, Yong Qing for 6–10 and Li Hao for 11–15. Adjust handovers to the group's speaking pace while preserving the slide sequence.
+| Slide | Presenter | Target | Title |
+| --- | --- | ---: | --- |
+| 1 | Tham Yao Xiang | 0:38 | Scheduling with language models |
+| 2 | Tham Yao Xiang | 0:45 | Scheduling is a coupled constraint problem |
+| 3 | Tham Yao Xiang | 0:31 | Same request, two routes, one validator |
+| 4 | Tham Yao Xiang | 0:33 | 1,000 paired cases test both methods |
+| 5 | Tham Yao Xiang | 0:35 | Can eight activities share one room? |
+| 6 | Woo Yong Qing | 0:29 | The same request exposes different errors |
+| 7 | Woo Yong Qing | 0:30 | Solver assistance increases acceptance |
+| 8 | Woo Yong Qing | 0:40 | The gap is in building schedules |
+| 9 | Woo Yong Qing | 0:25 | Failures have different causes |
+| 10 | Woo Yong Qing | 0:46 | A correct solver can solve the wrong problem |
+| 11 | Tea Li Hao | 0:41 | Infrastructure failures and cost |
+| 12 | Tea Li Hao | 0:46 | Earlier studies of the feedback scenarios |
+| 13 | Tea Li Hao | 0:35 | Limits: one-day, template-based evidence |
+| 14 | Tea Li Hao | 0:32 | Valid schedules still need responsible use |
+| 15 | Tea Li Hao | 0:42 | Our answer to the project question |
+| 16 | Tea Li Hao | 0:06 | References |
 
-## Main talk
+## Recording checklist
 
-| Slide | Elapsed time | Main message |
-| --- | --- | --- |
-| 1 | 0:00–0:30 | Scheduling with language models |
-| 2 | 0:30–1:40 | Scheduling as a constraint problem |
-| 3 | 1:40–2:50 | Two methods, one independent evaluation |
-| 4 | 2:50–4:10 | One room, eight activities |
-| 5 | 4:10–5:10 | The experiment |
-| 6 | 5:10–6:05 | Solver assistance raises acceptance |
-| 7 | 6:05–7:05 | Overall scores hide construction failures |
-| 8 | 7:05–8:15 | Failure patterns explain the performance gap |
-| 9 | 8:15–9:30 | An exact solver can solve the wrong specification |
-| 10 | 9:30–10:30 | GLM5.3 Flash quality and delivery |
-| 11 | 10:30–11:35 | Preference quality after feasibility |
-| 12 | 11:35–12:40 | What the evidence supports |
-| 13 | 12:40–13:20 | What this comparison establishes |
-| 14 | 13:20–14:10 | Team contributions |
-| 15 | 14:10–14:35 | Discussion |
+- Speak at a steady pace; if the take runs long, shorten slides 12 or 13 first.
+- Keep the bottom and top-right areas clear if a webcam inset is used; each slide already shows the presenter's name at top right.
+- Each member should be able to explain both methods, one extraction failure and the study's limitations in their own words.
+- Numbers on slides and in the narration match the [report](../docs/submission-report.md); do not present offline demo outputs as model results.
 
-## Q&A reference slides
-
-| Slide | Purpose |
-| --- | --- |
-| 16 | Exact model identities, shared-service settings and request/solve limits |
-| 17 | Mean, median, p95 and coverage of token usage |
-| 18 | Observed pipeline durations and timing-comparison limitations |
-| 19 | Lexicographic repair as a separate extension |
-| 20 | Research foundations, full references in speaker notes and evidence sources |
-
-Use these only when relevant to a question. A saved-record demonstration is optional; the main talk already contains a measured worked example. Do not make a new model request during the talk or present canned answers as observed model results.
-
-## Quantities and interpretation
-
-- **Models:** Qwen3.6 35B A3B (Qwen3.6), request/response `qwen3.6:35b`; GLM5.3 Flash, request `x-test-1`, response `glm-5.3-flash`.
-- **Design:** 1,000 generation cases, 500 feasible and 500 infeasible; two methods and two models give 4,000 attempts. Ten related construction families and five sizes (8, 12, 16, 24, 32 activities) do not establish independent real-world sampling. The 24 optional reordered conditions were not executed.
-- **Acceptance, direct versus solver-assisted:** Qwen3.6 308/1,000 (30.8%) versus 953/1,000 (95.3%); GLM5.3 Flash 891/1,000 (89.1%) versus 988/1,000 (98.8%). Gains are **64.5 and 9.7 percentage points**, respectively. All failures remain in these denominators.
-- **Valid schedules:** Qwen3.6 1/500 versus 467/500; GLM5.3 Flash 404/500 versus 492/500. Correct infeasibility answers: Qwen3.6 307/500 versus 486/500; GLM5.3 Flash 487/500 versus 496/500. Overall acceptance hides the direct Qwen3.6 construction weakness.
-- **Conditional optimality:** Qwen3.6 direct 1/1 and assisted 467/467; GLM5.3 Flash direct 403/404 and assisted 492/492. These denominators include only valid schedules on feasible cases. Reference optima range from 0 to 37, with median 12; only two are zero. The reference optimizer shares compiler code.
-- **Failures:** 51 infrastructure failures for Qwen3.6 and 68 for GLM5.3 Flash. They are distinct from invalid schedules, false infeasibility and formatting errors. GLM5.3 Flash's paired returned-response subset has 891/935 direct versus 927/935 assisted acceptance; the 3.85-point gap is diagnostic, not corrected accuracy.
-- **Resources:** unknown token usage is excluded, not counted as zero. Duration statistics include failures. Changing OS, concurrency and backend conditions prevent a controlled intrinsic-speed ranking.
-- **Scope:** generation is the main study. Repair and wording checks belong to earlier studies with their original denominators. Single-day, 30-minute slots and preferred-start penalties are the implemented semantics; weekly scheduling and richer preferences are outside scope.
-
-## Q&A preparation
-
-Use the following questions to check each member’s understanding.
+## Likely questions
 
 | Question | Answer boundary |
 | --- | --- |
-| Why CP-SAT; is a new solver the contribution? | Integer domains and coupled constraints fit CP-SAT. The contribution is the formulation, inspectable pipelines and evaluated trade-offs; CP-SAT itself is established. |
-| Could the solver and reference share a bug? | Yes. Arithmetic validation, independent feasibility certificates and tiny exhaustive checks reduce risk. The shared compiler limits independence of optimality checks. |
-| Does 98.8% mean deployment reliability? | No. It is finite synthetic development evidence, with related families and known service/extraction failures. Real-calendar generalization is untested. |
-| Why not treat 1,000 cases as independent? | Ten related construction families share mechanisms. The family bootstrap is descriptive design sensitivity, not a real-world population confidence claim. |
-| Does a structural mismatch prove an extraction error? | No. Structural equality and semantic equivalence differ. Use the concrete invented-deadline and dropped-constraint traces to demonstrate actual errors. |
-| Is solver-assisted optimization perfect? | Every valid solver-assisted schedule matches its proven reference optimum here. This is conditional on validity, bounded constructed instances and a shared reference compiler, not a general guarantee about language interpretation. |
-| When might direct reasoning be useful? | GLM5.3 Flash constructs 404 valid schedules directly and can propose schedules when no compatible solver/schema is available. Answers still need validation; no universal speed advantage follows from these runs. |
-| Why sequential repair objectives? | Fixing each proven optimum preserves priority; a weighted sum may trade it away. UNKNOWN is not UNSAT, and FEASIBLE is not OPTIMAL. Repair is a separately evaluated extension. |
-| How is responsible AI addressed? | Explain privacy, unequal inconvenience, objective choices, ambiguity and user control. Formal validity does not establish fairness or live adversarial robustness. |
-| Are the models and scope course-approved? | The TA accepts Qwen/GLM, as reported in the team’s consultation follow-up. The single-day calendar and preferred-start-only objective remain separate scope clarifications. |
-
-## Rehearsal record
-
-Record actual speakers, deck version, elapsed time, questions answered, weak explanations and corrections. Check chart readability, denominators and saved example commands. The group has confirmed its contribution allocation and whole-project understanding. Practise explaining the findings and limitations without reading the script. Follow [remaining submission tasks](../docs/submission-checklist.md#remaining-submission-tasks).
+| Why CP-SAT; is a new solver the contribution? | Integer domains and coupled constraints fit CP-SAT. The contribution is the formulation, comparable pipelines and evaluated trade-offs. |
+| Why these models rather than frontier models? | Both are hosted on SoC's SoCLaaS and were agreed with our TA; stronger models may do better directly, which the report discusses. |
+| Could the solver and reference share a bug? | Yes; arithmetic validation, independent certificates and exhaustive small-case checks reduce the risk, but optimality checks share the compiler. |
+| Does 98.8% mean deployment reliability? | No. These are synthetic, template-generated cases from ten related families with one answer per condition. |
+| Where do solver-assisted errors come from? | Extraction: given gold specifications, the compiler labels all 1,000 cases correctly. |
+| Was the case text checked by people? | Yes, 24 cases across all families and both labels, with no mismatches; the rest rely on automated checks. |

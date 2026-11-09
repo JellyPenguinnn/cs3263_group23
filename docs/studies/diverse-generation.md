@@ -1,6 +1,6 @@
 # Diverse generation study
 
-Qwen3.6 and GLM5.3 Flash each completed 2,000 scheduling attempts on the same 1,000 generation cases. The [comparison audit](../diverse-comparison-audit.md) and [summary](../../results/summary/diverse-comparison-20261018.json) retain every outcome and distinguish infrastructure failures and execution phases. This document specifies the frozen protocol and recorded operational changes. The dataset size is a team research choice; generation, independent validation and failure analysis remain the focus. Human semantic assessment is not included in the reported evidence.
+Qwen3.6 and GLM5.3 Flash each completed 2,000 scheduling attempts on the same 1,000 generation cases. The [comparison audit](../diverse-comparison-audit.md) and [summary](../../results/summary/diverse-comparison-20261018.json) retain every outcome and distinguish infrastructure failures and execution phases. This document specifies the frozen protocol and recorded operational changes. The dataset size is a team research choice; generation, independent validation and failure analysis remain the focus. Team members later manually reviewed 24 selected cases against their gold specifications and found no mismatches; the remaining cases rely on automated checks.
 
 ## Questions and denominators
 
@@ -132,7 +132,7 @@ Keep all previous studies separate. The current report now incorporates the comp
 
 ## Authorized parallel continuation
 
-The user authorized an explicit change from serial execution to **at most 16 in-flight scheduling attempts** for the remaining Qwen3.6 campaign and the subsequent GLM campaign. This is a separate execution protocol, not an unchanged timing condition. The operational adapter is `evaluation/parallel_development_campaign.py`; it reuses the frozen scientific pipelines, parsers, solver, validator and scoring functions.
+The team authorized an explicit change from serial execution to **at most 16 in-flight scheduling attempts** for the remaining Qwen3.6 campaign and the subsequent GLM campaign. This is a separate execution protocol, not an unchanged timing condition. The operational adapter is `evaluation/parallel_development_campaign.py`; it reuses the frozen scientific pipelines, parsers, solver, validator and scoring functions.
 
 The serial Qwen handoff was verified at **391 completed attempts and zero unresolved reservations**. Its first 295 attempts ran on macOS 26.5.2 and the next 96 on macOS 27.0.1. The remaining 1,609 Qwen attempts use concurrency 16 on macOS 27.0.1; GLM follows with its original 2,000-attempt allowance. Original metadata and capability checks for Qwen are reused. GLM retains its original one metadata request and two capability checks. The remaining maximum is therefore **3,612 HTTP requests**, within the original combined cap of 4,006; no extra inference is authorized by this protocol note.
 
@@ -152,7 +152,7 @@ The saved provider records establish HTTP 429 but do not retain the error body o
 
 ### Authorized eight-request continuation
 
-After the fully drained 16-request stop, the user authorized an **eight-request maximum** for the remaining Qwen3.6 attempts, followed by GLM. The new derivative starts with all **407** saved Qwen attempts (391 serial and 16 at concurrency 16), leaving **1,593** Qwen scheduling calls. GLM retains 2,000 scheduling calls and its original three qualification/metadata requests: **3,596 maximum new HTTP requests** across the sequence. Qwen qualification is reused and none of its recorded calls, including the four 429 and one 502 errors from the parallel batch, is repeated.
+After the fully drained 16-request stop, the team authorized an **eight-request maximum** for the remaining Qwen3.6 attempts, followed by GLM. The new derivative starts with all **407** saved Qwen attempts (391 serial and 16 at concurrency 16), leaving **1,593** Qwen scheduling calls. GLM retains 2,000 scheduling calls and its original three qualification/metadata requests: **3,596 maximum new HTTP requests** across the sequence. Qwen qualification is reused and none of its recorded calls, including the four 429 and one 502 errors from the parallel batch, is repeated.
 
 The historical 429 stop is reconciled only for the explicitly identified immutable records under this authorization. Newly encountered 429, identity, authorization or other fatal failures still stop new dispatch and drain in-flight calls. Other settings and the existing transient-error policy remain unchanged. Eight-way service acceptance must be observed; it is not established by offline tests.
 
@@ -162,7 +162,7 @@ The initial eight-request live check observed eight overlapping workers, 13 newl
 
 ### GLM four-request continuation
 
-Qwen completed all 2,000 scheduling attempts and its analysis export. GLM then completed 92 attempts at concurrency 8: 90 returned responses from `glm-5.3-flash` and two HTTP 429 rejections. The runner stopped dispatch and drained every issued request. The user subsequently authorized concurrency **4 for GLM only**, with **1,908** unattempted scheduling requests remaining. Existing GLM metadata/capability checks are reused; the maximum of 2,003 requests for that model remains unchanged. Its two failures stay counted and are not retried. The completed Qwen campaign is not rerun or modified.
+Qwen completed all 2,000 scheduling attempts and its analysis export. GLM then completed 92 attempts at concurrency 8: 90 returned responses from `glm-5.3-flash` and two HTTP 429 rejections. The runner stopped dispatch and drained every issued request. The team subsequently authorized concurrency **4 for GLM only**, with **1,908** unattempted scheduling requests remaining. Existing GLM metadata/capability checks are reused; the maximum of 2,003 requests for that model remains unchanged. Its two failures stay counted and are not retried. The completed Qwen campaign is not rerun or modified.
 
 The fresh GLM derivative preserves all 92 original records byte-for-byte and records the original 8-request and new 4-request timing segments. The historical 429 reconciliation is limited to those two explicit records; new fatal errors still stop dispatch and drain outstanding calls. All scientific settings remain frozen. The dashboard's completed-Qwen view is a byte-identical display copy, not another experiment.
 

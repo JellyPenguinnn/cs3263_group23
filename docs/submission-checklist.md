@@ -18,7 +18,7 @@ Current source: [submission-report.md](submission-report.md). Current PDF: [subm
 
 - [x] All members confirm that they have read and understood the project, report and slides. The report discloses both Codex and Claude Code. This confirmation is separate from the selected case-level checks below.
 
-- [x] Final 20-slide presentation and 1,814-word script are prepared and checked against the report; the [rehearsal guide](../presentation/rehearsal.md) matches their 15-slide talk and five Q&A reference slides. Actual presentation timing still requires rehearsal.
+- [x] Final 16-slide video deck and narration script (about 1,000 words, at most 10 minutes) are prepared and checked against the report; the [rehearsal guide](../presentation/rehearsal.md) lists the slide sequence. Actual presentation timing still requires rehearsal.
 
 - [x] Model selection: Qwen and GLM accepted by the TA, according to the team’s consultation follow-up.
 
@@ -29,12 +29,12 @@ Earlier report snapshots and their format checks are historical. Every substanti
 Use the [human review worksheet](human-review-checklist.md) for the selected cases, blank review records and individual contribution templates.
 
 - [ ] Verify the original Canvas feedback/receipt and current arrangements. The supplied written TA feedback has been addressed in [the alignment](ta-feedback-alignment.md); confirm the single-day/30-minute and preferred-start-only simplifications against the suggested weekly/hourly scenario. The proposal was mandatory for a project grade (Guidelines P37/P43).
-- [ ] Review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](report-details.md#conducting-the-human-review).
+- [x] Team members manually reviewed the 24-case packet against the gold specifications and reported no mismatches. Original task: review diverse-study public/gold pairs across the ten families, both labels and activity counts; inspect certificates, reference assumptions and saved failure examples. Record findings, corrections and generalization limits in the team’s review notes, using the [claim index](claim-evidence.md) to identify the supporting evidence. Keep earlier studies separate. Use the [review procedure](report-details.md#conducting-the-human-review).
 
 The confirmed division of work and AI-assistance disclosure address contribution reporting (Guidelines P56-60/P87-88). The worksheet's individual examples are optional aids for adding useful specifics; the course does not require a separate narrative or a fixed number of sentences per member. Do not claim independent authorship of AI-assisted work.
 
 - [ ] Confirm each member's name, matriculation number and email on the prepared **private** title page (P51). The local `docs/private/submission-report.md` and PDF contain the supplied details and are excluded from Git. Refresh this copy after substantive report edits; never put private identifiers in public Git.
-- [ ] Rehearse the prepared presentation and script, or produce a recording if requested, for **15 minutes plus five-minute Q&A** (P47). Each member should be prepared to explain the whole system (P57).
+- [ ] Record the presentation video from the prepared deck and script, keeping it **within 10 minutes** as required for the recorded format. Each member should be prepared to explain the whole system (P57).
 - [ ] Recheck the final submitted PDF: at most **10 single-spaced, single-column body pages**, at least **11 pt**, one-inch margins; title/references excluded, all substantive figures/tables included (P49/P92).
 - [ ] Verify final filename/upload instructions, submit by the actual Canvas cutoff, and retain the receipt. Presentation week: **9 November 2026**; report due **13 November** (Project p8 / P13-14).
 

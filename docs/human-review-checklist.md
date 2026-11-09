@@ -1,5 +1,7 @@
 # Human review and contribution worksheet
 
+**Status (9 November 2026):** the team reports that all 24 cases in the packet (C01–C20 and E1–E4) were reviewed against their gold specifications and that no request/gold mismatches were found. The per-case tables below remain the original worksheet template.
+
 Use this worksheet for the selected case-level checks before submission. The group has confirmed its actual work allocation and that all members have read and understood the project, report and slides. Case-review decisions and findings still need to be recorded by the reviewers; reading the report alone does not complete those checks. No student IDs, email addresses or API keys are needed here.
 
 ## How to use this worksheet

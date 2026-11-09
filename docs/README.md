@@ -17,7 +17,7 @@ Start with the report and use the supporting documents only as needed. The curre
 
 | Document | Purpose |
 | --- | --- |
-| [Presentation guide](../presentation/README.md) / [rehearsal sequence](../presentation/rehearsal.md) | Final 15-slide talk, five Q&A reference slides and offline examples |
+| [Presentation guide](../presentation/README.md) / [rehearsal sequence](../presentation/rehearsal.md) | Final 16-slide recorded video (≤10 minutes), script and offline examples |
 | [Division of work](contributions.md) | Confirmed responsibilities and AI-assistance disclosure |
 | [Human review worksheet](human-review-checklist.md) | Selected evidence checks and optional contribution examples |
 | [Submission checklist](submission-checklist.md) | Case review, private-title verification, rehearsal and course delivery |

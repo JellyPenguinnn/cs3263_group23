@@ -1,14 +1,8 @@
 # Presentation and demonstration guide
 
-The prepared presentation has **15 main slides for a 15-minute talk**, followed by **five reference slides for the separate five-minute Q&A**. It explains the formulation, common-input comparison, worked timetable, measured findings, failure mechanisms, limitations and responsible AI. Use the [rehearsal guide](rehearsal.md) for the matching slide sequence and speaking checkpoints.
+The final presentation is a **recorded video of at most 10 minutes** built from a **16-slide deck**: [CS3263_Group23_Presentation_Slides.pptx](CS3263_Group23_Presentation_Slides.pptx). Its speaker notes give the presenter, target time, narration and sources for each slide; [CS3263_Group23_Script.docx](CS3263_Group23_Script.docx) contains the narration only. The [rehearsal guide](rehearsal.md) lists the slide sequence, timing and likely questions.
 
-The final PPTX and DOCX script are retained in the team's local `cs3263_project_final` delivery folder. This directory contains reproducible demonstration inputs and presentation guidance. The [public report](../docs/submission-report.pdf), [report source](../docs/submission-report.md) and [evidence index](../docs/claim-evidence.md) provide the reader-facing scientific record. Private submission identity details remain outside Git.
-
-## Main study and examples
-
-The presentation uses **Qwen3.6 35B A3B** and **GLM5.3 Flash**, each evaluated on the same **1,000 generation cases using two methods**: 4,000 scheduling attempts overall. Keep the earlier balanced, difficulty and historical Qwen studies separate from these primary scores. Generation is the core; repair is a separately evaluated extension.
-
-Start with the [worked example and original traces](../docs/report-details.md#example-trace-index): both solver-assisted runs return a valid shared-room timetable, while the two direct answers exhibit different failures. Then connect the [acceptance chart](../docs/figures/report-polished-20261018/diverse-acceptance.png) to the [failure chart](../docs/figures/report-polished-20261018/diverse-failures.png). No live model request is needed during the presentation.
+The talk follows the [report](../docs/submission-report.md): problem and formulation, the two methods, the 1,000-case study and worked example, results and failure analysis, infrastructure failures and cost, earlier feedback-scenario studies, limits, responsible AI, and the answer to the research question. No live model request is needed during the presentation.
 
 ## Offline demonstration
 

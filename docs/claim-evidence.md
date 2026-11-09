@@ -1,5 +1,17 @@
 # Report claim-to-evidence index
 
+## Final report additions (9 November 2026)
+
+| Claim | Source |
+| --- | --- |
+| Search-space sizes: log10 of the unary-domain product, median 4.6 (8 activities), 25.4 (32), maximum 38.1 | `scripts/search_space_summary.py`, [saved output](../results/summary/search-space-20261109.json) |
+| Qwen3.6 direct says "no solution" for 291/500 feasible (58%) and 307/500 infeasible (61%) cases; 307/598 correct | [Summary](../results/summary/diverse-comparison-20261018.json) `overall_by_method.direct`: `correct_unsat`, `categories.false_unsat` |
+| Given gold specifications the compiler labels all 1,000 cases correctly; wrong solver-assisted answers are 20 Qwen3.6 / 4 GLM5.3 Flash (false UNSAT + invalid schedules) | Reference agreement in the [audit](diverse-comparison-audit.md); summary `categories` |
+| GLM5.3 Flash direct infrastructure failures 0/0/4/21/40 by size; 43 of 65 in fragmented packing, fork-join and precedence chain | Summary `by_size`, `by_mechanism` |
+| Repair optimality: valid solver-assisted repairs 14/14 (Qwen3.6) and 15/15 (GLM5.3 Flash), GLM5.3 Flash direct 15/15, Qwen3.6 direct 0/2 | [Difficulty summary](../results/summary/difficulty-comparison-20261014.json) `controlled_task_labels`, task repair, `objective_matches` |
+| Fictional requests: Qwen3.6 5→18/20, GLM5.3 Flash 18→20/20 | Difficulty summary `accepted_by_block` |
+| 24 cases manually reviewed with no mismatches | Team report; [worksheet status](human-review-checklist.md) |
+
 ## Current diverse generation study
 
 The revised report leads with the **completed 4,000-attempt comparison**. Earlier sections below remain evidence indexes for their named studies, not the latest primary result.

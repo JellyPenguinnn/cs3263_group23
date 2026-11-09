@@ -1,5 +1,15 @@
 # Repository publication verification
 
+## Final submission revision — 9 November 2026
+
+This revision publishes the final report and the recorded-video presentation materials, tagged `final-submission`. Changes:
+
+- The report adds the always-"no solution" baseline, the gold-specification control isolating extraction as the source of every wrong solver-assisted answer, infrastructure failures by case size and family, repair optimality, fictional-request results (Table 3), search-space sizes (reproduced by `scripts/search_space_summary.py`, saved in `results/summary/search-space-20261109.json`), an integer-programming alternative, and explicit answers to the three research questions. Unchanged experiment records, scores and archives underlie every number.
+- Team members manually reviewed the 24-case packet (`docs/reviews/human-review-packet.md`) against the gold specifications and reported no mismatches.
+- The presentation is now a 16-slide recorded video of at most 10 minutes; the deck and narration script are in `presentation/`.
+- The public report PDF passes `scripts/check_report.py`: 12 pages (title, 10 body pages, references), minimum 11 pt, one-inch margins. The full Python suite (1,031 tests) passed on a fresh locked install of the preceding commit; this revision changes documentation, presentation files and one offline summary script only.
+- The previous report is preserved in `docs/history/20261109-before-final/`. Older receipts, such as `results/summary/report-details-20261018.json`, keep their original "review pending" wording as historical records.
+
 ## Repository delivery audit — 7 November 2026
 
 GitHub `main` was checked at `9e8f37d2753212d71c8c9cb78c7d17981ce79017` before preparing this revision. The repository now includes the finalized public report/reference updates, clearer reader navigation and presentation guidance matching the prepared 15-slide talk plus five Q&A reference slides. The earlier demonstration guide is preserved in history. The frozen final-delivery folder, both report sources/PDFs and the local PPTX/DOCX retain their pre-audit hashes; private identity details remain excluded from Git.
@@ -48,7 +58,7 @@ This publication includes the tested implementation fixes from the [repository a
 
 Six study documents and two review documents are grouped separately. Thirty-three superseded development notes are moved byte-for-byte under `docs/history/development-notes/`; existing snapshots, figures, results and traces remain preserved. Active links are updated; historical source links and saved receipts retain their original checkpoint paths. The [cleanup receipt](../results/summary/documentation-cleanup-20261018.json) records relocation hashes, retired paths and validation.
 
-The preceding single full-suite pass (1,031 Python tests), ten frontend tests, installed 180-attempt offline demo, archive verification and report rebuild apply to the included runtime fixes. This subsequent cleanup changes documentation only; runtime, tests, prompts, datasets and scientific settings match that tested snapshot. Public report source/PDF and all evidence archives remain unchanged. The private report stays ignored and local. No new model calls were made. The user authorized a normal push to GitHub main; the containing commit is the publication record, and remote success is checked after the push. Earlier entries retain their checkpoint status.
+The preceding single full-suite pass (1,031 Python tests), ten frontend tests, installed 180-attempt offline demo, archive verification and report rebuild apply to the included runtime fixes. This subsequent cleanup changes documentation only; runtime, tests, prompts, datasets and scientific settings match that tested snapshot. Public report source/PDF and all evidence archives remain unchanged. The private report stays ignored and local. No new model calls were made. The team authorized a normal push to GitHub main; the containing commit is the publication record, and remote success is checked after the push. Earlier entries retain their checkpoint status.
 
 ## Detailed implementation audit — 18 October 2026 (local)
 
@@ -60,7 +70,7 @@ This publication includes the scientific-report refinements, clearer comparison 
 
 The final public/private report hashes match their successful format checks and visually reviewed versions: one title page, ten body pages and one references page, at least 11-point text and one-inch margins. Current figure/renderer hashes match their receipt. All eight archive hashes remain unchanged after the preceding full 9,186-member verification; scientific source, tests, prompts, fixtures and historical evidence are unchanged. Current local links, heading anchors, sensitive-data scans and whitespace checks pass. The preceding byte-identical comparison/chart reconstruction, targeted figure test and 180-attempt offline demo/replay still apply because their inputs and implementation are unchanged. No new inference was performed.
 
-The [finalization receipt](../results/summary/report-repository-publication-check-20261018.json) records the checked artifacts. The user authorized a normal commit and push to GitHub main; the commit containing this entry identifies the publication. Earlier entries describing local/uncommitted revisions retain their historical checkpoint status. Remote success must be verified after pushing; repository publication is not course submission.
+The [finalization receipt](../results/summary/report-repository-publication-check-20261018.json) records the checked artifacts. The team authorized a normal commit and push to GitHub main; the commit containing this entry identifies the publication. Earlier entries describing local/uncommitted revisions retain their historical checkpoint status. Remote success must be verified after pushing; repository publication is not course submission.
 
 ## Repository organization and documentation review — 18 October 2026 (local)
 
@@ -72,7 +82,7 @@ The report, scientific implementation, tests, fixtures, configuration, dependenc
 
 ## Contribution allocation — 18 October 2026 (local)
 
-The user confirmed Yao Xiang's formal-method responsibilities, Yong Qing's evaluation responsibilities and Li Hao's integration/LLM/experiment/quality responsibilities. Both report copies, the contribution log, planning, checklist and agent instructions now record that allocation. AI assistance remains explicit; personal-work accounts and final human review remain open.
+The team confirmed Yao Xiang's formal-method responsibilities, Yong Qing's evaluation responsibilities and Li Hao's integration/LLM/experiment/quality responsibilities. Both report copies, the contribution log, planning, checklist and agent instructions now record that allocation. AI assistance remains explicit; personal-work accounts and final human review remain open.
 
 Both PDFs pass fresh format checks with ten body pages, at least 11-point text and one-inch margins. Page 11 was visually inspected; every other page is pixel-identical to the preceding reviewed version. Public/private body and reference pages match. No scientific results, charts or traces changed. The [allocation verification](../results/summary/report-contribution-allocation-verification-20261018.json) records this local revision; earlier receipts retain their original identities. No commit or push was made.
 
@@ -116,7 +126,7 @@ The independent factual review confirmed all reported counts and distributions. 
 
 Validation: twelve final PDF pages visually inspected; ten body pages, one title and one reference page; at least 11-point text and one-inch margins; 161 source-text chunks and two mathematical expressions verified. Source-bound resource regeneration is byte-identical; all four mean/median/p95 tables and the worked schedule match saved evidence. The targeted figure regression passed (one test), report-script syntax checks passed, active local links and credential/private-identifier scans passed, and the final diff has no whitespace errors. All eight archives and 9,186 checksum-covered files verified. Runtime source, prompts, case data and original results are unchanged; no new model calls were made.
 
-The [final report-publication receipt](../results/summary/report-final-publication-check-20261018.json) binds the checked documents and results. The user authorized commit and push to GitHub main; the commit containing this entry is the publication identity. Actual human review, member contribution statements, scope/model clarification and course delivery remain open. Earlier entries below retain their checkpoint-specific status and checks.
+The [final report-publication receipt](../results/summary/report-final-publication-check-20261018.json) binds the checked documents and results. The team authorized commit and push to GitHub main; the commit containing this entry is the publication identity. Actual human review, member contribution statements, scope/model clarification and course delivery remain open. Earlier entries below retain their checkpoint-specific status and checks.
 
 ## Local report revision — 18 October 2026
 
@@ -138,7 +148,7 @@ The refreshed checks verified all eight evidence archives and their member check
 
 The targeted current-source Python run passed **200 tests**, including full offline mock campaigns, immutable continuation, concurrency transitions, model identity, proof bounds and generator checks. All nine frontend tests passed. This is a targeted run, not a new claim of a complete repository-suite pass. Source files covered by the preceding engineering qualification still match its recorded hashes. Active relative links, Python syntax, staged/working file equality, archive credential patterns and whitespace checks passed. No provider requests were made and no previous evidence was replaced.
 
-The [final audit receipt](../results/summary/diverse-final-publication-check-20261018.json) records exact checks and document hashes. The user authorized publication to GitHub main; the commit containing this section is the publication identity. The earlier preparation receipt below deliberately retains its original pre-publication status. GitHub publication does not establish course submission or human approval.
+The [final audit receipt](../results/summary/diverse-final-publication-check-20261018.json) records exact checks and document hashes. The team authorized publication to GitHub main; the commit containing this section is the publication identity. The earlier preparation receipt below deliberately retains its original pre-publication status. GitHub publication does not establish course submission or human approval.
 
 
 ## Diverse 2,000-attempt comparison and report — 18 October 2026
@@ -164,7 +174,7 @@ The [verification receipt](../results/summary/diverse-publication-verification-2
 
 ## Balanced results publication — 17 October 2026
 
-This checkpoint integrates both completed 96-attempt balanced campaigns and the previously prepared difficulty/balanced implementation into the user-authorized publication to GitHub `main`. It updates the README, agent guidance, active plan, report, evidence navigation and remaining human tasks. Original experiment outputs, prompts, fixtures, scoring and archives remain unchanged. No new model calls were made. Earlier sections below are dated historical checkpoints; their pending/publication statements do not describe this release.
+This checkpoint integrates both completed 96-attempt balanced campaigns and the previously prepared difficulty/balanced implementation into the team-authorized publication to GitHub `main`. It updates the README, agent guidance, active plan, report, evidence navigation and remaining human tasks. Original experiment outputs, prompts, fixtures, scoring and archives remain unchanged. No new model calls were made. Earlier sections below are dated historical checkpoints; their pending/publication statements do not describe this release.
 
 | Check | Observed result |
 | --- | --- |
@@ -273,7 +283,7 @@ The report distinguishes service errors, genuine extraction omissions and valid-
 
 The following checks refer to the earlier Qwen3.6/Qwen3.8 checkpoint and its [preserved report](history/20261002-report/submission-report.md), not the current difficulty report or a fresh full-suite run. Its [original format receipt](history/20261002-report/format-verification.json) remains available.
 
-Prepared 2 October 2026 for the user-authorized publication to GitHub `main`. This records checks of the publication worktree and preserved evidence, not course acceptance, a human review or a Canvas submission. The actual publication commit is the Git commit containing this document; original experiment source identities are unchanged.
+Prepared 2 October 2026 for the team-authorized publication to GitHub `main`. This records checks of the publication worktree and preserved evidence, not course acceptance, a human review or a Canvas submission. The actual publication commit is the Git commit containing this document; original experiment source identities are unchanged.
 
 ## Implementation and integration
 

@@ -1,5 +1,7 @@
 # Selected human-review case packet
 
+**Status (9 November 2026):** the team reports that all 24 cases below were reviewed against their gold specifications with no request/gold mismatches found. The packet text that follows was prepared before that review.
+
 Use the [fill-in checklist](../human-review-checklist.md). Read each original request and write your interpretation before opening its gold/recorded-output section. All times in the specifications below are slot indices; each slot is 30 minutes from the stated horizon start. An availability interval constrains the entire activity; a preferred-start interval constrains its start only.
 
 This is a retrospective review aid, not a new experiment or evidence of completed human review. C01–C20 cover all ten mechanisms and all five sizes: one SAT and one UNSAT case per mechanism, using size 8/12/16/24/32 in sorted-mechanism order, repeated twice. Within each mechanism/size/label cell, select the lexicographically first case ID; selection does not use model outcomes. Cases within each pair are ordered by ID. They are a coverage pair, not necessarily a matched construction pair. E1–E4 are deliberately selected explanatory examples from the report. This sample does not establish full-dataset semantic validity or estimate an error rate.
